@@ -1,0 +1,3358 @@
+{
+  "observations": {
+    "generated_at_utc": "2026-09-21T08:46:00.289043+00:00",
+    "indexing": [
+      {
+        "cold_seconds": 0.21541016595438123,
+        "cold_stats": {
+          "chunks": 1885,
+          "files": 129,
+          "parsed": 129,
+          "reused": 0
+        },
+        "repository": "click",
+        "warm_seconds": 0.05973720795009285,
+        "warm_stats": {
+          "chunks": 1885,
+          "files": 129,
+          "parsed": 0,
+          "reused": 129
+        }
+      },
+      {
+        "cold_seconds": 0.03070299990940839,
+        "cold_stats": {
+          "chunks": 195,
+          "files": 46,
+          "parsed": 46,
+          "reused": 0
+        },
+        "repository": "itsdangerous",
+        "warm_seconds": 0.013207207899540663,
+        "warm_stats": {
+          "chunks": 195,
+          "files": 46,
+          "parsed": 0,
+          "reused": 46
+        }
+      },
+      {
+        "cold_seconds": 0.025215000030584633,
+        "cold_stats": {
+          "chunks": 173,
+          "files": 45,
+          "parsed": 45,
+          "reused": 0
+        },
+        "repository": "markupsafe",
+        "warm_seconds": 0.012125250068493187,
+        "warm_stats": {
+          "chunks": 173,
+          "files": 45,
+          "parsed": 0,
+          "reused": 45
+        }
+      }
+    ],
+    "machine": "arm64",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "python": "3.12.14"
+  },
+  "provenance": {
+    "implementation_sha256": "babddb19607468184110a7eb4bdaf1c3d486ebe0744f0813b554438580972112",
+    "manifest_sha256": "06e07fb9e6fcc872a9ebf8be8ce8d4f5fc7c765b30db991d02acac46ae9971b1",
+    "queries_sha256": "c1f0cd8cb6323c0e7247f6b2ecfe37fbe017a0d717d2993ee2c0c59faee4d0dc"
+  },
+  "quality": {
+    "controlled": {
+      "cases": [
+        {
+          "case": "unchanged",
+          "expected_accept": true,
+          "expected_status": "valid",
+          "observed_status": "valid",
+          "predictions": {
+            "contextproof": true,
+            "file_hash": true,
+            "path_line_exact": true
+          },
+          "repair_contract_met": true,
+          "repair_error": null,
+          "repair_remaining_statuses": {
+            "valid": 1
+          },
+          "repair_retained_entries": 1,
+          "status_correct": true
+        },
+        {
+          "case": "insert_lines",
+          "expected_accept": true,
+          "expected_status": "relocated",
+          "observed_status": "relocated",
+          "predictions": {
+            "contextproof": true,
+            "file_hash": false,
+            "path_line_exact": false
+          },
+          "repair_contract_met": true,
+          "repair_error": null,
+          "repair_remaining_statuses": {
+            "valid": 1
+          },
+          "repair_retained_entries": 1,
+          "status_correct": true
+        },
+        {
+          "case": "move_file",
+          "expected_accept": true,
+          "expected_status": "relocated",
+          "observed_status": "relocated",
+          "predictions": {
+            "contextproof": true,
+            "file_hash": false,
+            "path_line_exact": false
+          },
+          "repair_contract_met": true,
+          "repair_error": null,
+          "repair_remaining_statuses": {
+            "valid": 1
+          },
+          "repair_retained_entries": 1,
+          "status_correct": true
+        },
+        {
+          "case": "edit_target",
+          "expected_accept": false,
+          "expected_status": "modified",
+          "observed_status": "modified",
+          "predictions": {
+            "contextproof": false,
+            "file_hash": false,
+            "path_line_exact": false
+          },
+          "repair_contract_met": true,
+          "repair_error": null,
+          "repair_remaining_statuses": {
+            "invalid": 0
+          },
+          "repair_retained_entries": 0,
+          "status_correct": true
+        },
+        {
+          "case": "delete_file",
+          "expected_accept": false,
+          "expected_status": "deleted",
+          "observed_status": "deleted",
+          "predictions": {
+            "contextproof": false,
+            "file_hash": false,
+            "path_line_exact": false
+          },
+          "repair_contract_met": true,
+          "repair_error": null,
+          "repair_remaining_statuses": {
+            "invalid": 0
+          },
+          "repair_retained_entries": 0,
+          "status_correct": true
+        },
+        {
+          "case": "duplicate_displaced",
+          "expected_accept": false,
+          "expected_status": "ambiguous",
+          "observed_status": "ambiguous",
+          "predictions": {
+            "contextproof": false,
+            "file_hash": false,
+            "path_line_exact": false
+          },
+          "repair_contract_met": true,
+          "repair_error": null,
+          "repair_remaining_statuses": {
+            "invalid": 0
+          },
+          "repair_retained_entries": 0,
+          "status_correct": true
+        },
+        {
+          "case": "tamper_bundle",
+          "expected_accept": false,
+          "expected_status": "invalid",
+          "observed_status": "invalid",
+          "predictions": {
+            "contextproof": false,
+            "file_hash": true,
+            "path_line_exact": false
+          },
+          "repair_contract_met": true,
+          "repair_error": "bundle integrity checksum mismatch",
+          "repair_remaining_statuses": {},
+          "repair_retained_entries": 0,
+          "status_correct": true
+        }
+      ],
+      "metrics": {
+        "contextproof": {
+          "accuracy": 1.0,
+          "false_negative": 0,
+          "false_positive": 0,
+          "n": 7,
+          "precision": 1.0,
+          "recall": 1.0,
+          "true_negative": 4,
+          "true_positive": 3
+        },
+        "file_hash": {
+          "accuracy": 0.5714285714285714,
+          "false_negative": 2,
+          "false_positive": 1,
+          "n": 7,
+          "precision": 0.5,
+          "recall": 0.3333333333333333,
+          "true_negative": 3,
+          "true_positive": 1
+        },
+        "path_line_exact": {
+          "accuracy": 0.7142857142857143,
+          "false_negative": 2,
+          "false_positive": 0,
+          "n": 7,
+          "precision": 1.0,
+          "recall": 0.3333333333333333,
+          "true_negative": 4,
+          "true_positive": 1
+        }
+      },
+      "oracle": "Independent fixed transformation labels; accept means untampered exact text at an unambiguous recoverable location, never semantic equivalence.",
+      "repair_contract_accuracy": 1.0,
+      "status_accuracy": 1.0
+    },
+    "natural_drift": [
+      {
+        "baseline_accept_counts": {
+          "file_hash": 2,
+          "path_line_exact": 12
+        },
+        "budget_excluded": [],
+        "eligible_count": 548,
+        "evaluated_count": 40,
+        "repository": "click",
+        "sampled_count": 40,
+        "samples": [
+          {
+            "end_line": 188,
+            "file_hash_accept": true,
+            "path": "src/click/_winconsole.py",
+            "path_line_exact_accept": true,
+            "start_line": 186,
+            "status": "valid",
+            "symbol": "ConsoleStream.name",
+            "text_sha256": "17d2d16b3cb5e05368fa2b7dc6b0beff391927515a1c28e61aba68726beea914"
+          },
+          {
+            "end_line": 459,
+            "file_hash_accept": false,
+            "path": "src/click/_compat.py",
+            "path_line_exact_accept": true,
+            "start_line": 455,
+            "status": "valid",
+            "symbol": "_AtomicFile.__init__",
+            "text_sha256": "8ab97b7769e145d659f4b133a2da67b52241f86896c0a86a281db90119037ae4"
+          },
+          {
+            "end_line": 2211,
+            "file_hash_accept": false,
+            "path": "src/click/core.py",
+            "path_line_exact_accept": false,
+            "start_line": 2206,
+            "status": "relocated",
+            "symbol": "Parameter.human_readable_name",
+            "text_sha256": "1f47fb7cafbc3b1110e5d1f76bd94ec5d92ad55d36569f0e3c4d52c86c61c0ff"
+          },
+          {
+            "end_line": 515,
+            "file_hash_accept": false,
+            "path": "src/click/_compat.py",
+            "path_line_exact_accept": true,
+            "start_line": 512,
+            "status": "valid",
+            "symbol": "_get_argv_encoding",
+            "text_sha256": "35b698eb95ba5be71fcfb5a58e29299139b1654b77908e40a400478d4d41cd52"
+          },
+          {
+            "end_line": 838,
+            "file_hash_accept": false,
+            "path": "src/click/types.py",
+            "path_line_exact_accept": false,
+            "start_line": 828,
+            "status": "relocated",
+            "symbol": "Path.to_info_dict",
+            "text_sha256": "4ac87c2681527de3d9870b476b7e7e9dd9cac4f02ac0368f2e0b9680c035c341"
+          },
+          {
+            "end_line": 103,
+            "file_hash_accept": false,
+            "path": "src/click/exceptions.py",
+            "path_line_exact_accept": false,
+            "start_line": 86,
+            "status": "relocated",
+            "symbol": "BadParameter",
+            "text_sha256": "d7f1f46d5d4e8930eb7c64febb46673c13dd855cae95233946896b6224dc2b54"
+          },
+          {
+            "end_line": 230,
+            "file_hash_accept": true,
+            "path": "src/click/_winconsole.py",
+            "path_line_exact_accept": true,
+            "start_line": 223,
+            "status": "valid",
+            "symbol": "_get_text_stdout",
+            "text_sha256": "07d47ef8800bf339a97b50fdab36e97c75ade04c1d094a0962c1c70c08d42419"
+          },
+          {
+            "end_line": 92,
+            "file_hash_accept": false,
+            "path": "src/click/decorators.py",
+            "path_line_exact_accept": true,
+            "start_line": 76,
+            "status": "valid",
+            "symbol": "make_pass_decorator.decorator.new_func",
+            "text_sha256": "1458582326ae7deacf5903d6ba16dc461cc5b066422427760e6c775638d52203"
+          },
+          {
+            "end_line": 33,
+            "file_hash_accept": false,
+            "path": "src/click/testing.py",
+            "path_line_exact_accept": false,
+            "start_line": 29,
+            "status": "relocated",
+            "symbol": "EchoingStdin._echo",
+            "text_sha256": "c651715a8f7a5bade265c72a546e1b3ac124340ebe63956e37ea97b749a613e0"
+          },
+          {
+            "end_line": 357,
+            "file_hash_accept": false,
+            "path": "src/click/_termui_impl.py",
+            "path_line_exact_accept": false,
+            "start_line": 326,
+            "status": "relocated",
+            "symbol": "ProgressBar.generator",
+            "text_sha256": "8a0c10b591a9316b8a75add7558065f5979874c2fafbab74e5ced1c3dcdd80f4"
+          },
+          {
+            "end_line": 583,
+            "file_hash_accept": false,
+            "path": "src/click/_compat.py",
+            "path_line_exact_accept": true,
+            "start_line": 578,
+            "status": "valid",
+            "symbol": "_make_cached_stream_func",
+            "text_sha256": "5e2cbd5514aaf300cdd218feb0c346fba989a3473ac26b93c56205237ba6ae3b"
+          },
+          {
+            "end_line": 1898,
+            "file_hash_accept": false,
+            "path": "src/click/core.py",
+            "path_line_exact_accept": false,
+            "start_line": 1896,
+            "status": "modified",
+            "symbol": "Group.group",
+            "text_sha256": "d700a44b15aed866465e30ba679e64895bc7ada3a56fa132228a6eef2738e6e4"
+          },
+          {
+            "end_line": 216,
+            "file_hash_accept": false,
+            "path": "src/click/exceptions.py",
+            "path_line_exact_accept": false,
+            "start_line": 204,
+            "status": "relocated",
+            "symbol": "NoSuchOption.__init__",
+            "text_sha256": "6addd38102c600a7d640125e02357da1625fa7d943001d7775d59929716d431d"
+          },
+          {
+            "end_line": 2167,
+            "file_hash_accept": false,
+            "path": "src/click/core.py",
+            "path_line_exact_accept": false,
+            "start_line": 2088,
+            "status": "relocated",
+            "symbol": "Parameter.__init__",
+            "text_sha256": "9be6b72915a3f8e80ae3d65ebb5eb044adb5253f2460e6f7eeb1bb96b04a6d45"
+          },
+          {
+            "end_line": 254,
+            "file_hash_accept": false,
+            "path": "src/click/shell_completion.py",
+            "path_line_exact_accept": true,
+            "start_line": 248,
+            "status": "valid",
+            "symbol": "ShellComplete.source",
+            "text_sha256": "d554f5a406b543a9fbca9f1ecfd0588225983f0b030394208fce08a7b90d9c06"
+          },
+          {
+            "end_line": 195,
+            "file_hash_accept": false,
+            "path": "src/click/testing.py",
+            "path_line_exact_accept": false,
+            "start_line": 190,
+            "status": "relocated",
+            "symbol": "CliRunner.get_default_prog_name",
+            "text_sha256": "1413e5fccad6719031b5925b42f3d490960ace472b6603d8dbcdc0a4abab9e92"
+          },
+          {
+            "end_line": 392,
+            "file_hash_accept": false,
+            "path": "src/click/_termui_impl.py",
+            "path_line_exact_accept": false,
+            "start_line": 360,
+            "status": "modified",
+            "symbol": "pager",
+            "text_sha256": "4cb79a24453a1cb91407dc82bcc530ed8c4fc966d374623abed90ee6601d21b8"
+          },
+          {
+            "end_line": 293,
+            "file_hash_accept": false,
+            "path": "src/click/_termui_impl.py",
+            "path_line_exact_accept": false,
+            "start_line": 273,
+            "status": "relocated",
+            "symbol": "ProgressBar.make_step",
+            "text_sha256": "c86bbf4d40f751f08482a03fb689148084fae124a67b8c461c1128615b2579e8"
+          },
+          {
+            "end_line": 456,
+            "file_hash_accept": false,
+            "path": "src/click/core.py",
+            "path_line_exact_accept": false,
+            "start_line": 453,
+            "status": "relocated",
+            "symbol": "Context.__enter__",
+            "text_sha256": "934b3d91ad76e072b7e729461d5773da3b811937d2bb894213bb293ad73174f8"
+          },
+          {
+            "end_line": 390,
+            "file_hash_accept": false,
+            "path": "src/click/decorators.py",
+            "path_line_exact_accept": false,
+            "start_line": 388,
+            "status": "relocated",
+            "symbol": "confirmation_option.callback",
+            "text_sha256": "55b8b79512d65eb8a33c8e66d53dec63a4014aa8d74f679978637a6901ba7512"
+          },
+          {
+            "end_line": 1157,
+            "file_hash_accept": false,
+            "path": "src/click/core.py",
+            "path_line_exact_accept": false,
+            "start_line": 1155,
+            "status": "relocated",
+            "symbol": "BaseCommand.__call__",
+            "text_sha256": "b82b2e9c62a7136eb1c02a573abe3ee5b50129e3a19380711dbb81d67f696151"
+          },
+          {
+            "end_line": 1843,
+            "file_hash_accept": false,
+            "path": "src/click/core.py",
+            "path_line_exact_accept": false,
+            "start_line": 1835,
+            "status": "relocated",
+            "symbol": "Group.add_command",
+            "text_sha256": "45a19d706e38bf0cb3af776b7d7d03dee99906c4f4c0e5b819c76ac3ddef28a2"
+          },
+          {
+            "end_line": 616,
+            "file_hash_accept": false,
+            "path": "src/click/core.py",
+            "path_line_exact_accept": false,
+            "start_line": 599,
+            "status": "relocated",
+            "symbol": "Context.command_path",
+            "text_sha256": "0e43cf154a54b0a90898820631a9829fd36f3cbf4cb75c6d3f6e8b453393a54c"
+          },
+          {
+            "end_line": 1281,
+            "file_hash_accept": false,
+            "path": "src/click/core.py",
+            "path_line_exact_accept": false,
+            "start_line": 1272,
+            "status": "relocated",
+            "symbol": "Command.collect_usage_pieces",
+            "text_sha256": "fd5edbfd4a29f5959cfb2a14626c1d4f8dea70463f92c3cdb915f4d5c6c51478"
+          },
+          {
+            "end_line": 1289,
+            "file_hash_accept": false,
+            "path": "src/click/core.py",
+            "path_line_exact_accept": false,
+            "start_line": 1283,
+            "status": "relocated",
+            "symbol": "Command.get_help_option_names",
+            "text_sha256": "af4f84be841905748b403b2aff6eed3ff71598b6e329c2e94ba4c4266b268785"
+          },
+          {
+            "end_line": 572,
+            "file_hash_accept": false,
+            "path": "src/click/utils.py",
+            "path_line_exact_accept": true,
+            "start_line": 520,
+            "status": "valid",
+            "symbol": "_detect_program_name",
+            "text_sha256": "e1166241dcf4b2de58a2dbc09611ecd08ef971a910527fb4bda6ed1c3d4a0e56"
+          },
+          {
+            "end_line": 245,
+            "file_hash_accept": false,
+            "path": "src/click/exceptions.py",
+            "path_line_exact_accept": false,
+            "start_line": 241,
+            "status": "relocated",
+            "symbol": "BadOptionUsage.__init__",
+            "text_sha256": "bf181237f1e5c9499c06a633a8035f280efb1837452bdbd6d70dd6fbd9547a8f"
+          },
+          {
+            "end_line": 35,
+            "file_hash_accept": false,
+            "path": "src/click/utils.py",
+            "path_line_exact_accept": true,
+            "start_line": 33,
+            "status": "valid",
+            "symbol": "safecall",
+            "text_sha256": "1cea1d36ff83ea4eb62e3cea6c16ab8ba89493e84e720a23a337ff3c5c2c1d49"
+          },
+          {
+            "end_line": 280,
+            "file_hash_accept": false,
+            "path": "src/click/termui.py",
+            "path_line_exact_accept": true,
+            "start_line": 251,
+            "status": "valid",
+            "symbol": "echo_via_pager",
+            "text_sha256": "7ad8faf592fe8c08ae0d266a4a7446f99996303d3db932c2ca5fae29296b701d"
+          },
+          {
+            "end_line": 630,
+            "file_hash_accept": false,
+            "path": "src/click/_termui_impl.py",
+            "path_line_exact_accept": false,
+            "start_line": 583,
+            "status": "modified",
+            "symbol": "open_url",
+            "text_sha256": "526a737dd4467a37c9c5aaca0619f6d1135515a076cd7dc9358544c4569f774c"
+          },
+          {
+            "end_line": 117,
+            "file_hash_accept": false,
+            "path": "src/click/types.py",
+            "path_line_exact_accept": false,
+            "start_line": 95,
+            "status": "relocated",
+            "symbol": "ParamType.convert",
+            "text_sha256": "71e2eb34a121d4a7965af2051cb369c4d7a88ecf1e3da6bf814d75727ec38794"
+          },
+          {
+            "end_line": 357,
+            "file_hash_accept": false,
+            "path": "src/click/_compat.py",
+            "path_line_exact_accept": true,
+            "start_line": 351,
+            "status": "valid",
+            "symbol": "get_text_stderr",
+            "text_sha256": "241750cfa484f43b93817fefb2cc47dc9179b9376a8e3fe6dcc30d7ff19385ac"
+          },
+          {
+            "end_line": 575,
+            "file_hash_accept": false,
+            "path": "src/click/_termui_impl.py",
+            "path_line_exact_accept": false,
+            "start_line": 573,
+            "status": "relocated",
+            "symbol": "open_url",
+            "text_sha256": "b75ceb63138c846c3b5ff9bab7e4a1c4dc51170fdc365314bdf490bff7c9f28e"
+          },
+          {
+            "end_line": 107,
+            "file_hash_accept": false,
+            "path": "src/click/_compat.py",
+            "path_line_exact_accept": true,
+            "start_line": 101,
+            "status": "valid",
+            "symbol": "_FixupStream.read1",
+            "text_sha256": "9003e3f217cbba037bdf785796116a6778920c3f1c937f0cf800e83031697bed"
+          },
+          {
+            "end_line": 957,
+            "file_hash_accept": false,
+            "path": "src/click/core.py",
+            "path_line_exact_accept": false,
+            "start_line": 953,
+            "status": "relocated",
+            "symbol": "BaseCommand.invoke",
+            "text_sha256": "0fdd1b883e84ebb147e3d5b29ac7c7d21f93a704459b2416f79570c2d68894f8"
+          },
+          {
+            "end_line": 57,
+            "file_hash_accept": false,
+            "path": "src/click/exceptions.py",
+            "path_line_exact_accept": false,
+            "start_line": 47,
+            "status": "relocated",
+            "symbol": "UsageError",
+            "text_sha256": "89281b52d2fe24fa88f4d511c65404365c1e9923a956767c9b039697614040c5"
+          },
+          {
+            "end_line": 1601,
+            "file_hash_accept": false,
+            "path": "src/click/core.py",
+            "path_line_exact_accept": false,
+            "start_line": 1595,
+            "status": "relocated",
+            "symbol": "MultiCommand.result_callback.decorator",
+            "text_sha256": "33064fdb0db34d06280ffa0d6dd29a6cdfb8d78b790edb41e5e01ccf4450b22b"
+          },
+          {
+            "end_line": 545,
+            "file_hash_accept": false,
+            "path": "src/click/types.py",
+            "path_line_exact_accept": false,
+            "start_line": 542,
+            "status": "relocated",
+            "symbol": "FloatParamType",
+            "text_sha256": "9da3363d7201ff864d5cd2f2c12e330d7515ce872c1af04e0d68c25e86ba9408"
+          },
+          {
+            "end_line": 266,
+            "file_hash_accept": false,
+            "path": "src/click/parser.py",
+            "path_line_exact_accept": false,
+            "start_line": 253,
+            "status": "relocated",
+            "symbol": "OptionParser",
+            "text_sha256": "80476a7e71d5eb50edcb5de7ea4a9d1972838b3eb6b295fca4418961587659e9"
+          },
+          {
+            "end_line": 487,
+            "file_hash_accept": false,
+            "path": "src/click/_termui_impl.py",
+            "path_line_exact_accept": false,
+            "start_line": 477,
+            "status": "relocated",
+            "symbol": "Editor.__init__",
+            "text_sha256": "4ccb8615ca23f28bd852caf8aff9561dc973da91c1ebc199a2ba153e4d7bbf71"
+          }
+        ],
+        "status_counts": {
+          "modified": 3,
+          "relocated": 25,
+          "valid": 12
+        }
+      },
+      {
+        "baseline_accept_counts": {
+          "file_hash": 0,
+          "path_line_exact": 0
+        },
+        "budget_excluded": [],
+        "eligible_count": 76,
+        "evaluated_count": 40,
+        "repository": "itsdangerous",
+        "sampled_count": 40,
+        "samples": [
+          {
+            "end_line": 90,
+            "file_hash_accept": false,
+            "path": "src/itsdangerous/exc.py",
+            "path_line_exact_accept": false,
+            "start_line": 75,
+            "status": "modified",
+            "symbol": "BadHeader.__init__",
+            "text_sha256": "1e5e1d06d62bcd8f20e098a912cdfafb656cded24d2a47b90c3d52ce64b29716"
+          },
+          {
+            "end_line": 58,
+            "file_hash_accept": false,
+            "path": "src/itsdangerous/exc.py",
+            "path_line_exact_accept": false,
+            "start_line": 42,
+            "status": "modified",
+            "symbol": "BadTimeSignature.__init__",
+            "text_sha256": "3b639945b2d78f704561eadc82e337bc5aea6755b7c6618a997fd99c5add8b68"
+          },
+          {
+            "end_line": 233,
+            "file_hash_accept": false,
+            "path": "src/itsdangerous/signer.py",
+            "path_line_exact_accept": false,
+            "start_line": 218,
+            "status": "modified",
+            "symbol": "Signer.verify_signature",
+            "text_sha256": "a3d009f04fffd5ef426fd219aae716aad8be0ecc811f392f62b881a8dd9ccbe5"
+          },
+          {
+            "end_line": 57,
+            "file_hash_accept": false,
+            "path": "src/itsdangerous/signer.py",
+            "path_line_exact_accept": false,
+            "start_line": 55,
+            "status": "relocated",
+            "symbol": "HMACAlgorithm.get_signature",
+            "text_sha256": "ddfd06a80fb766588bcd0cca41fbeb58c8990b1b0b30dd12fd72ebed63ec6306"
+          },
+          {
+            "end_line": 216,
+            "file_hash_accept": false,
+            "path": "src/itsdangerous/signer.py",
+            "path_line_exact_accept": false,
+            "start_line": 213,
+            "status": "modified",
+            "symbol": "Signer.sign",
+            "text_sha256": "1ccd53bc23555037e03afa2bb11fb8c5b4d496acc6ab436d845c3c515d742d5b"
+          },
+          {
+            "end_line": 4,
+            "file_hash_accept": false,
+            "path": "src/itsdangerous/_json.py",
+            "path_line_exact_accept": false,
+            "start_line": 1,
+            "status": "modified",
+            "symbol": "<module>",
+            "text_sha256": "f9591e41c4935458d04548b069949ab2ef9d0a7fa6bd4fdbb2a1f435f6196259"
+          },
+          {
+            "end_line": 211,
+            "file_hash_accept": false,
+            "path": "src/itsdangerous/signer.py",
+            "path_line_exact_accept": false,
+            "start_line": 206,
+            "status": "modified",
+            "symbol": "Signer.get_signature",
+            "text_sha256": "e63d70cf285d2c5ddc4d2fa1f7e48e67d043e46f026daba51dc5dba0433274ad"
+          },
+          {
+            "end_line": 236,
+            "file_hash_accept": false,
+            "path": "src/itsdangerous/serializer.py",
+            "path_line_exact_accept": false,
+            "start_line": 221,
+            "status": "modified",
+            "symbol": "Serializer.loads",
+            "text_sha256": "52654bacab3badefb540142b5db41af6471c019facfc1c0691bef5d8f1266b33"
+          },
+          {
+            "end_line": 25,
+            "file_hash_accept": false,
+            "path": "src/itsdangerous/exc.py",
+            "path_line_exact_accept": false,
+            "start_line": 23,
+            "status": "relocated",
+            "symbol": "BadSignature",
+            "text_sha256": "7defc635fb8cd849b1870957fe678194417c15f774fb8d69708f66bb96133d82"
+          },
+          {
+            "end_line": 48,
+            "file_hash_accept": false,
+            "path": "src/itsdangerous/signer.py",
+            "path_line_exact_accept": false,
+            "start_line": 41,
+            "status": "modified",
+            "symbol": "HMACAlgorithm",
+            "text_sha256": "4d324ec5897b8e4438eb434bbfc84d8c381b2e6d50e7be100a0a746c3fc5ee06"
+          },
+          {
+            "end_line": 162,
+            "file_hash_accept": false,
+            "path": "src/itsdangerous/serializer.py",
+            "path_line_exact_accept": false,
+            "start_line": 137,
+            "status": "modified",
+            "symbol": "Serializer.load_payload",
+            "text_sha256": "8d7fb68448eb7df4c21bf65f6af317f642005d6c210348a0a0ae25dd14811514"
+          },
+          {
+            "end_line": 41,
+            "file_hash_accept": false,
+            "path": "src/itsdangerous/exc.py",
+            "path_line_exact_accept": false,
+            "start_line": 37,
+            "status": "relocated",
+            "symbol": "BadTimeSignature",
+            "text_sha256": "e387df45597b18f0c233e81ef6e06ad2c7b13bac980e51cea36a5608e55add09"
+          },
+          {
+            "end_line": 32,
+            "file_hash_accept": false,
+            "path": "src/itsdangerous/timed.py",
+            "path_line_exact_accept": false,
+            "start_line": 26,
+            "status": "relocated",
+            "symbol": "TimestampSigner",
+            "text_sha256": "29ce9d58f70be9659a033b56350dc0d15fb4d3dd56452f09acf960a63b34f648"
+          },
+          {
+            "end_line": 7,
+            "file_hash_accept": false,
+            "path": "src/itsdangerous/_json.py",
+            "path_line_exact_accept": false,
+            "start_line": 5,
+            "status": "relocated",
+            "symbol": "_CompactJSON",
+            "text_sha256": "6af4311893abfa9e1bfbe1c5ef8160b9430107e3c82441eeffc28f9cae9a056c"
+          },
+          {
+            "end_line": 38,
+            "file_hash_accept": false,
+            "path": "src/itsdangerous/encoding.py",
+            "path_line_exact_accept": false,
+            "start_line": 28,
+            "status": "modified",
+            "symbol": "base64_decode",
+            "text_sha256": "353124b02fb1c2e6fb71cfff4e136d52e07e842d32a3f5f756913ca64c91ce67"
+          },
+          {
+            "end_line": 10,
+            "file_hash_accept": false,
+            "path": "src/itsdangerous/_json.py",
+            "path_line_exact_accept": false,
+            "start_line": 8,
+            "status": "modified",
+            "symbol": "_CompactJSON.loads",
+            "text_sha256": "393911c77cdc1236c1692c61dc9a6e02a0f02e4836083c9e2be9d49dfc614a7a"
+          },
+          {
+            "end_line": 59,
+            "file_hash_accept": false,
+            "path": "src/itsdangerous/timed.py",
+            "path_line_exact_accept": false,
+            "start_line": 56,
+            "status": "relocated",
+            "symbol": "TimestampSigner",
+            "text_sha256": "e5bd0cb9a5579630226d79e44f59365fed12534b9abce35245b18e958b45d9b3"
+          },
+          {
+            "end_line": 22,
+            "file_hash_accept": false,
+            "path": "src/itsdangerous/serializer.py",
+            "path_line_exact_accept": false,
+            "start_line": 20,
+            "status": "modified",
+            "symbol": "is_text_serializer",
+            "text_sha256": "9bbae8e8b125280e1f279b163755dacb82042c047b46458483bedab84fe89aa5"
+          },
+          {
+            "end_line": 173,
+            "file_hash_accept": false,
+            "path": "src/itsdangerous/timed.py",
+            "path_line_exact_accept": false,
+            "start_line": 166,
+            "status": "modified",
+            "symbol": "TimestampSigner.validate",
+            "text_sha256": "90d534988b868418797145d476959fdc445729120f6576ecb1c7dc3222434ee6"
+          },
+          {
+            "end_line": 164,
+            "file_hash_accept": false,
+            "path": "src/itsdangerous/timed.py",
+            "path_line_exact_accept": false,
+            "start_line": 158,
+            "status": "relocated",
+            "symbol": "TimestampSigner.unsign",
+            "text_sha256": "c12a6023220cdb5abe026735e36a2ab24fbcf82c65200e4f1911db4f023ec87e"
+          },
+          {
+            "end_line": 47,
+            "file_hash_accept": false,
+            "path": "src/itsdangerous/timed.py",
+            "path_line_exact_accept": false,
+            "start_line": 39,
+            "status": "relocated",
+            "symbol": "TimestampSigner.timestamp_to_datetime",
+            "text_sha256": "d32b43a16ec1aba41fc74bc5a15c092be3b8670ed322c612b64db7ac5861c73f"
+          },
+          {
+            "end_line": 34,
+            "file_hash_accept": false,
+            "path": "src/itsdangerous/exc.py",
+            "path_line_exact_accept": false,
+            "start_line": 26,
+            "status": "modified",
+            "symbol": "BadSignature.__init__",
+            "text_sha256": "d0b67141489b2a8fdf4ece4f33a1b34425db4244f40459ffc44077cb439c7e80"
+          },
+          {
+            "end_line": 178,
+            "file_hash_accept": false,
+            "path": "src/itsdangerous/serializer.py",
+            "path_line_exact_accept": false,
+            "start_line": 171,
+            "status": "modified",
+            "symbol": "Serializer.make_signer",
+            "text_sha256": "cba032cbbbda7658ef85d53dcda113ea2d269a10a191c4a8ab1b8aad04420838"
+          },
+          {
+            "end_line": 295,
+            "file_hash_accept": false,
+            "path": "src/itsdangerous/serializer.py",
+            "path_line_exact_accept": false,
+            "start_line": 290,
+            "status": "modified",
+            "symbol": "Serializer.load_unsafe",
+            "text_sha256": "d57a59a3d8c11dc4a5c7ae0d30f962ee333cce9cdbaf8d9c28db5695175bd8a3"
+          },
+          {
+            "end_line": 11,
+            "file_hash_accept": false,
+            "path": "src/itsdangerous/url_safe.py",
+            "path_line_exact_accept": false,
+            "start_line": 1,
+            "status": "modified",
+            "symbol": "<module>",
+            "text_sha256": "6111af8353f711a23b116fe03ae6df2ef799e1e7328a57f73f2b11f961f3cfd3"
+          },
+          {
+            "end_line": 234,
+            "file_hash_accept": false,
+            "path": "src/itsdangerous/timed.py",
+            "path_line_exact_accept": false,
+            "start_line": 228,
+            "status": "modified",
+            "symbol": "TimedSerializer.loads_unsafe",
+            "text_sha256": "0d57318df7e48822654e73c7e9f9020cf6efe234bb9c27c2afb9c3a05f948ae6"
+          },
+          {
+            "end_line": 258,
+            "file_hash_accept": false,
+            "path": "src/itsdangerous/serializer.py",
+            "path_line_exact_accept": false,
+            "start_line": 242,
+            "status": "modified",
+            "symbol": "Serializer.loads_unsafe",
+            "text_sha256": "da45f8813bf57c5e6b22f97a3e241b851db5d661138fb9e188a06ff96806d306"
+          },
+          {
+            "end_line": 128,
+            "file_hash_accept": false,
+            "path": "src/itsdangerous/serializer.py",
+            "path_line_exact_accept": false,
+            "start_line": 89,
+            "status": "modified",
+            "symbol": "Serializer.__init__",
+            "text_sha256": "2a819edcebed738bd5219bc3ae7c555bb38225f607b20007d626eacb01e2d17c"
+          },
+          {
+            "end_line": 226,
+            "file_hash_accept": false,
+            "path": "src/itsdangerous/timed.py",
+            "path_line_exact_accept": false,
+            "start_line": 191,
+            "status": "modified",
+            "symbol": "TimedSerializer.loads",
+            "text_sha256": "d57e9d8363c38c51381c2fc847143b8953f8286e5a91f6b3d5062ae0e443b463"
+          },
+          {
+            "end_line": 36,
+            "file_hash_accept": false,
+            "path": "src/itsdangerous/signer.py",
+            "path_line_exact_accept": false,
+            "start_line": 32,
+            "status": "relocated",
+            "symbol": "NoneAlgorithm",
+            "text_sha256": "04806ffb71dfc7d966eb3fc40ff7a341911253e1ded338308aa67f4d62164c51"
+          },
+          {
+            "end_line": 88,
+            "file_hash_accept": false,
+            "path": "src/itsdangerous/serializer.py",
+            "path_line_exact_accept": false,
+            "start_line": 25,
+            "status": "modified",
+            "symbol": "Serializer",
+            "text_sha256": "c1f2b9b012fa08c2b571fcf9c51711d466e15aa1fbe857a7e259d7d1f8553698"
+          },
+          {
+            "end_line": 16,
+            "file_hash_accept": false,
+            "path": "src/itsdangerous/_json.py",
+            "path_line_exact_accept": false,
+            "start_line": 12,
+            "status": "modified",
+            "symbol": "_CompactJSON.dumps",
+            "text_sha256": "63a3f0f062488a3a3e5892afd7f96dc889f74029b90ab1d11a3234ae22831544"
+          },
+          {
+            "end_line": 55,
+            "file_hash_accept": false,
+            "path": "src/itsdangerous/timed.py",
+            "path_line_exact_accept": false,
+            "start_line": 49,
+            "status": "modified",
+            "symbol": "TimestampSigner.sign",
+            "text_sha256": "dde512ece5512c8b1ae2e4152f23ba9508957e6e8eed3d6d63f4af400befe925"
+          },
+          {
+            "end_line": 10,
+            "file_hash_accept": false,
+            "path": "src/itsdangerous/encoding.py",
+            "path_line_exact_accept": false,
+            "start_line": 1,
+            "status": "modified",
+            "symbol": "<module>",
+            "text_sha256": "171ff64df7bd86c1455e1d78a46e9f9a319e8e5db6dff9f065bb76b5dfced2d0"
+          },
+          {
+            "end_line": 14,
+            "file_hash_accept": false,
+            "path": "src/itsdangerous/exc.py",
+            "path_line_exact_accept": false,
+            "start_line": 8,
+            "status": "relocated",
+            "symbol": "BadData",
+            "text_sha256": "698dadda495dc20c654fa0235bb3bed9a3c902e90dd16248892c9a1e539a5810"
+          },
+          {
+            "end_line": 157,
+            "file_hash_accept": false,
+            "path": "src/itsdangerous/timed.py",
+            "path_line_exact_accept": false,
+            "start_line": 78,
+            "status": "modified",
+            "symbol": "TimestampSigner.unsign",
+            "text_sha256": "37a9abdd1578e74713ec8b36046d20a4f61e46d936f267741ce0c78b9b860a99"
+          },
+          {
+            "end_line": 19,
+            "file_hash_accept": false,
+            "path": "src/itsdangerous/__init__.py",
+            "path_line_exact_accept": false,
+            "start_line": 1,
+            "status": "modified",
+            "symbol": "<module>",
+            "text_sha256": "9f89a4ca3948567db7a60b20088c3430928f75c1c87adc9e4697b9170b27f2a8"
+          },
+          {
+            "end_line": 17,
+            "file_hash_accept": false,
+            "path": "src/itsdangerous/exc.py",
+            "path_line_exact_accept": false,
+            "start_line": 15,
+            "status": "relocated",
+            "symbol": "BadData.__init__",
+            "text_sha256": "9134cf8f99b8d03cf4da79042a855a9425c3884aa298e0842727b532a6f8a941"
+          },
+          {
+            "end_line": 204,
+            "file_hash_accept": false,
+            "path": "src/itsdangerous/signer.py",
+            "path_line_exact_accept": false,
+            "start_line": 173,
+            "status": "modified",
+            "symbol": "Signer.derive_key",
+            "text_sha256": "74d59e20b8e994adfe9263ef00db34021ce96addc6dcde61f795e57013e74889"
+          },
+          {
+            "end_line": 67,
+            "file_hash_accept": false,
+            "path": "src/itsdangerous/timed.py",
+            "path_line_exact_accept": false,
+            "start_line": 60,
+            "status": "modified",
+            "symbol": "TimestampSigner.unsign",
+            "text_sha256": "c807ec3dec9ff69977a56098b4125beffc912658a40fe2064a97f71d47f85947"
+          }
+        ],
+        "status_counts": {
+          "modified": 29,
+          "relocated": 11
+        }
+      },
+      {
+        "baseline_accept_counts": {
+          "file_hash": 0,
+          "path_line_exact": 0
+        },
+        "budget_excluded": [],
+        "eligible_count": 38,
+        "evaluated_count": 38,
+        "repository": "markupsafe",
+        "sampled_count": 38,
+        "samples": [
+          {
+            "end_line": 76,
+            "file_hash_accept": false,
+            "path": "src/markupsafe/__init__.py",
+            "path_line_exact_accept": false,
+            "start_line": 67,
+            "status": "modified",
+            "symbol": "Markup.__new__",
+            "text_sha256": "314d75a3604ec6648a3dfdccc3fbe6aeb43d13ae0b75aff4b39a6430839f7202"
+          },
+          {
+            "end_line": 262,
+            "file_hash_accept": false,
+            "path": "src/markupsafe/__init__.py",
+            "path_line_exact_accept": false,
+            "start_line": 260,
+            "status": "relocated",
+            "symbol": "EscapeFormatter",
+            "text_sha256": "cf96914c31469edbd506c0908992b1f3b3bc750b2fb9b43107894ae7eaaa6936"
+          },
+          {
+            "end_line": 132,
+            "file_hash_accept": false,
+            "path": "src/markupsafe/__init__.py",
+            "path_line_exact_accept": false,
+            "start_line": 129,
+            "status": "modified",
+            "symbol": "Markup.rsplit",
+            "text_sha256": "bb18e4ff60e6738357f7b3c5a8397cbe75e5deb6bf869e138df9029d236a642b"
+          },
+          {
+            "end_line": 135,
+            "file_hash_accept": false,
+            "path": "src/markupsafe/__init__.py",
+            "path_line_exact_accept": false,
+            "start_line": 133,
+            "status": "modified",
+            "symbol": "Markup",
+            "text_sha256": "170f58a4176ecfc92d4e8bbaa7906a2b15b283d3f67ce883a551ce9ba4ad4e34"
+          },
+          {
+            "end_line": 97,
+            "file_hash_accept": false,
+            "path": "src/markupsafe/__init__.py",
+            "path_line_exact_accept": false,
+            "start_line": 93,
+            "status": "modified",
+            "symbol": "Markup.__mul__",
+            "text_sha256": "9bd017ee6c1eccd08205b7353a9570d56aedd6d949d7dab69c3e3f825875ed34"
+          },
+          {
+            "end_line": 209,
+            "file_hash_accept": false,
+            "path": "src/markupsafe/__init__.py",
+            "path_line_exact_accept": false,
+            "start_line": 199,
+            "status": "modified",
+            "symbol": "Markup.escape",
+            "text_sha256": "3ee8b860b8ab62650b9d1e4c831c132c66cf977fdf1a20caa3129ea98d613448"
+          },
+          {
+            "end_line": 24,
+            "file_hash_accept": false,
+            "path": "src/markupsafe/__init__.py",
+            "path_line_exact_accept": false,
+            "start_line": 20,
+            "status": "modified",
+            "symbol": "_simple_escaping_wrapper.wrapped",
+            "text_sha256": "d1350a9bac816baf799649516bb828577d456a0778fa7c9f797c50e6f62b6037"
+          },
+          {
+            "end_line": 236,
+            "file_hash_accept": false,
+            "path": "src/markupsafe/__init__.py",
+            "path_line_exact_accept": false,
+            "start_line": 233,
+            "status": "modified",
+            "symbol": "Markup.partition",
+            "text_sha256": "f79d9b028b864af452ef9280e87e67297ceee2b75791a75af7a8362a40fd43ed"
+          },
+          {
+            "end_line": 152,
+            "file_hash_accept": false,
+            "path": "src/markupsafe/__init__.py",
+            "path_line_exact_accept": false,
+            "start_line": 143,
+            "status": "modified",
+            "symbol": "Markup.unescape",
+            "text_sha256": "84cde61c049d258ea68b0314828d9bf7fec99ff442f22cfdcfad8569cb33fec0"
+          },
+          {
+            "end_line": 245,
+            "file_hash_accept": false,
+            "path": "src/markupsafe/__init__.py",
+            "path_line_exact_accept": false,
+            "start_line": 243,
+            "status": "modified",
+            "symbol": "Markup.format",
+            "text_sha256": "da58b369a0c895fa2dbad7eb38e2a31219cb8f0327f0f508f6eef0b0065150b2"
+          },
+          {
+            "end_line": 112,
+            "file_hash_accept": false,
+            "path": "src/markupsafe/__init__.py",
+            "path_line_exact_accept": false,
+            "start_line": 101,
+            "status": "modified",
+            "symbol": "Markup.__mod__",
+            "text_sha256": "4a13e2307be63d373c1ec53291f0ffeb86bb3fd9beb2149ddbc5ed5182e41360"
+          },
+          {
+            "end_line": 27,
+            "file_hash_accept": false,
+            "path": "src/markupsafe/_native.py",
+            "path_line_exact_accept": false,
+            "start_line": 6,
+            "status": "modified",
+            "symbol": "escape",
+            "text_sha256": "2aaa57df490bab8031e382cb9f17512aab4bb483fe4dc278e14bc3626082a33d"
+          },
+          {
+            "end_line": 66,
+            "file_hash_accept": false,
+            "path": "src/markupsafe/__init__.py",
+            "path_line_exact_accept": false,
+            "start_line": 29,
+            "status": "relocated",
+            "symbol": "Markup",
+            "text_sha256": "505f2c901dc9245d6be29244ee9b3836bfe818342a00d9efb8d37eb2ebf1c82f"
+          },
+          {
+            "end_line": 5,
+            "file_hash_accept": false,
+            "path": "src/markupsafe/_native.py",
+            "path_line_exact_accept": false,
+            "start_line": 1,
+            "status": "modified",
+            "symbol": "<module>",
+            "text_sha256": "adffef887c03f02e007ed36dda9af7d7bf83451dfaf5665391cc9f1aa4a2727e"
+          },
+          {
+            "end_line": 296,
+            "file_hash_accept": false,
+            "path": "src/markupsafe/__init__.py",
+            "path_line_exact_accept": false,
+            "start_line": 288,
+            "status": "modified",
+            "symbol": "_escape_argspec",
+            "text_sha256": "b8eec7a318f8d92e5c8c7ad80e57d4415de634e04318bb0298473d1ebddcb308"
+          },
+          {
+            "end_line": 282,
+            "file_hash_accept": false,
+            "path": "src/markupsafe/__init__.py",
+            "path_line_exact_accept": false,
+            "start_line": 267,
+            "status": "modified",
+            "symbol": "EscapeFormatter.format_field",
+            "text_sha256": "6610d2fb43657f4ee3cf9c5eefc34c05816c764476bb9a71dd9299da51b39ad2"
+          },
+          {
+            "end_line": 265,
+            "file_hash_accept": false,
+            "path": "src/markupsafe/__init__.py",
+            "path_line_exact_accept": false,
+            "start_line": 263,
+            "status": "modified",
+            "symbol": "EscapeFormatter.__init__",
+            "text_sha256": "8fa814c07b002ee5148b0d2444242087347592123201d36bb8ecab7a52c738d6"
+          },
+          {
+            "end_line": 197,
+            "file_hash_accept": false,
+            "path": "src/markupsafe/__init__.py",
+            "path_line_exact_accept": false,
+            "start_line": 154,
+            "status": "modified",
+            "symbol": "Markup.striptags",
+            "text_sha256": "e3d56d2020a994fcbc3f0b473c7883098ea2f7c9c91880632b7e5d69bf41b3e3"
+          },
+          {
+            "end_line": 121,
+            "file_hash_accept": false,
+            "path": "src/markupsafe/__init__.py",
+            "path_line_exact_accept": false,
+            "start_line": 119,
+            "status": "modified",
+            "symbol": "Markup",
+            "text_sha256": "26005eb2d7ba617a0255ccc33b8a3a2d9ba02edd32aa726f1943241b37d3434d"
+          },
+          {
+            "end_line": 18,
+            "file_hash_accept": false,
+            "path": "src/markupsafe/__init__.py",
+            "path_line_exact_accept": false,
+            "start_line": 12,
+            "status": "modified",
+            "symbol": "<module>",
+            "text_sha256": "d0d3b433e9cd8abb2b9c00980e05366b997efac2b8162c5029325562c487bc73"
+          },
+          {
+            "end_line": 303,
+            "file_hash_accept": false,
+            "path": "src/markupsafe/__init__.py",
+            "path_line_exact_accept": false,
+            "start_line": 299,
+            "status": "relocated",
+            "symbol": "_MarkupEscapeHelper",
+            "text_sha256": "075bcdcef6708f081bbd969fbc7676da964da9962987f6a0ba04994880d4e6e3"
+          },
+          {
+            "end_line": 100,
+            "file_hash_accept": false,
+            "path": "src/markupsafe/__init__.py",
+            "path_line_exact_accept": false,
+            "start_line": 98,
+            "status": "modified",
+            "symbol": "Markup",
+            "text_sha256": "4a8664726918ff4ce8044fa7abe0890c068bf7d100fe805883800dc43d598a90"
+          },
+          {
+            "end_line": 63,
+            "file_hash_accept": false,
+            "path": "src/markupsafe/_native.py",
+            "path_line_exact_accept": false,
+            "start_line": 46,
+            "status": "modified",
+            "symbol": "soft_str",
+            "text_sha256": "8c091d99cec29bcfa2a9ba6424bd428fb642a919b20bb5b682538254fd3fcafd"
+          },
+          {
+            "end_line": 8,
+            "file_hash_accept": false,
+            "path": "src/markupsafe/__init__.py",
+            "path_line_exact_accept": false,
+            "start_line": 1,
+            "status": "modified",
+            "symbol": "<module>",
+            "text_sha256": "be5c478c20403e66f205c27f7b3585970491754adeaf6abbcb90f725106c3597"
+          },
+          {
+            "end_line": 85,
+            "file_hash_accept": false,
+            "path": "src/markupsafe/__init__.py",
+            "path_line_exact_accept": false,
+            "start_line": 81,
+            "status": "modified",
+            "symbol": "Markup.__add__",
+            "text_sha256": "499bcd97306f722d2a7e5d6ceb14b04c80bde3825d5f8adbe308bcf62fc568e2"
+          },
+          {
+            "end_line": 241,
+            "file_hash_accept": false,
+            "path": "src/markupsafe/__init__.py",
+            "path_line_exact_accept": false,
+            "start_line": 238,
+            "status": "modified",
+            "symbol": "Markup.rpartition",
+            "text_sha256": "6a50cb303397ea1fb2a323cffc9b20c0833a9a9328d159dae34303d914302b25"
+          },
+          {
+            "end_line": 332,
+            "file_hash_accept": false,
+            "path": "src/markupsafe/__init__.py",
+            "path_line_exact_accept": false,
+            "start_line": 322,
+            "status": "modified",
+            "symbol": "<module>",
+            "text_sha256": "65999d445f9fb04e5041f8c8ce172b58037a7580f64ee4a6323d4b37b486aa61"
+          },
+          {
+            "end_line": 139,
+            "file_hash_accept": false,
+            "path": "src/markupsafe/__init__.py",
+            "path_line_exact_accept": false,
+            "start_line": 136,
+            "status": "modified",
+            "symbol": "Markup.splitlines",
+            "text_sha256": "34356815245e75340ac59d18e2f006f0e84374575232100cab722ffef4356be3"
+          },
+          {
+            "end_line": 257,
+            "file_hash_accept": false,
+            "path": "src/markupsafe/__init__.py",
+            "path_line_exact_accept": false,
+            "start_line": 253,
+            "status": "modified",
+            "symbol": "Markup.__html_format__",
+            "text_sha256": "7cab28171134b45d6288223997bb3b55c1573f709a817dd4ca53d6efa1727fdb"
+          },
+          {
+            "end_line": 306,
+            "file_hash_accept": false,
+            "path": "src/markupsafe/__init__.py",
+            "path_line_exact_accept": false,
+            "start_line": 304,
+            "status": "modified",
+            "symbol": "_MarkupEscapeHelper.__init__",
+            "text_sha256": "830e1e44dbd0ca564d5d5b4f22dacd515cc996a93fd78e0139d26f47ad41d095"
+          },
+          {
+            "end_line": 287,
+            "file_hash_accept": false,
+            "path": "src/markupsafe/__init__.py",
+            "path_line_exact_accept": false,
+            "start_line": 283,
+            "status": "modified",
+            "symbol": "<module>",
+            "text_sha256": "b41afdfd263772442d2f966807f6a57d65f008aae869267850ec4738ee693b64"
+          },
+          {
+            "end_line": 125,
+            "file_hash_accept": false,
+            "path": "src/markupsafe/__init__.py",
+            "path_line_exact_accept": false,
+            "start_line": 122,
+            "status": "modified",
+            "symbol": "Markup.split",
+            "text_sha256": "e9b5db7637cc3ddde6a1d623efa5ed551a4e3f916555d0c98320351960e2df8c"
+          },
+          {
+            "end_line": 43,
+            "file_hash_accept": false,
+            "path": "src/markupsafe/_native.py",
+            "path_line_exact_accept": false,
+            "start_line": 30,
+            "status": "modified",
+            "symbol": "escape_silent",
+            "text_sha256": "51d27bb749a858695a30b0e43b5c08f20b223ce4118083e94db9f36e9886ef77"
+          },
+          {
+            "end_line": 251,
+            "file_hash_accept": false,
+            "path": "src/markupsafe/__init__.py",
+            "path_line_exact_accept": false,
+            "start_line": 247,
+            "status": "modified",
+            "symbol": "Markup.format_map",
+            "text_sha256": "ba34af6a52080b4e0386aa3f8dee3e4c3c084ca76f9a8449470e4c1fe6b0a564"
+          },
+          {
+            "end_line": 128,
+            "file_hash_accept": false,
+            "path": "src/markupsafe/__init__.py",
+            "path_line_exact_accept": false,
+            "start_line": 126,
+            "status": "modified",
+            "symbol": "Markup",
+            "text_sha256": "fa66b385224400d9a3746a69d96ed22c373b4c39c89a2688058cad035d2236bb"
+          },
+          {
+            "end_line": 91,
+            "file_hash_accept": false,
+            "path": "src/markupsafe/__init__.py",
+            "path_line_exact_accept": false,
+            "start_line": 87,
+            "status": "modified",
+            "symbol": "Markup.__radd__",
+            "text_sha256": "b394d0211ed730c985a7e1aca7d08dec4ddfad8be48e21b5d8b0df70881ec4db"
+          },
+          {
+            "end_line": 142,
+            "file_hash_accept": false,
+            "path": "src/markupsafe/__init__.py",
+            "path_line_exact_accept": false,
+            "start_line": 140,
+            "status": "modified",
+            "symbol": "Markup",
+            "text_sha256": "71e87abf29d9918b3105012e4bd12cefa2b3122cfd721af9698c9c2e61b87116"
+          },
+          {
+            "end_line": 232,
+            "file_hash_accept": false,
+            "path": "src/markupsafe/__init__.py",
+            "path_line_exact_accept": false,
+            "start_line": 210,
+            "status": "modified",
+            "symbol": "Markup",
+            "text_sha256": "f80f786a536458e3498d9f221ccd1da2b5ff02d6dcc3b2d18c1c5dfe7f20e69e"
+          }
+        ],
+        "status_counts": {
+          "modified": 35,
+          "relocated": 3
+        }
+      }
+    ],
+    "retrieval": [
+      {
+        "budget_bytes": 2000,
+        "entry_count": 2,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 1,
+        "hit": true,
+        "method": "bm25",
+        "query_id": "click-completion",
+        "reciprocal_rank": 1.0,
+        "rendered_bytes": 1991,
+        "reported_consumed": 1991,
+        "reported_cost_matches": true,
+        "repository": "click",
+        "returned_files": [
+          "src/click/shell_completion.py",
+          "tests/test_shell_completion.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 4000,
+        "entry_count": 4,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 1,
+        "hit": true,
+        "method": "bm25",
+        "query_id": "click-completion",
+        "reciprocal_rank": 1.0,
+        "rendered_bytes": 3997,
+        "reported_consumed": 3997,
+        "reported_cost_matches": true,
+        "repository": "click",
+        "returned_files": [
+          "src/click/shell_completion.py",
+          "src/click/shell_completion.py",
+          "src/click/core.py",
+          "examples/completion/completion.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 8000,
+        "entry_count": 9,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 1,
+        "hit": true,
+        "method": "bm25",
+        "query_id": "click-completion",
+        "reciprocal_rank": 1.0,
+        "rendered_bytes": 7957,
+        "reported_consumed": 7957,
+        "reported_cost_matches": true,
+        "repository": "click",
+        "returned_files": [
+          "src/click/shell_completion.py",
+          "src/click/shell_completion.py",
+          "src/click/core.py",
+          "src/click/core.py",
+          "src/click/shell_completion.py",
+          "src/click/shell_completion.py",
+          "src/click/shell_completion.py",
+          "src/click/shell_completion.py",
+          "src/click/shell_completion.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 2000,
+        "entry_count": 2,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 1,
+        "hit": true,
+        "method": "graph",
+        "query_id": "click-completion",
+        "reciprocal_rank": 1.0,
+        "rendered_bytes": 1984,
+        "reported_consumed": 1984,
+        "reported_cost_matches": true,
+        "repository": "click",
+        "returned_files": [
+          "src/click/shell_completion.py",
+          "src/click/parser.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 4000,
+        "entry_count": 3,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 1,
+        "hit": true,
+        "method": "graph",
+        "query_id": "click-completion",
+        "reciprocal_rank": 1.0,
+        "rendered_bytes": 3697,
+        "reported_consumed": 3697,
+        "reported_cost_matches": true,
+        "repository": "click",
+        "returned_files": [
+          "src/click/shell_completion.py",
+          "src/click/core.py",
+          "src/click/shell_completion.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 8000,
+        "entry_count": 8,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 1,
+        "hit": true,
+        "method": "graph",
+        "query_id": "click-completion",
+        "reciprocal_rank": 1.0,
+        "rendered_bytes": 7911,
+        "reported_consumed": 7911,
+        "reported_cost_matches": true,
+        "repository": "click",
+        "returned_files": [
+          "src/click/shell_completion.py",
+          "src/click/core.py",
+          "src/click/shell_completion.py",
+          "src/click/core.py",
+          "src/click/types.py",
+          "src/click/shell_completion.py",
+          "src/click/shell_completion.py",
+          "src/click/shell_completion.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 2000,
+        "entry_count": 2,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 2,
+        "hit": true,
+        "method": "bm25",
+        "query_id": "click-format",
+        "reciprocal_rank": 0.5,
+        "rendered_bytes": 1712,
+        "reported_consumed": 1712,
+        "reported_cost_matches": true,
+        "repository": "click",
+        "returned_files": [
+          "src/click/core.py",
+          "src/click/formatting.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 4000,
+        "entry_count": 3,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 2,
+        "hit": true,
+        "method": "bm25",
+        "query_id": "click-format",
+        "reciprocal_rank": 0.5,
+        "rendered_bytes": 3567,
+        "reported_consumed": 3567,
+        "reported_cost_matches": true,
+        "repository": "click",
+        "returned_files": [
+          "src/click/core.py",
+          "src/click/formatting.py",
+          "src/click/formatting.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 8000,
+        "entry_count": 9,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 2,
+        "hit": true,
+        "method": "bm25",
+        "query_id": "click-format",
+        "reciprocal_rank": 0.5,
+        "rendered_bytes": 7969,
+        "reported_consumed": 7969,
+        "reported_cost_matches": true,
+        "repository": "click",
+        "returned_files": [
+          "src/click/core.py",
+          "src/click/formatting.py",
+          "src/click/formatting.py",
+          "src/click/formatting.py",
+          "src/click/formatting.py",
+          "tests/test_formatting.py",
+          "src/click/formatting.py",
+          "src/click/formatting.py",
+          "src/click/formatting.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 2000,
+        "entry_count": 2,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 2,
+        "hit": true,
+        "method": "graph",
+        "query_id": "click-format",
+        "reciprocal_rank": 0.5,
+        "rendered_bytes": 1832,
+        "reported_consumed": 1832,
+        "reported_cost_matches": true,
+        "repository": "click",
+        "returned_files": [
+          "src/click/core.py",
+          "src/click/formatting.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 4000,
+        "entry_count": 3,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 2,
+        "hit": true,
+        "method": "graph",
+        "query_id": "click-format",
+        "reciprocal_rank": 0.5,
+        "rendered_bytes": 3743,
+        "reported_consumed": 3743,
+        "reported_cost_matches": true,
+        "repository": "click",
+        "returned_files": [
+          "src/click/core.py",
+          "src/click/formatting.py",
+          "src/click/formatting.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 8000,
+        "entry_count": 8,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 2,
+        "hit": true,
+        "method": "graph",
+        "query_id": "click-format",
+        "reciprocal_rank": 0.5,
+        "rendered_bytes": 7873,
+        "reported_consumed": 7873,
+        "reported_cost_matches": true,
+        "repository": "click",
+        "returned_files": [
+          "src/click/core.py",
+          "src/click/formatting.py",
+          "src/click/formatting.py",
+          "src/click/formatting.py",
+          "src/click/formatting.py",
+          "tests/test_formatting.py",
+          "src/click/formatting.py",
+          "src/click/formatting.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 2000,
+        "entry_count": 2,
+        "file_recall": 0.0,
+        "first_relevant_entry_rank": null,
+        "hit": false,
+        "method": "bm25",
+        "query_id": "click-prompt",
+        "reciprocal_rank": 0.0,
+        "rendered_bytes": 1766,
+        "reported_consumed": 1766,
+        "reported_cost_matches": true,
+        "repository": "click",
+        "returned_files": [
+          "tests/test_termui.py",
+          "tests/test_termui.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 4000,
+        "entry_count": 4,
+        "file_recall": 0.0,
+        "first_relevant_entry_rank": null,
+        "hit": false,
+        "method": "bm25",
+        "query_id": "click-prompt",
+        "reciprocal_rank": 0.0,
+        "rendered_bytes": 3825,
+        "reported_consumed": 3825,
+        "reported_cost_matches": true,
+        "repository": "click",
+        "returned_files": [
+          "tests/test_termui.py",
+          "tests/test_termui.py",
+          "tests/test_utils.py",
+          "src/click/core.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 8000,
+        "entry_count": 6,
+        "file_recall": 0.0,
+        "first_relevant_entry_rank": null,
+        "hit": false,
+        "method": "bm25",
+        "query_id": "click-prompt",
+        "reciprocal_rank": 0.0,
+        "rendered_bytes": 7671,
+        "reported_consumed": 7671,
+        "reported_cost_matches": true,
+        "repository": "click",
+        "returned_files": [
+          "tests/test_termui.py",
+          "tests/test_termui.py",
+          "tests/test_utils.py",
+          "docs/prompts.rst",
+          "tests/test_utils.py",
+          "src/click/core.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 2000,
+        "entry_count": 2,
+        "file_recall": 0.0,
+        "first_relevant_entry_rank": null,
+        "hit": false,
+        "method": "graph",
+        "query_id": "click-prompt",
+        "reciprocal_rank": 0.0,
+        "rendered_bytes": 1885,
+        "reported_consumed": 1885,
+        "reported_cost_matches": true,
+        "repository": "click",
+        "returned_files": [
+          "tests/test_termui.py",
+          "tests/test_termui.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 4000,
+        "entry_count": 5,
+        "file_recall": 0.0,
+        "first_relevant_entry_rank": null,
+        "hit": false,
+        "method": "graph",
+        "query_id": "click-prompt",
+        "reciprocal_rank": 0.0,
+        "rendered_bytes": 3966,
+        "reported_consumed": 3966,
+        "reported_cost_matches": true,
+        "repository": "click",
+        "returned_files": [
+          "tests/test_termui.py",
+          "tests/test_termui.py",
+          "tests/test_utils.py",
+          "src/click/decorators.py",
+          "examples/termui/termui.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 8000,
+        "entry_count": 6,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 5,
+        "hit": true,
+        "method": "graph",
+        "query_id": "click-prompt",
+        "reciprocal_rank": 0.2,
+        "rendered_bytes": 7879,
+        "reported_consumed": 7879,
+        "reported_cost_matches": true,
+        "repository": "click",
+        "returned_files": [
+          "tests/test_termui.py",
+          "tests/test_termui.py",
+          "tests/test_utils.py",
+          "tests/test_utils.py",
+          "src/click/termui.py",
+          "src/click/decorators.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 2000,
+        "entry_count": 2,
+        "file_recall": 0.0,
+        "first_relevant_entry_rank": null,
+        "hit": false,
+        "method": "bm25",
+        "query_id": "click-command",
+        "reciprocal_rank": 0.0,
+        "rendered_bytes": 1643,
+        "reported_consumed": 1643,
+        "reported_cost_matches": true,
+        "repository": "click",
+        "returned_files": [
+          "examples/aliases/aliases.py",
+          "tests/test_commands.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 4000,
+        "entry_count": 5,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 5,
+        "hit": true,
+        "method": "bm25",
+        "query_id": "click-command",
+        "reciprocal_rank": 0.2,
+        "rendered_bytes": 3964,
+        "reported_consumed": 3964,
+        "reported_cost_matches": true,
+        "repository": "click",
+        "returned_files": [
+          "examples/aliases/aliases.py",
+          "tests/test_commands.py",
+          "tests/typing/typing_aliased_group.py",
+          "src/click/types.py",
+          "src/click/core.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 8000,
+        "entry_count": 7,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 4,
+        "hit": true,
+        "method": "bm25",
+        "query_id": "click-command",
+        "reciprocal_rank": 0.25,
+        "rendered_bytes": 7925,
+        "reported_consumed": 7925,
+        "reported_cost_matches": true,
+        "repository": "click",
+        "returned_files": [
+          "examples/aliases/aliases.py",
+          "tests/test_commands.py",
+          "tests/typing/typing_aliased_group.py",
+          "src/click/core.py",
+          "src/click/shell_completion.py",
+          "src/click/types.py",
+          "src/click/core.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 2000,
+        "entry_count": 2,
+        "file_recall": 0.0,
+        "first_relevant_entry_rank": null,
+        "hit": false,
+        "method": "graph",
+        "query_id": "click-command",
+        "reciprocal_rank": 0.0,
+        "rendered_bytes": 1757,
+        "reported_consumed": 1757,
+        "reported_cost_matches": true,
+        "repository": "click",
+        "returned_files": [
+          "examples/aliases/aliases.py",
+          "tests/test_commands.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 4000,
+        "entry_count": 5,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 5,
+        "hit": true,
+        "method": "graph",
+        "query_id": "click-command",
+        "reciprocal_rank": 0.2,
+        "rendered_bytes": 3921,
+        "reported_consumed": 3921,
+        "reported_cost_matches": true,
+        "repository": "click",
+        "returned_files": [
+          "examples/aliases/aliases.py",
+          "tests/test_commands.py",
+          "tests/typing/typing_aliased_group.py",
+          "src/click/types.py",
+          "src/click/core.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 8000,
+        "entry_count": 7,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 4,
+        "hit": true,
+        "method": "graph",
+        "query_id": "click-command",
+        "reciprocal_rank": 0.25,
+        "rendered_bytes": 7964,
+        "reported_consumed": 7964,
+        "reported_cost_matches": true,
+        "repository": "click",
+        "returned_files": [
+          "examples/aliases/aliases.py",
+          "tests/test_commands.py",
+          "tests/typing/typing_aliased_group.py",
+          "src/click/core.py",
+          "src/click/shell_completion.py",
+          "src/click/types.py",
+          "src/click/core.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 2000,
+        "entry_count": 2,
+        "file_recall": 0.0,
+        "first_relevant_entry_rank": null,
+        "hit": false,
+        "method": "bm25",
+        "query_id": "click-path",
+        "reciprocal_rank": 0.0,
+        "rendered_bytes": 1956,
+        "reported_consumed": 1956,
+        "reported_cost_matches": true,
+        "repository": "click",
+        "returned_files": [
+          "tests/test_types.py",
+          "tests/test_basic.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 4000,
+        "entry_count": 4,
+        "file_recall": 0.0,
+        "first_relevant_entry_rank": null,
+        "hit": false,
+        "method": "bm25",
+        "query_id": "click-path",
+        "reciprocal_rank": 0.0,
+        "rendered_bytes": 3926,
+        "reported_consumed": 3926,
+        "reported_cost_matches": true,
+        "repository": "click",
+        "returned_files": [
+          "tests/test_types.py",
+          "tests/test_types.py",
+          "tests/test_types.py",
+          "tests/test_basic.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 8000,
+        "entry_count": 7,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 5,
+        "hit": true,
+        "method": "bm25",
+        "query_id": "click-path",
+        "reciprocal_rank": 0.2,
+        "rendered_bytes": 7784,
+        "reported_consumed": 7784,
+        "reported_cost_matches": true,
+        "repository": "click",
+        "returned_files": [
+          "tests/test_types.py",
+          "tests/test_types.py",
+          "tests/test_types.py",
+          "tests/test_types.py",
+          "src/click/types.py",
+          "src/click/core.py",
+          "src/click/types.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 2000,
+        "entry_count": 1,
+        "file_recall": 0.0,
+        "first_relevant_entry_rank": null,
+        "hit": false,
+        "method": "graph",
+        "query_id": "click-path",
+        "reciprocal_rank": 0.0,
+        "rendered_bytes": 1578,
+        "reported_consumed": 1578,
+        "reported_cost_matches": true,
+        "repository": "click",
+        "returned_files": [
+          "tests/test_types.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 4000,
+        "entry_count": 3,
+        "file_recall": 0.0,
+        "first_relevant_entry_rank": null,
+        "hit": false,
+        "method": "graph",
+        "query_id": "click-path",
+        "reciprocal_rank": 0.0,
+        "rendered_bytes": 3663,
+        "reported_consumed": 3663,
+        "reported_cost_matches": true,
+        "repository": "click",
+        "returned_files": [
+          "tests/test_types.py",
+          "tests/test_types.py",
+          "tests/test_types.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 8000,
+        "entry_count": 6,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 5,
+        "hit": true,
+        "method": "graph",
+        "query_id": "click-path",
+        "reciprocal_rank": 0.2,
+        "rendered_bytes": 7570,
+        "reported_consumed": 7570,
+        "reported_cost_matches": true,
+        "repository": "click",
+        "returned_files": [
+          "tests/test_types.py",
+          "tests/test_types.py",
+          "tests/test_types.py",
+          "tests/test_types.py",
+          "src/click/types.py",
+          "src/click/core.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 2000,
+        "entry_count": 2,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 1,
+        "hit": true,
+        "method": "bm25",
+        "query_id": "itsdangerous-time",
+        "reciprocal_rank": 1.0,
+        "rendered_bytes": 1846,
+        "reported_consumed": 1846,
+        "reported_cost_matches": true,
+        "repository": "itsdangerous",
+        "returned_files": [
+          "src/itsdangerous/timed.py",
+          "src/itsdangerous/timed.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 4000,
+        "entry_count": 5,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 1,
+        "hit": true,
+        "method": "bm25",
+        "query_id": "itsdangerous-time",
+        "reciprocal_rank": 1.0,
+        "rendered_bytes": 3974,
+        "reported_consumed": 3974,
+        "reported_cost_matches": true,
+        "repository": "itsdangerous",
+        "returned_files": [
+          "src/itsdangerous/timed.py",
+          "src/itsdangerous/timed.py",
+          "src/itsdangerous/timed.py",
+          "tests/test_itsdangerous/test_timed.py",
+          "src/itsdangerous/exc.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 8000,
+        "entry_count": 8,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 1,
+        "hit": true,
+        "method": "bm25",
+        "query_id": "itsdangerous-time",
+        "reciprocal_rank": 1.0,
+        "rendered_bytes": 7784,
+        "reported_consumed": 7784,
+        "reported_cost_matches": true,
+        "repository": "itsdangerous",
+        "returned_files": [
+          "src/itsdangerous/timed.py",
+          "src/itsdangerous/timed.py",
+          "src/itsdangerous/timed.py",
+          "tests/test_itsdangerous/test_timed.py",
+          "docs/timed.rst",
+          "src/itsdangerous/timed.py",
+          "tests/test_itsdangerous/test_timed.py",
+          "src/itsdangerous/timed.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 2000,
+        "entry_count": 2,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 1,
+        "hit": true,
+        "method": "graph",
+        "query_id": "itsdangerous-time",
+        "reciprocal_rank": 1.0,
+        "rendered_bytes": 2000,
+        "reported_consumed": 2000,
+        "reported_cost_matches": true,
+        "repository": "itsdangerous",
+        "returned_files": [
+          "src/itsdangerous/timed.py",
+          "src/itsdangerous/timed.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 4000,
+        "entry_count": 4,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 1,
+        "hit": true,
+        "method": "graph",
+        "query_id": "itsdangerous-time",
+        "reciprocal_rank": 1.0,
+        "rendered_bytes": 3670,
+        "reported_consumed": 3670,
+        "reported_cost_matches": true,
+        "repository": "itsdangerous",
+        "returned_files": [
+          "src/itsdangerous/timed.py",
+          "src/itsdangerous/timed.py",
+          "src/itsdangerous/timed.py",
+          "tests/test_itsdangerous/test_timed.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 8000,
+        "entry_count": 8,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 1,
+        "hit": true,
+        "method": "graph",
+        "query_id": "itsdangerous-time",
+        "reciprocal_rank": 1.0,
+        "rendered_bytes": 7987,
+        "reported_consumed": 7987,
+        "reported_cost_matches": true,
+        "repository": "itsdangerous",
+        "returned_files": [
+          "src/itsdangerous/timed.py",
+          "src/itsdangerous/timed.py",
+          "src/itsdangerous/timed.py",
+          "tests/test_itsdangerous/test_timed.py",
+          "src/itsdangerous/timed.py",
+          "tests/test_itsdangerous/test_timed.py",
+          "docs/timed.rst",
+          "tests/test_itsdangerous/test_timed.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 2000,
+        "entry_count": 1,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 1,
+        "hit": true,
+        "method": "bm25",
+        "query_id": "itsdangerous-url",
+        "reciprocal_rank": 1.0,
+        "rendered_bytes": 1779,
+        "reported_consumed": 1779,
+        "reported_cost_matches": true,
+        "repository": "itsdangerous",
+        "returned_files": [
+          "src/itsdangerous/url_safe.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 4000,
+        "entry_count": 4,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 1,
+        "hit": true,
+        "method": "bm25",
+        "query_id": "itsdangerous-url",
+        "reciprocal_rank": 1.0,
+        "rendered_bytes": 3960,
+        "reported_consumed": 3960,
+        "reported_cost_matches": true,
+        "repository": "itsdangerous",
+        "returned_files": [
+          "src/itsdangerous/url_safe.py",
+          "src/itsdangerous/url_safe.py",
+          "src/itsdangerous/url_safe.py",
+          "tests/test_itsdangerous/test_url_safe.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 8000,
+        "entry_count": 7,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 1,
+        "hit": true,
+        "method": "bm25",
+        "query_id": "itsdangerous-url",
+        "reciprocal_rank": 1.0,
+        "rendered_bytes": 7689,
+        "reported_consumed": 7689,
+        "reported_cost_matches": true,
+        "repository": "itsdangerous",
+        "returned_files": [
+          "src/itsdangerous/url_safe.py",
+          "src/itsdangerous/url_safe.py",
+          "src/itsdangerous/url_safe.py",
+          "src/itsdangerous/url_safe.py",
+          "src/itsdangerous/url_safe.py",
+          "src/itsdangerous/serializer.py",
+          "src/itsdangerous/serializer.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 2000,
+        "entry_count": 1,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 1,
+        "hit": true,
+        "method": "graph",
+        "query_id": "itsdangerous-url",
+        "reciprocal_rank": 1.0,
+        "rendered_bytes": 1850,
+        "reported_consumed": 1850,
+        "reported_cost_matches": true,
+        "repository": "itsdangerous",
+        "returned_files": [
+          "src/itsdangerous/url_safe.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 4000,
+        "entry_count": 3,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 1,
+        "hit": true,
+        "method": "graph",
+        "query_id": "itsdangerous-url",
+        "reciprocal_rank": 1.0,
+        "rendered_bytes": 3641,
+        "reported_consumed": 3641,
+        "reported_cost_matches": true,
+        "repository": "itsdangerous",
+        "returned_files": [
+          "src/itsdangerous/url_safe.py",
+          "src/itsdangerous/url_safe.py",
+          "src/itsdangerous/url_safe.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 8000,
+        "entry_count": 8,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 1,
+        "hit": true,
+        "method": "graph",
+        "query_id": "itsdangerous-url",
+        "reciprocal_rank": 1.0,
+        "rendered_bytes": 7900,
+        "reported_consumed": 7900,
+        "reported_cost_matches": true,
+        "repository": "itsdangerous",
+        "returned_files": [
+          "src/itsdangerous/url_safe.py",
+          "src/itsdangerous/url_safe.py",
+          "src/itsdangerous/url_safe.py",
+          "src/itsdangerous/url_safe.py",
+          "src/itsdangerous/url_safe.py",
+          "src/itsdangerous/serializer.py",
+          "tests/test_itsdangerous/test_url_safe.py",
+          "tests/test_itsdangerous/test_url_safe.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 2000,
+        "entry_count": 2,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 2,
+        "hit": true,
+        "method": "bm25",
+        "query_id": "itsdangerous-sign",
+        "reciprocal_rank": 0.5,
+        "rendered_bytes": 1709,
+        "reported_consumed": 1709,
+        "reported_cost_matches": true,
+        "repository": "itsdangerous",
+        "returned_files": [
+          "tests/test_itsdangerous/test_signer.py",
+          "src/itsdangerous/signer.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 4000,
+        "entry_count": 4,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 1,
+        "hit": true,
+        "method": "bm25",
+        "query_id": "itsdangerous-sign",
+        "reciprocal_rank": 1.0,
+        "rendered_bytes": 3963,
+        "reported_consumed": 3963,
+        "reported_cost_matches": true,
+        "repository": "itsdangerous",
+        "returned_files": [
+          "src/itsdangerous/signer.py",
+          "tests/test_itsdangerous/test_signer.py",
+          "src/itsdangerous/signer.py",
+          "tests/test_itsdangerous/test_signer.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 8000,
+        "entry_count": 6,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 1,
+        "hit": true,
+        "method": "bm25",
+        "query_id": "itsdangerous-sign",
+        "reciprocal_rank": 1.0,
+        "rendered_bytes": 7980,
+        "reported_consumed": 7980,
+        "reported_cost_matches": true,
+        "repository": "itsdangerous",
+        "returned_files": [
+          "src/itsdangerous/signer.py",
+          "tests/test_itsdangerous/test_signer.py",
+          "src/itsdangerous/signer.py",
+          "src/itsdangerous/signer.py",
+          "src/itsdangerous/signer.py",
+          "src/itsdangerous/signer.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 2000,
+        "entry_count": 2,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 2,
+        "hit": true,
+        "method": "graph",
+        "query_id": "itsdangerous-sign",
+        "reciprocal_rank": 0.5,
+        "rendered_bytes": 1853,
+        "reported_consumed": 1853,
+        "reported_cost_matches": true,
+        "repository": "itsdangerous",
+        "returned_files": [
+          "tests/test_itsdangerous/test_signer.py",
+          "src/itsdangerous/signer.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 4000,
+        "entry_count": 3,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 1,
+        "hit": true,
+        "method": "graph",
+        "query_id": "itsdangerous-sign",
+        "reciprocal_rank": 1.0,
+        "rendered_bytes": 3749,
+        "reported_consumed": 3749,
+        "reported_cost_matches": true,
+        "repository": "itsdangerous",
+        "returned_files": [
+          "src/itsdangerous/signer.py",
+          "tests/test_itsdangerous/test_signer.py",
+          "src/itsdangerous/signer.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 8000,
+        "entry_count": 5,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 1,
+        "hit": true,
+        "method": "graph",
+        "query_id": "itsdangerous-sign",
+        "reciprocal_rank": 1.0,
+        "rendered_bytes": 7690,
+        "reported_consumed": 7690,
+        "reported_cost_matches": true,
+        "repository": "itsdangerous",
+        "returned_files": [
+          "src/itsdangerous/signer.py",
+          "tests/test_itsdangerous/test_signer.py",
+          "src/itsdangerous/signer.py",
+          "src/itsdangerous/signer.py",
+          "src/itsdangerous/signer.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 2000,
+        "entry_count": 2,
+        "file_recall": 0.0,
+        "first_relevant_entry_rank": null,
+        "hit": false,
+        "method": "bm25",
+        "query_id": "itsdangerous-serialize",
+        "reciprocal_rank": 0.0,
+        "rendered_bytes": 1734,
+        "reported_consumed": 1734,
+        "reported_cost_matches": true,
+        "repository": "itsdangerous",
+        "returned_files": [
+          "tests/test_itsdangerous/test_serializer.py",
+          "tests/test_itsdangerous/test_serializer.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 4000,
+        "entry_count": 5,
+        "file_recall": 0.0,
+        "first_relevant_entry_rank": null,
+        "hit": false,
+        "method": "bm25",
+        "query_id": "itsdangerous-serialize",
+        "reciprocal_rank": 0.0,
+        "rendered_bytes": 3941,
+        "reported_consumed": 3941,
+        "reported_cost_matches": true,
+        "repository": "itsdangerous",
+        "returned_files": [
+          "tests/test_itsdangerous/test_serializer.py",
+          "tests/test_itsdangerous/test_serializer.py",
+          "tests/test_itsdangerous/test_serializer.py",
+          "tests/test_itsdangerous/test_serializer.py",
+          "tests/test_itsdangerous/test_serializer.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 8000,
+        "entry_count": 10,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 9,
+        "hit": true,
+        "method": "bm25",
+        "query_id": "itsdangerous-serialize",
+        "reciprocal_rank": 0.1111111111111111,
+        "rendered_bytes": 7952,
+        "reported_consumed": 7952,
+        "reported_cost_matches": true,
+        "repository": "itsdangerous",
+        "returned_files": [
+          "tests/test_itsdangerous/test_serializer.py",
+          "tests/test_itsdangerous/test_serializer.py",
+          "tests/test_itsdangerous/test_serializer.py",
+          "tests/test_itsdangerous/test_serializer.py",
+          "tests/test_itsdangerous/test_serializer.py",
+          "tests/test_itsdangerous/test_serializer.py",
+          "tests/test_itsdangerous/test_timed.py",
+          "src/itsdangerous/url_safe.py",
+          "src/itsdangerous/serializer.py",
+          "src/itsdangerous/url_safe.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 2000,
+        "entry_count": 2,
+        "file_recall": 0.0,
+        "first_relevant_entry_rank": null,
+        "hit": false,
+        "method": "graph",
+        "query_id": "itsdangerous-serialize",
+        "reciprocal_rank": 0.0,
+        "rendered_bytes": 1887,
+        "reported_consumed": 1887,
+        "reported_cost_matches": true,
+        "repository": "itsdangerous",
+        "returned_files": [
+          "tests/test_itsdangerous/test_serializer.py",
+          "tests/test_itsdangerous/test_serializer.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 4000,
+        "entry_count": 4,
+        "file_recall": 0.0,
+        "first_relevant_entry_rank": null,
+        "hit": false,
+        "method": "graph",
+        "query_id": "itsdangerous-serialize",
+        "reciprocal_rank": 0.0,
+        "rendered_bytes": 3795,
+        "reported_consumed": 3795,
+        "reported_cost_matches": true,
+        "repository": "itsdangerous",
+        "returned_files": [
+          "tests/test_itsdangerous/test_serializer.py",
+          "tests/test_itsdangerous/test_serializer.py",
+          "tests/test_itsdangerous/test_serializer.py",
+          "tests/test_itsdangerous/test_serializer.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 8000,
+        "entry_count": 9,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 8,
+        "hit": true,
+        "method": "graph",
+        "query_id": "itsdangerous-serialize",
+        "reciprocal_rank": 0.125,
+        "rendered_bytes": 7924,
+        "reported_consumed": 7924,
+        "reported_cost_matches": true,
+        "repository": "itsdangerous",
+        "returned_files": [
+          "tests/test_itsdangerous/test_serializer.py",
+          "tests/test_itsdangerous/test_serializer.py",
+          "tests/test_itsdangerous/test_serializer.py",
+          "tests/test_itsdangerous/test_serializer.py",
+          "tests/test_itsdangerous/test_serializer.py",
+          "tests/test_itsdangerous/test_timed.py",
+          "tests/test_itsdangerous/test_serializer.py",
+          "src/itsdangerous/serializer.py",
+          "src/itsdangerous/url_safe.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 2000,
+        "entry_count": 2,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 1,
+        "hit": true,
+        "method": "bm25",
+        "query_id": "itsdangerous-expiry",
+        "reciprocal_rank": 1.0,
+        "rendered_bytes": 1764,
+        "reported_consumed": 1764,
+        "reported_cost_matches": true,
+        "repository": "itsdangerous",
+        "returned_files": [
+          "src/itsdangerous/exc.py",
+          "docs/exceptions.rst"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 4000,
+        "entry_count": 4,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 1,
+        "hit": true,
+        "method": "bm25",
+        "query_id": "itsdangerous-expiry",
+        "reciprocal_rank": 1.0,
+        "rendered_bytes": 3694,
+        "reported_consumed": 3694,
+        "reported_cost_matches": true,
+        "repository": "itsdangerous",
+        "returned_files": [
+          "src/itsdangerous/exc.py",
+          "docs/exceptions.rst",
+          "src/itsdangerous/__init__.py",
+          "src/itsdangerous/exc.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 8000,
+        "entry_count": 8,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 1,
+        "hit": true,
+        "method": "bm25",
+        "query_id": "itsdangerous-expiry",
+        "reciprocal_rank": 1.0,
+        "rendered_bytes": 7552,
+        "reported_consumed": 7552,
+        "reported_cost_matches": true,
+        "repository": "itsdangerous",
+        "returned_files": [
+          "src/itsdangerous/exc.py",
+          "docs/exceptions.rst",
+          "src/itsdangerous/__init__.py",
+          "src/itsdangerous/exc.py",
+          "tests/test_itsdangerous/test_timed.py",
+          "src/itsdangerous/timed.py",
+          "src/itsdangerous/exc.py",
+          "src/itsdangerous/timed.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 2000,
+        "entry_count": 2,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 1,
+        "hit": true,
+        "method": "graph",
+        "query_id": "itsdangerous-expiry",
+        "reciprocal_rank": 1.0,
+        "rendered_bytes": 1833,
+        "reported_consumed": 1833,
+        "reported_cost_matches": true,
+        "repository": "itsdangerous",
+        "returned_files": [
+          "src/itsdangerous/exc.py",
+          "docs/exceptions.rst"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 4000,
+        "entry_count": 4,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 1,
+        "hit": true,
+        "method": "graph",
+        "query_id": "itsdangerous-expiry",
+        "reciprocal_rank": 1.0,
+        "rendered_bytes": 3892,
+        "reported_consumed": 3892,
+        "reported_cost_matches": true,
+        "repository": "itsdangerous",
+        "returned_files": [
+          "src/itsdangerous/exc.py",
+          "src/itsdangerous/__init__.py",
+          "docs/exceptions.rst",
+          "src/itsdangerous/exc.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 8000,
+        "entry_count": 8,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 1,
+        "hit": true,
+        "method": "graph",
+        "query_id": "itsdangerous-expiry",
+        "reciprocal_rank": 1.0,
+        "rendered_bytes": 7754,
+        "reported_consumed": 7754,
+        "reported_cost_matches": true,
+        "repository": "itsdangerous",
+        "returned_files": [
+          "src/itsdangerous/exc.py",
+          "src/itsdangerous/__init__.py",
+          "docs/exceptions.rst",
+          "tests/test_itsdangerous/test_timed.py",
+          "src/itsdangerous/timed.py",
+          "src/itsdangerous/exc.py",
+          "src/itsdangerous/exc.py",
+          "src/itsdangerous/exc.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 2000,
+        "entry_count": 1,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 1,
+        "hit": true,
+        "method": "bm25",
+        "query_id": "markupsafe-tags",
+        "reciprocal_rank": 1.0,
+        "rendered_bytes": 1966,
+        "reported_consumed": 1966,
+        "reported_cost_matches": true,
+        "repository": "markupsafe",
+        "returned_files": [
+          "src/markupsafe/__init__.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 4000,
+        "entry_count": 4,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 1,
+        "hit": true,
+        "method": "bm25",
+        "query_id": "markupsafe-tags",
+        "reciprocal_rank": 1.0,
+        "rendered_bytes": 3936,
+        "reported_consumed": 3936,
+        "reported_cost_matches": true,
+        "repository": "markupsafe",
+        "returned_files": [
+          "src/markupsafe/__init__.py",
+          "docs/escaping.rst",
+          "tests/test_markupsafe.py",
+          "src/markupsafe/__init__.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 8000,
+        "entry_count": 8,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 1,
+        "hit": true,
+        "method": "bm25",
+        "query_id": "markupsafe-tags",
+        "reciprocal_rank": 1.0,
+        "rendered_bytes": 7667,
+        "reported_consumed": 7667,
+        "reported_cost_matches": true,
+        "repository": "markupsafe",
+        "returned_files": [
+          "src/markupsafe/__init__.py",
+          "docs/escaping.rst",
+          "tests/test_markupsafe.py",
+          "CHANGES.rst",
+          "src/markupsafe/__init__.py",
+          "tests/test_markupsafe.py",
+          "tests/test_markupsafe.py",
+          "src/markupsafe/__init__.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 2000,
+        "entry_count": 2,
+        "file_recall": 0.0,
+        "first_relevant_entry_rank": null,
+        "hit": false,
+        "method": "graph",
+        "query_id": "markupsafe-tags",
+        "reciprocal_rank": 0.0,
+        "rendered_bytes": 1937,
+        "reported_consumed": 1937,
+        "reported_cost_matches": true,
+        "repository": "markupsafe",
+        "returned_files": [
+          "tests/test_markupsafe.py",
+          "docs/escaping.rst"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 4000,
+        "entry_count": 3,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 1,
+        "hit": true,
+        "method": "graph",
+        "query_id": "markupsafe-tags",
+        "reciprocal_rank": 1.0,
+        "rendered_bytes": 3638,
+        "reported_consumed": 3638,
+        "reported_cost_matches": true,
+        "repository": "markupsafe",
+        "returned_files": [
+          "src/markupsafe/__init__.py",
+          "tests/test_markupsafe.py",
+          "docs/escaping.rst"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 8000,
+        "entry_count": 7,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 1,
+        "hit": true,
+        "method": "graph",
+        "query_id": "markupsafe-tags",
+        "reciprocal_rank": 1.0,
+        "rendered_bytes": 7582,
+        "reported_consumed": 7582,
+        "reported_cost_matches": true,
+        "repository": "markupsafe",
+        "returned_files": [
+          "src/markupsafe/__init__.py",
+          "tests/test_markupsafe.py",
+          "docs/escaping.rst",
+          "CHANGES.rst",
+          "tests/test_markupsafe.py",
+          "tests/test_markupsafe.py",
+          "tests/test_markupsafe.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 2000,
+        "entry_count": 3,
+        "file_recall": 0.0,
+        "first_relevant_entry_rank": null,
+        "hit": false,
+        "method": "bm25",
+        "query_id": "markupsafe-soft",
+        "reciprocal_rank": 0.0,
+        "rendered_bytes": 1836,
+        "reported_consumed": 1836,
+        "reported_cost_matches": true,
+        "repository": "markupsafe",
+        "returned_files": [
+          "tests/conftest.py",
+          "tests/test_markupsafe.py",
+          "src/markupsafe/_speedups.pyi"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 4000,
+        "entry_count": 5,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 4,
+        "hit": true,
+        "method": "bm25",
+        "query_id": "markupsafe-soft",
+        "reciprocal_rank": 0.25,
+        "rendered_bytes": 3575,
+        "reported_consumed": 3575,
+        "reported_cost_matches": true,
+        "repository": "markupsafe",
+        "returned_files": [
+          "tests/conftest.py",
+          "tests/test_markupsafe.py",
+          "src/markupsafe/_speedups.pyi",
+          "src/markupsafe/__init__.py",
+          "src/markupsafe/_native.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 8000,
+        "entry_count": 9,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 4,
+        "hit": true,
+        "method": "bm25",
+        "query_id": "markupsafe-soft",
+        "reciprocal_rank": 0.25,
+        "rendered_bytes": 7619,
+        "reported_consumed": 7619,
+        "reported_cost_matches": true,
+        "repository": "markupsafe",
+        "returned_files": [
+          "tests/conftest.py",
+          "tests/test_markupsafe.py",
+          "src/markupsafe/_speedups.pyi",
+          "src/markupsafe/__init__.py",
+          "src/markupsafe/_native.py",
+          "docs/escaping.rst",
+          "src/markupsafe/_speedups.c",
+          "src/markupsafe/_speedups.pyi",
+          "src/markupsafe/__init__.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 2000,
+        "entry_count": 3,
+        "file_recall": 0.0,
+        "first_relevant_entry_rank": null,
+        "hit": false,
+        "method": "graph",
+        "query_id": "markupsafe-soft",
+        "reciprocal_rank": 0.0,
+        "rendered_bytes": 1893,
+        "reported_consumed": 1893,
+        "reported_cost_matches": true,
+        "repository": "markupsafe",
+        "returned_files": [
+          "tests/conftest.py",
+          "src/markupsafe/_speedups.pyi",
+          "src/markupsafe/_speedups.pyi"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 4000,
+        "entry_count": 5,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 4,
+        "hit": true,
+        "method": "graph",
+        "query_id": "markupsafe-soft",
+        "reciprocal_rank": 0.25,
+        "rendered_bytes": 3877,
+        "reported_consumed": 3877,
+        "reported_cost_matches": true,
+        "repository": "markupsafe",
+        "returned_files": [
+          "tests/conftest.py",
+          "src/markupsafe/_speedups.pyi",
+          "tests/test_markupsafe.py",
+          "src/markupsafe/__init__.py",
+          "src/markupsafe/_native.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 8000,
+        "entry_count": 9,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 4,
+        "hit": true,
+        "method": "graph",
+        "query_id": "markupsafe-soft",
+        "reciprocal_rank": 0.25,
+        "rendered_bytes": 7975,
+        "reported_consumed": 7975,
+        "reported_cost_matches": true,
+        "repository": "markupsafe",
+        "returned_files": [
+          "tests/conftest.py",
+          "src/markupsafe/_speedups.pyi",
+          "tests/test_markupsafe.py",
+          "src/markupsafe/__init__.py",
+          "src/markupsafe/_native.py",
+          "src/markupsafe/_speedups.pyi",
+          "docs/escaping.rst",
+          "src/markupsafe/_speedups.c",
+          "src/markupsafe/__init__.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 2000,
+        "entry_count": 3,
+        "file_recall": 0.5,
+        "first_relevant_entry_rank": 1,
+        "hit": true,
+        "method": "bm25",
+        "query_id": "markupsafe-escape",
+        "reciprocal_rank": 1.0,
+        "rendered_bytes": 1990,
+        "reported_consumed": 1990,
+        "reported_cost_matches": true,
+        "repository": "markupsafe",
+        "returned_files": [
+          "src/markupsafe/_native.py",
+          "src/markupsafe/_speedups.pyi",
+          "src/markupsafe/_speedups.pyi"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 4000,
+        "entry_count": 5,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 1,
+        "hit": true,
+        "method": "bm25",
+        "query_id": "markupsafe-escape",
+        "reciprocal_rank": 1.0,
+        "rendered_bytes": 3920,
+        "reported_consumed": 3920,
+        "reported_cost_matches": true,
+        "repository": "markupsafe",
+        "returned_files": [
+          "src/markupsafe/_native.py",
+          "src/markupsafe/_speedups.pyi",
+          "src/markupsafe/__init__.py",
+          "src/markupsafe/_native.py",
+          "src/markupsafe/_speedups.pyi"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 8000,
+        "entry_count": 11,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 1,
+        "hit": true,
+        "method": "bm25",
+        "query_id": "markupsafe-escape",
+        "reciprocal_rank": 1.0,
+        "rendered_bytes": 7908,
+        "reported_consumed": 7908,
+        "reported_cost_matches": true,
+        "repository": "markupsafe",
+        "returned_files": [
+          "src/markupsafe/_native.py",
+          "src/markupsafe/_speedups.pyi",
+          "src/markupsafe/__init__.py",
+          "src/markupsafe/_native.py",
+          "src/markupsafe/_speedups.pyi",
+          "src/markupsafe/_native.py",
+          "src/markupsafe/__init__.py",
+          "src/markupsafe/__init__.py",
+          "tests/test_markupsafe.py",
+          "tests/test_markupsafe.py",
+          "tests/test_markupsafe.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 2000,
+        "entry_count": 2,
+        "file_recall": 0.5,
+        "first_relevant_entry_rank": 1,
+        "hit": true,
+        "method": "graph",
+        "query_id": "markupsafe-escape",
+        "reciprocal_rank": 1.0,
+        "rendered_bytes": 1689,
+        "reported_consumed": 1689,
+        "reported_cost_matches": true,
+        "repository": "markupsafe",
+        "returned_files": [
+          "src/markupsafe/_native.py",
+          "src/markupsafe/_speedups.pyi"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 4000,
+        "entry_count": 4,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 1,
+        "hit": true,
+        "method": "graph",
+        "query_id": "markupsafe-escape",
+        "reciprocal_rank": 1.0,
+        "rendered_bytes": 3717,
+        "reported_consumed": 3717,
+        "reported_cost_matches": true,
+        "repository": "markupsafe",
+        "returned_files": [
+          "src/markupsafe/_native.py",
+          "src/markupsafe/_speedups.pyi",
+          "src/markupsafe/__init__.py",
+          "src/markupsafe/_native.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 8000,
+        "entry_count": 10,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 1,
+        "hit": true,
+        "method": "graph",
+        "query_id": "markupsafe-escape",
+        "reciprocal_rank": 1.0,
+        "rendered_bytes": 7982,
+        "reported_consumed": 7982,
+        "reported_cost_matches": true,
+        "repository": "markupsafe",
+        "returned_files": [
+          "src/markupsafe/_native.py",
+          "src/markupsafe/_speedups.pyi",
+          "src/markupsafe/__init__.py",
+          "src/markupsafe/_native.py",
+          "src/markupsafe/_speedups.pyi",
+          "src/markupsafe/_native.py",
+          "src/markupsafe/__init__.py",
+          "src/markupsafe/__init__.py",
+          "tests/test_markupsafe.py",
+          "tests/test_markupsafe.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 2000,
+        "entry_count": 3,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 1,
+        "hit": true,
+        "method": "bm25",
+        "query_id": "markupsafe-html",
+        "reciprocal_rank": 1.0,
+        "rendered_bytes": 1926,
+        "reported_consumed": 1926,
+        "reported_cost_matches": true,
+        "repository": "markupsafe",
+        "returned_files": [
+          "src/markupsafe/__init__.py",
+          "tests/test_markupsafe.py",
+          "src/markupsafe/__init__.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 4000,
+        "entry_count": 7,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 1,
+        "hit": true,
+        "method": "bm25",
+        "query_id": "markupsafe-html",
+        "reciprocal_rank": 1.0,
+        "rendered_bytes": 3994,
+        "reported_consumed": 3994,
+        "reported_cost_matches": true,
+        "repository": "markupsafe",
+        "returned_files": [
+          "src/markupsafe/__init__.py",
+          "tests/test_markupsafe.py",
+          "src/markupsafe/__init__.py",
+          "tests/test_markupsafe.py",
+          "tests/test_markupsafe.py",
+          "tests/test_markupsafe.py",
+          "tests/test_exception_custom_html.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 8000,
+        "entry_count": 10,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 1,
+        "hit": true,
+        "method": "bm25",
+        "query_id": "markupsafe-html",
+        "reciprocal_rank": 1.0,
+        "rendered_bytes": 7974,
+        "reported_consumed": 7974,
+        "reported_cost_matches": true,
+        "repository": "markupsafe",
+        "returned_files": [
+          "src/markupsafe/__init__.py",
+          "tests/test_markupsafe.py",
+          "src/markupsafe/__init__.py",
+          "tests/test_markupsafe.py",
+          "docs/conf.py",
+          "tests/test_markupsafe.py",
+          "tests/test_markupsafe.py",
+          "src/markupsafe/_native.py",
+          "tests/test_markupsafe.py",
+          "tests/test_markupsafe.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 2000,
+        "entry_count": 3,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 1,
+        "hit": true,
+        "method": "graph",
+        "query_id": "markupsafe-html",
+        "reciprocal_rank": 1.0,
+        "rendered_bytes": 1970,
+        "reported_consumed": 1970,
+        "reported_cost_matches": true,
+        "repository": "markupsafe",
+        "returned_files": [
+          "src/markupsafe/__init__.py",
+          "tests/test_markupsafe.py",
+          "src/markupsafe/__init__.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 4000,
+        "entry_count": 6,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 1,
+        "hit": true,
+        "method": "graph",
+        "query_id": "markupsafe-html",
+        "reciprocal_rank": 1.0,
+        "rendered_bytes": 3932,
+        "reported_consumed": 3932,
+        "reported_cost_matches": true,
+        "repository": "markupsafe",
+        "returned_files": [
+          "src/markupsafe/__init__.py",
+          "tests/test_markupsafe.py",
+          "tests/test_markupsafe.py",
+          "src/markupsafe/__init__.py",
+          "tests/test_markupsafe.py",
+          "tests/test_markupsafe.py"
+        ],
+        "within_budget": true
+      },
+      {
+        "budget_bytes": 8000,
+        "entry_count": 11,
+        "file_recall": 1.0,
+        "first_relevant_entry_rank": 1,
+        "hit": true,
+        "method": "graph",
+        "query_id": "markupsafe-html",
+        "reciprocal_rank": 1.0,
+        "rendered_bytes": 7937,
+        "reported_consumed": 7937,
+        "reported_cost_matches": true,
+        "repository": "markupsafe",
+        "returned_files": [
+          "src/markupsafe/__init__.py",
+          "tests/test_markupsafe.py",
+          "tests/test_markupsafe.py",
+          "src/markupsafe/__init__.py",
+          "tests/test_markupsafe.py",
+          "tests/test_markupsafe.py",
+          "src/markupsafe/_native.py",
+          "tests/test_markupsafe.py",
+          "tests/test_markupsafe.py",
+          "src/markupsafe/__init__.py",
+          "src/markupsafe/__init__.py"
+        ],
+        "within_budget": true
+      }
+    ],
+    "retrieval_summary": [
+      {
+        "accounting_mismatches": 0,
+        "budget_bytes": 2000,
+        "budget_violations": 0,
+        "hit_rate": 0.6428571428571429,
+        "mean_file_recall": 0.6071428571428571,
+        "mean_reciprocal_rank": 0.5714285714285714,
+        "method": "bm25",
+        "queries": 14
+      },
+      {
+        "accounting_mismatches": 0,
+        "budget_bytes": 4000,
+        "budget_violations": 0,
+        "hit_rate": 0.7857142857142857,
+        "mean_file_recall": 0.7857142857142857,
+        "mean_reciprocal_rank": 0.6392857142857142,
+        "method": "bm25",
+        "queries": 14
+      },
+      {
+        "accounting_mismatches": 0,
+        "budget_bytes": 8000,
+        "budget_violations": 0,
+        "hit_rate": 0.9285714285714286,
+        "mean_file_recall": 0.9285714285714286,
+        "mean_reciprocal_rank": 0.6650793650793652,
+        "method": "bm25",
+        "queries": 14
+      },
+      {
+        "accounting_mismatches": 0,
+        "budget_bytes": 2000,
+        "budget_violations": 0,
+        "hit_rate": 0.5714285714285714,
+        "mean_file_recall": 0.5357142857142857,
+        "mean_reciprocal_rank": 0.5,
+        "method": "graph",
+        "queries": 14
+      },
+      {
+        "accounting_mismatches": 0,
+        "budget_bytes": 4000,
+        "budget_violations": 0,
+        "hit_rate": 0.7857142857142857,
+        "mean_file_recall": 0.7857142857142857,
+        "mean_reciprocal_rank": 0.6392857142857142,
+        "method": "graph",
+        "queries": 14
+      },
+      {
+        "accounting_mismatches": 0,
+        "budget_bytes": 8000,
+        "budget_violations": 0,
+        "hit_rate": 1.0,
+        "mean_file_recall": 1.0,
+        "mean_reciprocal_rank": 0.6803571428571429,
+        "method": "graph",
+        "queries": 14
+      }
+    ]
+  },
+  "schema_version": 1
+}

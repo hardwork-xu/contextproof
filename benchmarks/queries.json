@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "label_policy": "Author-written, file-level, exploratory smoke queries from public API concepts. Not independent labels, exhaustive judgments, or an accuracy benchmark. Multiple queries target the same file; no tuning or held-out split.",
+  "repositories": {
+    "click": [
+      {"id": "click-completion", "query": "ShellComplete shell_complete", "relevant_files": ["src/click/shell_completion.py"]},
+      {"id": "click-format", "query": "HelpFormatter write_usage", "relevant_files": ["src/click/formatting.py"]},
+      {"id": "click-prompt", "query": "prompt confirm", "relevant_files": ["src/click/termui.py"]},
+      {"id": "click-command", "query": "Group resolve_command", "relevant_files": ["src/click/core.py"]},
+      {"id": "click-path", "query": "Path convert", "relevant_files": ["src/click/types.py"]}
+    ],
+    "itsdangerous": [
+      {"id": "itsdangerous-time", "query": "TimestampSigner max_age", "relevant_files": ["src/itsdangerous/timed.py"]},
+      {"id": "itsdangerous-url", "query": "URLSafeSerializerMixin load_payload", "relevant_files": ["src/itsdangerous/url_safe.py"]},
+      {"id": "itsdangerous-sign", "query": "Signer derive_key", "relevant_files": ["src/itsdangerous/signer.py"]},
+      {"id": "itsdangerous-serialize", "query": "Serializer loads dumps", "relevant_files": ["src/itsdangerous/serializer.py"]},
+      {"id": "itsdangerous-expiry", "query": "BadTimeSignature SignatureExpired", "relevant_files": ["src/itsdangerous/exc.py"]}
+    ],
+    "markupsafe": [
+      {"id": "markupsafe-tags", "query": "Markup striptags", "relevant_files": ["src/markupsafe/__init__.py"]},
+      {"id": "markupsafe-soft", "query": "soft_str", "relevant_files": ["src/markupsafe/__init__.py"]},
+      {"id": "markupsafe-escape", "query": "escape s", "relevant_files": ["src/markupsafe/_native.py", "src/markupsafe/__init__.py"]},
+      {"id": "markupsafe-html", "query": "Markup __html__", "relevant_files": ["src/markupsafe/__init__.py"]}
+    ]
+  }
+}

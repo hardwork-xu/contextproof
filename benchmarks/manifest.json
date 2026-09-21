@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "source_policy": "Frozen public archives; source is inspected as text only and never executed. Archives are cached in ignored work/upstreams.",
+  "repositories": [
+    {
+      "name": "click",
+      "repository": "https://github.com/pallets/click",
+      "license": "BSD-3-Clause",
+      "versions": {
+        "before": {
+          "tag": "8.1.7",
+          "commit": "874ca2bc1c30d93a4ac6e36a15ed685eafe89097",
+          "archive_url": "https://codeload.github.com/pallets/click/tar.gz/874ca2bc1c30d93a4ac6e36a15ed685eafe89097",
+          "archive_sha256": "581d54717d647c95dab38adc4f45a99d5f5fd809109227d84dd60929c3d7a8c7",
+          "license_files": [
+            "LICENSE.rst"
+          ]
+        },
+        "after": {
+          "tag": "8.1.8",
+          "commit": "934813e4d421071a1b3db3973c02fe2721359a6e",
+          "archive_url": "https://codeload.github.com/pallets/click/tar.gz/934813e4d421071a1b3db3973c02fe2721359a6e",
+          "archive_sha256": "edfa6cf117bbbe46f6690266a40389b08b12cbf87fad8664d349ebd6eea811a1",
+          "license_files": [
+            "LICENSE.txt"
+          ]
+        }
+      }
+    },
+    {
+      "name": "itsdangerous",
+      "repository": "https://github.com/pallets/itsdangerous",
+      "license": "BSD-3-Clause",
+      "versions": {
+        "before": {
+          "tag": "2.1.2",
+          "commit": "49d263f60b6f78df8924be51262eeb5216ab1468",
+          "archive_url": "https://codeload.github.com/pallets/itsdangerous/tar.gz/49d263f60b6f78df8924be51262eeb5216ab1468",
+          "archive_sha256": "fde846570d298670513a00af4a192890c1e5d5c0f5d2ca7bdececb375b0f48e1",
+          "license_files": [
+            "LICENSE.rst"
+          ]
+        },
+        "after": {
+          "tag": "2.2.0",
+          "commit": "096c8d42545d3b68ea21a4f890fb2b2d8979c0bd",
+          "archive_url": "https://codeload.github.com/pallets/itsdangerous/tar.gz/096c8d42545d3b68ea21a4f890fb2b2d8979c0bd",
+          "archive_sha256": "d4efd6a06cc4118fdd4edd1cbd90987cd5d91dddd96f5cf4f70d027988385249",
+          "license_files": [
+            "LICENSE.txt"
+          ]
+        }
+      }
+    },
+    {
+      "name": "markupsafe",
+      "repository": "https://github.com/pallets/markupsafe",
+      "license": "BSD-3-Clause",
+      "versions": {
+        "before": {
+          "tag": "2.1.5",
+          "commit": "fbba4acd0312826cec9cfe18371c7df07962cb65",
+          "archive_url": "https://codeload.github.com/pallets/markupsafe/tar.gz/fbba4acd0312826cec9cfe18371c7df07962cb65",
+          "archive_sha256": "0fd7892e6f90c6ca3e92c896eb10a3ed163fe9ee71ec113fb6f999472652117d",
+          "license_files": [
+            "LICENSE.rst"
+          ]
+        },
+        "after": {
+          "tag": "3.0.2",
+          "commit": "28ace20b140d15c083e1cbc163ee6b7778ba098c",
+          "archive_url": "https://codeload.github.com/pallets/markupsafe/tar.gz/28ace20b140d15c083e1cbc163ee6b7778ba098c",
+          "archive_sha256": "bead4c1f90f02956a082c6f026237e1e106a00636f4b26c3f16921631eb8737f",
+          "license_files": [
+            "LICENSE.txt"
+          ]
+        }
+      }
+    }
+  ]
+}

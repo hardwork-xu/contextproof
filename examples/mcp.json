@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "contextproof": {
+      "command": "contextproof",
+      "args": ["serve", "/absolute/path/to/your/repository"]
+    }
+  }
+}

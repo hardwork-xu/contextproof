@@ -1,0 +1,467 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import attrs
+@attrs.define
+class Record:
+    value: str = attrs.field(validator=attrs.validators.in_(["a", "b"]))
+field = attrs.fields(Record).value
+include = attrs.filters.include(field)
+RESULT = include(field, "a")
+```
+
+Repository source evidence:
+<context query="Explain the behavior of this Python probe using repository source. src/attr/validators.py in_ src/attr/validators.py _InValidator src/attr/filters.py _split_what
+import attrs
+@attrs.define
+class Record:
+    value: str = attrs.field(validator=attrs.validators.in_([&quot;a&quot;, &quot;b&quot;]))
+field = attrs.fields(Record).value
+include = attrs.filters.include(field)
+RESULT = include(field, &quot;a&quot;)
+">
+  <structural-context>
+    <file-tree><![CDATA[
+src/attr/_make.py
+src/attr/filters.py
+src/attr/validators.py
+src/attrs/filters.py
+    ]]></file-tree>
+  </structural-context>
+  <chunks>
+    <chunk file="src/attr/filters.py" lines="21-45" symbol="include" score="2.2416" tokens="156">
+      <code><![CDATA[
+def include(*what):
+    """
+    Create a filter that only allows *what*.
+
+    Args:
+        what (list[type, str, attrs.Attribute]):
+            What to include. Can be a type, a name, or an attribute.
+
+    Returns:
+        Callable:
+            A callable that can be passed to `attrs.asdict`'s and
+            `attrs.astuple`'s *filter* argument.
+
+    .. versionchanged:: 23.1.0 Accept strings with field names.
+    """
+    cls, names, attrs = _split_what(what)
+
+    def include_(attribute, value):
+        return (
+            value.__class__ in cls
+            or attribute.name in names
+            or attribute in attrs
+        )
+
+    return include_
+      ]]></code>
+    </chunk>
+    <chunk file="src/attr/validators.py" lines="1-41" score="2.0467" tokens="173">
+      <code><![CDATA[
+# SPDX-License-Identifier: MIT
+
+"""
+Commonly useful validators.
+"""
+
+import operator
+import re
+
+from contextlib import contextmanager
+from re import Pattern
+
+from ._config import get_run_validators, set_run_validators
+from ._make import _AndValidator, and_, attrib, attrs
+from .converters import default_if_none
+from .exceptions import NotCallableError
+
+
+__all__ = [
+    "and_",
+    "deep_iterable",
+    "deep_mapping",
+    "disabled",
+    "ge",
+    "get_disabled",
+    "gt",
+    "in_",
+    "instance_of",
+    "is_callable",
+    "le",
+    "lt",
+    "matches_re",
+    "max_len",
+    "min_len",
+    "not_",
+    "optional",
+    "or_",
+    "set_disabled",
+]
+
+
+      ]]></code>
+    </chunk>
+    <chunk file="src/attrs/filters.py" lines="1-4" score="2.0436" tokens="19">
+      <code><![CDATA[
+# SPDX-License-Identifier: MIT
+
+from attr.filters import *  # noqa: F403
+
+      ]]></code>
+    </chunk>
+    <chunk file="src/attr/_make.py" lines="346-371" symbol="_collect_base_attrs_broken" score="1.0812" tokens="208">
+      <code><![CDATA[
+def _collect_base_attrs_broken(cls, taken_attr_names):
+    """
+    Collect attr.ibs from base classes of *cls*, except *taken_attr_names*.
+
+    N.B. *taken_attr_names* will be mutated.
+
+    Adhere to the old incorrect behavior.
+
+    Notably it collects from the front and considers inherited attributes which
+    leads to the buggy behavior reported in #428.
+    """
+    base_attrs = []
+    base_attr_map = {}  # A dictionary of base attrs to their classes.
+
+    # Traverse the MRO and collect attributes.
+    for base_cls in cls.__mro__[1:-1]:
+        for a in getattr(base_cls, "__attrs_attrs__", []):
+            if a.name in taken_attr_names:
+                continue
+
+            a = a.evolve(inherited=True)  # noqa: PLW2901
+            taken_attr_names.add(a.name)
+            base_attrs.append(a)
+            base_attr_map[a.name] = base_cls
+
+    return base_attrs, base_attr_map
+      ]]></code>
+    </chunk>
+    <chunk file="src/attr/validators.py" lines="42-57" symbol="set_disabled" score="2.0467" tokens="76">
+      <code><![CDATA[
+def set_disabled(disabled):
+    """
+    Globally disable or enable running validators.
+
+    By default, they are run.
+
+    Args:
+        disabled (bool): If `True`, disable running all validators.
+
+    .. warning::
+
+        This function is not thread-safe!
+
+    .. versionadded:: 21.3.0
+    """
+    set_run_validators(not disabled)
+      ]]></code>
+    </chunk>
+    <chunk file="src/attr/validators.py" lines="60-69" symbol="get_disabled" score="2.0467" tokens="55">
+      <code><![CDATA[
+def get_disabled():
+    """
+    Return a bool indicating whether validators are currently disabled or not.
+
+    Returns:
+        bool:`True` if validators are currently disabled.
+
+    .. versionadded:: 21.3.0
+    """
+    return not get_run_validators()
+      ]]></code>
+    </chunk>
+    <chunk file="src/attr/filters.py" lines="1-9" score="2.0467" tokens="31">
+      <code><![CDATA[
+# SPDX-License-Identifier: MIT
+
+"""
+Commonly useful filters for `attrs.asdict` and `attrs.astuple`.
+"""
+
+from ._make import Attribute
+
+
+      ]]></code>
+    </chunk>
+    <chunk file="src/attr/filters.py" lines="10-18" symbol="_split_what" score="1.9687" tokens="78">
+      <code><![CDATA[
+def _split_what(what):
+    """
+    Returns a tuple of `frozenset`s of classes and attributes.
+    """
+    return (
+        frozenset(cls for cls in what if isinstance(cls, type)),
+        frozenset(cls for cls in what if isinstance(cls, str)),
+        frozenset(cls for cls in what if isinstance(cls, Attribute)),
+    )
+      ]]></code>
+    </chunk>
+    <chunk file="src/attr/filters.py" lines="48-72" symbol="exclude" score="1.8426" tokens="162">
+      <code><![CDATA[
+def exclude(*what):
+    """
+    Create a filter that does **not** allow *what*.
+
+    Args:
+        what (list[type, str, attrs.Attribute]):
+            What to exclude. Can be a type, a name, or an attribute.
+
+    Returns:
+        Callable:
+            A callable that can be passed to `attrs.asdict`'s and
+            `attrs.astuple`'s *filter* argument.
+
+    .. versionchanged:: 23.3.0 Accept field name string as input argument
+    """
+    cls, names, attrs = _split_what(what)
+
+    def exclude_(attribute, value):
+        return not (
+            value.__class__ in cls
+            or attribute.name in names
+            or attribute in attrs
+        )
+
+    return exclude_
+      ]]></code>
+    </chunk>
+    <chunk file="src/attr/validators.py" lines="234-254" symbol="_InValidator" score="1.3433" tokens="144">
+      <code><![CDATA[
+class _InValidator:
+    options = attrib()
+    _original_options = attrib(hash=False)
+
+    def __call__(self, inst, attr, value):
+        try:
+            in_options = value in self.options
+        except TypeError:  # e.g. `1 in "abc"`
+            in_options = False
+
+        if not in_options:
+            msg = f"'{attr.name}' must be in {self._original_options!r} (got {value!r})"
+            raise ValueError(
+                msg,
+                attr,
+                self._original_options,
+                value,
+            )
+
+    def __repr__(self):
+        return f"<in_ validator with options {self._original_options!r}>"
+      ]]></code>
+    </chunk>
+    <chunk file="src/attr/validators.py" lines="257-289" symbol="in_" score="1.1097" tokens="270">
+      <code><![CDATA[
+def in_(options):
+    """
+    A validator that raises a `ValueError` if the initializer is called with a
+    value that does not belong in the *options* provided.
+
+    The check is performed using ``value in options``, so *options* has to
+    support that operation.
+
+    To keep the validator hashable, dicts, lists, and sets are transparently
+    transformed into a `tuple`.
+
+    Args:
+        options: Allowed options.
+
+    Raises:
+        ValueError:
+            With a human readable error message, the attribute (of type
+            `attrs.Attribute`), the expected options, and the value it got.
+
+    .. versionadded:: 17.1.0
+    .. versionchanged:: 22.1.0
+       The ValueError was incomplete until now and only contained the human
+       readable error message. Now it contains all the information that has
+       been promised since 17.1.0.
+    .. versionchanged:: 24.1.0
+       *options* that are a list, dict, or a set are now transformed into a
+       tuple to keep the validator hashable.
+    """
+    repr_options = options
+    if isinstance(options, (list, dict, set)):
+        options = tuple(options)
+
+    return _InValidator(options, repr_options)
+      ]]></code>
+    </chunk>
+    <chunk file="src/attr/_make.py" lines="2865-2924" symbol="make_class" score="0.8852" tokens="502">
+      <code><![CDATA[
+def make_class(
+    name, attrs, bases=(object,), class_body=None, **attributes_arguments
+):
+    r"""
+    A quick way to create a new class called *name* with *attrs*.
+
+    .. note::
+
+        ``make_class()`` is a thin wrapper around `attr.s`, not `attrs.define`
+        which means that it doesn't come with some of the improved defaults.
+
+        For example, if you want the same ``on_setattr`` behavior as in
+        `attrs.define`, you have to pass the hooks yourself: ``make_class(...,
+        on_setattr=setters.pipe(setters.convert, setters.validate)``
+
+    Args:
+        name (str): The name for the new class.
+
+        attrs (list | dict):
+            A list of names or a dictionary of mappings of names to `attr.ib`\
+            s / `attrs.field`\ s.
+
+            The order is deduced from the order of the names or attributes
+            inside *attrs*.  Otherwise the order of the definition of the
+            attributes is used.
+
+        bases (tuple[type, ...]): Classes that the new class will subclass.
+
+        class_body (dict):
+            An optional dictionary of class attributes for the new class.
+
+        attributes_arguments: Passed unmodified to `attr.s`.
+
+    Returns:
+        type: A new class with *attrs*.
+
+    .. versionadded:: 17.1.0 *bases*
+    .. versionchanged:: 18.1.0 If *attrs* is ordered, the order is retained.
+    .. versionchanged:: 23.2.0 *class_body*
+    """
+    if isinstance(attrs, dict):
+        cls_dict = attrs
+    elif isinstance(attrs, (list, tuple)):
+        cls_dict = {a: attrib() for a in attrs}
+    else:
+        msg = "attrs argument must be a dict or a list."
+        raise TypeError(msg)
+
+    pre_init = cls_dict.pop("__attrs_pre_init__", None)
+    post_init = cls_dict.pop("__attrs_post_init__", None)
+    user_init = cls_dict.pop("__init__", None)
+
+    body = {}
+    if class_body is not None:
+        body.update(class_body)
+    if pre_init is not None:
+        body["__attrs_pre_init__"] = pre_init
+    if post_init is not None:
+        body["__attrs_post_init__"] = post_init
+    if user_init is not None:
+      ]]></code>
+    </chunk>
+    <chunk file="src/attr/_make.py" lines="1245-1302" symbol="attrs" score="0.8166" tokens="493">
+      <code><![CDATA[
+def attrs(
+    maybe_cls=None,
+    these=None,
+    repr_ns=None,
+    repr=None,
+    cmp=None,
+    hash=None,
+    init=None,
+    slots=False,
+    frozen=False,
+    weakref_slot=True,
+    str=False,
+    auto_attribs=False,
+    kw_only=False,
+    cache_hash=False,
+    auto_exc=False,
+    eq=None,
+    order=None,
+    auto_detect=False,
+    collect_by_mro=False,
+    getstate_setstate=None,
+    on_setattr=None,
+    field_transformer=None,
+    match_args=True,
+    unsafe_hash=None,
+):
+    r"""
+    A class decorator that adds :term:`dunder methods` according to the
+    specified attributes using `attr.ib` or the *these* argument.
+
+    Consider using `attrs.define` / `attrs.frozen` in new code (``attr.s`` will
+    *never* go away, though).
+
+    Args:
+        repr_ns (str):
+            When using nested classes, there was no way in Python 2 to
+            automatically detect that.  This argument allows to set a custom
+            name for a more meaningful ``repr`` output.  This argument is
+            pointless in Python 3 and is therefore deprecated.
+
+    .. caution::
+        Refer to `attrs.define` for the rest of the parameters, but note that they
+        can have different defaults.
+
+        Notably, leaving *on_setattr* as `None` will **not** add any hooks.
+
+    .. versionadded:: 16.0.0 *slots*
+    .. versionadded:: 16.1.0 *frozen*
+    .. versionadded:: 16.3.0 *str*
+    .. versionadded:: 16.3.0 Support for ``__attrs_post_init__``.
+    .. versionchanged:: 17.1.0
+       *hash* supports `None` as value which is also the default now.
+    .. versionadded:: 17.3.0 *auto_attribs*
+    .. versionchanged:: 18.1.0
+       If *these* is passed, no attributes are deleted from the class body.
+    .. versionchanged:: 18.1.0 If *these* is ordered, the order is retained.
+    .. versionadded:: 18.2.0 *weakref_slot*
+    .. deprecated:: 18.2.0
+      ]]></code>
+    </chunk>
+  </chunks>
+  <type-definitions>
+    <type-def file="src/attr/validators.py" symbol="_InValidator" lines="234-254">
+      <![CDATA[class _InValidator:
+    options = attrib()
+    _original_options = attrib(hash=False)
+
+    def __call__(self, inst, attr, value):
+        try:
+            in_options = value in self.options
+        except TypeError:  # e.g. `1 in "abc"`
+            in_options = False
+
+        if not in_options:
+            msg = f"'{attr.name}' must be in {self._original_options!r} (got {value!r})"
+            raise ValueError(
+                msg,
+                attr,
+                self._original_options,
+                value,
+            )
+
+    def __repr__(self):
+        return f"<in_ validator with options {self._original_options!r}>"]]>
+    </type-def>
+  </type-definitions>
+  <receipt freshness="clean" complete="incomplete" reason="dependency_frontier_cut" action="fetch_skipped_candidate" index_revision="7b939a4221ac0937c0b7e156424e76d77c6e1f331e3aae264edf1e9230c4f91c" budget_requested="2666" budget_consumed="2367" returned_shown="13" returned_total="13" skipped_shown="18" skipped_total="18" omitted_edges_shown="20" omitted_edges_total="20">
+    <returned handle="chunk:src/attr/_make.py:_collect_base_attrs_broken:346" file="src/attr/_make.py" lines="346-371" hash="355beb17bcaef74e44a931ff6832417e83aa3b2f2f7e175e6357fe5e6f2460bd" score="1.0812" />
+    <returned handle="chunk:src/attr/_make.py:attrs:1245" file="src/attr/_make.py" lines="1245-1302" hash="49fa3aae7c664e229980ff103b14e03758f5cb02f881eb993ef799cbb15cccb6" score="0.8166" />
+    <returned handle="chunk:src/attr/_make.py:make_class:2865" file="src/attr/_make.py" lines="2865-2924" hash="38e7560f52304a28448b1cc347e3ac40817e8d331ba9b8e3012eeb35b1724d93" score="0.8852" />
+    <returned handle="chunk:src/attr/filters.py:_module:1" file="src/attr/filters.py" lines="1-9" hash="ddcdc03c8254b1104ac9d08daaacb05142811941dfbedfedb358c1454dc5a137" score="2.0467" />
+    <returned handle="chunk:src/attr/filters.py:_split_what:10" file="src/attr/filters.py" lines="10-18" hash="20646f1a44a10b269cd6d54b6d99eb9fc9cb54945a8bec3a52a9e3dd61e1cf4d" score="1.9687" />
+    <returned handle="chunk:src/attr/filters.py:include:21" file="src/attr/filters.py" lines="21-45" hash="8492c73ea14e8a4fed695e0b134d58786fea7e1e1c33f70e2c2495cfd53abe14" score="2.2416" />
+    <returned handle="chunk:src/attr/filters.py:exclude:48" file="src/attr/filters.py" lines="48-72" hash="15180f9c74316fe01fe185b9160a22ad42e2a812103709773cda2e04a1bd772f" score="1.8426" />
+    <returned handle="chunk:src/attr/validators.py:_module:1" file="src/attr/validators.py" lines="1-41" hash="a7f7e51f41e8808601cf00fe0eec4110d10b640f56d4557fb0ec2f3fccc0edbd" score="2.0467" />
+    <skipped file="src/attr/_make.py" reason="over_budget" handle="chunk:src/attr/_make.py:_module:1" />
+    <skipped file="src/attr/_make.py" reason="over_budget" handle="chunk:src/attr/_make.py:_ClassBuilder:952" />
+    <skipped file="src/attr/_make.py" reason="over_budget" handle="chunk:src/attr/_make.py:_attrs_to_init_script:2187" />
+    <skipped file="src/attr/_make.py" reason="over_budget" handle="chunk:src/attr/_make.py:_attrs_to_init_script:2251" />
+    <skipped file="src/attr/_make.py" reason="over_budget" handle="chunk:src/attr/_make.py:_make_getstate_setstate:964" />
+    <skipped file="src/attr/_make.py" reason="over_budget" handle="chunk:src/attr/_make.py:_make_hash:1494" />
+    <skipped file="src/attr/_make.py" reason="over_budget" handle="chunk:src/attr/_make.py:attrib:104" />
+    <skipped file="src/attr/_make.py" reason="over_budget" handle="chunk:src/attr/_make.py:attrib:157" />
+  </receipt>
+</context>

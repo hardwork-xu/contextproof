@@ -1,0 +1,1251 @@
+{
+  "attempts": 150,
+  "conditions": {
+    "archex": {
+      "accuracy": 0.84,
+      "by_family": {
+        "attrs-1285": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "attrs-1310": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "attrs-1319": {
+          "correct": 0,
+          "tasks": 1
+        },
+        "attrs-1320": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "attrs-1321": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "attrs-1365": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "control-attrs-converter": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "control-httpx-headers": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "control-httpx-raw-query": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "control-packaging-version": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "control-pluggy-registration": {
+          "correct": 0,
+          "tasks": 1
+        },
+        "httpx-3178": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "httpx-3364": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "httpx-3371-3373": {
+          "correct": 0,
+          "tasks": 1
+        },
+        "httpx-client-app-removal": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "httpx-form-query-encoding": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "packaging-683": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "packaging-733": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "packaging-775": {
+          "correct": 0,
+          "tasks": 1
+        },
+        "packaging-825": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "packaging-828": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "pluggy-178": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "pluggy-441": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "pluggy-463": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "pluggy-471": {
+          "correct": 1,
+          "tasks": 1
+        }
+      },
+      "by_repository": {
+        "attrs": {
+          "correct": 6,
+          "tasks": 7
+        },
+        "httpx": {
+          "correct": 6,
+          "tasks": 7
+        },
+        "packaging": {
+          "correct": 5,
+          "tasks": 6
+        },
+        "pluggy": {
+          "correct": 4,
+          "tasks": 5
+        }
+      },
+      "cached_input_tokens": 47616,
+      "changed_correct": 16,
+      "changed_tasks": 19,
+      "control_correct": 5,
+      "control_tasks": 6,
+      "correct": 21,
+      "equal_family_mean_accuracy": 0.84,
+      "equal_repository_mean_accuracy": 0.8369047619047619,
+      "evidence_bytes_max": 15950,
+      "evidence_bytes_mean": 14401.84,
+      "evidence_bytes_total": 360046,
+      "families": 25,
+      "input_tokens": 252611,
+      "invalid_completions": 0,
+      "median_wall_seconds": 28.947365290950984,
+      "output_tokens": 2475,
+      "tasks": 25,
+      "valid_completions": 25,
+      "wrong_matches_old_on_changed": 2
+    },
+    "fresh_anchors": {
+      "accuracy": 0.96,
+      "by_family": {
+        "attrs-1285": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "attrs-1310": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "attrs-1319": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "attrs-1320": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "attrs-1321": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "attrs-1365": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "control-attrs-converter": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "control-httpx-headers": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "control-httpx-raw-query": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "control-packaging-version": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "control-pluggy-registration": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "httpx-3178": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "httpx-3364": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "httpx-3371-3373": {
+          "correct": 0,
+          "tasks": 1
+        },
+        "httpx-client-app-removal": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "httpx-form-query-encoding": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "packaging-683": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "packaging-733": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "packaging-775": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "packaging-825": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "packaging-828": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "pluggy-178": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "pluggy-441": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "pluggy-463": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "pluggy-471": {
+          "correct": 1,
+          "tasks": 1
+        }
+      },
+      "by_repository": {
+        "attrs": {
+          "correct": 7,
+          "tasks": 7
+        },
+        "httpx": {
+          "correct": 6,
+          "tasks": 7
+        },
+        "packaging": {
+          "correct": 6,
+          "tasks": 6
+        },
+        "pluggy": {
+          "correct": 5,
+          "tasks": 5
+        }
+      },
+      "cached_input_tokens": 35968,
+      "changed_correct": 18,
+      "changed_tasks": 19,
+      "control_correct": 6,
+      "control_tasks": 6,
+      "correct": 24,
+      "equal_family_mean_accuracy": 0.96,
+      "equal_repository_mean_accuracy": 0.9642857142857143,
+      "evidence_bytes_max": 10283,
+      "evidence_bytes_mean": 4189,
+      "evidence_bytes_total": 104725,
+      "families": 25,
+      "input_tokens": 181712,
+      "invalid_completions": 0,
+      "median_wall_seconds": 28.126793375005946,
+      "output_tokens": 921,
+      "tasks": 25,
+      "valid_completions": 25,
+      "wrong_matches_old_on_changed": 1
+    },
+    "fresh_bm25": {
+      "accuracy": 0.96,
+      "by_family": {
+        "attrs-1285": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "attrs-1310": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "attrs-1319": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "attrs-1320": {
+          "correct": 0,
+          "tasks": 1
+        },
+        "attrs-1321": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "attrs-1365": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "control-attrs-converter": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "control-httpx-headers": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "control-httpx-raw-query": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "control-packaging-version": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "control-pluggy-registration": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "httpx-3178": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "httpx-3364": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "httpx-3371-3373": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "httpx-client-app-removal": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "httpx-form-query-encoding": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "packaging-683": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "packaging-733": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "packaging-775": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "packaging-825": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "packaging-828": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "pluggy-178": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "pluggy-441": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "pluggy-463": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "pluggy-471": {
+          "correct": 1,
+          "tasks": 1
+        }
+      },
+      "by_repository": {
+        "attrs": {
+          "correct": 6,
+          "tasks": 7
+        },
+        "httpx": {
+          "correct": 7,
+          "tasks": 7
+        },
+        "packaging": {
+          "correct": 6,
+          "tasks": 6
+        },
+        "pluggy": {
+          "correct": 5,
+          "tasks": 5
+        }
+      },
+      "cached_input_tokens": 35712,
+      "changed_correct": 18,
+      "changed_tasks": 19,
+      "control_correct": 6,
+      "control_tasks": 6,
+      "correct": 24,
+      "equal_family_mean_accuracy": 0.96,
+      "equal_repository_mean_accuracy": 0.9642857142857143,
+      "evidence_bytes_max": 15996,
+      "evidence_bytes_mean": 15894.12,
+      "evidence_bytes_total": 397353,
+      "families": 25,
+      "input_tokens": 268685,
+      "invalid_completions": 0,
+      "median_wall_seconds": 30.00192812504247,
+      "output_tokens": 1740,
+      "tasks": 25,
+      "valid_completions": 25,
+      "wrong_matches_old_on_changed": 1
+    },
+    "graph_current": {
+      "accuracy": 0.96,
+      "by_family": {
+        "attrs-1285": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "attrs-1310": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "attrs-1319": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "attrs-1320": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "attrs-1321": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "attrs-1365": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "control-attrs-converter": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "control-httpx-headers": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "control-httpx-raw-query": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "control-packaging-version": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "control-pluggy-registration": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "httpx-3178": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "httpx-3364": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "httpx-3371-3373": {
+          "correct": 0,
+          "tasks": 1
+        },
+        "httpx-client-app-removal": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "httpx-form-query-encoding": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "packaging-683": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "packaging-733": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "packaging-775": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "packaging-825": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "packaging-828": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "pluggy-178": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "pluggy-441": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "pluggy-463": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "pluggy-471": {
+          "correct": 1,
+          "tasks": 1
+        }
+      },
+      "by_repository": {
+        "attrs": {
+          "correct": 7,
+          "tasks": 7
+        },
+        "httpx": {
+          "correct": 6,
+          "tasks": 7
+        },
+        "packaging": {
+          "correct": 6,
+          "tasks": 6
+        },
+        "pluggy": {
+          "correct": 5,
+          "tasks": 5
+        }
+      },
+      "cached_input_tokens": 27776,
+      "changed_correct": 18,
+      "changed_tasks": 19,
+      "control_correct": 6,
+      "control_tasks": 6,
+      "correct": 24,
+      "equal_family_mean_accuracy": 0.96,
+      "equal_repository_mean_accuracy": 0.9642857142857143,
+      "evidence_bytes_max": 16000,
+      "evidence_bytes_mean": 12183.44,
+      "evidence_bytes_total": 304586,
+      "families": 25,
+      "input_tokens": 241809,
+      "invalid_completions": 0,
+      "median_wall_seconds": 31.512542583048344,
+      "output_tokens": 985,
+      "tasks": 25,
+      "valid_completions": 25,
+      "wrong_matches_old_on_changed": 1
+    },
+    "no_context": {
+      "accuracy": 0.84,
+      "by_family": {
+        "attrs-1285": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "attrs-1310": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "attrs-1319": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "attrs-1320": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "attrs-1321": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "attrs-1365": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "control-attrs-converter": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "control-httpx-headers": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "control-httpx-raw-query": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "control-packaging-version": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "control-pluggy-registration": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "httpx-3178": {
+          "correct": 0,
+          "tasks": 1
+        },
+        "httpx-3364": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "httpx-3371-3373": {
+          "correct": 0,
+          "tasks": 1
+        },
+        "httpx-client-app-removal": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "httpx-form-query-encoding": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "packaging-683": {
+          "correct": 0,
+          "tasks": 1
+        },
+        "packaging-733": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "packaging-775": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "packaging-825": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "packaging-828": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "pluggy-178": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "pluggy-441": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "pluggy-463": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "pluggy-471": {
+          "correct": 0,
+          "tasks": 1
+        }
+      },
+      "by_repository": {
+        "attrs": {
+          "correct": 7,
+          "tasks": 7
+        },
+        "httpx": {
+          "correct": 5,
+          "tasks": 7
+        },
+        "packaging": {
+          "correct": 5,
+          "tasks": 6
+        },
+        "pluggy": {
+          "correct": 4,
+          "tasks": 5
+        }
+      },
+      "cached_input_tokens": 35712,
+      "changed_correct": 15,
+      "changed_tasks": 19,
+      "control_correct": 6,
+      "control_tasks": 6,
+      "correct": 21,
+      "equal_family_mean_accuracy": 0.84,
+      "equal_repository_mean_accuracy": 0.8369047619047619,
+      "evidence_bytes_max": 0,
+      "evidence_bytes_mean": 0,
+      "evidence_bytes_total": 0,
+      "families": 25,
+      "input_tokens": 155974,
+      "invalid_completions": 0,
+      "median_wall_seconds": 28.987330583040603,
+      "output_tokens": 4320,
+      "tasks": 25,
+      "valid_completions": 25,
+      "wrong_matches_old_on_changed": 3
+    },
+    "stale_anchors": {
+      "accuracy": 0.32,
+      "by_family": {
+        "attrs-1285": {
+          "correct": 0,
+          "tasks": 1
+        },
+        "attrs-1310": {
+          "correct": 0,
+          "tasks": 1
+        },
+        "attrs-1319": {
+          "correct": 0,
+          "tasks": 1
+        },
+        "attrs-1320": {
+          "correct": 0,
+          "tasks": 1
+        },
+        "attrs-1321": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "attrs-1365": {
+          "correct": 0,
+          "tasks": 1
+        },
+        "control-attrs-converter": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "control-httpx-headers": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "control-httpx-raw-query": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "control-packaging-version": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "control-pluggy-registration": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "httpx-3178": {
+          "correct": 0,
+          "tasks": 1
+        },
+        "httpx-3364": {
+          "correct": 0,
+          "tasks": 1
+        },
+        "httpx-3371-3373": {
+          "correct": 0,
+          "tasks": 1
+        },
+        "httpx-client-app-removal": {
+          "correct": 0,
+          "tasks": 1
+        },
+        "httpx-form-query-encoding": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "packaging-683": {
+          "correct": 0,
+          "tasks": 1
+        },
+        "packaging-733": {
+          "correct": 0,
+          "tasks": 1
+        },
+        "packaging-775": {
+          "correct": 0,
+          "tasks": 1
+        },
+        "packaging-825": {
+          "correct": 0,
+          "tasks": 1
+        },
+        "packaging-828": {
+          "correct": 0,
+          "tasks": 1
+        },
+        "pluggy-178": {
+          "correct": 0,
+          "tasks": 1
+        },
+        "pluggy-441": {
+          "correct": 1,
+          "tasks": 1
+        },
+        "pluggy-463": {
+          "correct": 0,
+          "tasks": 1
+        },
+        "pluggy-471": {
+          "correct": 0,
+          "tasks": 1
+        }
+      },
+      "by_repository": {
+        "attrs": {
+          "correct": 2,
+          "tasks": 7
+        },
+        "httpx": {
+          "correct": 3,
+          "tasks": 7
+        },
+        "packaging": {
+          "correct": 1,
+          "tasks": 6
+        },
+        "pluggy": {
+          "correct": 2,
+          "tasks": 5
+        }
+      },
+      "cached_input_tokens": 23808,
+      "changed_correct": 2,
+      "changed_tasks": 19,
+      "control_correct": 6,
+      "control_tasks": 6,
+      "correct": 8,
+      "equal_family_mean_accuracy": 0.32,
+      "equal_repository_mean_accuracy": 0.3202380952380952,
+      "evidence_bytes_max": 11209,
+      "evidence_bytes_mean": 4189.76,
+      "evidence_bytes_total": 104744,
+      "families": 25,
+      "input_tokens": 181795,
+      "invalid_completions": 0,
+      "median_wall_seconds": 28.77533679199405,
+      "output_tokens": 1115,
+      "tasks": 25,
+      "valid_completions": 25,
+      "wrong_matches_old_on_changed": 16
+    }
+  },
+  "family_count": 25,
+  "graph_paired_against": {
+    "archex": {
+      "baseline_only_correct": 0,
+      "both_correct": 21,
+      "both_incorrect": 1,
+      "graph_only_correct": 3
+    },
+    "fresh_anchors": {
+      "baseline_only_correct": 0,
+      "both_correct": 24,
+      "both_incorrect": 1,
+      "graph_only_correct": 0
+    },
+    "fresh_bm25": {
+      "baseline_only_correct": 1,
+      "both_correct": 23,
+      "both_incorrect": 0,
+      "graph_only_correct": 1
+    },
+    "no_context": {
+      "baseline_only_correct": 0,
+      "both_correct": 21,
+      "both_incorrect": 1,
+      "graph_only_correct": 3
+    },
+    "stale_anchors": {
+      "baseline_only_correct": 0,
+      "both_correct": 8,
+      "both_incorrect": 1,
+      "graph_only_correct": 16
+    }
+  },
+  "limitations": [
+    "Upstream-derived, source-conditioned output prediction with supplied localization hints.",
+    "Four repositories and correlated change families; task rows are not IID.",
+    "Single semantic sample; no immutable hosted-weight identifier or generation seed.",
+    "No claim about general patching, autonomous agents, monetary costs or novelty."
+  ],
+  "paired_tasks": [
+    {
+      "changed": true,
+      "correct": {
+        "archex": true,
+        "fresh_anchors": true,
+        "fresh_bm25": true,
+        "graph_current": true,
+        "no_context": false,
+        "stale_anchors": false
+      },
+      "family": "packaging-683",
+      "repository": "packaging",
+      "task_id": "packaging-epoch"
+    },
+    {
+      "changed": true,
+      "correct": {
+        "archex": false,
+        "fresh_anchors": true,
+        "fresh_bm25": true,
+        "graph_current": true,
+        "no_context": true,
+        "stale_anchors": false
+      },
+      "family": "packaging-775",
+      "repository": "packaging",
+      "task_id": "packaging-iterable-specifiers"
+    },
+    {
+      "changed": true,
+      "correct": {
+        "archex": true,
+        "fresh_anchors": true,
+        "fresh_bm25": true,
+        "graph_current": true,
+        "no_context": true,
+        "stale_anchors": false
+      },
+      "family": "packaging-733",
+      "repository": "packaging",
+      "task_id": "packaging-missing-metadata"
+    },
+    {
+      "changed": true,
+      "correct": {
+        "archex": true,
+        "fresh_anchors": true,
+        "fresh_bm25": true,
+        "graph_current": true,
+        "no_context": true,
+        "stale_anchors": false
+      },
+      "family": "packaging-825",
+      "repository": "packaging",
+      "task_id": "packaging-marker-untagged"
+    },
+    {
+      "changed": true,
+      "correct": {
+        "archex": true,
+        "fresh_anchors": true,
+        "fresh_bm25": true,
+        "graph_current": true,
+        "no_context": true,
+        "stale_anchors": false
+      },
+      "family": "packaging-828",
+      "repository": "packaging",
+      "task_id": "packaging-license-expression"
+    },
+    {
+      "changed": true,
+      "correct": {
+        "archex": true,
+        "fresh_anchors": true,
+        "fresh_bm25": true,
+        "graph_current": true,
+        "no_context": true,
+        "stale_anchors": true
+      },
+      "family": "httpx-form-query-encoding",
+      "repository": "httpx",
+      "task_id": "httpx-form-encoding"
+    },
+    {
+      "changed": true,
+      "correct": {
+        "archex": true,
+        "fresh_anchors": true,
+        "fresh_bm25": true,
+        "graph_current": true,
+        "no_context": true,
+        "stale_anchors": false
+      },
+      "family": "httpx-3364",
+      "repository": "httpx",
+      "task_id": "httpx-empty-params"
+    },
+    {
+      "changed": true,
+      "correct": {
+        "archex": false,
+        "fresh_anchors": false,
+        "fresh_bm25": true,
+        "graph_current": false,
+        "no_context": false,
+        "stale_anchors": false
+      },
+      "family": "httpx-3371-3373",
+      "repository": "httpx",
+      "task_id": "httpx-userinfo-encoding"
+    },
+    {
+      "changed": true,
+      "correct": {
+        "archex": true,
+        "fresh_anchors": true,
+        "fresh_bm25": true,
+        "graph_current": true,
+        "no_context": true,
+        "stale_anchors": false
+      },
+      "family": "httpx-client-app-removal",
+      "repository": "httpx",
+      "task_id": "httpx-client-app"
+    },
+    {
+      "changed": true,
+      "correct": {
+        "archex": true,
+        "fresh_anchors": true,
+        "fresh_bm25": true,
+        "graph_current": true,
+        "no_context": false,
+        "stale_anchors": false
+      },
+      "family": "httpx-3178",
+      "repository": "httpx",
+      "task_id": "httpx-socks5h"
+    },
+    {
+      "changed": true,
+      "correct": {
+        "archex": true,
+        "fresh_anchors": true,
+        "fresh_bm25": true,
+        "graph_current": true,
+        "no_context": false,
+        "stale_anchors": false
+      },
+      "family": "pluggy-471",
+      "repository": "pluggy",
+      "task_id": "pluggy-unblock"
+    },
+    {
+      "changed": true,
+      "correct": {
+        "archex": true,
+        "fresh_anchors": true,
+        "fresh_bm25": true,
+        "graph_current": true,
+        "no_context": true,
+        "stale_anchors": false
+      },
+      "family": "pluggy-178",
+      "repository": "pluggy",
+      "task_id": "pluggy-parameter-warning"
+    },
+    {
+      "changed": true,
+      "correct": {
+        "archex": true,
+        "fresh_anchors": true,
+        "fresh_bm25": true,
+        "graph_current": true,
+        "no_context": true,
+        "stale_anchors": false
+      },
+      "family": "pluggy-463",
+      "repository": "pluggy",
+      "task_id": "pluggy-teardown-warning"
+    },
+    {
+      "changed": false,
+      "correct": {
+        "archex": true,
+        "fresh_anchors": true,
+        "fresh_bm25": true,
+        "graph_current": true,
+        "no_context": true,
+        "stale_anchors": true
+      },
+      "family": "pluggy-441",
+      "repository": "pluggy",
+      "task_id": "pluggy-extra-order"
+    },
+    {
+      "changed": true,
+      "correct": {
+        "archex": true,
+        "fresh_anchors": true,
+        "fresh_bm25": true,
+        "graph_current": true,
+        "no_context": true,
+        "stale_anchors": false
+      },
+      "family": "attrs-1310",
+      "repository": "attrs",
+      "task_id": "attrs-nan-equality"
+    },
+    {
+      "changed": true,
+      "correct": {
+        "archex": true,
+        "fresh_anchors": true,
+        "fresh_bm25": true,
+        "graph_current": true,
+        "no_context": true,
+        "stale_anchors": false
+      },
+      "family": "attrs-1285",
+      "repository": "attrs",
+      "task_id": "attrs-makeclass-annotations"
+    },
+    {
+      "changed": true,
+      "correct": {
+        "archex": false,
+        "fresh_anchors": true,
+        "fresh_bm25": true,
+        "graph_current": true,
+        "no_context": true,
+        "stale_anchors": false
+      },
+      "family": "attrs-1319",
+      "repository": "attrs",
+      "task_id": "attrs-preinit-default"
+    },
+    {
+      "changed": true,
+      "correct": {
+        "archex": true,
+        "fresh_anchors": true,
+        "fresh_bm25": true,
+        "graph_current": true,
+        "no_context": true,
+        "stale_anchors": false
+      },
+      "family": "attrs-1365",
+      "repository": "attrs",
+      "task_id": "attrs-frozen-exception"
+    },
+    {
+      "changed": true,
+      "correct": {
+        "archex": true,
+        "fresh_anchors": true,
+        "fresh_bm25": true,
+        "graph_current": true,
+        "no_context": true,
+        "stale_anchors": true
+      },
+      "family": "attrs-1321",
+      "repository": "attrs",
+      "task_id": "attrs-subclass-hook"
+    },
+    {
+      "changed": true,
+      "correct": {
+        "archex": true,
+        "fresh_anchors": true,
+        "fresh_bm25": false,
+        "graph_current": true,
+        "no_context": true,
+        "stale_anchors": false
+      },
+      "family": "attrs-1320",
+      "repository": "attrs",
+      "task_id": "attrs-validator-hash"
+    },
+    {
+      "changed": false,
+      "correct": {
+        "archex": true,
+        "fresh_anchors": true,
+        "fresh_bm25": true,
+        "graph_current": true,
+        "no_context": true,
+        "stale_anchors": true
+      },
+      "family": "control-httpx-raw-query",
+      "repository": "httpx",
+      "task_id": "httpx-query-control"
+    },
+    {
+      "changed": false,
+      "correct": {
+        "archex": true,
+        "fresh_anchors": true,
+        "fresh_bm25": true,
+        "graph_current": true,
+        "no_context": true,
+        "stale_anchors": true
+      },
+      "family": "control-httpx-headers",
+      "repository": "httpx",
+      "task_id": "httpx-headers-control"
+    },
+    {
+      "changed": false,
+      "correct": {
+        "archex": true,
+        "fresh_anchors": true,
+        "fresh_bm25": true,
+        "graph_current": true,
+        "no_context": true,
+        "stale_anchors": true
+      },
+      "family": "control-packaging-version",
+      "repository": "packaging",
+      "task_id": "packaging-version-control"
+    },
+    {
+      "changed": false,
+      "correct": {
+        "archex": false,
+        "fresh_anchors": true,
+        "fresh_bm25": true,
+        "graph_current": true,
+        "no_context": true,
+        "stale_anchors": true
+      },
+      "family": "control-pluggy-registration",
+      "repository": "pluggy",
+      "task_id": "pluggy-unregistered-control"
+    },
+    {
+      "changed": false,
+      "correct": {
+        "archex": true,
+        "fresh_anchors": true,
+        "fresh_bm25": true,
+        "graph_current": true,
+        "no_context": true,
+        "stale_anchors": true
+      },
+      "family": "control-attrs-converter",
+      "repository": "attrs",
+      "task_id": "attrs-converter-control"
+    }
+  ],
+  "results_sha256": "c51f2f40edbf961735b2805aa693719a948057f6c9b70c37fe7a039be79b9510",
+  "schema_version": 1,
+  "task_count": 25
+}

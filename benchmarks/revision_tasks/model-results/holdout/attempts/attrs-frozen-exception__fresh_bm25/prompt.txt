@@ -1,0 +1,338 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import attrs
+@attrs.frozen
+class Failure(Exception):
+    pass
+error = Failure()
+error.__suppress_context__ = True
+error.__notes__ = ["note"]
+RESULT = [error.__suppress_context__, error.__notes__]
+```
+
+Repository source evidence:
+# ContextProof source evidence
+{"budget":16000,"budget_unit":"utf8_bytes","id":"d417836c7434b92691b4499e9c2d39074cc7d8afe78425f1e2296d479edf3c0a","method":"bm25","omitted_count":400,"query":"Explain the behavior of this Python probe using repository source. src/attr/_make.py _frozen_setattrs\nimport attrs\n@attrs.frozen\nclass Failure(Exception):\n    pass\nerror = Failure()\nerror.__suppress_context__ = True\nerror.__notes__ = [\"note\"]\nRESULT = [error.__suppress_context__, error.__notes__]\n","schema_version":1,"snapshot_id":"58c49369a49066b693430d997a4de08e4a9c123a92d7766476a6071e1417221b","tokenizer":"bytes"}
+
+{"end_line":555,"file_sha256":"a2b2927fa0be0757997e96ade256c0b71be64b213fcb1946f3363dd75e6e7d69","id":"ad71aa2d270cf02d97f1a53adc856668adfe792ee354d7b406ce76fc82526519","kind":"function","path":"src/attr/_make.py","reasons":["lexical overlap: attr, context, error, exception, frozen, frozen_setattrs, make, notes, py, setattrs, src, suppress, suppress_context"],"score":49.49572451,"start_line":541,"symbol":"_frozen_setattrs","text_sha256":"dfff4edc0b00e7c76bee65858c5ca4bcb9418f26852ba5a79e03be9000e2b092"}
+```
+def _frozen_setattrs(self, name, value):
+    """
+    Attached to frozen classes as __setattr__.
+    """
+    if isinstance(self, BaseException) and name in (
+        "__cause__",
+        "__context__",
+        "__traceback__",
+        "__suppress_context__",
+        "__notes__",
+    ):
+        BaseException.__setattr__(self, name, value)
+        return
+
+    raise FrozenInstanceError
+```
+
+{"end_line":262,"file_sha256":"ec54646ed97f374d7b4ae0617ff570de6c36736a46661b4218ecda760cfbb69e","id":"f9a418b29adb46ddc74b41369a11d8d438bc49aaefce9287f32a7a5963e5a7ba","kind":"function","path":"src/attr/_next_gen.py","reasons":["lexical overlap: attr, attrs, behavior, class, error, frozen, make, note, of, py, python, src, the, this, true, using"],"score":23.04998802,"start_line":183,"symbol":"define","text_sha256":"9642147d4fd7cda27a9c4ace17b12047e05cb825610af98531c614dc7cc452a2"}
+```
+
+        cache_hash (bool):
+            Ensure that the object's hash code is computed only once and stored
+            on the object.  If this is set to True, hashing must be either
+            explicitly or implicitly enabled for this class.  If the hash code
+            is cached, avoid any reassignments of fields involved in hash code
+            computation or mutations of the objects those fields point to after
+            object creation.  If such changes occur, the behavior of the
+            object's hash code is undefined.
+
+        frozen (bool):
+            Make instances immutable after initialization.  If someone attempts
+            to modify a frozen instance, `attrs.exceptions.FrozenInstanceError`
+            is raised.
+
+            .. note::
+
+                1. This is achieved by installing a custom ``__setattr__``
+                   method on your class, so you can't implement your own.
+
+                2. True immutability is impossible in Python.
+
+                3. This *does* have a minor a runtime performance `impact
+                   <how-frozen>` when initializing new instances.  In other
+                   words: ``__init__`` is slightly slower with ``frozen=True``.
+
+                4. If a class is frozen, you cannot modify ``self`` in
+                   ``__attrs_post_init__`` or a self-written ``__init__``. You
+                   can circumvent that limitation by using
+                   ``object.__setattr__(self, "attribute_name", value)``.
+
+                5. Subclasses of a frozen class are frozen too.
+
+        kw_only (bool):
+            Make all attributes keyword-only in the generated ``__init__`` (if
+            *init* is False, this parameter is ignored).
+
+        weakref_slot (bool):
+            Make instances weak-referenceable.  This has no effect unless
+            *slots* is True.
+
+        field_transformer (~typing.Callable | None):
+            A function that is called with the original class object and all
+            fields right before *attrs* finalizes the class.  You can use this,
+            for example, to automatically add converters or validators to
+            fields based on their types.
+
+            .. seealso:: `transform-fields`
+
+        match_args (bool):
+            If True (default), set ``__match_args__`` on the class to support
+            :pep:`634` (*Structural Pattern Matching*). It is a tuple of all
+            non-keyword-only ``__init__`` parameter names on Python 3.10 and
+            later. Ignored on older Python versions.
+
+        collect_by_mro (bool):
+            If True, *attrs* collects attributes from base classes correctly
+            according to the `method resolution order
+            <https://docs.python.org/3/howto/mro.html>`_. If False, *attrs*
+            will mimic the (wrong) behavior of `dataclasses` and :pep:`681`.
+
+            See also `issue #428
+            <https://github.com/python-attrs/attrs/issues/428>`_.
+
+        getstate_setstate (bool | None):
+            .. note::
+
+                This is usually only interesting for slotted classes and you
+                should probably just set *auto_detect* to True.
+
+            If True, ``__getstate__`` and ``__setstate__`` are generated and
+            attached to the class. This is necessary for slotted classes to be
+            pickleable. If left None, it's True by default for slotted classes
+            and False for dict classes.
+
+            If *auto_detect* is True, and *getstate_setstate* is left None, and
+            **either** ``__getstate__`` or ``__setstate__`` is detected
+            directly on the class (meaning: not inherited), it is set to False
+            (this is usually what you want).
+
+```
+
+{"end_line":22,"file_sha256":"ec54646ed97f374d7b4ae0617ff570de6c36736a46661b4218ecda760cfbb69e","id":"dec5a9c2e0232d4fd2a7112beb258e71dcf0cb837490ce8369387181725f32d7","kind":"module","path":"src/attr/_next_gen.py","reasons":["lexical overlap: attr, attrs, error, frozen, frozen_setattrs, import, make, py, setattrs, src"],"score":19.02482223,"start_line":1,"symbol":"<module>","text_sha256":"a3d32f18b6901254a712783f1a6d9043d3348890cb77658e077728e65a589a11"}
+```
+# SPDX-License-Identifier: MIT
+
+"""
+These are keyword-only APIs that call `attr.s` and `attr.ib` with different
+default values.
+"""
+
+from functools import partial
+
+from . import setters
+from ._funcs import asdict as _asdict
+from ._funcs import astuple as _astuple
+from ._make import (
+    _DEFAULT_ON_SETATTR,
+    NOTHING,
+    _frozen_setattrs,
+    attrib,
+    attrs,
+)
+from .exceptions import UnannotatedAttributeError
+
+
+```
+
+{"end_line":566,"file_sha256":"a2b2927fa0be0757997e96ade256c0b71be64b213fcb1946f3363dd75e6e7d69","id":"ead67601e07adc7bb21186aa3bfdd70a3e1b3e654979212e793c176fd95d243a","kind":"function","path":"src/attr/_make.py","reasons":["lexical overlap: attr, error, exception, frozen, make, notes, py, src"],"score":18.81679678,"start_line":558,"symbol":"_frozen_delattrs","text_sha256":"11e55f85388115617ac87002900a60b15293a3d501e33058af9693c0b32d67fc"}
+```
+def _frozen_delattrs(self, name):
+    """
+    Attached to frozen classes as __delattr__.
+    """
+    if isinstance(self, BaseException) and name in ("__notes__",):
+        BaseException.__delattr__(self, name)
+        return
+
+    raise FrozenInstanceError
+```
+
+{"end_line":20,"file_sha256":"1d116ae22c9b9afefe0dc670ca397a3357ae33661e2552bf845c6e6811809e02","id":"15d3329a4a65df66fed7975a53f07376de869bbfc6a61d7b99a979673c5918d2","kind":"class","path":"src/attr/exceptions.py","reasons":["lexical overlap: attr, behavior, class, error, frozen, of, py, src, the, using"],"score":18.67748119,"start_line":8,"symbol":"FrozenError","text_sha256":"a438f4a6b619f1b21e62370bcd8c6e44f72013f8d3ca5028225db958253a9666"}
+```
+class FrozenError(AttributeError):
+    """
+    A frozen/immutable instance or attribute have been attempted to be
+    modified.
+
+    It mirrors the behavior of ``namedtuples`` by using the same error message
+    and subclassing `AttributeError`.
+
+    .. versionadded:: 20.1.0
+    """
+
+    msg = "can't set attribute"
+    args: ClassVar[tuple[str]] = [msg]
+```
+
+{"end_line":182,"file_sha256":"ec54646ed97f374d7b4ae0617ff570de6c36736a46661b4218ecda760cfbb69e","id":"7317baed1d7b9a0b8b82cf9f9de318d1bb3765478f15e9f28f0960e1656f292a","kind":"function","path":"src/attr/_next_gen.py","reasons":["lexical overlap: attr, attrs, behavior, class, exception, frozen, of, py, python, src, the, this, true"],"score":17.65838168,"start_line":103,"symbol":"define","text_sha256":"fe020578fdfb20f94972ed0c41c4c016e81b317dc30161307fea822aa2cd312b"}
+```
+            `setattr` like ``setattr(i, "x", 42)``). It receives the same
+            arguments as validators: the instance, the attribute that is being
+            modified, and the new value.
+
+            If no exception is raised, the attribute is set to the return value
+            of the callable.
+
+            If a list of callables is passed, they're automatically wrapped in
+            an `attrs.setters.pipe`.
+
+            If left None, the default behavior is to run converters and
+            validators whenever an attribute is set.
+
+        init (bool):
+            Create a ``__init__`` method that initializes the *attrs*
+            attributes. Leading underscores are stripped for the argument name,
+            unless an alias is set on the attribute.
+
+            .. seealso::
+                `init` shows advanced ways to customize the generated
+                ``__init__`` method, including executing code before and after.
+
+        repr(bool):
+            Create a ``__repr__`` method with a human readable representation
+            of *attrs* attributes.
+
+        str (bool):
+            Create a ``__str__`` method that is identical to ``__repr__``. This
+            is usually not necessary except for `Exception`\ s.
+
+        eq (bool | None):
+            If True or None (default), add ``__eq__`` and ``__ne__`` methods
+            that check two instances for equality.
+
+            .. seealso::
+                `comparison` describes how to customize the comparison behavior
+                going as far comparing NumPy arrays.
+
+        order (bool | None):
+            If True, add ``__lt__``, ``__le__``, ``__gt__``, and ``__ge__``
+            methods that behave like *eq* above and allow instances to be
+            ordered.
+
+            They compare the instances as if they were tuples of their *attrs*
+            attributes if and only if the types of both classes are
+            *identical*.
+
+            If `None` mirror value of *eq*.
+
+            .. seealso:: `comparison`
+
+        unsafe_hash (bool | None):
+            If None (default), the ``__hash__`` method is generated according
+            how *eq* and *frozen* are set.
+
+            1. If *both* are True, *attrs* will generate a ``__hash__`` for
+               you.
+            2. If *eq* is True and *frozen* is False, ``__hash__`` will be set
+               to None, marking it unhashable (which it is).
+            3. If *eq* is False, ``__hash__`` will be left untouched meaning
+               the ``__hash__`` method of the base class will be used. If the
+               base class is `object`, this means it will fall back to id-based
+               hashing.
+
+            Although not recommended, you can decide for yourself and force
+            *attrs* to create one (for example, if the class is immutable even
+            though you didn't freeze it programmatically) by passing True or
+            not.  Both of these cases are rather special and should be used
+            carefully.
+
+            .. seealso::
+
+                - Our documentation on `hashing`,
+                - Python's documentation on `object.__hash__`,
+                - and the `GitHub issue that led to the default \ behavior
+                  <https://github.com/python-attrs/attrs/issues/136>`_ for more
+                  details.
+
+        hash (bool | None):
+            Deprecated alias for *unsafe_hash*. *unsafe_hash* takes precedence.
+```
+
+{"end_line":1481,"file_sha256":"a2b2927fa0be0757997e96ade256c0b71be64b213fcb1946f3363dd75e6e7d69","id":"05d576d25cbd7b02b31f9d50f7657bd998171d9d3f7f87189302f2dbf99e2564","kind":"function","path":"src/attr/_make.py","reasons":["lexical overlap: attr, class, frozen, frozen_setattrs, make, py, setattrs, src"],"score":17.37960072,"start_line":1476,"symbol":"_has_frozen_base_class","text_sha256":"597082e67b36bafd2c5a7b4b5885bf93e15bcdac398f47b57079c860bdd100fb"}
+```
+def _has_frozen_base_class(cls):
+    """
+    Check whether *cls* has a frozen ancestor by looking at its
+    __setattr__.
+    """
+    return cls.__setattr__ is _frozen_setattrs
+```
+
+{"end_line":402,"file_sha256":"ec54646ed97f374d7b4ae0617ff570de6c36736a46661b4218ecda760cfbb69e","id":"ac4c4836f5c74576bde7367d4652b0aa7ab884cf1209797d054a65a71d024283","kind":"function","path":"src/attr/_next_gen.py","reasons":["lexical overlap: attr, class, error, frozen, frozen_setattrs, of, py, setattrs, src, the, this, true"],"score":16.65759553,"start_line":371,"symbol":"define.wrap","text_sha256":"73cfc133e92cc52708629d4fc20691048b249cd403247d39f3f6d4c3e04a17d1"}
+```
+    def wrap(cls):
+        """
+        Making this a wrapper ensures this code runs during class creation.
+
+        We also ensure that frozen-ness of classes is inherited.
+        """
+        nonlocal frozen, on_setattr
+
+        had_on_setattr = on_setattr not in (None, setters.NO_OP)
+
+        # By default, mutable classes convert & validate on setattr.
+        if frozen is False and on_setattr is None:
+            on_setattr = _DEFAULT_ON_SETATTR
+
+        # However, if we subclass a frozen class, we inherit the immutability
+        # and disable on_setattr.
+        for base_cls in cls.__bases__:
+            if base_cls.__setattr__ is _frozen_setattrs:
+                if had_on_setattr:
+                    msg = "Frozen classes can't use on_setattr (frozen-ness was inherited)."
+                    raise ValueError(msg)
+
+                on_setattr = setters.NO_OP
+                break
+
+        if auto_attribs is not None:
+            return do_it(cls, auto_attribs)
+
+        try:
+            return do_it(cls, True)
+        except UnannotatedAttributeError:
+            return do_it(cls, False)
+```
+
+{"end_line":125,"file_sha256":"59a0751cb0071ea4475acaeffcaf47fac27b1128a5dc7dc29afd9df13b55671e","id":"17747e71f113927dfc470005a704b06f17b28e1647d1a3f988c6e5a43a6ef80d","kind":"function","path":"src/attr/validators.py","reasons":["lexical overlap: attr, attrs, error, of, pass, py, src, the, this, using"],"score":15.55459652,"start_line":111,"symbol":"instance_of","text_sha256":"725bee78958bdbe132b8d06e7ac6c59802cd9a0b162136f22dd320878eae33a6"}
+```
+def instance_of(type):
+    """
+    A validator that raises a `TypeError` if the initializer is called with a
+    wrong type for this particular attribute (checks are performed using
+    `isinstance` therefore it's also valid to pass a tuple of types).
+
+    Args:
+        type (type | tuple[type]): The type to check for.
+
+    Raises:
+        TypeError:
+            With a human readable error message, the attribute (of type
+            `attrs.Attribute`), the expected type, and the value it got.
+    """
+    return _InstanceOfValidator(type)
+```
+
+{"end_line":81,"file_sha256":"4085e79c73e8b9c9835a46e936c5933fe7202756e7f257bb0e3c916bfc1875ec","id":"674b0d65485cb4899fc42162384e58ef9a2bf592ac89df85805771a1412b2b50","kind":"module","path":"src/attr/__init__.pyi","reasons":["lexical overlap: attr, make, note, src, the, this, using"],"score":12.5495599,"start_line":74,"symbol":"<module>","text_sha256":"e3ed7a9540eac7b66db1c212862625f4826403bdd7871a1f9d4f9affca9d9f39"}
+```
+
+NOTHING = _Nothing.NOTHING
+NothingType: TypeAlias = Literal[_Nothing.NOTHING]
+
+# NOTE: Factory lies about its return type to make this possible:
+# `x: List[int] # = Factory(list)`
+# Work around mypy issue #4554 in the common case by using an overload.
+
+```

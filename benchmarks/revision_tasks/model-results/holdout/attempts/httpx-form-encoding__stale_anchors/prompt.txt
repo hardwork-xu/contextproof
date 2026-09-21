@@ -1,0 +1,12 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import httpx
+RESULT = [str(httpx.QueryParams({"u": "with spaces"})),
+          str(httpx.QueryParams({"u": "with%20spaces"}))]
+```
+
+Repository source evidence:
+{"ambiguity_policy":"all physical declarations; no runtime binding selection","ambiguous_symbols":[],"complete":true,"kind":"supplied-anchor-source","missing":[],"omitted":[],"scope":"supplied-declarations-only","source":[{"end_line":631,"path":"httpx/_urls.py","start_line":623,"symbol":"QueryParams.__str__","text":"    def __str__(self) -> str:\n        \"\"\"\n        Note that we use '%20' encoding for spaces, and treat '/' as a safe\n        character.\n\n        See https://github.com/encode/httpx/issues/2536 and\n        https://docs.python.org/3/library/urllib.parse.html#urllib.parse.urlencode\n        \"\"\"\n        return urlencode(self.multi_items())\n","text_sha256":"645a83a879f2e5a508e42d35a819392c6dd3fe8429ba2feb46351a36b60b1489"},{"end_line":446,"path":"httpx/_urlparse.py","start_line":436,"symbol":"percent_encoded","text":"def percent_encoded(string: str, safe: str = \"/\") -> str:\n    \"\"\"\n    Use percent-encoding to quote a string.\n    \"\"\"\n    if is_safe(string, safe=safe):\n        return string\n\n    NON_ESCAPED_CHARS = UNRESERVED_CHARACTERS + safe\n    return \"\".join(\n        [char if char in NON_ESCAPED_CHARS else percent_encode(char) for char in string]\n    )\n","text_sha256":"58440bf82244b1009f764777134c2ddc496e94347719fcf7e3dd4491ba039458"}]}

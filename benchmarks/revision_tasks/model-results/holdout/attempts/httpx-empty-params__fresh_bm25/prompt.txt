@@ -1,0 +1,346 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import httpx
+request = httpx.Request("GET", "http://example.com?a=1", params={})
+RESULT = str(request.url)
+```
+
+Repository source evidence:
+# ContextProof source evidence
+{"budget":16000,"budget_unit":"utf8_bytes","id":"56d6b173d8ce614057b51ec3981466b632b5bb18b77994eb50dbb4d0189d7fe6","method":"bm25","omitted_count":572,"query":"Explain the behavior of this Python probe using repository source. httpx/_models.py Request.__init__ httpx/_urls.py URL.__init__\nimport httpx\nrequest = httpx.Request(\"GET\", \"http://example.com?a=1\", params={})\nRESULT = str(request.url)\n","schema_version":1,"snapshot_id":"d39d2caa51d7b21d91903e121d04b08f2bda3190abd9c65cdca544b59b846562","tokenizer":"bytes"}
+
+{"end_line":366,"file_sha256":"757f7d551d4348e1e9828f40abb3f360ee0529dc6a2a3c32369f20adff1d1cdd","id":"acc6cac0f96f0c291aec18b70b96af8b4843d73ef07e3aa718152c65f86ebb8f","kind":"function","path":"httpx/_urls.py","reasons":["lexical overlap: com, example, httpx, import, py, str, the, this, url, urls, using"],"score":26.66060099,"start_line":354,"symbol":"URL.join","text_sha256":"a8b8047dc204e4bfde7b256131934d19be2ccd3ffb1359aeb412d45d98a972e8"}
+```
+    def join(self, url: URL | str) -> URL:
+        """
+        Return an absolute URL, using this URL as the base.
+
+        Eg.
+
+        url = httpx.URL("https://www.example.com/test")
+        url = url.join("/new/path")
+        assert url == "https://www.example.com/new/path"
+        """
+        from urllib.parse import urljoin
+
+        return URL(urljoin(str(self), str(URL(url))))
+```
+
+{"end_line":190,"file_sha256":"fd355ea802afc4990a1ddcfb74579be2cd0b66a41781e1645d281f88704aff5a","id":"68ce533a4efde7d1ef4934b5eaf88253abb31d2a74b5bdd9f30e7a1a640b15fb","kind":"function","path":"httpx/_utils.py","reasons":["lexical overlap: 1, com, example, httpx, import, init, of, py, str, url, urls"],"score":23.18177722,"start_line":162,"symbol":"URLPattern.__init__","text_sha256":"1ff29ada219633461f6942c4462e01754e01ee0ab0f60d863d55da4abc769a15"}
+```
+    def __init__(self, pattern: str) -> None:
+        from ._urls import URL
+
+        if pattern and ":" not in pattern:
+            raise ValueError(
+                f"Proxy keys should use proper URL forms rather "
+                f"than plain scheme strings. "
+                f'Instead of "{pattern}", use "{pattern}://"'
+            )
+
+        url = URL(pattern)
+        self.pattern = pattern
+        self.scheme = "" if url.scheme == "all" else url.scheme
+        self.host = "" if url.host == "*" else url.host
+        self.port = url.port
+        if not url.host or url.host == "*":
+            self.host_regex: typing.Pattern[str] | None = None
+        elif url.host.startswith("*."):
+            # *.example.com should match "www.example.com", but not "example.com"
+            domain = re.escape(url.host[2:])
+            self.host_regex = re.compile(f"^.+\\.{domain}$")
+        elif url.host.startswith("*"):
+            # *example.com should match "www.example.com" and "example.com"
+            domain = re.escape(url.host[1:])
+            self.host_regex = re.compile(f"^(.+\\.)?{domain}$")
+        else:
+            # example.com should match "example.com" but not "www.example.com"
+            domain = re.escape(url.host)
+            self.host_regex = re.compile(f"^{domain}$")
+```
+
+{"end_line":340,"file_sha256":"757f7d551d4348e1e9828f40abb3f360ee0529dc6a2a3c32369f20adff1d1cdd","id":"f5473b15f288abbaedadf6491272b8aed59762ba6d51e433d3e0daed60bdfdf7","kind":"function","path":"httpx/_urls.py","reasons":["lexical overlap: a, com, example, httpx, of, py, the, this, url, urls"],"score":23.01786642,"start_line":327,"symbol":"URL.copy_with","text_sha256":"d907c8a99771ec2cf13428b2ef4bb0b595a1fe6548354e070d51bce2ec2cbbe5"}
+```
+    def copy_with(self, **kwargs: typing.Any) -> URL:
+        """
+        Copy this URL, returning a new URL with some components altered.
+        Accepts the same set of parameters as the components that are made
+        available via properties on the `URL` class.
+
+        For example:
+
+        url = httpx.URL("https://www.example.com").copy_with(
+            username="jo@gmail.com", password="a secret"
+        )
+        assert url == "https://jo%40email.com:a%20secret@www.example.com"
+        """
+        return URL(self, **kwargs)
+```
+
+{"end_line":272,"file_sha256":"757f7d551d4348e1e9828f40abb3f360ee0529dc6a2a3c32369f20adff1d1cdd","id":"0e7dfd0778667aa9c0e7d06e4e3920a52b386433ee66d8b897383aa0da4c956f","kind":"function","path":"httpx/_urls.py","reasons":["lexical overlap: a, com, example, httpx, of, params, py, the, this, url, urls"],"score":22.82379445,"start_line":257,"symbol":"URL.query","text_sha256":"151e65c530b76a989808b79f0955c502917da871b231979e1119a6bc4ac84115"}
+```
+    @property
+    def query(self) -> bytes:
+        """
+        The URL query string, as raw bytes, excluding the leading b"?".
+
+        This is necessarily a bytewise interface, because we cannot
+        perform URL decoding of this representation until we've parsed
+        the keys and values into a QueryParams instance.
+
+        For example:
+
+        url = httpx.URL("https://example.com/?filter=some%20search%20terms")
+        assert url.query == b"filter=some%20search%20terms"
+        """
+        query = self._uri_reference.query or ""
+        return query.encode("ascii")
+```
+
+{"end_line":411,"file_sha256":"c43f941baefe58c91e96d00039e1868fe719d91453026d7db1647194563bff8d","id":"decaef959dee84c061b27ab740d12a0a56e486838d1859b3bbd81bb4e645e907","kind":"function","path":"httpx/_client.py","reasons":["lexical overlap: a, com, example, get, httpx, py, request, str, the, this, url, urls"],"score":20.83843069,"start_line":391,"symbol":"BaseClient._merge_url","text_sha256":"3b00320150ee361237413617d769cef89c5754cc88cba49f0193858203adeb71"}
+```
+    def _merge_url(self, url: URL | str) -> URL:
+        """
+        Merge a URL argument together with any 'base_url' on the client,
+        to create the URL used for the outgoing request.
+        """
+        merge_url = URL(url)
+        if merge_url.is_relative_url:
+            # To merge URLs we always append to the base URL. To get this
+            # behaviour correct we always ensure the base URL ends in a '/'
+            # separator, and strip any leading '/' from the merge URL.
+            #
+            # So, eg...
+            #
+            # >>> client = Client(base_url="https://www.example.com/subpath")
+            # >>> client.base_url
+            # URL('https://www.example.com/subpath/')
+            # >>> client.build_request("GET", "/path").url
+            # URL('https://www.example.com/subpath/path')
+            merge_raw_path = self.base_url.raw_path + merge_url.raw_path.lstrip(b"/")
+            return self.base_url.copy_with(raw_path=merge_raw_path)
+        return merge_url
+```
+
+{"end_line":76,"file_sha256":"757f7d551d4348e1e9828f40abb3f360ee0529dc6a2a3c32369f20adff1d1cdd","id":"999203d9736670c7e87bad749cb5b1bd235caf90b37c521e37d6ee4f23c89e22","kind":"class","path":"httpx/_urls.py","reasons":["lexical overlap: a, com, example, http, httpx, of, py, the, this, url, urls"],"score":20.09327945,"start_line":15,"symbol":"URL","text_sha256":"6604f8dc73f0aa8c734691c66056a3cf88aefb3fcf5db55cf2754376f6dc3ab1"}
+```
+class URL:
+    """
+    url = httpx.URL("HTTPS://jo%40email.com:a%20secret@müller.de:1234/pa%20th?search=ab#anchorlink")
+
+    assert url.scheme == "https"
+    assert url.username == "jo@email.com"
+    assert url.password == "a secret"
+    assert url.userinfo == b"jo%40email.com:a%20secret"
+    assert url.host == "müller.de"
+    assert url.raw_host == b"xn--mller-kva.de"
+    assert url.port == 1234
+    assert url.netloc == b"xn--mller-kva.de:1234"
+    assert url.path == "/pa th"
+    assert url.query == b"?search=ab"
+    assert url.raw_path == b"/pa%20th?search=ab"
+    assert url.fragment == "anchorlink"
+
+    The components of a URL are broken down like this:
+
+       https://jo%40email.com:a%20secret@müller.de:1234/pa%20th?search=ab#anchorlink
+    [scheme]   [  username  ] [password] [ host ][port][ path ] [ query ] [fragment]
+               [       userinfo        ] [   netloc   ][    raw_path    ]
+
+    Note that:
+
+    * `url.scheme` is normalized to always be lowercased.
+
+    * `url.host` is normalized to always be lowercased. Internationalized domain
+      names are represented in unicode, without IDNA encoding applied. For instance:
+
+      url = httpx.URL("http://中国.icom.museum")
+      assert url.host == "中国.icom.museum"
+      url = httpx.URL("http://xn--fiqs8s.icom.museum")
+      assert url.host == "中国.icom.museum"
+
+    * `url.raw_host` is normalized to always be lowercased, and is IDNA encoded.
+
+      url = httpx.URL("http://中国.icom.museum")
+      assert url.raw_host == b"xn--fiqs8s.icom.museum"
+      url = httpx.URL("http://xn--fiqs8s.icom.museum")
+      assert url.raw_host == b"xn--fiqs8s.icom.museum"
+
+    * `url.port` is either None or an integer. URLs that include the default port for
+      "http", "https", "ws", "wss", and "ftp" schemes have their port
+      normalized to `None`.
+
+      assert httpx.URL("http://example.com") == httpx.URL("http://example.com:80")
+      assert httpx.URL("http://example.com").port is None
+      assert httpx.URL("http://example.com:80").port is None
+
+    * `url.userinfo` is raw bytes, without URL escaping. Usually you'll want to work
+      with `url.username` and `url.password` instead, which handle the URL escaping.
+
+    * `url.raw_path` is raw bytes of both the path and query, without URL escaping.
+      This portion is used as the target when constructing HTTP requests. Usually you'll
+      want to work with `url.path` instead.
+
+    * `url.query` is raw bytes, without URL escaping. A URL query string portion can
+      only be properly URL escaped when decoding the parameter names and values
+      themselves.
+    """
+
+```
+
+{"end_line":231,"file_sha256":"757f7d551d4348e1e9828f40abb3f360ee0529dc6a2a3c32369f20adff1d1cdd","id":"fa37ece1abfa2a1c0cb3ba03e7bf5b5aa4dd1bb5ac5701caa645501f7bec6b9c","kind":"function","path":"httpx/_urls.py","reasons":["lexical overlap: com, example, http, httpx, py, the, url, urls"],"score":19.68195396,"start_line":217,"symbol":"URL.port","text_sha256":"1f623b3c2da75d01da8e8e8717502baaca7823f1f3e1fde2079ef2fdcff07963"}
+```
+    @property
+    def port(self) -> int | None:
+        """
+        The URL port as an integer.
+
+        Note that the URL class performs port normalization as per the WHATWG spec.
+        Default ports for "http", "https", "ws", "wss", and "ftp" schemes are always
+        treated as `None`.
+
+        For example:
+
+        assert httpx.URL("http://www.example.com") == httpx.URL("http://www.example.com:80")
+        assert httpx.URL("http://www.example.com:80").port is None
+        """
+        return self._uri_reference.port
+```
+
+{"end_line":73,"file_sha256":"03379a454c95c0271c4f2c8d25ec437f49f57457f3cf2769748420bf0ecf2e79","id":"d349b5d11d5cce98387a9d31fdd34998cca8675deae94f98b31dfc562460adb7","kind":"module","path":"httpx/_transports/default.py","reasons":["lexical overlap: 1, a, example, http, httpx, import, models, py, request, str, the, url, urls, using"],"score":18.91756972,"start_line":1,"symbol":"<module>","text_sha256":"b9ae619c70f6cd8a9f6900b24499821e385f8e78891f8ae904ffc21550f452a2"}
+```
+"""
+Custom transports, with nicely configured defaults.
+
+The following additional keyword arguments are currently supported by httpcore...
+
+* uds: str
+* local_address: str
+* retries: int
+
+Example usages...
+
+# Disable HTTP/2 on a single specific domain.
+mounts = {
+    "all://": httpx.HTTPTransport(http2=True),
+    "all://*example.org": httpx.HTTPTransport()
+}
+
+# Using advanced httpcore configuration, with connection retries.
+transport = httpx.HTTPTransport(retries=1)
+client = httpx.Client(transport=transport)
+
+# Using advanced httpcore configuration, with unix domain sockets.
+transport = httpx.HTTPTransport(uds="socket.uds")
+client = httpx.Client(transport=transport)
+"""
+
+from __future__ import annotations
+
+import contextlib
+import typing
+from types import TracebackType
+
+if typing.TYPE_CHECKING:
+    import ssl  # pragma: no cover
+
+    import httpx  # pragma: no cover
+
+from .._config import DEFAULT_LIMITS, Limits, Proxy, create_ssl_context
+from .._exceptions import (
+    ConnectError,
+    ConnectTimeout,
+    LocalProtocolError,
+    NetworkError,
+    PoolTimeout,
+    ProtocolError,
+    ProxyError,
+    ReadError,
+    ReadTimeout,
+    RemoteProtocolError,
+    TimeoutException,
+    UnsupportedProtocol,
+    WriteError,
+    WriteTimeout,
+)
+from .._models import Request, Response
+from .._types import AsyncByteStream, CertTypes, ProxyTypes, SyncByteStream
+from .._urls import URL
+from .base import AsyncBaseTransport, BaseTransport
+
+T = typing.TypeVar("T", bound="HTTPTransport")
+A = typing.TypeVar("A", bound="AsyncHTTPTransport")
+
+SOCKET_OPTION = typing.Union[
+    typing.Tuple[int, int, int],
+    typing.Tuple[int, int, typing.Union[bytes, bytearray]],
+    typing.Tuple[int, int, None, int],
+]
+
+__all__ = ["AsyncHTTPTransport", "HTTPTransport"]
+
+HTTPCORE_EXC_MAP: dict[type[Exception], type[httpx.HTTPError]] = {}
+
+
+```
+
+{"end_line":59,"file_sha256":"9194bf54c6d58987c5e7bd29a205022756ee973fb26df2f9d4faacf7292d79b5","id":"9193a988184622384555d51733e68ad8e6ae8fd5f06971e1466838bd4a23332a","kind":"function","path":"httpx/_transports/base.py","reasons":["lexical overlap: a, com, example, get, http, httpx, py, request, the, this, url"],"score":18.59092452,"start_line":26,"symbol":"BaseTransport.handle_request","text_sha256":"c44027d5132ff82e19b2d160a2ae4dea5da3e61c9498c12501f756fdee442a31"}
+```
+    def handle_request(self, request: Request) -> Response:
+        """
+        Send a single HTTP request and return a response.
+
+        Developers shouldn't typically ever need to call into this API directly,
+        since the Client class provides all the higher level user-facing API
+        niceties.
+
+        In order to properly release any network resources, the response
+        stream should *either* be consumed immediately, with a call to
+        `response.stream.read()`, or else the `handle_request` call should
+        be followed with a try/finally block to ensuring the stream is
+        always closed.
+
+        Example usage:
+
+            with httpx.HTTPTransport() as transport:
+                req = httpx.Request(
+                    method=b"GET",
+                    url=(b"https", b"www.example.com", 443, b"/"),
+                    headers=[(b"Host", b"www.example.com")],
+                )
+                resp = transport.handle_request(req)
+                body = resp.stream.read()
+                print(resp.status_code, resp.headers, body)
+
+
+        Takes a `Request` instance as the only argument.
+
+        Returns a `Response` instance.
+        """
+        raise NotImplementedError(
+            "The 'handle_request' method must be implemented."
+        )  # pragma: no cover
+```
+
+{"end_line":297,"file_sha256":"757f7d551d4348e1e9828f40abb3f360ee0529dc6a2a3c32369f20adff1d1cdd","id":"cadf3c11aed45fd50f1a4ad0f937698beee514622d1506c87e0191a1bb0d9858","kind":"function","path":"httpx/_urls.py","reasons":["lexical overlap: 1, example, get, http, httpx, py, the, url, urls"],"score":17.94462221,"start_line":282,"symbol":"URL.raw_path","text_sha256":"f3c366f2aac7ede5e2c5fb979e62dfb9e59cfbccb74230932db877712e03d9c5"}
+```
+    @property
+    def raw_path(self) -> bytes:
+        """
+        The complete URL path and query string as raw bytes.
+        Used as the target when constructing HTTP requests.
+
+        For example:
+
+        GET /users?search=some%20text HTTP/1.1
+        Host: www.example.org
+        Connection: close
+        """
+        path = self._uri_reference.path or "/"
+        if self._uri_reference.query is not None:
+            path += "?" + self._uri_reference.query
+        return path.encode("ascii")
+```

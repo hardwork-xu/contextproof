@@ -15,6 +15,7 @@ from typing import Any
 
 from .evidence import _bundle_error, _entry_error, _json, _safe_parts, sha256
 from .index import _root_path, iter_source_files, read_source_bytes, snapshot_id, source_lines
+from .static_scope import guard_module_bindings, guard_references, module_lookup_uncertainty
 
 
 KIND = "contextproof.dependency-witnesses"
@@ -155,6 +156,7 @@ class _Corpus:
                     parsed_cache[cache_key] = tree
             self.trees[path] = tree
             self._index(path, tree)
+        guard_module_bindings(self)
         self.snapshot_id = snapshot_id({path: sha256(text)
                                         for path, text in self.texts.items()})
 
@@ -232,6 +234,9 @@ class _Corpus:
             return _unresolved("qualified expression exceeds the static resolution depth limit")
         if not attrs:
             return _unresolved("a module value has no bounded definition witness")
+        uncertainty = module_lookup_uncertainty(self, module, attrs)
+        if uncertainty:
+            return _unresolved(uncertainty)
         # A qualified imported module may be a namespace package without init.py.
         # Never guess a submodule over a same-named explicit package binding.
         candidates = self.modules.get(module, [])
@@ -425,7 +430,8 @@ class _Corpus:
                             }
                         else:
                             add(synthetic_name, "read")
-        return [references[key] for key in sorted(references)]
+        return guard_references([references[key] for key in sorted(references)],
+                                owner, _scope_locals, start, end)
 
 
 def capture_witnesses(bundle: dict, root: Path) -> dict:

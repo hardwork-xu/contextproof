@@ -1,0 +1,12 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import httpx
+RESULT = [str(httpx.QueryParams({"u": "with spaces"})),
+          str(httpx.QueryParams({"u": "with%20spaces"}))]
+```
+
+Repository source evidence:
+{"ambiguity_policy":"all physical declarations; no runtime binding selection","ambiguous_symbols":[],"complete":true,"kind":"supplied-anchor-source","missing":[],"omitted":[],"scope":"supplied-declarations-only","source":[{"end_line":624,"path":"httpx/_urls.py","start_line":623,"symbol":"QueryParams.__str__","text":"    def __str__(self) -> str:\n        return urlencode(self.multi_items())\n","text_sha256":"24043c55683b7d4c173c60b74c6ae061dca24c96022b8bb236f89c0ddd013187"},{"end_line":494,"path":"httpx/_urlparse.py","start_line":482,"symbol":"percent_encoded","text":"def percent_encoded(string: str, safe: str) -> str:\n    \"\"\"\n    Use percent-encoding to quote a string.\n    \"\"\"\n    NON_ESCAPED_CHARS = UNRESERVED_CHARACTERS + safe\n\n    # Fast path for strings that don't need escaping.\n    if not string.rstrip(NON_ESCAPED_CHARS):\n        return string\n\n    return \"\".join(\n        [char if char in NON_ESCAPED_CHARS else PERCENT(char) for char in string]\n    )\n","text_sha256":"96c59ae0cea1b548738673bb028d32ea658ccfe4f28109e3e03b887dc71fc417"}]}

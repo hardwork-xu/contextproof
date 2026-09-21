@@ -1,0 +1,326 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import attrs
+observed = []
+@attrs.define
+class Record:
+    value: int = attrs.field(kw_only=True, default=3)
+    def __attrs_pre_init__(self, *, value):
+        observed.append(value)
+record = Record()
+RESULT = [observed, record.value]
+```
+
+Repository source evidence:
+<context query="Explain the behavior of this Python probe using repository source. src/attr/_make.py _attrs_to_init_script src/attr/_make.py _make_init_script
+import attrs
+observed = []
+@attrs.define
+class Record:
+    value: int = attrs.field(kw_only=True, default=3)
+    def __attrs_pre_init__(self, *, value):
+        observed.append(value)
+record = Record()
+RESULT = [observed, record.value]
+">
+  <structural-context>
+    <file-tree><![CDATA[
+src/attr/__init__.py
+src/attr/_funcs.py
+src/attr/_make.py
+src/attr/_next_gen.py
+    ]]></file-tree>
+  </structural-context>
+  <chunks>
+    <chunk file="src/attr/_make.py" lines="2865-2924" symbol="make_class" score="2.4287" tokens="502">
+      <code><![CDATA[
+def make_class(
+    name, attrs, bases=(object,), class_body=None, **attributes_arguments
+):
+    r"""
+    A quick way to create a new class called *name* with *attrs*.
+
+    .. note::
+
+        ``make_class()`` is a thin wrapper around `attr.s`, not `attrs.define`
+        which means that it doesn't come with some of the improved defaults.
+
+        For example, if you want the same ``on_setattr`` behavior as in
+        `attrs.define`, you have to pass the hooks yourself: ``make_class(...,
+        on_setattr=setters.pipe(setters.convert, setters.validate)``
+
+    Args:
+        name (str): The name for the new class.
+
+        attrs (list | dict):
+            A list of names or a dictionary of mappings of names to `attr.ib`\
+            s / `attrs.field`\ s.
+
+            The order is deduced from the order of the names or attributes
+            inside *attrs*.  Otherwise the order of the definition of the
+            attributes is used.
+
+        bases (tuple[type, ...]): Classes that the new class will subclass.
+
+        class_body (dict):
+            An optional dictionary of class attributes for the new class.
+
+        attributes_arguments: Passed unmodified to `attr.s`.
+
+    Returns:
+        type: A new class with *attrs*.
+
+    .. versionadded:: 17.1.0 *bases*
+    .. versionchanged:: 18.1.0 If *attrs* is ordered, the order is retained.
+    .. versionchanged:: 23.2.0 *class_body*
+    """
+    if isinstance(attrs, dict):
+        cls_dict = attrs
+    elif isinstance(attrs, (list, tuple)):
+        cls_dict = {a: attrib() for a in attrs}
+    else:
+        msg = "attrs argument must be a dict or a list."
+        raise TypeError(msg)
+
+    pre_init = cls_dict.pop("__attrs_pre_init__", None)
+    post_init = cls_dict.pop("__attrs_post_init__", None)
+    user_init = cls_dict.pop("__init__", None)
+
+    body = {}
+    if class_body is not None:
+        body.update(class_body)
+    if pre_init is not None:
+        body["__attrs_pre_init__"] = pre_init
+    if post_init is not None:
+        body["__attrs_post_init__"] = post_init
+    if user_init is not None:
+      ]]></code>
+    </chunk>
+    <chunk file="src/attr/__init__.py" lines="37-38" symbol="AttrsInstance" score="1.2203" tokens="9">
+      <code><![CDATA[
+class AttrsInstance(Protocol):
+    pass
+      ]]></code>
+    </chunk>
+    <chunk file="src/attr/_funcs.py" lines="397-449" symbol="resolve_types" score="0.9616" tokens="501">
+      <code><![CDATA[
+def resolve_types(
+    cls, globalns=None, localns=None, attribs=None, include_extras=True
+):
+    """
+    Resolve any strings and forward annotations in type annotations.
+
+    This is only required if you need concrete types in :class:`Attribute`'s
+    *type* field. In other words, you don't need to resolve your types if you
+    only use them for static type checking.
+
+    With no arguments, names will be looked up in the module in which the class
+    was created. If this is not what you want, for example, if the name only
+    exists inside a method, you may pass *globalns* or *localns* to specify
+    other dictionaries in which to look up these names. See the docs of
+    `typing.get_type_hints` for more details.
+
+    Args:
+        cls (type): Class to resolve.
+
+        globalns (dict | None): Dictionary containing global variables.
+
+        localns (dict | None): Dictionary containing local variables.
+
+        attribs (list | None):
+            List of attribs for the given class. This is necessary when calling
+            from inside a ``field_transformer`` since *cls* is not an *attrs*
+            class yet.
+
+        include_extras (bool):
+            Resolve more accurately, if possible. Pass ``include_extras`` to
+            ``typing.get_hints``, if supported by the typing module. On
+            supported Python versions (3.9+), this resolves the types more
+            accurately.
+
+    Raises:
+        TypeError: If *cls* is not a class.
+
+        attrs.exceptions.NotAnAttrsClassError:
+            If *cls* is not an *attrs* class and you didn't pass any attribs.
+
+        NameError: If types cannot be resolved because of missing variables.
+
+    Returns:
+        *cls* so you can use this function also as a class decorator. Please
+        note that you have to apply it **after** `attrs.define`. That means the
+        decorator has to come in the line **before** `attrs.define`.
+
+    ..  versionadded:: 20.1.0
+    ..  versionadded:: 21.1.0 *attribs*
+    ..  versionadded:: 23.1.0 *include_extras*
+    """
+    # Since calling get_type_hints is expensive we cache whether we've
+    # done it already.
+      ]]></code>
+    </chunk>
+    <chunk file="src/attr/_next_gen.py" lines="134-186" symbol="define" score="0.8950" tokens="516">
+      <code><![CDATA[
+            If True or None (default), add ``__eq__`` and ``__ne__`` methods
+            that check two instances for equality.
+
+            .. seealso::
+                `comparison` describes how to customize the comparison behavior
+                going as far comparing NumPy arrays.
+
+        order (bool | None):
+            If True, add ``__lt__``, ``__le__``, ``__gt__``, and ``__ge__``
+            methods that behave like *eq* above and allow instances to be
+            ordered.
+
+            They compare the instances as if they were tuples of their *attrs*
+            attributes if and only if the types of both classes are
+            *identical*.
+
+            If `None` mirror value of *eq*.
+
+            .. seealso:: `comparison`
+
+        unsafe_hash (bool | None):
+            If None (default), the ``__hash__`` method is generated according
+            how *eq* and *frozen* are set.
+
+            1. If *both* are True, *attrs* will generate a ``__hash__`` for
+               you.
+            2. If *eq* is True and *frozen* is False, ``__hash__`` will be set
+               to None, marking it unhashable (which it is).
+            3. If *eq* is False, ``__hash__`` will be left untouched meaning
+               the ``__hash__`` method of the base class will be used. If the
+               base class is `object`, this means it will fall back to id-based
+               hashing.
+
+            Although not recommended, you can decide for yourself and force
+            *attrs* to create one (for example, if the class is immutable even
+            though you didn't freeze it programmatically) by passing True or
+            not.  Both of these cases are rather special and should be used
+            carefully.
+
+            .. seealso::
+
+                - Our documentation on `hashing`,
+                - Python's documentation on `object.__hash__`,
+                - and the `GitHub issue that led to the default \ behavior
+                  <https://github.com/python-attrs/attrs/issues/136>`_ for more
+                  details.
+
+        hash (bool | None):
+            Deprecated alias for *unsafe_hash*. *unsafe_hash* takes precedence.
+
+        cache_hash (bool):
+            Ensure that the object's hash code is computed only once and stored
+            on the object.  If this is set to True, hashing must be either
+      ]]></code>
+    </chunk>
+    <chunk file="src/attr/_make.py" lines="2187-2250" symbol="_attrs_to_init_script" score="2.4269" tokens="506">
+      <code><![CDATA[
+                )
+                names_for_globals[converter._get_global_name(a.name)] = (
+                    converter.converter
+                )
+            else:
+                lines.append(
+                    "    " + fmt_setter(attr_name, arg_name, has_on_setattr)
+                )
+                lines.append("else:")
+                lines.append(
+                    "    "
+                    + fmt_setter(
+                        attr_name,
+                        init_factory_name + "(" + maybe_self + ")",
+                        has_on_setattr,
+                    )
+                )
+            names_for_globals[init_factory_name] = a.default.factory
+        else:
+            if a.kw_only:
+                kw_only_args.append(arg_name)
+            else:
+                args.append(arg_name)
+
+            if converter is not None:
+                lines.append(
+                    fmt_setter_with_converter(
+                        attr_name, arg_name, has_on_setattr, converter
+                    )
+                )
+                names_for_globals[converter._get_global_name(a.name)] = (
+                    converter.converter
+                )
+            else:
+                lines.append(fmt_setter(attr_name, arg_name, has_on_setattr))
+
+        if a.init is True:
+            if a.type is not None and converter is None:
+                annotations[arg_name] = a.type
+            elif converter is not None and converter._first_param_type:
+                # Use the type from the converter if present.
+                annotations[arg_name] = converter._first_param_type
+
+    if attrs_to_validate:  # we can skip this if there are no validators.
+        names_for_globals["_config"] = _config
+        lines.append("if _config._run_validators is True:")
+        for a in attrs_to_validate:
+            val_name = "__attr_validator_" + a.name
+            attr_name = "__attr_" + a.name
+            lines.append(f"    {val_name}(self, {attr_name}, self.{a.name})")
+            names_for_globals[val_name] = a.validator
+            names_for_globals[attr_name] = a
+
+    if call_post_init:
+        lines.append("self.__attrs_post_init__()")
+
+    # Because this is set only after __attrs_post_init__ is called, a crash
+    # will result if post-init tries to access the hash code.  This seemed
+    # preferable to setting this beforehand, in which case alteration to field
+    # values during post-init combined with post-init accessing the hash code
+    # would result in silent bugs.
+    if does_cache_hash:
+        if is_frozen:
+            if is_slotted:
+      ]]></code>
+    </chunk>
+    <chunk file="src/attr/_make.py" lines="73-74" symbol="__repr__" score="2.0687" tokens="13">
+      <code><![CDATA[
+    def __repr__(self):
+        return "NOTHING"
+      ]]></code>
+    </chunk>
+    <chunk file="src/attr/_make.py" lines="76-77" symbol="__bool__" score="2.0687" tokens="10">
+      <code><![CDATA[
+    def __bool__(self):
+        return False
+      ]]></code>
+    </chunk>
+  </chunks>
+  <type-definitions>
+    <type-def file="src/attr/__init__.py" symbol="AttrsInstance" lines="37-38">
+      <![CDATA[class AttrsInstance(Protocol):
+    pass]]>
+    </type-def>
+  </type-definitions>
+  <receipt freshness="clean" complete="incomplete" reason="dependency_frontier_cut" action="fetch_skipped_candidate" index_revision="7b939a4221ac0937c0b7e156424e76d77c6e1f331e3aae264edf1e9230c4f91c" budget_requested="2118" budget_consumed="2057" returned_shown="7" returned_total="7" skipped_shown="20" skipped_total="20" omitted_edges_shown="20" omitted_edges_total="20">
+    <returned handle="chunk:src/attr/__init__.py:AttrsInstance:37" file="src/attr/__init__.py" lines="37-38" hash="2cff5dcc6f48de94fc48de8e50e212d64bbfffe9056cd1fd57770e7fc4e90d1c" score="1.2203" />
+    <returned handle="chunk:src/attr/_funcs.py:resolve_types:397" file="src/attr/_funcs.py" lines="397-449" hash="20d6f5d0e6162dccfa00af09322f8ec5ce45a821dc1bfae26a3f96bfe2a2e69b" score="0.9616" />
+    <returned handle="chunk:src/attr/_make.py:__repr__:73" file="src/attr/_make.py" lines="73-74" hash="d78fec715e33365b9088db4786dab96f1502055db2ea6681ed6e28e72d84ad39" score="2.0687" />
+    <returned handle="chunk:src/attr/_make.py:__bool__:76" file="src/attr/_make.py" lines="76-77" hash="58d7c08ee8600ab533e6178cac92fe197ff1377ed1dc905072c94f057ce10c02" score="2.0687" />
+    <returned handle="chunk:src/attr/_make.py:_attrs_to_init_script:2187" file="src/attr/_make.py" lines="2187-2250" hash="19b6a88451d1e6739e4d379f90d7b6cfdc7306a535c017d702c1f8b7dbbb4e66" score="2.4269" />
+    <returned handle="chunk:src/attr/_make.py:make_class:2865" file="src/attr/_make.py" lines="2865-2924" hash="38e7560f52304a28448b1cc347e3ac40817e8d331ba9b8e3012eeb35b1724d93" score="2.4287" />
+    <returned handle="chunk:src/attr/_next_gen.py:define:134" file="src/attr/_next_gen.py" lines="134-186" hash="08963f92a01ab3eef3dcd0976959a6ecaeb58c0c8125db9811bd8f86489a2949" score="0.8950" />
+    <skipped file="src/attr/__init__.py" reason="over_budget" handle="chunk:src/attr/__init__.py:_module:1" />
+    <skipped file="src/attr/__init__.py" reason="over_budget" handle="chunk:src/attr/__init__.py:_module:39" />
+    <skipped file="src/attr/__init__.py" reason="over_budget" handle="chunk:src/attr/__init__.py:_make_getattr:81" />
+    <skipped file="src/attr/_funcs.py" reason="over_budget" handle="chunk:src/attr/_funcs.py:assoc:354" />
+    <skipped file="src/attr/_funcs.py" reason="over_budget" handle="chunk:src/attr/_funcs.py:resolve_types:450" />
+    <skipped file="src/attr/_make.py" reason="over_budget" handle="chunk:src/attr/_make.py:_module:1" />
+    <skipped file="src/attr/_make.py" reason="over_budget" handle="chunk:src/attr/_make.py:_CacheHashWrapper:88" />
+    <skipped file="src/attr/_make.py" reason="over_budget" handle="chunk:src/attr/_make.py:_ClassBuilder:775" />
+  </receipt>
+</context>

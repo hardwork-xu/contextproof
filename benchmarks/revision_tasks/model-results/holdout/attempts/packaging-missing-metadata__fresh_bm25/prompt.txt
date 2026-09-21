@@ -1,0 +1,329 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+from packaging.metadata import Metadata
+meta = Metadata.from_raw({}, validate=False)
+RESULT = meta.keywords
+```
+
+Repository source evidence:
+# ContextProof source evidence
+{"budget":16000,"budget_unit":"utf8_bytes","id":"606b33b98a88eaad8b5229084fa2b42b202ff38fe6807d18716b0094a4c83bfa","method":"bm25","omitted_count":312,"query":"Explain the behavior of this Python probe using repository source. src/packaging/metadata.py _Validator.__get__ src/packaging/metadata.py _Validator._process_keywords src/packaging/metadata.py Metadata.from_raw\nfrom packaging.metadata import Metadata\nmeta = Metadata.from_raw({}, validate=False)\nRESULT = meta.keywords\n","schema_version":1,"snapshot_id":"e997c04787f0a125dc18b4aa3515e97689b1bc275fc6d5efdc040420e8b410e6","tokenizer":"bytes"}
+
+{"end_line":522,"file_sha256":"60989b33b1987b8adef3ed1adce9579864be5c38131283b8b6506ddaadb90678","id":"cc056a487d583b74149ab7895231a30f475142fb2c24f309423b1f47da13d16d","kind":"function","path":"src/packaging/metadata.py","reasons":["lexical overlap: get, metadata, of, packaging, process, py, python, raw, src, the, this, validator"],"score":23.23202272,"start_line":497,"symbol":"_Validator.__get__","text_sha256":"0d2529d4e9cf46e95232da6baf7ae1b30dd625eb85bf12f49ab7c60b8cdec042"}
+```
+    def __get__(self, instance: Metadata, _owner: type[Metadata]) -> T:
+        # With Python 3.8, the caching can be replaced with functools.cached_property().
+        # No need to check the cache as attribute lookup will resolve into the
+        # instance's __dict__ before __get__ is called.
+        cache = instance.__dict__
+        value = instance._raw.get(self.name)
+
+        # To make the _process_* methods easier, we'll check if the value is None
+        # and if this field is NOT a required attribute, and if both of those
+        # things are true, we'll skip the the converter. This will mean that the
+        # converters never have to deal with the None union.
+        if self.name in _REQUIRED_ATTRS or value is not None:
+            try:
+                converter: Callable[[Any], T] = getattr(self, f"_process_{self.name}")
+            except AttributeError:
+                pass
+            else:
+                value = converter(value)
+
+        cache[self.name] = value
+        try:
+            del instance._raw[self.name]  # type: ignore[misc]
+        except KeyError:
+            pass
+
+        return cast(T, value)
+```
+
+{"end_line":485,"file_sha256":"60989b33b1987b8adef3ed1adce9579864be5c38131283b8b6506ddaadb90678","id":"12fc8d607cc42ad949c408a230173d9a52e868c2b11d8cb44cdf1f93d02c219e","kind":"class","path":"src/packaging/metadata.py","reasons":["lexical overlap: metadata, packaging, process, py, raw, src, the, validate, validator"],"score":22.32017496,"start_line":472,"symbol":"_Validator","text_sha256":"1d35f0efab0c3795c2656c461ed3fddf986f4816bc43b2563128ad89c685d1f2"}
+```
+class _Validator(Generic[T]):
+    """Validate a metadata field.
+
+    All _process_*() methods correspond to a core metadata field. The method is
+    called with the field's raw value. If the raw value is valid it is returned
+    in its "enriched" form (e.g. ``version.Version`` for the ``Version`` field).
+    If the raw value is invalid, :exc:`InvalidMetadata` is raised (with a cause
+    as appropriate).
+    """
+
+    name: str
+    raw_name: str
+    added: _MetadataVersion
+
+```
+
+{"end_line":782,"file_sha256":"60989b33b1987b8adef3ed1adce9579864be5c38131283b8b6506ddaadb90678","id":"b2335affa2b47f31addfd18db8a7728daa4b5a184ca7eeb02e1aa808d0845aef","kind":"function","path":"src/packaging/metadata.py","reasons":["lexical overlap: from, from_raw, metadata, packaging, py, raw, src, the, validate"],"score":22.29470753,"start_line":756,"symbol":"Metadata.from_email","text_sha256":"8e84ed90b297fcc6e23b1e638192126db6a9ea1c07b7c17d70c2fd8ea13bd95a"}
+```
+    @classmethod
+    def from_email(cls, data: bytes | str, *, validate: bool = True) -> Metadata:
+        """Parse metadata from email headers.
+
+        If *validate* is true, the metadata will be validated. All exceptions
+        related to validation will be gathered and raised as an :class:`ExceptionGroup`.
+        """
+        raw, unparsed = parse_email(data)
+
+        if validate:
+            exceptions: list[Exception] = []
+            for unparsed_key in unparsed:
+                if unparsed_key in _EMAIL_TO_RAW_MAPPING:
+                    message = f"{unparsed_key!r} has invalid data"
+                else:
+                    message = f"unrecognized field: {unparsed_key!r}"
+                exceptions.append(InvalidMetadata(unparsed_key, message))
+
+            if exceptions:
+                raise ExceptionGroup("unparsed", exceptions)
+
+        try:
+            return cls.from_raw(raw, validate=validate)
+        except ExceptionGroup as exc_group:
+            raise ExceptionGroup(
+                "invalid or unparsed metadata", exc_group.exceptions
+            ) from None
+```
+
+{"end_line":41,"file_sha256":"085aab2730337365cd19ec5eac7fff4fe639230abb59bb185ec88b1112d6c58d","id":"c23cdc00331af863f9a4aa2d8700e551463bf6318a9c9391d8c975bce1530e99","kind":"module","path":"src/packaging/tags.py","reasons":["lexical overlap: from, get, import, of, packaging, py, python, repository, src, the, this"],"score":22.24087645,"start_line":1,"symbol":"<module>","text_sha256":"e23391a6bb65398b12287a424a9a3bd549a91c23d533fae79f4f4e89ed6226fe"}
+```
+# This file is dual licensed under the terms of the Apache License, Version
+# 2.0, and the BSD License. See the LICENSE file in the root of this repository
+# for complete details.
+
+from __future__ import annotations
+
+import logging
+import platform
+import re
+import struct
+import subprocess
+import sys
+import sysconfig
+from importlib.machinery import EXTENSION_SUFFIXES
+from typing import (
+    Iterable,
+    Iterator,
+    Sequence,
+    Tuple,
+    cast,
+)
+
+from . import _manylinux, _musllinux
+
+logger = logging.getLogger(__name__)
+
+PythonVersion = Sequence[int]
+AppleVersion = Tuple[int, int]
+
+INTERPRETER_SHORT_NAMES: dict[str, str] = {
+    "python": "py",  # Generic.
+    "cpython": "cp",
+    "pypy": "pp",
+    "ironpython": "ip",
+    "jython": "jy",
+}
+
+
+_32_BIT_INTERPRETER = struct.calcsize("P") == 4
+
+
+```
+
+{"end_line":754,"file_sha256":"60989b33b1987b8adef3ed1adce9579864be5c38131283b8b6506ddaadb90678","id":"3eb031497fe0ca0906d38ad2330c33f2a847b234da99af49c3e9e8f70b4872dd","kind":"function","path":"src/packaging/metadata.py","reasons":["lexical overlap: from, from_raw, metadata, packaging, py, raw, src, the, validate"],"score":21.7207141,"start_line":699,"symbol":"Metadata.from_raw","text_sha256":"eef32b314cf0fb62ce87683a81b542ac74fd5f40c623f73871436c0f1842c2f6"}
+```
+    @classmethod
+    def from_raw(cls, data: RawMetadata, *, validate: bool = True) -> Metadata:
+        """Create an instance from :class:`RawMetadata`.
+
+        If *validate* is true, all metadata will be validated. All exceptions
+        related to validation will be gathered and raised as an :class:`ExceptionGroup`.
+        """
+        ins = cls()
+        ins._raw = data.copy()  # Mutations occur due to caching enriched values.
+
+        if validate:
+            exceptions: list[Exception] = []
+            try:
+                metadata_version = ins.metadata_version
+                metadata_age = _VALID_METADATA_VERSIONS.index(metadata_version)
+            except InvalidMetadata as metadata_version_exc:
+                exceptions.append(metadata_version_exc)
+                metadata_version = None
+
+            # Make sure to check for the fields that are present, the required
+            # fields (so their absence can be reported).
+            fields_to_check = frozenset(ins._raw) | _REQUIRED_ATTRS
+            # Remove fields that have already been checked.
+            fields_to_check -= {"metadata_version"}
+
+            for key in fields_to_check:
+                try:
+                    if metadata_version:
+                        # Can't use getattr() as that triggers descriptor protocol which
+                        # will fail due to no value for the instance argument.
+                        try:
+                            field_metadata_version = cls.__dict__[key].added
+                        except KeyError:
+                            exc = InvalidMetadata(key, f"unrecognized field: {key!r}")
+                            exceptions.append(exc)
+                            continue
+                        field_age = _VALID_METADATA_VERSIONS.index(
+                            field_metadata_version
+                        )
+                        if field_age > metadata_age:
+                            field = _RAW_TO_EMAIL_MAPPING[key]
+                            exc = InvalidMetadata(
+                                field,
+                                f"{field} introduced in metadata version "
+                                f"{field_metadata_version}, not {metadata_version}",
+                            )
+                            exceptions.append(exc)
+                            continue
+                    getattr(ins, key)
+                except InvalidMetadata as exc:
+                    exceptions.append(exc)
+
+            if exceptions:
+                raise ExceptionGroup("invalid metadata", exceptions)
+
+        return ins
+```
+
+{"end_line":445,"file_sha256":"60989b33b1987b8adef3ed1adce9579864be5c38131283b8b6506ddaadb90678","id":"bf78ef1722a8ae1e8e91452c774b3ffc78d683fd7abe8dba096e067154e58508","kind":"function","path":"src/packaging/metadata.py","reasons":["lexical overlap: from, get, keywords, metadata, of, packaging, py, raw, src, the, this, using"],"score":21.25772829,"start_line":366,"symbol":"parse_email","text_sha256":"132d205ced03adbaf73d922ac4ca720562409b3d28f39b949efa6a21a2c1e8fd"}
+```
+                value.append(str(email.header.make_header(chunks)))
+            # This is already a string, so just add it.
+            else:
+                value.append(h)
+
+        # We've processed all of our values to get them into a list of str,
+        # but we may have mojibake data, in which case this is an unparsed
+        # field.
+        if not valid_encoding:
+            unparsed[name] = value
+            continue
+
+        raw_name = _EMAIL_TO_RAW_MAPPING.get(name)
+        if raw_name is None:
+            # This is a bit of a weird situation, we've encountered a key that
+            # we don't know what it means, so we don't know whether it's meant
+            # to be a list or not.
+            #
+            # Since we can't really tell one way or another, we'll just leave it
+            # as a list, even though it may be a single item list, because that's
+            # what makes the most sense for email headers.
+            unparsed[name] = value
+            continue
+
+        # If this is one of our string fields, then we'll check to see if our
+        # value is a list of a single item. If it is then we'll assume that
+        # it was emitted as a single string, and unwrap the str from inside
+        # the list.
+        #
+        # If it's any other kind of data, then we haven't the faintest clue
+        # what we should parse it as, and we have to just add it to our list
+        # of unparsed stuff.
+        if raw_name in _STRING_FIELDS and len(value) == 1:
+            raw[raw_name] = value[0]
+        # If this is one of our list of string fields, then we can just assign
+        # the value, since email *only* has strings, and our get_all() call
+        # above ensures that this is a list.
+        elif raw_name in _LIST_FIELDS:
+            raw[raw_name] = value
+        # Special Case: Keywords
+        # The keywords field is implemented in the metadata spec as a str,
+        # but it conceptually is a list of strings, and is serialized using
+        # ", ".join(keywords), so we'll do some light data massaging to turn
+        # this into what it logically is.
+        elif raw_name == "keywords" and len(value) == 1:
+            raw[raw_name] = _parse_keywords(value[0])
+        # Special Case: Project-URL
+        # The project urls is implemented in the metadata spec as a list of
+        # specially-formatted strings that represent a key and a value, which
+        # is fundamentally a mapping, however the email format doesn't support
+        # mappings in a sane way, so it was crammed into a list of strings
+        # instead.
+        #
+        # We will do a little light data massaging to turn this into a map as
+        # it logically should be.
+        elif raw_name == "project_urls":
+            try:
+                raw[raw_name] = _parse_project_urls(value)
+            except KeyError:
+                unparsed[name] = value
+        # Nothing that we've done has managed to parse this, so it'll just
+        # throw it in our unparseable data and move on.
+        else:
+            unparsed[name] = value
+
+    # We need to support getting the Description from the message payload in
+    # addition to getting it from the the headers. This does mean, though, there
+    # is the possibility of it being set both ways, in which case we put both
+    # in 'unparsed' since we don't know which is right.
+    try:
+        payload = _get_payload(parsed, data)
+    except ValueError:
+        unparsed.setdefault("description", []).append(
+            parsed.get_payload(decode=isinstance(data, bytes))  # type: ignore[call-overload]
+        )
+    else:
+        if payload:
+            # Check to see if we've already got a description, if so then both
+            # it, and this body move to unparseable.
+            if "description" in raw:
+```
+
+{"end_line":550,"file_sha256":"60989b33b1987b8adef3ed1adce9579864be5c38131283b8b6506ddaadb90678","id":"506715cd7e3d0d7bf4cede39c61b70f7b0a0c5bdf691ded8deb5f190ace4b5f5","kind":"function","path":"src/packaging/metadata.py","reasons":["lexical overlap: from, metadata, packaging, process, py, src, the, validate, validator"],"score":20.74663745,"start_line":539,"symbol":"_Validator._process_name","text_sha256":"185ee8f145f706a37d64cdb8714d3e6efee856a2065368c282620c9075d825cc"}
+```
+    def _process_name(self, value: str) -> str:
+        if not value:
+            raise self._invalid_metadata("{field} is a required field")
+        # Validate the name as a side-effect.
+        try:
+            utils.canonicalize_name(value, validate=True)
+        except utils.InvalidName as exc:
+            raise self._invalid_metadata(
+                f"{value!r} is invalid for {{field}}", cause=exc
+            ) from exc
+        else:
+            return value
+```
+
+{"end_line":633,"file_sha256":"60989b33b1987b8adef3ed1adce9579864be5c38131283b8b6506ddaadb90678","id":"37770b90e68a42c81a3f9c876c0ee38d692e1a0f82253069009dc76f847ac5bf","kind":"function","path":"src/packaging/metadata.py","reasons":["lexical overlap: from, metadata, packaging, process, py, python, src, validator"],"score":18.63576209,"start_line":627,"symbol":"_Validator._process_requires_python","text_sha256":"95985a2aebb98120c448c315c580b124c5ca10027a53fa8c05990e303f0bf75c"}
+```
+    def _process_requires_python(self, value: str) -> specifiers.SpecifierSet:
+        try:
+            return specifiers.SpecifierSet(value)
+        except specifiers.InvalidSpecifier as exc:
+            raise self._invalid_metadata(
+                f"{value!r} is invalid for {{field}}", cause=exc
+            ) from exc
+```
+
+{"end_line":17,"file_sha256":"a7d66a35888e22d19e7bc29c64578717f61c76157018774aeabfbc9608b1bc64","id":"e49ea1a3b9a901113446a25553bb4e3f6e0596bbcfebdb69f78342876acaf908","kind":"module","path":"src/packaging/_musllinux.py","reasons":["lexical overlap: from, import, packaging, py, python, src, the, this"],"score":14.42853405,"start_line":1,"symbol":"<module>","text_sha256":"941c69dd7627dda8d5ea5b20aa84e7f0c4b1dc2f0e43f3fcd38449a692a77b17"}
+```
+"""PEP 656 support.
+
+This module implements logic to detect if the currently running Python is
+linked against musl, and what musl version is used.
+"""
+
+from __future__ import annotations
+
+import functools
+import re
+import subprocess
+import sys
+from typing import Iterator, NamedTuple, Sequence
+
+from ._elffile import ELFFile
+
+
+```

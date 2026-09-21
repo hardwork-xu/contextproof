@@ -1,0 +1,12 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import httpx
+headers = httpx.Headers({"Content-Type": "text/plain"})
+RESULT = [headers["content-type"], "CONTENT-TYPE" in headers]
+```
+
+Repository source evidence:
+(No source evidence supplied.)

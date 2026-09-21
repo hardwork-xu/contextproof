@@ -1,0 +1,62 @@
+{
+  "answer": {
+    "value": [
+      2,
+      [
+        1,
+        4
+      ],
+      [
+        "rc",
+        2
+      ],
+      3,
+      1,
+      "linux.4"
+    ]
+  },
+  "artifact_sha256": {
+    "command.json": "bd091dcde816d38966aebd9311c75fa9f415f9412212445a41bcf574c3ead554",
+    "events.jsonl": "874d411732e88ec46ce4f3427c8c9961cdfddf8ca74a225373662a279e7d9605",
+    "instructions.txt": "526c634a7fb2948dad3a3e046acd375975ef58e997ddef36f2039479a7cd05c3",
+    "prompt.txt": "7fc331ed79007f2a35b534b002b73e5e0d9437c9cad18fa7fb8af299fefdcaae",
+    "response.json": "a3faf367927f802509fb223e7686d7de4d508e426988318a7f513d83b8f4a8bf",
+    "schema.json": "0875783714dbd7f5cce9a18f60cf5859ebf464e24c8ba232d4254deb1fe231fe",
+    "stderr.txt": "f15ed598b20214e3248259d2c7006e6cea060dff119d649756bff76dd04f32a9"
+  },
+  "evidence_bytes": 8763,
+  "execution_error": null,
+  "forbidden_items": [],
+  "input_identity": {
+    "instructions_sha256": "526c634a7fb2948dad3a3e046acd375975ef58e997ddef36f2039479a7cd05c3",
+    "model": "gpt-6-astra",
+    "prompt_sha256": "7fc331ed79007f2a35b534b002b73e5e0d9437c9cad18fa7fb8af299fefdcaae",
+    "reasoning_effort": "medium",
+    "schema_sha256": "572d646905a4274b2f90cd86de3e2e10660a0dee4b3b963495ade9d263ae41f9",
+    "transport": "https"
+  },
+  "malformed_events": [],
+  "parse_error": null,
+  "prompt_bytes": 9239,
+  "returncode": 0,
+  "started_at": "2026-09-21T11:36:59.411170+00:00",
+  "tool_violation": false,
+  "transport_messages": [
+    {
+      "id": "item_0",
+      "message": "Under-development features enabled: skip_host_skill_discovery. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in <USER_HOME>/.codex/config.toml.",
+      "type": "error"
+    }
+  ],
+  "usage": [
+    {
+      "cache_write_input_tokens": 0,
+      "cached_input_tokens": 0,
+      "input_tokens": 8674,
+      "output_tokens": 46,
+      "reasoning_output_tokens": 0
+    }
+  ],
+  "valid_completion": true,
+  "wall_seconds": 27.02375266700983
+}

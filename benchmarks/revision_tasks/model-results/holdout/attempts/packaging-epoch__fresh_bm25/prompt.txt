@@ -1,0 +1,308 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+from packaging.specifiers import Specifier
+RESULT = Specifier("==2!1.0.0.0.*").contains("2!1.0.0")
+```
+
+Repository source evidence:
+# ContextProof source evidence
+{"budget":16000,"budget_unit":"utf8_bytes","id":"c6750c3bc41b45a8fb6c63a0442562fdf176a6808b0d36ae5cc22c26f6745788","method":"bm25","omitted_count":308,"query":"Explain the behavior of this Python probe using repository source. src/packaging/specifiers.py Specifier._compare_equal src/packaging/specifiers.py _version_split src/packaging/specifiers.py _pad_version\nfrom packaging.specifiers import Specifier\nRESULT = Specifier(\"==2!1.0.0.0.*\").contains(\"2!1.0.0\")\n","schema_version":1,"snapshot_id":"e997c04787f0a125dc18b4aa3515e97689b1bc275fc6d5efdc040420e8b410e6","tokenizer":"bytes"}
+
+{"end_line":426,"file_sha256":"186d703cd31c2f47cc24eebcbc5e77c0a31dc277de84371a23eafd3694df8a50","id":"512f61d2b436ce43336109445e76ef298088a354416680773f414f54d3abffbb","kind":"function","path":"src/packaging/specifiers.py","reasons":["lexical overlap: 0, 2, compare, compare_equal, equal, of, packaging, pad, pad_version, py, specifier, specifiers, split, src, the, version, version_split"],"score":38.596247,"start_line":388,"symbol":"Specifier._compare_equal","text_sha256":"2861ef5d42512d0a8541df06379bd90cb11eeddaa5c395f74c1cf00b8d2902ef"}
+```
+    def _compare_equal(self, prospective: Version, spec: str) -> bool:
+        # We need special logic to handle prefix matching
+        if spec.endswith(".*"):
+            # In the case of prefix matching we want to ignore local segment.
+            normalized_prospective = canonicalize_version(
+                prospective.public, strip_trailing_zero=False
+            )
+            # Get the normalized version string ignoring the trailing .*
+            normalized_spec = canonicalize_version(spec[:-2], strip_trailing_zero=False)
+            # Split the spec out by bangs and dots, and pretend that there is
+            # an implicit dot in between a release segment and a pre-release segment.
+            split_spec = _version_split(normalized_spec)
+
+            # Split the prospective version out by bangs and dots, and pretend
+            # that there is an implicit dot in between a release segment and
+            # a pre-release segment.
+            split_prospective = _version_split(normalized_prospective)
+
+            # 0-pad the prospective version before shortening it to get the correct
+            # shortened version.
+            padded_prospective, _ = _pad_version(split_prospective, split_spec)
+
+            # Shorten the prospective version to be the same length as the spec
+            # so that we can determine if the specifier is a prefix of the
+            # prospective version or not.
+            shortened_prospective = padded_prospective[: len(split_spec)]
+
+            return shortened_prospective == split_spec
+        else:
+            # Convert our spec string into a Version
+            spec_version = Version(spec)
+
+            # If the specifier does not have a local segment, then we want to
+            # act as if the prospective version also does not have a local
+            # segment.
+            if not spec_version.local:
+                prospective = Version(prospective.public)
+
+            return prospective == spec_version
+```
+
+{"end_line":687,"file_sha256":"186d703cd31c2f47cc24eebcbc5e77c0a31dc277de84371a23eafd3694df8a50","id":"8950e238ddd63348d8176947f67369a10d01be347c83908cc017bac6858121d2","kind":"function","path":"src/packaging/specifiers.py","reasons":["lexical overlap: 0, 1, from, of, packaging, pad, pad_version, py, specifiers, split, src, the, version"],"score":30.42032285,"start_line":669,"symbol":"_pad_version","text_sha256":"49f14b20ac81c415858be16860ad031a0ed578360b5eee0863743f783e89691e"}
+```
+def _pad_version(left: list[str], right: list[str]) -> tuple[list[str], list[str]]:
+    left_split, right_split = [], []
+
+    # Get the release segment of our versions
+    left_split.append(list(itertools.takewhile(lambda x: x.isdigit(), left)))
+    right_split.append(list(itertools.takewhile(lambda x: x.isdigit(), right)))
+
+    # Get the rest of our versions
+    left_split.append(left[len(left_split[0]) :])
+    right_split.append(right[len(right_split[0]) :])
+
+    # Insert our padding
+    left_split.insert(1, ["0"] * max(0, len(right_split[0]) - len(left_split[0])))
+    right_split.insert(1, ["0"] * max(0, len(left_split[0]) - len(right_split[0])))
+
+    return (
+        list(itertools.chain.from_iterable(left_split)),
+        list(itertools.chain.from_iterable(right_split)),
+    )
+```
+
+{"end_line":649,"file_sha256":"186d703cd31c2f47cc24eebcbc5e77c0a31dc277de84371a23eafd3694df8a50","id":"7ff329bda8fbc3b7ef38bd4a92f223aebf35fb666d2297f748723cbb5ed4fe02","kind":"function","path":"src/packaging/specifiers.py","reasons":["lexical overlap: 0, packaging, py, result, specifiers, split, src, the, version, version_split"],"score":27.05154269,"start_line":630,"symbol":"_version_split","text_sha256":"0cd68f109fcc4e4f1948e52c7fb797bcf4121bf41ef49dbb7c62fe06b415caaa"}
+```
+def _version_split(version: str) -> list[str]:
+    """Split version into components.
+
+    The split components are intended for version comparison. The logic does
+    not attempt to retain the original version string, so joining the
+    components back with :func:`_version_join` may not produce the original
+    version string.
+    """
+    result: list[str] = []
+
+    epoch, _, rest = version.rpartition("!")
+    result.append(epoch or "0")
+
+    for item in rest.split("."):
+        match = _prefix_regex.search(item)
+        if match:
+            result.extend(match.groups())
+        else:
+            result.append(item)
+    return result
+```
+
+{"end_line":386,"file_sha256":"186d703cd31c2f47cc24eebcbc5e77c0a31dc277de84371a23eafd3694df8a50","id":"5924cc576f1c00d52480272f6a6ed4169e559be6354f7571081dd9de684d7964","kind":"function","path":"src/packaging/specifiers.py","reasons":["lexical overlap: 1, 2, compare, of, packaging, py, specifier, specifiers, split, src, the, this, version, version_split"],"score":26.51732843,"start_line":368,"symbol":"Specifier._compare_compatible","text_sha256":"7695f3292ce03235d92a0b5c792a8b54d808ef1b40c73c2b0abc76660fc57ef5"}
+```
+    def _compare_compatible(self, prospective: Version, spec: str) -> bool:
+        # Compatible releases have an equivalent combination of >= and ==. That
+        # is that ~=2.2 is equivalent to >=2.2,==2.*. This allows us to
+        # implement this in terms of the other specifiers instead of
+        # implementing it ourselves. The only thing we need to do is construct
+        # the other specifiers.
+
+        # We want everything but the last item in the version, but we want to
+        # ignore suffix segments.
+        prefix = _version_join(
+            list(itertools.takewhile(_is_not_suffix, _version_split(spec)))[:-1]
+        )
+
+        # Add the prefix notation to the end of our string
+        prefix += ".*"
+
+        return self._get_operator(">=")(prospective, spec) and self._get_operator("==")(
+            prospective, prefix
+        )
+```
+
+{"end_line":25,"file_sha256":"186d703cd31c2f47cc24eebcbc5e77c0a31dc277de84371a23eafd3694df8a50","id":"ef23945741806c6f395b89dc1596dc7c821f9ac18e3a8ba12bdbcef5169a786c","kind":"module","path":"src/packaging/specifiers.py","reasons":["lexical overlap: 0, 2, from, import, of, packaging, py, repository, specifier, specifiers, src, the, this, version"],"score":26.477183,"start_line":1,"symbol":"<module>","text_sha256":"cc3e6c46b5dbd28bd229d9cd21641ecf8797bdfa74bec0020e98bc3cf8e2d7d9"}
+```
+# This file is dual licensed under the terms of the Apache License, Version
+# 2.0, and the BSD License. See the LICENSE file in the root of this repository
+# for complete details.
+"""
+.. testsetup::
+
+    from packaging.specifiers import Specifier, SpecifierSet, InvalidSpecifier
+    from packaging.version import Version
+"""
+
+from __future__ import annotations
+
+import abc
+import itertools
+import re
+from typing import Callable, Iterable, Iterator, TypeVar, Union
+
+from .utils import canonicalize_version
+from .version import Version
+
+UnparsedVersion = Union[Version, str]
+UnparsedVersionVar = TypeVar("UnparsedVersionVar", bound=UnparsedVersion)
+CallableOperator = Callable[[Version, str], bool]
+
+
+```
+
+{"end_line":429,"file_sha256":"186d703cd31c2f47cc24eebcbc5e77c0a31dc277de84371a23eafd3694df8a50","id":"f9c31df59b8260af7b9441f9bba17a69d2e8b15f436009e8dfb843dea2517157","kind":"function","path":"src/packaging/specifiers.py","reasons":["lexical overlap: compare, compare_equal, equal, packaging, py, specifier, specifiers, src, version"],"score":26.45044738,"start_line":428,"symbol":"Specifier._compare_not_equal","text_sha256":"4cad5d50a41fc9e4fc89fb627fcb1c694d56e17e29701e0e0fda55453f8d0c21"}
+```
+    def _compare_not_equal(self, prospective: Version, spec: str) -> bool:
+        return not self._compare_equal(prospective, spec)
+```
+
+{"end_line":14,"file_sha256":"818c9148075bac8c8a0d8ebaba02035108d132fc641f600b8a84e65f7b672faa","id":"3e039122bcb81603f350e6a7988abb99a80248df433e25cf25cec8565af5e4f5","kind":"module","path":"src/packaging/requirements.py","reasons":["lexical overlap: 0, 2, from, import, of, packaging, py, repository, specifier, specifiers, src, the, this, version"],"score":25.8140213,"start_line":1,"symbol":"<module>","text_sha256":"b28fc0cc770d07a0b548c151568c65388cb69cbb34402330253922cb8f05257c"}
+```
+# This file is dual licensed under the terms of the Apache License, Version
+# 2.0, and the BSD License. See the LICENSE file in the root of this repository
+# for complete details.
+from __future__ import annotations
+
+from typing import Any, Iterator
+
+from ._parser import parse_requirement as _parse_requirement
+from ._tokenizer import ParserSyntaxError
+from .markers import Marker, _normalize_extra_values
+from .specifiers import SpecifierSet
+from .utils import canonicalize_name
+
+
+```
+
+{"end_line":29,"file_sha256":"73cf5337307b65d198864a2f9ba3d89aa1b21f15e561568b5b9f753c750d283f","id":"8b57c6e5cefacf5177a8963c48cd8c00d90d51433cfe7fc62e361863aaf7dfd6","kind":"module","path":"src/packaging/markers.py","reasons":["lexical overlap: 0, 2, from, import, of, packaging, py, repository, specifier, specifiers, src, the, this, version"],"score":24.37159129,"start_line":1,"symbol":"<module>","text_sha256":"ed10dab9049924e6c9df47e1f59fcd565629d27fbdb3796ecd1b031809a0d6c9"}
+```
+# This file is dual licensed under the terms of the Apache License, Version
+# 2.0, and the BSD License. See the LICENSE file in the root of this repository
+# for complete details.
+
+from __future__ import annotations
+
+import operator
+import os
+import platform
+import sys
+from typing import Any, Callable, TypedDict, cast
+
+from ._parser import MarkerAtom, MarkerList, Op, Value, Variable
+from ._parser import parse_marker as _parse_marker
+from ._tokenizer import ParserSyntaxError
+from .specifiers import InvalidSpecifier, Specifier
+from .utils import canonicalize_name
+
+__all__ = [
+    "InvalidMarker",
+    "Marker",
+    "UndefinedComparison",
+    "UndefinedEnvironmentName",
+    "default_environment",
+]
+
+Operator = Callable[[str, str], bool]
+
+
+```
+
+{"end_line":41,"file_sha256":"085aab2730337365cd19ec5eac7fff4fe639230abb59bb185ec88b1112d6c58d","id":"c23cdc00331af863f9a4aa2d8700e551463bf6318a9c9391d8c975bce1530e99","kind":"module","path":"src/packaging/tags.py","reasons":["lexical overlap: 0, 2, from, import, of, packaging, py, python, repository, src, the, this, version"],"score":23.92520739,"start_line":1,"symbol":"<module>","text_sha256":"e23391a6bb65398b12287a424a9a3bd549a91c23d533fae79f4f4e89ed6226fe"}
+```
+# This file is dual licensed under the terms of the Apache License, Version
+# 2.0, and the BSD License. See the LICENSE file in the root of this repository
+# for complete details.
+
+from __future__ import annotations
+
+import logging
+import platform
+import re
+import struct
+import subprocess
+import sys
+import sysconfig
+from importlib.machinery import EXTENSION_SUFFIXES
+from typing import (
+    Iterable,
+    Iterator,
+    Sequence,
+    Tuple,
+    cast,
+)
+
+from . import _manylinux, _musllinux
+
+logger = logging.getLogger(__name__)
+
+PythonVersion = Sequence[int]
+AppleVersion = Tuple[int, int]
+
+INTERPRETER_SHORT_NAMES: dict[str, str] = {
+    "python": "py",  # Generic.
+    "cpython": "cp",
+    "pypy": "pp",
+    "ironpython": "ip",
+    "jython": "jy",
+}
+
+
+_32_BIT_INTERPRETER = struct.calcsize("P") == 4
+
+
+```
+
+{"end_line":435,"file_sha256":"186d703cd31c2f47cc24eebcbc5e77c0a31dc277de84371a23eafd3694df8a50","id":"ddf1edcfb370c7df408700ad10c301b125de0616120277be06029850ff95f02d","kind":"function","path":"src/packaging/specifiers.py","reasons":["lexical overlap: compare, equal, from, packaging, py, specifier, specifiers, src, the, version"],"score":22.31339872,"start_line":431,"symbol":"Specifier._compare_less_than_equal","text_sha256":"aefada5c3050e46f3115c92dca2d37bbc8b259da1087a7a4b4f8a41420257ffe"}
+```
+    def _compare_less_than_equal(self, prospective: Version, spec: str) -> bool:
+        # NB: Local version identifiers are NOT permitted in the version
+        # specifier, so local version labels can be universally removed from
+        # the prospective version.
+        return Version(prospective.public) <= Version(spec)
+```
+
+{"end_line":441,"file_sha256":"186d703cd31c2f47cc24eebcbc5e77c0a31dc277de84371a23eafd3694df8a50","id":"f94e659507c6f5f5646d8345c505b20f5beed45a491bf1a61a9b919efba85fc6","kind":"function","path":"src/packaging/specifiers.py","reasons":["lexical overlap: compare, equal, from, packaging, py, specifier, specifiers, src, the, version"],"score":22.31339872,"start_line":437,"symbol":"Specifier._compare_greater_than_equal","text_sha256":"48dccd1395d60d4f02e54f7f76d0763daa66612acf1ac4fd22059151c036795e"}
+```
+    def _compare_greater_than_equal(self, prospective: Version, spec: str) -> bool:
+        # NB: Local version identifiers are NOT permitted in the version
+        # specifier, so local version labels can be universally removed from
+        # the prospective version.
+        return Version(prospective.public) >= Version(spec)
+```
+
+{"end_line":17,"file_sha256":"d05dc787d385b9182b8538066549792b6d85bf560fdad665d73ff680eea42620","id":"a49eb1fc8234de5e98b631b5e27c3175ec133372dbdbadb4ab11eb52f1af8fbe","kind":"module","path":"src/packaging/utils.py","reasons":["lexical overlap: 0, 2, from, import, of, packaging, py, repository, src, the, this, version"],"score":22.22314914,"start_line":1,"symbol":"<module>","text_sha256":"3326c5b726e8b8d0a74b78d5598684757ff0ca3549d7bf55c790724b0c200fb9"}
+```
+# This file is dual licensed under the terms of the Apache License, Version
+# 2.0, and the BSD License. See the LICENSE file in the root of this repository
+# for complete details.
+
+from __future__ import annotations
+
+import functools
+import re
+from typing import NewType, Tuple, Union, cast
+
+from .tags import Tag, parse_tag
+from .version import InvalidVersion, Version, _TrimmedRelease
+
+BuildTag = Union[Tuple[()], Tuple[int, str]]
+NormalizedName = NewType("NormalizedName", str)
+
+
+```
+
+{"end_line":660,"file_sha256":"186d703cd31c2f47cc24eebcbc5e77c0a31dc277de84371a23eafd3694df8a50","id":"96e430d6790e79ca4532fa82b4e7e018a65f76272cea53f61b82a3a3224ed358","kind":"function","path":"src/packaging/specifiers.py","reasons":["lexical overlap: from, packaging, py, specifiers, split, src, the, this, version, version_split"],"score":18.54218199,"start_line":652,"symbol":"_version_join","text_sha256":"94aa502a6edd6a5893acd2defe077b27a223b3a0ebb825b7237a13bc98d85116"}
+```
+def _version_join(components: list[str]) -> str:
+    """Join split version components into a version string.
+
+    This function assumes the input came from :func:`_version_split`, where the
+    first component must be the epoch (either empty or numeric), and all other
+    components numeric.
+    """
+    epoch, *rest = components
+    return f"{epoch}!{'.'.join(rest)}"
+```

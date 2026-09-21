@@ -1,0 +1,12 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import httpx
+headers = httpx.Headers({"Content-Type": "text/plain"})
+RESULT = [headers["content-type"], "CONTENT-TYPE" in headers]
+```
+
+Repository source evidence:
+{"ambiguity_policy":"all physical declarations; no runtime binding selection","ambiguous_symbols":[],"complete":true,"kind":"supplied-anchor-source","missing":[],"omitted":[],"scope":"supplied-declarations-only","source":[{"end_line":226,"path":"httpx/_models.py","start_line":208,"symbol":"Headers.__getitem__","text":"    def __getitem__(self, key: str) -> str:\n        \"\"\"\n        Return a single header value.\n\n        If there are multiple headers with the same key, then we concatenate\n        them with commas. See: https://tools.ietf.org/html/rfc7230#section-3.2.2\n        \"\"\"\n        normalized_key = key.lower().encode(self.encoding)\n\n        items = [\n            header_value.decode(self.encoding)\n            for _, header_key, header_value in self._list\n            if header_key == normalized_key\n        ]\n\n        if items:\n            return \", \".join(items)\n\n        raise KeyError(key)\n","text_sha256":"7c220df74e99968a848c1bf3b88f363f98a351dc779857f61f8482d90dbf686d"},{"end_line":272,"path":"httpx/_models.py","start_line":270,"symbol":"Headers.__contains__","text":"    def __contains__(self, key: typing.Any) -> bool:\n        header_key = key.lower().encode(self.encoding)\n        return header_key in [key for _, key, _ in self._list]\n","text_sha256":"e0f082dd8cfdb20643aafdc85baa68d54ccdd0b5dbe87d3bc89243b986f6cec2"}]}

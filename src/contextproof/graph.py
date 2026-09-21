@@ -20,11 +20,12 @@ from .index import source_lines
 
 KIND = "contextproof.evidence-graph"
 SCOPE = "python-transitive-static"
+RESOLVER_VERSION = 2
 GUARANTEE = (
     "observed source and import-binding identity in a bounded static Python closure only; "
     "unresolved and truncated frontiers prevent freshness; no runtime or semantic guarantee"
 )
-_DECLARATIONS = (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)
+
 
 
 def _bytes(value: Any) -> bytes:
@@ -151,7 +152,7 @@ def build_graph(texts: Mapping[str, str], snapshot_id: str, anchors: list[dict],
     corpus = _Corpus.from_texts(dict(texts), parsed_cache=parsed_cache)
     graph = {"schema_version": 1, "kind": KIND, "scope": SCOPE, "guarantee": GUARANTEE,
              "snapshot_id": snapshot_id,
-             "policy": {"max_depth": max_depth, "max_nodes": max_nodes, "resolver_version": 1},
+             "policy": {"max_depth": max_depth, "max_nodes": max_nodes, "resolver_version": RESOLVER_VERSION},
              "nodes": {}, "edges": {}, "anchors": [], "frontier": []}
     queue: deque[tuple[str, int]] = deque()
     seen_entries: set[str] = set()
@@ -261,7 +262,9 @@ def validate_graph(graph: dict) -> None:
         if graph.get("id") != _hash({key: value for key, value in graph.items() if key != "id"}):
             raise ValueError("evidence graph integrity mismatch")
         policy = graph["policy"]
-        if (policy.get("resolver_version") != 1 or type(policy["max_depth"]) is not int
+        if policy.get("resolver_version") != RESOLVER_VERSION:
+            raise ValueError("unsupported graph resolver version; recapture with the current resolver")
+        if (type(policy["max_depth"]) is not int
                 or not 0 <= policy["max_depth"] <= 128 or type(policy["max_nodes"]) is not int
                 or not 1 <= policy["max_nodes"] <= 100000):
             raise ValueError("invalid evidence graph policy")
@@ -341,6 +344,10 @@ def compare_graphs(before: dict, after: dict) -> dict:
     An unresolved capture cannot become fresh by later resolving. Added edges,
     bindings and targets are changes, while line movement alone is harmless.
     """
+    if (isinstance(before, dict) and isinstance(after, dict)
+            and isinstance(before.get("policy"), dict) and isinstance(after.get("policy"), dict)
+            and before["policy"].get("resolver_version") != after["policy"].get("resolver_version")):
+        raise ValueError("cannot compare different graph resolver versions; recapture the baseline")
     validate_graph(before)
     validate_graph(after)
     if before["policy"] != after["policy"]:

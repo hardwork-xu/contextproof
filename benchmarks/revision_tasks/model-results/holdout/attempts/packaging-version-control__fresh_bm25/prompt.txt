@@ -1,0 +1,371 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+from packaging.version import Version
+version = Version("2!1.4rc2.post3.dev1+linux.4")
+RESULT = [version.epoch, list(version.release), list(version.pre),
+          version.post, version.dev, version.local]
+```
+
+Repository source evidence:
+# ContextProof source evidence
+{"budget":16000,"budget_unit":"utf8_bytes","id":"e12cba41babd908259f673db330742d35bc6af03d58f954e1096fa5347b366dd","method":"bm25","omitted_count":314,"query":"Explain the behavior of this Python probe using repository source. src/packaging/version.py Version.__init__ src/packaging/version.py _parse_letter_version\nfrom packaging.version import Version\nversion = Version(\"2!1.4rc2.post3.dev1+linux.4\")\nRESULT = [version.epoch, list(version.release), list(version.pre),\n          version.post, version.dev, version.local]\n","schema_version":1,"snapshot_id":"e997c04787f0a125dc18b4aa3515e97689b1bc275fc6d5efdc040420e8b410e6","tokenizer":"bytes"}
+
+{"end_line":224,"file_sha256":"a257f2ba4fc33db7e5364278c0159eb57435edcef8c770c1e74d5d7a052fec36","id":"76de1aaaa1af243a06ea2d9b4f5d6a8293ca0c73868602a42240d92fba02fd66","kind":"function","path":"src/packaging/version.py","reasons":["lexical overlap: dev, epoch, init, letter, local, of, packaging, parse, parse_letter_version, post, pre, py, release, src, the, this, version"],"score":49.09243163,"start_line":188,"symbol":"Version.__init__","text_sha256":"20795f13b2349e7ebe616163b1c7a88d42674c07fc47a744e5d7c9258ea738fd"}
+```
+    def __init__(self, version: str) -> None:
+        """Initialize a Version object.
+
+        :param version:
+            The string representation of a version which will be parsed and normalized
+            before use.
+        :raises InvalidVersion:
+            If the ``version`` does not conform to PEP 440 in any way then this
+            exception will be raised.
+        """
+
+        # Validate the version and parse it into pieces
+        match = self._regex.search(version)
+        if not match:
+            raise InvalidVersion(f"Invalid version: {version!r}")
+
+        # Store the parsed out pieces of the version
+        self._version = _Version(
+            epoch=int(match.group("epoch")) if match.group("epoch") else 0,
+            release=tuple(int(i) for i in match.group("release").split(".")),
+            pre=_parse_letter_version(match.group("pre_l"), match.group("pre_n")),
+            post=_parse_letter_version(
+                match.group("post_l"), match.group("post_n1") or match.group("post_n2")
+            ),
+            dev=_parse_letter_version(match.group("dev_l"), match.group("dev_n")),
+            local=_parse_local_version(match.group("local")),
+        )
+
+        # Generate a key which will be used for sorting
+        self._key = _cmpkey(
+            self._version.epoch,
+            self._version.release,
+            self._version.pre,
+            self._version.post,
+            self._version.dev,
+            self._version.local,
+        )
+```
+
+{"end_line":505,"file_sha256":"a257f2ba4fc33db7e5364278c0159eb57435edcef8c770c1e74d5d7a052fec36","id":"d5579baa09cade14e97871728f86437072761ef32fb59324f02d3ddfd2fa7d36","kind":"function","path":"src/packaging/version.py","reasons":["lexical overlap: 1, letter, of, packaging, parse, parse_letter_version, post, pre, py, release, src, the, this, using, version"],"score":36.99894244,"start_line":471,"symbol":"_parse_letter_version","text_sha256":"a032c814c1ee832483abdfd7ed17d1ea2f8765b4aaee5bac51b2478dc6aaab39"}
+```
+def _parse_letter_version(
+    letter: str | None, number: str | bytes | SupportsInt | None
+) -> tuple[str, int] | None:
+    if letter:
+        # We consider there to be an implicit 0 in a pre-release if there is
+        # not a numeral associated with it.
+        if number is None:
+            number = 0
+
+        # We normalize any letters to their lower case form
+        letter = letter.lower()
+
+        # We consider some words to be alternate spellings of other words and
+        # in those cases we want to normalize the spellings to our preferred
+        # spelling.
+        if letter == "alpha":
+            letter = "a"
+        elif letter == "beta":
+            letter = "b"
+        elif letter in ["c", "pre", "preview"]:
+            letter = "rc"
+        elif letter in ["rev", "r"]:
+            letter = "post"
+
+        return letter, int(number)
+
+    assert not letter
+    if number:
+        # We assume if we are given a number, but we are not given a letter
+        # then this is using the implicit post release syntax (e.g. 1.0-1)
+        letter = "post"
+
+        return letter, int(number)
+
+    return None
+```
+
+{"end_line":37,"file_sha256":"a257f2ba4fc33db7e5364278c0159eb57435edcef8c770c1e74d5d7a052fec36","id":"2e7e29d068a8b92ae4dc2ef9293d9f79b3cd5ef596fa0b3f72fa452dc3013e2c","kind":"module","path":"src/packaging/version.py","reasons":["lexical overlap: 2, dev, from, import, local, of, packaging, parse, post, pre, py, repository, src, the, this, version"],"score":36.76593697,"start_line":1,"symbol":"<module>","text_sha256":"0bf510fa66f0f09e58171af84f21cf2291e9efea4d1042aab4121d92b969e008"}
+```
+# This file is dual licensed under the terms of the Apache License, Version
+# 2.0, and the BSD License. See the LICENSE file in the root of this repository
+# for complete details.
+"""
+.. testsetup::
+
+    from packaging.version import parse, Version
+"""
+
+from __future__ import annotations
+
+import itertools
+import re
+from typing import Any, Callable, NamedTuple, SupportsInt, Tuple, Union
+
+from ._structures import Infinity, InfinityType, NegativeInfinity, NegativeInfinityType
+
+__all__ = ["VERSION_PATTERN", "InvalidVersion", "Version", "parse"]
+
+LocalType = Tuple[Union[int, str], ...]
+
+CmpPrePostDevType = Union[InfinityType, NegativeInfinityType, Tuple[str, int]]
+CmpLocalType = Union[
+    NegativeInfinityType,
+    Tuple[Union[Tuple[int, str], Tuple[NegativeInfinityType, Union[int, str]]], ...],
+]
+CmpKey = Tuple[
+    int,
+    Tuple[int, ...],
+    CmpPrePostDevType,
+    CmpPrePostDevType,
+    CmpPrePostDevType,
+    CmpLocalType,
+]
+VersionComparisonMethod = Callable[[CmpKey, CmpKey], bool]
+
+
+```
+
+{"end_line":582,"file_sha256":"a257f2ba4fc33db7e5364278c0159eb57435edcef8c770c1e74d5d7a052fec36","id":"5100eaeda4aaefa7733a38afaef03b33a38baa46ceefb1de7dddcba98e8ebff6","kind":"function","path":"src/packaging/version.py","reasons":["lexical overlap: 1, dev, epoch, list, local, of, packaging, post, pre, py, release, src, the, this, version"],"score":32.5780719,"start_line":523,"symbol":"_cmpkey","text_sha256":"0af1e7e39139e637e668cfca9348f41ecb6b0c747c7ac456922394d08ad24e98"}
+```
+def _cmpkey(
+    epoch: int,
+    release: tuple[int, ...],
+    pre: tuple[str, int] | None,
+    post: tuple[str, int] | None,
+    dev: tuple[str, int] | None,
+    local: LocalType | None,
+) -> CmpKey:
+    # When we compare a release version, we want to compare it with all of the
+    # trailing zeros removed. So we'll use a reverse the list, drop all the now
+    # leading zeros until we come to something non zero, then take the rest
+    # re-reverse it back into the correct order and make it a tuple and use
+    # that for our sorting key.
+    _release = tuple(
+        reversed(list(itertools.dropwhile(lambda x: x == 0, reversed(release))))
+    )
+
+    # We need to "trick" the sorting algorithm to put 1.0.dev0 before 1.0a0.
+    # We'll do this by abusing the pre segment, but we _only_ want to do this
+    # if there is not a pre or a post segment. If we have one of those then
+    # the normal sorting rules will handle this case correctly.
+    if pre is None and post is None and dev is not None:
+        _pre: CmpPrePostDevType = NegativeInfinity
+    # Versions without a pre-release (except as noted above) should sort after
+    # those with one.
+    elif pre is None:
+        _pre = Infinity
+    else:
+        _pre = pre
+
+    # Versions without a post segment should sort before those with one.
+    if post is None:
+        _post: CmpPrePostDevType = NegativeInfinity
+
+    else:
+        _post = post
+
+    # Versions without a development segment should sort after those with one.
+    if dev is None:
+        _dev: CmpPrePostDevType = Infinity
+
+    else:
+        _dev = dev
+
+    if local is None:
+        # Versions without a local segment should sort before those with one.
+        _local: CmpLocalType = NegativeInfinity
+    else:
+        # Versions with a local segment need that segment parsed to implement
+        # the sorting rules in PEP440.
+        # - Alpha numeric segments sort before numeric segments
+        # - Alpha numeric segments sort lexicographically
+        # - Numeric segments sort numerically
+        # - Shorter versions sort before longer versions when the prefixes
+        #   match exactly
+        _local = tuple(
+            (i, "") if isinstance(i, int) else (NegativeInfinity, i) for i in local
+        )
+
+    return epoch, _release, _pre, _post, _dev, _local
+```
+
+{"end_line":265,"file_sha256":"a257f2ba4fc33db7e5364278c0159eb57435edcef8c770c1e74d5d7a052fec36","id":"65cc5bb7e1ce794a74d4a193a71deadf67917136130582b5a89a65192019a340","kind":"function","path":"src/packaging/version.py","reasons":["lexical overlap: 1, dev, epoch, local, of, packaging, post, pre, py, release, src, the, version"],"score":32.28666169,"start_line":234,"symbol":"Version.__str__","text_sha256":"8e2a59a89d8d2606e34c99b5242970e27c854587a3e9760b2db1e2db17b55b7d"}
+```
+    def __str__(self) -> str:
+        """A string representation of the version that can be round-tripped.
+
+        >>> str(Version("1.0a5"))
+        '1.0a5'
+        """
+        parts = []
+
+        # Epoch
+        if self.epoch != 0:
+            parts.append(f"{self.epoch}!")
+
+        # Release segment
+        parts.append(".".join(str(x) for x in self.release))
+
+        # Pre-release
+        if self.pre is not None:
+            parts.append("".join(str(x) for x in self.pre))
+
+        # Post-release
+        if self.post is not None:
+            parts.append(f".post{self.post}")
+
+        # Development release
+        if self.dev is not None:
+            parts.append(f".dev{self.dev}")
+
+        # Local version segment
+        if self.local is not None:
+            parts.append(f"+{self.local}")
+
+        return "".join(parts)
+```
+
+{"end_line":178,"file_sha256":"186d703cd31c2f47cc24eebcbc5e77c0a31dc277de84371a23eafd3694df8a50","id":"0216935bd392eaeb02ff787e3a1a1c7274378222bdbfe4f677fa958bc9bdb0dd","kind":"class","path":"src/packaging/specifiers.py","reasons":["lexical overlap: dev, epoch, from, local, of, packaging, parse, post, pre, py, release, src, the, this, version"],"score":29.60980725,"start_line":99,"symbol":"Specifier","text_sha256":"e2133bae390f5ea0da762bc6a4c8e06a770fa61e4dd19772bd0d9aafde7d1989"}
+```
+class Specifier(BaseSpecifier):
+    """This class abstracts handling of version specifiers.
+
+    .. tip::
+
+        It is generally not required to instantiate this manually. You should instead
+        prefer to work with :class:`SpecifierSet` instead, which can parse
+        comma-separated version specifiers (which is what package metadata contains).
+    """
+
+    _operator_regex_str = r"""
+        (?P<operator>(~=|==|!=|<=|>=|<|>|===))
+        """
+    _version_regex_str = r"""
+        (?P<version>
+            (?:
+                # The identity operators allow for an escape hatch that will
+                # do an exact string match of the version you wish to install.
+                # This will not be parsed by PEP 440 and we cannot determine
+                # any semantic meaning from it. This operator is discouraged
+                # but included entirely as an escape hatch.
+                (?<====)  # Only match for the identity operator
+                \s*
+                [^\s;)]*  # The arbitrary version can be just about anything,
+                          # we match everything except for whitespace, a
+                          # semi-colon for marker support, and a closing paren
+                          # since versions can be enclosed in them.
+            )
+            |
+            (?:
+                # The (non)equality operators allow for wild card and local
+                # versions to be specified so we have to define these two
+                # operators separately to enable that.
+                (?<===|!=)            # Only match for equals and not equals
+
+                \s*
+                v?
+                (?:[0-9]+!)?          # epoch
+                [0-9]+(?:\.[0-9]+)*   # release
+
+                # You cannot use a wild card and a pre-release, post-release, a dev or
+                # local version together so group them with a | and make them optional.
+                (?:
+                    \.\*  # Wild card syntax of .*
+                    |
+                    (?:                                  # pre release
+                        [-_\.]?
+                        (alpha|beta|preview|pre|a|b|c|rc)
+                        [-_\.]?
+                        [0-9]*
+                    )?
+                    (?:                                  # post release
+                        (?:-[0-9]+)|(?:[-_\.]?(post|rev|r)[-_\.]?[0-9]*)
+                    )?
+                    (?:[-_\.]?dev[-_\.]?[0-9]*)?         # dev release
+                    (?:\+[a-z0-9]+(?:[-_\.][a-z0-9]+)*)? # local
+                )?
+            )
+            |
+            (?:
+                # The compatible operator requires at least two digits in the
+                # release segment.
+                (?<=~=)               # Only match for the compatible operator
+
+                \s*
+                v?
+                (?:[0-9]+!)?          # epoch
+                [0-9]+(?:\.[0-9]+)+   # release  (We have a + instead of a *)
+                (?:                   # pre release
+                    [-_\.]?
+                    (alpha|beta|preview|pre|a|b|c|rc)
+                    [-_\.]?
+                    [0-9]*
+                )?
+                (?:                                   # post release
+                    (?:-[0-9]+)|(?:[-_\.]?(post|rev|r)[-_\.]?[0-9]*)
+                )?
+                (?:[-_\.]?dev[-_\.]?[0-9]*)?          # dev release
+            )
+            |
+```
+
+{"end_line":160,"file_sha256":"a257f2ba4fc33db7e5364278c0159eb57435edcef8c770c1e74d5d7a052fec36","id":"162fc65081d7ab10911747fca572570bed98dfbdef5fea03656e4619342340e6","kind":"module","path":"src/packaging/version.py","reasons":["lexical overlap: dev, epoch, local, of, packaging, post, pre, py, release, src, the, version"],"score":29.0468813,"start_line":113,"symbol":"<module>","text_sha256":"0f880710a4b9770a32c3b2b561002aaadd20c228f17732d2d5a09fbf4f4663dc"}
+```
+
+
+# Deliberately not anchored to the start and end of the string, to make it
+# easier for 3rd party code to reuse
+_VERSION_PATTERN = r"""
+    v?
+    (?:
+        (?:(?P<epoch>[0-9]+)!)?                           # epoch
+        (?P<release>[0-9]+(?:\.[0-9]+)*)                  # release segment
+        (?P<pre>                                          # pre-release
+            [-_\.]?
+            (?P<pre_l>alpha|a|beta|b|preview|pre|c|rc)
+            [-_\.]?
+            (?P<pre_n>[0-9]+)?
+        )?
+        (?P<post>                                         # post release
+            (?:-(?P<post_n1>[0-9]+))
+            |
+            (?:
+                [-_\.]?
+                (?P<post_l>post|rev|r)
+                [-_\.]?
+                (?P<post_n2>[0-9]+)?
+            )
+        )?
+        (?P<dev>                                          # dev release
+            [-_\.]?
+            (?P<dev_l>dev)
+            [-_\.]?
+            (?P<dev_n>[0-9]+)?
+        )?
+    )
+    (?:\+(?P<local>[a-z0-9]+(?:[-_\.][a-z0-9]+)*))?       # local version
+"""
+
+VERSION_PATTERN = _VERSION_PATTERN
+"""
+A string containing the regular expression used to match a valid version.
+
+The pattern is not anchored at either end, and is intended for embedding in larger
+expressions (for example, matching a version number as part of a file name). The
+regular expression should be compiled with the ``re.VERBOSE`` and ``re.IGNORECASE``
+flags set.
+
+:meta hide-value:
+"""
+
+
+```

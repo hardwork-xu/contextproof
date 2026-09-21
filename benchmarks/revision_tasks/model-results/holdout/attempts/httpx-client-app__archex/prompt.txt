@@ -1,0 +1,422 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import httpx
+transport = httpx.MockTransport(lambda request: httpx.Response(200))
+client = httpx.Client(app=object(), transport=transport, trust_env=False)
+RESULT = client.is_closed
+```
+
+Repository source evidence:
+<context query="Explain the behavior of this Python probe using repository source. httpx/_client.py Client.__init__ httpx/_client.py Client._init_transport
+import httpx
+transport = httpx.MockTransport(lambda request: httpx.Response(200))
+client = httpx.Client(app=object(), transport=transport, trust_env=False)
+RESULT = client.is_closed
+">
+  <structural-context>
+    <file-tree><![CDATA[
+httpx/__init__.py
+httpx/_client.py
+httpx/_transports/mock.py
+httpx/_types.py
+    ]]></file-tree>
+  </structural-context>
+  <chunks>
+    <chunk file="httpx/__init__.py" lines="97-106" score="2.6542" tokens="53">
+      <code><![CDATA[
+    "WriteTimeout",
+    "WSGITransport",
+]
+
+
+__locals = locals()
+for __name in __all__:
+    if not __name.startswith("__"):
+        setattr(__locals[__name], "__module__", "httpx")  # noqa
+
+      ]]></code>
+    </chunk>
+    <chunk file="httpx/_client.py" lines="494-515" symbol="_redirect_method" score="2.4021" tokens="201">
+      <code><![CDATA[
+    def _redirect_method(self, request: Request, response: Response) -> str:
+        """
+        When being redirected we may want to change the method of the request
+        based on certain specs or browser behavior.
+        """
+        method = request.method
+
+        # https://tools.ietf.org/html/rfc7231#section-6.4.4
+        if response.status_code == codes.SEE_OTHER and method != "HEAD":
+            method = "GET"
+
+        # Do what the browsers do, despite standards...
+        # Turn 302s into GETs.
+        if response.status_code == codes.FOUND and method != "HEAD":
+            method = "GET"
+
+        # If a POST is responded to with a 301, turn it into a GET.
+        # This bizarre behaviour is explained in 'requests' issue 1704.
+        if response.status_code == codes.MOVED_PERMANENTLY and method == "POST":
+            method = "GET"
+
+        return method
+      ]]></code>
+    </chunk>
+    <chunk file="httpx/_transports/mock.py" lines="15-43" symbol="MockTransport" score="1.0345" tokens="188">
+      <code><![CDATA[
+class MockTransport(AsyncBaseTransport, BaseTransport):
+    def __init__(self, handler: SyncHandler | AsyncHandler) -> None:
+        self.handler = handler
+
+    def handle_request(
+        self,
+        request: Request,
+    ) -> Response:
+        request.read()
+        response = self.handler(request)
+        if not isinstance(response, Response):  # pragma: no cover
+            raise TypeError("Cannot use an async handler in a sync Client")
+        return response
+
+    async def handle_async_request(
+        self,
+        request: Request,
+    ) -> Response:
+        await request.aread()
+        response = self.handler(request)
+
+        # Allow handler to *optionally* be an `async` function.
+        # If it is, then the `response` variable need to be awaited to actually
+        # return the result.
+
+        if not isinstance(response, Response):
+            response = await response
+
+        return response
+      ]]></code>
+    </chunk>
+    <chunk file="httpx/_types.py" lines="92-103" symbol="SyncByteStream" score="0.9509" tokens="87">
+      <code><![CDATA[
+class SyncByteStream:
+    def __iter__(self) -> Iterator[bytes]:
+        raise NotImplementedError(
+            "The '__iter__' method must be implemented."
+        )  # pragma: no cover
+        yield b""  # pragma: no cover
+
+    def close(self) -> None:
+        """
+        Subclasses can override this method to release any network resources
+        after a request/response cycle is complete.
+        """
+      ]]></code>
+    </chunk>
+    <chunk file="httpx/_client.py" lines="62-74" symbol="_is_https_redirect" score="2.0421" tokens="93">
+      <code><![CDATA[
+def _is_https_redirect(url: URL, location: URL) -> bool:
+    """
+    Return 'True' if 'location' is a HTTPS upgrade of 'url'
+    """
+    if url.host != location.host:
+        return False
+
+    return (
+        url.scheme == "http"
+        and _port_or_default(url) == 80
+        and location.scheme == "https"
+        and _port_or_default(location) == 443
+    )
+      ]]></code>
+    </chunk>
+    <chunk file="httpx/_client.py" lines="77-80" symbol="_port_or_default" score="2.0421" tokens="45">
+      <code><![CDATA[
+def _port_or_default(url: URL) -> int | None:
+    if url.port is not None:
+        return url.port
+    return {"http": 80, "https": 443}.get(url.scheme)
+      ]]></code>
+    </chunk>
+    <chunk file="httpx/_client.py" lines="83-91" symbol="_same_origin" score="2.0421" tokens="68">
+      <code><![CDATA[
+def _same_origin(url: URL, other: URL) -> bool:
+    """
+    Return 'True' if the given URLs share the same origin.
+    """
+    return (
+        url.scheme == other.scheme
+        and url.host == other.host
+        and _port_or_default(url) == _port_or_default(other)
+    )
+      ]]></code>
+    </chunk>
+    <chunk file="httpx/_client.py" lines="1-61" score="1.1725" tokens="357">
+      <code><![CDATA[
+from __future__ import annotations
+
+import datetime
+import enum
+import logging
+import time
+import typing
+import warnings
+from contextlib import asynccontextmanager, contextmanager
+from types import TracebackType
+
+from .__version__ import __version__
+from ._auth import Auth, BasicAuth, FunctionAuth
+from ._config import (
+    DEFAULT_LIMITS,
+    DEFAULT_MAX_REDIRECTS,
+    DEFAULT_TIMEOUT_CONFIG,
+    Limits,
+    Proxy,
+    Timeout,
+)
+from ._decoders import SUPPORTED_DECODERS
+from ._exceptions import (
+    InvalidURL,
+    RemoteProtocolError,
+    TooManyRedirects,
+    request_context,
+)
+from ._models import Cookies, Headers, Request, Response
+from ._status_codes import codes
+from ._transports.base import AsyncBaseTransport, BaseTransport
+from ._transports.default import AsyncHTTPTransport, HTTPTransport
+from ._types import (
+    AsyncByteStream,
+    AuthTypes,
+    CertTypes,
+    CookieTypes,
+    HeaderTypes,
+    ProxyTypes,
+    QueryParamTypes,
+    RequestContent,
+    RequestData,
+    RequestExtensions,
+    RequestFiles,
+    SyncByteStream,
+    TimeoutTypes,
+)
+from ._urls import URL, QueryParams
+from ._utils import URLPattern, get_environment_proxies
+
+if typing.TYPE_CHECKING:
+    import ssl  # pragma: no cover
+
+__all__ = ["USE_CLIENT_DEFAULT", "AsyncClient", "Client"]
+
+# The type annotation for @classmethod and context managers here follows PEP 484
+# https://www.python.org/dev/peps/pep-0484/#annotating-instance-and-class-methods
+T = typing.TypeVar("T", bound="Client")
+U = typing.TypeVar("U", bound="AsyncClient")
+
+
+      ]]></code>
+    </chunk>
+    <chunk file="httpx/_client.py" lines="112-129" score="0.9805" tokens="67">
+      <code><![CDATA[
+
+
+USE_CLIENT_DEFAULT = UseClientDefault()
+
+
+logger = logging.getLogger("httpx")
+
+USER_AGENT = f"python-httpx/{__version__}"
+ACCEPT_ENCODING = ", ".join(
+    [key for key in SUPPORTED_DECODERS.keys() if key != "identity"]
+)
+
+
+
+
+EventHook = typing.Callable[..., typing.Any]
+
+
+      ]]></code>
+    </chunk>
+    <chunk file="httpx/__init__.py" lines="1-96" score="0.9768" tokens="500">
+      <code><![CDATA[
+from .__version__ import __description__, __title__, __version__
+from ._api import *
+from ._auth import *
+from ._client import *
+from ._config import *
+from ._content import *
+from ._exceptions import *
+from ._models import *
+from ._status_codes import *
+from ._transports import *
+from ._types import *
+from ._urls import *
+
+try:
+    from ._main import main
+except ImportError:  # pragma: no cover
+
+    def main() -> None:  # type: ignore
+        import sys
+
+        print(
+            "The httpx command line client could not run because the required "
+            "dependencies were not installed.\nMake sure you've installed "
+            "everything with: pip install 'httpx[cli]'"
+        )
+        sys.exit(1)
+
+
+__all__ = [
+    "__description__",
+    "__title__",
+    "__version__",
+    "ASGITransport",
+    "AsyncBaseTransport",
+    "AsyncByteStream",
+    "AsyncClient",
+    "AsyncHTTPTransport",
+    "Auth",
+    "BaseTransport",
+    "BasicAuth",
+    "ByteStream",
+    "Client",
+    "CloseError",
+    "codes",
+    "ConnectError",
+    "ConnectTimeout",
+    "CookieConflict",
+    "Cookies",
+    "create_ssl_context",
+    "DecodingError",
+    "delete",
+    "DigestAuth",
+    "get",
+    "head",
+    "Headers",
+    "HTTPError",
+    "HTTPStatusError",
+    "HTTPTransport",
+    "InvalidURL",
+    "Limits",
+    "LocalProtocolError",
+    "main",
+    "MockTransport",
+    "NetRCAuth",
+    "NetworkError",
+    "options",
+    "patch",
+    "PoolTimeout",
+    "post",
+    "ProtocolError",
+    "Proxy",
+    "ProxyError",
+    "put",
+    "QueryParams",
+    "ReadError",
+    "ReadTimeout",
+    "RemoteProtocolError",
+    "request",
+    "Request",
+    "RequestError",
+    "RequestNotRead",
+    "Response",
+    "ResponseNotRead",
+    "stream",
+    "StreamClosed",
+    "StreamConsumed",
+    "StreamError",
+    "SyncByteStream",
+    "Timeout",
+    "TimeoutException",
+    "TooManyRedirects",
+    "TransportError",
+    "UnsupportedProtocol",
+    "URL",
+    "USE_CLIENT_DEFAULT",
+    "WriteError",
+      ]]></code>
+    </chunk>
+    <chunk file="httpx/_types.py" lines="82-91" score="0.9239" tokens="75">
+      <code><![CDATA[
+    # (filename, file (or bytes), content_type, headers)
+    Tuple[Optional[str], FileContent, Optional[str], Mapping[str, str]],
+]
+RequestFiles = Union[Mapping[str, FileTypes], Sequence[Tuple[str, FileTypes]]]
+
+RequestExtensions = Mapping[str, Any]
+
+__all__ = ["AsyncByteStream", "SyncByteStream"]
+
+
+      ]]></code>
+    </chunk>
+  </chunks>
+  <type-definitions>
+    <type-def file="httpx/_transports/mock.py" symbol="MockTransport" lines="15-43">
+      <![CDATA[class MockTransport(AsyncBaseTransport, BaseTransport):
+    def __init__(self, handler: SyncHandler | AsyncHandler) -> None:
+        self.handler = handler
+
+    def handle_request(
+        self,
+        request: Request,
+    ) -> Response:
+        request.read()
+        response = self.handler(request)
+        if not isinstance(response, Response):  # pragma: no cover
+            raise TypeError("Cannot use an async handler in a sync Client")
+        return response
+
+    async def handle_async_request(
+        self,
+        request: Request,
+    ) -> Response:
+        await request.aread()
+        response = self.handler(request)
+
+        # Allow handler to *optionally* be an `async` function.
+        # If it is, then the `response` variable need to be awaited to actually
+        # return the result.
+
+        if not isinstance(response, Response):
+            response = await response
+
+        return response]]>
+    </type-def>
+    <type-def file="httpx/_types.py" symbol="SyncByteStream" lines="92-103">
+      <![CDATA[class SyncByteStream:
+    def __iter__(self) -> Iterator[bytes]:
+        raise NotImplementedError(
+            "The '__iter__' method must be implemented."
+        )  # pragma: no cover
+        yield b""  # pragma: no cover
+
+    def close(self) -> None:
+        """
+        Subclasses can override this method to release any network resources
+        after a request/response cycle is complete.
+        """]]>
+    </type-def>
+  </type-definitions>
+  <receipt freshness="clean" complete="incomplete" reason="dependency_frontier_cut" action="fetch_skipped_candidate" index_revision="1a76e45765620474a56fe0c93bfc933e93515aabefec220cd5b49f2cb4ec2151" budget_requested="1763" budget_consumed="1734" returned_shown="11" returned_total="11" skipped_shown="20" skipped_total="20" omitted_edges_shown="20" omitted_edges_total="20">
+    <returned handle="chunk:httpx/__init__.py:_module:1" file="httpx/__init__.py" lines="1-96" hash="641d3516a8ce8890d58255156534064a996e2165d80992bcdc6369a6ae36ae69" score="0.9768" />
+    <returned handle="chunk:httpx/__init__.py:_module:97" file="httpx/__init__.py" lines="97-106" hash="1e243fa9fd66a1b0dc9e69638d9db796a62f2d609959c84db24f604f06a234ab" score="2.6542" />
+    <returned handle="chunk:httpx/_client.py:_module:1" file="httpx/_client.py" lines="1-61" hash="d3fd6675327c143ceba23b4d96e4fae96e96adc80d15496b60c1ce514500a2e3" score="1.1725" />
+    <returned handle="chunk:httpx/_client.py:_is_https_redirect:62" file="httpx/_client.py" lines="62-74" hash="0e89c509a6cd0efa6a540480c139f7c5b4dd04aca32cce4510a247ed4e77c8d4" score="2.0421" />
+    <returned handle="chunk:httpx/_client.py:_port_or_default:77" file="httpx/_client.py" lines="77-80" hash="d9831a893d6bd9479efca1e539ddfa3743d0fe23d9b5b761c25ed82a2add93da" score="2.0421" />
+    <returned handle="chunk:httpx/_client.py:_same_origin:83" file="httpx/_client.py" lines="83-91" hash="7ce1b717a298c72d9094e46466cb76738dbfa80f2052634177cf798c144c9db5" score="2.0421" />
+    <returned handle="chunk:httpx/_client.py:_module:112" file="httpx/_client.py" lines="112-129" hash="3c4aadba0ad9c2187ec2f2ab2a4268a183954e0207e1aa02077adaf2f0963eeb" score="0.9805" />
+    <returned handle="chunk:httpx/_client.py:_redirect_method:494" file="httpx/_client.py" lines="494-515" hash="04f56ee639b94755a020b88474edac7b0514949b0594a44a15838931e7674833" score="2.4021" />
+    <skipped file="httpx/_client.py" reason="over_budget" handle="chunk:httpx/_client.py:AsyncClient:1307" />
+    <skipped file="httpx/_client.py" reason="over_budget" handle="chunk:httpx/_client.py:AsyncClient:1360" />
+    <skipped file="httpx/_client.py" reason="over_budget" handle="chunk:httpx/_client.py:AsyncClient:1426" />
+    <skipped file="httpx/_client.py" reason="over_budget" handle="chunk:httpx/_client.py:AsyncClient:1498" />
+    <skipped file="httpx/_client.py" reason="over_budget" handle="chunk:httpx/_client.py:AsyncClient:1662" />
+    <skipped file="httpx/_client.py" reason="over_budget" handle="chunk:httpx/_client.py:AsyncClient:1756" />
+    <skipped file="httpx/_client.py" reason="over_budget" handle="chunk:httpx/_client.py:AsyncClient:1833" />
+    <skipped file="httpx/_client.py" reason="over_budget" handle="chunk:httpx/_client.py:AsyncClient:1912" />
+  </receipt>
+</context>

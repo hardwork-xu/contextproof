@@ -1,0 +1,12 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+from packaging.specifiers import Specifier, SpecifierSet
+spec = SpecifierSet(iter([Specifier(">=1.0"), Specifier("<2.0")]))
+RESULT = sorted(map(str, spec))
+```
+
+Repository source evidence:
+(No source evidence supplied.)

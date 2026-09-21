@@ -1,0 +1,12 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "answer_json": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "answer_json"
+  ],
+  "type": "object"
+}

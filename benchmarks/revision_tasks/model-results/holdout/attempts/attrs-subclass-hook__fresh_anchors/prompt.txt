@@ -1,0 +1,20 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import attrs
+registry = []
+@attrs.define
+class Base:
+    @classmethod
+    def __attrs_init_subclass__(cls):
+        registry.append(cls.__name__)
+@attrs.define
+class Child(Base):
+    pass
+RESULT = registry
+```
+
+Repository source evidence:
+{"ambiguity_policy":"all physical declarations; no runtime binding selection","ambiguous_symbols":[],"complete":true,"kind":"supplied-anchor-source","missing":[],"omitted":[],"scope":"supplied-declarations-only","source":[{"end_line":769,"path":"src/attr/_make.py","start_line":748,"symbol":"_ClassBuilder.build_class","text":"    def build_class(self):\n        \"\"\"\n        Finalize class based on the accumulated configuration.\n\n        Builder cannot be used after calling this method.\n        \"\"\"\n        if self._slots is True:\n            cls = self._create_slots_class()\n        else:\n            cls = self._patch_original_class()\n            if PY_3_10_PLUS:\n                cls = abc.update_abstractmethods(cls)\n\n        # The method gets only called if it's not inherited from a base class.\n        # _has_own_attribute does NOT work properly for classmethods.\n        if (\n            getattr(cls, \"__attrs_init_subclass__\", None)\n            and \"__attrs_init_subclass__\" not in cls.__dict__\n        ):\n            cls.__attrs_init_subclass__()\n\n        return cls\n","text_sha256":"242ad293ae56ca9a6e20cc8ab1254951d106dee8f624e359cba23d86fa878418"}]}

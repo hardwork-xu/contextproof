@@ -1,0 +1,16 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import attrs
+@attrs.define
+class Record:
+    value: str = attrs.field(validator=attrs.validators.in_(["a", "b"]))
+field = attrs.fields(Record).value
+include = attrs.filters.include(field)
+RESULT = include(field, "a")
+```
+
+Repository source evidence:
+{"ambiguity_policy":"all physical declarations; no runtime binding selection","ambiguous_symbols":[],"complete":true,"kind":"supplied-anchor-source","missing":[],"omitted":[],"scope":"supplied-declarations-only","source":[{"end_line":325,"path":"src/attr/validators.py","start_line":306,"symbol":"in_","text":"def in_(options):\n    \"\"\"\n    A validator that raises a `ValueError` if the initializer is called\n    with a value that does not belong in the options provided.  The check is\n    performed using ``value in options``.\n\n    :param options: Allowed options.\n    :type options: list, tuple, `enum.Enum`, ...\n\n    :raises ValueError: With a human readable error message, the attribute (of\n       type `attrs.Attribute`), the expected options, and the value it\n       got.\n\n    .. versionadded:: 17.1.0\n    .. versionchanged:: 22.1.0\n       The ValueError was incomplete until now and only contained the human\n       readable error message. Now it contains all the information that has\n       been promised since 17.1.0.\n    \"\"\"\n    return _InValidator(options)\n","text_sha256":"16a71ff5838a7dcf62410bdee0b5e16060f36a6f81edc53e8f6861f81680a69e"},{"end_line":303,"path":"src/attr/validators.py","start_line":283,"symbol":"_InValidator","text":"@attrs(repr=False, slots=True, hash=True)\nclass _InValidator:\n    options = attrib()\n\n    def __call__(self, inst, attr, value):\n        try:\n            in_options = value in self.options\n        except TypeError:  # e.g. `1 in \"abc\"`\n            in_options = False\n\n        if not in_options:\n            msg = f\"'{attr.name}' must be in {self.options!r} (got {value!r})\"\n            raise ValueError(\n                msg,\n                attr,\n                self.options,\n                value,\n            )\n\n    def __repr__(self):\n        return f\"<in_ validator with options {self.options!r}>\"\n","text_sha256":"805eb6c729c463a3644b16f3ff622dccf296e5b31457cbd66b80af126785dd13"},{"end_line":18,"path":"src/attr/filters.py","start_line":10,"symbol":"_split_what","text":"def _split_what(what):\n    \"\"\"\n    Returns a tuple of `frozenset`s of classes and attributes.\n    \"\"\"\n    return (\n        frozenset(cls for cls in what if isinstance(cls, type)),\n        frozenset(cls for cls in what if isinstance(cls, str)),\n        frozenset(cls for cls in what if isinstance(cls, Attribute)),\n    )\n","text_sha256":"58edae521e56112c129ebf07cf1f2f1f60b8b72bfa11167e43bd26e2b2740c59"}]}

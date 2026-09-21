@@ -1,0 +1,327 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import attrs
+@attrs.define
+class Record:
+    value: float
+value = float("nan")
+RESULT = Record(value) == Record(value)
+```
+
+Repository source evidence:
+# ContextProof source evidence
+{"budget":16000,"budget_unit":"utf8_bytes","id":"f59dc72552e9cc59590147de31610c6dbd5811fab920fdece4fcbbb715b06fa8","method":"bm25","omitted_count":400,"query":"Explain the behavior of this Python probe using repository source. src/attr/_make.py _make_eq src/attr/_make.py _ClassBuilder.add_eq\nimport attrs\n@attrs.define\nclass Record:\n    value: float\nvalue = float(\"nan\")\nRESULT = Record(value) == Record(value)\n","schema_version":1,"snapshot_id":"58c49369a49066b693430d997a4de08e4a9c123a92d7766476a6071e1417221b","tokenizer":"bytes"}
+
+{"end_line":1082,"file_sha256":"a2b2927fa0be0757997e96ade256c0b71be64b213fcb1946f3363dd75e6e7d69","id":"aeac5ac5abefdd6cc9631abca93e316e6e576ab187143baa827485b2d711561e","kind":"function","path":"src/attr/_make.py","reasons":["lexical overlap: add, add_eq, attr, attrs, builder, class, classbuilder, eq, make, make_eq, py, src"],"score":32.29125157,"start_line":1074,"symbol":"_ClassBuilder.add_eq","text_sha256":"843904c40d66ca971adb4df6ee14516b5bca360ba2170c6585b1431750ebf689"}
+```
+    def add_eq(self):
+        cd = self._cls_dict
+
+        cd["__eq__"] = self._add_method_dunders(
+            _make_eq(self._cls, self._attrs)
+        )
+        cd["__ne__"] = self._add_method_dunders(_make_ne())
+
+        return self
+```
+
+{"end_line":1696,"file_sha256":"a2b2927fa0be0757997e96ade256c0b71be64b213fcb1946f3363dd75e6e7d69","id":"658e6b34e19c685ebaa6b8d478473d60c852a8a15032f56645086784545eb2eb","kind":"function","path":"src/attr/_make.py","reasons":["lexical overlap: add, add_eq, attr, attrs, eq, make, make_eq, py, src"],"score":23.99709577,"start_line":1686,"symbol":"_add_eq","text_sha256":"c322c0b4bca385c6a2117354abceb42004950f569291cff14ef07a90a484d562"}
+```
+def _add_eq(cls, attrs=None):
+    """
+    Add equality methods to *cls* with *attrs*.
+    """
+    if attrs is None:
+        attrs = cls.__attrs_attrs__
+
+    cls.__eq__ = _make_eq(cls, attrs)
+    cls.__ne__ = _make_ne()
+
+    return cls
+```
+
+{"end_line":182,"file_sha256":"ec54646ed97f374d7b4ae0617ff570de6c36736a46661b4218ecda760cfbb69e","id":"7317baed1d7b9a0b8b82cf9f9de318d1bb3765478f15e9f28f0960e1656f292a","kind":"function","path":"src/attr/_next_gen.py","reasons":["lexical overlap: add, attr, attrs, behavior, class, define, eq, of, py, python, src, the, this, value"],"score":19.27380554,"start_line":103,"symbol":"define","text_sha256":"fe020578fdfb20f94972ed0c41c4c016e81b317dc30161307fea822aa2cd312b"}
+```
+            `setattr` like ``setattr(i, "x", 42)``). It receives the same
+            arguments as validators: the instance, the attribute that is being
+            modified, and the new value.
+
+            If no exception is raised, the attribute is set to the return value
+            of the callable.
+
+            If a list of callables is passed, they're automatically wrapped in
+            an `attrs.setters.pipe`.
+
+            If left None, the default behavior is to run converters and
+            validators whenever an attribute is set.
+
+        init (bool):
+            Create a ``__init__`` method that initializes the *attrs*
+            attributes. Leading underscores are stripped for the argument name,
+            unless an alias is set on the attribute.
+
+            .. seealso::
+                `init` shows advanced ways to customize the generated
+                ``__init__`` method, including executing code before and after.
+
+        repr(bool):
+            Create a ``__repr__`` method with a human readable representation
+            of *attrs* attributes.
+
+        str (bool):
+            Create a ``__str__`` method that is identical to ``__repr__``. This
+            is usually not necessary except for `Exception`\ s.
+
+        eq (bool | None):
+            If True or None (default), add ``__eq__`` and ``__ne__`` methods
+            that check two instances for equality.
+
+            .. seealso::
+                `comparison` describes how to customize the comparison behavior
+                going as far comparing NumPy arrays.
+
+        order (bool | None):
+            If True, add ``__lt__``, ``__le__``, ``__gt__``, and ``__ge__``
+            methods that behave like *eq* above and allow instances to be
+            ordered.
+
+            They compare the instances as if they were tuples of their *attrs*
+            attributes if and only if the types of both classes are
+            *identical*.
+
+            If `None` mirror value of *eq*.
+
+            .. seealso:: `comparison`
+
+        unsafe_hash (bool | None):
+            If None (default), the ``__hash__`` method is generated according
+            how *eq* and *frozen* are set.
+
+            1. If *both* are True, *attrs* will generate a ``__hash__`` for
+               you.
+            2. If *eq* is True and *frozen* is False, ``__hash__`` will be set
+               to None, marking it unhashable (which it is).
+            3. If *eq* is False, ``__hash__`` will be left untouched meaning
+               the ``__hash__`` method of the base class will be used. If the
+               base class is `object`, this means it will fall back to id-based
+               hashing.
+
+            Although not recommended, you can decide for yourself and force
+            *attrs* to create one (for example, if the class is immutable even
+            though you didn't freeze it programmatically) by passing True or
+            not.  Both of these cases are rather special and should be used
+            carefully.
+
+            .. seealso::
+
+                - Our documentation on `hashing`,
+                - Python's documentation on `object.__hash__`,
+                - and the `GitHub issue that led to the default \ behavior
+                  <https://github.com/python-attrs/attrs/issues/136>`_ for more
+                  details.
+
+        hash (bool | None):
+            Deprecated alias for *unsafe_hash*. *unsafe_hash* takes precedence.
+```
+
+{"end_line":1355,"file_sha256":"a2b2927fa0be0757997e96ade256c0b71be64b213fcb1946f3363dd75e6e7d69","id":"a202a5ee1b47619faf41d5708d8053f2160250556854a0a7f3bbbf1d5fafcf14","kind":"function","path":"src/attr/_make.py","reasons":["lexical overlap: attr, attrs, behavior, class, eq, import, make, nan, of, py, src, the, this, using"],"score":19.11961667,"start_line":1325,"symbol":"attrs","text_sha256":"fc9a91797db6b5539266f8a15746dd047a55c7ee497c1950e9e92195a10cbfa2"}
+```
+    .. versionadded:: 22.2.0
+       *unsafe_hash* as an alias for *hash* (for :pep:`681` compliance).
+    .. deprecated:: 24.1.0 *repr_ns*
+    .. versionchanged:: 24.1.0
+       Instances are not compared as tuples of attributes anymore, but using a
+       big ``and`` condition. This is faster and has more correct behavior for
+       uncomparable values like `math.nan`.
+    .. versionadded:: 24.1.0
+       If a class has an *inherited* classmethod called
+       ``__attrs_init_subclass__``, it is executed after the class is created.
+    .. deprecated:: 24.1.0 *hash* is deprecated in favor of *unsafe_hash*.
+    """
+    if repr_ns is not None:
+        import warnings
+
+        warnings.warn(
+            DeprecationWarning(
+                "The `repr_ns` argument is deprecated and will be removed in or after August 2025."
+            ),
+            stacklevel=2,
+        )
+
+    eq_, order_ = _determine_attrs_eq_order(cmp, eq, order, None)
+
+    #  unsafe_hash takes precedence due to PEP 681.
+    if unsafe_hash is not None:
+        hash = unsafe_hash
+
+    if isinstance(on_setattr, (list, tuple)):
+        on_setattr = setters.pipe(*on_setattr)
+
+```
+
+{"end_line":262,"file_sha256":"ec54646ed97f374d7b4ae0617ff570de6c36736a46661b4218ecda760cfbb69e","id":"f9a418b29adb46ddc74b41369a11d8d438bc49aaefce9287f32a7a5963e5a7ba","kind":"function","path":"src/attr/_next_gen.py","reasons":["lexical overlap: add, attr, attrs, behavior, class, define, make, of, py, python, src, the, this, using, value"],"score":18.64755999,"start_line":183,"symbol":"define","text_sha256":"9642147d4fd7cda27a9c4ace17b12047e05cb825610af98531c614dc7cc452a2"}
+```
+
+        cache_hash (bool):
+            Ensure that the object's hash code is computed only once and stored
+            on the object.  If this is set to True, hashing must be either
+            explicitly or implicitly enabled for this class.  If the hash code
+            is cached, avoid any reassignments of fields involved in hash code
+            computation or mutations of the objects those fields point to after
+            object creation.  If such changes occur, the behavior of the
+            object's hash code is undefined.
+
+        frozen (bool):
+            Make instances immutable after initialization.  If someone attempts
+            to modify a frozen instance, `attrs.exceptions.FrozenInstanceError`
+            is raised.
+
+            .. note::
+
+                1. This is achieved by installing a custom ``__setattr__``
+                   method on your class, so you can't implement your own.
+
+                2. True immutability is impossible in Python.
+
+                3. This *does* have a minor a runtime performance `impact
+                   <how-frozen>` when initializing new instances.  In other
+                   words: ``__init__`` is slightly slower with ``frozen=True``.
+
+                4. If a class is frozen, you cannot modify ``self`` in
+                   ``__attrs_post_init__`` or a self-written ``__init__``. You
+                   can circumvent that limitation by using
+                   ``object.__setattr__(self, "attribute_name", value)``.
+
+                5. Subclasses of a frozen class are frozen too.
+
+        kw_only (bool):
+            Make all attributes keyword-only in the generated ``__init__`` (if
+            *init* is False, this parameter is ignored).
+
+        weakref_slot (bool):
+            Make instances weak-referenceable.  This has no effect unless
+            *slots* is True.
+
+        field_transformer (~typing.Callable | None):
+            A function that is called with the original class object and all
+            fields right before *attrs* finalizes the class.  You can use this,
+            for example, to automatically add converters or validators to
+            fields based on their types.
+
+            .. seealso:: `transform-fields`
+
+        match_args (bool):
+            If True (default), set ``__match_args__`` on the class to support
+            :pep:`634` (*Structural Pattern Matching*). It is a tuple of all
+            non-keyword-only ``__init__`` parameter names on Python 3.10 and
+            later. Ignored on older Python versions.
+
+        collect_by_mro (bool):
+            If True, *attrs* collects attributes from base classes correctly
+            according to the `method resolution order
+            <https://docs.python.org/3/howto/mro.html>`_. If False, *attrs*
+            will mimic the (wrong) behavior of `dataclasses` and :pep:`681`.
+
+            See also `issue #428
+            <https://github.com/python-attrs/attrs/issues/428>`_.
+
+        getstate_setstate (bool | None):
+            .. note::
+
+                This is usually only interesting for slotted classes and you
+                should probably just set *auto_detect* to True.
+
+            If True, ``__getstate__`` and ``__setstate__`` are generated and
+            attached to the class. This is necessary for slotted classes to be
+            pickleable. If left None, it's True by default for slotted classes
+            and False for dict classes.
+
+            If *auto_detect* is True, and *getstate_setstate* is left None, and
+            **either** ``__getstate__`` or ``__setstate__`` is detected
+            directly on the class (meaning: not inherited), it is set to False
+            (this is usually what you want).
+
+```
+
+{"end_line":1627,"file_sha256":"a2b2927fa0be0757997e96ade256c0b71be64b213fcb1946f3363dd75e6e7d69","id":"f4ab20e96fda0ee16c7005550d7c022135247cdc5c1ca5db694e3c254f6c37aa","kind":"function","path":"src/attr/_make.py","reasons":["lexical overlap: add, attr, attrs, class, eq, make, make_eq, of, py, src, the"],"score":18.29269699,"start_line":1592,"symbol":"_make_eq","text_sha256":"5be004bf8aa76b11dd4ff32574ebf59c761fbdf4f88b8a799f9673ef82417638"}
+```
+def _make_eq(cls, attrs):
+    """
+    Create __eq__ method for *cls* with *attrs*.
+    """
+    attrs = [a for a in attrs if a.eq]
+
+    unique_filename = _generate_unique_filename(cls, "eq")
+    lines = [
+        "def __eq__(self, other):",
+        "    if other.__class__ is not self.__class__:",
+        "        return NotImplemented",
+    ]
+
+    globs = {}
+    if attrs:
+        lines.append("    return  (")
+        for a in attrs:
+            if a.eq_key:
+                cmp_name = f"_{a.name}_key"
+                # Add the key function to the global namespace
+                # of the evaluated function.
+                globs[cmp_name] = a.eq_key
+                lines.append(
+                    f"        {cmp_name}(self.{a.name}) == {cmp_name}(other.{a.name})"
+                )
+            else:
+                lines.append(f"        self.{a.name} == other.{a.name}")
+            if a is not attrs[-1]:
+                lines[-1] = f"{lines[-1]} and"
+        lines.append("    )")
+    else:
+        lines.append("    return True")
+
+    script = "\n".join(lines)
+
+    return _make_method("__eq__", script, unique_filename, globs)
+```
+
+{"end_line":950,"file_sha256":"a2b2927fa0be0757997e96ade256c0b71be64b213fcb1946f3363dd75e6e7d69","id":"1f20eaf21d4d9e0fb314175bad00ca8f776c1758bfd2c2df26e52c5180ef3e02","kind":"function","path":"src/attr/_make.py","reasons":["lexical overlap: add, attr, attrs, builder, class, classbuilder, make, py, src"],"score":16.52387899,"start_line":946,"symbol":"_ClassBuilder.add_repr","text_sha256":"a0aa80140dad94a2a0bd351667e6f90d6a3fb04ce712943aa4bdd357961b53ed"}
+```
+    def add_repr(self, ns):
+        self._cls_dict["__repr__"] = self._add_method_dunders(
+            _make_repr(self._attrs, ns, self._cls)
+        )
+        return self
+```
+
+{"end_line":957,"file_sha256":"a2b2927fa0be0757997e96ade256c0b71be64b213fcb1946f3363dd75e6e7d69","id":"5e077492ae9715a67c142e73c307578ebb16ae8300e101fcca85f70774845d11","kind":"function","path":"src/attr/_make.py","reasons":["lexical overlap: add, attr, builder, class, classbuilder, make, py, src, value"],"score":16.1648066,"start_line":952,"symbol":"_ClassBuilder.add_str","text_sha256":"14150a17b3621aacd37c1b83104463afa35183ae8895fa1a8fab7bd14e6e28a1"}
+```
+    def add_str(self):
+        repr = self._cls_dict.get("__repr__")
+        if repr is None:
+            msg = "__str__ can only be generated if a __repr__ exists."
+            raise ValueError(msg)
+
+```
+
+{"end_line":1019,"file_sha256":"a2b2927fa0be0757997e96ade256c0b71be64b213fcb1946f3363dd75e6e7d69","id":"cb496f8721207b6eb930f9daef2266843c1540691bd3a6bab40dd6fab0ccf0ed","kind":"function","path":"src/attr/_make.py","reasons":["lexical overlap: add, attr, attrs, builder, class, classbuilder, make, py, src"],"score":16.01627326,"start_line":1009,"symbol":"_ClassBuilder.add_hash","text_sha256":"6c4b5f066aac65edea849b280ceb4acdb3d39fbbb4494588781265e8ddaa389c"}
+```
+    def add_hash(self):
+        self._cls_dict["__hash__"] = self._add_method_dunders(
+            _make_hash(
+                self._cls,
+                self._attrs,
+                frozen=self._frozen,
+                cache_hash=self._cache_hash,
+            )
+        )
+
+        return self
+```
+
+{"end_line":959,"file_sha256":"a2b2927fa0be0757997e96ade256c0b71be64b213fcb1946f3363dd75e6e7d69","id":"86e926ddf8ac3f6d5a5ebdec798de982b38dbec4bf74ee6542b3108ceeedd20b","kind":"function","path":"src/attr/_make.py","reasons":["lexical overlap: add, attr, builder, class, classbuilder, make, py, src"],"score":15.8033037,"start_line":958,"symbol":"_ClassBuilder.add_str.__str__","text_sha256":"7e8b539fc81d50fc1d4f312a481474b2b8104d60fd20dc9a037720b6d91af88d"}
+```
+        def __str__(self):
+            return self.__repr__()
+```

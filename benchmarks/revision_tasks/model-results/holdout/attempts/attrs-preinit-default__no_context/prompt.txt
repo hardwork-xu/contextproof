@@ -1,0 +1,18 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import attrs
+observed = []
+@attrs.define
+class Record:
+    value: int = attrs.field(kw_only=True, default=3)
+    def __attrs_pre_init__(self, *, value):
+        observed.append(value)
+record = Record()
+RESULT = [observed, record.value]
+```
+
+Repository source evidence:
+(No source evidence supplied.)

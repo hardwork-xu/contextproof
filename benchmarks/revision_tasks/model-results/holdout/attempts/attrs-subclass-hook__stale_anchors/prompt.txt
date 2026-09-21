@@ -1,0 +1,20 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import attrs
+registry = []
+@attrs.define
+class Base:
+    @classmethod
+    def __attrs_init_subclass__(cls):
+        registry.append(cls.__name__)
+@attrs.define
+class Child(Base):
+    pass
+RESULT = registry
+```
+
+Repository source evidence:
+{"ambiguity_policy":"all physical declarations; no runtime binding selection","ambiguous_symbols":[],"complete":false,"kind":"supplied-anchor-source","missing":[{"path":"src/attr/_make.py","reason":"missing","symbol":"_ClassBuilder.build_class"}],"omitted":[],"scope":"supplied-declarations-only","source":[]}

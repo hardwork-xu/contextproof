@@ -1,0 +1,355 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import pluggy
+import warnings
+hookspec = pluggy.HookspecMarker("example")
+hookimpl = pluggy.HookimplMarker("example")
+class Specification:
+    @hookspec
+    def run(self):
+        pass
+class Plugin:
+    @hookimpl(hookwrapper=True)
+    def run(self):
+        yield
+        raise ValueError("teardown")
+manager = pluggy.PluginManager("example")
+manager.add_hookspecs(Specification)
+manager.register(Plugin(), "plugin")
+with warnings.catch_warnings(record=True) as caught:
+    warnings.simplefilter("always")
+    try:
+        manager.hook.run()
+    except ValueError:
+        pass
+RESULT = [type(item.message).__name__ for item in caught]
+```
+
+Repository source evidence:
+<context query="Explain the behavior of this Python probe using repository source. src/pluggy/_callers.py _multicall src/pluggy/_callers.py _warn_teardown_exception
+import pluggy
+import warnings
+hookspec = pluggy.HookspecMarker(&quot;example&quot;)
+hookimpl = pluggy.HookimplMarker(&quot;example&quot;)
+class Specification:
+    @hookspec
+    def run(self):
+        pass
+class Plugin:
+    @hookimpl(hookwrapper=True)
+    def run(self):
+        yield
+        raise ValueError(&quot;teardown&quot;)
+manager = pluggy.PluginManager(&quot;example&quot;)
+manager.add_hookspecs(Specification)
+manager.register(Plugin(), &quot;plugin&quot;)
+with warnings.catch_warnings(record=True) as caught:
+    warnings.simplefilter(&quot;always&quot;)
+    try:
+        manager.hook.run()
+    except ValueError:
+        pass
+RESULT = [type(item.message).__name__ for item in caught]
+">
+  <structural-context>
+    <file-tree><![CDATA[
+src/pluggy/_callers.py
+src/pluggy/_manager.py
+src/pluggy/_result.py
+src/pluggy/_warnings.py
+    ]]></file-tree>
+  </structural-context>
+  <chunks>
+    <chunk file="src/pluggy/_callers.py" lines="53-113" symbol="_multicall" score="2.4213" tokens="509">
+      <code><![CDATA[
+def _multicall(
+    hook_name: str,
+    hook_impls: Sequence[HookImpl],
+    caller_kwargs: Mapping[str, object],
+    firstresult: bool,
+) -> object | list[object]:
+    """Execute a call into multiple python functions/methods and return the
+    result(s).
+
+    ``caller_kwargs`` comes from HookCaller.__call__().
+    """
+    __tracebackhide__ = True
+    results: list[object] = []
+    exception = None
+    only_new_style_wrappers = True
+    try:  # run impl and wrapper setup functions in a loop
+        teardowns: list[Teardown] = []
+        try:
+            for hook_impl in reversed(hook_impls):
+                try:
+                    args = [caller_kwargs[argname] for argname in hook_impl.argnames]
+                except KeyError:
+                    for argname in hook_impl.argnames:
+                        if argname not in caller_kwargs:
+                            raise HookCallError(
+                                f"hook call must provide argument {argname!r}"
+                            )
+
+                if hook_impl.hookwrapper:
+                    only_new_style_wrappers = False
+                    try:
+                        # If this cast is not valid, a type error is raised below,
+                        # which is the desired response.
+                        res = hook_impl.function(*args)
+                        wrapper_gen = cast(Generator[None, Result[object], None], res)
+                        next(wrapper_gen)  # first yield
+                        teardowns.append((wrapper_gen, hook_impl))
+                    except StopIteration:
+                        _raise_wrapfail(wrapper_gen, "did not yield")
+                elif hook_impl.wrapper:
+                    try:
+                        # If this cast is not valid, a type error is raised below,
+                        # which is the desired response.
+                        res = hook_impl.function(*args)
+                        function_gen = cast(Generator[None, object, object], res)
+                        next(function_gen)  # first yield
+                        teardowns.append(function_gen)
+                    except StopIteration:
+                        _raise_wrapfail(function_gen, "did not yield")
+                else:
+                    res = hook_impl.function(*args)
+                    if res is not None:
+                        results.append(res)
+                        if firstresult:  # halt further impl calls
+                            break
+        except BaseException as exc:
+            exception = exc
+    finally:
+        # Fast path - only new-style wrappers, no Result.
+        if only_new_style_wrappers:
+            if firstresult:  # first result hooks return a single value
+      ]]></code>
+    </chunk>
+    <chunk file="src/pluggy/_manager.py" lines="1-38" score="2.4014" tokens="227">
+      <code><![CDATA[
+from __future__ import annotations
+
+import inspect
+import types
+from typing import Any
+from typing import Callable
+from typing import cast
+from typing import Final
+from typing import Iterable
+from typing import Mapping
+from typing import Sequence
+from typing import TYPE_CHECKING
+import warnings
+
+from . import _tracing
+from ._callers import _multicall
+from ._hooks import _HookImplFunction
+from ._hooks import _Namespace
+from ._hooks import _Plugin
+from ._hooks import _SubsetHookCaller
+from ._hooks import HookCaller
+from ._hooks import HookImpl
+from ._hooks import HookimplOpts
+from ._hooks import HookRelay
+from ._hooks import HookspecOpts
+from ._hooks import normalize_hookimpl_opts
+from ._result import Result
+
+
+if TYPE_CHECKING:
+    # importtlib.metadata import is slow, defer it.
+    import importlib.metadata
+
+
+_BeforeTrace = Callable[[str, Sequence[HookImpl], Mapping[str, Any]], None]
+_AfterTrace = Callable[[Result[Any], str, Sequence[HookImpl], Mapping[str, Any]], None]
+
+
+      ]]></code>
+    </chunk>
+    <chunk file="src/pluggy/_result.py" lines="1-29" score="2.2686" tokens="117">
+      <code><![CDATA[
+"""
+Hook wrapper "result" utilities.
+"""
+
+from __future__ import annotations
+
+from types import TracebackType
+from typing import Callable
+from typing import cast
+from typing import final
+from typing import Generic
+from typing import Optional
+from typing import Tuple
+from typing import Type
+from typing import TypeVar
+
+
+_ExcInfo = Tuple[Type[BaseException], BaseException, Optional[TracebackType]]
+ResultType = TypeVar("ResultType")
+
+
+
+
+@final
+
+
+# Historical name (pluggy<=1.2), kept for backward compatibility.
+_Result = Result
+
+      ]]></code>
+    </chunk>
+    <chunk file="src/pluggy/_warnings.py" lines="1-6" score="2.2054" tokens="7">
+      <code><![CDATA[
+from typing import final
+
+
+
+
+@final
+      ]]></code>
+    </chunk>
+    <chunk file="src/pluggy/_callers.py" lines="114-182" symbol="_multicall" score="2.1698" tokens="506">
+      <code><![CDATA[
+                result = results[0] if results else None
+            else:
+                result = results
+
+            # run all wrapper post-yield blocks
+            for teardown in reversed(teardowns):
+                try:
+                    if exception is not None:
+                        teardown.throw(exception)  # type: ignore[union-attr]
+                    else:
+                        teardown.send(result)  # type: ignore[union-attr]
+                    # Following is unreachable for a well behaved hook wrapper.
+                    # Try to force finalizers otherwise postponed till GC action.
+                    # Note: close() may raise if generator handles GeneratorExit.
+                    teardown.close()  # type: ignore[union-attr]
+                except StopIteration as si:
+                    result = si.value
+                    exception = None
+                    continue
+                except BaseException as e:
+                    exception = e
+                    continue
+                _raise_wrapfail(teardown, "has second yield")  # type: ignore[arg-type]
+
+            if exception is not None:
+                raise exception.with_traceback(exception.__traceback__)
+            else:
+                return result
+
+        # Slow path - need to support old-style wrappers.
+        else:
+            if firstresult:  # first result hooks return a single value
+                outcome: Result[object | list[object]] = Result(
+                    results[0] if results else None, exception
+                )
+            else:
+                outcome = Result(results, exception)
+
+            # run all wrapper post-yield blocks
+            for teardown in reversed(teardowns):
+                if isinstance(teardown, tuple):
+                    try:
+                        teardown[0].send(outcome)
+                    except StopIteration:
+                        pass
+                    except BaseException as e:
+                        _warn_teardown_exception(hook_name, teardown[1], e)
+                        raise
+                    else:
+                        _raise_wrapfail(teardown[0], "has second yield")
+                else:
+                    try:
+                        if outcome._exception is not None:
+                            teardown.throw(outcome._exception)
+                        else:
+                            teardown.send(outcome._result)
+                        # Following is unreachable for a well behaved hook wrapper.
+                        # Try to force finalizers otherwise postponed till GC action.
+                        # Note: close() may raise if generator handles GeneratorExit.
+                        teardown.close()
+                    except StopIteration as si:
+                        outcome.force_result(si.value)
+                        continue
+                    except BaseException as e:
+                        outcome.force_exception(e)
+                        continue
+                    _raise_wrapfail(teardown, "has second yield")
+
+            return outcome.get_result()
+      ]]></code>
+    </chunk>
+    <chunk file="src/pluggy/_callers.py" lines="30-40" symbol="_raise_wrapfail" score="2.0613" tokens="90">
+      <code><![CDATA[
+def _raise_wrapfail(
+    wrap_controller: (
+        Generator[None, Result[object], None] | Generator[None, object, object]
+    ),
+    msg: str,
+) -> NoReturn:
+    co = wrap_controller.gi_code
+    raise RuntimeError(
+        "wrap_controller at %r %s:%d %s"
+        % (co.co_name, co.co_filename, co.co_firstlineno, msg)
+    )
+      ]]></code>
+    </chunk>
+    <chunk file="src/pluggy/_manager.py" lines="397-425" symbol="load_setuptools_entrypoints" score="2.0577" tokens="203">
+      <code><![CDATA[
+    def load_setuptools_entrypoints(self, group: str, name: str | None = None) -> int:
+        """Load modules from querying the specified setuptools ``group``.
+
+        :param group:
+            Entry point group to load plugins.
+        :param name:
+            If given, loads only plugins with the given ``name``.
+
+        :return:
+            The number of plugins loaded by this call.
+        """
+        import importlib.metadata
+
+        count = 0
+        for dist in list(importlib.metadata.distributions()):
+            for ep in dist.entry_points:
+                if (
+                    ep.group != group
+                    or (name is not None and ep.name != name)
+                    # already registered
+                    or self.get_plugin(ep.name)
+                    or self.is_blocked(ep.name)
+                ):
+                    continue
+                plugin = ep.load()
+                self.register(plugin, name=ep.name)
+                self._plugin_distinfo.append((plugin, DistFacade(dist)))
+                count += 1
+        return count
+      ]]></code>
+    </chunk>
+  </chunks>
+  <receipt freshness="clean" complete="incomplete" reason="dependency_frontier_cut" action="fetch_skipped_candidate" index_revision="b664ee4e377a4af38f35d6ebc78dd91610f32729700706d75ef02e6199ae9aac" budget_requested="1672" budget_consumed="1659" returned_shown="7" returned_total="7" skipped_shown="20" skipped_total="20" omitted_edges_shown="17" omitted_edges_total="17">
+    <returned handle="chunk:src/pluggy/_callers.py:_raise_wrapfail:30" file="src/pluggy/_callers.py" lines="30-40" hash="9cd8e9c3714ad9f7581c17467819bbcd003dfacce8e618e4a983bddb2e943cb3" score="2.0613" />
+    <returned handle="chunk:src/pluggy/_callers.py:_multicall:53" file="src/pluggy/_callers.py" lines="53-113" hash="ee6c4f70b4e80b89fecd73b98ce5478af12ab5d51aabf440726e91f0e0d24965" score="2.4213" />
+    <returned handle="chunk:src/pluggy/_callers.py:_multicall:114" file="src/pluggy/_callers.py" lines="114-182" hash="c15fd658fcb60179cc5c889bceba6aa2fa30f90bc36180cf85da325c94142a7b" score="2.1698" />
+    <returned handle="chunk:src/pluggy/_manager.py:_module:1" file="src/pluggy/_manager.py" lines="1-38" hash="f4f8540e32f65c6f1da2309e0ca498c87c4749c700861d98ea28ccb816adf37e" score="2.4014" />
+    <returned handle="chunk:src/pluggy/_manager.py:load_setuptools_entrypoints:397" file="src/pluggy/_manager.py" lines="397-425" hash="a6a98ff7e1b17dd57b8bbd2bac8bf8d0430ac6bcb69f78cfa4c1be6678b6d458" score="2.0577" />
+    <returned handle="chunk:src/pluggy/_result.py:_module:1" file="src/pluggy/_result.py" lines="1-29" hash="25c790e4f65e98d15ac0c146d17cf531923302313fb6bd01811774efef326379" score="2.2686" />
+    <returned handle="chunk:src/pluggy/_warnings.py:_module:1" file="src/pluggy/_warnings.py" lines="1-6" hash="f3e69b7872e94ccb93355015aff171e3720ff2c4718453530bf0110b7f8da272" score="2.2054" />
+    <skipped file="src/pluggy/_callers.py" reason="over_budget" handle="chunk:src/pluggy/_callers.py:_module:1" />
+    <skipped file="src/pluggy/_callers.py" reason="over_budget" handle="chunk:src/pluggy/_callers.py:_warn_teardown_exception:43" />
+    <skipped file="src/pluggy/_manager.py" reason="over_budget" handle="chunk:src/pluggy/_manager.py:PluginManager:137" />
+    <skipped file="src/pluggy/_manager.py" reason="over_budget" handle="chunk:src/pluggy/_manager.py:PluginManager:190" />
+    <skipped file="src/pluggy/_manager.py" reason="over_budget" handle="chunk:src/pluggy/_manager.py:PluginManager:256" />
+    <skipped file="src/pluggy/_manager.py" reason="over_budget" handle="chunk:src/pluggy/_manager.py:PluginManager:309" />
+    <skipped file="src/pluggy/_manager.py" reason="over_budget" handle="chunk:src/pluggy/_manager.py:PluginManager:430" />
+    <skipped file="src/pluggy/_manager.py" reason="over_budget" handle="chunk:src/pluggy/_manager.py:PluginManager:80" />
+  </receipt>
+</context>

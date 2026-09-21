@@ -1,0 +1,54 @@
+{
+  "answer": {
+    "value": [
+      true,
+      [
+        "note"
+      ]
+    ]
+  },
+  "artifact_sha256": {
+    "command.json": "9a5849d7251e8b1e2f667fd41ae33db7756fe693aaa9c00d1e7806f2b01d2e4f",
+    "events.jsonl": "9fbec688a095a97d7187f139352bed24509888223c902c5eaf71830c4a1c18a1",
+    "instructions.txt": "526c634a7fb2948dad3a3e046acd375975ef58e997ddef36f2039479a7cd05c3",
+    "prompt.txt": "441e6a767e90ba3a1b74382dbf28f9b6daf4ed4c658c065f5ed10245f8475ff6",
+    "response.json": "607442d2f05939832f9a9c7dbffea58d3df242def10e27dec8aee22de9712f34",
+    "schema.json": "0875783714dbd7f5cce9a18f60cf5859ebf464e24c8ba232d4254deb1fe231fe",
+    "stderr.txt": "2bf5baf9018ee1b6c6dd2996701b85c88f6694746af350313c50500d106c7763"
+  },
+  "evidence_bytes": 0,
+  "execution_error": null,
+  "forbidden_items": [],
+  "input_identity": {
+    "instructions_sha256": "526c634a7fb2948dad3a3e046acd375975ef58e997ddef36f2039479a7cd05c3",
+    "model": "gpt-6-astra",
+    "prompt_sha256": "441e6a767e90ba3a1b74382dbf28f9b6daf4ed4c658c065f5ed10245f8475ff6",
+    "reasoning_effort": "medium",
+    "schema_sha256": "572d646905a4274b2f90cd86de3e2e10660a0dee4b3b963495ade9d263ae41f9",
+    "transport": "https"
+  },
+  "malformed_events": [],
+  "parse_error": null,
+  "prompt_bytes": 496,
+  "returncode": 0,
+  "started_at": "2026-09-21T11:30:35.961368+00:00",
+  "tool_violation": false,
+  "transport_messages": [
+    {
+      "id": "item_0",
+      "message": "Under-development features enabled: skip_host_skill_discovery. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in <USER_HOME>/.codex/config.toml.",
+      "type": "error"
+    }
+  ],
+  "usage": [
+    {
+      "cache_write_input_tokens": 0,
+      "cached_input_tokens": 0,
+      "input_tokens": 6219,
+      "output_tokens": 230,
+      "reasoning_output_tokens": 202
+    }
+  ],
+  "valid_completion": true,
+  "wall_seconds": 28.573508291039616
+}

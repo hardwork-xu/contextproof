@@ -1,0 +1,13 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import httpx
+url = httpx.URL("https://example.org").copy_with(
+    username="tom@example.org", password="abc123@ %")
+RESULT = str(url)
+```
+
+Repository source evidence:
+(No source evidence supplied.)

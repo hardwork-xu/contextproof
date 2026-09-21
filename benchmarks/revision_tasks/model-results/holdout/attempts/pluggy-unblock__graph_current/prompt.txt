@@ -1,0 +1,15 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import pluggy
+manager = pluggy.PluginManager("example")
+manager.set_blocked("plugin")
+first = manager.unblock("plugin")
+second = manager.unblock("plugin")
+RESULT = [first, second, manager.is_blocked("plugin")]
+```
+
+Repository source evidence:
+{"anchor_count":2,"anchor_nodes":["04b17ed3d2b8","e404932b9241"],"anchor_nodes_truncated":false,"base_graph_id":null,"budget":16000,"cause_count":0,"cause_details_truncated":false,"causes":[],"complete":false,"coverage":"saved-anchor-static-closure","deleted":[],"frontier":[{"count":2,"kind":"unresolved","reason":"local value, parameter, or closure requires runtime resolution"},{"count":2,"kind":"unresolved","reason":"name is not a static repository binding (possibly builtin/external)"}],"frontier_count":4,"frontier_details_truncated":true,"full_graph_handle":"4f2cf9b7dddda9ec28bdb1b46ac0b1dfc929b398307a76e2f739f7e42fdc08b5","graph_id":"4f2cf9b7dddda9ec28bdb1b46ac0b1dfc929b398307a76e2f739f7e42fdc08b5","guarantee":"current recorded source and static references; no behavior or task-sufficiency proof","kind":"contextproof.graph-payload","nodes":[{"end_line":247,"id":"04b17ed3d2b8fe0e6e38fea725ec902105e4d3b02affa2ec6969e1934be685fc","kind":"function","path":"src/pluggy/_manager.py","start_line":239,"symbol":"PluginManager.unblock","text":"    def unblock(self, name: str) -> bool:\n        \"\"\"Unblocks a name.\n\n        Returns whether the name was actually blocked.\n        \"\"\"\n        if self._name2plugin.get(name, -1) is None:\n            del self._name2plugin[name]\n            return True\n        return False\n"},{"end_line":233,"id":"e404932b92411f48f77af23da416df97655e18c169f9591149fd26ff14ed69c6","kind":"function","path":"src/pluggy/_manager.py","start_line":230,"symbol":"PluginManager.set_blocked","text":"    def set_blocked(self, name: str) -> None:\n        \"\"\"Block registrations of the given name, unregister if already registered.\"\"\"\n        self.unregister(name=name)\n        self._name2plugin[name] = None\n"}],"omitted_node_count":0,"omitted_nodes":[],"omitted_nodes_truncated":false,"policy":{"max_depth":4,"max_nodes":256,"resolver_version":1},"reference_id_prefix_length":12,"references":[],"requires_base":false,"schema_version":1,"scope":"full","snapshot_id":"b44f331cae0c553ea8fc773e1f973911c9f6513090972022e40b5e16e8d45b56","unit":"utf-8-bytes"}

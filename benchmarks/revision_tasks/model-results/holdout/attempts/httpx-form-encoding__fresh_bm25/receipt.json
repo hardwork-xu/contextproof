@@ -1,0 +1,52 @@
+{
+  "answer": {
+    "value": [
+      "u=with+spaces",
+      "u=with%2520spaces"
+    ]
+  },
+  "artifact_sha256": {
+    "command.json": "bec1dbf8f6abd5e07362096daeb8acd051289c64ff137191c63ba83932656df5",
+    "events.jsonl": "72a081401c6a689a7fb22462413e25a0f72948c59a424593211a3ce2881dbf64",
+    "instructions.txt": "526c634a7fb2948dad3a3e046acd375975ef58e997ddef36f2039479a7cd05c3",
+    "prompt.txt": "aa8b966d95fa0d30f0653e494e78f88b1b4be3fa92497efb6cae5a0863c3277f",
+    "response.json": "dbc7b1ff37e9d9ae705f2e21f6a7948a13d8cb3699699d4a70a4224809ac6f6e",
+    "schema.json": "0875783714dbd7f5cce9a18f60cf5859ebf464e24c8ba232d4254deb1fe231fe",
+    "stderr.txt": "4df1529d6d85c150d1f3fc333ac8b119e130a401c934549e7e567e74ba651076"
+  },
+  "evidence_bytes": 15676,
+  "execution_error": null,
+  "forbidden_items": [],
+  "input_identity": {
+    "instructions_sha256": "526c634a7fb2948dad3a3e046acd375975ef58e997ddef36f2039479a7cd05c3",
+    "model": "gpt-6-astra",
+    "prompt_sha256": "aa8b966d95fa0d30f0653e494e78f88b1b4be3fa92497efb6cae5a0863c3277f",
+    "reasoning_effort": "medium",
+    "schema_sha256": "572d646905a4274b2f90cd86de3e2e10660a0dee4b3b963495ade9d263ae41f9",
+    "transport": "https"
+  },
+  "malformed_events": [],
+  "parse_error": null,
+  "prompt_bytes": 16073,
+  "returncode": 0,
+  "started_at": "2026-09-21T11:28:26.223238+00:00",
+  "tool_violation": false,
+  "transport_messages": [
+    {
+      "id": "item_0",
+      "message": "Under-development features enabled: skip_host_skill_discovery. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in <USER_HOME>/.codex/config.toml.",
+      "type": "error"
+    }
+  ],
+  "usage": [
+    {
+      "cache_write_input_tokens": 0,
+      "cached_input_tokens": 0,
+      "input_tokens": 11417,
+      "output_tokens": 47,
+      "reasoning_output_tokens": 10
+    }
+  ],
+  "valid_completion": true,
+  "wall_seconds": 28.53237666701898
+}

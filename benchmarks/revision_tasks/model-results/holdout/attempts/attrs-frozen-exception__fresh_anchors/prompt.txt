@@ -1,0 +1,17 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import attrs
+@attrs.frozen
+class Failure(Exception):
+    pass
+error = Failure()
+error.__suppress_context__ = True
+error.__notes__ = ["note"]
+RESULT = [error.__suppress_context__, error.__notes__]
+```
+
+Repository source evidence:
+{"ambiguity_policy":"all physical declarations; no runtime binding selection","ambiguous_symbols":[],"complete":true,"kind":"supplied-anchor-source","missing":[],"omitted":[],"scope":"supplied-declarations-only","source":[{"end_line":555,"path":"src/attr/_make.py","start_line":541,"symbol":"_frozen_setattrs","text":"def _frozen_setattrs(self, name, value):\n    \"\"\"\n    Attached to frozen classes as __setattr__.\n    \"\"\"\n    if isinstance(self, BaseException) and name in (\n        \"__cause__\",\n        \"__context__\",\n        \"__traceback__\",\n        \"__suppress_context__\",\n        \"__notes__\",\n    ):\n        BaseException.__setattr__(self, name, value)\n        return\n\n    raise FrozenInstanceError\n","text_sha256":"dfff4edc0b00e7c76bee65858c5ca4bcb9418f26852ba5a79e03be9000e2b092"}]}

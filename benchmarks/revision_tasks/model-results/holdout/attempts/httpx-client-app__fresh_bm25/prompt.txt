@@ -1,0 +1,377 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import httpx
+transport = httpx.MockTransport(lambda request: httpx.Response(200))
+client = httpx.Client(app=object(), transport=transport, trust_env=False)
+RESULT = client.is_closed
+```
+
+Repository source evidence:
+# ContextProof source evidence
+{"budget":16000,"budget_unit":"utf8_bytes","id":"3e235b234110514fc6b239bebde53bddfdfdd90cf6112f782f2590b78c5561d6","method":"bm25","omitted_count":574,"query":"Explain the behavior of this Python probe using repository source. httpx/_client.py Client.__init__ httpx/_client.py Client._init_transport\nimport httpx\ntransport = httpx.MockTransport(lambda request: httpx.Response(200))\nclient = httpx.Client(app=object(), transport=transport, trust_env=False)\nRESULT = client.is_closed\n","schema_version":1,"snapshot_id":"d39d2caa51d7b21d91903e121d04b08f2bda3190abd9c65cdca544b59b846562","tokenizer":"bytes"}
+
+{"end_line":738,"file_sha256":"c43f941baefe58c91e96d00039e1868fe719d91453026d7db1647194563bff8d","id":"1c62288e156f87b5becb20f0bebbdf5f4f0fbebb8f3bc07a5b34ecf40272c653","kind":"function","path":"httpx/_client.py","reasons":["lexical overlap: client, env, false, httpx, init, init_transport, is, py, transport, trust, trust_env"],"score":35.37524392,"start_line":718,"symbol":"Client._init_transport","text_sha256":"031c37f984f8b3e91e4f6b60bef8d6b966f7c83e6eeba323c1fc2d267055e5de"}
+```
+    def _init_transport(
+        self,
+        verify: ssl.SSLContext | str | bool = True,
+        cert: CertTypes | None = None,
+        trust_env: bool = True,
+        http1: bool = True,
+        http2: bool = False,
+        limits: Limits = DEFAULT_LIMITS,
+        transport: BaseTransport | None = None,
+    ) -> BaseTransport:
+        if transport is not None:
+            return transport
+
+        return HTTPTransport(
+            verify=verify,
+            cert=cert,
+            trust_env=trust_env,
+            http1=http1,
+            http2=http2,
+            limits=limits,
+        )
+```
+
+{"end_line":1452,"file_sha256":"c43f941baefe58c91e96d00039e1868fe719d91453026d7db1647194563bff8d","id":"f1598c755ff585020e6e7d3e3fa2255e9f06788813f7d61d752bda247abf75d9","kind":"function","path":"httpx/_client.py","reasons":["lexical overlap: client, env, false, httpx, init, init_transport, is, py, transport, trust, trust_env"],"score":34.68189518,"start_line":1432,"symbol":"AsyncClient._init_transport","text_sha256":"e0a943317ef65dd4ecde9efb3d2e834119c21ad861722e326bff365ba708a701"}
+```
+    def _init_transport(
+        self,
+        verify: ssl.SSLContext | str | bool = True,
+        cert: CertTypes | None = None,
+        trust_env: bool = True,
+        http1: bool = True,
+        http2: bool = False,
+        limits: Limits = DEFAULT_LIMITS,
+        transport: AsyncBaseTransport | None = None,
+    ) -> AsyncBaseTransport:
+        if transport is not None:
+            return transport
+
+        return AsyncHTTPTransport(
+            verify=verify,
+            cert=cert,
+            trust_env=trust_env,
+            http1=http1,
+            http2=http2,
+            limits=limits,
+        )
+```
+
+{"end_line":716,"file_sha256":"c43f941baefe58c91e96d00039e1868fe719d91453026d7db1647194563bff8d","id":"bbcb7f3e8dde2fbd7dfb54942bb4ca8ba964fb2d75e2c9199954bf9f29dde92b","kind":"function","path":"httpx/_client.py","reasons":["lexical overlap: client, env, false, httpx, import, init, init_transport, is, py, the, transport, trust, trust_env, using"],"score":31.21709297,"start_line":639,"symbol":"Client.__init__","text_sha256":"a3bbb12afe326ab278fb3c324fb14e1f8507a03956e36453c2808c0d4ab4e950"}
+```
+    def __init__(
+        self,
+        *,
+        auth: AuthTypes | None = None,
+        params: QueryParamTypes | None = None,
+        headers: HeaderTypes | None = None,
+        cookies: CookieTypes | None = None,
+        verify: ssl.SSLContext | str | bool = True,
+        cert: CertTypes | None = None,
+        trust_env: bool = True,
+        http1: bool = True,
+        http2: bool = False,
+        proxy: ProxyTypes | None = None,
+        mounts: None | (typing.Mapping[str, BaseTransport | None]) = None,
+        timeout: TimeoutTypes = DEFAULT_TIMEOUT_CONFIG,
+        follow_redirects: bool = False,
+        limits: Limits = DEFAULT_LIMITS,
+        max_redirects: int = DEFAULT_MAX_REDIRECTS,
+        event_hooks: None | (typing.Mapping[str, list[EventHook]]) = None,
+        base_url: URL | str = "",
+        transport: BaseTransport | None = None,
+        default_encoding: str | typing.Callable[[bytes], str] = "utf-8",
+    ) -> None:
+        super().__init__(
+            auth=auth,
+            params=params,
+            headers=headers,
+            cookies=cookies,
+            timeout=timeout,
+            follow_redirects=follow_redirects,
+            max_redirects=max_redirects,
+            event_hooks=event_hooks,
+            base_url=base_url,
+            trust_env=trust_env,
+            default_encoding=default_encoding,
+        )
+
+        if http2:
+            try:
+                import h2  # noqa
+            except ImportError:  # pragma: no cover
+                raise ImportError(
+                    "Using http2=True, but the 'h2' package is not installed. "
+                    "Make sure to install httpx using `pip install httpx[http2]`."
+                ) from None
+
+        allow_env_proxies = trust_env and transport is None
+        proxy_map = self._get_proxy_map(proxy, allow_env_proxies)
+
+        self._transport = self._init_transport(
+            verify=verify,
+            cert=cert,
+            trust_env=trust_env,
+            http1=http1,
+            http2=http2,
+            limits=limits,
+            transport=transport,
+        )
+        self._mounts: dict[URLPattern, BaseTransport | None] = {
+            URLPattern(key): None
+            if proxy is None
+            else self._init_proxy_transport(
+                proxy,
+                verify=verify,
+                cert=cert,
+                trust_env=trust_env,
+                http1=http1,
+                http2=http2,
+                limits=limits,
+            )
+            for key, proxy in proxy_map.items()
+        }
+        if mounts is not None:
+            self._mounts.update(
+                {URLPattern(key): transport for key, transport in mounts.items()}
+            )
+
+        self._mounts = dict(sorted(self._mounts.items()))
+```
+
+{"end_line":1430,"file_sha256":"c43f941baefe58c91e96d00039e1868fe719d91453026d7db1647194563bff8d","id":"de5d46f865611373738901be6f7ae450c75aed9c37aa47eec5b29a1ced464732","kind":"function","path":"httpx/_client.py","reasons":["lexical overlap: client, env, false, httpx, import, init, init_transport, is, py, the, transport, trust, trust_env, using"],"score":30.94956796,"start_line":1353,"symbol":"AsyncClient.__init__","text_sha256":"4dc8397d2249ef58e1422917f7f3860f078ed2588effb98ab4adcbbc79b5d8e3"}
+```
+    def __init__(
+        self,
+        *,
+        auth: AuthTypes | None = None,
+        params: QueryParamTypes | None = None,
+        headers: HeaderTypes | None = None,
+        cookies: CookieTypes | None = None,
+        verify: ssl.SSLContext | str | bool = True,
+        cert: CertTypes | None = None,
+        http1: bool = True,
+        http2: bool = False,
+        proxy: ProxyTypes | None = None,
+        mounts: None | (typing.Mapping[str, AsyncBaseTransport | None]) = None,
+        timeout: TimeoutTypes = DEFAULT_TIMEOUT_CONFIG,
+        follow_redirects: bool = False,
+        limits: Limits = DEFAULT_LIMITS,
+        max_redirects: int = DEFAULT_MAX_REDIRECTS,
+        event_hooks: None | (typing.Mapping[str, list[EventHook]]) = None,
+        base_url: URL | str = "",
+        transport: AsyncBaseTransport | None = None,
+        trust_env: bool = True,
+        default_encoding: str | typing.Callable[[bytes], str] = "utf-8",
+    ) -> None:
+        super().__init__(
+            auth=auth,
+            params=params,
+            headers=headers,
+            cookies=cookies,
+            timeout=timeout,
+            follow_redirects=follow_redirects,
+            max_redirects=max_redirects,
+            event_hooks=event_hooks,
+            base_url=base_url,
+            trust_env=trust_env,
+            default_encoding=default_encoding,
+        )
+
+        if http2:
+            try:
+                import h2  # noqa
+            except ImportError:  # pragma: no cover
+                raise ImportError(
+                    "Using http2=True, but the 'h2' package is not installed. "
+                    "Make sure to install httpx using `pip install httpx[http2]`."
+                ) from None
+
+        allow_env_proxies = trust_env and transport is None
+        proxy_map = self._get_proxy_map(proxy, allow_env_proxies)
+
+        self._transport = self._init_transport(
+            verify=verify,
+            cert=cert,
+            trust_env=trust_env,
+            http1=http1,
+            http2=http2,
+            limits=limits,
+            transport=transport,
+        )
+
+        self._mounts: dict[URLPattern, AsyncBaseTransport | None] = {
+            URLPattern(key): None
+            if proxy is None
+            else self._init_proxy_transport(
+                proxy,
+                verify=verify,
+                cert=cert,
+                trust_env=trust_env,
+                http1=http1,
+                http2=http2,
+                limits=limits,
+            )
+            for key, proxy in proxy_map.items()
+        }
+        if mounts is not None:
+            self._mounts.update(
+                {URLPattern(key): transport for key, transport in mounts.items()}
+            )
+        self._mounts = dict(sorted(self._mounts.items()))
+```
+
+{"end_line":118,"file_sha256":"aff660b388c8a5c3c92ea2b975b6d26b2aa8fe254c2856b164277ea0e1f12c4b","id":"c55af5c226a19a670c603787dabb43cc046140e1a83e75c3693d7812cadc71f7","kind":"function","path":"httpx/_api.py","reasons":["lexical overlap: 200, client, env, false, httpx, import, object, of, py, request, response, the, trust, trust_env"],"score":28.54131785,"start_line":39,"symbol":"request","text_sha256":"0462729948170f35cf43d8bb6798e92d5b23ebfabfceea45b13e626688d1e3ad"}
+````
+def request(
+    method: str,
+    url: URL | str,
+    *,
+    params: QueryParamTypes | None = None,
+    content: RequestContent | None = None,
+    data: RequestData | None = None,
+    files: RequestFiles | None = None,
+    json: typing.Any | None = None,
+    headers: HeaderTypes | None = None,
+    cookies: CookieTypes | None = None,
+    auth: AuthTypes | None = None,
+    proxy: ProxyTypes | None = None,
+    timeout: TimeoutTypes = DEFAULT_TIMEOUT_CONFIG,
+    follow_redirects: bool = False,
+    verify: ssl.SSLContext | str | bool = True,
+    trust_env: bool = True,
+) -> Response:
+    """
+    Sends an HTTP request.
+
+    **Parameters:**
+
+    * **method** - HTTP method for the new `Request` object: `GET`, `OPTIONS`,
+    `HEAD`, `POST`, `PUT`, `PATCH`, or `DELETE`.
+    * **url** - URL for the new `Request` object.
+    * **params** - *(optional)* Query parameters to include in the URL, as a
+    string, dictionary, or sequence of two-tuples.
+    * **content** - *(optional)* Binary content to include in the body of the
+    request, as bytes or a byte iterator.
+    * **data** - *(optional)* Form data to include in the body of the request,
+    as a dictionary.
+    * **files** - *(optional)* A dictionary of upload files to include in the
+    body of the request.
+    * **json** - *(optional)* A JSON serializable object to include in the body
+    of the request.
+    * **headers** - *(optional)* Dictionary of HTTP headers to include in the
+    request.
+    * **cookies** - *(optional)* Dictionary of Cookie items to include in the
+    request.
+    * **auth** - *(optional)* An authentication class to use when sending the
+    request.
+    * **proxy** - *(optional)* A proxy URL where all the traffic should be routed.
+    * **timeout** - *(optional)* The timeout configuration to use when sending
+    the request.
+    * **follow_redirects** - *(optional)* Enables or disables HTTP redirects.
+    * **verify** - *(optional)* Either `True` to use an SSL context with the
+    default CA bundle, `False` to disable verification, or an instance of
+    `ssl.SSLContext` to use a custom context.
+    * **trust_env** - *(optional)* Enables or disables usage of environment
+    variables for configuration.
+
+    **Returns:** `Response`
+
+    Usage:
+
+    ```
+    >>> import httpx
+    >>> response = httpx.request('GET', 'https://httpbin.org/get')
+    >>> response
+    <Response [200 OK]>
+    ```
+    """
+    with Client(
+        cookies=cookies,
+        proxy=proxy,
+        verify=verify,
+        timeout=timeout,
+        trust_env=trust_env,
+    ) as client:
+        return client.request(
+            method=method,
+            url=url,
+            content=content,
+            data=data,
+            files=files,
+            json=json,
+            params=params,
+            headers=headers,
+            auth=auth,
+````
+
+{"end_line":43,"file_sha256":"3d3a34779ebb4484d7c46ae48ba90deffebbc300317f088c0dcb972626428c4a","id":"ba6838854bc574ac2b674b4db073e21a358f5af403b36c441f054b494d74c77a","kind":"function","path":"httpx/_transports/mock.py","reasons":["lexical overlap: httpx, is, mock, mocktransport, py, request, response, result, the, transport"],"score":27.35728407,"start_line":29,"symbol":"MockTransport.handle_async_request","text_sha256":"abcf5c125eb6ec648b59a7d9e7088d65a926c04ebf1bcc92701a14fafd473b7c"}
+```
+    async def handle_async_request(
+        self,
+        request: Request,
+    ) -> Response:
+        await request.aread()
+        response = self.handler(request)
+
+        # Allow handler to *optionally* be an `async` function.
+        # If it is, then the `response` variable need to be awaited to actually
+        # return the result.
+
+        if not isinstance(response, Response):
+            response = await response
+
+        return response
+```
+
+{"end_line":758,"file_sha256":"c43f941baefe58c91e96d00039e1868fe719d91453026d7db1647194563bff8d","id":"619887de4f6abb4749c454a89e61e6a1709b99f7de759e8bfc99fdf9aba93e24","kind":"function","path":"httpx/_client.py","reasons":["lexical overlap: client, env, false, httpx, init, py, transport, trust, trust_env"],"score":26.77543542,"start_line":740,"symbol":"Client._init_proxy_transport","text_sha256":"584bd8df834947e621e45aff7c535d339f90664dcdd4ad60d149020e24eeeeb5"}
+```
+    def _init_proxy_transport(
+        self,
+        proxy: Proxy,
+        verify: ssl.SSLContext | str | bool = True,
+        cert: CertTypes | None = None,
+        trust_env: bool = True,
+        http1: bool = True,
+        http2: bool = False,
+        limits: Limits = DEFAULT_LIMITS,
+    ) -> BaseTransport:
+        return HTTPTransport(
+            verify=verify,
+            cert=cert,
+            trust_env=trust_env,
+            http1=http1,
+            http2=http2,
+            limits=limits,
+            proxy=proxy,
+        )
+```
+
+{"end_line":1472,"file_sha256":"c43f941baefe58c91e96d00039e1868fe719d91453026d7db1647194563bff8d","id":"7e034edb8329bcc95d95ec02c66885349856d4b1a0ce5369609885db31425fe7","kind":"function","path":"httpx/_client.py","reasons":["lexical overlap: client, env, false, httpx, init, py, transport, trust, trust_env"],"score":26.31127217,"start_line":1454,"symbol":"AsyncClient._init_proxy_transport","text_sha256":"95dcc6c52696881f39991f6297d8b1f6a8b3796ffbfbe7f28ceb62a69736aaf1"}
+```
+    def _init_proxy_transport(
+        self,
+        proxy: Proxy,
+        verify: ssl.SSLContext | str | bool = True,
+        cert: CertTypes | None = None,
+        trust_env: bool = True,
+        http1: bool = True,
+        http2: bool = False,
+        limits: Limits = DEFAULT_LIMITS,
+    ) -> AsyncBaseTransport:
+        return AsyncHTTPTransport(
+            verify=verify,
+            cert=cert,
+            trust_env=trust_env,
+            http1=http1,
+            http2=http2,
+            limits=limits,
+            proxy=proxy,
+        )
+```

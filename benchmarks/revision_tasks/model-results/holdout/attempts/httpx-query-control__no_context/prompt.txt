@@ -1,0 +1,11 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import httpx
+RESULT = str(httpx.URL("http://webservice?u=phrase%20with%20spaces"))
+```
+
+Repository source evidence:
+(No source evidence supplied.)

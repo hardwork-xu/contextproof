@@ -1,0 +1,310 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import httpx
+RESULT = [str(httpx.QueryParams({"u": "with spaces"})),
+          str(httpx.QueryParams({"u": "with%20spaces"}))]
+```
+
+Repository source evidence:
+<context query="Explain the behavior of this Python probe using repository source. httpx/_urls.py QueryParams.__str__ httpx/_urlparse.py percent_encoded
+import httpx
+RESULT = [str(httpx.QueryParams({&quot;u&quot;: &quot;with spaces&quot;})),
+          str(httpx.QueryParams({&quot;u&quot;: &quot;with%20spaces&quot;}))]
+">
+  <structural-context>
+    <file-tree><![CDATA[
+httpx/_client.py
+httpx/_types.py
+httpx/_urlparse.py
+httpx/_urls.py
+    ]]></file-tree>
+  </structural-context>
+  <chunks>
+    <chunk file="httpx/_urlparse.py" lines="1-53" score="2.4072" tokens="511">
+      <code><![CDATA[
+"""
+An implementation of `urlparse` that provides URL validation and normalization
+as described by RFC3986.
+
+We rely on this implementation rather than the one in Python's stdlib, because:
+
+* It provides more complete URL validation.
+* It properly differentiates between an empty querystring and an absent querystring,
+  to distinguish URLs with a trailing '?'.
+* It handles scheme, hostname, port, and path normalization.
+* It supports IDNA hostnames, normalizing them to their encoded form.
+* The API supports passing individual components, as well as the complete URL string.
+
+Previously we relied on the excellent `rfc3986` package to handle URL parsing and
+validation, but this module provides a simpler alternative, with less indirection
+required.
+"""
+
+from __future__ import annotations
+
+import ipaddress
+import re
+import typing
+
+import idna
+
+from ._exceptions import InvalidURL
+
+MAX_URL_LENGTH = 65536
+
+# https://datatracker.ietf.org/doc/html/rfc3986.html#section-2.3
+UNRESERVED_CHARACTERS = (
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~"
+)
+SUB_DELIMS = "!$&'()*+,;="
+
+PERCENT_ENCODED_REGEX = re.compile("%[A-Fa-f0-9]{2}")
+
+# https://url.spec.whatwg.org/#percent-encoded-bytes
+
+# The fragment percent-encode set is the C0 control percent-encode set
+# and U+0020 SPACE, U+0022 ("), U+003C (<), U+003E (>), and U+0060 (`).
+FRAG_SAFE = "".join(
+    [chr(i) for i in range(0x20, 0x7F) if i not in (0x20, 0x22, 0x3C, 0x3E, 0x60)]
+)
+
+# The query percent-encode set is the C0 control percent-encode set
+# and U+0020 SPACE, U+0022 ("), U+0023 (#), U+003C (<), and U+003E (>).
+QUERY_SAFE = "".join(
+    [chr(i) for i in range(0x20, 0x7F) if i not in (0x20, 0x22, 0x23, 0x3C, 0x3E)]
+)
+
+# The path percent-encode set is the query percent-encode set
+      ]]></code>
+    </chunk>
+    <chunk file="httpx/_urls.py" lines="15-57" symbol="URL" score="2.1202" tokens="501">
+      <code><![CDATA[
+class URL:
+    """
+    url = httpx.URL("HTTPS://jo%40email.com:a%20secret@müller.de:1234/pa%20th?search=ab#anchorlink")
+
+    assert url.scheme == "https"
+    assert url.username == "jo@email.com"
+    assert url.password == "a secret"
+    assert url.userinfo == b"jo%40email.com:a%20secret"
+    assert url.host == "müller.de"
+    assert url.raw_host == b"xn--mller-kva.de"
+    assert url.port == 1234
+    assert url.netloc == b"xn--mller-kva.de:1234"
+    assert url.path == "/pa th"
+    assert url.query == b"?search=ab"
+    assert url.raw_path == b"/pa%20th?search=ab"
+    assert url.fragment == "anchorlink"
+
+    The components of a URL are broken down like this:
+
+       https://jo%40email.com:a%20secret@müller.de:1234/pa%20th?search=ab#anchorlink
+    [scheme]   [  username  ] [password] [ host ][port][ path ] [ query ] [fragment]
+               [       userinfo        ] [   netloc   ][    raw_path    ]
+
+    Note that:
+
+    * `url.scheme` is normalized to always be lowercased.
+
+    * `url.host` is normalized to always be lowercased. Internationalized domain
+      names are represented in unicode, without IDNA encoding applied. For instance:
+
+      url = httpx.URL("http://中国.icom.museum")
+      assert url.host == "中国.icom.museum"
+      url = httpx.URL("http://xn--fiqs8s.icom.museum")
+      assert url.host == "中国.icom.museum"
+
+    * `url.raw_host` is normalized to always be lowercased, and is IDNA encoded.
+
+      url = httpx.URL("http://中国.icom.museum")
+      assert url.raw_host == b"xn--fiqs8s.icom.museum"
+      url = httpx.URL("http://xn--fiqs8s.icom.museum")
+      assert url.raw_host == b"xn--fiqs8s.icom.museum"
+
+    * `url.port` is either None or an integer. URLs that include the default port for
+      ]]></code>
+    </chunk>
+    <chunk file="httpx/_client.py" lines="494-515" symbol="_redirect_method" score="1.0691" tokens="201">
+      <code><![CDATA[
+    def _redirect_method(self, request: Request, response: Response) -> str:
+        """
+        When being redirected we may want to change the method of the request
+        based on certain specs or browser behavior.
+        """
+        method = request.method
+
+        # https://tools.ietf.org/html/rfc7231#section-6.4.4
+        if response.status_code == codes.SEE_OTHER and method != "HEAD":
+            method = "GET"
+
+        # Do what the browsers do, despite standards...
+        # Turn 302s into GETs.
+        if response.status_code == codes.FOUND and method != "HEAD":
+            method = "GET"
+
+        # If a POST is responded to with a 301, turn it into a GET.
+        # This bizarre behaviour is explained in 'requests' issue 1704.
+        if response.status_code == codes.MOVED_PERMANENTLY and method == "POST":
+            method = "GET"
+
+        return method
+      ]]></code>
+    </chunk>
+    <chunk file="httpx/_types.py" lines="92-103" symbol="SyncByteStream" score="0.9409" tokens="87">
+      <code><![CDATA[
+class SyncByteStream:
+    def __iter__(self) -> Iterator[bytes]:
+        raise NotImplementedError(
+            "The '__iter__' method must be implemented."
+        )  # pragma: no cover
+        yield b""  # pragma: no cover
+
+    def close(self) -> None:
+        """
+        Subclasses can override this method to release any network resources
+        after a request/response cycle is complete.
+        """
+      ]]></code>
+    </chunk>
+    <chunk file="httpx/_urlparse.py" lines="482-494" symbol="percent_encoded" score="1.8056" tokens="100">
+      <code><![CDATA[
+def percent_encoded(string: str, safe: str) -> str:
+    """
+    Use percent-encoding to quote a string.
+    """
+    NON_ESCAPED_CHARS = UNRESERVED_CHARACTERS + safe
+
+    # Fast path for strings that don't need escaping.
+    if not string.rstrip(NON_ESCAPED_CHARS):
+        return string
+
+    return "".join(
+        [char if char in NON_ESCAPED_CHARS else PERCENT(char) for char in string]
+    )
+      ]]></code>
+    </chunk>
+    <chunk file="httpx/_urlparse.py" lines="186-198" symbol="copy_with" score="1.5216" tokens="80">
+      <code><![CDATA[
+    def copy_with(self, **kwargs: str | None) -> ParseResult:
+        if not kwargs:
+            return self
+
+        defaults = {
+            "scheme": self.scheme,
+            "authority": self.authority,
+            "path": self.path,
+            "query": self.query,
+            "fragment": self.fragment,
+        }
+        defaults.update(kwargs)
+        return urlparse("", **defaults)
+      ]]></code>
+    </chunk>
+    <chunk file="httpx/_urls.py" lines="1-14" score="1.0311" tokens="61">
+      <code><![CDATA[
+from __future__ import annotations
+
+import typing
+from urllib.parse import parse_qs, unquote, urlencode
+
+import idna
+
+from ._types import QueryParamTypes
+from ._urlparse import urlparse
+from ._utils import primitive_value_to_str
+
+__all__ = ["URL", "QueryParams"]
+
+
+      ]]></code>
+    </chunk>
+    <chunk file="httpx/_urlparse.py" lines="478-479" symbol="PERCENT" score="0.7572" tokens="34">
+      <code><![CDATA[
+def PERCENT(string: str) -> str:
+    return "".join([f"%{byte:02X}" for byte in string.encode("utf-8")])
+      ]]></code>
+    </chunk>
+  </chunks>
+  <type-definitions>
+    <type-def file="httpx/_urls.py" symbol="URL" lines="15-57">
+      <![CDATA[class URL:
+    """
+    url = httpx.URL("HTTPS://jo%40email.com:a%20secret@müller.de:1234/pa%20th?search=ab#anchorlink")
+
+    assert url.scheme == "https"
+    assert url.username == "jo@email.com"
+    assert url.password == "a secret"
+    assert url.userinfo == b"jo%40email.com:a%20secret"
+    assert url.host == "müller.de"
+    assert url.raw_host == b"xn--mller-kva.de"
+    assert url.port == 1234
+    assert url.netloc == b"xn--mller-kva.de:1234"
+    assert url.path == "/pa th"
+    assert url.query == b"?search=ab"
+    assert url.raw_path == b"/pa%20th?search=ab"
+    assert url.fragment == "anchorlink"
+
+    The components of a URL are broken down like this:
+
+       https://jo%40email.com:a%20secret@müller.de:1234/pa%20th?search=ab#anchorlink
+    [scheme]   [  username  ] [password] [ host ][port][ path ] [ query ] [fragment]
+               [       userinfo        ] [   netloc   ][    raw_path    ]
+
+    Note that:
+
+    * `url.scheme` is normalized to always be lowercased.
+
+    * `url.host` is normalized to always be lowercased. Internationalized domain
+      names are represented in unicode, without IDNA encoding applied. For instance:
+
+      url = httpx.URL("http://中国.icom.museum")
+      assert url.host == "中国.icom.museum"
+      url = httpx.URL("http://xn--fiqs8s.icom.museum")
+      assert url.host == "中国.icom.museum"
+
+    * `url.raw_host` is normalized to always be lowercased, and is IDNA encoded.
+
+      url = httpx.URL("http://中国.icom.museum")
+      assert url.raw_host == b"xn--fiqs8s.icom.museum"
+      url = httpx.URL("http://xn--fiqs8s.icom.museum")
+      assert url.raw_host == b"xn--fiqs8s.icom.museum"
+
+    * `url.port` is either None or an integer. URLs that include the default port for]]>
+    </type-def>
+    <type-def file="httpx/_types.py" symbol="SyncByteStream" lines="92-103">
+      <![CDATA[class SyncByteStream:
+    def __iter__(self) -> Iterator[bytes]:
+        raise NotImplementedError(
+            "The '__iter__' method must be implemented."
+        )  # pragma: no cover
+        yield b""  # pragma: no cover
+
+    def close(self) -> None:
+        """
+        Subclasses can override this method to release any network resources
+        after a request/response cycle is complete.
+        """]]>
+    </type-def>
+  </type-definitions>
+  <receipt freshness="clean" complete="incomplete" reason="dependency_frontier_cut" action="fetch_skipped_candidate" index_revision="1a76e45765620474a56fe0c93bfc933e93515aabefec220cd5b49f2cb4ec2151" budget_requested="1581" budget_consumed="1575" returned_shown="8" returned_total="8" skipped_shown="20" skipped_total="20" omitted_edges_shown="20" omitted_edges_total="20">
+    <returned handle="chunk:httpx/_client.py:_redirect_method:494" file="httpx/_client.py" lines="494-515" hash="04f56ee639b94755a020b88474edac7b0514949b0594a44a15838931e7674833" score="1.0691" />
+    <returned handle="chunk:httpx/_types.py:SyncByteStream:92" file="httpx/_types.py" lines="92-103" hash="2f17465de2acbe211dd8a613dbb411d05ca19eb8fbaea136fb5d69ff14a7ce52" score="0.9409" />
+    <returned handle="chunk:httpx/_urlparse.py:_module:1" file="httpx/_urlparse.py" lines="1-53" hash="430786cfd45e52d27c0bffd9dea15c0737798991f34c547d6b420dcdd20c3a1b" score="2.4072" />
+    <returned handle="chunk:httpx/_urlparse.py:copy_with:186" file="httpx/_urlparse.py" lines="186-198" hash="9f600eed35e5bf2c2bf772a7f4a604a14d7b17b3a64176866a46c7f2d1a36092" score="1.5216" />
+    <returned handle="chunk:httpx/_urlparse.py:PERCENT:478" file="httpx/_urlparse.py" lines="478-479" hash="7597b6c430eb2cc0d12d3c2004e9490dbf3c1a1acc3cdbdad715d7d04ce1fe3a" score="0.7572" />
+    <returned handle="chunk:httpx/_urlparse.py:percent_encoded:482" file="httpx/_urlparse.py" lines="482-494" hash="d1deb891d12b696a8f6cf092d7af6bededece3152e91393d03f752ee39a8062c" score="1.8056" />
+    <returned handle="chunk:httpx/_urls.py:_module:1" file="httpx/_urls.py" lines="1-14" hash="4eee5765d57bb2c1306dafef230ea98f416f579fa927a6e78de2ebe7582446ee" score="1.0311" />
+    <returned handle="chunk:httpx/_urls.py:URL:15" file="httpx/_urls.py" lines="15-57" hash="4e5bfa6d01710cd37cdcdffb66c20235e475b68b510f82d58ccb54f89a2e9709" score="2.1202" />
+    <skipped file="httpx/_client.py" reason="over_budget" handle="chunk:httpx/_client.py:_module:1" />
+    <skipped file="httpx/_client.py" reason="over_budget" handle="chunk:httpx/_client.py:_module:112" />
+    <skipped file="httpx/_client.py" reason="over_budget" handle="chunk:httpx/_client.py:AsyncClient:1307" />
+    <skipped file="httpx/_client.py" reason="over_budget" handle="chunk:httpx/_client.py:AsyncClient:1360" />
+    <skipped file="httpx/_client.py" reason="over_budget" handle="chunk:httpx/_client.py:AsyncClient:1426" />
+    <skipped file="httpx/_client.py" reason="over_budget" handle="chunk:httpx/_client.py:AsyncClient:1498" />
+    <skipped file="httpx/_client.py" reason="over_budget" handle="chunk:httpx/_client.py:AsyncClient:1569" />
+    <skipped file="httpx/_client.py" reason="over_budget" handle="chunk:httpx/_client.py:AsyncClient:1756" />
+  </receipt>
+</context>

@@ -1,0 +1,389 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import attrs
+@attrs.define
+class Record:
+    value: str = attrs.field(validator=attrs.validators.in_(["a", "b"]))
+field = attrs.fields(Record).value
+include = attrs.filters.include(field)
+RESULT = include(field, "a")
+```
+
+Repository source evidence:
+# ContextProof source evidence
+{"budget":16000,"budget_unit":"utf8_bytes","id":"181e6943f25496609b46fe8e59f8e9363690afecbeac67328fe36089ca0aed26","method":"bm25","omitted_count":403,"query":"Explain the behavior of this Python probe using repository source. src/attr/validators.py in_ src/attr/validators.py _InValidator src/attr/filters.py _split_what\nimport attrs\n@attrs.define\nclass Record:\n    value: str = attrs.field(validator=attrs.validators.in_([\"a\", \"b\"]))\nfield = attrs.fields(Record).value\ninclude = attrs.filters.include(field)\nRESULT = include(field, \"a\")\n","schema_version":1,"snapshot_id":"58c49369a49066b693430d997a4de08e4a9c123a92d7766476a6071e1417221b","tokenizer":"bytes"}
+
+{"end_line":18,"file_sha256":"64188a58ba774742df099b2aed7d75a67f565fc36c952db05cce23b272ce19cf","id":"5d771b1f8bf2d5305723b8a187b86f09fc28ce98118adae926383e65278b24b3","kind":"function","path":"src/attr/filters.py","reasons":["lexical overlap: a, attr, filters, in, of, py, split, split_what, src, str, what"],"score":34.69982092,"start_line":10,"symbol":"_split_what","text_sha256":"58edae521e56112c129ebf07cf1f2f1f60b8b72bfa11167e43bd26e2b2740c59"}
+```
+def _split_what(what):
+    """
+    Returns a tuple of `frozenset`s of classes and attributes.
+    """
+    return (
+        frozenset(cls for cls in what if isinstance(cls, type)),
+        frozenset(cls for cls in what if isinstance(cls, str)),
+        frozenset(cls for cls in what if isinstance(cls, Attribute)),
+    )
+```
+
+{"end_line":37,"file_sha256":"64188a58ba774742df099b2aed7d75a67f565fc36c952db05cce23b272ce19cf","id":"5f821edceda47188d714a5ff63bbd6ff965229032ff5167c11063a53c7e55ec5","kind":"function","path":"src/attr/filters.py","reasons":["lexical overlap: a, attr, attrs, field, filters, include, py, split, split_what, src, str, what"],"score":34.26240827,"start_line":21,"symbol":"include","text_sha256":"18cf53bf6d5cdd94caa743415e47fc332d3f8ab9ca341700cf8aa573d123c7c2"}
+```
+def include(*what):
+    """
+    Create a filter that only allows *what*.
+
+    Args:
+        what (list[type, str, attrs.Attribute]):
+            What to include. Can be a type, a name, or an attribute.
+
+    Returns:
+        Callable:
+            A callable that can be passed to `attrs.asdict`'s and
+            `attrs.astuple`'s *filter* argument.
+
+    .. versionchanged:: 23.1.0 Accept strings with field names.
+    """
+    cls, names, attrs = _split_what(what)
+
+```
+
+{"end_line":64,"file_sha256":"64188a58ba774742df099b2aed7d75a67f565fc36c952db05cce23b272ce19cf","id":"722a7bcb465434684cd7c3caa3674fe3507d5c54554a4983f609a04472cedec2","kind":"function","path":"src/attr/filters.py","reasons":["lexical overlap: a, attr, attrs, field, filters, py, split, split_what, src, str, what"],"score":27.60242512,"start_line":48,"symbol":"exclude","text_sha256":"3f70fa0232d9280fbffd1f968617ae0ededb0af039237464f3e19480bdb2a63d"}
+```
+def exclude(*what):
+    """
+    Create a filter that does **not** allow *what*.
+
+    Args:
+        what (list[type, str, attrs.Attribute]):
+            What to exclude. Can be a type, a name, or an attribute.
+
+    Returns:
+        Callable:
+            A callable that can be passed to `attrs.asdict`'s and
+            `attrs.astuple`'s *filter* argument.
+
+    .. versionchanged:: 23.3.0 Accept field name string as input argument
+    """
+    cls, names, attrs = _split_what(what)
+
+```
+
+{"end_line":262,"file_sha256":"ec54646ed97f374d7b4ae0617ff570de6c36736a46661b4218ecda760cfbb69e","id":"f9a418b29adb46ddc74b41369a11d8d438bc49aaefce9287f32a7a5963e5a7ba","kind":"function","path":"src/attr/_next_gen.py","reasons":["lexical overlap: a, attr, attrs, behavior, class, define, field, fields, in, of, py, python, src, the, this, using, validators, value, what"],"score":25.37195843,"start_line":183,"symbol":"define","text_sha256":"9642147d4fd7cda27a9c4ace17b12047e05cb825610af98531c614dc7cc452a2"}
+```
+
+        cache_hash (bool):
+            Ensure that the object's hash code is computed only once and stored
+            on the object.  If this is set to True, hashing must be either
+            explicitly or implicitly enabled for this class.  If the hash code
+            is cached, avoid any reassignments of fields involved in hash code
+            computation or mutations of the objects those fields point to after
+            object creation.  If such changes occur, the behavior of the
+            object's hash code is undefined.
+
+        frozen (bool):
+            Make instances immutable after initialization.  If someone attempts
+            to modify a frozen instance, `attrs.exceptions.FrozenInstanceError`
+            is raised.
+
+            .. note::
+
+                1. This is achieved by installing a custom ``__setattr__``
+                   method on your class, so you can't implement your own.
+
+                2. True immutability is impossible in Python.
+
+                3. This *does* have a minor a runtime performance `impact
+                   <how-frozen>` when initializing new instances.  In other
+                   words: ``__init__`` is slightly slower with ``frozen=True``.
+
+                4. If a class is frozen, you cannot modify ``self`` in
+                   ``__attrs_post_init__`` or a self-written ``__init__``. You
+                   can circumvent that limitation by using
+                   ``object.__setattr__(self, "attribute_name", value)``.
+
+                5. Subclasses of a frozen class are frozen too.
+
+        kw_only (bool):
+            Make all attributes keyword-only in the generated ``__init__`` (if
+            *init* is False, this parameter is ignored).
+
+        weakref_slot (bool):
+            Make instances weak-referenceable.  This has no effect unless
+            *slots* is True.
+
+        field_transformer (~typing.Callable | None):
+            A function that is called with the original class object and all
+            fields right before *attrs* finalizes the class.  You can use this,
+            for example, to automatically add converters or validators to
+            fields based on their types.
+
+            .. seealso:: `transform-fields`
+
+        match_args (bool):
+            If True (default), set ``__match_args__`` on the class to support
+            :pep:`634` (*Structural Pattern Matching*). It is a tuple of all
+            non-keyword-only ``__init__`` parameter names on Python 3.10 and
+            later. Ignored on older Python versions.
+
+        collect_by_mro (bool):
+            If True, *attrs* collects attributes from base classes correctly
+            according to the `method resolution order
+            <https://docs.python.org/3/howto/mro.html>`_. If False, *attrs*
+            will mimic the (wrong) behavior of `dataclasses` and :pep:`681`.
+
+            See also `issue #428
+            <https://github.com/python-attrs/attrs/issues/428>`_.
+
+        getstate_setstate (bool | None):
+            .. note::
+
+                This is usually only interesting for slotted classes and you
+                should probably just set *auto_detect* to True.
+
+            If True, ``__getstate__`` and ``__setstate__`` are generated and
+            attached to the class. This is necessary for slotted classes to be
+            pickleable. If left None, it's True by default for slotted classes
+            and False for dict classes.
+
+            If *auto_detect* is True, and *getstate_setstate* is left None, and
+            **either** ``__getstate__`` or ``__setstate__`` is detected
+            directly on the class (meaning: not inherited), it is set to False
+            (this is usually what you want).
+
+```
+
+{"end_line":69,"file_sha256":"a9e4096783b4f327334a7f38d2ff5b60e699c9113cd56b158be402ad8de4ac25","id":"243333cf6f1e279c7ba2fef70de7740e716a2e023e6caf3ad63c10ef2b690579","kind":"module","path":"src/attrs/__init__.py","reasons":["lexical overlap: attr, attrs, class, define, field, fields, filters, import, py, src, using, validators"],"score":25.30715324,"start_line":1,"symbol":"<module>","text_sha256":"a9e4096783b4f327334a7f38d2ff5b60e699c9113cd56b158be402ad8de4ac25"}
+```
+# SPDX-License-Identifier: MIT
+
+from attr import (
+    NOTHING,
+    Attribute,
+    AttrsInstance,
+    Converter,
+    Factory,
+    NothingType,
+    _make_getattr,
+    assoc,
+    cmp_using,
+    define,
+    evolve,
+    field,
+    fields,
+    fields_dict,
+    frozen,
+    has,
+    make_class,
+    mutable,
+    resolve_types,
+    validate,
+)
+from attr._next_gen import asdict, astuple
+
+from . import converters, exceptions, filters, setters, validators
+
+
+__all__ = [
+    "NOTHING",
+    "Attribute",
+    "AttrsInstance",
+    "Converter",
+    "Factory",
+    "NothingType",
+    "__author__",
+    "__copyright__",
+    "__description__",
+    "__doc__",
+    "__email__",
+    "__license__",
+    "__title__",
+    "__url__",
+    "__version__",
+    "__version_info__",
+    "asdict",
+    "assoc",
+    "astuple",
+    "cmp_using",
+    "converters",
+    "define",
+    "evolve",
+    "exceptions",
+    "field",
+    "fields",
+    "fields_dict",
+    "filters",
+    "frozen",
+    "has",
+    "make_class",
+    "mutable",
+    "resolve_types",
+    "setters",
+    "validate",
+    "validators",
+]
+
+__getattr__ = _make_getattr(__name__)
+```
+
+{"end_line":468,"file_sha256":"e7eb54289b69de1e44979e4470397a1965c5a7af1f4fc0fc53bb8244deb8f7b2","id":"c23cbc20ce749cdc22497d2ef1741ddc220a14c20b7e242fd395e6b159b9f35a","kind":"function","path":"src/attr/_funcs.py","reasons":["lexical overlap: a, attr, attrs, class, define, field, fields, import, in, include, of, py, python, src, the, this, what"],"score":24.71258775,"start_line":397,"symbol":"resolve_types","text_sha256":"6a50290610faa1eca1092507094a3175a1baa6ea92fa969f9d6a3d5eee0e214f"}
+```
+def resolve_types(
+    cls, globalns=None, localns=None, attribs=None, include_extras=True
+):
+    """
+    Resolve any strings and forward annotations in type annotations.
+
+    This is only required if you need concrete types in :class:`Attribute`'s
+    *type* field. In other words, you don't need to resolve your types if you
+    only use them for static type checking.
+
+    With no arguments, names will be looked up in the module in which the class
+    was created. If this is not what you want, for example, if the name only
+    exists inside a method, you may pass *globalns* or *localns* to specify
+    other dictionaries in which to look up these names. See the docs of
+    `typing.get_type_hints` for more details.
+
+    Args:
+        cls (type): Class to resolve.
+
+        globalns (dict | None): Dictionary containing global variables.
+
+        localns (dict | None): Dictionary containing local variables.
+
+        attribs (list | None):
+            List of attribs for the given class. This is necessary when calling
+            from inside a ``field_transformer`` since *cls* is not an *attrs*
+            class yet.
+
+        include_extras (bool):
+            Resolve more accurately, if possible. Pass ``include_extras`` to
+            ``typing.get_hints``, if supported by the typing module. On
+            supported Python versions (3.9+), this resolves the types more
+            accurately.
+
+    Raises:
+        TypeError: If *cls* is not a class.
+
+        attrs.exceptions.NotAnAttrsClassError:
+            If *cls* is not an *attrs* class and you didn't pass any attribs.
+
+        NameError: If types cannot be resolved because of missing variables.
+
+    Returns:
+        *cls* so you can use this function also as a class decorator. Please
+        note that you have to apply it **after** `attrs.define`. That means the
+        decorator has to come in the line **before** `attrs.define`.
+
+    ..  versionadded:: 20.1.0
+    ..  versionadded:: 21.1.0 *attribs*
+    ..  versionadded:: 23.1.0 *include_extras*
+    """
+    # Since calling get_type_hints is expensive we cache whether we've
+    # done it already.
+    if getattr(cls, "__attrs_types_resolved__", None) != cls:
+        import typing
+
+        kwargs = {"globalns": globalns, "localns": localns}
+
+        if PY_3_9_PLUS:
+            kwargs["include_extras"] = include_extras
+
+        hints = typing.get_type_hints(cls, **kwargs)
+        for field in fields(cls) if attribs is None else attribs:
+            if field.name in hints:
+                # Since fields have been frozen we must work around it.
+                _OBJ_SETATTR(field, "type", hints[field.name])
+        # We store the class we resolved so that subclasses know they haven't
+        # been resolved.
+        cls.__attrs_types_resolved__ = cls
+
+    # Return the class so you can use it as a decorator too.
+    return cls
+```
+
+{"end_line":495,"file_sha256":"ec54646ed97f374d7b4ae0617ff570de6c36736a46661b4218ecda760cfbb69e","id":"1252f6e5bda28f8c5ef53b77e28f53c87e670afb1fa1da303385eed6547cc86e","kind":"function","path":"src/attr/_next_gen.py","reasons":["lexical overlap: a, attr, attrs, class, define, field, in, include, of, py, src, the, this, using, validator, validators, value"],"score":23.25593111,"start_line":416,"symbol":"field","text_sha256":"43b43781f78b0f5579a6024481df9a2123b3fafd9bba5cf14385460183f93a96"}
+```
+def field(
+    *,
+    default=NOTHING,
+    validator=None,
+    repr=True,
+    hash=None,
+    init=True,
+    metadata=None,
+    type=None,
+    converter=None,
+    factory=None,
+    kw_only=False,
+    eq=None,
+    order=None,
+    on_setattr=None,
+    alias=None,
+):
+    """
+    Create a new :term:`field` / :term:`attribute` on a class.
+
+    ..  warning::
+
+        Does **nothing** unless the class is also decorated with
+        `attrs.define` (or similar)!
+
+    Args:
+        default:
+            A value that is used if an *attrs*-generated ``__init__`` is used
+            and no value is passed while instantiating or the attribute is
+            excluded using ``init=False``.
+
+            If the value is an instance of `attrs.Factory`, its callable will
+            be used to construct a new value (useful for mutable data types
+            like lists or dicts).
+
+            If a default is not set (or set manually to `attrs.NOTHING`), a
+            value *must* be supplied when instantiating; otherwise a
+            `TypeError` will be raised.
+
+            .. seealso:: `defaults`
+
+        factory (~typing.Callable):
+            Syntactic sugar for ``default=attr.Factory(factory)``.
+
+        validator (~typing.Callable | list[~typing.Callable]):
+            Callable that is called by *attrs*-generated ``__init__`` methods
+            after the instance has been initialized.  They receive the
+            initialized instance, the :func:`~attrs.Attribute`, and the passed
+            value.
+
+            The return value is *not* inspected so the validator has to throw
+            an exception itself.
+
+            If a `list` is passed, its items are treated as validators and must
+            all pass.
+
+            Validators can be globally disabled and re-enabled using
+            `attrs.validators.get_disabled` / `attrs.validators.set_disabled`.
+
+            The validator can also be set using decorator notation as shown
+            below.
+
+            .. seealso:: :ref:`validators`
+
+        repr (bool | ~typing.Callable):
+            Include this attribute in the generated ``__repr__`` method. If
+            True, include the attribute; if False, omit it. By default, the
+            built-in ``repr()`` function is used. To override how the attribute
+            value is formatted, pass a ``callable`` that takes a single value
+            and returns a string. Note that the resulting string is used as-is,
+            which means it will be used directly *instead* of calling
+            ``repr()`` (the default).
+
+        eq (bool | ~typing.Callable):
+            If True (default), include this attribute in the generated
+            ``__eq__`` and ``__ne__`` methods that check two instances for
+            equality. To override how the attribute value is compared, pass a
+            callable that takes a single value and returns the value to be
+            compared.
+
+```

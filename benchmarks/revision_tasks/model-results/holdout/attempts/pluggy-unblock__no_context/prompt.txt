@@ -1,0 +1,15 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import pluggy
+manager = pluggy.PluginManager("example")
+manager.set_blocked("plugin")
+first = manager.unblock("plugin")
+second = manager.unblock("plugin")
+RESULT = [first, second, manager.is_blocked("plugin")]
+```
+
+Repository source evidence:
+(No source evidence supplied.)

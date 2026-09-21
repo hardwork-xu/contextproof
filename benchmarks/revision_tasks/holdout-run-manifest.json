@@ -1,0 +1,15 @@
+{
+  "budget_bytes": 16000,
+  "contexts_sha256": "52432d6042c7a069845f071ee3a8ce38254dd83c16ece31e237ee47550fdf594",
+  "model": "gpt-6-astra",
+  "parallel": 4,
+  "qualification": "at least 4/5 development fresh-anchor exact answers before holdout",
+  "reasoning_effort": "medium",
+  "seed_for_job_order": 230921,
+  "semantic_attempts_per_cell": 1,
+  "split": "holdout",
+  "task_manifest_sha256": "e27051186f0fe5b56a615cd9ee9de5ba6b56232b227e1ea40b72379aeacd4c0b",
+  "transport": "HTTPS via documented custom provider; unchanged authenticated OpenAI endpoint",
+  "transport_retries": "CLI defaults; raw errors retained",
+  "protocol_commit": "0c6d0be9713971c36430c2f9f80cf24240e4e8da"
+}

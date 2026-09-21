@@ -1,0 +1,340 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import httpx
+proxy = httpx.Proxy("socks5h://localhost:1080")
+RESULT = [proxy.url.scheme, proxy.url.port]
+```
+
+Repository source evidence:
+# ContextProof source evidence
+{"budget":16000,"budget_unit":"utf8_bytes","id":"cff306ec04d70511c01271b915ce7b1e8127d4e0ffaf7288a09f39ff0a6f4a78","method":"bm25","omitted_count":575,"query":"Explain the behavior of this Python probe using repository source. httpx/_config.py Proxy.__init__\nimport httpx\nproxy = httpx.Proxy(\"socks5h://localhost:1080\")\nRESULT = [proxy.url.scheme, proxy.url.port]\n","schema_version":1,"snapshot_id":"d39d2caa51d7b21d91903e121d04b08f2bda3190abd9c65cdca544b59b846562","tokenizer":"bytes"}
+
+{"end_line":215,"file_sha256":"03379a454c95c0271c4f2c8d25ec437f49f57457f3cf2769748420bf0ecf2e79","id":"87fd9e8f5a419b7fa26d5e1e79b9017a94e8906358b38fac364d6ddd9a056d94","kind":"function","path":"httpx/_transports/default.py","reasons":["lexical overlap: httpx, import, init, port, proxy, py, scheme, socks5h, the, url, using"],"score":23.55128047,"start_line":136,"symbol":"HTTPTransport.__init__","text_sha256":"c5fe8f1eadf4fb491a7b7cb18ca729b208952caa5ed47ad062a558d0f5d880ae"}
+```
+    def __init__(
+        self,
+        verify: ssl.SSLContext | str | bool = True,
+        cert: CertTypes | None = None,
+        trust_env: bool = True,
+        http1: bool = True,
+        http2: bool = False,
+        limits: Limits = DEFAULT_LIMITS,
+        proxy: ProxyTypes | None = None,
+        uds: str | None = None,
+        local_address: str | None = None,
+        retries: int = 0,
+        socket_options: typing.Iterable[SOCKET_OPTION] | None = None,
+    ) -> None:
+        import httpcore
+
+        proxy = Proxy(url=proxy) if isinstance(proxy, (str, URL)) else proxy
+        ssl_context = create_ssl_context(verify=verify, cert=cert, trust_env=trust_env)
+
+        if proxy is None:
+            self._pool = httpcore.ConnectionPool(
+                ssl_context=ssl_context,
+                max_connections=limits.max_connections,
+                max_keepalive_connections=limits.max_keepalive_connections,
+                keepalive_expiry=limits.keepalive_expiry,
+                http1=http1,
+                http2=http2,
+                uds=uds,
+                local_address=local_address,
+                retries=retries,
+                socket_options=socket_options,
+            )
+        elif proxy.url.scheme in ("http", "https"):
+            self._pool = httpcore.HTTPProxy(
+                proxy_url=httpcore.URL(
+                    scheme=proxy.url.raw_scheme,
+                    host=proxy.url.raw_host,
+                    port=proxy.url.port,
+                    target=proxy.url.raw_path,
+                ),
+                proxy_auth=proxy.raw_auth,
+                proxy_headers=proxy.headers.raw,
+                ssl_context=ssl_context,
+                proxy_ssl_context=proxy.ssl_context,
+                max_connections=limits.max_connections,
+                max_keepalive_connections=limits.max_keepalive_connections,
+                keepalive_expiry=limits.keepalive_expiry,
+                http1=http1,
+                http2=http2,
+                socket_options=socket_options,
+            )
+        elif proxy.url.scheme in ("socks5", "socks5h"):
+            try:
+                import socksio  # noqa
+            except ImportError:  # pragma: no cover
+                raise ImportError(
+                    "Using SOCKS proxy, but the 'socksio' package is not installed. "
+                    "Make sure to install httpx using `pip install httpx[socks]`."
+                ) from None
+
+            self._pool = httpcore.SOCKSProxy(
+                proxy_url=httpcore.URL(
+                    scheme=proxy.url.raw_scheme,
+                    host=proxy.url.raw_host,
+                    port=proxy.url.port,
+                    target=proxy.url.raw_path,
+                ),
+                proxy_auth=proxy.raw_auth,
+                ssl_context=ssl_context,
+                max_connections=limits.max_connections,
+                max_keepalive_connections=limits.max_keepalive_connections,
+                keepalive_expiry=limits.keepalive_expiry,
+                http1=http1,
+                http2=http2,
+            )
+        else:  # pragma: no cover
+            raise ValueError(
+                "Proxy protocol must be either 'http', 'https', 'socks5', or 'socks5h',"
+                f" but got {proxy.url.scheme!r}."
+            )
+```
+
+{"end_line":359,"file_sha256":"03379a454c95c0271c4f2c8d25ec437f49f57457f3cf2769748420bf0ecf2e79","id":"8a3a839912b0707c7ec8154a3a79e54fe9e3640adf91c5af049545350cd8ed98","kind":"function","path":"httpx/_transports/default.py","reasons":["lexical overlap: httpx, import, init, port, proxy, py, scheme, socks5h, the, url, using"],"score":23.44974986,"start_line":280,"symbol":"AsyncHTTPTransport.__init__","text_sha256":"433c33239d86ec87383cba12229bd086b4a92985b25ff8b0859cf028f29250e0"}
+```
+    def __init__(
+        self,
+        verify: ssl.SSLContext | str | bool = True,
+        cert: CertTypes | None = None,
+        trust_env: bool = True,
+        http1: bool = True,
+        http2: bool = False,
+        limits: Limits = DEFAULT_LIMITS,
+        proxy: ProxyTypes | None = None,
+        uds: str | None = None,
+        local_address: str | None = None,
+        retries: int = 0,
+        socket_options: typing.Iterable[SOCKET_OPTION] | None = None,
+    ) -> None:
+        import httpcore
+
+        proxy = Proxy(url=proxy) if isinstance(proxy, (str, URL)) else proxy
+        ssl_context = create_ssl_context(verify=verify, cert=cert, trust_env=trust_env)
+
+        if proxy is None:
+            self._pool = httpcore.AsyncConnectionPool(
+                ssl_context=ssl_context,
+                max_connections=limits.max_connections,
+                max_keepalive_connections=limits.max_keepalive_connections,
+                keepalive_expiry=limits.keepalive_expiry,
+                http1=http1,
+                http2=http2,
+                uds=uds,
+                local_address=local_address,
+                retries=retries,
+                socket_options=socket_options,
+            )
+        elif proxy.url.scheme in ("http", "https"):
+            self._pool = httpcore.AsyncHTTPProxy(
+                proxy_url=httpcore.URL(
+                    scheme=proxy.url.raw_scheme,
+                    host=proxy.url.raw_host,
+                    port=proxy.url.port,
+                    target=proxy.url.raw_path,
+                ),
+                proxy_auth=proxy.raw_auth,
+                proxy_headers=proxy.headers.raw,
+                proxy_ssl_context=proxy.ssl_context,
+                ssl_context=ssl_context,
+                max_connections=limits.max_connections,
+                max_keepalive_connections=limits.max_keepalive_connections,
+                keepalive_expiry=limits.keepalive_expiry,
+                http1=http1,
+                http2=http2,
+                socket_options=socket_options,
+            )
+        elif proxy.url.scheme in ("socks5", "socks5h"):
+            try:
+                import socksio  # noqa
+            except ImportError:  # pragma: no cover
+                raise ImportError(
+                    "Using SOCKS proxy, but the 'socksio' package is not installed. "
+                    "Make sure to install httpx using `pip install httpx[socks]`."
+                ) from None
+
+            self._pool = httpcore.AsyncSOCKSProxy(
+                proxy_url=httpcore.URL(
+                    scheme=proxy.url.raw_scheme,
+                    host=proxy.url.raw_host,
+                    port=proxy.url.port,
+                    target=proxy.url.raw_path,
+                ),
+                proxy_auth=proxy.raw_auth,
+                ssl_context=ssl_context,
+                max_connections=limits.max_connections,
+                max_keepalive_connections=limits.max_keepalive_connections,
+                keepalive_expiry=limits.keepalive_expiry,
+                http1=http1,
+                http2=http2,
+            )
+        else:  # pragma: no cover
+            raise ValueError(
+                "Proxy protocol must be either 'http', 'https', 'socks5', or 'socks5h',"
+                " but got {proxy.url.scheme!r}."
+            )
+```
+
+{"end_line":224,"file_sha256":"a4fa7653ec2271f70ab05f8a6111352d876dddee84446788a1767c1a3a372d67","id":"838fa67009fc0658216990be110cd79999846eca41f8e80691b071d4d5533cdf","kind":"function","path":"httpx/_config.py","reasons":["lexical overlap: config, httpx, init, proxy, py, scheme, socks5h, the, url"],"score":20.99731652,"start_line":202,"symbol":"Proxy.__init__","text_sha256":"22b7381dd95c3beb4dfbd4fc24b2659337d2623ef5ca21b852fb5e4701e693d0"}
+```
+    def __init__(
+        self,
+        url: URL | str,
+        *,
+        ssl_context: ssl.SSLContext | None = None,
+        auth: tuple[str, str] | None = None,
+        headers: HeaderTypes | None = None,
+    ) -> None:
+        url = URL(url)
+        headers = Headers(headers)
+
+        if url.scheme not in ("http", "https", "socks5", "socks5h"):
+            raise ValueError(f"Unknown scheme for proxy URL {url!r}")
+
+        if url.username or url.password:
+            # Remove any auth credentials from the URL.
+            auth = (url.username, url.password)
+            url = url.copy_with(username=None, password=None)
+
+        self.url = url
+        self.auth = auth
+        self.headers = headers
+        self.ssl_context = ssl_context
+```
+
+{"end_line":190,"file_sha256":"fd355ea802afc4990a1ddcfb74579be2cd0b66a41781e1645d281f88704aff5a","id":"68ce533a4efde7d1ef4934b5eaf88253abb31d2a74b5bdd9f30e7a1a640b15fb","kind":"function","path":"httpx/_utils.py","reasons":["lexical overlap: httpx, import, init, of, port, proxy, py, scheme, url"],"score":17.03859593,"start_line":162,"symbol":"URLPattern.__init__","text_sha256":"1ff29ada219633461f6942c4462e01754e01ee0ab0f60d863d55da4abc769a15"}
+```
+    def __init__(self, pattern: str) -> None:
+        from ._urls import URL
+
+        if pattern and ":" not in pattern:
+            raise ValueError(
+                f"Proxy keys should use proper URL forms rather "
+                f"than plain scheme strings. "
+                f'Instead of "{pattern}", use "{pattern}://"'
+            )
+
+        url = URL(pattern)
+        self.pattern = pattern
+        self.scheme = "" if url.scheme == "all" else url.scheme
+        self.host = "" if url.host == "*" else url.host
+        self.port = url.port
+        if not url.host or url.host == "*":
+            self.host_regex: typing.Pattern[str] | None = None
+        elif url.host.startswith("*."):
+            # *.example.com should match "www.example.com", but not "example.com"
+            domain = re.escape(url.host[2:])
+            self.host_regex = re.compile(f"^.+\\.{domain}$")
+        elif url.host.startswith("*"):
+            # *example.com should match "www.example.com" and "example.com"
+            domain = re.escape(url.host[1:])
+            self.host_regex = re.compile(f"^(.+\\.)?{domain}$")
+        else:
+            # example.com should match "example.com" but not "www.example.com"
+            domain = re.escape(url.host)
+            self.host_regex = re.compile(f"^{domain}$")
+```
+
+{"end_line":419,"file_sha256":"640987e3b38d7e4c6bae3f8f3d88467a21e36fa0232824be00d58837838bfca6","id":"015f663dc89160f1c17bd7eba589073bf82987c7cf5f2755c86ac499b47b943c","kind":"function","path":"httpx/_urlparse.py","reasons":["lexical overlap: httpx, of, port, py, scheme, the, url"],"score":16.63332444,"start_line":395,"symbol":"normalize_port","text_sha256":"1912d963a6391f1e603ec88aa088447f362c3aaf9f0aa24126a61cdff6317906"}
+```
+def normalize_port(port: str | int | None, scheme: str) -> int | None:
+    # From https://tools.ietf.org/html/rfc3986#section-3.2.3
+    #
+    # "A scheme may define a default port.  For example, the "http" scheme
+    # defines a default port of "80", corresponding to its reserved TCP
+    # port number.  The type of port designated by the port number (e.g.,
+    # TCP, UDP, SCTP) is defined by the URI scheme.  URI producers and
+    # normalizers should omit the port component and its ":" delimiter if
+    # port is empty or if its value would be the same as that of the
+    # scheme's default."
+    if port is None or port == "":
+        return None
+
+    try:
+        port_as_int = int(port)
+    except ValueError:
+        raise InvalidURL(f"Invalid port: {port!r}")
+
+    # See https://url.spec.whatwg.org/#url-miscellaneous
+    default_port = {"ftp": 21, "http": 80, "https": 443, "ws": 80, "wss": 443}.get(
+        scheme
+    )
+    if port_as_int == default_port:
+        return None
+    return port_as_int
+```
+
+{"end_line":76,"file_sha256":"fd355ea802afc4990a1ddcfb74579be2cd0b66a41781e1645d281f88704aff5a","id":"5fce7f99449fd2d1f783f06bc8b39e9fa33baffb9b02e2c6c1d6fa5f733e4483","kind":"function","path":"httpx/_utils.py","reasons":["lexical overlap: config, httpx, localhost, of, proxy, py, scheme, the"],"score":16.44463297,"start_line":30,"symbol":"get_environment_proxies","text_sha256":"dfefe0682926371085ba1f25446ad872831aa9ed6c8139df36e3a9d3791a4364"}
+```
+def get_environment_proxies() -> dict[str, str | None]:
+    """Gets proxy information from the environment"""
+
+    # urllib.request.getproxies() falls back on System
+    # Registry and Config for proxies on Windows and macOS.
+    # We don't want to propagate non-HTTP proxies into
+    # our configuration such as 'TRAVIS_APT_PROXY'.
+    proxy_info = getproxies()
+    mounts: dict[str, str | None] = {}
+
+    for scheme in ("http", "https", "all"):
+        if proxy_info.get(scheme):
+            hostname = proxy_info[scheme]
+            mounts[f"{scheme}://"] = (
+                hostname if "://" in hostname else f"http://{hostname}"
+            )
+
+    no_proxy_hosts = [host.strip() for host in proxy_info.get("no", "").split(",")]
+    for hostname in no_proxy_hosts:
+        # See https://curl.haxx.se/libcurl/c/CURLOPT_NOPROXY.html for details
+        # on how names in `NO_PROXY` are handled.
+        if hostname == "*":
+            # If NO_PROXY=* is used or if "*" occurs as any one of the comma
+            # separated hostnames, then we should just bypass any information
+            # from HTTP_PROXY, HTTPS_PROXY, ALL_PROXY, and always ignore
+            # proxies.
+            return {}
+        elif hostname:
+            # NO_PROXY=.google.com is marked as "all://*.google.com,
+            #   which disables "www.google.com" but not "google.com"
+            # NO_PROXY=google.com is marked as "all://*google.com,
+            #   which disables "www.google.com" and "google.com".
+            #   (But not "wwwgoogle.com")
+            # NO_PROXY can include domains, IPv6, IPv4 addresses and "localhost"
+            #   NO_PROXY=example.com,::1,localhost,192.168.0.0/16
+            if "://" in hostname:
+                mounts[hostname] = None
+            elif is_ipv4_hostname(hostname):
+                mounts[f"all://{hostname}"] = None
+            elif is_ipv6_hostname(hostname):
+                mounts[f"all://[{hostname}]"] = None
+            elif hostname.lower() == "localhost":
+                mounts[f"all://{hostname}"] = None
+            else:
+                mounts[f"all://*{hostname}"] = None
+
+    return mounts
+```
+
+{"end_line":417,"file_sha256":"757f7d551d4348e1e9828f40abb3f360ee0529dc6a2a3c32369f20adff1d1cdd","id":"c7e0b3300cee5e6134aead9dccad8f187af8c1492fb12970cbca95b3b88b1c3f","kind":"function","path":"httpx/_urls.py","reasons":["lexical overlap: httpx, import, port, py, scheme, url"],"score":15.32644804,"start_line":403,"symbol":"URL.raw","text_sha256":"b1578fce153f88cf9f0336d0d20b1e3114d0fc59edbf716611f923dd8958000f"}
+```
+    @property
+    def raw(self) -> tuple[bytes, bytes, int, bytes]:  # pragma: nocover
+        import collections
+        import warnings
+
+        warnings.warn("URL.raw is deprecated.")
+        RawURL = collections.namedtuple(
+            "RawURL", ["raw_scheme", "raw_host", "port", "raw_path"]
+        )
+        return RawURL(
+            raw_scheme=self.raw_scheme,
+            raw_host=self.raw_host,
+            port=self.port,
+            raw_path=self.raw_path,
+        )
+```

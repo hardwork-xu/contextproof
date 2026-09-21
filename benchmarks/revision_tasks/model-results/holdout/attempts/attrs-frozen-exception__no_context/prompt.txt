@@ -1,0 +1,17 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import attrs
+@attrs.frozen
+class Failure(Exception):
+    pass
+error = Failure()
+error.__suppress_context__ = True
+error.__notes__ = ["note"]
+RESULT = [error.__suppress_context__, error.__notes__]
+```
+
+Repository source evidence:
+(No source evidence supplied.)

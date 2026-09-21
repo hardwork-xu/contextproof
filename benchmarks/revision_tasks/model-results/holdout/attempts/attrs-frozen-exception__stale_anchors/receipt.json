@@ -1,0 +1,49 @@
+{
+  "answer": {
+    "error": "FrozenInstanceError"
+  },
+  "artifact_sha256": {
+    "command.json": "6d3a151fc48434c3b3963b963fb3d00bc2f4eff225c3d41e4897e0ec52883400",
+    "events.jsonl": "25f78c21ddd052c5136e2bad7c4a9ea81116dfde47219acc608611ca1529e13a",
+    "instructions.txt": "526c634a7fb2948dad3a3e046acd375975ef58e997ddef36f2039479a7cd05c3",
+    "prompt.txt": "28840f13e6e2ed0cd97a1a1d2875b881e886026632e19e0d621cfa983050c357",
+    "response.json": "035e23000ac99f97ed8daa35ae906d18fd5dab43c01a184e06e0267481be9317",
+    "schema.json": "0875783714dbd7f5cce9a18f60cf5859ebf464e24c8ba232d4254deb1fe231fe",
+    "stderr.txt": "aa6d053fe69e166177c5d674d3a92652ec7bc00f37b758780cd1b23dc9b234b6"
+  },
+  "evidence_bytes": 762,
+  "execution_error": null,
+  "forbidden_items": [],
+  "input_identity": {
+    "instructions_sha256": "526c634a7fb2948dad3a3e046acd375975ef58e997ddef36f2039479a7cd05c3",
+    "model": "gpt-6-astra",
+    "prompt_sha256": "28840f13e6e2ed0cd97a1a1d2875b881e886026632e19e0d621cfa983050c357",
+    "reasoning_effort": "medium",
+    "schema_sha256": "572d646905a4274b2f90cd86de3e2e10660a0dee4b3b963495ade9d263ae41f9",
+    "transport": "https"
+  },
+  "malformed_events": [],
+  "parse_error": null,
+  "prompt_bytes": 1228,
+  "returncode": 0,
+  "started_at": "2026-09-21T11:38:03.374198+00:00",
+  "tool_violation": false,
+  "transport_messages": [
+    {
+      "id": "item_0",
+      "message": "Under-development features enabled: skip_host_skill_discovery. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in <USER_HOME>/.codex/config.toml.",
+      "type": "error"
+    }
+  ],
+  "usage": [
+    {
+      "cache_write_input_tokens": 0,
+      "cached_input_tokens": 0,
+      "input_tokens": 6425,
+      "output_tokens": 23,
+      "reasoning_output_tokens": 0
+    }
+  ],
+  "valid_completion": true,
+  "wall_seconds": 26.60985529201571
+}

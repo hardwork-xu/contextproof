@@ -1,0 +1,13 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import httpx
+transport = httpx.MockTransport(lambda request: httpx.Response(200))
+client = httpx.Client(app=object(), transport=transport, trust_env=False)
+RESULT = client.is_closed
+```
+
+Repository source evidence:
+(No source evidence supplied.)

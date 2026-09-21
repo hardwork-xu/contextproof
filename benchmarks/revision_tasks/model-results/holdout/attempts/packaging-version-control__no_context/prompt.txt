@@ -1,0 +1,13 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+from packaging.version import Version
+version = Version("2!1.4rc2.post3.dev1+linux.4")
+RESULT = [version.epoch, list(version.release), list(version.pre),
+          version.post, version.dev, version.local]
+```
+
+Repository source evidence:
+(No source evidence supplied.)

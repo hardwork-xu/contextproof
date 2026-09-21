@@ -1,0 +1,304 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import pluggy
+import warnings
+hookspec = pluggy.HookspecMarker("example")
+hookimpl = pluggy.HookimplMarker("example")
+class Specification:
+    @hookspec(warn_on_impl_args={"old": DeprecationWarning("deprecated old")})
+    def run(self, old, new):
+        pass
+class Plugin:
+    @hookimpl
+    def run(self, old):
+        return old
+manager = pluggy.PluginManager("example")
+manager.add_hookspecs(Specification)
+with warnings.catch_warnings(record=True) as caught:
+    warnings.simplefilter("always")
+    manager.register(Plugin())
+RESULT = [type(item.message).__name__ for item in caught]
+```
+
+Repository source evidence:
+# ContextProof source evidence
+{"budget":16000,"budget_unit":"utf8_bytes","id":"e164f2b174c8b88e020b9256681a420fe2ba4478755919e052e1aadbaeaf89fe","method":"bm25","omitted_count":119,"query":"Explain the behavior of this Python probe using repository source. src/pluggy/_hooks.py HookspecMarker.__call__ src/pluggy/_manager.py PluginManager._verify_hook\nimport pluggy\nimport warnings\nhookspec = pluggy.HookspecMarker(\"example\")\nhookimpl = pluggy.HookimplMarker(\"example\")\nclass Specification:\n    @hookspec(warn_on_impl_args={\"old\": DeprecationWarning(\"deprecated old\")})\n    def run(self, old, new):\n        pass\nclass Plugin:\n    @hookimpl\n    def run(self, old):\n        return old\nmanager = pluggy.PluginManager(\"example\")\nmanager.add_hookspecs(Specification)\nwith warnings.catch_warnings(record=True) as caught:\n    warnings.simplefilter(\"always\")\n    manager.register(Plugin())\nRESULT = [type(item.message).__name__ for item in caught]\n","schema_version":1,"snapshot_id":"b44f331cae0c553ea8fc773e1f973911c9f6513090972022e40b5e16e8d45b56","tokenizer":"bytes"}
+
+{"end_line":147,"file_sha256":"9bedea54b0dd9f84bdcb7a5f7cb3a93107832383c3c3c86b0132b5482f2b4245","id":"57a5794f9a3ed3100d0755a9d27667360897c563988ebfd345c04ee144fd2bc1","kind":"function","path":"src/pluggy/_hooks.py","reasons":["lexical overlap: add, add_hookspecs, args, call, def, hook, hooks, hookspec, hookspecmarker, hookspecs, impl, in, manager, marker, of, on, pluggy, plugin, pluginmanager, py, result, self, src, the, this, true, using, warn, warn_on_impl_args, warning"],"score":44.54279324,"start_line":113,"symbol":"HookspecMarker.__call__","text_sha256":"a708519b0f4f5b1e00968de5b564ee85fa1c723db920a1e90e5ebd78b937a2f4"}
+```
+    def __call__(  # noqa: F811
+        self,
+        function: _F | None = None,
+        firstresult: bool = False,
+        historic: bool = False,
+        warn_on_impl: Warning | None = None,
+        warn_on_impl_args: Mapping[str, Warning] | None = None,
+    ) -> _F | Callable[[_F], _F]:
+        """If passed a function, directly sets attributes on the function
+        which will make it discoverable to :meth:`PluginManager.add_hookspecs`.
+
+        If passed no function, returns a decorator which can be applied to a
+        function later using the attributes supplied.
+
+        :param firstresult:
+            If ``True``, the 1:N hook call (N being the number of registered
+            hook implementation functions) will stop at I<=N when the I'th
+            function returns a non-``None`` result. See :ref:`firstresult`.
+
+        :param historic:
+            If ``True``, every call to the hook will be memorized and replayed
+            on plugins registered after the call was made. See :ref:`historic`.
+
+        :param warn_on_impl:
+            If given, every implementation of this hook will trigger the given
+            warning. See :ref:`warn_on_impl`.
+
+        :param warn_on_impl_args:
+            If given, every implementation of this hook which requests one of
+            the arguments in the dict will trigger the corresponding warning.
+            See :ref:`warn_on_impl`.
+
+            .. versionadded:: 1.5
+        """
+
+```
+
+{"end_line":273,"file_sha256":"ca5203170ad43ff98c006a5d44f8fdcf0c6e906ee758901f635cb2957c9700ca","id":"96129684640707b25ae2785b18696a9151c211759d7a7d486d0ce8f07795cb15","kind":"function","path":"src/pluggy/_manager.py","reasons":["lexical overlap: add, add_hookspecs, as, class, def, for, hook, hooks, hookspec, hookspecmarker, hookspecs, in, manager, marker, name, new, pluggy, plugin, pluginmanager, py, self, specification, src, the, this, verify, verify_hook, with"],"score":39.81522031,"start_line":249,"symbol":"PluginManager.add_hookspecs","text_sha256":"11b116e807ac7939280cb005c1658bd6202c36e392de09d79d7544eb0e17ae50"}
+```
+    def add_hookspecs(self, module_or_class: _Namespace) -> None:
+        """Add new hook specifications defined in the given ``module_or_class``.
+
+        Functions are recognized as hook specifications if they have been
+        decorated with a matching :class:`HookspecMarker`.
+        """
+        names = []
+        for name in dir(module_or_class):
+            spec_opts = self.parse_hookspec_opts(module_or_class, name)
+            if spec_opts is not None:
+                hc: HookCaller | None = getattr(self.hook, name, None)
+                if hc is None:
+                    hc = HookCaller(name, self._hookexec, module_or_class, spec_opts)
+                    setattr(self.hook, name, hc)
+                else:
+                    # Plugins registered this hook without knowing the spec.
+                    hc.set_specification(module_or_class, spec_opts)
+                    for hookfunction in hc.get_hookimpls():
+                        self._verify_hook(hc, hookfunction)
+                names.append(name)
+
+        if not names:
+            raise ValueError(
+                f"did not find any {self.project_name!r} hooks in {module_or_class!r}"
+            )
+```
+
+{"end_line":379,"file_sha256":"ca5203170ad43ff98c006a5d44f8fdcf0c6e906ee758901f635cb2957c9700ca","id":"e3475573e40c629b380f98b5f3a298de5b098764f0982fe462e8df86e851f6d5","kind":"function","path":"src/pluggy/_manager.py","reasons":["lexical overlap: args, as, def, for, hook, hookimpl, hookspec, impl, in, manager, name, on, pluggy, plugin, pluginmanager, py, self, src, the, true, verify, verify_hook, warn, warn_on_impl_args, warning, with"],"score":38.08796999,"start_line":328,"symbol":"PluginManager._verify_hook","text_sha256":"394d5424f9ecfb12afe76efc133211e2d269e9c53c51131a6cac216615163b48"}
+```
+    def _verify_hook(self, hook: HookCaller, hookimpl: HookImpl) -> None:
+        if hook.is_historic() and (hookimpl.hookwrapper or hookimpl.wrapper):
+            raise PluginValidationError(
+                hookimpl.plugin,
+                "Plugin %r\nhook %r\nhistoric incompatible with yield/wrapper/hookwrapper"
+                % (hookimpl.plugin_name, hook.name),
+            )
+
+        assert hook.spec is not None
+        if hook.spec.warn_on_impl:
+            _warn_for_function(hook.spec.warn_on_impl, hookimpl.function)
+
+        # positional arg checking
+        notinspec = set(hookimpl.argnames) - set(hook.spec.argnames)
+        if notinspec:
+            raise PluginValidationError(
+                hookimpl.plugin,
+                "Plugin %r for hook %r\nhookimpl definition: %s\n"
+                "Argument(s) %s are declared in the hookimpl but "
+                "can not be found in the hookspec"
+                % (
+                    hookimpl.plugin_name,
+                    hook.name,
+                    _formatdef(hookimpl.function),
+                    notinspec,
+                ),
+            )
+
+        if hook.spec.warn_on_impl_args:
+            for hookimpl_argname in hookimpl.argnames:
+                argname_warning = hook.spec.warn_on_impl_args.get(hookimpl_argname)
+                if argname_warning is not None:
+                    _warn_for_function(argname_warning, hookimpl.function)
+
+        if (
+            hookimpl.wrapper or hookimpl.hookwrapper
+        ) and not inspect.isgeneratorfunction(hookimpl.function):
+            raise PluginValidationError(
+                hookimpl.plugin,
+                "Plugin %r for hook %r\nhookimpl definition: %s\n"
+                "Declared as wrapper=True or hookwrapper=True "
+                "but function is not a generator function"
+                % (hookimpl.plugin_name, hook.name, _formatdef(hookimpl.function)),
+            )
+
+        if hookimpl.wrapper and hookimpl.hookwrapper:
+            raise PluginValidationError(
+                hookimpl.plugin,
+                "Plugin %r for hook %r\nhookimpl definition: %s\n"
+                "The wrapper=True and hookwrapper=True options are mutually exclusive"
+                % (hookimpl.plugin_name, hook.name, _formatdef(hookimpl.function)),
+            )
+```
+
+{"end_line":264,"file_sha256":"9bedea54b0dd9f84bdcb7a5f7cb3a93107832383c3c3c86b0132b5482f2b4245","id":"8d32ccd7ef7cd996524ef88c98919a49bf2d92efc7a9a63c9d847bc2d32e3408","kind":"function","path":"src/pluggy/_hooks.py","reasons":["lexical overlap: as, call, class, def, for, hook, hookimpl, hookimplmarker, hooks, in, manager, marker, name, new, of, old, on, pluggy, plugin, pluginmanager, py, register, result, return, run, self, specification, src, the, this, true, using, with"],"score":37.77438183,"start_line":204,"symbol":"HookimplMarker.__call__","text_sha256":"346f312d6d1c53ed4ec240f3cad1421ca85480de837eebce96d83f542a081629"}
+```
+    def __call__(  # noqa: F811
+        self,
+        function: _F | None = None,
+        hookwrapper: bool = False,
+        optionalhook: bool = False,
+        tryfirst: bool = False,
+        trylast: bool = False,
+        specname: str | None = None,
+        wrapper: bool = False,
+    ) -> _F | Callable[[_F], _F]:
+        """If passed a function, directly sets attributes on the function
+        which will make it discoverable to :meth:`PluginManager.register`.
+
+        If passed no function, returns a decorator which can be applied to a
+        function later using the attributes supplied.
+
+        :param optionalhook:
+            If ``True``, a missing matching hook specification will not result
+            in an error (by default it is an error if no matching spec is
+            found). See :ref:`optionalhook`.
+
+        :param tryfirst:
+            If ``True``, this hook implementation will run as early as possible
+            in the chain of N hook implementations for a specification. See
+            :ref:`callorder`.
+
+        :param trylast:
+            If ``True``, this hook implementation will run as late as possible
+            in the chain of N hook implementations for a specification. See
+            :ref:`callorder`.
+
+        :param wrapper:
+            If ``True`` ("new-style hook wrapper"), the hook implementation
+            needs to execute exactly one ``yield``. The code before the
+            ``yield`` is run early before any non-hook-wrapper function is run.
+            The code after the ``yield`` is run after all non-hook-wrapper
+            functions have run. The ``yield`` receives the result value of the
+            inner calls, or raises the exception of inner calls (including
+            earlier hook wrapper calls). The return value of the function
+            becomes the return value of the hook, and a raised exception becomes
+            the exception of the hook. See :ref:`hookwrapper`.
+
+        :param hookwrapper:
+            If ``True`` ("old-style hook wrapper"), the hook implementation
+            needs to execute exactly one ``yield``. The code before the
+            ``yield`` is run early before any non-hook-wrapper function is run.
+            The code after the ``yield`` is run after all non-hook-wrapper
+            function have run  The ``yield`` receives a :class:`Result` object
+            representing the exception or result outcome of the inner calls
+            (including earlier hook wrapper calls). This option is mutually
+            exclusive with ``wrapper``. See :ref:`old_style_hookwrapper`.
+
+        :param specname:
+            If provided, the given name will be used instead of the function
+            name when matching this hook implementation to a hook specification
+            during registration. See :ref:`specname`.
+
+        .. versionadded:: 1.2.0
+            The ``wrapper`` parameter.
+        """
+
+```
+
+{"end_line":37,"file_sha256":"53caad2119a6af449175bc4017c54926cd358cc51880a01cf6802361808b833e","id":"d5ac07d04a062c14ea2b08a9e051dc4ba2f5c1c3d181f8c756d2d921a4dffdf6","kind":"module","path":"src/pluggy/__init__.py","reasons":["lexical overlap: as, call, hook, hookimpl, hookimplmarker, hooks, hookspec, hookspecmarker, impl, import, manager, marker, pluggy, plugin, pluginmanager, py, result, src, warning, warnings"],"score":36.33835255,"start_line":1,"symbol":"<module>","text_sha256":"53caad2119a6af449175bc4017c54926cd358cc51880a01cf6802361808b833e"}
+```
+try:
+    from ._version import version as __version__
+except ImportError:
+    # broken installation, we don't even try
+    # unknown only works because we do poor mans version compare
+    __version__ = "unknown"
+
+__all__ = [
+    "__version__",
+    "PluginManager",
+    "PluginValidationError",
+    "HookCaller",
+    "HookCallError",
+    "HookspecOpts",
+    "HookimplOpts",
+    "HookImpl",
+    "HookRelay",
+    "HookspecMarker",
+    "HookimplMarker",
+    "Result",
+    "PluggyWarning",
+    "PluggyTeardownRaisedWarning",
+]
+
+from ._hooks import HookCaller
+from ._hooks import HookImpl
+from ._hooks import HookimplMarker
+from ._hooks import HookimplOpts
+from ._hooks import HookRelay
+from ._hooks import HookspecMarker
+from ._hooks import HookspecOpts
+from ._manager import PluginManager
+from ._manager import PluginValidationError
+from ._result import HookCallError
+from ._result import Result
+from ._warnings import PluggyTeardownRaisedWarning
+from ._warnings import PluggyWarning
+```
+
+{"end_line":89,"file_sha256":"9bedea54b0dd9f84bdcb7a5f7cb3a93107832383c3c3c86b0132b5482f2b4245","id":"fe4b89e4f7a905155a6a02ab647164d23220e1a481b3898dca86d3b3eb7b5005","kind":"class","path":"src/pluggy/_hooks.py","reasons":["lexical overlap: add, add_hookspecs, as, class, for, hook, hooks, hookspec, hookspecmarker, hookspecs, manager, marker, name, pluggy, plugin, pluginmanager, py, src, the, with"],"score":35.99880436,"start_line":79,"symbol":"HookspecMarker","text_sha256":"aaab0cca3854faeb5b19e7c878c5ac323443fb2b0ec353d4bfbe0012c6f1abc2"}
+```
+@final
+class HookspecMarker:
+    """Decorator for marking functions as hook specifications.
+
+    Instantiate it with a project_name to get a decorator.
+    Calling :meth:`PluginManager.add_hookspecs` later will discover all marked
+    functions if the :class:`PluginManager` uses the same project name.
+    """
+
+    __slots__ = ("project_name",)
+
+```
+
+{"end_line":101,"file_sha256":"9bedea54b0dd9f84bdcb7a5f7cb3a93107832383c3c3c86b0132b5482f2b4245","id":"32ff71519467d88ab5c9cc0efaf96ce4bb70bc1aafba0fbd528167895f2f3fe4","kind":"function","path":"src/pluggy/_hooks.py","reasons":["lexical overlap: args, call, def, hooks, hookspec, hookspecmarker, impl, marker, on, pluggy, py, self, src, warn, warn_on_impl_args, warning"],"score":33.15458695,"start_line":93,"symbol":"HookspecMarker.__call__","text_sha256":"b30c3126a7bb6101b877704074b120c606ced4566645a62d236ae990015b6d1d"}
+```
+    @overload
+    def __call__(
+        self,
+        function: _F,
+        firstresult: bool = False,
+        historic: bool = False,
+        warn_on_impl: Warning | None = None,
+        warn_on_impl_args: Mapping[str, Warning] | None = None,
+    ) -> _F: ...
+```
+
+{"end_line":111,"file_sha256":"9bedea54b0dd9f84bdcb7a5f7cb3a93107832383c3c3c86b0132b5482f2b4245","id":"d8803e3318e2298afebc8c4805ad05af9706c6f2dc651f1e4dbb36016196bcd6","kind":"function","path":"src/pluggy/_hooks.py","reasons":["lexical overlap: args, call, def, hooks, hookspec, hookspecmarker, impl, marker, on, pluggy, py, self, src, warn, warn_on_impl_args, warning"],"score":32.83180281,"start_line":103,"symbol":"HookspecMarker.__call__","text_sha256":"6af0d1737c1ab24511d65af4f2849056129d4bb43f674ffeb1f41f55181b2494"}
+```
+    @overload  # noqa: F811
+    def __call__(  # noqa: F811
+        self,
+        function: None = ...,
+        firstresult: bool = ...,
+        historic: bool = ...,
+        warn_on_impl: Warning | None = ...,
+        warn_on_impl_args: Mapping[str, Warning] | None = ...,
+    ) -> Callable[[_F], _F]: ...
+```
+
+{"end_line":17,"file_sha256":"91206bdb917facd9255764212c3ea1d63c7a67591c28345bb98bc5e63bf7e695","id":"846b7a9c582babf465eb90285aa72fdf02c002d4e68fd75bba1fd542531e8a98","kind":"class","path":"src/pluggy/_tracing.py","reasons":["lexical overlap: class, pluggy, py, src"],"score":2.21648558,"start_line":17,"symbol":"TagTracer","text_sha256":"4e4e25ffcb463703700ef9fb0941e163678524c7f929e057bdd3cc14adf48093"}
+```
+class TagTracer:
+```

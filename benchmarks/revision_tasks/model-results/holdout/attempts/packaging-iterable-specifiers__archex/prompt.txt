@@ -1,0 +1,340 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+from packaging.specifiers import Specifier, SpecifierSet
+spec = SpecifierSet(iter([Specifier(">=1.0"), Specifier("<2.0")]))
+RESULT = sorted(map(str, spec))
+```
+
+Repository source evidence:
+<context query="Explain the behavior of this Python probe using repository source. src/packaging/specifiers.py SpecifierSet.__init__
+from packaging.specifiers import Specifier, SpecifierSet
+spec = SpecifierSet(iter([Specifier(&quot;&gt;=1.0&quot;), Specifier(&quot;&lt;2.0&quot;)]))
+RESULT = sorted(map(str, spec))
+">
+  <structural-context>
+    <file-tree><![CDATA[
+src/packaging/__init__.py
+src/packaging/_manylinux.py
+src/packaging/licenses/__init__.py
+src/packaging/specifiers.py
+    ]]></file-tree>
+  </structural-context>
+  <chunks>
+    <chunk file="src/packaging/licenses/__init__.py" lines="50-57" symbol="InvalidLicenseExpression" score="2.7372" tokens="54">
+      <code><![CDATA[
+class InvalidLicenseExpression(ValueError):
+    """Raised when a license-expression string is invalid
+
+    >>> canonicalize_license_expression("invalid")
+    Traceback (most recent call last):
+        ...
+    packaging.licenses.InvalidLicenseExpression: Invalid license expression: 'invalid'
+    """
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/__init__.py" lines="1-16" score="2.4009" tokens="140">
+      <code><![CDATA[
+# This file is dual licensed under the terms of the Apache License, Version
+# 2.0, and the BSD License. See the LICENSE file in the root of this repository
+# for complete details.
+
+__title__ = "packaging"
+__summary__ = "Core utilities for Python packages"
+__uri__ = "https://github.com/pypa/packaging"
+
+__version__ = "24.2"
+
+__author__ = "Donald Stufft and individual contributors"
+__email__ = "donald@stufft.io"
+
+__license__ = "BSD-2-Clause or Apache-2.0"
+__copyright__ = f"2014 {__author__}"
+
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/specifiers.py" lines="1-30" score="2.2021" tokens="185">
+      <code><![CDATA[
+# This file is dual licensed under the terms of the Apache License, Version
+# 2.0, and the BSD License. See the LICENSE file in the root of this repository
+# for complete details.
+"""
+.. testsetup::
+
+    from packaging.specifiers import Specifier, SpecifierSet, InvalidSpecifier
+    from packaging.version import Version
+"""
+
+from __future__ import annotations
+
+import abc
+import itertools
+import re
+from typing import Callable, Iterable, Iterator, TypeVar, Union
+
+from .utils import canonicalize_version
+from .version import Version
+
+UnparsedVersion = Union[Version, str]
+UnparsedVersionVar = TypeVar("UnparsedVersionVar", bound=UnparsedVersion)
+CallableOperator = Callable[[Version, str], bool]
+
+
+
+
+_prefix_regex = re.compile(r"^([0-9]+)((?:a|b|c|rc)[0-9]+)$")
+
+
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/_manylinux.py" lines="182-205" symbol="_is_compatible" score="1.0817" tokens="255">
+      <code><![CDATA[
+def _is_compatible(arch: str, version: _GLibCVersion) -> bool:
+    sys_glibc = _get_glibc_version()
+    if sys_glibc < version:
+        return False
+    # Check for presence of _manylinux module.
+    try:
+        import _manylinux
+    except ImportError:
+        return True
+    if hasattr(_manylinux, "manylinux_compatible"):
+        result = _manylinux.manylinux_compatible(version[0], version[1], arch)
+        if result is not None:
+            return bool(result)
+        return True
+    if version == _GLibCVersion(2, 5):
+        if hasattr(_manylinux, "manylinux1_compatible"):
+            return bool(_manylinux.manylinux1_compatible)
+    if version == _GLibCVersion(2, 12):
+        if hasattr(_manylinux, "manylinux2010_compatible"):
+            return bool(_manylinux.manylinux2010_compatible)
+    if version == _GLibCVersion(2, 17):
+        if hasattr(_manylinux, "manylinux2014_compatible"):
+            return bool(_manylinux.manylinux2014_compatible)
+    return True
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/licenses/__init__.py" lines="60-119" symbol="canonicalize_license_expression" score="2.6592" tokens="501">
+      <code><![CDATA[
+def canonicalize_license_expression(
+    raw_license_expression: str,
+) -> NormalizedLicenseExpression:
+    if not raw_license_expression:
+        message = f"Invalid license expression: {raw_license_expression!r}"
+        raise InvalidLicenseExpression(message)
+
+    # Pad any parentheses so tokenization can be achieved by merely splitting on
+    # whitespace.
+    license_expression = raw_license_expression.replace("(", " ( ").replace(")", " ) ")
+    licenseref_prefix = "LicenseRef-"
+    license_refs = {
+        ref.lower(): "LicenseRef-" + ref[len(licenseref_prefix) :]
+        for ref in license_expression.split()
+        if ref.lower().startswith(licenseref_prefix.lower())
+    }
+
+    # Normalize to lower case so we can look up licenses/exceptions
+    # and so boolean operators are Python-compatible.
+    license_expression = license_expression.lower()
+
+    tokens = license_expression.split()
+
+    # Rather than implementing boolean logic, we create an expression that Python can
+    # parse. Everything that is not involved with the grammar itself is treated as
+    # `False` and the expression should evaluate as such.
+    python_tokens = []
+    for token in tokens:
+        if token not in {"or", "and", "with", "(", ")"}:
+            python_tokens.append("False")
+        elif token == "with":
+            python_tokens.append("or")
+        elif token == "(" and python_tokens and python_tokens[-1] not in {"or", "and"}:
+            message = f"Invalid license expression: {raw_license_expression!r}"
+            raise InvalidLicenseExpression(message)
+        else:
+            python_tokens.append(token)
+
+    python_expression = " ".join(python_tokens)
+    try:
+        invalid = eval(python_expression, globals(), locals())
+    except Exception:
+        invalid = True
+
+    if invalid is not False:
+        message = f"Invalid license expression: {raw_license_expression!r}"
+        raise InvalidLicenseExpression(message) from None
+
+    # Take a final pass to check for unknown licenses/exceptions.
+    normalized_tokens = []
+    for token in tokens:
+        if token in {"or", "and", "with", "(", ")"}:
+            normalized_tokens.append(token.upper())
+            continue
+
+        if normalized_tokens and normalized_tokens[-1] == "WITH":
+            if token not in EXCEPTIONS:
+                message = f"Unknown license exception: {token!r}"
+                raise InvalidLicenseExpression(message)
+
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/licenses/__init__.py" lines="120-145" symbol="canonicalize_license_expression" score="2.6592" tokens="189">
+      <code><![CDATA[
+            normalized_tokens.append(EXCEPTIONS[token]["id"])
+        else:
+            if token.endswith("+"):
+                final_token = token[:-1]
+                suffix = "+"
+            else:
+                final_token = token
+                suffix = ""
+
+            if final_token.startswith("licenseref-"):
+                if not license_ref_allowed.match(final_token):
+                    message = f"Invalid licenseref: {final_token!r}"
+                    raise InvalidLicenseExpression(message)
+                normalized_tokens.append(license_refs[final_token] + suffix)
+            else:
+                if final_token not in LICENSES:
+                    message = f"Unknown license: {final_token!r}"
+                    raise InvalidLicenseExpression(message)
+                normalized_tokens.append(LICENSES[final_token]["id"] + suffix)
+
+    normalized_expression = " ".join(normalized_tokens)
+
+    return cast(
+        NormalizedLicenseExpression,
+        normalized_expression.replace("( ", "(").replace(" )", ")"),
+    )
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/specifiers.py" lines="32-41" symbol="InvalidSpecifier" score="2.1142" tokens="64">
+      <code><![CDATA[
+class InvalidSpecifier(ValueError):
+    """
+    Raised when attempting to create a :class:`Specifier` with a specifier
+    string that is invalid.
+
+    >>> Specifier("lolwat")
+    Traceback (most recent call last):
+        ...
+    packaging.specifiers.InvalidSpecifier: Invalid specifier: 'lolwat'
+    """
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/specifiers.py" lines="630-649" symbol="_version_split" score="1.9506" tokens="135">
+      <code><![CDATA[
+def _version_split(version: str) -> list[str]:
+    """Split version into components.
+
+    The split components are intended for version comparison. The logic does
+    not attempt to retain the original version string, so joining the
+    components back with :func:`_version_join` may not produce the original
+    version string.
+    """
+    result: list[str] = []
+
+    epoch, _, rest = version.rpartition("!")
+    result.append(epoch or "0")
+
+    for item in rest.split("."):
+        match = _prefix_regex.search(item)
+        if match:
+            result.extend(match.groups())
+        else:
+            result.append(item)
+    return result
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/specifiers.py" lines="323-328" symbol="_canonical_spec" score="1.3916" tokens="56">
+      <code><![CDATA[
+    def _canonical_spec(self) -> tuple[str, str]:
+        canonical_version = canonicalize_version(
+            self._spec[1],
+            strip_trailing_zero=(self._spec[0] != "~="),
+        )
+        return self._spec[0], canonical_version
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/specifiers.py" lines="497-498" symbol="_compare_arbitrary" score="1.3810" tokens="34">
+      <code><![CDATA[
+    def _compare_arbitrary(self, prospective: Version, spec: str) -> bool:
+        return str(prospective).lower() == str(spec).lower()
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/specifiers.py" lines="428-429" symbol="_compare_not_equal" score="1.3803" tokens="32">
+      <code><![CDATA[
+    def _compare_not_equal(self, prospective: Version, spec: str) -> bool:
+        return not self._compare_equal(prospective, spec)
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/specifiers.py" lines="790-791" symbol="__hash__" score="1.3794" tokens="17">
+      <code><![CDATA[
+    def __hash__(self) -> int:
+        return hash(self._specs)
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/specifiers.py" lines="330-331" symbol="__hash__" score="1.3741" tokens="18">
+      <code><![CDATA[
+    def __hash__(self) -> int:
+        return hash(self._canonical_spec)
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/specifiers.py" lines="277-283" symbol="operator" score="1.3661" tokens="44">
+      <code><![CDATA[
+    def operator(self) -> str:
+        """The operator of this specifier.
+
+        >>> Specifier("==1.2.3").operator
+        '=='
+        """
+        return self._spec[0]
+      ]]></code>
+    </chunk>
+  </chunks>
+  <type-definitions>
+    <type-def file="src/packaging/licenses/__init__.py" symbol="InvalidLicenseExpression" lines="50-57">
+      <![CDATA[class InvalidLicenseExpression(ValueError):
+    """Raised when a license-expression string is invalid
+
+    >>> canonicalize_license_expression("invalid")
+    Traceback (most recent call last):
+        ...
+    packaging.licenses.InvalidLicenseExpression: Invalid license expression: 'invalid'
+    """]]>
+    </type-def>
+    <type-def file="src/packaging/specifiers.py" symbol="InvalidSpecifier" lines="32-41">
+      <![CDATA[class InvalidSpecifier(ValueError):
+    """
+    Raised when attempting to create a :class:`Specifier` with a specifier
+    string that is invalid.
+
+    >>> Specifier("lolwat")
+    Traceback (most recent call last):
+        ...
+    packaging.specifiers.InvalidSpecifier: Invalid specifier: 'lolwat'
+    """]]>
+    </type-def>
+  </type-definitions>
+  <receipt freshness="clean" complete="incomplete" reason="dependency_frontier_cut" action="fetch_skipped_candidate" index_revision="f846c38dc48af337e9d838d465a652dacd3975209156386732a1bdd68051cf1f" budget_requested="1744" budget_consumed="1724" returned_shown="14" returned_total="14" skipped_shown="20" skipped_total="20" omitted_edges_shown="20" omitted_edges_total="20">
+    <returned handle="chunk:src/packaging/__init__.py:_module:1" file="src/packaging/__init__.py" lines="1-16" hash="2baeba609be6104b9a32e245ef5b35afc84017ca376b6b4cbe5e47c46e6ebb52" score="2.4009" />
+    <returned handle="chunk:src/packaging/_manylinux.py:_is_compatible:182" file="src/packaging/_manylinux.py" lines="182-205" hash="2239e76784be6d213cf590589311cdd81e97263875d208755e9818a7860710a3" score="1.0817" />
+    <returned handle="chunk:src/packaging/licenses/__init__.py:InvalidLicenseExpression:50" file="src/packaging/licenses/__init__.py" lines="50-57" hash="f14fd43125cd240af7cc97b5d4160ee44c74b64d28337f4e5f9ae3728adf3904" score="2.7372" />
+    <returned handle="chunk:src/packaging/licenses/__init__.py:canonicalize_license_expression:60" file="src/packaging/licenses/__init__.py" lines="60-119" hash="5986ee3649f4e39f28580617c1ff259f4ba96cf4b867004206042d3078a2dcb5" score="2.6592" />
+    <returned handle="chunk:src/packaging/licenses/__init__.py:canonicalize_license_expression:120" file="src/packaging/licenses/__init__.py" lines="120-145" hash="c485e03c1cdead08b5f1f6203519a385cc0d74b5c9643b1eee8217855a3b4f66" score="2.6592" />
+    <returned handle="chunk:src/packaging/specifiers.py:_module:1" file="src/packaging/specifiers.py" lines="1-30" hash="7b62adc78294e5d4824cf803e9cd26e9f0525ce5368351502aed37db02872380" score="2.2021" />
+    <returned handle="chunk:src/packaging/specifiers.py:InvalidSpecifier:32" file="src/packaging/specifiers.py" lines="32-41" hash="950ab5e407f2e02aa586e4be22e0c523e531350dfb777dcf3f55f213bcffeb19" score="2.1142" />
+    <returned handle="chunk:src/packaging/specifiers.py:operator:277" file="src/packaging/specifiers.py" lines="277-283" hash="be4172f86609a11ea11f5d1bc8fb03aeaf609027b4e0cb8cf44470ce5d58a4c9" score="1.3661" />
+    <skipped file="src/packaging/_manylinux.py" reason="over_budget" handle="chunk:src/packaging/_manylinux.py:_module:1" />
+    <skipped file="src/packaging/_manylinux.py" reason="over_budget" handle="chunk:src/packaging/_manylinux.py:_glibc_version_string_ctypes:104" />
+    <skipped file="src/packaging/_manylinux.py" reason="over_budget" handle="chunk:src/packaging/_manylinux.py:_is_linux_armhf:30" />
+    <skipped file="src/packaging/_manylinux.py" reason="over_budget" handle="chunk:src/packaging/_manylinux.py:_is_linux_i686:45" />
+    <skipped file="src/packaging/_manylinux.py" reason="over_budget" handle="chunk:src/packaging/_manylinux.py:_parse_elf:22" />
+    <skipped file="src/packaging/licenses/__init__.py" reason="over_budget" handle="chunk:src/packaging/licenses/__init__.py:_module:1" />
+    <skipped file="src/packaging/specifiers.py" reason="over_budget" handle="chunk:src/packaging/specifiers.py:BaseSpecifier:44" />
+    <skipped file="src/packaging/specifiers.py" reason="over_budget" handle="chunk:src/packaging/specifiers.py:Specifier:212" />
+  </receipt>
+</context>

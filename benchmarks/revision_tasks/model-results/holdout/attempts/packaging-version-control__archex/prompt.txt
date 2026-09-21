@@ -1,0 +1,355 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+from packaging.version import Version
+version = Version("2!1.4rc2.post3.dev1+linux.4")
+RESULT = [version.epoch, list(version.release), list(version.pre),
+          version.post, version.dev, version.local]
+```
+
+Repository source evidence:
+<context query="Explain the behavior of this Python probe using repository source. src/packaging/version.py Version.__init__ src/packaging/version.py _parse_letter_version
+from packaging.version import Version
+version = Version(&quot;2!1.4rc2.post3.dev1+linux.4&quot;)
+RESULT = [version.epoch, list(version.release), list(version.pre),
+          version.post, version.dev, version.local]
+">
+  <structural-context>
+    <file-tree><![CDATA[
+src/packaging/__init__.py
+src/packaging/_manylinux.py
+src/packaging/licenses/__init__.py
+src/packaging/version.py
+    ]]></file-tree>
+  </structural-context>
+  <chunks>
+    <chunk file="src/packaging/licenses/__init__.py" lines="50-57" symbol="InvalidLicenseExpression" score="2.7372" tokens="54">
+      <code><![CDATA[
+class InvalidLicenseExpression(ValueError):
+    """Raised when a license-expression string is invalid
+
+    >>> canonicalize_license_expression("invalid")
+    Traceback (most recent call last):
+        ...
+    packaging.licenses.InvalidLicenseExpression: Invalid license expression: 'invalid'
+    """
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/version.py" lines="188-224" symbol="__init__" score="2.4148" tokens="311">
+      <code><![CDATA[
+    def __init__(self, version: str) -> None:
+        """Initialize a Version object.
+
+        :param version:
+            The string representation of a version which will be parsed and normalized
+            before use.
+        :raises InvalidVersion:
+            If the ``version`` does not conform to PEP 440 in any way then this
+            exception will be raised.
+        """
+
+        # Validate the version and parse it into pieces
+        match = self._regex.search(version)
+        if not match:
+            raise InvalidVersion(f"Invalid version: {version!r}")
+
+        # Store the parsed out pieces of the version
+        self._version = _Version(
+            epoch=int(match.group("epoch")) if match.group("epoch") else 0,
+            release=tuple(int(i) for i in match.group("release").split(".")),
+            pre=_parse_letter_version(match.group("pre_l"), match.group("pre_n")),
+            post=_parse_letter_version(
+                match.group("post_l"), match.group("post_n1") or match.group("post_n2")
+            ),
+            dev=_parse_letter_version(match.group("dev_l"), match.group("dev_n")),
+            local=_parse_local_version(match.group("local")),
+        )
+
+        # Generate a key which will be used for sorting
+        self._key = _cmpkey(
+            self._version.epoch,
+            self._version.release,
+            self._version.pre,
+            self._version.post,
+            self._version.dev,
+            self._version.local,
+        )
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/__init__.py" lines="1-16" score="1.4676" tokens="140">
+      <code><![CDATA[
+# This file is dual licensed under the terms of the Apache License, Version
+# 2.0, and the BSD License. See the LICENSE file in the root of this repository
+# for complete details.
+
+__title__ = "packaging"
+__summary__ = "Core utilities for Python packages"
+__uri__ = "https://github.com/pypa/packaging"
+
+__version__ = "24.2"
+
+__author__ = "Donald Stufft and individual contributors"
+__email__ = "donald@stufft.io"
+
+__license__ = "BSD-2-Clause or Apache-2.0"
+__copyright__ = f"2014 {__author__}"
+
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/_manylinux.py" lines="22-27" symbol="_parse_elf" score="0.7577" tokens="55">
+      <code><![CDATA[
+def _parse_elf(path: str) -> Generator[ELFFile | None, None, None]:
+    try:
+        with open(path, "rb") as f:
+            yield ELFFile(f)
+    except (OSError, TypeError, ValueError):
+        yield None
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/licenses/__init__.py" lines="60-119" symbol="canonicalize_license_expression" score="2.6592" tokens="501">
+      <code><![CDATA[
+def canonicalize_license_expression(
+    raw_license_expression: str,
+) -> NormalizedLicenseExpression:
+    if not raw_license_expression:
+        message = f"Invalid license expression: {raw_license_expression!r}"
+        raise InvalidLicenseExpression(message)
+
+    # Pad any parentheses so tokenization can be achieved by merely splitting on
+    # whitespace.
+    license_expression = raw_license_expression.replace("(", " ( ").replace(")", " ) ")
+    licenseref_prefix = "LicenseRef-"
+    license_refs = {
+        ref.lower(): "LicenseRef-" + ref[len(licenseref_prefix) :]
+        for ref in license_expression.split()
+        if ref.lower().startswith(licenseref_prefix.lower())
+    }
+
+    # Normalize to lower case so we can look up licenses/exceptions
+    # and so boolean operators are Python-compatible.
+    license_expression = license_expression.lower()
+
+    tokens = license_expression.split()
+
+    # Rather than implementing boolean logic, we create an expression that Python can
+    # parse. Everything that is not involved with the grammar itself is treated as
+    # `False` and the expression should evaluate as such.
+    python_tokens = []
+    for token in tokens:
+        if token not in {"or", "and", "with", "(", ")"}:
+            python_tokens.append("False")
+        elif token == "with":
+            python_tokens.append("or")
+        elif token == "(" and python_tokens and python_tokens[-1] not in {"or", "and"}:
+            message = f"Invalid license expression: {raw_license_expression!r}"
+            raise InvalidLicenseExpression(message)
+        else:
+            python_tokens.append(token)
+
+    python_expression = " ".join(python_tokens)
+    try:
+        invalid = eval(python_expression, globals(), locals())
+    except Exception:
+        invalid = True
+
+    if invalid is not False:
+        message = f"Invalid license expression: {raw_license_expression!r}"
+        raise InvalidLicenseExpression(message) from None
+
+    # Take a final pass to check for unknown licenses/exceptions.
+    normalized_tokens = []
+    for token in tokens:
+        if token in {"or", "and", "with", "(", ")"}:
+            normalized_tokens.append(token.upper())
+            continue
+
+        if normalized_tokens and normalized_tokens[-1] == "WITH":
+            if token not in EXCEPTIONS:
+                message = f"Unknown license exception: {token!r}"
+                raise InvalidLicenseExpression(message)
+
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/licenses/__init__.py" lines="120-145" symbol="canonicalize_license_expression" score="2.6592" tokens="189">
+      <code><![CDATA[
+            normalized_tokens.append(EXCEPTIONS[token]["id"])
+        else:
+            if token.endswith("+"):
+                final_token = token[:-1]
+                suffix = "+"
+            else:
+                final_token = token
+                suffix = ""
+
+            if final_token.startswith("licenseref-"):
+                if not license_ref_allowed.match(final_token):
+                    message = f"Invalid licenseref: {final_token!r}"
+                    raise InvalidLicenseExpression(message)
+                normalized_tokens.append(license_refs[final_token] + suffix)
+            else:
+                if final_token not in LICENSES:
+                    message = f"Unknown license: {final_token!r}"
+                    raise InvalidLicenseExpression(message)
+                normalized_tokens.append(LICENSES[final_token]["id"] + suffix)
+
+    normalized_expression = " ".join(normalized_tokens)
+
+    return cast(
+        NormalizedLicenseExpression,
+        normalized_expression.replace("( ", "(").replace(" )", ")"),
+    )
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/version.py" lines="69-112" symbol="_BaseVersion" score="2.1148" tokens="301">
+      <code><![CDATA[
+class _BaseVersion:
+    _key: tuple[Any, ...]
+
+    def __hash__(self) -> int:
+        return hash(self._key)
+
+    # Please keep the duplicated `isinstance` check
+    # in the six comparisons hereunder
+    # unless you find a way to avoid adding overhead function calls.
+    def __lt__(self, other: _BaseVersion) -> bool:
+        if not isinstance(other, _BaseVersion):
+            return NotImplemented
+
+        return self._key < other._key
+
+    def __le__(self, other: _BaseVersion) -> bool:
+        if not isinstance(other, _BaseVersion):
+            return NotImplemented
+
+        return self._key <= other._key
+
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, _BaseVersion):
+            return NotImplemented
+
+        return self._key == other._key
+
+    def __ge__(self, other: _BaseVersion) -> bool:
+        if not isinstance(other, _BaseVersion):
+            return NotImplemented
+
+        return self._key >= other._key
+
+    def __gt__(self, other: _BaseVersion) -> bool:
+        if not isinstance(other, _BaseVersion):
+            return NotImplemented
+
+        return self._key > other._key
+
+    def __ne__(self, other: object) -> bool:
+        if not isinstance(other, _BaseVersion):
+            return NotImplemented
+
+        return self._key != other._key
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/version.py" lines="47-56" symbol="parse" score="2.0548" tokens="72">
+      <code><![CDATA[
+def parse(version: str) -> Version:
+    """Parse the given version string.
+
+    >>> parse('1.0.dev1')
+    <Version('1.0.dev1')>
+
+    :param version: The version string to parse.
+    :raises InvalidVersion: When the version string is not a valid version.
+    """
+    return Version(version)
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/version.py" lines="226-232" symbol="__repr__" score="2.0548" tokens="55">
+      <code><![CDATA[
+    def __repr__(self) -> str:
+        """A representation of the Version that shows all internal state.
+
+        >>> Version('1.0.0')
+        <Version('1.0.0')>
+        """
+        return f"<Version('{self}')>"
+      ]]></code>
+    </chunk>
+  </chunks>
+  <type-definitions>
+    <type-def file="src/packaging/licenses/__init__.py" symbol="InvalidLicenseExpression" lines="50-57">
+      <![CDATA[class InvalidLicenseExpression(ValueError):
+    """Raised when a license-expression string is invalid
+
+    >>> canonicalize_license_expression("invalid")
+    Traceback (most recent call last):
+        ...
+    packaging.licenses.InvalidLicenseExpression: Invalid license expression: 'invalid'
+    """]]>
+    </type-def>
+    <type-def file="src/packaging/version.py" symbol="_BaseVersion" lines="69-112">
+      <![CDATA[class _BaseVersion:
+    _key: tuple[Any, ...]
+
+    def __hash__(self) -> int:
+        return hash(self._key)
+
+    # Please keep the duplicated `isinstance` check
+    # in the six comparisons hereunder
+    # unless you find a way to avoid adding overhead function calls.
+    def __lt__(self, other: _BaseVersion) -> bool:
+        if not isinstance(other, _BaseVersion):
+            return NotImplemented
+
+        return self._key < other._key
+
+    def __le__(self, other: _BaseVersion) -> bool:
+        if not isinstance(other, _BaseVersion):
+            return NotImplemented
+
+        return self._key <= other._key
+
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, _BaseVersion):
+            return NotImplemented
+
+        return self._key == other._key
+
+    def __ge__(self, other: _BaseVersion) -> bool:
+        if not isinstance(other, _BaseVersion):
+            return NotImplemented
+
+        return self._key >= other._key
+
+    def __gt__(self, other: _BaseVersion) -> bool:
+        if not isinstance(other, _BaseVersion):
+            return NotImplemented
+
+        return self._key > other._key
+
+    def __ne__(self, other: object) -> bool:
+        if not isinstance(other, _BaseVersion):
+            return NotImplemented
+
+        return self._key != other._key]]>
+    </type-def>
+  </type-definitions>
+  <receipt freshness="clean" complete="incomplete" reason="dependency_frontier_cut" action="fetch_skipped_candidate" index_revision="f846c38dc48af337e9d838d465a652dacd3975209156386732a1bdd68051cf1f" budget_requested="1730" budget_consumed="1678" returned_shown="9" returned_total="9" skipped_shown="20" skipped_total="20" omitted_edges_shown="20" omitted_edges_total="20">
+    <returned handle="chunk:src/packaging/__init__.py:_module:1" file="src/packaging/__init__.py" lines="1-16" hash="2baeba609be6104b9a32e245ef5b35afc84017ca376b6b4cbe5e47c46e6ebb52" score="1.4676" />
+    <returned handle="chunk:src/packaging/_manylinux.py:_parse_elf:22" file="src/packaging/_manylinux.py" lines="22-27" hash="6363c3c1c6f4373cfd5ab6b229a2026433f8bd61c8ec159f3d34612f327f93b5" score="0.7577" />
+    <returned handle="chunk:src/packaging/licenses/__init__.py:InvalidLicenseExpression:50" file="src/packaging/licenses/__init__.py" lines="50-57" hash="f14fd43125cd240af7cc97b5d4160ee44c74b64d28337f4e5f9ae3728adf3904" score="2.7372" />
+    <returned handle="chunk:src/packaging/licenses/__init__.py:canonicalize_license_expression:60" file="src/packaging/licenses/__init__.py" lines="60-119" hash="5986ee3649f4e39f28580617c1ff259f4ba96cf4b867004206042d3078a2dcb5" score="2.6592" />
+    <returned handle="chunk:src/packaging/licenses/__init__.py:canonicalize_license_expression:120" file="src/packaging/licenses/__init__.py" lines="120-145" hash="c485e03c1cdead08b5f1f6203519a385cc0d74b5c9643b1eee8217855a3b4f66" score="2.6592" />
+    <returned handle="chunk:src/packaging/version.py:parse:47" file="src/packaging/version.py" lines="47-56" hash="aea002101433dcbe39acad0394695ee77dd3ae42e2f7696ac3382129f6fe9b97" score="2.0548" />
+    <returned handle="chunk:src/packaging/version.py:_BaseVersion:69" file="src/packaging/version.py" lines="69-112" hash="fc9c037918a8ac0f105deec470fbd1c64bf103ef3603e2c7f2a8e0081fc7950a" score="2.1148" />
+    <returned handle="chunk:src/packaging/version.py:__init__:188" file="src/packaging/version.py" lines="188-224" hash="539e66c466e43ec44370d03068269105d12b04954ae8b56084236fa7ec2fb111" score="2.4148" />
+    <skipped file="src/packaging/_manylinux.py" reason="over_budget" handle="chunk:src/packaging/_manylinux.py:_module:1" />
+    <skipped file="src/packaging/_manylinux.py" reason="over_budget" handle="chunk:src/packaging/_manylinux.py:_glibc_version_string_confstr:85" />
+    <skipped file="src/packaging/_manylinux.py" reason="over_budget" handle="chunk:src/packaging/_manylinux.py:_glibc_version_string_ctypes:104" />
+    <skipped file="src/packaging/_manylinux.py" reason="over_budget" handle="chunk:src/packaging/_manylinux.py:_is_compatible:182" />
+    <skipped file="src/packaging/_manylinux.py" reason="over_budget" handle="chunk:src/packaging/_manylinux.py:_is_linux_armhf:30" />
+    <skipped file="src/packaging/_manylinux.py" reason="over_budget" handle="chunk:src/packaging/_manylinux.py:_is_linux_i686:45" />
+    <skipped file="src/packaging/_manylinux.py" reason="over_budget" handle="chunk:src/packaging/_manylinux.py:_parse_glibc_version:153" />
+    <skipped file="src/packaging/licenses/__init__.py" reason="over_budget" handle="chunk:src/packaging/licenses/__init__.py:_module:1" />
+  </receipt>
+</context>

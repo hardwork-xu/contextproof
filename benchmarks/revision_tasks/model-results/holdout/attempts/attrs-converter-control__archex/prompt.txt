@@ -1,0 +1,378 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import attrs
+@attrs.define
+class Record:
+    value: int = attrs.field(converter=int)
+record = Record("3")
+record.value = "4"
+RESULT = [record.value, type(record.value).__name__]
+```
+
+Repository source evidence:
+<context query="Explain the behavior of this Python probe using repository source. src/attr/setters.py convert src/attr/_next_gen.py define
+import attrs
+@attrs.define
+class Record:
+    value: int = attrs.field(converter=int)
+record = Record(&quot;3&quot;)
+record.value = &quot;4&quot;
+RESULT = [record.value, type(record.value).__name__]
+">
+  <structural-context>
+    <file-tree><![CDATA[
+src/attr/__init__.py
+src/attr/_next_gen.py
+src/attr/setters.py
+src/attrs/setters.py
+    ]]></file-tree>
+  </structural-context>
+  <chunks>
+    <chunk file="src/attr/_next_gen.py" lines="405-409" symbol="define" score="2.0475" tokens="41">
+      <code><![CDATA[
+    # if it's used as `@attrs` but `None` if used as `@attrs()`.
+    if maybe_cls is None:
+        return wrap
+
+    return wrap(maybe_cls)
+      ]]></code>
+    </chunk>
+    <chunk file="src/attr/setters.py" lines="1-17" score="2.0467" tokens="75">
+      <code><![CDATA[
+# SPDX-License-Identifier: MIT
+
+"""
+Commonly used hooks for on_setattr.
+"""
+
+from . import _config
+from .exceptions import FrozenAttributeError
+
+
+
+
+# Sentinel for disabling class-wide *on_setattr* hooks for certain attributes.
+# Sphinx's autodata stopped working, so the docstring is inlined in the API
+# docs.
+NO_OP = object()
+
+      ]]></code>
+    </chunk>
+    <chunk file="src/attrs/setters.py" lines="1-4" score="2.0436" tokens="20">
+      <code><![CDATA[
+# SPDX-License-Identifier: MIT
+
+from attr.setters import *  # noqa: F403
+
+      ]]></code>
+    </chunk>
+    <chunk file="src/attr/__init__.py" lines="37-38" symbol="AttrsInstance" score="1.0296" tokens="9">
+      <code><![CDATA[
+class AttrsInstance(Protocol):
+    pass
+      ]]></code>
+    </chunk>
+    <chunk file="src/attr/_next_gen.py" lines="598-611" symbol="asdict" score="2.0475" tokens="96">
+      <code><![CDATA[
+def asdict(inst, *, recurse=True, filter=None, value_serializer=None):
+    """
+    Same as `attr.asdict`, except that collections types are always retained
+    and dict is always used as *dict_factory*.
+
+    .. versionadded:: 21.3.0
+    """
+    return _asdict(
+        inst=inst,
+        recurse=recurse,
+        filter=filter,
+        value_serializer=value_serializer,
+        retain_collection_types=True,
+    )
+      ]]></code>
+    </chunk>
+    <chunk file="src/attr/_next_gen.py" lines="614-623" symbol="astuple" score="2.0475" tokens="86">
+      <code><![CDATA[
+def astuple(inst, *, recurse=True, filter=None):
+    """
+    Same as `attr.astuple`, except that collections types are always retained
+    and `tuple` is always used as the *tuple_factory*.
+
+    .. versionadded:: 21.3.0
+    """
+    return _astuple(
+        inst=inst, recurse=recurse, filter=filter, retain_collection_types=True
+    )
+      ]]></code>
+    </chunk>
+    <chunk file="src/attr/setters.py" lines="11-26" symbol="pipe" score="2.0467" tokens="80">
+      <code><![CDATA[
+def pipe(*setters):
+    """
+    Run all *setters* and return the return value of the last one.
+
+    .. versionadded:: 20.1.0
+    """
+
+    def wrapped_pipe(instance, attrib, new_value):
+        rv = new_value
+
+        for setter in setters:
+            rv = setter(instance, attrib, rv)
+
+        return rv
+
+    return wrapped_pipe
+      ]]></code>
+    </chunk>
+    <chunk file="src/attr/setters.py" lines="29-35" symbol="frozen" score="2.0467" tokens="36">
+      <code><![CDATA[
+def frozen(_, __, ___):
+    """
+    Prevent an attribute to be modified.
+
+    .. versionadded:: 20.1.0
+    """
+    raise FrozenAttributeError
+      ]]></code>
+    </chunk>
+    <chunk file="src/attr/_next_gen.py" lines="187-240" symbol="define" score="1.8506" tokens="516">
+      <code><![CDATA[
+            explicitly or implicitly enabled for this class.  If the hash code
+            is cached, avoid any reassignments of fields involved in hash code
+            computation or mutations of the objects those fields point to after
+            object creation.  If such changes occur, the behavior of the
+            object's hash code is undefined.
+
+        frozen (bool):
+            Make instances immutable after initialization.  If someone attempts
+            to modify a frozen instance, `attrs.exceptions.FrozenInstanceError`
+            is raised.
+
+            .. note::
+
+                1. This is achieved by installing a custom ``__setattr__``
+                   method on your class, so you can't implement your own.
+
+                2. True immutability is impossible in Python.
+
+                3. This *does* have a minor a runtime performance `impact
+                   <how-frozen>` when initializing new instances.  In other
+                   words: ``__init__`` is slightly slower with ``frozen=True``.
+
+                4. If a class is frozen, you cannot modify ``self`` in
+                   ``__attrs_post_init__`` or a self-written ``__init__``. You
+                   can circumvent that limitation by using
+                   ``object.__setattr__(self, "attribute_name", value)``.
+
+                5. Subclasses of a frozen class are frozen too.
+
+        kw_only (bool):
+            Make all attributes keyword-only in the generated ``__init__`` (if
+            *init* is False, this parameter is ignored).
+
+        weakref_slot (bool):
+            Make instances weak-referenceable.  This has no effect unless
+            *slots* is True.
+
+        field_transformer (~typing.Callable | None):
+            A function that is called with the original class object and all
+            fields right before *attrs* finalizes the class.  You can use this,
+            for example, to automatically add converters or validators to
+            fields based on their types.
+
+            .. seealso:: `transform-fields`
+
+        match_args (bool):
+            If True (default), set ``__match_args__`` on the class to support
+            :pep:`634` (*Structural Pattern Matching*). It is a tuple of all
+            non-keyword-only ``__init__`` parameter names on Python 3.10 and
+            later. Ignored on older Python versions.
+
+        collect_by_mro (bool):
+            If True, *attrs* collects attributes from base classes correctly
+            according to the `method resolution order
+      ]]></code>
+    </chunk>
+    <chunk file="src/attr/setters.py" lines="56-73" symbol="convert" score="1.6843" tokens="115">
+      <code><![CDATA[
+def convert(instance, attrib, new_value):
+    """
+    Run *attrib*'s converter -- if it has one -- on *new_value* and return the
+    result.
+
+    .. versionadded:: 20.1.0
+    """
+    c = attrib.converter
+    if c:
+        # This can be removed once we drop 3.8 and use attrs.Converter instead.
+        from ._make import Converter
+
+        if not isinstance(c, Converter):
+            return c(new_value)
+
+        return c(new_value, instance, attrib)
+
+    return new_value
+      ]]></code>
+    </chunk>
+    <chunk file="src/attr/_next_gen.py" lines="134-186" symbol="define" score="1.6213" tokens="516">
+      <code><![CDATA[
+            If True or None (default), add ``__eq__`` and ``__ne__`` methods
+            that check two instances for equality.
+
+            .. seealso::
+                `comparison` describes how to customize the comparison behavior
+                going as far comparing NumPy arrays.
+
+        order (bool | None):
+            If True, add ``__lt__``, ``__le__``, ``__gt__``, and ``__ge__``
+            methods that behave like *eq* above and allow instances to be
+            ordered.
+
+            They compare the instances as if they were tuples of their *attrs*
+            attributes if and only if the types of both classes are
+            *identical*.
+
+            If `None` mirror value of *eq*.
+
+            .. seealso:: `comparison`
+
+        unsafe_hash (bool | None):
+            If None (default), the ``__hash__`` method is generated according
+            how *eq* and *frozen* are set.
+
+            1. If *both* are True, *attrs* will generate a ``__hash__`` for
+               you.
+            2. If *eq* is True and *frozen* is False, ``__hash__`` will be set
+               to None, marking it unhashable (which it is).
+            3. If *eq* is False, ``__hash__`` will be left untouched meaning
+               the ``__hash__`` method of the base class will be used. If the
+               base class is `object`, this means it will fall back to id-based
+               hashing.
+
+            Although not recommended, you can decide for yourself and force
+            *attrs* to create one (for example, if the class is immutable even
+            though you didn't freeze it programmatically) by passing True or
+            not.  Both of these cases are rather special and should be used
+            carefully.
+
+            .. seealso::
+
+                - Our documentation on `hashing`,
+                - Python's documentation on `object.__hash__`,
+                - and the `GitHub issue that led to the default \ behavior
+                  <https://github.com/python-attrs/attrs/issues/136>`_ for more
+                  details.
+
+        hash (bool | None):
+            Deprecated alias for *unsafe_hash*. *unsafe_hash* takes precedence.
+
+        cache_hash (bool):
+            Ensure that the object's hash code is computed only once and stored
+            on the object.  If this is set to True, hashing must be either
+      ]]></code>
+    </chunk>
+    <chunk file="src/attr/_next_gen.py" lines="334-404" symbol="define" score="1.5677" tokens="496">
+      <code><![CDATA[
+          programming. But it *can* lead to some surprising behaviors, so
+          please make sure to read :term:`slotted classes`.
+
+        - *auto_exc=True*
+        - *auto_detect=True*
+        - *order=False*
+        - Some options that were only relevant on Python 2 or were kept around
+          for backwards-compatibility have been removed.
+
+    """
+
+    def do_it(cls, auto_attribs):
+        return attrs(
+            maybe_cls=cls,
+            these=these,
+            repr=repr,
+            hash=hash,
+            unsafe_hash=unsafe_hash,
+            init=init,
+            slots=slots,
+            frozen=frozen,
+            weakref_slot=weakref_slot,
+            str=str,
+            auto_attribs=auto_attribs,
+            kw_only=kw_only,
+            cache_hash=cache_hash,
+            auto_exc=auto_exc,
+            eq=eq,
+            order=order,
+            auto_detect=auto_detect,
+            collect_by_mro=True,
+            getstate_setstate=getstate_setstate,
+            on_setattr=on_setattr,
+            field_transformer=field_transformer,
+            match_args=match_args,
+        )
+
+    def wrap(cls):
+        """
+        Making this a wrapper ensures this code runs during class creation.
+
+        We also ensure that frozen-ness of classes is inherited.
+        """
+        nonlocal frozen, on_setattr
+
+        had_on_setattr = on_setattr not in (None, setters.NO_OP)
+
+        # By default, mutable classes convert & validate on setattr.
+        if frozen is False and on_setattr is None:
+            on_setattr = _DEFAULT_ON_SETATTR
+
+        # However, if we subclass a frozen class, we inherit the immutability
+        # and disable on_setattr.
+        for base_cls in cls.__bases__:
+            if base_cls.__setattr__ is _frozen_setattrs:
+                if had_on_setattr:
+                    msg = "Frozen classes can't use on_setattr (frozen-ness was inherited)."
+                    raise ValueError(msg)
+
+                on_setattr = setters.NO_OP
+                break
+
+        if auto_attribs is not None:
+            return do_it(cls, auto_attribs)
+
+        try:
+            return do_it(cls, True)
+        except UnannotatedAttributeError:
+            return do_it(cls, False)
+
+    # maybe_cls's type depends on the usage of the decorator.  It's a class
+      ]]></code>
+    </chunk>
+  </chunks>
+  <type-definitions>
+    <type-def file="src/attr/__init__.py" symbol="AttrsInstance" lines="37-38">
+      <![CDATA[class AttrsInstance(Protocol):
+    pass]]>
+    </type-def>
+  </type-definitions>
+  <receipt freshness="clean" complete="incomplete" reason="dependency_frontier_cut" action="fetch_skipped_candidate" index_revision="7b939a4221ac0937c0b7e156424e76d77c6e1f331e3aae264edf1e9230c4f91c" budget_requested="2096" budget_consumed="2086" returned_shown="12" returned_total="12" skipped_shown="11" skipped_total="11" omitted_edges_shown="15" omitted_edges_total="15">
+    <returned handle="chunk:src/attr/__init__.py:AttrsInstance:37" file="src/attr/__init__.py" lines="37-38" hash="2cff5dcc6f48de94fc48de8e50e212d64bbfffe9056cd1fd57770e7fc4e90d1c" score="1.0296" />
+    <returned handle="chunk:src/attr/_next_gen.py:define:134" file="src/attr/_next_gen.py" lines="134-186" hash="08963f92a01ab3eef3dcd0976959a6ecaeb58c0c8125db9811bd8f86489a2949" score="1.6213" />
+    <returned handle="chunk:src/attr/_next_gen.py:define:187" file="src/attr/_next_gen.py" lines="187-240" hash="edde27dba00073409c8c2dd75a30e58888454fbbaa6268afec11581dfc37ce2f" score="1.8506" />
+    <returned handle="chunk:src/attr/_next_gen.py:define:334" file="src/attr/_next_gen.py" lines="334-404" hash="aeb91e1adebbba3eb443f48d8b1a1d10040a985d601e9f6aadc2b5cc3a16f6f5" score="1.5677" />
+    <returned handle="chunk:src/attr/_next_gen.py:define:405" file="src/attr/_next_gen.py" lines="405-409" hash="0ae8768dbb082478d45f55ad2b4334b4811fc9900b6b42ca1784293d339acc66" score="2.0475" />
+    <returned handle="chunk:src/attr/_next_gen.py:asdict:598" file="src/attr/_next_gen.py" lines="598-611" hash="0c1c90b04509bb0b3db674c381268dfba39def89c02e3a38c66a3017ff471f76" score="2.0475" />
+    <returned handle="chunk:src/attr/_next_gen.py:astuple:614" file="src/attr/_next_gen.py" lines="614-623" hash="0898a81351d3e0ff91ba3cbf033122228e95028e4418ad0931497b9aa1f15b28" score="2.0475" />
+    <returned handle="chunk:src/attr/setters.py:_module:1" file="src/attr/setters.py" lines="1-17" hash="63593bec035e75c987737202ae10d87f2e94500623241b14af15c7b284600ef2" score="2.0467" />
+    <skipped file="src/attr/__init__.py" reason="over_budget" handle="chunk:src/attr/__init__.py:_module:1" />
+    <skipped file="src/attr/__init__.py" reason="over_budget" handle="chunk:src/attr/__init__.py:_module:39" />
+    <skipped file="src/attr/__init__.py" reason="over_budget" handle="chunk:src/attr/__init__.py:_make_getattr:81" />
+    <skipped file="src/attr/_next_gen.py" reason="over_budget" handle="chunk:src/attr/_next_gen.py:_module:1" />
+    <skipped file="src/attr/_next_gen.py" reason="over_budget" handle="chunk:src/attr/_next_gen.py:define:23" />
+    <skipped file="src/attr/_next_gen.py" reason="over_budget" handle="chunk:src/attr/_next_gen.py:define:241" />
+    <skipped file="src/attr/_next_gen.py" reason="over_budget" handle="chunk:src/attr/_next_gen.py:define:288" />
+    <skipped file="src/attr/_next_gen.py" reason="over_budget" handle="chunk:src/attr/_next_gen.py:define:80" />
+  </receipt>
+</context>

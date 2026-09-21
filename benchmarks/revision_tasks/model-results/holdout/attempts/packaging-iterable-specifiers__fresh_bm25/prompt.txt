@@ -1,0 +1,338 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+from packaging.specifiers import Specifier, SpecifierSet
+spec = SpecifierSet(iter([Specifier(">=1.0"), Specifier("<2.0")]))
+RESULT = sorted(map(str, spec))
+```
+
+Repository source evidence:
+# ContextProof source evidence
+{"budget":16000,"budget_unit":"utf8_bytes","id":"20a9408cc79379081df2330f48a97c8448d44e6522a0cf83c2a76485c70a879b","method":"bm25","omitted_count":311,"query":"Explain the behavior of this Python probe using repository source. src/packaging/specifiers.py SpecifierSet.__init__\nfrom packaging.specifiers import Specifier, SpecifierSet\nspec = SpecifierSet(iter([Specifier(\">=1.0\"), Specifier(\"<2.0\")]))\nRESULT = sorted(map(str, spec))\n","schema_version":1,"snapshot_id":"e997c04787f0a125dc18b4aa3515e97689b1bc275fc6d5efdc040420e8b410e6","tokenizer":"bytes"}
+
+{"end_line":863,"file_sha256":"186d703cd31c2f47cc24eebcbc5e77c0a31dc277de84371a23eafd3694df8a50","id":"005e0b07dc32624d6a3c4fbb32fae1e0ca011b23f1985388754484940f8ed83c","kind":"function","path":"src/packaging/specifiers.py","reasons":["lexical overlap: 0, 1, iter, packaging, py, set, sorted, specifier, specifiers, specifierset, src, str, the, this"],"score":35.62000885,"start_line":855,"symbol":"SpecifierSet.__iter__","text_sha256":"42e1cae356cd367a8f52fc0cca9e95a10f22c3b274dfda4c3cb011d2dc2f1aa9"}
+```
+    def __iter__(self) -> Iterator[Specifier]:
+        """
+        Returns an iterator over all the underlying :class:`Specifier` instances
+        in this specifier set.
+
+        >>> sorted(SpecifierSet(">=1.0.0,!=1.0.1"), key=str)
+        [<Specifier('!=1.0.1')>, <Specifier('>=1.0.0')>]
+        """
+        return iter(self._specs)
+```
+
+{"end_line":25,"file_sha256":"186d703cd31c2f47cc24eebcbc5e77c0a31dc277de84371a23eafd3694df8a50","id":"ef23945741806c6f395b89dc1596dc7c821f9ac18e3a8ba12bdbcef5169a786c","kind":"module","path":"src/packaging/specifiers.py","reasons":["lexical overlap: 0, 2, from, import, of, packaging, py, repository, set, specifier, specifiers, specifierset, src, str, the, this"],"score":30.13504928,"start_line":1,"symbol":"<module>","text_sha256":"cc3e6c46b5dbd28bd229d9cd21641ecf8797bdfa74bec0020e98bc3cf8e2d7d9"}
+```
+# This file is dual licensed under the terms of the Apache License, Version
+# 2.0, and the BSD License. See the LICENSE file in the root of this repository
+# for complete details.
+"""
+.. testsetup::
+
+    from packaging.specifiers import Specifier, SpecifierSet, InvalidSpecifier
+    from packaging.version import Version
+"""
+
+from __future__ import annotations
+
+import abc
+import itertools
+import re
+from typing import Callable, Iterable, Iterator, TypeVar, Union
+
+from .utils import canonicalize_version
+from .version import Version
+
+UnparsedVersion = Union[Version, str]
+UnparsedVersionVar = TypeVar("UnparsedVersionVar", bound=UnparsedVersion)
+CallableOperator = Callable[[Version, str], bool]
+
+
+```
+
+{"end_line":14,"file_sha256":"818c9148075bac8c8a0d8ebaba02035108d132fc641f600b8a84e65f7b672faa","id":"3e039122bcb81603f350e6a7988abb99a80248df433e25cf25cec8565af5e4f5","kind":"module","path":"src/packaging/requirements.py","reasons":["lexical overlap: 0, 2, from, import, of, packaging, py, repository, set, specifier, specifiers, specifierset, src, the, this"],"score":30.12412016,"start_line":1,"symbol":"<module>","text_sha256":"b28fc0cc770d07a0b548c151568c65388cb69cbb34402330253922cb8f05257c"}
+```
+# This file is dual licensed under the terms of the Apache License, Version
+# 2.0, and the BSD License. See the LICENSE file in the root of this repository
+# for complete details.
+from __future__ import annotations
+
+from typing import Any, Iterator
+
+from ._parser import parse_requirement as _parse_requirement
+from ._tokenizer import ParserSyntaxError
+from .markers import Marker, _normalize_extra_values
+from .specifiers import SpecifierSet
+from .utils import canonicalize_name
+
+
+```
+
+{"end_line":788,"file_sha256":"186d703cd31c2f47cc24eebcbc5e77c0a31dc277de84371a23eafd3694df8a50","id":"fe9caa8b43cb59714e5b48b093f70f26dbb2cf6b0afed4a3ef15eb7a5f155f45","kind":"function","path":"src/packaging/specifiers.py","reasons":["lexical overlap: 0, 1, of, packaging, py, set, sorted, specifier, specifiers, specifierset, src, str, the"],"score":28.0467973,"start_line":777,"symbol":"SpecifierSet.__str__","text_sha256":"efccb55d6e0f65284be3b0b7721c3048aa01a59de8b3293769c46553b452dde6"}
+```
+    def __str__(self) -> str:
+        """A string representation of the specifier set that can be round-tripped.
+
+        Note that the ordering of the individual specifiers within the set may not
+        match the input string.
+
+        >>> str(SpecifierSet(">=1.0.0,!=1.0.1"))
+        '!=1.0.1,>=1.0.0'
+        >>> str(SpecifierSet(">=1.0.0,!=1.0.1", prereleases=False))
+        '!=1.0.1,>=1.0.0'
+        """
+        return ",".join(sorted(str(s) for s in self._specs))
+```
+
+{"end_line":733,"file_sha256":"186d703cd31c2f47cc24eebcbc5e77c0a31dc277de84371a23eafd3694df8a50","id":"063609c473421e1f75bc2f3136d83b73ab375e8acd6ac4fae5bc32d8b3526d1c","kind":"function","path":"src/packaging/specifiers.py","reasons":["lexical overlap: from, init, map, of, packaging, py, set, specifier, specifiers, specifierset, src, str, the, this"],"score":26.22318071,"start_line":697,"symbol":"SpecifierSet.__init__","text_sha256":"711752ca26eef1fb4e1cb66cdb07717cce8fb47ecc3cccde54d07cb97ee36570"}
+```
+    def __init__(
+        self,
+        specifiers: str | Iterable[Specifier] = "",
+        prereleases: bool | None = None,
+    ) -> None:
+        """Initialize a SpecifierSet instance.
+
+        :param specifiers:
+            The string representation of a specifier or a comma-separated list of
+            specifiers which will be parsed and normalized before use.
+            May also be an iterable of ``Specifier`` instances, which will be used
+            as is.
+        :param prereleases:
+            This tells the SpecifierSet if it should accept prerelease versions if
+            applicable or not. The default of ``None`` will autodetect it from the
+            given specifiers.
+
+        :raises InvalidSpecifier:
+            If the given ``specifiers`` are not parseable than this exception will be
+            raised.
+        """
+
+        if isinstance(specifiers, str):
+            # Split on `,` to break each individual specifier into its own item, and
+            # strip each item to remove leading/trailing whitespace.
+            split_specifiers = [s.strip() for s in specifiers.split(",") if s.strip()]
+
+            # Make each individual specifier a Specifier and save in a frozen set
+            # for later.
+            self._specs = frozenset(map(Specifier, split_specifiers))
+        else:
+            # Save the supplied specifiers in a frozen set.
+            self._specs = frozenset(specifiers)
+
+        # Store our prereleases value so we can use it later to determine if
+        # we accept prereleases or not.
+        self._prereleases = prereleases
+```
+
+{"end_line":1020,"file_sha256":"186d703cd31c2f47cc24eebcbc5e77c0a31dc277de84371a23eafd3694df8a50","id":"f77f3a2cf22e9f380fce64bfa8cad41199041231d632e6a38e365866d0fee4c0","kind":"function","path":"src/packaging/specifiers.py","reasons":["lexical overlap: 1, 2, from, iter, of, packaging, py, set, spec, specifier, specifiers, specifierset, src, the, this"],"score":26.14982662,"start_line":943,"symbol":"SpecifierSet.filter","text_sha256":"150e2762096ec666619d1ca2096edc674a4e4e22495a2ccb85feeb46608d2a9e"}
+```
+    def filter(
+        self, iterable: Iterable[UnparsedVersionVar], prereleases: bool | None = None
+    ) -> Iterator[UnparsedVersionVar]:
+        """Filter items in the given iterable, that match the specifiers in this set.
+
+        :param iterable:
+            An iterable that can contain version strings and :class:`Version` instances.
+            The items in the iterable will be filtered according to the specifier.
+        :param prereleases:
+            Whether or not to allow prereleases in the returned iterator. If set to
+            ``None`` (the default), it will be intelligently decide whether to allow
+            prereleases or not (based on the :attr:`prereleases` attribute, and
+            whether the only versions matching are prereleases).
+
+        This method is smarter than just ``filter(SpecifierSet(...).contains, [...])``
+        because it implements the rule from :pep:`440` that a prerelease item
+        SHOULD be accepted if no other versions match the given specifier.
+
+        >>> list(SpecifierSet(">=1.2.3").filter(["1.2", "1.3", "1.5a1"]))
+        ['1.3']
+        >>> list(SpecifierSet(">=1.2.3").filter(["1.2", "1.3", Version("1.4")]))
+        ['1.3', <Version('1.4')>]
+        >>> list(SpecifierSet(">=1.2.3").filter(["1.2", "1.5a1"]))
+        []
+        >>> list(SpecifierSet(">=1.2.3").filter(["1.3", "1.5a1"], prereleases=True))
+        ['1.3', '1.5a1']
+        >>> list(SpecifierSet(">=1.2.3", prereleases=True).filter(["1.3", "1.5a1"]))
+        ['1.3', '1.5a1']
+
+        An "empty" SpecifierSet will filter items based on the presence of prerelease
+        versions in the set.
+
+        >>> list(SpecifierSet("").filter(["1.3", "1.5a1"]))
+        ['1.3']
+        >>> list(SpecifierSet("").filter(["1.5a1"]))
+        ['1.5a1']
+        >>> list(SpecifierSet("", prereleases=True).filter(["1.3", "1.5a1"]))
+        ['1.3', '1.5a1']
+        >>> list(SpecifierSet("").filter(["1.3", "1.5a1"], prereleases=True))
+        ['1.3', '1.5a1']
+        """
+        # Determine if we're forcing a prerelease or not, if we're not forcing
+        # one for this particular filter call, then we'll use whatever the
+        # SpecifierSet thinks for whether or not we should support prereleases.
+        if prereleases is None:
+            prereleases = self.prereleases
+
+        # If we have any specifiers, then we want to wrap our iterable in the
+        # filter method for each one, this will act as a logical AND amongst
+        # each specifier.
+        if self._specs:
+            for spec in self._specs:
+                iterable = spec.filter(iterable, prereleases=bool(prereleases))
+            return iter(iterable)
+        # If we do not have any specifiers, then we need to have a rough filter
+        # which will filter out any pre-releases, unless there are no final
+        # releases.
+        else:
+            filtered: list[UnparsedVersionVar] = []
+            found_prereleases: list[UnparsedVersionVar] = []
+
+            for item in iterable:
+                parsed_version = _coerce_version(item)
+
+                # Store any item which is a pre-release for later unless we've
+                # already found a final version or we are accepting prereleases
+                if parsed_version.is_prerelease and not prereleases:
+                    if not filtered:
+                        found_prereleases.append(item)
+                else:
+                    filtered.append(item)
+
+            # If we've found no items except for pre-releases, then we'll go
+            # ahead and use the pre-releases
+            if not filtered and found_prereleases and prereleases is None:
+                return iter(found_prereleases)
+
+            return iter(filtered)
+```
+
+{"end_line":775,"file_sha256":"186d703cd31c2f47cc24eebcbc5e77c0a31dc277de84371a23eafd3694df8a50","id":"47b2ca952848a614945fa5113b1f89bfda1cc37c7ab669c1b69ddf9534ce746f","kind":"function","path":"src/packaging/specifiers.py","reasons":["lexical overlap: 0, 1, 2, of, packaging, py, set, specifier, specifiers, specifierset, src, str, the"],"score":25.82370452,"start_line":756,"symbol":"SpecifierSet.__repr__","text_sha256":"8c81e94782ba2f8f4481ebb870ce62b1d324b79d697e1827fa70c017158e5579"}
+```
+    def __repr__(self) -> str:
+        """A representation of the specifier set that shows all internal state.
+
+        Note that the ordering of the individual specifiers within the set may not
+        match the input string.
+
+        >>> SpecifierSet('>=1.0.0,!=2.0.0')
+        <SpecifierSet('!=2.0.0,>=1.0.0')>
+        >>> SpecifierSet('>=1.0.0,!=2.0.0', prereleases=False)
+        <SpecifierSet('!=2.0.0,>=1.0.0', prereleases=False)>
+        >>> SpecifierSet('>=1.0.0,!=2.0.0', prereleases=True)
+        <SpecifierSet('!=2.0.0,>=1.0.0', prereleases=True)>
+        """
+        pre = (
+            f", prereleases={self.prereleases!r}"
+            if self._prereleases is not None
+            else ""
+        )
+
+        return f"<SpecifierSet({str(self)!r}{pre})>"
+```
+
+{"end_line":29,"file_sha256":"73cf5337307b65d198864a2f9ba3d89aa1b21f15e561568b5b9f753c750d283f","id":"8b57c6e5cefacf5177a8963c48cd8c00d90d51433cfe7fc62e361863aaf7dfd6","kind":"module","path":"src/packaging/markers.py","reasons":["lexical overlap: 0, 2, from, import, of, packaging, py, repository, specifier, specifiers, src, str, the, this"],"score":24.26570261,"start_line":1,"symbol":"<module>","text_sha256":"ed10dab9049924e6c9df47e1f59fcd565629d27fbdb3796ecd1b031809a0d6c9"}
+```
+# This file is dual licensed under the terms of the Apache License, Version
+# 2.0, and the BSD License. See the LICENSE file in the root of this repository
+# for complete details.
+
+from __future__ import annotations
+
+import operator
+import os
+import platform
+import sys
+from typing import Any, Callable, TypedDict, cast
+
+from ._parser import MarkerAtom, MarkerList, Op, Value, Variable
+from ._parser import parse_marker as _parse_marker
+from ._tokenizer import ParserSyntaxError
+from .specifiers import InvalidSpecifier, Specifier
+from .utils import canonicalize_name
+
+__all__ = [
+    "InvalidMarker",
+    "Marker",
+    "UndefinedComparison",
+    "UndefinedEnvironmentName",
+    "default_environment",
+]
+
+Operator = Callable[[str, str], bool]
+
+
+```
+
+{"end_line":884,"file_sha256":"186d703cd31c2f47cc24eebcbc5e77c0a31dc277de84371a23eafd3694df8a50","id":"29acd4a9abc2c150342087c079fb487d817cb8648ff10c30c68bc95eace4ae9b","kind":"function","path":"src/packaging/specifiers.py","reasons":["lexical overlap: 0, 1, 2, packaging, py, set, specifier, specifiers, specifierset, src, the, this"],"score":23.9189264,"start_line":865,"symbol":"SpecifierSet.__contains__","text_sha256":"0fcf6690b1fb8ebf237a08fce714955027a9d55ac0576b1fe83fae84ddcc5059"}
+```
+    def __contains__(self, item: UnparsedVersion) -> bool:
+        """Return whether or not the item is contained in this specifier.
+
+        :param item: The item to check for.
+
+        This is used for the ``in`` operator and behaves the same as
+        :meth:`contains` with no ``prereleases`` argument passed.
+
+        >>> "1.2.3" in SpecifierSet(">=1.0.0,!=1.0.1")
+        True
+        >>> Version("1.2.3") in SpecifierSet(">=1.0.0,!=1.0.1")
+        True
+        >>> "1.0.1" in SpecifierSet(">=1.0.0,!=1.0.1")
+        False
+        >>> "1.3.0a1" in SpecifierSet(">=1.0.0,!=1.0.1")
+        False
+        >>> "1.3.0a1" in SpecifierSet(">=1.0.0,!=1.0.1", prereleases=True)
+        True
+        """
+        return self.contains(item)
+```
+
+{"end_line":41,"file_sha256":"085aab2730337365cd19ec5eac7fff4fe639230abb59bb185ec88b1112d6c58d","id":"c23cdc00331af863f9a4aa2d8700e551463bf6318a9c9391d8c975bce1530e99","kind":"module","path":"src/packaging/tags.py","reasons":["lexical overlap: 0, 2, from, import, of, packaging, py, python, repository, src, str, the, this"],"score":23.28266769,"start_line":1,"symbol":"<module>","text_sha256":"e23391a6bb65398b12287a424a9a3bd549a91c23d533fae79f4f4e89ed6226fe"}
+```
+# This file is dual licensed under the terms of the Apache License, Version
+# 2.0, and the BSD License. See the LICENSE file in the root of this repository
+# for complete details.
+
+from __future__ import annotations
+
+import logging
+import platform
+import re
+import struct
+import subprocess
+import sys
+import sysconfig
+from importlib.machinery import EXTENSION_SUFFIXES
+from typing import (
+    Iterable,
+    Iterator,
+    Sequence,
+    Tuple,
+    cast,
+)
+
+from . import _manylinux, _musllinux
+
+logger = logging.getLogger(__name__)
+
+PythonVersion = Sequence[int]
+AppleVersion = Tuple[int, int]
+
+INTERPRETER_SHORT_NAMES: dict[str, str] = {
+    "python": "py",  # Generic.
+    "cpython": "cp",
+    "pypy": "pp",
+    "ironpython": "ip",
+    "jython": "jy",
+}
+
+
+_32_BIT_INTERPRETER = struct.calcsize("P") == 4
+
+
+```

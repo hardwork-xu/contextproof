@@ -1,0 +1,445 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import attrs
+@attrs.frozen
+class Failure(Exception):
+    pass
+error = Failure()
+error.__suppress_context__ = True
+error.__notes__ = ["note"]
+RESULT = [error.__suppress_context__, error.__notes__]
+```
+
+Repository source evidence:
+<context query="Explain the behavior of this Python probe using repository source. src/attr/_make.py _frozen_setattrs
+import attrs
+@attrs.frozen
+class Failure(Exception):
+    pass
+error = Failure()
+error.__suppress_context__ = True
+error.__notes__ = [&quot;note&quot;]
+RESULT = [error.__suppress_context__, error.__notes__]
+">
+  <structural-context>
+    <file-tree><![CDATA[
+src/attr/__init__.py
+src/attr/_compat.py
+src/attr/_make.py
+src/attr/_next_gen.py
+    ]]></file-tree>
+  </structural-context>
+  <chunks>
+    <chunk file="src/attr/_make.py" lines="541-555" symbol="_frozen_setattrs" score="2.4359" tokens="87">
+      <code><![CDATA[
+def _frozen_setattrs(self, name, value):
+    """
+    Attached to frozen classes as __setattr__.
+    """
+    if isinstance(self, BaseException) and name in (
+        "__cause__",
+        "__context__",
+        "__traceback__",
+        "__suppress_context__",
+        "__notes__",
+    ):
+        BaseException.__setattr__(self, name, value)
+        return
+
+    raise FrozenInstanceError
+      ]]></code>
+    </chunk>
+    <chunk file="src/attr/__init__.py" lines="37-38" symbol="AttrsInstance" score="1.0413" tokens="9">
+      <code><![CDATA[
+class AttrsInstance(Protocol):
+    pass
+      ]]></code>
+    </chunk>
+    <chunk file="src/attr/_next_gen.py" lines="1-28" score="0.9743" tokens="120">
+      <code><![CDATA[
+# SPDX-License-Identifier: MIT
+
+"""
+These are keyword-only APIs that call `attr.s` and `attr.ib` with different
+default values.
+"""
+
+from functools import partial
+
+from . import setters
+from ._funcs import asdict as _asdict
+from ._funcs import astuple as _astuple
+from ._make import (
+    _DEFAULT_ON_SETATTR,
+    NOTHING,
+    _frozen_setattrs,
+    attrib,
+    attrs,
+)
+from .exceptions import UnannotatedAttributeError
+
+
+
+
+mutable = define
+frozen = partial(define, frozen=True, on_setattr=None)
+
+
+      ]]></code>
+    </chunk>
+    <chunk file="src/attr/_compat.py" lines="35-72" symbol="_AnnotationExtractor" score="0.7999" tokens="201">
+      <code><![CDATA[
+class _AnnotationExtractor:
+    """
+    Extract type annotations from a callable, returning None whenever there
+    is none.
+    """
+
+    __slots__ = ["sig"]
+
+    def __init__(self, callable):
+        try:
+            self.sig = inspect.signature(callable)
+        except (ValueError, TypeError):  # inspect failed
+            self.sig = None
+
+    def get_first_param_type(self):
+        """
+        Return the type annotation of the first argument if it's not empty.
+        """
+        if not self.sig:
+            return None
+
+        params = list(self.sig.parameters.values())
+        if params and params[0].annotation is not inspect.Parameter.empty:
+            return params[0].annotation
+
+        return None
+
+    def get_return_type(self):
+        """
+        Return the return type if it's not empty.
+        """
+        if (
+            self.sig
+            and self.sig.return_annotation is not inspect.Signature.empty
+        ):
+            return self.sig.return_annotation
+
+        return None
+      ]]></code>
+    </chunk>
+    <chunk file="src/attr/_make.py" lines="60-77" symbol="_Nothing" score="2.1509" tokens="132">
+      <code><![CDATA[
+class _Nothing(enum.Enum):
+    """
+    Sentinel to indicate the lack of a value when `None` is ambiguous.
+
+    If extending attrs, you can use ``typing.Literal[NOTHING]`` to show
+    that a value may be ``NOTHING``.
+
+    .. versionchanged:: 21.1.0 ``bool(NOTHING)`` is now False.
+    .. versionchanged:: 22.2.0 ``NOTHING`` is now an ``enum.Enum`` variant.
+    """
+
+    NOTHING = enum.auto()
+
+    def __repr__(self):
+        return "NOTHING"
+
+    def __bool__(self):
+        return False
+      ]]></code>
+    </chunk>
+    <chunk file="src/attr/_make.py" lines="1245-1302" symbol="attrs" score="2.1124" tokens="493">
+      <code><![CDATA[
+def attrs(
+    maybe_cls=None,
+    these=None,
+    repr_ns=None,
+    repr=None,
+    cmp=None,
+    hash=None,
+    init=None,
+    slots=False,
+    frozen=False,
+    weakref_slot=True,
+    str=False,
+    auto_attribs=False,
+    kw_only=False,
+    cache_hash=False,
+    auto_exc=False,
+    eq=None,
+    order=None,
+    auto_detect=False,
+    collect_by_mro=False,
+    getstate_setstate=None,
+    on_setattr=None,
+    field_transformer=None,
+    match_args=True,
+    unsafe_hash=None,
+):
+    r"""
+    A class decorator that adds :term:`dunder methods` according to the
+    specified attributes using `attr.ib` or the *these* argument.
+
+    Consider using `attrs.define` / `attrs.frozen` in new code (``attr.s`` will
+    *never* go away, though).
+
+    Args:
+        repr_ns (str):
+            When using nested classes, there was no way in Python 2 to
+            automatically detect that.  This argument allows to set a custom
+            name for a more meaningful ``repr`` output.  This argument is
+            pointless in Python 3 and is therefore deprecated.
+
+    .. caution::
+        Refer to `attrs.define` for the rest of the parameters, but note that they
+        can have different defaults.
+
+        Notably, leaving *on_setattr* as `None` will **not** add any hooks.
+
+    .. versionadded:: 16.0.0 *slots*
+    .. versionadded:: 16.1.0 *frozen*
+    .. versionadded:: 16.3.0 *str*
+    .. versionadded:: 16.3.0 Support for ``__attrs_post_init__``.
+    .. versionchanged:: 17.1.0
+       *hash* supports `None` as value which is also the default now.
+    .. versionadded:: 17.3.0 *auto_attribs*
+    .. versionchanged:: 18.1.0
+       If *these* is passed, no attributes are deleted from the class body.
+    .. versionchanged:: 18.1.0 If *these* is ordered, the order is retained.
+    .. versionadded:: 18.2.0 *weakref_slot*
+    .. deprecated:: 18.2.0
+      ]]></code>
+    </chunk>
+    <chunk file="src/attr/_make.py" lines="1494-1560" symbol="_make_hash" score="1.9787" tokens="502">
+      <code><![CDATA[
+def _make_hash(cls, attrs, frozen, cache_hash):
+    attrs = tuple(
+        a for a in attrs if a.hash is True or (a.hash is None and a.eq is True)
+    )
+
+    tab = "        "
+
+    unique_filename = _generate_unique_filename(cls, "hash")
+    type_hash = hash(unique_filename)
+    # If eq is custom generated, we need to include the functions in globs
+    globs = {}
+
+    hash_def = "def __hash__(self"
+    hash_func = "hash(("
+    closing_braces = "))"
+    if not cache_hash:
+        hash_def += "):"
+    else:
+        hash_def += ", *"
+
+        hash_def += ", _cache_wrapper=__import__('attr._make')._make._CacheHashWrapper):"
+        hash_func = "_cache_wrapper(" + hash_func
+        closing_braces += ")"
+
+    method_lines = [hash_def]
+
+    def append_hash_computation_lines(prefix, indent):
+        """
+        Generate the code for actually computing the hash code.
+        Below this will either be returned directly or used to compute
+        a value which is then cached, depending on the value of cache_hash
+        """
+
+        method_lines.extend(
+            [
+                indent + prefix + hash_func,
+                indent + f"        {type_hash},",
+            ]
+        )
+
+        for a in attrs:
+            if a.eq_key:
+                cmp_name = f"_{a.name}_key"
+                globs[cmp_name] = a.eq_key
+                method_lines.append(
+                    indent + f"        {cmp_name}(self.{a.name}),"
+                )
+            else:
+                method_lines.append(indent + f"        self.{a.name},")
+
+        method_lines.append(indent + "    " + closing_braces)
+
+    if cache_hash:
+        method_lines.append(tab + f"if self.{_HASH_CACHE_FIELD} is None:")
+        if frozen:
+            append_hash_computation_lines(
+                f"object.__setattr__(self, '{_HASH_CACHE_FIELD}', ", tab * 2
+            )
+            method_lines.append(tab * 2 + ")")  # close __setattr__
+        else:
+            append_hash_computation_lines(
+                f"self.{_HASH_CACHE_FIELD} = ", tab * 2
+            )
+        method_lines.append(tab + f"return self.{_HASH_CACHE_FIELD}")
+    else:
+        append_hash_computation_lines("return ", tab)
+
+      ]]></code>
+    </chunk>
+    <chunk file="src/attr/_make.py" lines="569-624" symbol="evolve" score="1.4031" tokens="383">
+      <code><![CDATA[
+def evolve(*args, **changes):
+    """
+    Create a new instance, based on the first positional argument with
+    *changes* applied.
+
+    .. tip::
+
+       On Python 3.13 and later, you can also use `copy.replace` instead.
+
+    Args:
+
+        inst:
+            Instance of a class with *attrs* attributes. *inst* must be passed
+            as a positional argument.
+
+        changes:
+            Keyword changes in the new copy.
+
+    Returns:
+        A copy of inst with *changes* incorporated.
+
+    Raises:
+        TypeError:
+            If *attr_name* couldn't be found in the class ``__init__``.
+
+        attrs.exceptions.NotAnAttrsClassError:
+            If *cls* is not an *attrs* class.
+
+    .. versionadded:: 17.1.0
+    .. deprecated:: 23.1.0
+       It is now deprecated to pass the instance using the keyword argument
+       *inst*. It will raise a warning until at least April 2024, after which
+       it will become an error. Always pass the instance as a positional
+       argument.
+    .. versionchanged:: 24.1.0
+       *inst* can't be passed as a keyword argument anymore.
+    """
+    try:
+        (inst,) = args
+    except ValueError:
+        msg = (
+            f"evolve() takes 1 positional argument, but {len(args)} were given"
+        )
+        raise TypeError(msg) from None
+
+    cls = inst.__class__
+    attrs = fields(cls)
+    for a in attrs:
+        if not a.init:
+            continue
+        attr_name = a.name  # To deal with private attributes.
+        init_name = a.alias
+        if init_name not in changes:
+            changes[init_name] = getattr(inst, attr_name)
+
+    return cls(**changes)
+      ]]></code>
+    </chunk>
+    <chunk file="src/attr/_make.py" lines="1565-1570" symbol="_add_hash" score="1.3683" tokens="45">
+      <code><![CDATA[
+def _add_hash(cls, attrs):
+    """
+    Add a hash method to *cls*.
+    """
+    cls.__hash__ = _make_hash(cls, attrs, frozen=False, cache_hash=False)
+    return cls
+      ]]></code>
+    </chunk>
+  </chunks>
+  <type-definitions>
+    <type-def file="src/attr/__init__.py" symbol="AttrsInstance" lines="37-38">
+      <![CDATA[class AttrsInstance(Protocol):
+    pass]]>
+    </type-def>
+    <type-def file="src/attr/_compat.py" symbol="_AnnotationExtractor" lines="35-72">
+      <![CDATA[class _AnnotationExtractor:
+    """
+    Extract type annotations from a callable, returning None whenever there
+    is none.
+    """
+
+    __slots__ = ["sig"]
+
+    def __init__(self, callable):
+        try:
+            self.sig = inspect.signature(callable)
+        except (ValueError, TypeError):  # inspect failed
+            self.sig = None
+
+    def get_first_param_type(self):
+        """
+        Return the type annotation of the first argument if it's not empty.
+        """
+        if not self.sig:
+            return None
+
+        params = list(self.sig.parameters.values())
+        if params and params[0].annotation is not inspect.Parameter.empty:
+            return params[0].annotation
+
+        return None
+
+    def get_return_type(self):
+        """
+        Return the return type if it's not empty.
+        """
+        if (
+            self.sig
+            and self.sig.return_annotation is not inspect.Signature.empty
+        ):
+            return self.sig.return_annotation
+
+        return None]]>
+    </type-def>
+    <type-def file="src/attr/_make.py" symbol="_Nothing" lines="60-77">
+      <![CDATA[class _Nothing(enum.Enum):
+    """
+    Sentinel to indicate the lack of a value when `None` is ambiguous.
+
+    If extending attrs, you can use ``typing.Literal[NOTHING]`` to show
+    that a value may be ``NOTHING``.
+
+    .. versionchanged:: 21.1.0 ``bool(NOTHING)`` is now False.
+    .. versionchanged:: 22.2.0 ``NOTHING`` is now an ``enum.Enum`` variant.
+    """
+
+    NOTHING = enum.auto()
+
+    def __repr__(self):
+        return "NOTHING"
+
+    def __bool__(self):
+        return False]]>
+    </type-def>
+  </type-definitions>
+  <receipt freshness="clean" complete="incomplete" reason="dependency_frontier_cut" action="fetch_skipped_candidate" index_revision="7b939a4221ac0937c0b7e156424e76d77c6e1f331e3aae264edf1e9230c4f91c" budget_requested="2001" budget_consumed="1972" returned_shown="9" returned_total="9" skipped_shown="20" skipped_total="20" omitted_edges_shown="20" omitted_edges_total="20">
+    <returned handle="chunk:src/attr/__init__.py:AttrsInstance:37" file="src/attr/__init__.py" lines="37-38" hash="2cff5dcc6f48de94fc48de8e50e212d64bbfffe9056cd1fd57770e7fc4e90d1c" score="1.0413" />
+    <returned handle="chunk:src/attr/_compat.py:_AnnotationExtractor:35" file="src/attr/_compat.py" lines="35-72" hash="a901b4e16af1410c5571640e1c7a8c356e1454d2f5e8f45e6a846dc1f9703ea2" score="0.7999" />
+    <returned handle="chunk:src/attr/_make.py:_Nothing:60" file="src/attr/_make.py" lines="60-77" hash="4a5f79848ced0d83d5158490c590069856fd0d6bc8f4408b186c57a2cd0ac093" score="2.1509" />
+    <returned handle="chunk:src/attr/_make.py:_frozen_setattrs:541" file="src/attr/_make.py" lines="541-555" hash="e90624c9c56b99d027c3bfd39256c0f55929976b5db16e4566c6612e1de31ffb" score="2.4359" />
+    <returned handle="chunk:src/attr/_make.py:evolve:569" file="src/attr/_make.py" lines="569-624" hash="e840933cc347bdbe496b7b17e27850bf3eb4167557ec36ed7d0ff0a3860bc98f" score="1.4031" />
+    <returned handle="chunk:src/attr/_make.py:attrs:1245" file="src/attr/_make.py" lines="1245-1302" hash="49fa3aae7c664e229980ff103b14e03758f5cb02f881eb993ef799cbb15cccb6" score="2.1124" />
+    <returned handle="chunk:src/attr/_make.py:_make_hash:1494" file="src/attr/_make.py" lines="1494-1560" hash="219f85bd4118545c8da7986013a20e865d514200d3258b67211b55fcebbeb0f3" score="1.9787" />
+    <returned handle="chunk:src/attr/_make.py:_add_hash:1565" file="src/attr/_make.py" lines="1565-1570" hash="485b4102288f680e84e60847a7acb5af767becb88002e44def1863ec6f633fff" score="1.3683" />
+    <skipped file="src/attr/__init__.py" reason="over_budget" handle="chunk:src/attr/__init__.py:_module:1" />
+    <skipped file="src/attr/__init__.py" reason="over_budget" handle="chunk:src/attr/__init__.py:_module:39" />
+    <skipped file="src/attr/__init__.py" reason="over_budget" handle="chunk:src/attr/__init__.py:_make_getattr:81" />
+    <skipped file="src/attr/_compat.py" reason="over_budget" handle="chunk:src/attr/_compat.py:_module:1" />
+    <skipped file="src/attr/_make.py" reason="over_budget" handle="chunk:src/attr/_make.py:_module:1" />
+    <skipped file="src/attr/_make.py" reason="over_budget" handle="chunk:src/attr/_make.py:_module:2842" />
+    <skipped file="src/attr/_make.py" reason="over_budget" handle="chunk:src/attr/_make.py:_ClassBuilder:702" />
+    <skipped file="src/attr/_make.py" reason="over_budget" handle="chunk:src/attr/_make.py:_ClassBuilder:894" />
+  </receipt>
+</context>

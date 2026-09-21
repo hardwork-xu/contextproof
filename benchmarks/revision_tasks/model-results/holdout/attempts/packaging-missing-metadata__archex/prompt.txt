@@ -1,0 +1,375 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+from packaging.metadata import Metadata
+meta = Metadata.from_raw({}, validate=False)
+RESULT = meta.keywords
+```
+
+Repository source evidence:
+<context query="Explain the behavior of this Python probe using repository source. src/packaging/metadata.py _Validator.__get__ src/packaging/metadata.py _Validator._process_keywords src/packaging/metadata.py Metadata.from_raw
+from packaging.metadata import Metadata
+meta = Metadata.from_raw({}, validate=False)
+RESULT = meta.keywords
+">
+  <structural-context>
+    <file-tree><![CDATA[
+src/packaging/_manylinux.py
+src/packaging/_structures.py
+src/packaging/metadata.py
+src/packaging/tags.py
+    ]]></file-tree>
+  </structural-context>
+  <chunks>
+    <chunk file="src/packaging/metadata.py" lines="64-130" symbol="RawMetadata" score="2.1039" tokens="530">
+      <code><![CDATA[
+class RawMetadata(TypedDict, total=False):
+    """A dictionary of raw core metadata.
+
+    Each field in core metadata maps to a key of this dictionary (when data is
+    provided). The key is lower-case and underscores are used instead of dashes
+    compared to the equivalent core metadata field. Any core metadata field that
+    can be specified multiple times or can hold multiple values in a single
+    field have a key with a plural name. See :class:`Metadata` whose attributes
+    match the keys of this dictionary.
+
+    Core metadata fields that can be specified multiple times are stored as a
+    list or dict depending on which is appropriate for the field. Any fields
+    which hold multiple values in a single field are stored as a list.
+
+    """
+
+    # Metadata 1.0 - PEP 241
+    metadata_version: str
+    name: str
+    version: str
+    platforms: list[str]
+    summary: str
+    description: str
+    keywords: list[str]
+    home_page: str
+    author: str
+    author_email: str
+    license: str
+
+    # Metadata 1.1 - PEP 314
+    supported_platforms: list[str]
+    download_url: str
+    classifiers: list[str]
+    requires: list[str]
+    provides: list[str]
+    obsoletes: list[str]
+
+    # Metadata 1.2 - PEP 345
+    maintainer: str
+    maintainer_email: str
+    requires_dist: list[str]
+    provides_dist: list[str]
+    obsoletes_dist: list[str]
+    requires_python: str
+    requires_external: list[str]
+    project_urls: dict[str, str]
+
+    # Metadata 2.0
+    # PEP 426 attempted to completely revamp the metadata format
+    # but got stuck without ever being able to build consensus on
+    # it and ultimately ended up withdrawn.
+    #
+    # However, a number of tools had started emitting METADATA with
+    # `2.0` Metadata-Version, so for historical reasons, this version
+    # was skipped.
+
+    # Metadata 2.1 - PEP 566
+    description_content_type: str
+    provides_extra: list[str]
+
+    # Metadata 2.2 - PEP 643
+    dynamic: list[str]
+
+    # Metadata 2.3 - PEP 685
+    # No new fields were added in PEP 685, just some edge case were
+    # tightened up to provide better interoptability.
+
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/_manylinux.py" lines="182-205" symbol="_is_compatible" score="1.0817" tokens="255">
+      <code><![CDATA[
+def _is_compatible(arch: str, version: _GLibCVersion) -> bool:
+    sys_glibc = _get_glibc_version()
+    if sys_glibc < version:
+        return False
+    # Check for presence of _manylinux module.
+    try:
+        import _manylinux
+    except ImportError:
+        return True
+    if hasattr(_manylinux, "manylinux_compatible"):
+        result = _manylinux.manylinux_compatible(version[0], version[1], arch)
+        if result is not None:
+            return bool(result)
+        return True
+    if version == _GLibCVersion(2, 5):
+        if hasattr(_manylinux, "manylinux1_compatible"):
+            return bool(_manylinux.manylinux1_compatible)
+    if version == _GLibCVersion(2, 12):
+        if hasattr(_manylinux, "manylinux2010_compatible"):
+            return bool(_manylinux.manylinux2010_compatible)
+    if version == _GLibCVersion(2, 17):
+        if hasattr(_manylinux, "manylinux2014_compatible"):
+            return bool(_manylinux.manylinux2014_compatible)
+    return True
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/tags.py" lines="1-41" score="0.9866" tokens="211">
+      <code><![CDATA[
+# This file is dual licensed under the terms of the Apache License, Version
+# 2.0, and the BSD License. See the LICENSE file in the root of this repository
+# for complete details.
+
+from __future__ import annotations
+
+import logging
+import platform
+import re
+import struct
+import subprocess
+import sys
+import sysconfig
+from importlib.machinery import EXTENSION_SUFFIXES
+from typing import (
+    Iterable,
+    Iterator,
+    Sequence,
+    Tuple,
+    cast,
+)
+
+from . import _manylinux, _musllinux
+
+logger = logging.getLogger(__name__)
+
+PythonVersion = Sequence[int]
+AppleVersion = Tuple[int, int]
+
+INTERPRETER_SHORT_NAMES: dict[str, str] = {
+    "python": "py",  # Generic.
+    "cpython": "cp",
+    "pypy": "pp",
+    "ironpython": "ip",
+    "jython": "jy",
+}
+
+
+_32_BIT_INTERPRETER = struct.calcsize("P") == 4
+
+
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/_structures.py" lines="6-29" symbol="InfinityType" score="0.8625" tokens="150">
+      <code><![CDATA[
+class InfinityType:
+    def __repr__(self) -> str:
+        return "Infinity"
+
+    def __hash__(self) -> int:
+        return hash(repr(self))
+
+    def __lt__(self, other: object) -> bool:
+        return False
+
+    def __le__(self, other: object) -> bool:
+        return False
+
+    def __eq__(self, other: object) -> bool:
+        return isinstance(other, self.__class__)
+
+    def __gt__(self, other: object) -> bool:
+        return True
+
+    def __ge__(self, other: object) -> bool:
+        return True
+
+    def __neg__(self: object) -> "NegativeInfinityType":
+        return NegativeInfinity
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/metadata.py" lines="180-217" symbol="_parse_project_urls" score="2.0439" tokens="467">
+      <code><![CDATA[
+def _parse_project_urls(data: list[str]) -> dict[str, str]:
+    """Parse a list of label/URL string pairings separated by a comma."""
+    urls = {}
+    for pair in data:
+        # Our logic is slightly tricky here as we want to try and do
+        # *something* reasonable with malformed data.
+        #
+        # The main thing that we have to worry about, is data that does
+        # not have a ',' at all to split the label from the Value. There
+        # isn't a singular right answer here, and we will fail validation
+        # later on (if the caller is validating) so it doesn't *really*
+        # matter, but since the missing value has to be an empty str
+        # and our return value is dict[str, str], if we let the key
+        # be the missing value, then they'd have multiple '' values that
+        # overwrite each other in a accumulating dict.
+        #
+        # The other potentional issue is that it's possible to have the
+        # same label multiple times in the metadata, with no solid "right"
+        # answer with what to do in that case. As such, we'll do the only
+        # thing we can, which is treat the field as unparseable and add it
+        # to our list of unparsed fields.
+        parts = [p.strip() for p in pair.split(",", 1)]
+        parts.extend([""] * (max(0, 2 - len(parts))))  # Ensure 2 items
+
+        # TODO: The spec doesn't say anything about if the keys should be
+        #       considered case sensitive or not... logically they should
+        #       be case-preserving and case-insensitive, but doing that
+        #       would open up more cases where we might have duplicate
+        #       entries.
+        label, url = parts
+        if label in urls:
+            # The label already exists in our set of urls, so this field
+            # is unparseable, and we can just add the whole thing to our
+            # unparseable data and stop processing it.
+            raise KeyError("duplicate labels in project urls")
+        urls[label] = url
+
+    return urls
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/metadata.py" lines="220-236" symbol="_get_payload" score="2.0189" tokens="167">
+      <code><![CDATA[
+def _get_payload(msg: email.message.Message, source: bytes | str) -> str:
+    """Get the body of the message."""
+    # If our source is a str, then our caller has managed encodings for us,
+    # and we don't need to deal with it.
+    if isinstance(source, str):
+        payload = msg.get_payload()
+        assert isinstance(payload, str)
+        return payload
+    # If our source is a bytes, then we're managing the encoding and we need
+    # to deal with it.
+    else:
+        bpayload = msg.get_payload(decode=True)
+        assert isinstance(bpayload, bytes)
+        try:
+            return bpayload.decode("utf8", "strict")
+        except UnicodeDecodeError as exc:
+            raise ValueError("payload in an invalid encoding") from exc
+      ]]></code>
+    </chunk>
+  </chunks>
+  <type-definitions>
+    <type-def file="src/packaging/metadata.py" symbol="RawMetadata" lines="64-130">
+      <![CDATA[class RawMetadata(TypedDict, total=False):
+    """A dictionary of raw core metadata.
+
+    Each field in core metadata maps to a key of this dictionary (when data is
+    provided). The key is lower-case and underscores are used instead of dashes
+    compared to the equivalent core metadata field. Any core metadata field that
+    can be specified multiple times or can hold multiple values in a single
+    field have a key with a plural name. See :class:`Metadata` whose attributes
+    match the keys of this dictionary.
+
+    Core metadata fields that can be specified multiple times are stored as a
+    list or dict depending on which is appropriate for the field. Any fields
+    which hold multiple values in a single field are stored as a list.
+
+    """
+
+    # Metadata 1.0 - PEP 241
+    metadata_version: str
+    name: str
+    version: str
+    platforms: list[str]
+    summary: str
+    description: str
+    keywords: list[str]
+    home_page: str
+    author: str
+    author_email: str
+    license: str
+
+    # Metadata 1.1 - PEP 314
+    supported_platforms: list[str]
+    download_url: str
+    classifiers: list[str]
+    requires: list[str]
+    provides: list[str]
+    obsoletes: list[str]
+
+    # Metadata 1.2 - PEP 345
+    maintainer: str
+    maintainer_email: str
+    requires_dist: list[str]
+    provides_dist: list[str]
+    obsoletes_dist: list[str]
+    requires_python: str
+    requires_external: list[str]
+    project_urls: dict[str, str]
+
+    # Metadata 2.0
+    # PEP 426 attempted to completely revamp the metadata format
+    # but got stuck without ever being able to build consensus on
+    # it and ultimately ended up withdrawn.
+    #
+    # However, a number of tools had started emitting METADATA with
+    # `2.0` Metadata-Version, so for historical reasons, this version
+    # was skipped.
+
+    # Metadata 2.1 - PEP 566
+    description_content_type: str
+    provides_extra: list[str]
+
+    # Metadata 2.2 - PEP 643
+    dynamic: list[str]
+
+    # Metadata 2.3 - PEP 685
+    # No new fields were added in PEP 685, just some edge case were
+    # tightened up to provide better interoptability.
+]]>
+    </type-def>
+    <type-def file="src/packaging/_structures.py" symbol="InfinityType" lines="6-29">
+      <![CDATA[class InfinityType:
+    def __repr__(self) -> str:
+        return "Infinity"
+
+    def __hash__(self) -> int:
+        return hash(repr(self))
+
+    def __lt__(self, other: object) -> bool:
+        return False
+
+    def __le__(self, other: object) -> bool:
+        return False
+
+    def __eq__(self, other: object) -> bool:
+        return isinstance(other, self.__class__)
+
+    def __gt__(self, other: object) -> bool:
+        return True
+
+    def __ge__(self, other: object) -> bool:
+        return True
+
+    def __neg__(self: object) -> "NegativeInfinityType":
+        return NegativeInfinity]]>
+    </type-def>
+  </type-definitions>
+  <receipt freshness="clean" complete="incomplete" reason="dependency_frontier_cut" action="fetch_skipped_candidate" index_revision="f846c38dc48af337e9d838d465a652dacd3975209156386732a1bdd68051cf1f" budget_requested="1800" budget_consumed="1780" returned_shown="6" returned_total="6" skipped_shown="20" skipped_total="20" omitted_edges_shown="20" omitted_edges_total="20">
+    <returned handle="chunk:src/packaging/_manylinux.py:_is_compatible:182" file="src/packaging/_manylinux.py" lines="182-205" hash="2239e76784be6d213cf590589311cdd81e97263875d208755e9818a7860710a3" score="1.0817" />
+    <returned handle="chunk:src/packaging/_structures.py:InfinityType:6" file="src/packaging/_structures.py" lines="6-29" hash="81a2ac674162ddacdb651f00b01a5fe9b3383e6f988ed3297d4a77c0ab3ff1af" score="0.8625" />
+    <returned handle="chunk:src/packaging/metadata.py:RawMetadata:64" file="src/packaging/metadata.py" lines="64-130" hash="4507b0489b7a2964e441e5515ea7c297114d1e6c4f7b7e0e8ed59f6d357f067c" score="2.1039" />
+    <returned handle="chunk:src/packaging/metadata.py:_parse_project_urls:180" file="src/packaging/metadata.py" lines="180-217" hash="ae59d4e51167916dbbaccf03fd36d20da2841a2ed883a9ac6c99238e380ff211" score="2.0439" />
+    <returned handle="chunk:src/packaging/metadata.py:_get_payload:220" file="src/packaging/metadata.py" lines="220-236" hash="1b616a173d079afabcd63f3a590ad778bbd5b7fe0dbadd2625c25d421da1283a" score="2.0189" />
+    <returned handle="chunk:src/packaging/tags.py:_module:1" file="src/packaging/tags.py" lines="1-41" hash="9aafb2a109fadcc48438f7a17f0ce77a8810fa94fd988129b8cd7fb387dfb793" score="0.9866" />
+    <skipped file="src/packaging/_manylinux.py" reason="over_budget" handle="chunk:src/packaging/_manylinux.py:_module:1" />
+    <skipped file="src/packaging/_manylinux.py" reason="over_budget" handle="chunk:src/packaging/_manylinux.py:_is_linux_armhf:30" />
+    <skipped file="src/packaging/_manylinux.py" reason="over_budget" handle="chunk:src/packaging/_manylinux.py:_is_linux_i686:45" />
+    <skipped file="src/packaging/_manylinux.py" reason="over_budget" handle="chunk:src/packaging/_manylinux.py:_parse_elf:22" />
+    <skipped file="src/packaging/_structures.py" reason="over_budget" handle="chunk:src/packaging/_structures.py:_module:1" />
+    <skipped file="src/packaging/metadata.py" reason="over_budget" handle="chunk:src/packaging/metadata.py:_module:1" />
+    <skipped file="src/packaging/metadata.py" reason="over_budget" handle="chunk:src/packaging/metadata.py:_module:134" />
+    <skipped file="src/packaging/metadata.py" reason="over_budget" handle="chunk:src/packaging/metadata.py:_module:237" />
+  </receipt>
+</context>

@@ -1,0 +1,356 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import pluggy
+hookspec = pluggy.HookspecMarker("example")
+hookimpl = pluggy.HookimplMarker("example")
+class Specification:
+    @hookspec
+    def run(self):
+        pass
+class First:
+    @hookimpl(tryfirst=True)
+    def run(self):
+        return "first"
+class Last:
+    @hookimpl(trylast=True)
+    def run(self):
+        return "last"
+manager = pluggy.PluginManager("example")
+manager.add_hookspecs(Specification)
+manager.register(First())
+manager.register(Last())
+RESULT = manager.hook.run.call_extra([lambda: "extra"], {})
+```
+
+Repository source evidence:
+<context query="Explain the behavior of this Python probe using repository source. src/pluggy/_hooks.py HookCaller.call_extra src/pluggy/_callers.py _multicall
+import pluggy
+hookspec = pluggy.HookspecMarker(&quot;example&quot;)
+hookimpl = pluggy.HookimplMarker(&quot;example&quot;)
+class Specification:
+    @hookspec
+    def run(self):
+        pass
+class First:
+    @hookimpl(tryfirst=True)
+    def run(self):
+        return &quot;first&quot;
+class Last:
+    @hookimpl(trylast=True)
+    def run(self):
+        return &quot;last&quot;
+manager = pluggy.PluginManager(&quot;example&quot;)
+manager.add_hookspecs(Specification)
+manager.register(First())
+manager.register(Last())
+RESULT = manager.hook.run.call_extra([lambda: &quot;extra&quot;], {})
+">
+  <structural-context>
+    <file-tree><![CDATA[
+src/pluggy/_callers.py
+src/pluggy/_hooks.py
+src/pluggy/_manager.py
+src/pluggy/_result.py
+    ]]></file-tree>
+  </structural-context>
+  <chunks>
+    <chunk file="src/pluggy/_callers.py" lines="53-113" symbol="_multicall" score="2.4171" tokens="509">
+      <code><![CDATA[
+def _multicall(
+    hook_name: str,
+    hook_impls: Sequence[HookImpl],
+    caller_kwargs: Mapping[str, object],
+    firstresult: bool,
+) -> object | list[object]:
+    """Execute a call into multiple python functions/methods and return the
+    result(s).
+
+    ``caller_kwargs`` comes from HookCaller.__call__().
+    """
+    __tracebackhide__ = True
+    results: list[object] = []
+    exception = None
+    only_new_style_wrappers = True
+    try:  # run impl and wrapper setup functions in a loop
+        teardowns: list[Teardown] = []
+        try:
+            for hook_impl in reversed(hook_impls):
+                try:
+                    args = [caller_kwargs[argname] for argname in hook_impl.argnames]
+                except KeyError:
+                    for argname in hook_impl.argnames:
+                        if argname not in caller_kwargs:
+                            raise HookCallError(
+                                f"hook call must provide argument {argname!r}"
+                            )
+
+                if hook_impl.hookwrapper:
+                    only_new_style_wrappers = False
+                    try:
+                        # If this cast is not valid, a type error is raised below,
+                        # which is the desired response.
+                        res = hook_impl.function(*args)
+                        wrapper_gen = cast(Generator[None, Result[object], None], res)
+                        next(wrapper_gen)  # first yield
+                        teardowns.append((wrapper_gen, hook_impl))
+                    except StopIteration:
+                        _raise_wrapfail(wrapper_gen, "did not yield")
+                elif hook_impl.wrapper:
+                    try:
+                        # If this cast is not valid, a type error is raised below,
+                        # which is the desired response.
+                        res = hook_impl.function(*args)
+                        function_gen = cast(Generator[None, object, object], res)
+                        next(function_gen)  # first yield
+                        teardowns.append(function_gen)
+                    except StopIteration:
+                        _raise_wrapfail(function_gen, "did not yield")
+                else:
+                    res = hook_impl.function(*args)
+                    if res is not None:
+                        results.append(res)
+                        if firstresult:  # halt further impl calls
+                            break
+        except BaseException as exc:
+            exception = exc
+    finally:
+        # Fast path - only new-style wrappers, no Result.
+        if only_new_style_wrappers:
+            if firstresult:  # first result hooks return a single value
+      ]]></code>
+    </chunk>
+    <chunk file="src/pluggy/_manager.py" lines="1-38" score="2.4024" tokens="227">
+      <code><![CDATA[
+from __future__ import annotations
+
+import inspect
+import types
+from typing import Any
+from typing import Callable
+from typing import cast
+from typing import Final
+from typing import Iterable
+from typing import Mapping
+from typing import Sequence
+from typing import TYPE_CHECKING
+import warnings
+
+from . import _tracing
+from ._callers import _multicall
+from ._hooks import _HookImplFunction
+from ._hooks import _Namespace
+from ._hooks import _Plugin
+from ._hooks import _SubsetHookCaller
+from ._hooks import HookCaller
+from ._hooks import HookImpl
+from ._hooks import HookimplOpts
+from ._hooks import HookRelay
+from ._hooks import HookspecOpts
+from ._hooks import normalize_hookimpl_opts
+from ._result import Result
+
+
+if TYPE_CHECKING:
+    # importtlib.metadata import is slow, defer it.
+    import importlib.metadata
+
+
+_BeforeTrace = Callable[[str, Sequence[HookImpl], Mapping[str, Any]], None]
+_AfterTrace = Callable[[Result[Any], str, Sequence[HookImpl], Mapping[str, Any]], None]
+
+
+      ]]></code>
+    </chunk>
+    <chunk file="src/pluggy/_hooks.py" lines="542-574" symbol="call_extra" score="2.1871" tokens="317">
+      <code><![CDATA[
+    def call_extra(
+        self, methods: Sequence[Callable[..., object]], kwargs: Mapping[str, object]
+    ) -> Any:
+        """Call the hook with some additional temporarily participating
+        methods using the specified ``kwargs`` as call parameters, see
+        :ref:`call_extra`."""
+        assert (
+            not self.is_historic()
+        ), "Cannot directly call a historic hook - use call_historic instead."
+        self._verify_all_args_are_provided(kwargs)
+        opts: HookimplOpts = {
+            "wrapper": False,
+            "hookwrapper": False,
+            "optionalhook": False,
+            "trylast": False,
+            "tryfirst": False,
+            "specname": None,
+        }
+        hookimpls = self._hookimpls.copy()
+        for method in methods:
+            hookimpl = HookImpl(None, "<temp>", method, opts)
+            # Find last non-tryfirst nonwrapper method.
+            i = len(hookimpls) - 1
+            while i >= 0 and (
+                # Skip wrappers.
+                (hookimpls[i].hookwrapper or hookimpls[i].wrapper)
+                # Skip tryfirst nonwrappers.
+                or hookimpls[i].tryfirst
+            ):
+                i -= 1
+            hookimpls.insert(i + 1, hookimpl)
+        firstresult = self.spec.opts.get("firstresult", False) if self.spec else False
+        return self._hookexec(self.name, hookimpls, kwargs, firstresult)
+      ]]></code>
+    </chunk>
+    <chunk file="src/pluggy/_result.py" lines="22-23" symbol="HookCallError" score="1.7872" tokens="13">
+      <code><![CDATA[
+class HookCallError(Exception):
+    """Hook was called incorrectly."""
+      ]]></code>
+    </chunk>
+    <chunk file="src/pluggy/_hooks.py" lines="42-55" symbol="HookspecOpts" score="2.1864" tokens="136">
+      <code><![CDATA[
+class HookspecOpts(TypedDict):
+    """Options for a hook specification."""
+
+    #: Whether the hook is :ref:`first result only <firstresult>`.
+    firstresult: bool
+    #: Whether the hook is :ref:`historic <historic>`.
+    historic: bool
+    #: Whether the hook :ref:`warns when implemented <warn_on_impl>`.
+    warn_on_impl: Warning | None
+    #: Whether the hook warns when :ref:`certain arguments are requested
+    #: <warn_on_impl>`.
+    #:
+    #: .. versionadded:: 1.5
+    warn_on_impl_args: Mapping[str, Warning] | None
+      ]]></code>
+    </chunk>
+    <chunk file="src/pluggy/_hooks.py" lines="58-76" symbol="HookimplOpts" score="2.1701" tokens="177">
+      <code><![CDATA[
+class HookimplOpts(TypedDict):
+    """Options for a hook implementation."""
+
+    #: Whether the hook implementation is a :ref:`wrapper <hookwrapper>`.
+    wrapper: bool
+    #: Whether the hook implementation is an :ref:`old-style wrapper
+    #: <old_style_hookwrappers>`.
+    hookwrapper: bool
+    #: Whether validation against a hook specification is :ref:`optional
+    #: <optionalhook>`.
+    optionalhook: bool
+    #: Whether to try to order this hook implementation :ref:`first
+    #: <callorder>`.
+    tryfirst: bool
+    #: Whether to try to order this hook implementation :ref:`last
+    #: <callorder>`.
+    trylast: bool
+    #: The name of the hook specification to match, see :ref:`specname`.
+    specname: str | None
+      ]]></code>
+    </chunk>
+    <chunk file="src/pluggy/_callers.py" lines="30-40" symbol="_raise_wrapfail" score="2.0571" tokens="90">
+      <code><![CDATA[
+def _raise_wrapfail(
+    wrap_controller: (
+        Generator[None, Result[object], None] | Generator[None, object, object]
+    ),
+    msg: str,
+) -> NoReturn:
+    co = wrap_controller.gi_code
+    raise RuntimeError(
+        "wrap_controller at %r %s:%d %s"
+        % (co.co_name, co.co_filename, co.co_firstlineno, msg)
+    )
+      ]]></code>
+    </chunk>
+    <chunk file="src/pluggy/_manager.py" lines="49-59" symbol="PluginValidationError" score="1.7571" tokens="71">
+      <code><![CDATA[
+class PluginValidationError(Exception):
+    """Plugin failed validation.
+
+    :param plugin: The plugin which failed validation.
+    :param message: Error message.
+    """
+
+    def __init__(self, plugin: _Plugin, message: str) -> None:
+        super().__init__(message)
+        #: The plugin which failed validation.
+        self.plugin = plugin
+      ]]></code>
+    </chunk>
+  </chunks>
+  <type-definitions>
+    <type-def file="src/pluggy/_result.py" symbol="HookCallError" lines="22-23">
+      <![CDATA[class HookCallError(Exception):
+    """Hook was called incorrectly."""]]>
+    </type-def>
+    <type-def file="src/pluggy/_hooks.py" symbol="HookspecOpts" lines="42-55">
+      <![CDATA[class HookspecOpts(TypedDict):
+    """Options for a hook specification."""
+
+    #: Whether the hook is :ref:`first result only <firstresult>`.
+    firstresult: bool
+    #: Whether the hook is :ref:`historic <historic>`.
+    historic: bool
+    #: Whether the hook :ref:`warns when implemented <warn_on_impl>`.
+    warn_on_impl: Warning | None
+    #: Whether the hook warns when :ref:`certain arguments are requested
+    #: <warn_on_impl>`.
+    #:
+    #: .. versionadded:: 1.5
+    warn_on_impl_args: Mapping[str, Warning] | None]]>
+    </type-def>
+    <type-def file="src/pluggy/_hooks.py" symbol="HookimplOpts" lines="58-76">
+      <![CDATA[class HookimplOpts(TypedDict):
+    """Options for a hook implementation."""
+
+    #: Whether the hook implementation is a :ref:`wrapper <hookwrapper>`.
+    wrapper: bool
+    #: Whether the hook implementation is an :ref:`old-style wrapper
+    #: <old_style_hookwrappers>`.
+    hookwrapper: bool
+    #: Whether validation against a hook specification is :ref:`optional
+    #: <optionalhook>`.
+    optionalhook: bool
+    #: Whether to try to order this hook implementation :ref:`first
+    #: <callorder>`.
+    tryfirst: bool
+    #: Whether to try to order this hook implementation :ref:`last
+    #: <callorder>`.
+    trylast: bool
+    #: The name of the hook specification to match, see :ref:`specname`.
+    specname: str | None]]>
+    </type-def>
+    <type-def file="src/pluggy/_manager.py" symbol="PluginValidationError" lines="49-59">
+      <![CDATA[class PluginValidationError(Exception):
+    """Plugin failed validation.
+
+    :param plugin: The plugin which failed validation.
+    :param message: Error message.
+    """
+
+    def __init__(self, plugin: _Plugin, message: str) -> None:
+        super().__init__(message)
+        #: The plugin which failed validation.
+        self.plugin = plugin]]>
+    </type-def>
+  </type-definitions>
+  <receipt freshness="clean" complete="incomplete" reason="dependency_frontier_cut" action="fetch_skipped_candidate" index_revision="b664ee4e377a4af38f35d6ebc78dd91610f32729700706d75ef02e6199ae9aac" budget_requested="1548" budget_consumed="1540" returned_shown="8" returned_total="8" skipped_shown="20" skipped_total="20" omitted_edges_shown="19" omitted_edges_total="19">
+    <returned handle="chunk:src/pluggy/_callers.py:_raise_wrapfail:30" file="src/pluggy/_callers.py" lines="30-40" hash="9cd8e9c3714ad9f7581c17467819bbcd003dfacce8e618e4a983bddb2e943cb3" score="2.0571" />
+    <returned handle="chunk:src/pluggy/_callers.py:_multicall:53" file="src/pluggy/_callers.py" lines="53-113" hash="ee6c4f70b4e80b89fecd73b98ce5478af12ab5d51aabf440726e91f0e0d24965" score="2.4171" />
+    <returned handle="chunk:src/pluggy/_hooks.py:HookspecOpts:42" file="src/pluggy/_hooks.py" lines="42-55" hash="de0710362680a68bf07eacaaad07eb7a636d991fbb28790b10bdb30fb5e1ab0b" score="2.1864" />
+    <returned handle="chunk:src/pluggy/_hooks.py:HookimplOpts:58" file="src/pluggy/_hooks.py" lines="58-76" hash="9d4df11ec61bc168b6f2489c757dca57f8462501fff1e357ee88560cf99b3020" score="2.1701" />
+    <returned handle="chunk:src/pluggy/_hooks.py:call_extra:542" file="src/pluggy/_hooks.py" lines="542-574" hash="b1f60f05f6305b5e9a43475040238102025c45bca78d51cb99b2e6613968b9e9" score="2.1871" />
+    <returned handle="chunk:src/pluggy/_manager.py:_module:1" file="src/pluggy/_manager.py" lines="1-38" hash="f4f8540e32f65c6f1da2309e0ca498c87c4749c700861d98ea28ccb816adf37e" score="2.4024" />
+    <returned handle="chunk:src/pluggy/_manager.py:PluginValidationError:49" file="src/pluggy/_manager.py" lines="49-59" hash="85a4760131f84535103f5318fdd19caf66c3d4c858f346d0a2aa5dafc8551b74" score="1.7571" />
+    <returned handle="chunk:src/pluggy/_result.py:HookCallError:22" file="src/pluggy/_result.py" lines="22-23" hash="15a63860cdaabad413eef1420171fffb08a8027febc7ce44c70e68af255b08c0" score="1.7872" />
+    <skipped file="src/pluggy/_callers.py" reason="over_budget" handle="chunk:src/pluggy/_callers.py:_module:1" />
+    <skipped file="src/pluggy/_callers.py" reason="over_budget" handle="chunk:src/pluggy/_callers.py:_multicall:114" />
+    <skipped file="src/pluggy/_callers.py" reason="over_budget" handle="chunk:src/pluggy/_callers.py:_warn_teardown_exception:43" />
+    <skipped file="src/pluggy/_hooks.py" reason="over_budget" handle="chunk:src/pluggy/_hooks.py:_module:1" />
+    <skipped file="src/pluggy/_hooks.py" reason="over_budget" handle="chunk:src/pluggy/_hooks.py:_module:77" />
+    <skipped file="src/pluggy/_hooks.py" reason="over_budget" handle="chunk:src/pluggy/_hooks.py:HookCaller:382" />
+    <skipped file="src/pluggy/_hooks.py" reason="over_budget" handle="chunk:src/pluggy/_hooks.py:HookCaller:447" />
+    <skipped file="src/pluggy/_hooks.py" reason="over_budget" handle="chunk:src/pluggy/_hooks.py:HookCaller:509" />
+  </receipt>
+</context>

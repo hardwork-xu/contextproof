@@ -1,0 +1,338 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+from packaging.metadata import Metadata
+meta = Metadata.from_raw({"license_expression": "mit"}, validate=False)
+RESULT = meta.license_expression
+```
+
+Repository source evidence:
+<context query="Explain the behavior of this Python probe using repository source. src/packaging/metadata.py _Validator._process_license_expression src/packaging/metadata.py Metadata
+from packaging.metadata import Metadata
+meta = Metadata.from_raw({&quot;license_expression&quot;: &quot;mit&quot;}, validate=False)
+RESULT = meta.license_expression
+">
+  <structural-context>
+    <file-tree><![CDATA[
+src/packaging/_manylinux.py
+src/packaging/_structures.py
+src/packaging/_tokenizer.py
+src/packaging/metadata.py
+    ]]></file-tree>
+  </structural-context>
+  <chunks>
+    <chunk file="src/packaging/metadata.py" lines="220-236" symbol="_get_payload" score="2.3547" tokens="167">
+      <code><![CDATA[
+def _get_payload(msg: email.message.Message, source: bytes | str) -> str:
+    """Get the body of the message."""
+    # If our source is a str, then our caller has managed encodings for us,
+    # and we don't need to deal with it.
+    if isinstance(source, str):
+        payload = msg.get_payload()
+        assert isinstance(payload, str)
+        return payload
+    # If our source is a bytes, then we're managing the encoding and we need
+    # to deal with it.
+    else:
+        bpayload = msg.get_payload(decode=True)
+        assert isinstance(bpayload, bytes)
+        try:
+            return bpayload.decode("utf8", "strict")
+        except UnicodeDecodeError as exc:
+            raise ValueError("payload in an invalid encoding") from exc
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/_manylinux.py" lines="182-205" symbol="_is_compatible" score="1.0817" tokens="255">
+      <code><![CDATA[
+def _is_compatible(arch: str, version: _GLibCVersion) -> bool:
+    sys_glibc = _get_glibc_version()
+    if sys_glibc < version:
+        return False
+    # Check for presence of _manylinux module.
+    try:
+        import _manylinux
+    except ImportError:
+        return True
+    if hasattr(_manylinux, "manylinux_compatible"):
+        result = _manylinux.manylinux_compatible(version[0], version[1], arch)
+        if result is not None:
+            return bool(result)
+        return True
+    if version == _GLibCVersion(2, 5):
+        if hasattr(_manylinux, "manylinux1_compatible"):
+            return bool(_manylinux.manylinux1_compatible)
+    if version == _GLibCVersion(2, 12):
+        if hasattr(_manylinux, "manylinux2010_compatible"):
+            return bool(_manylinux.manylinux2010_compatible)
+    if version == _GLibCVersion(2, 17):
+        if hasattr(_manylinux, "manylinux2014_compatible"):
+            return bool(_manylinux.manylinux2014_compatible)
+    return True
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/_tokenizer.py" lines="12-15" symbol="Token" score="0.8679" tokens="17">
+      <code><![CDATA[
+class Token:
+    name: str
+    text: str
+    position: int
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/_structures.py" lines="6-29" symbol="InfinityType" score="0.8625" tokens="150">
+      <code><![CDATA[
+class InfinityType:
+    def __repr__(self) -> str:
+        return "Infinity"
+
+    def __hash__(self) -> int:
+        return hash(repr(self))
+
+    def __lt__(self, other: object) -> bool:
+        return False
+
+    def __le__(self, other: object) -> bool:
+        return False
+
+    def __eq__(self, other: object) -> bool:
+        return isinstance(other, self.__class__)
+
+    def __gt__(self, other: object) -> bool:
+        return True
+
+    def __ge__(self, other: object) -> bool:
+        return True
+
+    def __neg__(self: object) -> "NegativeInfinityType":
+        return NegativeInfinity
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/metadata.py" lines="1-48" score="2.1995" tokens="263">
+      <code><![CDATA[
+from __future__ import annotations
+
+import email.feedparser
+import email.header
+import email.message
+import email.parser
+import email.policy
+import pathlib
+import sys
+import typing
+from typing import (
+    Any,
+    Callable,
+    Generic,
+    Literal,
+    TypedDict,
+    cast,
+)
+
+from . import licenses, requirements, specifiers, utils
+from . import version as version_module
+from .licenses import NormalizedLicenseExpression
+
+T = typing.TypeVar("T")
+
+
+if sys.version_info >= (3, 11):  # pragma: no cover
+    ExceptionGroup = ExceptionGroup
+else:  # pragma: no cover
+
+    class ExceptionGroup(Exception):
+        """A minimal implementation of :external:exc:`ExceptionGroup` from Python 3.11.
+
+        If :external:exc:`ExceptionGroup` is already defined by Python itself,
+        that version is used instead.
+        """
+
+        message: str
+        exceptions: list[Exception]
+
+        def __init__(self, message: str, exceptions: list[Exception]) -> None:
+            self.message = message
+            self.exceptions = exceptions
+
+        def __repr__(self) -> str:
+            return f"{self.__class__.__name__}({self.message!r}, {self.exceptions!r})"
+
+
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/metadata.py" lines="180-217" symbol="_parse_project_urls" score="2.0439" tokens="467">
+      <code><![CDATA[
+def _parse_project_urls(data: list[str]) -> dict[str, str]:
+    """Parse a list of label/URL string pairings separated by a comma."""
+    urls = {}
+    for pair in data:
+        # Our logic is slightly tricky here as we want to try and do
+        # *something* reasonable with malformed data.
+        #
+        # The main thing that we have to worry about, is data that does
+        # not have a ',' at all to split the label from the Value. There
+        # isn't a singular right answer here, and we will fail validation
+        # later on (if the caller is validating) so it doesn't *really*
+        # matter, but since the missing value has to be an empty str
+        # and our return value is dict[str, str], if we let the key
+        # be the missing value, then they'd have multiple '' values that
+        # overwrite each other in a accumulating dict.
+        #
+        # The other potentional issue is that it's possible to have the
+        # same label multiple times in the metadata, with no solid "right"
+        # answer with what to do in that case. As such, we'll do the only
+        # thing we can, which is treat the field as unparseable and add it
+        # to our list of unparsed fields.
+        parts = [p.strip() for p in pair.split(",", 1)]
+        parts.extend([""] * (max(0, 2 - len(parts))))  # Ensure 2 items
+
+        # TODO: The spec doesn't say anything about if the keys should be
+        #       considered case sensitive or not... logically they should
+        #       be case-preserving and case-insensitive, but doing that
+        #       would open up more cases where we might have duplicate
+        #       entries.
+        label, url = parts
+        if label in urls:
+            # The label already exists in our set of urls, so this field
+            # is unparseable, and we can just add the whole thing to our
+            # unparseable data and stop processing it.
+            raise KeyError("duplicate labels in project urls")
+        urls[label] = url
+
+    return urls
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/metadata.py" lines="329-380" symbol="parse_email" score="2.0439" tokens="508">
+      <code><![CDATA[
+        # As such, we'll look for those Header objects, and fix up the encoding.
+        value = []
+        # Flag if we have run into any issues processing the headers, thus
+        # signalling that the data belongs in 'unparsed'.
+        valid_encoding = True
+        for h in headers:
+            # It's unclear if this can return more types than just a Header or
+            # a str, so we'll just assert here to make sure.
+            assert isinstance(h, (email.header.Header, str))
+
+            # If it's a header object, we need to do our little dance to get
+            # the real data out of it. In cases where there is invalid data
+            # we're going to end up with mojibake, but there's no obvious, good
+            # way around that without reimplementing parts of the Header object
+            # ourselves.
+            #
+            # That should be fine since, if mojibacked happens, this key is
+            # going into the unparsed dict anyways.
+            if isinstance(h, email.header.Header):
+                # The Header object stores it's data as chunks, and each chunk
+                # can be independently encoded, so we'll need to check each
+                # of them.
+                chunks: list[tuple[bytes, str | None]] = []
+                for bin, encoding in email.header.decode_header(h):
+                    try:
+                        bin.decode("utf8", "strict")
+                    except UnicodeDecodeError:
+                        # Enable mojibake.
+                        encoding = "latin1"
+                        valid_encoding = False
+                    else:
+                        encoding = "utf8"
+                    chunks.append((bin, encoding))
+
+                # Turn our chunks back into a Header object, then let that
+                # Header object do the right thing to turn them into a
+                # string for us.
+                value.append(str(email.header.make_header(chunks)))
+            # This is already a string, so just add it.
+            else:
+                value.append(h)
+
+        # We've processed all of our values to get them into a list of str,
+        # but we may have mojibake data, in which case this is an unparsed
+        # field.
+        if not valid_encoding:
+            unparsed[name] = value
+            continue
+
+        raw_name = _EMAIL_TO_RAW_MAPPING.get(name)
+        if raw_name is None:
+            # This is a bit of a weird situation, we've encountered a key that
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/metadata.py" lines="49-57" symbol="InvalidMetadata" score="1.7730" tokens="62">
+      <code><![CDATA[
+class InvalidMetadata(ValueError):
+    """A metadata field contains invalid data."""
+
+    field: str
+    """The name of the field that contains invalid data."""
+
+    def __init__(self, field: str, message: str) -> None:
+        self.field = field
+        super().__init__(message)
+      ]]></code>
+    </chunk>
+  </chunks>
+  <type-definitions>
+    <type-def file="src/packaging/_tokenizer.py" symbol="Token" lines="12-15">
+      <![CDATA[class Token:
+    name: str
+    text: str
+    position: int]]>
+    </type-def>
+    <type-def file="src/packaging/_structures.py" symbol="InfinityType" lines="6-29">
+      <![CDATA[class InfinityType:
+    def __repr__(self) -> str:
+        return "Infinity"
+
+    def __hash__(self) -> int:
+        return hash(repr(self))
+
+    def __lt__(self, other: object) -> bool:
+        return False
+
+    def __le__(self, other: object) -> bool:
+        return False
+
+    def __eq__(self, other: object) -> bool:
+        return isinstance(other, self.__class__)
+
+    def __gt__(self, other: object) -> bool:
+        return True
+
+    def __ge__(self, other: object) -> bool:
+        return True
+
+    def __neg__(self: object) -> "NegativeInfinityType":
+        return NegativeInfinity]]>
+    </type-def>
+    <type-def file="src/packaging/metadata.py" symbol="InvalidMetadata" lines="49-57">
+      <![CDATA[class InvalidMetadata(ValueError):
+    """A metadata field contains invalid data."""
+
+    field: str
+    """The name of the field that contains invalid data."""
+
+    def __init__(self, field: str, message: str) -> None:
+        self.field = field
+        super().__init__(message)]]>
+    </type-def>
+  </type-definitions>
+  <receipt freshness="clean" complete="incomplete" reason="dependency_frontier_cut" action="fetch_skipped_candidate" index_revision="f846c38dc48af337e9d838d465a652dacd3975209156386732a1bdd68051cf1f" budget_requested="1897" budget_consumed="1889" returned_shown="8" returned_total="8" skipped_shown="20" skipped_total="20" omitted_edges_shown="20" omitted_edges_total="20">
+    <returned handle="chunk:src/packaging/_manylinux.py:_is_compatible:182" file="src/packaging/_manylinux.py" lines="182-205" hash="2239e76784be6d213cf590589311cdd81e97263875d208755e9818a7860710a3" score="1.0817" />
+    <returned handle="chunk:src/packaging/_structures.py:InfinityType:6" file="src/packaging/_structures.py" lines="6-29" hash="81a2ac674162ddacdb651f00b01a5fe9b3383e6f988ed3297d4a77c0ab3ff1af" score="0.8625" />
+    <returned handle="chunk:src/packaging/_tokenizer.py:Token:12" file="src/packaging/_tokenizer.py" lines="12-15" hash="c3d04b55e09a21565ed88de873ba8068235cbafd3d285db3cf2d9c4cd7fcc732" score="0.8679" />
+    <returned handle="chunk:src/packaging/metadata.py:_module:1" file="src/packaging/metadata.py" lines="1-48" hash="98df68238493f32ed2d3901758425d65a01b129bfc6bd139baa669062adc2c63" score="2.1995" />
+    <returned handle="chunk:src/packaging/metadata.py:InvalidMetadata:49" file="src/packaging/metadata.py" lines="49-57" hash="cfed152e9724887e6306747f20b6601b5f5e374185765a1cfcca73e11d9e567d" score="1.7730" />
+    <returned handle="chunk:src/packaging/metadata.py:_parse_project_urls:180" file="src/packaging/metadata.py" lines="180-217" hash="ae59d4e51167916dbbaccf03fd36d20da2841a2ed883a9ac6c99238e380ff211" score="2.0439" />
+    <returned handle="chunk:src/packaging/metadata.py:_get_payload:220" file="src/packaging/metadata.py" lines="220-236" hash="1b616a173d079afabcd63f3a590ad778bbd5b7fe0dbadd2625c25d421da1283a" score="2.3547" />
+    <returned handle="chunk:src/packaging/metadata.py:parse_email:329" file="src/packaging/metadata.py" lines="329-380" hash="1554e04e226b390fa3d3029a00b49b851e2379d3e2791b675d51dbb2a6801486" score="2.0439" />
+    <skipped file="src/packaging/_manylinux.py" reason="over_budget" handle="chunk:src/packaging/_manylinux.py:_module:1" />
+    <skipped file="src/packaging/_manylinux.py" reason="over_budget" handle="chunk:src/packaging/_manylinux.py:_is_linux_armhf:30" />
+    <skipped file="src/packaging/_manylinux.py" reason="over_budget" handle="chunk:src/packaging/_manylinux.py:_parse_elf:22" />
+    <skipped file="src/packaging/_structures.py" reason="over_budget" handle="chunk:src/packaging/_structures.py:_module:1" />
+    <skipped file="src/packaging/_tokenizer.py" reason="over_budget" handle="chunk:src/packaging/_tokenizer.py:ParserSyntaxError:18" />
+    <skipped file="src/packaging/metadata.py" reason="over_budget" handle="chunk:src/packaging/metadata.py:_module:134" />
+    <skipped file="src/packaging/metadata.py" reason="over_budget" handle="chunk:src/packaging/metadata.py:_module:237" />
+    <skipped file="src/packaging/metadata.py" reason="over_budget" handle="chunk:src/packaging/metadata.py:_module:460" />
+  </receipt>
+</context>

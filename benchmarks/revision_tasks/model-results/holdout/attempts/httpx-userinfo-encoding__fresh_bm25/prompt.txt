@@ -1,0 +1,304 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import httpx
+url = httpx.URL("https://example.org").copy_with(
+    username="tom@example.org", password="abc123@ %")
+RESULT = str(url)
+```
+
+Repository source evidence:
+# ContextProof source evidence
+{"budget":16000,"budget_unit":"utf8_bytes","id":"c665cdf386df4bf1066e0f3f5c9fa7022d9304da9667bd248b56e5e20114bebb","method":"bm25","omitted_count":570,"query":"Explain the behavior of this Python probe using repository source. httpx/_urlparse.py urlparse httpx/_urlparse.py quote httpx/_urls.py URL.copy_with\nimport httpx\nurl = httpx.URL(\"https://example.org\").copy_with(\n    username=\"tom@example.org\", password=\"abc123@ %\")\nRESULT = str(url)\n","schema_version":1,"snapshot_id":"d39d2caa51d7b21d91903e121d04b08f2bda3190abd9c65cdca544b59b846562","tokenizer":"bytes"}
+
+{"end_line":340,"file_sha256":"757f7d551d4348e1e9828f40abb3f360ee0529dc6a2a3c32369f20adff1d1cdd","id":"f5473b15f288abbaedadf6491272b8aed59762ba6d51e433d3e0daed60bdfdf7","kind":"function","path":"httpx/_urls.py","reasons":["lexical overlap: copy, copy_with, example, https, httpx, of, password, py, the, this, url, urls, username, with"],"score":41.91148314,"start_line":327,"symbol":"URL.copy_with","text_sha256":"d907c8a99771ec2cf13428b2ef4bb0b595a1fe6548354e070d51bce2ec2cbbe5"}
+```
+    def copy_with(self, **kwargs: typing.Any) -> URL:
+        """
+        Copy this URL, returning a new URL with some components altered.
+        Accepts the same set of parameters as the components that are made
+        available via properties on the `URL` class.
+
+        For example:
+
+        url = httpx.URL("https://www.example.com").copy_with(
+            username="jo@gmail.com", password="a secret"
+        )
+        assert url == "https://jo%40email.com:a%20secret@www.example.com"
+        """
+        return URL(self, **kwargs)
+```
+
+{"end_line":198,"file_sha256":"640987e3b38d7e4c6bae3f8f3d88467a21e36fa0232824be00d58837838bfca6","id":"bbf4fc9ca92bd9a8696bb0616d8d966a23467cbb9b1c75fb9d90a701b3a69492","kind":"function","path":"httpx/_urlparse.py","reasons":["lexical overlap: copy, copy_with, httpx, py, result, str, urlparse, with"],"score":28.37974833,"start_line":186,"symbol":"ParseResult.copy_with","text_sha256":"0573546d4d9600bac2802ec55805ea85bb7f38b61efa7814402141de55662aed"}
+```
+    def copy_with(self, **kwargs: str | None) -> ParseResult:
+        if not kwargs:
+            return self
+
+        defaults = {
+            "scheme": self.scheme,
+            "authority": self.authority,
+            "path": self.path,
+            "query": self.query,
+            "fragment": self.fragment,
+        }
+        defaults.update(kwargs)
+        return urlparse("", **defaults)
+```
+
+{"end_line":366,"file_sha256":"757f7d551d4348e1e9828f40abb3f360ee0529dc6a2a3c32369f20adff1d1cdd","id":"acc6cac0f96f0c291aec18b70b96af8b4843d73ef07e3aa718152c65f86ebb8f","kind":"function","path":"httpx/_urls.py","reasons":["lexical overlap: example, https, httpx, import, py, str, the, this, url, urls, using"],"score":25.6648791,"start_line":354,"symbol":"URL.join","text_sha256":"a8b8047dc204e4bfde7b256131934d19be2ccd3ffb1359aeb412d45d98a972e8"}
+```
+    def join(self, url: URL | str) -> URL:
+        """
+        Return an absolute URL, using this URL as the base.
+
+        Eg.
+
+        url = httpx.URL("https://www.example.com/test")
+        url = url.join("/new/path")
+        assert url == "https://www.example.com/new/path"
+        """
+        from urllib.parse import urljoin
+
+        return URL(urljoin(str(self), str(URL(url))))
+```
+
+{"end_line":224,"file_sha256":"a4fa7653ec2271f70ab05f8a6111352d876dddee84446788a1767c1a3a372d67","id":"838fa67009fc0658216990be110cd79999846eca41f8e80691b071d4d5533cdf","kind":"function","path":"httpx/_config.py","reasons":["lexical overlap: copy, copy_with, https, httpx, password, py, str, the, url, username, with"],"score":25.13537142,"start_line":202,"symbol":"Proxy.__init__","text_sha256":"22b7381dd95c3beb4dfbd4fc24b2659337d2623ef5ca21b852fb5e4701e693d0"}
+```
+    def __init__(
+        self,
+        url: URL | str,
+        *,
+        ssl_context: ssl.SSLContext | None = None,
+        auth: tuple[str, str] | None = None,
+        headers: HeaderTypes | None = None,
+    ) -> None:
+        url = URL(url)
+        headers = Headers(headers)
+
+        if url.scheme not in ("http", "https", "socks5", "socks5h"):
+            raise ValueError(f"Unknown scheme for proxy URL {url!r}")
+
+        if url.username or url.password:
+            # Remove any auth credentials from the URL.
+            auth = (url.username, url.password)
+            url = url.copy_with(username=None, password=None)
+
+        self.url = url
+        self.auth = auth
+        self.headers = headers
+        self.ssl_context = ssl_context
+```
+
+{"end_line":411,"file_sha256":"c43f941baefe58c91e96d00039e1868fe719d91453026d7db1647194563bff8d","id":"decaef959dee84c061b27ab740d12a0a56e486838d1859b3bbd81bb4e645e907","kind":"function","path":"httpx/_client.py","reasons":["lexical overlap: copy, copy_with, example, https, httpx, py, str, the, this, url, urls, with"],"score":22.41365507,"start_line":391,"symbol":"BaseClient._merge_url","text_sha256":"3b00320150ee361237413617d769cef89c5754cc88cba49f0193858203adeb71"}
+```
+    def _merge_url(self, url: URL | str) -> URL:
+        """
+        Merge a URL argument together with any 'base_url' on the client,
+        to create the URL used for the outgoing request.
+        """
+        merge_url = URL(url)
+        if merge_url.is_relative_url:
+            # To merge URLs we always append to the base URL. To get this
+            # behaviour correct we always ensure the base URL ends in a '/'
+            # separator, and strip any leading '/' from the merge URL.
+            #
+            # So, eg...
+            #
+            # >>> client = Client(base_url="https://www.example.com/subpath")
+            # >>> client.base_url
+            # URL('https://www.example.com/subpath/')
+            # >>> client.build_request("GET", "/path").url
+            # URL('https://www.example.com/subpath/path')
+            merge_raw_path = self.base_url.raw_path + merge_url.raw_path.lstrip(b"/")
+            return self.base_url.copy_with(raw_path=merge_raw_path)
+        return merge_url
+```
+
+{"end_line":292,"file_sha256":"640987e3b38d7e4c6bae3f8f3d88467a21e36fa0232824be00d58837838bfca6","id":"db6c7e5a65305c1da30ff574c045e37d8482a389291fef204077def910ae0995","kind":"function","path":"httpx/_urlparse.py","reasons":["lexical overlap: httpx, password, py, quote, result, str, the, url, urlparse, urls, username, with"],"score":21.36893529,"start_line":213,"symbol":"urlparse","text_sha256":"f2fff70d01b90ab00df09a2bcf9be515384fecb99fdba67678b94f9b1b6378bd"}
+```
+def urlparse(url: str = "", **kwargs: str | None) -> ParseResult:
+    # Initial basic checks on allowable URLs.
+    # ---------------------------------------
+
+    # Hard limit the maximum allowable URL length.
+    if len(url) > MAX_URL_LENGTH:
+        raise InvalidURL("URL too long")
+
+    # If a URL includes any ASCII control characters including \t, \r, \n,
+    # then treat it as invalid.
+    if any(char.isascii() and not char.isprintable() for char in url):
+        char = next(char for char in url if char.isascii() and not char.isprintable())
+        idx = url.find(char)
+        error = (
+            f"Invalid non-printable ASCII character in URL, {char!r} at position {idx}."
+        )
+        raise InvalidURL(error)
+
+    # Some keyword arguments require special handling.
+    # ------------------------------------------------
+
+    # Coerce "port" to a string, if it is provided as an integer.
+    if "port" in kwargs:
+        port = kwargs["port"]
+        kwargs["port"] = str(port) if isinstance(port, int) else port
+
+    # Replace "netloc" with "host and "port".
+    if "netloc" in kwargs:
+        netloc = kwargs.pop("netloc") or ""
+        kwargs["host"], _, kwargs["port"] = netloc.partition(":")
+
+    # Replace "username" and/or "password" with "userinfo".
+    if "username" in kwargs or "password" in kwargs:
+        username = quote(kwargs.pop("username", "") or "", safe=USERNAME_SAFE)
+        password = quote(kwargs.pop("password", "") or "", safe=PASSWORD_SAFE)
+        kwargs["userinfo"] = f"{username}:{password}" if password else username
+
+    # Replace "raw_path" with "path" and "query".
+    if "raw_path" in kwargs:
+        raw_path = kwargs.pop("raw_path") or ""
+        kwargs["path"], seperator, kwargs["query"] = raw_path.partition("?")
+        if not seperator:
+            kwargs["query"] = None
+
+    # Ensure that IPv6 "host" addresses are always escaped with "[...]".
+    if "host" in kwargs:
+        host = kwargs.get("host") or ""
+        if ":" in host and not (host.startswith("[") and host.endswith("]")):
+            kwargs["host"] = f"[{host}]"
+
+    # If any keyword arguments are provided, ensure they are valid.
+    # -------------------------------------------------------------
+
+    for key, value in kwargs.items():
+        if value is not None:
+            if len(value) > MAX_URL_LENGTH:
+                raise InvalidURL(f"URL component '{key}' too long")
+
+            # If a component includes any ASCII control characters including \t, \r, \n,
+            # then treat it as invalid.
+            if any(char.isascii() and not char.isprintable() for char in value):
+                char = next(
+                    char for char in value if char.isascii() and not char.isprintable()
+                )
+                idx = value.find(char)
+                error = (
+                    f"Invalid non-printable ASCII character in URL {key} component, "
+                    f"{char!r} at position {idx}."
+                )
+                raise InvalidURL(error)
+
+            # Ensure that keyword arguments match as a valid regex.
+            if not COMPONENT_REGEX[key].fullmatch(value):
+                raise InvalidURL(f"Invalid URL component '{key}'")
+
+    # The URL_REGEX will always match, but may have empty components.
+    url_match = URL_REGEX.match(url)
+    assert url_match is not None
+    url_dict = url_match.groupdict()
+
+```
+
+{"end_line":349,"file_sha256":"757f7d551d4348e1e9828f40abb3f360ee0529dc6a2a3c32369f20adff1d1cdd","id":"b73fe7a741b47944685ce3e1dfc20f2caea53f1a055a98e99a7fd31fa64956aa","kind":"function","path":"httpx/_urls.py","reasons":["lexical overlap: copy, copy_with, httpx, py, str, url, urls, with"],"score":21.17748416,"start_line":348,"symbol":"URL.copy_remove_param","text_sha256":"b590529d6c57e90dfd8e8a4ba8261fde5bcd31626d275bc482141c65043cf952"}
+```
+    def copy_remove_param(self, key: str) -> URL:
+        return self.copy_with(params=self.params.remove(key))
+```
+
+{"end_line":343,"file_sha256":"757f7d551d4348e1e9828f40abb3f360ee0529dc6a2a3c32369f20adff1d1cdd","id":"6d40072b8d1f0f6c6f2de5314b151996fbf3aca129054e91eba2757a41ef8244","kind":"function","path":"httpx/_urls.py","reasons":["lexical overlap: copy, copy_with, httpx, py, str, url, urls, with"],"score":20.64276806,"start_line":342,"symbol":"URL.copy_set_param","text_sha256":"c0211d49701ca3366a78c77ca3aea1513236c9e6abf9e41732b8473f8012a296"}
+```
+    def copy_set_param(self, key: str, value: typing.Any = None) -> URL:
+        return self.copy_with(params=self.params.set(key, value))
+```
+
+{"end_line":346,"file_sha256":"757f7d551d4348e1e9828f40abb3f360ee0529dc6a2a3c32369f20adff1d1cdd","id":"4a02438127773695b1ea3421c585db279754c6ae3ed3906c0a22476ff2b7cfb1","kind":"function","path":"httpx/_urls.py","reasons":["lexical overlap: copy, copy_with, httpx, py, str, url, urls, with"],"score":20.64276806,"start_line":345,"symbol":"URL.copy_add_param","text_sha256":"3e0884f9cd5a59feb1be9277712bb042e9e1a6a30ff2a76edf74d6fe305a8b7b"}
+```
+    def copy_add_param(self, key: str, value: typing.Any = None) -> URL:
+        return self.copy_with(params=self.params.add(key, value))
+```
+
+{"end_line":76,"file_sha256":"757f7d551d4348e1e9828f40abb3f360ee0529dc6a2a3c32369f20adff1d1cdd","id":"999203d9736670c7e87bad749cb5b1bd235caf90b37c521e37d6ee4f23c89e22","kind":"class","path":"httpx/_urls.py","reasons":["lexical overlap: example, https, httpx, of, password, py, the, this, url, urls, username, with"],"score":20.61012434,"start_line":15,"symbol":"URL","text_sha256":"6604f8dc73f0aa8c734691c66056a3cf88aefb3fcf5db55cf2754376f6dc3ab1"}
+```
+class URL:
+    """
+    url = httpx.URL("HTTPS://jo%40email.com:a%20secret@müller.de:1234/pa%20th?search=ab#anchorlink")
+
+    assert url.scheme == "https"
+    assert url.username == "jo@email.com"
+    assert url.password == "a secret"
+    assert url.userinfo == b"jo%40email.com:a%20secret"
+    assert url.host == "müller.de"
+    assert url.raw_host == b"xn--mller-kva.de"
+    assert url.port == 1234
+    assert url.netloc == b"xn--mller-kva.de:1234"
+    assert url.path == "/pa th"
+    assert url.query == b"?search=ab"
+    assert url.raw_path == b"/pa%20th?search=ab"
+    assert url.fragment == "anchorlink"
+
+    The components of a URL are broken down like this:
+
+       https://jo%40email.com:a%20secret@müller.de:1234/pa%20th?search=ab#anchorlink
+    [scheme]   [  username  ] [password] [ host ][port][ path ] [ query ] [fragment]
+               [       userinfo        ] [   netloc   ][    raw_path    ]
+
+    Note that:
+
+    * `url.scheme` is normalized to always be lowercased.
+
+    * `url.host` is normalized to always be lowercased. Internationalized domain
+      names are represented in unicode, without IDNA encoding applied. For instance:
+
+      url = httpx.URL("http://中国.icom.museum")
+      assert url.host == "中国.icom.museum"
+      url = httpx.URL("http://xn--fiqs8s.icom.museum")
+      assert url.host == "中国.icom.museum"
+
+    * `url.raw_host` is normalized to always be lowercased, and is IDNA encoded.
+
+      url = httpx.URL("http://中国.icom.museum")
+      assert url.raw_host == b"xn--fiqs8s.icom.museum"
+      url = httpx.URL("http://xn--fiqs8s.icom.museum")
+      assert url.raw_host == b"xn--fiqs8s.icom.museum"
+
+    * `url.port` is either None or an integer. URLs that include the default port for
+      "http", "https", "ws", "wss", and "ftp" schemes have their port
+      normalized to `None`.
+
+      assert httpx.URL("http://example.com") == httpx.URL("http://example.com:80")
+      assert httpx.URL("http://example.com").port is None
+      assert httpx.URL("http://example.com:80").port is None
+
+    * `url.userinfo` is raw bytes, without URL escaping. Usually you'll want to work
+      with `url.username` and `url.password` instead, which handle the URL escaping.
+
+    * `url.raw_path` is raw bytes of both the path and query, without URL escaping.
+      This portion is used as the target when constructing HTTP requests. Usually you'll
+      want to work with `url.path` instead.
+
+    * `url.query` is raw bytes, without URL escaping. A URL query string portion can
+      only be properly URL escaped when decoding the parameter names and values
+      themselves.
+    """
+
+```
+
+{"end_line":157,"file_sha256":"757f7d551d4348e1e9828f40abb3f360ee0529dc6a2a3c32369f20adff1d1cdd","id":"1aaabcbadea66883dcdf030b977e93206a1b38bc598d1bf5e1c0a5c4ae53b0f3","kind":"function","path":"httpx/_urls.py","reasons":["lexical overlap: example, httpx, py, str, the, url, urls, username, with"],"score":20.30187978,"start_line":150,"symbol":"URL.username","text_sha256":"e11ccbd38b3a6b82ea430cee13fee7f3a2f4e44ebf09852476c0f29e73c76d57"}
+```
+    @property
+    def username(self) -> str:
+        """
+        The URL username as a string, with URL decoding applied.
+        For example: "jo@email.com"
+        """
+        userinfo = self._uri_reference.userinfo
+        return unquote(userinfo.partition(":")[0])
+```
+
+{"end_line":375,"file_sha256":"757f7d551d4348e1e9828f40abb3f360ee0529dc6a2a3c32369f20adff1d1cdd","id":"9285d5ff87c91360f734bd81c4f9fb5b6a0b12c04816649cdbcb7c40ed8c7dcb","kind":"function","path":"httpx/_urls.py","reasons":["lexical overlap: httpx, py, str, url, urls"],"score":7.43166052,"start_line":374,"symbol":"URL.__str__","text_sha256":"51c4e8ec9232524b8b5c4ca40f02067ff5febf83593d415ca1bd392e30e43ac6"}
+```
+    def __str__(self) -> str:
+        return str(self._uri_reference)
+```

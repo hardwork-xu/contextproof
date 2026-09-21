@@ -1,0 +1,407 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import attrs
+@attrs.define
+class Record:
+    value: int = attrs.field(converter=int)
+record = Record("3")
+record.value = "4"
+RESULT = [record.value, type(record.value).__name__]
+```
+
+Repository source evidence:
+# ContextProof source evidence
+{"budget":16000,"budget_unit":"utf8_bytes","id":"a06547d8e4d46a21f94660f30de80d677be1fd4e081e403d2eb5a5a86e2dd836","method":"bm25","omitted_count":402,"query":"Explain the behavior of this Python probe using repository source. src/attr/setters.py convert src/attr/_next_gen.py define\nimport attrs\n@attrs.define\nclass Record:\n    value: int = attrs.field(converter=int)\nrecord = Record(\"3\")\nrecord.value = \"4\"\nRESULT = [record.value, type(record.value).__name__]\n","schema_version":1,"snapshot_id":"58c49369a49066b693430d997a4de08e4a9c123a92d7766476a6071e1417221b","tokenizer":"bytes"}
+
+{"end_line":69,"file_sha256":"a9e4096783b4f327334a7f38d2ff5b60e699c9113cd56b158be402ad8de4ac25","id":"243333cf6f1e279c7ba2fef70de7740e716a2e023e6caf3ad63c10ef2b690579","kind":"module","path":"src/attrs/__init__.py","reasons":["lexical overlap: attr, attrs, class, converter, define, field, gen, import, name, next, next_gen, py, setters, src, type, using"],"score":30.75432979,"start_line":1,"symbol":"<module>","text_sha256":"a9e4096783b4f327334a7f38d2ff5b60e699c9113cd56b158be402ad8de4ac25"}
+```
+# SPDX-License-Identifier: MIT
+
+from attr import (
+    NOTHING,
+    Attribute,
+    AttrsInstance,
+    Converter,
+    Factory,
+    NothingType,
+    _make_getattr,
+    assoc,
+    cmp_using,
+    define,
+    evolve,
+    field,
+    fields,
+    fields_dict,
+    frozen,
+    has,
+    make_class,
+    mutable,
+    resolve_types,
+    validate,
+)
+from attr._next_gen import asdict, astuple
+
+from . import converters, exceptions, filters, setters, validators
+
+
+__all__ = [
+    "NOTHING",
+    "Attribute",
+    "AttrsInstance",
+    "Converter",
+    "Factory",
+    "NothingType",
+    "__author__",
+    "__copyright__",
+    "__description__",
+    "__doc__",
+    "__email__",
+    "__license__",
+    "__title__",
+    "__url__",
+    "__version__",
+    "__version_info__",
+    "asdict",
+    "assoc",
+    "astuple",
+    "cmp_using",
+    "converters",
+    "define",
+    "evolve",
+    "exceptions",
+    "field",
+    "fields",
+    "fields_dict",
+    "filters",
+    "frozen",
+    "has",
+    "make_class",
+    "mutable",
+    "resolve_types",
+    "setters",
+    "validate",
+    "validators",
+]
+
+__getattr__ = _make_getattr(__name__)
+```
+
+{"end_line":73,"file_sha256":"e7e75c4fadc640adf938d1334a07d70a46c1ee93e4691faabf5e669b83d54b34","id":"99bd94eee1e6768f0ddbaf4e3963e29a1bdab73b1aa175c55c3620432f142ccf","kind":"function","path":"src/attr/setters.py","reasons":["lexical overlap: 3, attr, attrs, convert, converter, import, py, result, setters, src, the, this, value"],"score":27.0399715,"start_line":56,"symbol":"convert","text_sha256":"d9bb7cd5aae277fc78e4fde118e4404713e8f3b615b01a9db1c5fc080bc06cd0"}
+```
+def convert(instance, attrib, new_value):
+    """
+    Run *attrib*'s converter -- if it has one -- on *new_value* and return the
+    result.
+
+    .. versionadded:: 20.1.0
+    """
+    c = attrib.converter
+    if c:
+        # This can be removed once we drop 3.8 and use attrs.Converter instead.
+        from ._make import Converter
+
+        if not isinstance(c, Converter):
+            return c(new_value)
+
+        return c(new_value, instance, attrib)
+
+    return new_value
+```
+
+{"end_line":575,"file_sha256":"ec54646ed97f374d7b4ae0617ff570de6c36736a46661b4218ecda760cfbb69e","id":"a22177fcb2dc435059292c900c5c3d397082fe552338831487b287588e9806f4","kind":"function","path":"src/attr/_next_gen.py","reasons":["lexical overlap: attr, attrs, behavior, class, convert, converter, define, field, gen, name, next, next_gen, of, py, python, setters, src, the, this, type, using, value"],"score":25.57769276,"start_line":496,"symbol":"field","text_sha256":"32818c5c00176f2380812c4a136fec58f9dea785efcf860bf69326ead41aa37f"}
+```
+            .. seealso:: `comparison`
+
+        order (bool | ~typing.Callable):
+            If True (default), include this attributes in the generated
+            ``__lt__``, ``__le__``, ``__gt__`` and ``__ge__`` methods. To
+            override how the attribute value is ordered, pass a callable that
+            takes a single value and returns the value to be ordered.
+
+            .. seealso:: `comparison`
+
+        hash (bool | None):
+            Include this attribute in the generated ``__hash__`` method.  If
+            None (default), mirror *eq*'s value.  This is the correct behavior
+            according the Python spec.  Setting this value to anything else
+            than None is *discouraged*.
+
+            .. seealso:: `hashing`
+
+        init (bool):
+            Include this attribute in the generated ``__init__`` method.
+
+            It is possible to set this to False and set a default value. In
+            that case this attributed is unconditionally initialized with the
+            specified default value or factory.
+
+            .. seealso:: `init`
+
+        converter (typing.Callable | Converter):
+            A callable that is called by *attrs*-generated ``__init__`` methods
+            to convert attribute's value to the desired format.
+
+            If a vanilla callable is passed, it is given the passed-in value as
+            the only positional argument. It is possible to receive additional
+            arguments by wrapping the callable in a `Converter`.
+
+            Either way, the returned value will be used as the new value of the
+            attribute.  The value is converted before being passed to the
+            validator, if any.
+
+            .. seealso:: :ref:`converters`
+
+        metadata (dict | None):
+            An arbitrary mapping, to be used by third-party code.
+
+            .. seealso:: `extending-metadata`.
+
+        type (type):
+            The type of the attribute. Nowadays, the preferred method to
+            specify the type is using a variable annotation (see :pep:`526`).
+            This argument is provided for backwards-compatibility and for usage
+            with `make_class`. Regardless of the approach used, the type will
+            be stored on ``Attribute.type``.
+
+            Please note that *attrs* doesn't do anything with this metadata by
+            itself. You can use it as part of your own code or for `static type
+            checking <types>`.
+
+        kw_only (bool):
+            Make this attribute keyword-only in the generated ``__init__`` (if
+            ``init`` is False, this parameter is ignored).
+
+        on_setattr (~typing.Callable | list[~typing.Callable] | None | ~typing.Literal[attrs.setters.NO_OP]):
+            Allows to overwrite the *on_setattr* setting from `attr.s`. If left
+            None, the *on_setattr* value from `attr.s` is used. Set to
+            `attrs.setters.NO_OP` to run **no** `setattr` hooks for this
+            attribute -- regardless of the setting in `define()`.
+
+        alias (str | None):
+            Override this attribute's parameter name in the generated
+            ``__init__`` method. If left None, default to ``name`` stripped
+            of leading underscores. See `private-attributes`.
+
+    .. versionadded:: 20.1.0
+    .. versionchanged:: 21.1.0
+       *eq*, *order*, and *cmp* also accept a custom callable
+    .. versionadded:: 22.2.0 *alias*
+    .. versionadded:: 23.1.0
+       The *type* parameter has been re-added; mostly for `attrs.make_class`.
+       Please note that type checkers ignore this metadata.
+
+```
+
+{"end_line":36,"file_sha256":"7ce608bedd5e192a90adee2e092dec256299d26c00b82f140faa9b6b9392f7f5","id":"9e630ed5e7938df5815d84a244c18046f2088f73e95153e135b581a69fc5bdfd","kind":"module","path":"src/attr/__init__.py","reasons":["lexical overlap: attr, attrs, class, converter, define, field, gen, import, next, next_gen, py, setters, src, using"],"score":25.46520849,"start_line":1,"symbol":"<module>","text_sha256":"f014af858f9f1b687cde270fe8f3830a931a5e3c6a90203e5f7b887263b44771"}
+```
+# SPDX-License-Identifier: MIT
+
+"""
+Classes Without Boilerplate
+"""
+
+from functools import partial
+from typing import Callable, Literal, Protocol
+
+from . import converters, exceptions, filters, setters, validators
+from ._cmp import cmp_using
+from ._config import get_run_validators, set_run_validators
+from ._funcs import asdict, assoc, astuple, has, resolve_types
+from ._make import (
+    NOTHING,
+    Attribute,
+    Converter,
+    Factory,
+    _Nothing,
+    attrib,
+    attrs,
+    evolve,
+    fields,
+    fields_dict,
+    make_class,
+    validate,
+)
+from ._next_gen import define, field, frozen, mutable
+from ._version_info import VersionInfo
+
+
+s = attributes = attrs
+ib = attr = attrib
+dataclass = partial(attrs, auto_attribs=True)  # happy Easter ;)
+
+
+```
+
+{"end_line":262,"file_sha256":"ec54646ed97f374d7b4ae0617ff570de6c36736a46661b4218ecda760cfbb69e","id":"f9a418b29adb46ddc74b41369a11d8d438bc49aaefce9287f32a7a5963e5a7ba","kind":"function","path":"src/attr/_next_gen.py","reasons":["lexical overlap: 3, 4, attr, attrs, behavior, class, define, field, gen, name, next, next_gen, of, py, python, src, the, this, using, value"],"score":24.47476858,"start_line":183,"symbol":"define","text_sha256":"9642147d4fd7cda27a9c4ace17b12047e05cb825610af98531c614dc7cc452a2"}
+```
+
+        cache_hash (bool):
+            Ensure that the object's hash code is computed only once and stored
+            on the object.  If this is set to True, hashing must be either
+            explicitly or implicitly enabled for this class.  If the hash code
+            is cached, avoid any reassignments of fields involved in hash code
+            computation or mutations of the objects those fields point to after
+            object creation.  If such changes occur, the behavior of the
+            object's hash code is undefined.
+
+        frozen (bool):
+            Make instances immutable after initialization.  If someone attempts
+            to modify a frozen instance, `attrs.exceptions.FrozenInstanceError`
+            is raised.
+
+            .. note::
+
+                1. This is achieved by installing a custom ``__setattr__``
+                   method on your class, so you can't implement your own.
+
+                2. True immutability is impossible in Python.
+
+                3. This *does* have a minor a runtime performance `impact
+                   <how-frozen>` when initializing new instances.  In other
+                   words: ``__init__`` is slightly slower with ``frozen=True``.
+
+                4. If a class is frozen, you cannot modify ``self`` in
+                   ``__attrs_post_init__`` or a self-written ``__init__``. You
+                   can circumvent that limitation by using
+                   ``object.__setattr__(self, "attribute_name", value)``.
+
+                5. Subclasses of a frozen class are frozen too.
+
+        kw_only (bool):
+            Make all attributes keyword-only in the generated ``__init__`` (if
+            *init* is False, this parameter is ignored).
+
+        weakref_slot (bool):
+            Make instances weak-referenceable.  This has no effect unless
+            *slots* is True.
+
+        field_transformer (~typing.Callable | None):
+            A function that is called with the original class object and all
+            fields right before *attrs* finalizes the class.  You can use this,
+            for example, to automatically add converters or validators to
+            fields based on their types.
+
+            .. seealso:: `transform-fields`
+
+        match_args (bool):
+            If True (default), set ``__match_args__`` on the class to support
+            :pep:`634` (*Structural Pattern Matching*). It is a tuple of all
+            non-keyword-only ``__init__`` parameter names on Python 3.10 and
+            later. Ignored on older Python versions.
+
+        collect_by_mro (bool):
+            If True, *attrs* collects attributes from base classes correctly
+            according to the `method resolution order
+            <https://docs.python.org/3/howto/mro.html>`_. If False, *attrs*
+            will mimic the (wrong) behavior of `dataclasses` and :pep:`681`.
+
+            See also `issue #428
+            <https://github.com/python-attrs/attrs/issues/428>`_.
+
+        getstate_setstate (bool | None):
+            .. note::
+
+                This is usually only interesting for slotted classes and you
+                should probably just set *auto_detect* to True.
+
+            If True, ``__getstate__`` and ``__setstate__`` are generated and
+            attached to the class. This is necessary for slotted classes to be
+            pickleable. If left None, it's True by default for slotted classes
+            and False for dict classes.
+
+            If *auto_detect* is True, and *getstate_setstate* is left None, and
+            **either** ``__getstate__`` or ``__setstate__`` is detected
+            directly on the class (meaning: not inherited), it is set to False
+            (this is usually what you want).
+
+```
+
+{"end_line":409,"file_sha256":"ec54646ed97f374d7b4ae0617ff570de6c36736a46661b4218ecda760cfbb69e","id":"9509118737f2ca3da9de7a907b55e34cc7d902d3f4d7100a34b87d016ed5c7ab","kind":"function","path":"src/attr/_next_gen.py","reasons":["lexical overlap: attr, attrs, class, define, gen, next, next_gen, of, py, src, the, type"],"score":23.54817334,"start_line":403,"symbol":"define","text_sha256":"08759a822b93e5f856d037322f9eabafd3ed0ec0ff7d961e89d8fead78b0583e"}
+```
+
+    # maybe_cls's type depends on the usage of the decorator.  It's a class
+    # if it's used as `@attrs` but `None` if used as `@attrs()`.
+    if maybe_cls is None:
+        return wrap
+
+    return wrap(maybe_cls)
+```
+
+{"end_line":66,"file_sha256":"4085e79c73e8b9c9835a46e936c5933fe7202756e7f257bb0e3c916bfc1875ec","id":"f8ece29852522b67e5a125c7f63017f671a1608f61e2c1e3fb192f18b09de367","kind":"module","path":"src/attr/__init__.pyi","reasons":["lexical overlap: 3, attr, attrs, converter, define, field, import, name, setters, src, the, this, type, using"],"score":22.29802813,"start_line":1,"symbol":"<module>","text_sha256":"1bd27f9025af922544cf53908628137405b87abdf69477c348f1f0834e92a8dc"}
+```
+import enum
+import sys
+
+from typing import (
+    Any,
+    Callable,
+    Generic,
+    Literal,
+    Mapping,
+    Protocol,
+    Sequence,
+    TypeVar,
+    overload,
+)
+
+# `import X as X` is required to make these public
+from . import converters as converters
+from . import exceptions as exceptions
+from . import filters as filters
+from . import setters as setters
+from . import validators as validators
+from ._cmp import cmp_using as cmp_using
+from ._typing_compat import AttrsInstance_
+from ._version_info import VersionInfo
+from attrs import (
+    define as define,
+    field as field,
+    mutable as mutable,
+    frozen as frozen,
+    _EqOrderType,
+    _ValidatorType,
+    _ConverterType,
+    _ReprArgType,
+    _OnSetAttrType,
+    _OnSetAttrArgType,
+    _FieldTransformer,
+    _ValidatorArgType,
+)
+
+if sys.version_info >= (3, 10):
+    from typing import TypeGuard, TypeAlias
+else:
+    from typing_extensions import TypeGuard, TypeAlias
+
+if sys.version_info >= (3, 11):
+    from typing import dataclass_transform
+else:
+    from typing_extensions import dataclass_transform
+
+__version__: str
+__version_info__: VersionInfo
+__title__: str
+__description__: str
+__url__: str
+__uri__: str
+__author__: str
+__email__: str
+__license__: str
+__copyright__: str
+
+_T = TypeVar("_T")
+_C = TypeVar("_C", bound=type)
+
+_FilterType = Callable[["Attribute[_T]", _T], bool]
+
+# We subclass this here to keep the protocol's qualified name clean.
+```
+
+{"end_line":344,"file_sha256":"ec54646ed97f374d7b4ae0617ff570de6c36736a46661b4218ecda760cfbb69e","id":"61514fd634534b9a1558c0818db462ad44f3388935a8210bf82c3ce5b7aac524","kind":"function","path":"src/attr/_next_gen.py","reasons":["lexical overlap: attr, define, gen, next, next_gen, py, src"],"score":20.69689392,"start_line":343,"symbol":"define","text_sha256":"9420c60a76d570c75ede17e2a36d46ced4c77f303bf9eeba8e4a0040a24d7e2d"}
+```
+    """
+
+```

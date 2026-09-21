@@ -1,0 +1,20 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import attrs
+registry = []
+@attrs.define
+class Base:
+    @classmethod
+    def __attrs_init_subclass__(cls):
+        registry.append(cls.__name__)
+@attrs.define
+class Child(Base):
+    pass
+RESULT = registry
+```
+
+Repository source evidence:
+{"anchor_count":1,"anchor_nodes":["c6c3a483e6c7"],"anchor_nodes_truncated":false,"base_graph_id":null,"budget":16000,"cause_count":0,"cause_details_truncated":false,"causes":[],"complete":false,"coverage":"saved-anchor-static-closure","deleted":[],"frontier":[{"count":1,"kind":"unresolved","reason":"external or unavailable import"},{"count":1,"kind":"unresolved","reason":"global assignment is not a literal constant"},{"count":1,"kind":"unresolved","reason":"local value, parameter, or closure requires runtime resolution"},{"count":1,"kind":"unresolved","reason":"name is not a static repository binding (possibly builtin/external)"}],"frontier_count":4,"frontier_details_truncated":true,"full_graph_handle":"1ef2d10c046e4bb2d0bf6472f647127d0854b46dba6c50d6f0e6bdc0d76adbeb","graph_id":"1ef2d10c046e4bb2d0bf6472f647127d0854b46dba6c50d6f0e6bdc0d76adbeb","guarantee":"current recorded source and static references; no behavior or task-sufficiency proof","kind":"contextproof.graph-payload","nodes":[{"end_line":769,"id":"c6c3a483e6c72ba6bbe89b7444e27806c67a4e6beadffc4464f6703d27e61515","kind":"function","path":"src/attr/_make.py","start_line":748,"symbol":"_ClassBuilder.build_class","text":"    def build_class(self):\n        \"\"\"\n        Finalize class based on the accumulated configuration.\n\n        Builder cannot be used after calling this method.\n        \"\"\"\n        if self._slots is True:\n            cls = self._create_slots_class()\n        else:\n            cls = self._patch_original_class()\n            if PY_3_10_PLUS:\n                cls = abc.update_abstractmethods(cls)\n\n        # The method gets only called if it's not inherited from a base class.\n        # _has_own_attribute does NOT work properly for classmethods.\n        if (\n            getattr(cls, \"__attrs_init_subclass__\", None)\n            and \"__attrs_init_subclass__\" not in cls.__dict__\n        ):\n            cls.__attrs_init_subclass__()\n\n        return cls\n"}],"omitted_node_count":0,"omitted_nodes":[],"omitted_nodes_truncated":false,"policy":{"max_depth":4,"max_nodes":256,"resolver_version":1},"reference_id_prefix_length":12,"references":[],"requires_base":false,"schema_version":1,"scope":"full","snapshot_id":"58c49369a49066b693430d997a4de08e4a9c123a92d7766476a6071e1417221b","unit":"utf-8-bytes"}

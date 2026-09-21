@@ -1,0 +1,381 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import attrs
+observed = []
+@attrs.define
+class Record:
+    value: int = attrs.field(kw_only=True, default=3)
+    def __attrs_pre_init__(self, *, value):
+        observed.append(value)
+record = Record()
+RESULT = [observed, record.value]
+```
+
+Repository source evidence:
+# ContextProof source evidence
+{"budget":16000,"budget_unit":"utf8_bytes","id":"a42196946ce6796a09fb5b58aa7dd85aa24b3fc072e4df55d240a98e980c25c2","method":"bm25","omitted_count":404,"query":"Explain the behavior of this Python probe using repository source. src/attr/_make.py _attrs_to_init_script src/attr/_make.py _make_init_script\nimport attrs\nobserved = []\n@attrs.define\nclass Record:\n    value: int = attrs.field(kw_only=True, default=3)\n    def __attrs_pre_init__(self, *, value):\n        observed.append(value)\nrecord = Record()\nRESULT = [observed, record.value]\n","schema_version":1,"snapshot_id":"58c49369a49066b693430d997a4de08e4a9c123a92d7766476a6071e1417221b","tokenizer":"bytes"}
+
+{"end_line":2292,"file_sha256":"a2b2927fa0be0757997e96ade256c0b71be64b213fcb1946f3363dd75e6e7d69","id":"f2f18b3ba7bbee013e0483da036251faf58caba6b4be21187b0bb3e59394b0be","kind":"function","path":"src/attr/_make.py","reasons":["lexical overlap: 3, attr, attrs, attrs_pre_init, attrs_to_init_script, def, init, kw, make, only, pre, py, python, script, self, src, to"],"score":38.14386827,"start_line":2275,"symbol":"_attrs_to_init_script","text_sha256":"788ffddbb80a9471c65ee72d2817f572128ca43f4de1b28088ac57b1294cb0d4"}
+```
+            ]
+        )
+        pre_init_args += ", " if pre_init_args else ""
+        pre_init_args += pre_init_kw_only_args
+
+    if call_pre_init and pre_init_has_args:
+        # If pre init method has arguments, pass same arguments as `__init__`.
+        lines[0] = f"self.__attrs_pre_init__({pre_init_args})"
+
+    # Python <3.12 doesn't allow backslashes in f-strings.
+    NL = "\n    "
+    return (
+        f"""def {method_name}(self, {args}):
+    {NL.join(lines) if lines else 'pass'}
+""",
+        names_for_globals,
+        annotations,
+    )
+```
+
+{"end_line":2274,"file_sha256":"a2b2927fa0be0757997e96ade256c0b71be64b213fcb1946f3363dd75e6e7d69","id":"c30f86d0937573269d58b7117144b2b292b29c91eb7827ace01cab7563be9aa2","kind":"function","path":"src/attr/_make.py","reasons":["lexical overlap: append, attr, attrs, attrs_to_init_script, default, field, init, kw, kw_only, make, only, pre, py, result, script, self, src, the, this, to, true"],"score":33.77084534,"start_line":2195,"symbol":"_attrs_to_init_script","text_sha256":"096ee71c112a69fde7b227e02e8a36efdd2ce7337a981d436ae274b376b98423"}
+```
+                lines.append("else:")
+                lines.append(
+                    "    "
+                    + fmt_setter(
+                        attr_name,
+                        init_factory_name + "(" + maybe_self + ")",
+                        has_on_setattr,
+                    )
+                )
+            names_for_globals[init_factory_name] = a.default.factory
+        else:
+            if a.kw_only:
+                kw_only_args.append(arg_name)
+            else:
+                args.append(arg_name)
+
+            if converter is not None:
+                lines.append(
+                    fmt_setter_with_converter(
+                        attr_name, arg_name, has_on_setattr, converter
+                    )
+                )
+                names_for_globals[converter._get_global_name(a.name)] = (
+                    converter.converter
+                )
+            else:
+                lines.append(fmt_setter(attr_name, arg_name, has_on_setattr))
+
+        if a.init is True:
+            if a.type is not None and converter is None:
+                annotations[arg_name] = a.type
+            elif converter is not None and converter._first_param_type:
+                # Use the type from the converter if present.
+                annotations[arg_name] = converter._first_param_type
+
+    if attrs_to_validate:  # we can skip this if there are no validators.
+        names_for_globals["_config"] = _config
+        lines.append("if _config._run_validators is True:")
+        for a in attrs_to_validate:
+            val_name = "__attr_validator_" + a.name
+            attr_name = "__attr_" + a.name
+            lines.append(f"    {val_name}(self, {attr_name}, self.{a.name})")
+            names_for_globals[val_name] = a.validator
+            names_for_globals[attr_name] = a
+
+    if call_post_init:
+        lines.append("self.__attrs_post_init__()")
+
+    # Because this is set only after __attrs_post_init__ is called, a crash
+    # will result if post-init tries to access the hash code.  This seemed
+    # preferable to setting this beforehand, in which case alteration to field
+    # values during post-init combined with post-init accessing the hash code
+    # would result in silent bugs.
+    if does_cache_hash:
+        if is_frozen:
+            if is_slotted:
+                init_hash_cache = f"_setattr('{_HASH_CACHE_FIELD}', None)"
+            else:
+                init_hash_cache = f"_inst_dict['{_HASH_CACHE_FIELD}'] = None"
+        else:
+            init_hash_cache = f"self.{_HASH_CACHE_FIELD} = None"
+        lines.append(init_hash_cache)
+
+    # For exceptions we rely on BaseException.__init__ for proper
+    # initialization.
+    if is_exc:
+        vals = ",".join(f"self.{a.name}" for a in attrs if a.init)
+
+        lines.append(f"BaseException.__init__(self, {vals})")
+
+    args = ", ".join(args)
+    pre_init_args = args
+    if kw_only_args:
+        # leading comma & kw_only args
+        args += f"{', ' if args else ''}*, {', '.join(kw_only_args)}"
+        pre_init_kw_only_args = ", ".join(
+            [
+                f"{kw_arg_name}={kw_arg_name}"
+                # We need to remove the defaults from the kw_only_args.
+                for kw_arg_name in (kwa.split("=")[0] for kwa in kw_only_args)
+```
+
+{"end_line":262,"file_sha256":"ec54646ed97f374d7b4ae0617ff570de6c36736a46661b4218ecda760cfbb69e","id":"f9a418b29adb46ddc74b41369a11d8d438bc49aaefce9287f32a7a5963e5a7ba","kind":"function","path":"src/attr/_next_gen.py","reasons":["lexical overlap: 3, attr, attrs, behavior, class, default, define, field, init, kw, kw_only, make, of, only, py, python, self, src, the, this, to, true, using, value"],"score":30.99120216,"start_line":183,"symbol":"define","text_sha256":"9642147d4fd7cda27a9c4ace17b12047e05cb825610af98531c614dc7cc452a2"}
+```
+
+        cache_hash (bool):
+            Ensure that the object's hash code is computed only once and stored
+            on the object.  If this is set to True, hashing must be either
+            explicitly or implicitly enabled for this class.  If the hash code
+            is cached, avoid any reassignments of fields involved in hash code
+            computation or mutations of the objects those fields point to after
+            object creation.  If such changes occur, the behavior of the
+            object's hash code is undefined.
+
+        frozen (bool):
+            Make instances immutable after initialization.  If someone attempts
+            to modify a frozen instance, `attrs.exceptions.FrozenInstanceError`
+            is raised.
+
+            .. note::
+
+                1. This is achieved by installing a custom ``__setattr__``
+                   method on your class, so you can't implement your own.
+
+                2. True immutability is impossible in Python.
+
+                3. This *does* have a minor a runtime performance `impact
+                   <how-frozen>` when initializing new instances.  In other
+                   words: ``__init__`` is slightly slower with ``frozen=True``.
+
+                4. If a class is frozen, you cannot modify ``self`` in
+                   ``__attrs_post_init__`` or a self-written ``__init__``. You
+                   can circumvent that limitation by using
+                   ``object.__setattr__(self, "attribute_name", value)``.
+
+                5. Subclasses of a frozen class are frozen too.
+
+        kw_only (bool):
+            Make all attributes keyword-only in the generated ``__init__`` (if
+            *init* is False, this parameter is ignored).
+
+        weakref_slot (bool):
+            Make instances weak-referenceable.  This has no effect unless
+            *slots* is True.
+
+        field_transformer (~typing.Callable | None):
+            A function that is called with the original class object and all
+            fields right before *attrs* finalizes the class.  You can use this,
+            for example, to automatically add converters or validators to
+            fields based on their types.
+
+            .. seealso:: `transform-fields`
+
+        match_args (bool):
+            If True (default), set ``__match_args__`` on the class to support
+            :pep:`634` (*Structural Pattern Matching*). It is a tuple of all
+            non-keyword-only ``__init__`` parameter names on Python 3.10 and
+            later. Ignored on older Python versions.
+
+        collect_by_mro (bool):
+            If True, *attrs* collects attributes from base classes correctly
+            according to the `method resolution order
+            <https://docs.python.org/3/howto/mro.html>`_. If False, *attrs*
+            will mimic the (wrong) behavior of `dataclasses` and :pep:`681`.
+
+            See also `issue #428
+            <https://github.com/python-attrs/attrs/issues/428>`_.
+
+        getstate_setstate (bool | None):
+            .. note::
+
+                This is usually only interesting for slotted classes and you
+                should probably just set *auto_detect* to True.
+
+            If True, ``__getstate__`` and ``__setstate__`` are generated and
+            attached to the class. This is necessary for slotted classes to be
+            pickleable. If left None, it's True by default for slotted classes
+            and False for dict classes.
+
+            If *auto_detect* is True, and *getstate_setstate* is left None, and
+            **either** ``__getstate__`` or ``__setstate__`` is detected
+            directly on the class (meaning: not inherited), it is set to False
+            (this is usually what you want).
+
+```
+
+{"end_line":2114,"file_sha256":"a2b2927fa0be0757997e96ade256c0b71be64b213fcb1946f3363dd75e6e7d69","id":"5dc140d5e80ba57488f250096876f11fe9009c44a1596f43a1d614094e36f785","kind":"function","path":"src/attr/_make.py","reasons":["lexical overlap: append, attr, attrs, attrs_pre_init, attrs_to_init_script, class, def, default, init, kw, make, of, only, pre, py, script, self, src, the, this, to, true"],"score":30.35665931,"start_line":2035,"symbol":"_attrs_to_init_script","text_sha256":"55b0376e1207008c2501817af5e41b54dfdd06da379f255c230e70614ccf161b"}
+```
+def _attrs_to_init_script(
+    attrs: list[Attribute],
+    is_frozen: bool,
+    is_slotted: bool,
+    call_pre_init: bool,
+    pre_init_has_args: bool,
+    call_post_init: bool,
+    does_cache_hash: bool,
+    base_attr_map: dict[str, type],
+    is_exc: bool,
+    needs_cached_setattr: bool,
+    has_cls_on_setattr: bool,
+    method_name: str,
+) -> tuple[str, dict, dict]:
+    """
+    Return a script of an initializer for *attrs*, a dict of globals, and
+    annotations for the initializer.
+
+    The globals are required by the generated script.
+    """
+    lines = ["self.__attrs_pre_init__()"] if call_pre_init else []
+
+    if needs_cached_setattr:
+        lines.append(
+            # Circumvent the __setattr__ descriptor to save one lookup per
+            # assignment. Note _setattr will be used again below if
+            # does_cache_hash is True.
+            "_setattr = _cached_setattr_get(self)"
+        )
+
+    extra_lines, fmt_setter, fmt_setter_with_converter = _determine_setters(
+        is_frozen, is_slotted, base_attr_map
+    )
+    lines.extend(extra_lines)
+
+    args = []
+    kw_only_args = []
+    attrs_to_validate = []
+
+    # This is a dictionary of names to validator and converter callables.
+    # Injecting this into __init__ globals lets us avoid lookups.
+    names_for_globals = {}
+    annotations = {"return": None}
+
+    for a in attrs:
+        if a.validator:
+            attrs_to_validate.append(a)
+
+        attr_name = a.name
+        has_on_setattr = a.on_setattr is not None or (
+            a.on_setattr is not setters.NO_OP and has_cls_on_setattr
+        )
+        # a.alias is set to maybe-mangled attr_name in _ClassBuilder if not
+        # explicitly provided
+        arg_name = a.alias
+
+        has_factory = isinstance(a.default, Factory)
+        maybe_self = "self" if has_factory and a.default.takes_self else ""
+
+        if a.converter is not None and not isinstance(a.converter, Converter):
+            converter = Converter(a.converter)
+        else:
+            converter = a.converter
+
+        if a.init is False:
+            if has_factory:
+                init_factory_name = _INIT_FACTORY_PAT % (a.name,)
+                if converter is not None:
+                    lines.append(
+                        fmt_setter_with_converter(
+                            attr_name,
+                            init_factory_name + f"({maybe_self})",
+                            has_on_setattr,
+                            converter,
+                        )
+                    )
+                    names_for_globals[converter._get_global_name(a.name)] = (
+                        converter.converter
+                    )
+                else:
+```
+
+{"end_line":2612,"file_sha256":"a2b2927fa0be0757997e96ade256c0b71be64b213fcb1946f3363dd75e6e7d69","id":"783fa6f8cbdc7173713471b4f4ce0d76afad0404ba9360e65665472d7a76f97d","kind":"class","path":"src/attr/_make.py","reasons":["lexical overlap: attr, attrs, class, default, init, kw, kw_only, make, of, only, py, result, src, the, to, true"],"score":24.86264615,"start_line":2535,"symbol":"_CountingAttr","text_sha256":"cdbf0ae7e7ef46adec2bf81183f87eb4ec762abf87e51170d5f7acbd920691b0"}
+```
+class _CountingAttr:
+    """
+    Intermediate representation of attributes that uses a counter to preserve
+    the order in which the attributes have been defined.
+
+    *Internal* data structure of the attrs library.  Running into is most
+    likely the result of a bug like a forgotten `@attr.s` decorator.
+    """
+
+    __slots__ = (
+        "_default",
+        "_validator",
+        "alias",
+        "converter",
+        "counter",
+        "eq",
+        "eq_key",
+        "hash",
+        "init",
+        "kw_only",
+        "metadata",
+        "on_setattr",
+        "order",
+        "order_key",
+        "repr",
+        "type",
+    )
+    __attrs_attrs__ = (
+        *tuple(
+            Attribute(
+                name=name,
+                alias=_default_init_alias_for(name),
+                default=NOTHING,
+                validator=None,
+                repr=True,
+                cmp=None,
+                hash=True,
+                init=True,
+                kw_only=False,
+                eq=True,
+                eq_key=None,
+                order=False,
+                order_key=None,
+                inherited=False,
+                on_setattr=None,
+            )
+            for name in (
+                "counter",
+                "_default",
+                "repr",
+                "eq",
+                "order",
+                "hash",
+                "init",
+                "on_setattr",
+                "alias",
+            )
+        ),
+        Attribute(
+            name="metadata",
+            alias="metadata",
+            default=None,
+            validator=None,
+            repr=True,
+            cmp=None,
+            hash=False,
+            init=True,
+            kw_only=False,
+            eq=True,
+            eq_key=None,
+            order=False,
+            order_key=None,
+            inherited=False,
+            on_setattr=None,
+        ),
+    )
+    cls_counter = 0
+
+```
+
+{"end_line":112,"file_sha256":"9d99889e872333bb47578010c34bf13bf7e8ea82632ff3e89e557dcca296f036","id":"d05fbfd5bfa168f6736afdddce9fa0cf1f84d7421157c327e7222c6648552384","kind":"module","path":"src/attrs/__init__.pyi","reasons":["lexical overlap: attrs, default, init, src, this"],"score":9.43711536,"start_line":111,"symbol":"<module>","text_sha256":"9261959adf42b619248cdbbd5aa893c95ddd29c90f552acd0a7873fe8ca08157"}
+```
+
+# This form catches an explicit default argument.
+```

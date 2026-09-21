@@ -1,0 +1,12 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import httpx
+proxy = httpx.Proxy("socks5h://localhost:1080")
+RESULT = [proxy.url.scheme, proxy.url.port]
+```
+
+Repository source evidence:
+{"ambiguity_policy":"all physical declarations; no runtime binding selection","ambiguous_symbols":[],"complete":true,"kind":"supplied-anchor-source","missing":[],"omitted":[],"scope":"supplied-declarations-only","source":[{"end_line":224,"path":"httpx/_config.py","start_line":202,"symbol":"Proxy.__init__","text":"    def __init__(\n        self,\n        url: URL | str,\n        *,\n        ssl_context: ssl.SSLContext | None = None,\n        auth: tuple[str, str] | None = None,\n        headers: HeaderTypes | None = None,\n    ) -> None:\n        url = URL(url)\n        headers = Headers(headers)\n\n        if url.scheme not in (\"http\", \"https\", \"socks5\", \"socks5h\"):\n            raise ValueError(f\"Unknown scheme for proxy URL {url!r}\")\n\n        if url.username or url.password:\n            # Remove any auth credentials from the URL.\n            auth = (url.username, url.password)\n            url = url.copy_with(username=None, password=None)\n\n        self.url = url\n        self.auth = auth\n        self.headers = headers\n        self.ssl_context = ssl_context\n","text_sha256":"22b7381dd95c3beb4dfbd4fc24b2659337d2623ef5ca21b852fb5e4701e693d0"}]}

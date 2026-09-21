@@ -1,0 +1,368 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+from packaging.markers import Marker
+RESULT = Marker("python_full_version < '3.12'").evaluate(
+    {"python_full_version": "3.11.1+"})
+```
+
+Repository source evidence:
+# ContextProof source evidence
+{"budget":16000,"budget_unit":"utf8_bytes","id":"29b834c82892c7975386a1493387be212c5b644bd72d97a22953127548f323ec","method":"bm25","omitted_count":309,"query":"Explain the behavior of this Python probe using repository source. src/packaging/markers.py Marker.evaluate src/packaging/markers.py _repair_python_full_version src/packaging/markers.py _eval_op\nfrom packaging.markers import Marker\nRESULT = Marker(\"python_full_version < '3.12'\").evaluate(\n    {\"python_full_version\": \"3.11.1+\"})\n","schema_version":1,"snapshot_id":"e997c04787f0a125dc18b4aa3515e97689b1bc275fc6d5efdc040420e8b410e6","tokenizer":"bytes"}
+
+{"end_line":331,"file_sha256":"73cf5337307b65d198864a2f9ba3d89aa1b21f15e561568b5b9f753c750d283f","id":"bdc44f67e632e44e262c45acc80d70edc518bc8fbf8fc2ce0d7b155353f4c308","kind":"function","path":"src/packaging/markers.py","reasons":["lexical overlap: full, markers, packaging, py, python, python_full_version, repair, repair_python_full_version, src, version"],"score":39.21335813,"start_line":324,"symbol":"_repair_python_full_version","text_sha256":"fdd5ef554b2d57c3f448a138e1dd4487a16f42d6482031cb1aa15a9e39ac4916"}
+```
+def _repair_python_full_version(env: dict[str, str]) -> dict[str, str]:
+    """
+    Work around platform.python_version() returning something that is not PEP 440
+    compliant for non-tagged Python builds.
+    """
+    if env["python_full_version"].endswith("+"):
+        env["python_full_version"] += "local"
+    return env
+```
+
+{"end_line":321,"file_sha256":"73cf5337307b65d198864a2f9ba3d89aa1b21f15e561568b5b9f753c750d283f","id":"c76110b23a82ea66df38f0f28d18431e8363f6ee34f16a341d17b263d56e70a9","kind":"function","path":"src/packaging/markers.py","reasons":["lexical overlap: evaluate, from, full, marker, markers, of, packaging, py, python, repair, repair_python_full_version, src, the, this, version"],"score":38.02613258,"start_line":301,"symbol":"Marker.evaluate","text_sha256":"3339c2596da52109c54b99cab8353d86158e789bfa3663dcf45dacc654174127"}
+```
+    def evaluate(self, environment: dict[str, str] | None = None) -> bool:
+        """Evaluate a marker.
+
+        Return the boolean from evaluating the given marker against the
+        environment. environment is an optional argument to override all or
+        part of the determined environment.
+
+        The environment is determined from the current Python process.
+        """
+        current_environment = cast("dict[str, str]", default_environment())
+        current_environment["extra"] = ""
+        if environment is not None:
+            current_environment.update(environment)
+            # The API used to allow setting extra to None. We need to handle this
+            # case for backwards compatibility.
+            if current_environment["extra"] is None:
+                current_environment["extra"] = ""
+
+        return _evaluate_markers(
+            self._markers, _repair_python_full_version(current_environment)
+        )
+```
+
+{"end_line":231,"file_sha256":"73cf5337307b65d198864a2f9ba3d89aa1b21f15e561568b5b9f753c750d283f","id":"2a34ee151cd817c283615a3e120cb38b1da4fbd37b0744b6c7b297ef0dd59364","kind":"function","path":"src/packaging/markers.py","reasons":["lexical overlap: 1, eval, eval_op, evaluate, marker, markers, op, packaging, py, src"],"score":30.24709019,"start_line":204,"symbol":"_evaluate_markers","text_sha256":"1695ddbcc38263d568598f28839d5fabe7b59164278a624e1f6b394a7afd649e"}
+```
+def _evaluate_markers(markers: MarkerList, environment: dict[str, str]) -> bool:
+    groups: list[list[bool]] = [[]]
+
+    for marker in markers:
+        assert isinstance(marker, (list, tuple, str))
+
+        if isinstance(marker, list):
+            groups[-1].append(_evaluate_markers(marker, environment))
+        elif isinstance(marker, tuple):
+            lhs, op, rhs = marker
+
+            if isinstance(lhs, Variable):
+                environment_key = lhs.value
+                lhs_value = environment[environment_key]
+                rhs_value = rhs.value
+            else:
+                lhs_value = lhs.value
+                environment_key = rhs.value
+                rhs_value = environment[environment_key]
+
+            lhs_value, rhs_value = _normalize(lhs_value, rhs_value, key=environment_key)
+            groups[-1].append(_eval_op(lhs_value, op, rhs_value))
+        else:
+            assert marker in ["and", "or"]
+            if marker == "or":
+                groups.append([])
+
+    return any(all(item) for item in groups)
+```
+
+{"end_line":29,"file_sha256":"73cf5337307b65d198864a2f9ba3d89aa1b21f15e561568b5b9f753c750d283f","id":"8b57c6e5cefacf5177a8963c48cd8c00d90d51433cfe7fc62e361863aaf7dfd6","kind":"module","path":"src/packaging/markers.py","reasons":["lexical overlap: from, import, marker, markers, of, op, packaging, py, repository, src, the, this, version"],"score":27.85282835,"start_line":1,"symbol":"<module>","text_sha256":"ed10dab9049924e6c9df47e1f59fcd565629d27fbdb3796ecd1b031809a0d6c9"}
+```
+# This file is dual licensed under the terms of the Apache License, Version
+# 2.0, and the BSD License. See the LICENSE file in the root of this repository
+# for complete details.
+
+from __future__ import annotations
+
+import operator
+import os
+import platform
+import sys
+from typing import Any, Callable, TypedDict, cast
+
+from ._parser import MarkerAtom, MarkerList, Op, Value, Variable
+from ._parser import parse_marker as _parse_marker
+from ._tokenizer import ParserSyntaxError
+from .specifiers import InvalidSpecifier, Specifier
+from .utils import canonicalize_name
+
+__all__ = [
+    "InvalidMarker",
+    "Marker",
+    "UndefinedComparison",
+    "UndefinedEnvironmentName",
+    "default_environment",
+]
+
+Operator = Callable[[str, str], bool]
+
+
+```
+
+{"end_line":284,"file_sha256":"73cf5337307b65d198864a2f9ba3d89aa1b21f15e561568b5b9f753c750d283f","id":"5bd8702c873aac160310f753f02d66c3c015a2b792427a22c34047174bcb3d0c","kind":"function","path":"src/packaging/markers.py","reasons":["lexical overlap: 3, from, marker, markers, of, op, packaging, py, python, src, the, this, version"],"score":25.72319267,"start_line":261,"symbol":"Marker.__init__","text_sha256":"ee7c311f497004ba3937dd7b1390ef48b9389de3a7a5f78fc219433ad07966d2"}
+```
+    def __init__(self, marker: str) -> None:
+        # Note: We create a Marker object without calling this constructor in
+        #       packaging.requirements.Requirement. If any additional logic is
+        #       added here, make sure to mirror/adapt Requirement.
+        try:
+            self._markers = _normalize_extra_values(_parse_marker(marker))
+            # The attribute `_markers` can be described in terms of a recursive type:
+            # MarkerList = List[Union[Tuple[Node, ...], str, MarkerList]]
+            #
+            # For example, the following expression:
+            # python_version > "3.6" or (python_version == "3.6" and os_name == "unix")
+            #
+            # is parsed into:
+            # [
+            #     (<Variable('python_version')>, <Op('>')>, <Value('3.6')>),
+            #     'and',
+            #     [
+            #         (<Variable('python_version')>, <Op('==')>, <Value('3.6')>),
+            #         'or',
+            #         (<Variable('os_name')>, <Op('==')>, <Value('unix')>)
+            #     ]
+            # ]
+        except ParserSyntaxError as e:
+            raise InvalidMarker(str(e)) from e
+```
+
+{"end_line":189,"file_sha256":"73cf5337307b65d198864a2f9ba3d89aa1b21f15e561568b5b9f753c750d283f","id":"185f60c0a8b55869f80ded47f4bcb32e9f5107fb54ae469988fcd058e89d6379","kind":"function","path":"src/packaging/markers.py","reasons":["lexical overlap: eval, eval_op, markers, op, packaging, py, src"],"score":24.79453628,"start_line":177,"symbol":"_eval_op","text_sha256":"c60a0f286d35949531a45f87e0bb6beeb283c56ad140df3b4f1eecbb0c8f8792"}
+```
+def _eval_op(lhs: str, op: Op, rhs: str) -> bool:
+    try:
+        spec = Specifier("".join([op.serialize(), rhs]))
+    except InvalidSpecifier:
+        pass
+    else:
+        return spec.contains(lhs, prereleases=True)
+
+    oper: Operator | None = _operators.get(op.serialize())
+    if oper is None:
+        raise UndefinedComparison(f"Undefined {op!r} on {lhs!r} and {rhs!r}.")
+
+    return oper(lhs, rhs)
+```
+
+{"end_line":14,"file_sha256":"818c9148075bac8c8a0d8ebaba02035108d132fc641f600b8a84e65f7b672faa","id":"3e039122bcb81603f350e6a7988abb99a80248df433e25cf25cec8565af5e4f5","kind":"module","path":"src/packaging/requirements.py","reasons":["lexical overlap: from, import, marker, markers, of, packaging, py, repository, src, the, this, version"],"score":24.67357834,"start_line":1,"symbol":"<module>","text_sha256":"b28fc0cc770d07a0b548c151568c65388cb69cbb34402330253922cb8f05257c"}
+```
+# This file is dual licensed under the terms of the Apache License, Version
+# 2.0, and the BSD License. See the LICENSE file in the root of this repository
+# for complete details.
+from __future__ import annotations
+
+from typing import Any, Iterator
+
+from ._parser import parse_requirement as _parse_requirement
+from ._tokenizer import ParserSyntaxError
+from .markers import Marker, _normalize_extra_values
+from .specifiers import SpecifierSet
+from .utils import canonicalize_name
+
+
+```
+
+{"end_line":41,"file_sha256":"085aab2730337365cd19ec5eac7fff4fe639230abb59bb185ec88b1112d6c58d","id":"c23cdc00331af863f9a4aa2d8700e551463bf6318a9c9391d8c975bce1530e99","kind":"module","path":"src/packaging/tags.py","reasons":["lexical overlap: from, import, of, packaging, py, python, repository, src, the, this, version"],"score":21.31913341,"start_line":1,"symbol":"<module>","text_sha256":"e23391a6bb65398b12287a424a9a3bd549a91c23d533fae79f4f4e89ed6226fe"}
+```
+# This file is dual licensed under the terms of the Apache License, Version
+# 2.0, and the BSD License. See the LICENSE file in the root of this repository
+# for complete details.
+
+from __future__ import annotations
+
+import logging
+import platform
+import re
+import struct
+import subprocess
+import sys
+import sysconfig
+from importlib.machinery import EXTENSION_SUFFIXES
+from typing import (
+    Iterable,
+    Iterator,
+    Sequence,
+    Tuple,
+    cast,
+)
+
+from . import _manylinux, _musllinux
+
+logger = logging.getLogger(__name__)
+
+PythonVersion = Sequence[int]
+AppleVersion = Tuple[int, int]
+
+INTERPRETER_SHORT_NAMES: dict[str, str] = {
+    "python": "py",  # Generic.
+    "cpython": "cp",
+    "pypy": "pp",
+    "ironpython": "ip",
+    "jython": "jy",
+}
+
+
+_32_BIT_INTERPRETER = struct.calcsize("P") == 4
+
+
+```
+
+{"end_line":17,"file_sha256":"d05dc787d385b9182b8538066549792b6d85bf560fdad665d73ff680eea42620","id":"a49eb1fc8234de5e98b631b5e27c3175ec133372dbdbadb4ab11eb52f1af8fbe","kind":"module","path":"src/packaging/utils.py","reasons":["lexical overlap: from, import, of, packaging, py, repository, src, the, this, version"],"score":19.31136167,"start_line":1,"symbol":"<module>","text_sha256":"3326c5b726e8b8d0a74b78d5598684757ff0ca3549d7bf55c790724b0c200fb9"}
+```
+# This file is dual licensed under the terms of the Apache License, Version
+# 2.0, and the BSD License. See the LICENSE file in the root of this repository
+# for complete details.
+
+from __future__ import annotations
+
+import functools
+import re
+from typing import NewType, Tuple, Union, cast
+
+from .tags import Tag, parse_tag
+from .version import InvalidVersion, Version, _TrimmedRelease
+
+BuildTag = Union[Tuple[()], Tuple[int, str]]
+NormalizedName = NewType("NormalizedName", str)
+
+
+```
+
+{"end_line":25,"file_sha256":"186d703cd31c2f47cc24eebcbc5e77c0a31dc277de84371a23eafd3694df8a50","id":"ef23945741806c6f395b89dc1596dc7c821f9ac18e3a8ba12bdbcef5169a786c","kind":"module","path":"src/packaging/specifiers.py","reasons":["lexical overlap: from, import, of, packaging, py, repository, src, the, this, version"],"score":19.24179024,"start_line":1,"symbol":"<module>","text_sha256":"cc3e6c46b5dbd28bd229d9cd21641ecf8797bdfa74bec0020e98bc3cf8e2d7d9"}
+```
+# This file is dual licensed under the terms of the Apache License, Version
+# 2.0, and the BSD License. See the LICENSE file in the root of this repository
+# for complete details.
+"""
+.. testsetup::
+
+    from packaging.specifiers import Specifier, SpecifierSet, InvalidSpecifier
+    from packaging.version import Version
+"""
+
+from __future__ import annotations
+
+import abc
+import itertools
+import re
+from typing import Callable, Iterable, Iterator, TypeVar, Union
+
+from .utils import canonicalize_version
+from .version import Version
+
+UnparsedVersion = Union[Version, str]
+UnparsedVersionVar = TypeVar("UnparsedVersionVar", bound=UnparsedVersion)
+CallableOperator = Callable[[Version, str], bool]
+
+
+```
+
+{"end_line":118,"file_sha256":"73cf5337307b65d198864a2f9ba3d89aa1b21f15e561568b5b9f753c750d283f","id":"dc089d554f982bc4c1bc1f2d57f6c4c7d06291ded7c69371de770456b2cc54c3","kind":"class","path":"src/packaging/markers.py","reasons":["lexical overlap: 3, full, markers, of, packaging, py, python, python_full_version, src, the, this, version"],"score":18.40490143,"start_line":49,"symbol":"Environment","text_sha256":"4fca465bbdfa35c9e5ca2bff4b565296b49fef1f983f6ed25222c175382ec5d7"}
+```
+class Environment(TypedDict):
+    implementation_name: str
+    """The implementation's identifier, e.g. ``'cpython'``."""
+
+    implementation_version: str
+    """
+    The implementation's version, e.g. ``'3.13.0a2'`` for CPython 3.13.0a2, or
+    ``'7.3.13'`` for PyPy3.10 v7.3.13.
+    """
+
+    os_name: str
+    """
+    The value of :py:data:`os.name`. The name of the operating system dependent module
+    imported, e.g. ``'posix'``.
+    """
+
+    platform_machine: str
+    """
+    Returns the machine type, e.g. ``'i386'``.
+
+    An empty string if the value cannot be determined.
+    """
+
+    platform_release: str
+    """
+    The system's release, e.g. ``'2.2.0'`` or ``'NT'``.
+
+    An empty string if the value cannot be determined.
+    """
+
+    platform_system: str
+    """
+    The system/OS name, e.g. ``'Linux'``, ``'Windows'`` or ``'Java'``.
+
+    An empty string if the value cannot be determined.
+    """
+
+    platform_version: str
+    """
+    The system's release version, e.g. ``'#3 on degas'``.
+
+    An empty string if the value cannot be determined.
+    """
+
+    python_full_version: str
+    """
+    The Python version as string ``'major.minor.patchlevel'``.
+
+    Note that unlike the Python :py:data:`sys.version`, this value will always include
+    the patchlevel (it defaults to 0).
+    """
+
+    platform_python_implementation: str
+    """
+    A string identifying the Python implementation, e.g. ``'CPython'``.
+    """
+
+    python_version: str
+    """The Python version as string ``'major.minor'``."""
+
+    sys_platform: str
+    """
+    This string contains a platform identifier that can be used to append
+    platform-specific components to :py:data:`sys.path`, for instance.
+
+    For Unix systems, except on Linux and AIX, this is the lowercased OS name as
+    returned by ``uname -s`` with the first part of the version as returned by
+    ``uname -r`` appended, e.g. ``'sunos5'`` or ``'freebsd8'``, at the time when Python
+    was built.
+    """
+```
+
+{"end_line":17,"file_sha256":"a7d66a35888e22d19e7bc29c64578717f61c76157018774aeabfbc9608b1bc64","id":"e49ea1a3b9a901113446a25553bb4e3f6e0596bbcfebdb69f78342876acaf908","kind":"module","path":"src/packaging/_musllinux.py","reasons":["lexical overlap: from, import, packaging, py, python, src, the, this, version"],"score":15.55780937,"start_line":1,"symbol":"<module>","text_sha256":"941c69dd7627dda8d5ea5b20aa84e7f0c4b1dc2f0e43f3fcd38449a692a77b17"}
+```
+"""PEP 656 support.
+
+This module implements logic to detect if the currently running Python is
+linked against musl, and what musl version is used.
+"""
+
+from __future__ import annotations
+
+import functools
+import re
+import subprocess
+import sys
+from typing import Iterator, NamedTuple, Sequence
+
+from ._elffile import ELFFile
+
+
+```

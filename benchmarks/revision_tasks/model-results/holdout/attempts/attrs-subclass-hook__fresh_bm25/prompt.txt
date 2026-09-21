@@ -1,0 +1,355 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import attrs
+registry = []
+@attrs.define
+class Base:
+    @classmethod
+    def __attrs_init_subclass__(cls):
+        registry.append(cls.__name__)
+@attrs.define
+class Child(Base):
+    pass
+RESULT = registry
+```
+
+Repository source evidence:
+# ContextProof source evidence
+{"budget":16000,"budget_unit":"utf8_bytes","id":"64fd38963b35c0b3cbe377bf7e354ecabb2683238f3490b9a8621630cd942ccf","method":"bm25","omitted_count":402,"query":"Explain the behavior of this Python probe using repository source. src/attr/_make.py _ClassBuilder.build_class\nimport attrs\nregistry = []\n@attrs.define\nclass Base:\n    @classmethod\n    def __attrs_init_subclass__(cls):\n        registry.append(cls.__name__)\n@attrs.define\nclass Child(Base):\n    pass\nRESULT = registry\n","schema_version":1,"snapshot_id":"58c49369a49066b693430d997a4de08e4a9c123a92d7766476a6071e1417221b","tokenizer":"bytes"}
+
+{"end_line":769,"file_sha256":"a2b2927fa0be0757997e96ade256c0b71be64b213fcb1946f3363dd75e6e7d69","id":"78b6d063c95b14290e78f56c22eb7b984a054ad59cf82a3c2ba5a4140a4ea595","kind":"function","path":"src/attr/_make.py","reasons":["lexical overlap: attr, attrs, attrs_init_subclass, base, build, build_class, builder, class, classbuilder, cls, def, init, make, py, src, subclass, the, this"],"score":46.10741735,"start_line":748,"symbol":"_ClassBuilder.build_class","text_sha256":"242ad293ae56ca9a6e20cc8ab1254951d106dee8f624e359cba23d86fa878418"}
+```
+    def build_class(self):
+        """
+        Finalize class based on the accumulated configuration.
+
+        Builder cannot be used after calling this method.
+        """
+        if self._slots is True:
+            cls = self._create_slots_class()
+        else:
+            cls = self._patch_original_class()
+            if PY_3_10_PLUS:
+                cls = abc.update_abstractmethods(cls)
+
+        # The method gets only called if it's not inherited from a base class.
+        # _has_own_attribute does NOT work properly for classmethods.
+        if (
+            getattr(cls, "__attrs_init_subclass__", None)
+            and "__attrs_init_subclass__" not in cls.__dict__
+        ):
+            cls.__attrs_init_subclass__()
+
+        return cls
+```
+
+{"end_line":652,"file_sha256":"a2b2927fa0be0757997e96ade256c0b71be64b213fcb1946f3363dd75e6e7d69","id":"bc20ba4004e629d461e2b3a3650930211c9aa29563a4c3bb3b60e3e606cc338e","kind":"class","path":"src/attr/_make.py","reasons":["lexical overlap: attr, attrs, base, build, builder, class, classbuilder, cls, init, make, py, src"],"score":24.31410897,"start_line":627,"symbol":"_ClassBuilder","text_sha256":"22508554d8952a5b08de0ee61edc76c9e27ff7fc3481f2e8c70caf3ef9f8263d"}
+```
+class _ClassBuilder:
+    """
+    Iteratively build *one* class.
+    """
+
+    __slots__ = (
+        "_attr_names",
+        "_attrs",
+        "_base_attr_map",
+        "_base_names",
+        "_cache_hash",
+        "_cls",
+        "_cls_dict",
+        "_delete_attribs",
+        "_frozen",
+        "_has_custom_setattr",
+        "_has_post_init",
+        "_has_pre_init",
+        "_is_exc",
+        "_on_setattr",
+        "_pre_init_has_args",
+        "_slots",
+        "_weakref_slot",
+        "_wrote_own_setattr",
+    )
+
+```
+
+{"end_line":1355,"file_sha256":"a2b2927fa0be0757997e96ade256c0b71be64b213fcb1946f3363dd75e6e7d69","id":"a202a5ee1b47619faf41d5708d8053f2160250556854a0a7f3bbbf1d5fafcf14","kind":"function","path":"src/attr/_make.py","reasons":["lexical overlap: attr, attrs, attrs_init_subclass, behavior, class, classmethod, import, init, make, of, py, src, subclass, the, this, using"],"score":22.0493482,"start_line":1325,"symbol":"attrs","text_sha256":"fc9a91797db6b5539266f8a15746dd047a55c7ee497c1950e9e92195a10cbfa2"}
+```
+    .. versionadded:: 22.2.0
+       *unsafe_hash* as an alias for *hash* (for :pep:`681` compliance).
+    .. deprecated:: 24.1.0 *repr_ns*
+    .. versionchanged:: 24.1.0
+       Instances are not compared as tuples of attributes anymore, but using a
+       big ``and`` condition. This is faster and has more correct behavior for
+       uncomparable values like `math.nan`.
+    .. versionadded:: 24.1.0
+       If a class has an *inherited* classmethod called
+       ``__attrs_init_subclass__``, it is executed after the class is created.
+    .. deprecated:: 24.1.0 *hash* is deprecated in favor of *unsafe_hash*.
+    """
+    if repr_ns is not None:
+        import warnings
+
+        warnings.warn(
+            DeprecationWarning(
+                "The `repr_ns` argument is deprecated and will be removed in or after August 2025."
+            ),
+            stacklevel=2,
+        )
+
+    eq_, order_ = _determine_attrs_eq_order(cmp, eq, order, None)
+
+    #  unsafe_hash takes precedence due to PEP 681.
+    if unsafe_hash is not None:
+        hash = unsafe_hash
+
+    if isinstance(on_setattr, (list, tuple)):
+        on_setattr = setters.pipe(*on_setattr)
+
+```
+
+{"end_line":371,"file_sha256":"a2b2927fa0be0757997e96ade256c0b71be64b213fcb1946f3363dd75e6e7d69","id":"16cc9ec1b3a3a9329546d1629ffb07fb84456ecad97c4500a57fd63ad14a5d8d","kind":"function","path":"src/attr/_make.py","reasons":["lexical overlap: append, attr, attrs, base, behavior, cls, def, make, name, of, py, src, the"],"score":21.70514084,"start_line":346,"symbol":"_collect_base_attrs_broken","text_sha256":"009b0eda67542c5254e37125a4b254358e3991956324a666ff1d4ebb1f81dff2"}
+```
+def _collect_base_attrs_broken(cls, taken_attr_names):
+    """
+    Collect attr.ibs from base classes of *cls*, except *taken_attr_names*.
+
+    N.B. *taken_attr_names* will be mutated.
+
+    Adhere to the old incorrect behavior.
+
+    Notably it collects from the front and considers inherited attributes which
+    leads to the buggy behavior reported in #428.
+    """
+    base_attrs = []
+    base_attr_map = {}  # A dictionary of base attrs to their classes.
+
+    # Traverse the MRO and collect attributes.
+    for base_cls in cls.__mro__[1:-1]:
+        for a in getattr(base_cls, "__attrs_attrs__", []):
+            if a.name in taken_attr_names:
+                continue
+
+            a = a.evolve(inherited=True)  # noqa: PLW2901
+            taken_attr_names.add(a.name)
+            base_attrs.append(a)
+            base_attr_map[a.name] = base_cls
+
+    return base_attrs, base_attr_map
+```
+
+{"end_line":886,"file_sha256":"a2b2927fa0be0757997e96ade256c0b71be64b213fcb1946f3363dd75e6e7d69","id":"8b69afdaca70569e6b74439b20cbf559d273ef094368cab03da08625f9439b31","kind":"function","path":"src/attr/_make.py","reasons":["lexical overlap: append, attr, attrs, base, build, builder, class, classbuilder, cls, def, make, name, of, py, src, subclass, the, this"],"score":21.68049615,"start_line":807,"symbol":"_ClassBuilder._create_slots_class","text_sha256":"c819d277181192d3fdb042b54b7db7deff20301b16eb3e1a2bc954703f04a2e3"}
+```
+    def _create_slots_class(self):
+        """
+        Build and return a new class with a `__slots__` attribute.
+        """
+        cd = {
+            k: v
+            for k, v in self._cls_dict.items()
+            if k not in (*tuple(self._attr_names), "__dict__", "__weakref__")
+        }
+
+        # If our class doesn't have its own implementation of __setattr__
+        # (either from the user or by us), check the bases, if one of them has
+        # an attrs-made __setattr__, that needs to be reset. We don't walk the
+        # MRO because we only care about our immediate base classes.
+        # XXX: This can be confused by subclassing a slotted attrs class with
+        # XXX: a non-attrs class and subclass the resulting class with an attrs
+        # XXX: class.  See `test_slotted_confused` for details.  For now that's
+        # XXX: OK with us.
+        if not self._wrote_own_setattr:
+            cd["__attrs_own_setattr__"] = False
+
+            if not self._has_custom_setattr:
+                for base_cls in self._cls.__bases__:
+                    if base_cls.__dict__.get("__attrs_own_setattr__", False):
+                        cd["__setattr__"] = _OBJ_SETATTR
+                        break
+
+        # Traverse the MRO to collect existing slots
+        # and check for an existing __weakref__.
+        existing_slots = {}
+        weakref_inherited = False
+        for base_cls in self._cls.__mro__[1:-1]:
+            if base_cls.__dict__.get("__weakref__", None) is not None:
+                weakref_inherited = True
+            existing_slots.update(
+                {
+                    name: getattr(base_cls, name)
+                    for name in getattr(base_cls, "__slots__", [])
+                }
+            )
+
+        base_names = set(self._base_names)
+
+        names = self._attr_names
+        if (
+            self._weakref_slot
+            and "__weakref__" not in getattr(self._cls, "__slots__", ())
+            and "__weakref__" not in names
+            and not weakref_inherited
+        ):
+            names += ("__weakref__",)
+
+        cached_properties = {
+            name: cached_property.func
+            for name, cached_property in cd.items()
+            if isinstance(cached_property, functools.cached_property)
+        }
+
+        # Collect methods with a `__class__` reference that are shadowed in the new class.
+        # To know to update them.
+        additional_closure_functions_to_update = []
+        if cached_properties:
+            class_annotations = _get_annotations(self._cls)
+            for name, func in cached_properties.items():
+                # Add cached properties to names for slotting.
+                names += (name,)
+                # Clear out function from class to avoid clashing.
+                del cd[name]
+                additional_closure_functions_to_update.append(func)
+                annotation = inspect.signature(func).return_annotation
+                if annotation is not inspect.Parameter.empty:
+                    class_annotations[name] = annotation
+
+            original_getattr = cd.get("__getattr__")
+            if original_getattr is not None:
+                additional_closure_functions_to_update.append(original_getattr)
+
+            cd["__getattr__"] = _make_cached_property_getattr(
+                cached_properties, original_getattr, self._cls
+            )
+```
+
+{"end_line":102,"file_sha256":"ec54646ed97f374d7b4ae0617ff570de6c36736a46661b4218ecda760cfbb69e","id":"66c97e1ada3d5af7716d0c1f9ccab8743d888e18b5433f3ab38e1dfc80fc3f00","kind":"function","path":"src/attr/_next_gen.py","reasons":["lexical overlap: attr, attrs, attrs_init_subclass, base, class, cls, def, define, init, of, py, python, src, subclass, the, using"],"score":21.61185795,"start_line":23,"symbol":"define","text_sha256":"420171ad483999edde4229d5e7294c772b049872ef4c92d5d26922fb30280b77"}
+```
+def define(
+    maybe_cls=None,
+    *,
+    these=None,
+    repr=None,
+    unsafe_hash=None,
+    hash=None,
+    init=None,
+    slots=True,
+    frozen=False,
+    weakref_slot=True,
+    str=False,
+    auto_attribs=None,
+    kw_only=False,
+    cache_hash=False,
+    auto_exc=True,
+    eq=None,
+    order=False,
+    auto_detect=True,
+    getstate_setstate=None,
+    on_setattr=None,
+    field_transformer=None,
+    match_args=True,
+):
+    r"""
+    A class decorator that adds :term:`dunder methods` according to
+    :term:`fields <field>` specified using :doc:`type annotations <types>`,
+    `field()` calls, or the *these* argument.
+
+    Since *attrs* patches or replaces an existing class, you cannot use
+    `object.__init_subclass__` with *attrs* classes, because it runs too early.
+    As a replacement, you can define ``__attrs_init_subclass__`` on your class.
+    It will be called by *attrs* classes that subclass it after they're
+    created. See also :ref:`init-subclass`.
+
+    Args:
+        slots (bool):
+            Create a :term:`slotted class <slotted classes>` that's more
+            memory-efficient. Slotted classes are generally superior to the
+            default dict classes, but have some gotchas you should know about,
+            so we encourage you to read the :term:`glossary entry <slotted
+            classes>`.
+
+        auto_detect (bool):
+            Instead of setting the *init*, *repr*, *eq*, and *hash* arguments
+            explicitly, assume they are set to True **unless any** of the
+            involved methods for one of the arguments is implemented in the
+            *current* class (meaning, it is *not* inherited from some base
+            class).
+
+            So, for example by implementing ``__eq__`` on a class yourself,
+            *attrs* will deduce ``eq=False`` and will create *neither*
+            ``__eq__`` *nor* ``__ne__`` (but Python classes come with a
+            sensible ``__ne__`` by default, so it *should* be enough to only
+            implement ``__eq__`` in most cases).
+
+            Passing True or False` to *init*, *repr*, *eq*, or *hash*
+            overrides whatever *auto_detect* would determine.
+
+        auto_exc (bool):
+            If the class subclasses `BaseException` (which implicitly includes
+            any subclass of any exception), the following happens to behave
+            like a well-behaved Python exception class:
+
+            - the values for *eq*, *order*, and *hash* are ignored and the
+              instances compare and hash by the instance's ids [#]_ ,
+            - all attributes that are either passed into ``__init__`` or have a
+              default value are additionally available as a tuple in the
+              ``args`` attribute,
+            - the value of *str* is ignored leaving ``__str__`` to base
+              classes.
+
+            .. [#]
+               Note that *attrs* will *not* remove existing implementations of
+               ``__hash__`` or the equality methods. It just won't add own
+               ones.
+
+        on_setattr (~typing.Callable | list[~typing.Callable] | None | ~typing.Literal[attrs.setters.NO_OP]):
+            A callable that is run whenever the user attempts to set an
+            attribute (either by assignment like ``i.x = 42`` or by using
+```
+
+{"end_line":805,"file_sha256":"a2b2927fa0be0757997e96ade256c0b71be64b213fcb1946f3363dd75e6e7d69","id":"5bddbdad59a33844d6861a8f199926e03b828890d3c10dd5dd0a35c08e1ef409","kind":"function","path":"src/attr/_make.py","reasons":["lexical overlap: attr, attrs, base, builder, class, classbuilder, cls, def, make, name, of, py, src, the, using"],"score":21.54045544,"start_line":771,"symbol":"_ClassBuilder._patch_original_class","text_sha256":"8a3ed16a92166110f0b4509883115ef38dc053b6b397ab0d760c46b3337909db"}
+```
+    def _patch_original_class(self):
+        """
+        Apply accumulated methods and return the class.
+        """
+        cls = self._cls
+        base_names = self._base_names
+
+        # Clean class of attribute definitions (`attr.ib()`s).
+        if self._delete_attribs:
+            for name in self._attr_names:
+                if (
+                    name not in base_names
+                    and getattr(cls, name, _SENTINEL) is not _SENTINEL
+                ):
+                    # An AttributeError can happen if a base class defines a
+                    # class variable and we want to set an attribute with the
+                    # same name by using only a type annotation.
+                    with contextlib.suppress(AttributeError):
+                        delattr(cls, name)
+
+        # Attach our dunder methods.
+        for name, value in self._cls_dict.items():
+            setattr(cls, name, value)
+
+        # If we've inherited an attrs __setattr__ and don't write our own,
+        # reset it to object's.
+        if not self._wrote_own_setattr and getattr(
+            cls, "__attrs_own_setattr__", False
+        ):
+            cls.__attrs_own_setattr__ = False
+
+            if not self._has_custom_setattr:
+                cls.__setattr__ = _OBJ_SETATTR
+
+        return cls
+```
+
+{"end_line":38,"file_sha256":"7ce608bedd5e192a90adee2e092dec256299d26c00b82f140faa9b6b9392f7f5","id":"8795ccb285f13f0bf9bb7d753225d6ee320929ffbef997756f7aee1f75ad6d99","kind":"class","path":"src/attr/__init__.py","reasons":["lexical overlap: attr, attrs, class, init, pass, py, src"],"score":9.97591063,"start_line":37,"symbol":"AttrsInstance","text_sha256":"d616d6ef2314bba0ba04ab87b74b067ca19995671b27e46145b927ffd68c1e8a"}
+```
+class AttrsInstance(Protocol):
+    pass
+```

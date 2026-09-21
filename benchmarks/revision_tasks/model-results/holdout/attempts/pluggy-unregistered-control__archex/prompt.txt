@@ -1,0 +1,329 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import pluggy
+manager = pluggy.PluginManager("example")
+plugin = object()
+manager.register(plugin, "plugin")
+RESULT = [manager.has_plugin("plugin"), manager.get_name(plugin),
+          manager.is_blocked("plugin")]
+```
+
+Repository source evidence:
+<context query="Explain the behavior of this Python probe using repository source. src/pluggy/_manager.py PluginManager.register src/pluggy/_manager.py PluginManager.has_plugin src/pluggy/_manager.py PluginManager.get_name
+import pluggy
+manager = pluggy.PluginManager(&quot;example&quot;)
+plugin = object()
+manager.register(plugin, &quot;plugin&quot;)
+RESULT = [manager.has_plugin(&quot;plugin&quot;), manager.get_name(plugin),
+          manager.is_blocked(&quot;plugin&quot;)]
+">
+  <structural-context>
+    <file-tree><![CDATA[
+src/pluggy/_callers.py
+src/pluggy/_manager.py
+src/pluggy/_result.py
+    ]]></file-tree>
+  </structural-context>
+  <chunks>
+    <chunk file="src/pluggy/_manager.py" lines="367-429" symbol="PluginManager" score="2.2850" tokens="510">
+      <code><![CDATA[
+                "Plugin %r for hook %r\nhookimpl definition: %s\n"
+                "Declared as wrapper=True or hookwrapper=True "
+                "but function is not a generator function"
+                % (hookimpl.plugin_name, hook.name, _formatdef(hookimpl.function)),
+            )
+
+        if hookimpl.wrapper and hookimpl.hookwrapper:
+            raise PluginValidationError(
+                hookimpl.plugin,
+                "Plugin %r for hook %r\nhookimpl definition: %s\n"
+                "The wrapper=True and hookwrapper=True options are mutually exclusive"
+                % (hookimpl.plugin_name, hook.name, _formatdef(hookimpl.function)),
+            )
+
+    def check_pending(self) -> None:
+        """Verify that all hooks which have not been verified against a
+        hook specification are optional, otherwise raise
+        :exc:`PluginValidationError`."""
+        for name in self.hook.__dict__:
+            if name[0] != "_":
+                hook: HookCaller = getattr(self.hook, name)
+                if not hook.has_spec():
+                    for hookimpl in hook.get_hookimpls():
+                        if not hookimpl.optionalhook:
+                            raise PluginValidationError(
+                                hookimpl.plugin,
+                                "unknown hook %r in plugin %r"
+                                % (name, hookimpl.plugin),
+                            )
+
+    def load_setuptools_entrypoints(self, group: str, name: str | None = None) -> int:
+        """Load modules from querying the specified setuptools ``group``.
+
+        :param group:
+            Entry point group to load plugins.
+        :param name:
+            If given, loads only plugins with the given ``name``.
+
+        :return:
+            The number of plugins loaded by this call.
+        """
+        import importlib.metadata
+
+        count = 0
+        for dist in list(importlib.metadata.distributions()):
+            for ep in dist.entry_points:
+                if (
+                    ep.group != group
+                    or (name is not None and ep.name != name)
+                    # already registered
+                    or self.get_plugin(ep.name)
+                    or self.is_blocked(ep.name)
+                ):
+                    continue
+                plugin = ep.load()
+                self.register(plugin, name=ep.name)
+                self._plugin_distinfo.append((plugin, DistFacade(dist)))
+                count += 1
+        return count
+
+    def list_plugin_distinfo(self) -> list[tuple[_Plugin, DistFacade]]:
+        """Return a list of (plugin, distinfo) pairs for all
+        setuptools-registered plugins."""
+      ]]></code>
+    </chunk>
+    <chunk file="src/pluggy/_result.py" lines="1-29" score="2.2273" tokens="117">
+      <code><![CDATA[
+"""
+Hook wrapper "result" utilities.
+"""
+
+from __future__ import annotations
+
+from types import TracebackType
+from typing import Callable
+from typing import cast
+from typing import final
+from typing import Generic
+from typing import Optional
+from typing import Tuple
+from typing import Type
+from typing import TypeVar
+
+
+_ExcInfo = Tuple[Type[BaseException], BaseException, Optional[TracebackType]]
+ResultType = TypeVar("ResultType")
+
+
+
+
+@final
+
+
+# Historical name (pluggy<=1.2), kept for backward compatibility.
+_Result = Result
+
+      ]]></code>
+    </chunk>
+    <chunk file="src/pluggy/_callers.py" lines="53-113" symbol="_multicall" score="1.0877" tokens="509">
+      <code><![CDATA[
+def _multicall(
+    hook_name: str,
+    hook_impls: Sequence[HookImpl],
+    caller_kwargs: Mapping[str, object],
+    firstresult: bool,
+) -> object | list[object]:
+    """Execute a call into multiple python functions/methods and return the
+    result(s).
+
+    ``caller_kwargs`` comes from HookCaller.__call__().
+    """
+    __tracebackhide__ = True
+    results: list[object] = []
+    exception = None
+    only_new_style_wrappers = True
+    try:  # run impl and wrapper setup functions in a loop
+        teardowns: list[Teardown] = []
+        try:
+            for hook_impl in reversed(hook_impls):
+                try:
+                    args = [caller_kwargs[argname] for argname in hook_impl.argnames]
+                except KeyError:
+                    for argname in hook_impl.argnames:
+                        if argname not in caller_kwargs:
+                            raise HookCallError(
+                                f"hook call must provide argument {argname!r}"
+                            )
+
+                if hook_impl.hookwrapper:
+                    only_new_style_wrappers = False
+                    try:
+                        # If this cast is not valid, a type error is raised below,
+                        # which is the desired response.
+                        res = hook_impl.function(*args)
+                        wrapper_gen = cast(Generator[None, Result[object], None], res)
+                        next(wrapper_gen)  # first yield
+                        teardowns.append((wrapper_gen, hook_impl))
+                    except StopIteration:
+                        _raise_wrapfail(wrapper_gen, "did not yield")
+                elif hook_impl.wrapper:
+                    try:
+                        # If this cast is not valid, a type error is raised below,
+                        # which is the desired response.
+                        res = hook_impl.function(*args)
+                        function_gen = cast(Generator[None, object, object], res)
+                        next(function_gen)  # first yield
+                        teardowns.append(function_gen)
+                    except StopIteration:
+                        _raise_wrapfail(function_gen, "did not yield")
+                else:
+                    res = hook_impl.function(*args)
+                    if res is not None:
+                        results.append(res)
+                        if firstresult:  # halt further impl calls
+                            break
+        except BaseException as exc:
+            exception = exc
+    finally:
+        # Fast path - only new-style wrappers, no Result.
+        if only_new_style_wrappers:
+            if firstresult:  # first result hooks return a single value
+      ]]></code>
+    </chunk>
+    <chunk file="src/pluggy/_manager.py" lines="1-38" score="2.1915" tokens="227">
+      <code><![CDATA[
+from __future__ import annotations
+
+import inspect
+import types
+from typing import Any
+from typing import Callable
+from typing import cast
+from typing import Final
+from typing import Iterable
+from typing import Mapping
+from typing import Sequence
+from typing import TYPE_CHECKING
+import warnings
+
+from . import _tracing
+from ._callers import _multicall
+from ._hooks import _HookImplFunction
+from ._hooks import _Namespace
+from ._hooks import _Plugin
+from ._hooks import _SubsetHookCaller
+from ._hooks import HookCaller
+from ._hooks import HookImpl
+from ._hooks import HookimplOpts
+from ._hooks import HookRelay
+from ._hooks import HookspecOpts
+from ._hooks import normalize_hookimpl_opts
+from ._result import Result
+
+
+if TYPE_CHECKING:
+    # importtlib.metadata import is slow, defer it.
+    import importlib.metadata
+
+
+_BeforeTrace = Callable[[str, Sequence[HookImpl], Mapping[str, Any]], None]
+_AfterTrace = Callable[[Result[Any], str, Sequence[HookImpl], Mapping[str, Any]], None]
+
+
+      ]]></code>
+    </chunk>
+    <chunk file="src/pluggy/_manager.py" lines="56-59" symbol="__init__" score="2.0571" tokens="39">
+      <code><![CDATA[
+    def __init__(self, plugin: _Plugin, message: str) -> None:
+        super().__init__(message)
+        #: The plugin which failed validation.
+        self.plugin = plugin
+      ]]></code>
+    </chunk>
+  </chunks>
+  <type-definitions>
+    <type-def file="src/pluggy/_manager.py" symbol="PluginManager" lines="367-429">
+      <![CDATA[                "Plugin %r for hook %r\nhookimpl definition: %s\n"
+                "Declared as wrapper=True or hookwrapper=True "
+                "but function is not a generator function"
+                % (hookimpl.plugin_name, hook.name, _formatdef(hookimpl.function)),
+            )
+
+        if hookimpl.wrapper and hookimpl.hookwrapper:
+            raise PluginValidationError(
+                hookimpl.plugin,
+                "Plugin %r for hook %r\nhookimpl definition: %s\n"
+                "The wrapper=True and hookwrapper=True options are mutually exclusive"
+                % (hookimpl.plugin_name, hook.name, _formatdef(hookimpl.function)),
+            )
+
+    def check_pending(self) -> None:
+        """Verify that all hooks which have not been verified against a
+        hook specification are optional, otherwise raise
+        :exc:`PluginValidationError`."""
+        for name in self.hook.__dict__:
+            if name[0] != "_":
+                hook: HookCaller = getattr(self.hook, name)
+                if not hook.has_spec():
+                    for hookimpl in hook.get_hookimpls():
+                        if not hookimpl.optionalhook:
+                            raise PluginValidationError(
+                                hookimpl.plugin,
+                                "unknown hook %r in plugin %r"
+                                % (name, hookimpl.plugin),
+                            )
+
+    def load_setuptools_entrypoints(self, group: str, name: str | None = None) -> int:
+        """Load modules from querying the specified setuptools ``group``.
+
+        :param group:
+            Entry point group to load plugins.
+        :param name:
+            If given, loads only plugins with the given ``name``.
+
+        :return:
+            The number of plugins loaded by this call.
+        """
+        import importlib.metadata
+
+        count = 0
+        for dist in list(importlib.metadata.distributions()):
+            for ep in dist.entry_points:
+                if (
+                    ep.group != group
+                    or (name is not None and ep.name != name)
+                    # already registered
+                    or self.get_plugin(ep.name)
+                    or self.is_blocked(ep.name)
+                ):
+                    continue
+                plugin = ep.load()
+                self.register(plugin, name=ep.name)
+                self._plugin_distinfo.append((plugin, DistFacade(dist)))
+                count += 1
+        return count
+
+    def list_plugin_distinfo(self) -> list[tuple[_Plugin, DistFacade]]:
+        """Return a list of (plugin, distinfo) pairs for all
+        setuptools-registered plugins."""]]>
+    </type-def>
+  </type-definitions>
+  <receipt freshness="clean" complete="incomplete" reason="dependency_frontier_cut" action="raise_budget" index_revision="b664ee4e377a4af38f35d6ebc78dd91610f32729700706d75ef02e6199ae9aac" budget_requested="1426" budget_consumed="1402" returned_shown="5" returned_total="5" skipped_shown="20" skipped_total="20" omitted_edges_shown="16" omitted_edges_total="16">
+    <returned handle="chunk:src/pluggy/_callers.py:_multicall:53" file="src/pluggy/_callers.py" lines="53-113" hash="ee6c4f70b4e80b89fecd73b98ce5478af12ab5d51aabf440726e91f0e0d24965" score="1.0877" />
+    <returned handle="chunk:src/pluggy/_manager.py:_module:1" file="src/pluggy/_manager.py" lines="1-38" hash="f4f8540e32f65c6f1da2309e0ca498c87c4749c700861d98ea28ccb816adf37e" score="2.1915" />
+    <returned handle="chunk:src/pluggy/_manager.py:__init__:56" file="src/pluggy/_manager.py" lines="56-59" hash="84d2d47944668450fa8ece648e348239ed6afe5804a0c043a0817fd538c26b21" score="2.0571" />
+    <returned handle="chunk:src/pluggy/_manager.py:PluginManager:367" file="src/pluggy/_manager.py" lines="367-429" hash="3e7d0356909574ff0a78b4fada5b3714e343bceb8393ac61d3f48cfe6f6290ff" score="2.2850" />
+    <returned handle="chunk:src/pluggy/_result.py:_module:1" file="src/pluggy/_result.py" lines="1-29" hash="25c790e4f65e98d15ac0c146d17cf531923302313fb6bd01811774efef326379" score="2.2273" />
+    <skipped file="src/pluggy/_callers.py" reason="over_budget" handle="chunk:src/pluggy/_callers.py:_module:1" />
+    <skipped file="src/pluggy/_callers.py" reason="over_budget" handle="chunk:src/pluggy/_callers.py:_multicall:114" />
+    <skipped file="src/pluggy/_callers.py" reason="over_budget" handle="chunk:src/pluggy/_callers.py:_raise_wrapfail:30" />
+    <skipped file="src/pluggy/_callers.py" reason="over_budget" handle="chunk:src/pluggy/_callers.py:_warn_teardown_exception:43" />
+    <skipped file="src/pluggy/_hooks.py" reason="over_budget" handle="chunk:src/pluggy/_hooks.py:_module:1" />
+    <skipped file="src/pluggy/_hooks.py" reason="over_budget" handle="chunk:src/pluggy/_hooks.py:_module:77" />
+    <skipped file="src/pluggy/_hooks.py" reason="over_budget" handle="chunk:src/pluggy/_hooks.py:HookCaller:447" />
+    <skipped file="src/pluggy/_hooks.py" reason="over_budget" handle="chunk:src/pluggy/_hooks.py:HookCaller:509" />
+  </receipt>
+</context>

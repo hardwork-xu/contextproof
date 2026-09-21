@@ -1,0 +1,388 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import httpx
+headers = httpx.Headers({"Content-Type": "text/plain"})
+RESULT = [headers["content-type"], "CONTENT-TYPE" in headers]
+```
+
+Repository source evidence:
+# ContextProof source evidence
+{"budget":16000,"budget_unit":"utf8_bytes","id":"02c8512b966d3a27d52d37010d0ba0f4f5189cb00458d92601aab2116b60bad8","method":"bm25","omitted_count":572,"query":"Explain the behavior of this Python probe using repository source. httpx/_models.py Headers.__getitem__ httpx/_models.py Headers.__contains__\nimport httpx\nheaders = httpx.Headers({\"Content-Type\": \"text/plain\"})\nRESULT = [headers[\"content-type\"], \"CONTENT-TYPE\" in headers]\n","schema_version":1,"snapshot_id":"d39d2caa51d7b21d91903e121d04b08f2bda3190abd9c65cdca544b59b846562","tokenizer":"bytes"}
+
+{"end_line":165,"file_sha256":"2c61b3ac94d1dcebcde0c6f519554d2d7917247fbaa0a97002db4ef69e70ff28","id":"1911861b2e9fff2037ea2c11f4885594bb009e539c4abf23fed4313e16d119b4","kind":"function","path":"httpx/_content.py","reasons":["lexical overlap: content, headers, httpx, plain, py, text, type"],"score":19.41527249,"start_line":160,"symbol":"encode_text","text_sha256":"33cb9c4d599751626ff73ea91432019a05aa0b97d676d90dbbf1b362d2032f2c"}
+```
+def encode_text(text: str) -> tuple[dict[str, str], ByteStream]:
+    body = text.encode("utf-8")
+    content_length = str(len(body))
+    content_type = "text/plain; charset=utf-8"
+    headers = {"Content-Length": content_length, "Content-Type": content_type}
+    return headers, ByteStream(body)
+```
+
+{"end_line":169,"file_sha256":"28e1c465997aa28860f663da2b2caedf8e6aab5ac92e0df94d41b7600cd70776","id":"603d3c60d27874ee8575c6eede38ced6fd17378df9edb1fc58a014e6935ea866","kind":"function","path":"httpx/_multipart.py","reasons":["lexical overlap: content, headers, httpx, in, of, py, text, the, this, type"],"score":18.41490673,"start_line":122,"symbol":"FileField.__init__","text_sha256":"cbffd11fca9dbec0ed9508151220ff48f91c4f9610d22592cebc33e6b6331ce7"}
+```
+    def __init__(self, name: str, value: FileTypes) -> None:
+        self.name = name
+
+        fileobj: FileContent
+
+        headers: dict[str, str] = {}
+        content_type: str | None = None
+
+        # This large tuple based API largely mirror's requests' API
+        # It would be good to think of better APIs for this that we could
+        # include in httpx 2.0 since variable length tuples(especially of 4 elements)
+        # are quite unwieldly
+        if isinstance(value, tuple):
+            if len(value) == 2:
+                # neither the 3rd parameter (content_type) nor the 4th (headers)
+                # was included
+                filename, fileobj = value
+            elif len(value) == 3:
+                filename, fileobj, content_type = value
+            else:
+                # all 4 parameters included
+                filename, fileobj, content_type, headers = value  # type: ignore
+        else:
+            filename = Path(str(getattr(value, "name", "upload"))).name
+            fileobj = value
+
+        if content_type is None:
+            content_type = _guess_content_type(filename)
+
+        has_content_type_header = any("content-type" in key.lower() for key in headers)
+        if content_type is not None and not has_content_type_header:
+            # note that unlike requests, we ignore the content_type provided in the 3rd
+            # tuple element if it is also included in the headers requests does
+            # the opposite (it overwrites the headerwith the 3rd tuple element)
+            headers["Content-Type"] = content_type
+
+        if isinstance(fileobj, io.StringIO):
+            raise TypeError(
+                "Multipart file uploads require 'io.BytesIO', not 'io.StringIO'."
+            )
+        if isinstance(fileobj, io.TextIOBase):
+            raise TypeError(
+                "Multipart file uploads must be opened in binary mode, not text mode."
+            )
+
+        self.filename = filename
+        self.file = fileobj
+        self.headers = headers
+```
+
+{"end_line":149,"file_sha256":"2c61b3ac94d1dcebcde0c6f519554d2d7917247fbaa0a97002db4ef69e70ff28","id":"1f922521e420d82508704a205c0af5f05b22996450a317edc893828ab4040c65","kind":"function","path":"httpx/_content.py","reasons":["lexical overlap: content, headers, httpx, in, plain, py, type"],"score":16.84106745,"start_line":136,"symbol":"encode_urlencoded_data","text_sha256":"cf65b36debda98d7df59185c9f3001d77b02050611f7d1fc3250b37adb6e3291"}
+```
+def encode_urlencoded_data(
+    data: RequestData,
+) -> tuple[dict[str, str], ByteStream]:
+    plain_data = []
+    for key, value in data.items():
+        if isinstance(value, (list, tuple)):
+            plain_data.extend([(key, primitive_value_to_str(item)) for item in value])
+        else:
+            plain_data.append((key, primitive_value_to_str(value)))
+    body = urlencode(plain_data, doseq=True).encode("utf-8")
+    content_length = str(len(body))
+    content_type = "application/x-www-form-urlencoded"
+    headers = {"Content-Length": content_length, "Content-Type": content_type}
+    return headers, ByteStream(body)
+```
+
+{"end_line":369,"file_sha256":"a74757f08d0d1077b1b37506a784ac66eb62321b17aeb5a5ebe1a7a956f488a3","id":"da33060bf374fa9e47c00b654011cf09d2d0133a399199c5abe4523e0fd9efbc","kind":"function","path":"httpx/_decoders.py","reasons":["lexical overlap: httpx, in, of, py, python, result, text, the, this"],"score":16.82919106,"start_line":333,"symbol":"LineDecoder.decode","text_sha256":"8097e3e9f92ed5129bb7a461b65fcb8845a138d822ce4977efabf2728db774a5"}
+```
+    def decode(self, text: str) -> list[str]:
+        # See https://docs.python.org/3/library/stdtypes.html#str.splitlines
+        NEWLINE_CHARS = "\n\r\x0b\x0c\x1c\x1d\x1e\x85\u2028\u2029"
+
+        # We always push a trailing `\r` into the next decode iteration.
+        if self.trailing_cr:
+            text = "\r" + text
+            self.trailing_cr = False
+        if text.endswith("\r"):
+            self.trailing_cr = True
+            text = text[:-1]
+
+        if not text:
+            # NOTE: the edge case input of empty text doesn't occur in practice,
+            # because other httpx internals filter out this value
+            return []  # pragma: no cover
+
+        trailing_newline = text[-1] in NEWLINE_CHARS
+        lines = text.splitlines()
+
+        if len(lines) == 1 and not trailing_newline:
+            # No new lines, buffer the input and continue.
+            self.buffer.append(lines[0])
+            return []
+
+        if self.buffer:
+            # Include any existing buffer in the first portion of the
+            # splitlines result.
+            lines = ["".join(self.buffer) + lines[0]] + lines[1:]
+            self.buffer = []
+
+        if not trailing_newline:
+            # If the last segment of splitlines is not newline terminated,
+            # then drop it from our output and start a new buffer.
+            self.buffer = [lines.pop()]
+
+        return lines
+```
+
+{"end_line":35,"file_sha256":"a74757f08d0d1077b1b37506a784ac66eb62321b17aeb5a5ebe1a7a956f488a3","id":"83f47832cd9136d99c3a9c1ea2e266f5bf7c954d214d3fd57b9ad153f48552bc","kind":"module","path":"httpx/_decoders.py","reasons":["lexical overlap: content, headers, httpx, import, in, py, python, the, type"],"score":16.20626262,"start_line":1,"symbol":"<module>","text_sha256":"7d6e48f23765792f4d39ba7134c5dc4a907c18b6ba4c6c7a3cc5694e83703b64"}
+```
+"""
+Handlers for Content-Encoding.
+
+See: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Encoding
+"""
+
+from __future__ import annotations
+
+import codecs
+import io
+import typing
+import zlib
+
+from ._exceptions import DecodingError
+
+# Brotli support is optional
+try:
+    # The C bindings in `brotli` are recommended for CPython.
+    import brotli
+except ImportError:  # pragma: no cover
+    try:
+        # The CFFI bindings in `brotlicffi` are recommended for PyPy
+        # and other environments.
+        import brotlicffi as brotli
+    except ImportError:
+        brotli = None
+
+
+# Zstandard support is optional
+try:
+    import zstandard
+except ImportError:  # pragma: no cover
+    zstandard = None  # type: ignore
+
+
+```
+
+{"end_line":348,"file_sha256":"e3ffc6bb2bf580bc6e6428708a6f247d036220e709f5a72b785392babbd97e6b","id":"56f3a3fa69fe05fe00292446825dbb34a5e42fc0800b00e5731d1b7bf96967af","kind":"function","path":"httpx/_models.py","reasons":["lexical overlap: contains, headers, httpx, in, models, py"],"score":15.86656296,"start_line":346,"symbol":"Headers.__contains__","text_sha256":"e0f082dd8cfdb20643aafdc85baa68d54ccdd0b5dbe87d3bc89243b986f6cec2"}
+```
+    def __contains__(self, key: typing.Any) -> bool:
+        header_key = key.lower().encode(self.encoding)
+        return header_key in [key for _, key, _ in self._list]
+```
+
+{"end_line":439,"file_sha256":"e3ffc6bb2bf580bc6e6428708a6f247d036220e709f5a72b785392babbd97e6b","id":"fe91c09283b36801a7947f181ac720a4c247dadecb52b509ecd858694ff8fb93","kind":"function","path":"httpx/_models.py","reasons":["lexical overlap: content, headers, httpx, models, of, py, the, type, using"],"score":14.83513325,"start_line":383,"symbol":"Request.__init__","text_sha256":"23b22679c8fb43190f18e4d00f018e9e9c6f806fca22234486740d001cd52b36"}
+```
+    def __init__(
+        self,
+        method: str,
+        url: URL | str,
+        *,
+        params: QueryParamTypes | None = None,
+        headers: HeaderTypes | None = None,
+        cookies: CookieTypes | None = None,
+        content: RequestContent | None = None,
+        data: RequestData | None = None,
+        files: RequestFiles | None = None,
+        json: typing.Any | None = None,
+        stream: SyncByteStream | AsyncByteStream | None = None,
+        extensions: RequestExtensions | None = None,
+    ) -> None:
+        self.method = method.upper()
+        self.url = URL(url) if params is None else URL(url, params=params)
+        self.headers = Headers(headers)
+        self.extensions = {} if extensions is None else dict(extensions)
+
+        if cookies:
+            Cookies(cookies).set_cookie_header(self)
+
+        if stream is None:
+            content_type: str | None = self.headers.get("content-type")
+            headers, stream = encode_request(
+                content=content,
+                data=data,
+                files=files,
+                json=json,
+                boundary=get_multipart_boundary_from_content_type(
+                    content_type=content_type.encode(self.headers.encoding)
+                    if content_type
+                    else None
+                ),
+            )
+            self._prepare(headers)
+            self.stream = stream
+            # Load the request body, except for streaming content.
+            if isinstance(stream, ByteStream):
+                self.read()
+        else:
+            # There's an important distinction between `Request(content=...)`,
+            # and `Request(stream=...)`.
+            #
+            # Using `content=...` implies automatically populated `Host` and content
+            # headers, of either `Content-Length: ...` or `Transfer-Encoding: chunked`.
+            #
+            # Using `stream=...` will not automatically include *any*
+            # auto-populated headers.
+            #
+            # As an end-user you don't really need `stream=...`. It's only
+            # useful when:
+            #
+            # * Preserving the request stream when copying requests, eg for redirects.
+            # * Creating request instances on the *server-side* of the transport API.
+            self.stream = stream
+```
+
+{"end_line":302,"file_sha256":"e3ffc6bb2bf580bc6e6428708a6f247d036220e709f5a72b785392babbd97e6b","id":"2b403b6f5c83e40a4811da06a7894c104e0963d350fe05ef57cac5bfe4e3518c","kind":"function","path":"httpx/_models.py","reasons":["lexical overlap: getitem, headers, httpx, in, models, py, the"],"score":13.94907934,"start_line":284,"symbol":"Headers.__getitem__","text_sha256":"7c220df74e99968a848c1bf3b88f363f98a351dc779857f61f8482d90dbf686d"}
+```
+    def __getitem__(self, key: str) -> str:
+        """
+        Return a single header value.
+
+        If there are multiple headers with the same key, then we concatenate
+        them with commas. See: https://tools.ietf.org/html/rfc7230#section-3.2.2
+        """
+        normalized_key = key.lower().encode(self.encoding)
+
+        items = [
+            header_value.decode(self.encoding)
+            for _, header_key, header_value in self._list
+            if header_key == normalized_key
+        ]
+
+        if items:
+            return ", ".join(items)
+
+        raise KeyError(key)
+```
+
+{"end_line":55,"file_sha256":"e3ffc6bb2bf580bc6e6428708a6f247d036220e709f5a72b785392babbd97e6b","id":"3a064f2b8450201b61901fec9fe58a31a72a27aa7166e38212cfb87c9fb71285","kind":"module","path":"httpx/_models.py","reasons":["lexical overlap: content, headers, httpx, import, models, py, text, type"],"score":13.79367575,"start_line":1,"symbol":"<module>","text_sha256":"5e33dcc2e34cc7011d6347dd50e71d7e1d5fb5f69a8a65ad727dd84ea0730d08"}
+```
+from __future__ import annotations
+
+import codecs
+import datetime
+import email.message
+import json as jsonlib
+import re
+import typing
+import urllib.request
+from collections.abc import Mapping
+from http.cookiejar import Cookie, CookieJar
+
+from ._content import ByteStream, UnattachedStream, encode_request, encode_response
+from ._decoders import (
+    SUPPORTED_DECODERS,
+    ByteChunker,
+    ContentDecoder,
+    IdentityDecoder,
+    LineDecoder,
+    MultiDecoder,
+    TextChunker,
+    TextDecoder,
+)
+from ._exceptions import (
+    CookieConflict,
+    HTTPStatusError,
+    RequestNotRead,
+    ResponseNotRead,
+    StreamClosed,
+    StreamConsumed,
+    request_context,
+)
+from ._multipart import get_multipart_boundary_from_content_type
+from ._status_codes import codes
+from ._types import (
+    AsyncByteStream,
+    CookieTypes,
+    HeaderTypes,
+    QueryParamTypes,
+    RequestContent,
+    RequestData,
+    RequestExtensions,
+    RequestFiles,
+    ResponseContent,
+    ResponseExtensions,
+    SyncByteStream,
+)
+from ._urls import URL
+from ._utils import to_bytes_or_str, to_str
+
+__all__ = ["Cookies", "Headers", "Request", "Response"]
+
+SENSITIVE_HEADERS = {"authorization", "proxy-authorization"}
+
+
+```
+
+{"end_line":61,"file_sha256":"c43f941baefe58c91e96d00039e1868fe719d91453026d7db1647194563bff8d","id":"c67819a19d2f299fb90da0c76dc6a62cf87dc95d797eecb31f447d431cdacc60","kind":"module","path":"httpx/_client.py","reasons":["lexical overlap: content, headers, httpx, import, models, py, python, the, type"],"score":12.75961682,"start_line":1,"symbol":"<module>","text_sha256":"8833b0801e218726fe75fc21a3969df574e52d86cc8e47fcb9b0aadbb2eea43c"}
+```
+from __future__ import annotations
+
+import datetime
+import enum
+import logging
+import time
+import typing
+import warnings
+from contextlib import asynccontextmanager, contextmanager
+from types import TracebackType
+
+from .__version__ import __version__
+from ._auth import Auth, BasicAuth, FunctionAuth
+from ._config import (
+    DEFAULT_LIMITS,
+    DEFAULT_MAX_REDIRECTS,
+    DEFAULT_TIMEOUT_CONFIG,
+    Limits,
+    Proxy,
+    Timeout,
+)
+from ._decoders import SUPPORTED_DECODERS
+from ._exceptions import (
+    InvalidURL,
+    RemoteProtocolError,
+    TooManyRedirects,
+    request_context,
+)
+from ._models import Cookies, Headers, Request, Response
+from ._status_codes import codes
+from ._transports.base import AsyncBaseTransport, BaseTransport
+from ._transports.default import AsyncHTTPTransport, HTTPTransport
+from ._types import (
+    AsyncByteStream,
+    AuthTypes,
+    CertTypes,
+    CookieTypes,
+    HeaderTypes,
+    ProxyTypes,
+    QueryParamTypes,
+    RequestContent,
+    RequestData,
+    RequestExtensions,
+    RequestFiles,
+    SyncByteStream,
+    TimeoutTypes,
+)
+from ._urls import URL, QueryParams
+from ._utils import URLPattern, get_environment_proxies
+
+if typing.TYPE_CHECKING:
+    import ssl  # pragma: no cover
+
+__all__ = ["USE_CLIENT_DEFAULT", "AsyncClient", "Client"]
+
+# The type annotation for @classmethod and context managers here follows PEP 484
+# https://www.python.org/dev/peps/pep-0484/#annotating-instance-and-class-methods
+T = typing.TypeVar("T", bound="Client")
+U = typing.TypeVar("U", bound="AsyncClient")
+
+
+```

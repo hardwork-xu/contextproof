@@ -114,3 +114,20 @@ exact source corpora, adapter implementation hashes and the context-record diges
 Run `scripts/run_revision_model.py --help` for the completion runner and store its
 output outside the repository. Export only through `scripts/publish_revision_model.py`.
 No hosted-model calls are made by CI or the unit tests.
+
+## Post-freeze correctness amendment
+
+After the public input/protocol commit and while its 150 completions were running,
+independent code review found false-fresh static resolution cases involving nested
+scope parameters, structural-pattern captures, hidden module rebinding, conditional
+wildcard imports and unsafe package-submodule fallback. These findings came from
+minimal source counterexamples, not tuning against model answers.
+
+The original 150 cells and their exact resolver-v1 contexts remain unchanged.
+They measure the frozen prototype and cannot be represented as a validation of the
+corrected resolver. Resolver v2 adds conservative unresolved barriers and regression
+checks. A separately frozen sensitivity run will supply all 25 held-out tasks with
+corrected graph contexts, using the same model, prompt, source cap and single-attempt
+rule. All original baselines remain; both graph versions will be reported. This
+additional run occurs after partial original outcomes were visible and is explicitly
+exploratory, not an untouched holdout or a preregistered superiority result.

@@ -1,0 +1,454 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import attrs
+Record = attrs.make_class("Record", {"flag": attrs.field(type=bool)})
+RESULT = {name: value.__name__ for name, value in Record.__annotations__.items()}
+```
+
+Repository source evidence:
+<context query="Explain the behavior of this Python probe using repository source. src/attr/_make.py make_class
+import attrs
+Record = attrs.make_class(&quot;Record&quot;, {&quot;flag&quot;: attrs.field(type=bool)})
+RESULT = {name: value.__name__ for name, value in Record.__annotations__.items()}
+">
+  <structural-context>
+    <file-tree><![CDATA[
+src/attr/__init__.py
+src/attr/_compat.py
+src/attr/_make.py
+src/attr/_next_gen.py
+    ]]></file-tree>
+  </structural-context>
+  <chunks>
+    <chunk file="src/attr/_make.py" lines="1219-1242" symbol="_determine_whether_to_implement" score="2.3943" tokens="185">
+      <code><![CDATA[
+def _determine_whether_to_implement(
+    cls, flag, auto_detect, dunders, default=True
+):
+    """
+    Check whether we should implement a set of methods for *cls*.
+
+    *flag* is the argument passed into @attr.s like 'init', *auto_detect* the
+    same as passed into @attr.s and *dunders* is a tuple of attribute names
+    whose presence signal that the user has implemented it themselves.
+
+    Return *default* if no reason for either for or against is found.
+    """
+    if flag is True or flag is False:
+        return flag
+
+    if flag is None and auto_detect is False:
+        return default
+
+    # Logically, flag is None and auto_detect is True here.
+    for dunder in dunders:
+        if _has_own_attribute(cls, dunder):
+            return False
+
+    return default
+      ]]></code>
+    </chunk>
+    <chunk file="src/attr/__init__.py" lines="37-38" symbol="AttrsInstance" score="1.0296" tokens="9">
+      <code><![CDATA[
+class AttrsInstance(Protocol):
+    pass
+      ]]></code>
+    </chunk>
+    <chunk file="src/attr/_next_gen.py" lines="134-186" symbol="define" score="1.0199" tokens="516">
+      <code><![CDATA[
+            If True or None (default), add ``__eq__`` and ``__ne__`` methods
+            that check two instances for equality.
+
+            .. seealso::
+                `comparison` describes how to customize the comparison behavior
+                going as far comparing NumPy arrays.
+
+        order (bool | None):
+            If True, add ``__lt__``, ``__le__``, ``__gt__``, and ``__ge__``
+            methods that behave like *eq* above and allow instances to be
+            ordered.
+
+            They compare the instances as if they were tuples of their *attrs*
+            attributes if and only if the types of both classes are
+            *identical*.
+
+            If `None` mirror value of *eq*.
+
+            .. seealso:: `comparison`
+
+        unsafe_hash (bool | None):
+            If None (default), the ``__hash__`` method is generated according
+            how *eq* and *frozen* are set.
+
+            1. If *both* are True, *attrs* will generate a ``__hash__`` for
+               you.
+            2. If *eq* is True and *frozen* is False, ``__hash__`` will be set
+               to None, marking it unhashable (which it is).
+            3. If *eq* is False, ``__hash__`` will be left untouched meaning
+               the ``__hash__`` method of the base class will be used. If the
+               base class is `object`, this means it will fall back to id-based
+               hashing.
+
+            Although not recommended, you can decide for yourself and force
+            *attrs* to create one (for example, if the class is immutable even
+            though you didn't freeze it programmatically) by passing True or
+            not.  Both of these cases are rather special and should be used
+            carefully.
+
+            .. seealso::
+
+                - Our documentation on `hashing`,
+                - Python's documentation on `object.__hash__`,
+                - and the `GitHub issue that led to the default \ behavior
+                  <https://github.com/python-attrs/attrs/issues/136>`_ for more
+                  details.
+
+        hash (bool | None):
+            Deprecated alias for *unsafe_hash*. *unsafe_hash* takes precedence.
+
+        cache_hash (bool):
+            Ensure that the object's hash code is computed only once and stored
+            on the object.  If this is set to True, hashing must be either
+      ]]></code>
+    </chunk>
+    <chunk file="src/attr/_compat.py" lines="1-34" score="0.9627" tokens="239">
+      <code><![CDATA[
+# SPDX-License-Identifier: MIT
+
+import inspect
+import platform
+import sys
+import threading
+
+from collections.abc import Mapping, Sequence  # noqa: F401
+from typing import _GenericAlias
+
+
+PYPY = platform.python_implementation() == "PyPy"
+PY_3_9_PLUS = sys.version_info[:2] >= (3, 9)
+PY_3_10_PLUS = sys.version_info[:2] >= (3, 10)
+PY_3_11_PLUS = sys.version_info[:2] >= (3, 11)
+PY_3_12_PLUS = sys.version_info[:2] >= (3, 12)
+PY_3_13_PLUS = sys.version_info[:2] >= (3, 13)
+PY_3_14_PLUS = sys.version_info[:2] >= (3, 14)
+
+
+if PY_3_14_PLUS:  # pragma: no cover
+    import annotationlib
+
+    _get_annotations = annotationlib.get_annotations
+
+else:
+
+    def _get_annotations(cls):
+        """
+        Get annotations for *cls*.
+        """
+        return cls.__dict__.get("__annotations__", {})
+
+
+      ]]></code>
+    </chunk>
+    <chunk file="src/attr/_make.py" lines="60-77" symbol="_Nothing" score="2.1287" tokens="132">
+      <code><![CDATA[
+class _Nothing(enum.Enum):
+    """
+    Sentinel to indicate the lack of a value when `None` is ambiguous.
+
+    If extending attrs, you can use ``typing.Literal[NOTHING]`` to show
+    that a value may be ``NOTHING``.
+
+    .. versionchanged:: 21.1.0 ``bool(NOTHING)`` is now False.
+    .. versionchanged:: 22.2.0 ``NOTHING`` is now an ``enum.Enum`` variant.
+    """
+
+    NOTHING = enum.auto()
+
+    def __repr__(self):
+        return "NOTHING"
+
+    def __bool__(self):
+        return False
+      ]]></code>
+    </chunk>
+    <chunk file="src/attr/_make.py" lines="2535-2643" symbol="_CountingAttr" score="1.7169" tokens="511">
+      <code><![CDATA[
+class _CountingAttr:
+    """
+    Intermediate representation of attributes that uses a counter to preserve
+    the order in which the attributes have been defined.
+
+    *Internal* data structure of the attrs library.  Running into is most
+    likely the result of a bug like a forgotten `@attr.s` decorator.
+    """
+
+    __slots__ = (
+        "_default",
+        "_validator",
+        "alias",
+        "converter",
+        "counter",
+        "eq",
+        "eq_key",
+        "hash",
+        "init",
+        "kw_only",
+        "metadata",
+        "on_setattr",
+        "order",
+        "order_key",
+        "repr",
+        "type",
+    )
+    __attrs_attrs__ = (
+        *tuple(
+            Attribute(
+                name=name,
+                alias=_default_init_alias_for(name),
+                default=NOTHING,
+                validator=None,
+                repr=True,
+                cmp=None,
+                hash=True,
+                init=True,
+                kw_only=False,
+                eq=True,
+                eq_key=None,
+                order=False,
+                order_key=None,
+                inherited=False,
+                on_setattr=None,
+            )
+            for name in (
+                "counter",
+                "_default",
+                "repr",
+                "eq",
+                "order",
+                "hash",
+                "init",
+                "on_setattr",
+                "alias",
+            )
+        ),
+        Attribute(
+            name="metadata",
+            alias="metadata",
+            default=None,
+            validator=None,
+            repr=True,
+            cmp=None,
+            hash=False,
+            init=True,
+            kw_only=False,
+            eq=True,
+            eq_key=None,
+            order=False,
+            order_key=None,
+            inherited=False,
+            on_setattr=None,
+        ),
+    )
+    cls_counter = 0
+
+    def __init__(
+        self,
+        default,
+        validator,
+        repr,
+        cmp,
+        hash,
+        init,
+        converter,
+        metadata,
+        type,
+        kw_only,
+        eq,
+        eq_key,
+        order,
+        order_key,
+        on_setattr,
+        alias,
+    ):
+        _CountingAttr.cls_counter += 1
+        self.counter = _CountingAttr.cls_counter
+        self._default = default
+        self._validator = validator
+        self.converter = converter
+        self.repr = repr
+        self.eq = eq
+        self.eq_key = eq_key
+        self.order = order
+        self.order_key = order_key
+        self.hash = hash
+        self.init = init
+      ]]></code>
+    </chunk>
+    <chunk file="src/attr/_compat.py" lines="43-47" symbol="__init__" score="0.7641" tokens="39">
+      <code><![CDATA[
+    def __init__(self, callable):
+        try:
+            self.sig = inspect.signature(callable)
+        except (ValueError, TypeError):  # inspect failed
+            self.sig = None
+      ]]></code>
+    </chunk>
+  </chunks>
+  <type-definitions>
+    <type-def file="src/attr/__init__.py" symbol="AttrsInstance" lines="37-38">
+      <![CDATA[class AttrsInstance(Protocol):
+    pass]]>
+    </type-def>
+    <type-def file="src/attr/_make.py" symbol="_Nothing" lines="60-77">
+      <![CDATA[class _Nothing(enum.Enum):
+    """
+    Sentinel to indicate the lack of a value when `None` is ambiguous.
+
+    If extending attrs, you can use ``typing.Literal[NOTHING]`` to show
+    that a value may be ``NOTHING``.
+
+    .. versionchanged:: 21.1.0 ``bool(NOTHING)`` is now False.
+    .. versionchanged:: 22.2.0 ``NOTHING`` is now an ``enum.Enum`` variant.
+    """
+
+    NOTHING = enum.auto()
+
+    def __repr__(self):
+        return "NOTHING"
+
+    def __bool__(self):
+        return False]]>
+    </type-def>
+    <type-def file="src/attr/_make.py" symbol="_CountingAttr" lines="2535-2643">
+      <![CDATA[class _CountingAttr:
+    """
+    Intermediate representation of attributes that uses a counter to preserve
+    the order in which the attributes have been defined.
+
+    *Internal* data structure of the attrs library.  Running into is most
+    likely the result of a bug like a forgotten `@attr.s` decorator.
+    """
+
+    __slots__ = (
+        "_default",
+        "_validator",
+        "alias",
+        "converter",
+        "counter",
+        "eq",
+        "eq_key",
+        "hash",
+        "init",
+        "kw_only",
+        "metadata",
+        "on_setattr",
+        "order",
+        "order_key",
+        "repr",
+        "type",
+    )
+    __attrs_attrs__ = (
+        *tuple(
+            Attribute(
+                name=name,
+                alias=_default_init_alias_for(name),
+                default=NOTHING,
+                validator=None,
+                repr=True,
+                cmp=None,
+                hash=True,
+                init=True,
+                kw_only=False,
+                eq=True,
+                eq_key=None,
+                order=False,
+                order_key=None,
+                inherited=False,
+                on_setattr=None,
+            )
+            for name in (
+                "counter",
+                "_default",
+                "repr",
+                "eq",
+                "order",
+                "hash",
+                "init",
+                "on_setattr",
+                "alias",
+            )
+        ),
+        Attribute(
+            name="metadata",
+            alias="metadata",
+            default=None,
+            validator=None,
+            repr=True,
+            cmp=None,
+            hash=False,
+            init=True,
+            kw_only=False,
+            eq=True,
+            eq_key=None,
+            order=False,
+            order_key=None,
+            inherited=False,
+            on_setattr=None,
+        ),
+    )
+    cls_counter = 0
+
+    def __init__(
+        self,
+        default,
+        validator,
+        repr,
+        cmp,
+        hash,
+        init,
+        converter,
+        metadata,
+        type,
+        kw_only,
+        eq,
+        eq_key,
+        order,
+        order_key,
+        on_setattr,
+        alias,
+    ):
+        _CountingAttr.cls_counter += 1
+        self.counter = _CountingAttr.cls_counter
+        self._default = default
+        self._validator = validator
+        self.converter = converter
+        self.repr = repr
+        self.eq = eq
+        self.eq_key = eq_key
+        self.order = order
+        self.order_key = order_key
+        self.hash = hash
+        self.init = init]]>
+    </type-def>
+  </type-definitions>
+  <receipt freshness="clean" complete="incomplete" reason="dependency_frontier_cut" action="fetch_skipped_candidate" index_revision="7b939a4221ac0937c0b7e156424e76d77c6e1f331e3aae264edf1e9230c4f91c" budget_requested="1641" budget_consumed="1631" returned_shown="7" returned_total="7" skipped_shown="20" skipped_total="20" omitted_edges_shown="20" omitted_edges_total="20">
+    <returned handle="chunk:src/attr/__init__.py:AttrsInstance:37" file="src/attr/__init__.py" lines="37-38" hash="2cff5dcc6f48de94fc48de8e50e212d64bbfffe9056cd1fd57770e7fc4e90d1c" score="1.0296" />
+    <returned handle="chunk:src/attr/_compat.py:_module:1" file="src/attr/_compat.py" lines="1-34" hash="a1acd34fec940544a3175df87a70978894bfef4d2686eaa2ccfdeb9e3c0d2965" score="0.9627" />
+    <returned handle="chunk:src/attr/_compat.py:__init__:43" file="src/attr/_compat.py" lines="43-47" hash="afca3a5cf782c5fc0665ebcc460ae66a0b5a4b5778483db39d921c6f03e49c30" score="0.7641" />
+    <returned handle="chunk:src/attr/_make.py:_Nothing:60" file="src/attr/_make.py" lines="60-77" hash="4a5f79848ced0d83d5158490c590069856fd0d6bc8f4408b186c57a2cd0ac093" score="2.1287" />
+    <returned handle="chunk:src/attr/_make.py:_determine_whether_to_implement:1219" file="src/attr/_make.py" lines="1219-1242" hash="64ddc21e241775497d1af4d16e294833b50a8352f5d365832f6e3611f43982d2" score="2.3943" />
+    <returned handle="chunk:src/attr/_make.py:_CountingAttr:2535" file="src/attr/_make.py" lines="2535-2643" hash="775476deb22222eecffaa6244bd020bb614070186b1e39ee3d8eaf129adc9cfa" score="1.7169" />
+    <returned handle="chunk:src/attr/_next_gen.py:define:134" file="src/attr/_next_gen.py" lines="134-186" hash="08963f92a01ab3eef3dcd0976959a6ecaeb58c0c8125db9811bd8f86489a2949" score="1.0199" />
+    <skipped file="src/attr/__init__.py" reason="over_budget" handle="chunk:src/attr/__init__.py:_module:1" />
+    <skipped file="src/attr/__init__.py" reason="over_budget" handle="chunk:src/attr/__init__.py:_module:39" />
+    <skipped file="src/attr/__init__.py" reason="over_budget" handle="chunk:src/attr/__init__.py:_make_getattr:81" />
+    <skipped file="src/attr/_compat.py" reason="over_budget" handle="chunk:src/attr/_compat.py:get_first_param_type:49" />
+    <skipped file="src/attr/_make.py" reason="over_budget" handle="chunk:src/attr/_make.py:_module:1" />
+    <skipped file="src/attr/_make.py" reason="over_budget" handle="chunk:src/attr/_make.py:_module:2842" />
+    <skipped file="src/attr/_make.py" reason="over_budget" handle="chunk:src/attr/_make.py:_ClassBuilder:775" />
+    <skipped file="src/attr/_make.py" reason="over_budget" handle="chunk:src/attr/_make.py:_ClassBuilder:894" />
+  </receipt>
+</context>

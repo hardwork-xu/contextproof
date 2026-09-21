@@ -1,0 +1,367 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import httpx
+RESULT = [str(httpx.QueryParams({"u": "with spaces"})),
+          str(httpx.QueryParams({"u": "with%20spaces"}))]
+```
+
+Repository source evidence:
+# ContextProof source evidence
+{"budget":16000,"budget_unit":"utf8_bytes","id":"8a23b1b371ff3d57e94ee8350b710e1f5cdd74c48df5aa25221509e9ff91bd9c","method":"bm25","omitted_count":569,"query":"Explain the behavior of this Python probe using repository source. httpx/_urls.py QueryParams.__str__ httpx/_urlparse.py percent_encoded\nimport httpx\nRESULT = [str(httpx.QueryParams({\"u\": \"with spaces\"})),\n          str(httpx.QueryParams({\"u\": \"with%20spaces\"}))]\n","schema_version":1,"snapshot_id":"d39d2caa51d7b21d91903e121d04b08f2bda3190abd9c65cdca544b59b846562","tokenizer":"bytes"}
+
+{"end_line":80,"file_sha256":"640987e3b38d7e4c6bae3f8f3d88467a21e36fa0232824be00d58837838bfca6","id":"02e3d68f477f6943c9e69dc3b0786544258d51c374dbf10fb1a6e344f7c2e246","kind":"module","path":"httpx/_urlparse.py","reasons":["lexical overlap: encoded, httpx, import, of, percent, py, python, query, the, this, u, urlparse, urls, with"],"score":30.45377201,"start_line":1,"symbol":"<module>","text_sha256":"715d32a0334d000573301a8cfa698fbbf6ee398537f16149fcc74f93d3222a4d"}
+```
+"""
+An implementation of `urlparse` that provides URL validation and normalization
+as described by RFC3986.
+
+We rely on this implementation rather than the one in Python's stdlib, because:
+
+* It provides more complete URL validation.
+* It properly differentiates between an empty querystring and an absent querystring,
+  to distinguish URLs with a trailing '?'.
+* It handles scheme, hostname, port, and path normalization.
+* It supports IDNA hostnames, normalizing them to their encoded form.
+* The API supports passing individual components, as well as the complete URL string.
+
+Previously we relied on the excellent `rfc3986` package to handle URL parsing and
+validation, but this module provides a simpler alternative, with less indirection
+required.
+"""
+
+from __future__ import annotations
+
+import ipaddress
+import re
+import typing
+
+import idna
+
+from ._exceptions import InvalidURL
+
+MAX_URL_LENGTH = 65536
+
+# https://datatracker.ietf.org/doc/html/rfc3986.html#section-2.3
+UNRESERVED_CHARACTERS = (
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~"
+)
+SUB_DELIMS = "!$&'()*+,;="
+
+PERCENT_ENCODED_REGEX = re.compile("%[A-Fa-f0-9]{2}")
+
+# https://url.spec.whatwg.org/#percent-encoded-bytes
+
+# The fragment percent-encode set is the C0 control percent-encode set
+# and U+0020 SPACE, U+0022 ("), U+003C (<), U+003E (>), and U+0060 (`).
+FRAG_SAFE = "".join(
+    [chr(i) for i in range(0x20, 0x7F) if i not in (0x20, 0x22, 0x3C, 0x3E, 0x60)]
+)
+
+# The query percent-encode set is the C0 control percent-encode set
+# and U+0020 SPACE, U+0022 ("), U+0023 (#), U+003C (<), and U+003E (>).
+QUERY_SAFE = "".join(
+    [chr(i) for i in range(0x20, 0x7F) if i not in (0x20, 0x22, 0x23, 0x3C, 0x3E)]
+)
+
+# The path percent-encode set is the query percent-encode set
+# and U+003F (?), U+0060 (`), U+007B ({), and U+007D (}).
+PATH_SAFE = "".join(
+    [
+        chr(i)
+        for i in range(0x20, 0x7F)
+        if i not in (0x20, 0x22, 0x23, 0x3C, 0x3E) + (0x3F, 0x60, 0x7B, 0x7D)
+    ]
+)
+
+# The userinfo percent-encode set is the path percent-encode set
+# and U+002F (/), U+003A (:), U+003B (;), U+003D (=), U+0040 (@),
+# U+005B ([) to U+005E (^), inclusive, and U+007C (|).
+USERNAME_SAFE = "".join(
+    [
+        chr(i)
+        for i in range(0x20, 0x7F)
+        if i
+        not in (0x20, 0x22, 0x23, 0x3C, 0x3E)
+        + (0x3F, 0x60, 0x7B, 0x7D)
+        + (0x2F, 0x3A, 0x3B, 0x3D, 0x40, 0x5B, 0x5C, 0x5D, 0x5E, 0x7C)
+    ]
+)
+PASSWORD_SAFE = "".join(
+    [
+        chr(i)
+        for i in range(0x20, 0x7F)
+        if i
+```
+
+{"end_line":494,"file_sha256":"640987e3b38d7e4c6bae3f8f3d88467a21e36fa0232824be00d58837838bfca6","id":"ad82526720d0d86feb11f99672a59df98b9ce2f41e3566c2af33b4833ceeac6e","kind":"function","path":"httpx/_urlparse.py","reasons":["lexical overlap: encoded, httpx, percent, percent_encoded, py, str, urlparse"],"score":28.20032483,"start_line":482,"symbol":"percent_encoded","text_sha256":"96c59ae0cea1b548738673bb028d32ea658ccfe4f28109e3e03b887dc71fc417"}
+```
+def percent_encoded(string: str, safe: str) -> str:
+    """
+    Use percent-encoding to quote a string.
+    """
+    NON_ESCAPED_CHARS = UNRESERVED_CHARACTERS + safe
+
+    # Fast path for strings that don't need escaping.
+    if not string.rstrip(NON_ESCAPED_CHARS):
+        return string
+
+    return "".join(
+        [char if char in NON_ESCAPED_CHARS else PERCENT(char) for char in string]
+    )
+```
+
+{"end_line":14,"file_sha256":"757f7d551d4348e1e9828f40abb3f360ee0529dc6a2a3c32369f20adff1d1cdd","id":"e94cb229a9d555fa9ea38fac3a3c15591d341794bbce73df223faee85651b39b","kind":"module","path":"httpx/_urls.py","reasons":["lexical overlap: httpx, import, params, py, query, queryparams, str, urlparse, urls"],"score":22.73495456,"start_line":1,"symbol":"<module>","text_sha256":"a3cdffc441e675212f83defbfd5ddbc0b3a24721e1f7a6343406b5733ee70a67"}
+```
+from __future__ import annotations
+
+import typing
+from urllib.parse import parse_qs, unquote, urlencode
+
+import idna
+
+from ._types import QueryParamTypes
+from ._urlparse import urlparse
+from ._utils import primitive_value_to_str
+
+__all__ = ["URL", "QueryParams"]
+
+
+```
+
+{"end_line":527,"file_sha256":"640987e3b38d7e4c6bae3f8f3d88467a21e36fa0232824be00d58837838bfca6","id":"7db388983ec93017e0170a99088a172036e1867a26e1e2906cec739bdb7b33b1","kind":"function","path":"httpx/_urlparse.py","reasons":["lexical overlap: encoded, httpx, percent, percent_encoded, py, str, the, urlparse"],"score":20.92892265,"start_line":497,"symbol":"quote","text_sha256":"3743b0ecdca22ea5fc0abcca1773a6daa8af18fec7a2509120ac735eb4e3181d"}
+```
+def quote(string: str, safe: str) -> str:
+    """
+    Use percent-encoding to quote a string, omitting existing '%xx' escape sequences.
+
+    See: https://www.rfc-editor.org/rfc/rfc3986#section-2.1
+
+    * `string`: The string to be percent-escaped.
+    * `safe`: A string containing characters that may be treated as safe, and do not
+        need to be escaped. Unreserved characters are always treated as safe.
+        See: https://www.rfc-editor.org/rfc/rfc3986#section-2.3
+    """
+    parts = []
+    current_position = 0
+    for match in re.finditer(PERCENT_ENCODED_REGEX, string):
+        start_position, end_position = match.start(), match.end()
+        matched_text = match.group(0)
+        # Add any text up to the '%xx' escape sequence.
+        if start_position != current_position:
+            leading_text = string[current_position:start_position]
+            parts.append(percent_encoded(leading_text, safe=safe))
+
+        # Add the '%xx' escape sequence.
+        parts.append(matched_text)
+        current_position = end_position
+
+    # Add any text after the final '%xx' escape sequence.
+    if current_position != len(string):
+        trailing_text = string[current_position:]
+        parts.append(percent_encoded(trailing_text, safe=safe))
+
+    return "".join(parts)
+```
+
+{"end_line":580,"file_sha256":"757f7d551d4348e1e9828f40abb3f360ee0529dc6a2a3c32369f20adff1d1cdd","id":"3f754e27a8a0bbefbeecc0ac372ddc74fcffeac03428531b22cc740a116acc52","kind":"function","path":"httpx/_urls.py","reasons":["lexical overlap: httpx, of, params, py, query, queryparams, str, the, urls"],"score":19.85540269,"start_line":567,"symbol":"QueryParams.remove","text_sha256":"39491a124f3020daee7694ecf0779ce363e847c2f8d48eace2d7a365c995ae05"}
+```
+    def remove(self, key: str) -> QueryParams:
+        """
+        Return a new QueryParams instance, removing the value of a key.
+
+        Usage:
+
+        q = httpx.QueryParams("a=123")
+        q = q.remove("a")
+        assert q == httpx.QueryParams("")
+        """
+        q = QueryParams()
+        q._dict = dict(self._dict)
+        q._dict.pop(str(key), None)
+        return q
+```
+
+{"end_line":550,"file_sha256":"757f7d551d4348e1e9828f40abb3f360ee0529dc6a2a3c32369f20adff1d1cdd","id":"d18f0c3078f1d0d16d63f34907a9b72e68e5389f416e8bcafe83ebbcb36379d2","kind":"function","path":"httpx/_urls.py","reasons":["lexical overlap: httpx, of, params, py, query, queryparams, str, the, urls"],"score":19.43536245,"start_line":537,"symbol":"QueryParams.set","text_sha256":"5f25fdad9d45fe7480263994ddce5b49569777f4260426561f3a58a6df9284fa"}
+```
+    def set(self, key: str, value: typing.Any = None) -> QueryParams:
+        """
+        Return a new QueryParams instance, setting the value of a key.
+
+        Usage:
+
+        q = httpx.QueryParams("a=123")
+        q = q.set("a", "456")
+        assert q == httpx.QueryParams("a=456")
+        """
+        q = QueryParams()
+        q._dict = dict(self._dict)
+        q._dict[str(key)] = [primitive_value_to_str(value)]
+        return q
+```
+
+{"end_line":565,"file_sha256":"757f7d551d4348e1e9828f40abb3f360ee0529dc6a2a3c32369f20adff1d1cdd","id":"6a2a3cdde5710892fd4dada6f0ffbf9fd22265bfa7235b8d86221469d963a69d","kind":"function","path":"httpx/_urls.py","reasons":["lexical overlap: httpx, of, params, py, query, queryparams, str, the, urls"],"score":18.98434665,"start_line":552,"symbol":"QueryParams.add","text_sha256":"ced8a72ca555029a462c63c8d5e3a518a3ec98f081b1c9287bad95ecb9201ee5"}
+```
+    def add(self, key: str, value: typing.Any = None) -> QueryParams:
+        """
+        Return a new QueryParams instance, setting or appending the value of a key.
+
+        Usage:
+
+        q = httpx.QueryParams("a=123")
+        q = q.add("a", "456")
+        assert q == httpx.QueryParams("a=123&a=456")
+        """
+        q = QueryParams()
+        q._dict = dict(self._dict)
+        q._dict[str(key)] = q.get_list(key) + [primitive_value_to_str(value)]
+        return q
+```
+
+{"end_line":198,"file_sha256":"640987e3b38d7e4c6bae3f8f3d88467a21e36fa0232824be00d58837838bfca6","id":"bbf4fc9ca92bd9a8696bb0616d8d966a23467cbb9b1c75fb9d90a701b3a69492","kind":"function","path":"httpx/_urlparse.py","reasons":["lexical overlap: httpx, py, query, result, str, urlparse, with"],"score":18.49503581,"start_line":186,"symbol":"ParseResult.copy_with","text_sha256":"0573546d4d9600bac2802ec55805ea85bb7f38b61efa7814402141de55662aed"}
+```
+    def copy_with(self, **kwargs: str | None) -> ParseResult:
+        if not kwargs:
+            return self
+
+        defaults = {
+            "scheme": self.scheme,
+            "authority": self.authority,
+            "path": self.path,
+            "query": self.query,
+            "fragment": self.fragment,
+        }
+        defaults.update(kwargs)
+        return urlparse("", **defaults)
+```
+
+{"end_line":272,"file_sha256":"757f7d551d4348e1e9828f40abb3f360ee0529dc6a2a3c32369f20adff1d1cdd","id":"0e7dfd0778667aa9c0e7d06e4e3920a52b386433ee66d8b897383aa0da4c956f","kind":"function","path":"httpx/_urls.py","reasons":["lexical overlap: httpx, of, params, py, query, queryparams, the, this, urls"],"score":17.88002648,"start_line":257,"symbol":"URL.query","text_sha256":"151e65c530b76a989808b79f0955c502917da871b231979e1119a6bc4ac84115"}
+```
+    @property
+    def query(self) -> bytes:
+        """
+        The URL query string, as raw bytes, excluding the leading b"?".
+
+        This is necessarily a bytewise interface, because we cannot
+        perform URL decoding of this representation until we've parsed
+        the keys and values into a QueryParams instance.
+
+        For example:
+
+        url = httpx.URL("https://example.com/?filter=some%20search%20terms")
+        assert url.query == b"filter=some%20search%20terms"
+        """
+        query = self._uri_reference.query or ""
+        return query.encode("ascii")
+```
+
+{"end_line":472,"file_sha256":"757f7d551d4348e1e9828f40abb3f360ee0529dc6a2a3c32369f20adff1d1cdd","id":"fe9ce371cd43c9584652e5db2ed04867e8d7e5de1ce3616c40e541b6bae26bbe","kind":"function","path":"httpx/_urls.py","reasons":["lexical overlap: httpx, params, py, query, queryparams, str, the, urls"],"score":17.10528654,"start_line":463,"symbol":"QueryParams.keys","text_sha256":"c4ff7dfbdfe84ad5d68a745e73aef5fa9e47b014b21a03589644958138cb187f"}
+```
+    def keys(self) -> typing.KeysView[str]:
+        """
+        Return all the keys in the query params.
+
+        Usage:
+
+        q = httpx.QueryParams("a=123&a=456&b=789")
+        assert list(q.keys()) == ["a", "b"]
+        """
+        return self._dict.keys()
+```
+
+{"end_line":424,"file_sha256":"757f7d551d4348e1e9828f40abb3f360ee0529dc6a2a3c32369f20adff1d1cdd","id":"08fc727a7d59f8d392ef1e3502711c9f47188eff637b0b2d549839035609cae6","kind":"class","path":"httpx/_urls.py","reasons":["lexical overlap: httpx, params, py, query, queryparams, str, urls"],"score":17.01321845,"start_line":420,"symbol":"QueryParams","text_sha256":"e3b214e16a624b0f57a5fe2e8e5dec14b827beffdee9b5d359295955846bde06"}
+```
+class QueryParams(typing.Mapping[str, str]):
+    """
+    URL query parameters, as a multi-dict.
+    """
+
+```
+
+{"end_line":61,"file_sha256":"c43f941baefe58c91e96d00039e1868fe719d91453026d7db1647194563bff8d","id":"c67819a19d2f299fb90da0c76dc6a62cf87dc95d797eecb31f447d431cdacc60","kind":"module","path":"httpx/_client.py","reasons":["lexical overlap: httpx, import, params, py, python, query, queryparams, the, u, urls"],"score":16.78907795,"start_line":1,"symbol":"<module>","text_sha256":"8833b0801e218726fe75fc21a3969df574e52d86cc8e47fcb9b0aadbb2eea43c"}
+```
+from __future__ import annotations
+
+import datetime
+import enum
+import logging
+import time
+import typing
+import warnings
+from contextlib import asynccontextmanager, contextmanager
+from types import TracebackType
+
+from .__version__ import __version__
+from ._auth import Auth, BasicAuth, FunctionAuth
+from ._config import (
+    DEFAULT_LIMITS,
+    DEFAULT_MAX_REDIRECTS,
+    DEFAULT_TIMEOUT_CONFIG,
+    Limits,
+    Proxy,
+    Timeout,
+)
+from ._decoders import SUPPORTED_DECODERS
+from ._exceptions import (
+    InvalidURL,
+    RemoteProtocolError,
+    TooManyRedirects,
+    request_context,
+)
+from ._models import Cookies, Headers, Request, Response
+from ._status_codes import codes
+from ._transports.base import AsyncBaseTransport, BaseTransport
+from ._transports.default import AsyncHTTPTransport, HTTPTransport
+from ._types import (
+    AsyncByteStream,
+    AuthTypes,
+    CertTypes,
+    CookieTypes,
+    HeaderTypes,
+    ProxyTypes,
+    QueryParamTypes,
+    RequestContent,
+    RequestData,
+    RequestExtensions,
+    RequestFiles,
+    SyncByteStream,
+    TimeoutTypes,
+)
+from ._urls import URL, QueryParams
+from ._utils import URLPattern, get_environment_proxies
+
+if typing.TYPE_CHECKING:
+    import ssl  # pragma: no cover
+
+__all__ = ["USE_CLIENT_DEFAULT", "AsyncClient", "Client"]
+
+# The type annotation for @classmethod and context managers here follows PEP 484
+# https://www.python.org/dev/peps/pep-0484/#annotating-instance-and-class-methods
+T = typing.TypeVar("T", bound="Client")
+U = typing.TypeVar("U", bound="AsyncClient")
+
+
+```
+
+{"end_line":598,"file_sha256":"757f7d551d4348e1e9828f40abb3f360ee0529dc6a2a3c32369f20adff1d1cdd","id":"be0cfaa117fcb18b8115abea5f62be9e06759728038fd3fe9a1f3c9da9fe81b7","kind":"function","path":"httpx/_urls.py","reasons":["lexical overlap: httpx, params, py, query, queryparams, urls, with"],"score":16.68420065,"start_line":582,"symbol":"QueryParams.merge","text_sha256":"c240889f06b0cc9989458bd58640713fcd1ad4e7542f9108e52b00f8ecdeb243"}
+```
+    def merge(self, params: QueryParamTypes | None = None) -> QueryParams:
+        """
+        Return a new QueryParams instance, updated with.
+
+        Usage:
+
+        q = httpx.QueryParams("a=123")
+        q = q.merge({"b": "456"})
+        assert q == httpx.QueryParams("a=123&b=456")
+
+        q = httpx.QueryParams("a=123")
+        q = q.merge({"a": "456", "b": "789"})
+        assert q == httpx.QueryParams("a=456&b=789")
+        """
+        q = QueryParams(params)
+        q._dict = {**self._dict, **q._dict}
+        return q
+```

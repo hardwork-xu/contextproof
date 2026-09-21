@@ -1,0 +1,377 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import httpx
+headers = httpx.Headers({"Content-Type": "text/plain"})
+RESULT = [headers["content-type"], "CONTENT-TYPE" in headers]
+```
+
+Repository source evidence:
+<context query="Explain the behavior of this Python probe using repository source. httpx/_models.py Headers.__getitem__ httpx/_models.py Headers.__contains__
+import httpx
+headers = httpx.Headers({&quot;Content-Type&quot;: &quot;text/plain&quot;})
+RESULT = [headers[&quot;content-type&quot;], &quot;CONTENT-TYPE&quot; in headers]
+">
+  <structural-context>
+    <file-tree><![CDATA[
+httpx/_client.py
+httpx/_content.py
+httpx/_models.py
+httpx/_status_codes.py
+    ]]></file-tree>
+  </structural-context>
+  <chunks>
+    <chunk file="httpx/_models.py" lines="56-64" symbol="_is_known_encoding" score="2.0732" tokens="50">
+      <code><![CDATA[
+def _is_known_encoding(encoding: str) -> bool:
+    """
+    Return `True` if `encoding` is a known codec.
+    """
+    try:
+        codecs.lookup(encoding)
+    except LookupError:
+        return False
+    return True
+      ]]></code>
+    </chunk>
+    <chunk file="httpx/_content.py" lines="31-39" symbol="ByteStream" score="1.7451" tokens="71">
+      <code><![CDATA[
+class ByteStream(AsyncByteStream, SyncByteStream):
+    def __init__(self, stream: bytes) -> None:
+        self._stream = stream
+
+    def __iter__(self) -> Iterator[bytes]:
+        yield self._stream
+
+    async def __aiter__(self) -> AsyncIterator[bytes]:
+        yield self._stream
+      ]]></code>
+    </chunk>
+    <chunk file="httpx/_client.py" lines="494-515" symbol="_redirect_method" score="1.0810" tokens="201">
+      <code><![CDATA[
+    def _redirect_method(self, request: Request, response: Response) -> str:
+        """
+        When being redirected we may want to change the method of the request
+        based on certain specs or browser behavior.
+        """
+        method = request.method
+
+        # https://tools.ietf.org/html/rfc7231#section-6.4.4
+        if response.status_code == codes.SEE_OTHER and method != "HEAD":
+            method = "GET"
+
+        # Do what the browsers do, despite standards...
+        # Turn 302s into GETs.
+        if response.status_code == codes.FOUND and method != "HEAD":
+            method = "GET"
+
+        # If a POST is responded to with a 301, turn it into a GET.
+        # This bizarre behaviour is explained in 'requests' issue 1704.
+        if response.status_code == codes.MOVED_PERMANENTLY and method == "POST":
+            method = "GET"
+
+        return method
+      ]]></code>
+    </chunk>
+    <chunk file="httpx/_status_codes.py" lines="8-68" symbol="codes" score="0.9421" tokens="515">
+      <code><![CDATA[
+class codes(IntEnum):
+    """HTTP status codes and reason phrases
+
+    Status codes from the following RFCs are all observed:
+
+        * RFC 7231: Hypertext Transfer Protocol (HTTP/1.1), obsoletes 2616
+        * RFC 6585: Additional HTTP Status Codes
+        * RFC 3229: Delta encoding in HTTP
+        * RFC 4918: HTTP Extensions for WebDAV, obsoletes 2518
+        * RFC 5842: Binding Extensions to WebDAV
+        * RFC 7238: Permanent Redirect
+        * RFC 2295: Transparent Content Negotiation in HTTP
+        * RFC 2774: An HTTP Extension Framework
+        * RFC 7540: Hypertext Transfer Protocol Version 2 (HTTP/2)
+        * RFC 2324: Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0)
+        * RFC 7725: An HTTP Status Code to Report Legal Obstacles
+        * RFC 8297: An HTTP Status Code for Indicating Hints
+        * RFC 8470: Using Early Data in HTTP
+    """
+
+    def __new__(cls, value: int, phrase: str = "") -> codes:
+        obj = int.__new__(cls, value)
+        obj._value_ = value
+
+        obj.phrase = phrase  # type: ignore[attr-defined]
+        return obj
+
+    def __str__(self) -> str:
+        return str(self.value)
+
+    @classmethod
+    def get_reason_phrase(cls, value: int) -> str:
+        try:
+            return codes(value).phrase  # type: ignore
+        except ValueError:
+            return ""
+
+    @classmethod
+    def is_informational(cls, value: int) -> bool:
+        """
+        Returns `True` for 1xx status codes, `False` otherwise.
+        """
+        return 100 <= value <= 199
+
+    @classmethod
+    def is_success(cls, value: int) -> bool:
+        """
+        Returns `True` for 2xx status codes, `False` otherwise.
+        """
+        return 200 <= value <= 299
+
+    @classmethod
+    def is_redirect(cls, value: int) -> bool:
+        """
+        Returns `True` for 3xx status codes, `False` otherwise.
+        """
+        return 300 <= value <= 399
+
+    @classmethod
+    def is_client_error(cls, value: int) -> bool:
+        """
+      ]]></code>
+    </chunk>
+    <chunk file="httpx/_models.py" lines="67-71" symbol="_normalize_header_key" score="2.0732" tokens="58">
+      <code><![CDATA[
+def _normalize_header_key(key: str | bytes, encoding: str | None = None) -> bytes:
+    """
+    Coerce str/bytes into a strictly byte-wise HTTP header key.
+    """
+    return key if isinstance(key, bytes) else key.encode(encoding or "ascii")
+      ]]></code>
+    </chunk>
+    <chunk file="httpx/_models.py" lines="74-82" symbol="_normalize_header_value" score="2.0732" tokens="88">
+      <code><![CDATA[
+def _normalize_header_value(value: str | bytes, encoding: str | None = None) -> bytes:
+    """
+    Coerce str/bytes into a strictly byte-wise HTTP header value.
+    """
+    if isinstance(value, bytes):
+        return value
+    if not isinstance(value, str):
+        raise TypeError(f"Header value must be str or bytes, not {type(value)}")
+    return value.encode(encoding or "ascii")
+      ]]></code>
+    </chunk>
+    <chunk file="httpx/_content.py" lines="1-30" score="1.6851" tokens="126">
+      <code><![CDATA[
+from __future__ import annotations
+
+import inspect
+import warnings
+from json import dumps as json_dumps
+from typing import (
+    Any,
+    AsyncIterable,
+    AsyncIterator,
+    Iterable,
+    Iterator,
+    Mapping,
+)
+from urllib.parse import urlencode
+
+from ._exceptions import StreamClosed, StreamConsumed
+from ._multipart import MultipartStream
+from ._types import (
+    AsyncByteStream,
+    RequestContent,
+    RequestData,
+    RequestFiles,
+    ResponseContent,
+    SyncByteStream,
+)
+from ._utils import peek_filelike_length, primitive_value_to_str
+
+__all__ = ["ByteStream"]
+
+
+      ]]></code>
+    </chunk>
+    <chunk file="httpx/_content.py" lines="92-104" symbol="UnattachedStream" score="1.1202" tokens="105">
+      <code><![CDATA[
+class UnattachedStream(AsyncByteStream, SyncByteStream):
+    """
+    If a request or response is serialized using pickle, then it is no longer
+    attached to a stream for I/O purposes. Any stream operations should result
+    in `httpx.StreamClosed`.
+    """
+
+    def __iter__(self) -> Iterator[bytes]:
+        raise StreamClosed()
+
+    async def __aiter__(self) -> AsyncIterator[bytes]:
+        raise StreamClosed()
+        yield b""  # pragma: no cover
+      ]]></code>
+    </chunk>
+    <chunk file="httpx/_models.py" lines="85-90" symbol="_parse_content_type_charset" score="1.0069" tokens="85">
+      <code><![CDATA[
+def _parse_content_type_charset(content_type: str) -> str | None:
+    # We used to use `cgi.parse_header()` here, but `cgi` became a dead battery.
+    # See: https://peps.python.org/pep-0594/#cgi
+    msg = email.message.Message()
+    msg["content-type"] = content_type
+    return msg.get_content_charset(failobj=None)
+      ]]></code>
+    </chunk>
+    <chunk file="httpx/_status_codes.py" lines="1-13" score="0.9151" tokens="51">
+      <code><![CDATA[
+from __future__ import annotations
+
+from enum import IntEnum
+
+__all__ = ["codes"]
+
+
+
+
+# Include lower-case styles for `requests` compatibility.
+for code in codes:
+    setattr(codes, code._name_.lower(), int(code))
+
+      ]]></code>
+    </chunk>
+    <chunk file="httpx/_models.py" lines="1222-1223" symbol="__len__" score="0.7145" tokens="16">
+      <code><![CDATA[
+    def __len__(self) -> int:
+        return len(self.jar)
+      ]]></code>
+    </chunk>
+    <chunk file="httpx/_models.py" lines="353-354" symbol="__len__" score="0.7145" tokens="17">
+      <code><![CDATA[
+    def __len__(self) -> int:
+        return len(self._list)
+      ]]></code>
+    </chunk>
+    <chunk file="httpx/_models.py" lines="607-608" symbol="request" score="0.7145" tokens="18">
+      <code><![CDATA[
+    def request(self, value: Request) -> None:
+        self._request = value
+      ]]></code>
+    </chunk>
+    <chunk file="httpx/_models.py" lines="192-193" symbol="encoding" score="0.7138" tokens="18">
+      <code><![CDATA[
+    def encoding(self, value: str) -> None:
+        self._encoding = value
+      ]]></code>
+    </chunk>
+  </chunks>
+  <type-definitions>
+    <type-def file="httpx/_content.py" symbol="ByteStream" lines="31-39">
+      <![CDATA[class ByteStream(AsyncByteStream, SyncByteStream):
+    def __init__(self, stream: bytes) -> None:
+        self._stream = stream
+
+    def __iter__(self) -> Iterator[bytes]:
+        yield self._stream
+
+    async def __aiter__(self) -> AsyncIterator[bytes]:
+        yield self._stream]]>
+    </type-def>
+    <type-def file="httpx/_status_codes.py" symbol="codes" lines="8-68">
+      <![CDATA[class codes(IntEnum):
+    """HTTP status codes and reason phrases
+
+    Status codes from the following RFCs are all observed:
+
+        * RFC 7231: Hypertext Transfer Protocol (HTTP/1.1), obsoletes 2616
+        * RFC 6585: Additional HTTP Status Codes
+        * RFC 3229: Delta encoding in HTTP
+        * RFC 4918: HTTP Extensions for WebDAV, obsoletes 2518
+        * RFC 5842: Binding Extensions to WebDAV
+        * RFC 7238: Permanent Redirect
+        * RFC 2295: Transparent Content Negotiation in HTTP
+        * RFC 2774: An HTTP Extension Framework
+        * RFC 7540: Hypertext Transfer Protocol Version 2 (HTTP/2)
+        * RFC 2324: Hyper Text Coffee Pot Control Protocol (HTCPCP/1.0)
+        * RFC 7725: An HTTP Status Code to Report Legal Obstacles
+        * RFC 8297: An HTTP Status Code for Indicating Hints
+        * RFC 8470: Using Early Data in HTTP
+    """
+
+    def __new__(cls, value: int, phrase: str = "") -> codes:
+        obj = int.__new__(cls, value)
+        obj._value_ = value
+
+        obj.phrase = phrase  # type: ignore[attr-defined]
+        return obj
+
+    def __str__(self) -> str:
+        return str(self.value)
+
+    @classmethod
+    def get_reason_phrase(cls, value: int) -> str:
+        try:
+            return codes(value).phrase  # type: ignore
+        except ValueError:
+            return ""
+
+    @classmethod
+    def is_informational(cls, value: int) -> bool:
+        """
+        Returns `True` for 1xx status codes, `False` otherwise.
+        """
+        return 100 <= value <= 199
+
+    @classmethod
+    def is_success(cls, value: int) -> bool:
+        """
+        Returns `True` for 2xx status codes, `False` otherwise.
+        """
+        return 200 <= value <= 299
+
+    @classmethod
+    def is_redirect(cls, value: int) -> bool:
+        """
+        Returns `True` for 3xx status codes, `False` otherwise.
+        """
+        return 300 <= value <= 399
+
+    @classmethod
+    def is_client_error(cls, value: int) -> bool:
+        """]]>
+    </type-def>
+    <type-def file="httpx/_content.py" symbol="UnattachedStream" lines="92-104">
+      <![CDATA[class UnattachedStream(AsyncByteStream, SyncByteStream):
+    """
+    If a request or response is serialized using pickle, then it is no longer
+    attached to a stream for I/O purposes. Any stream operations should result
+    in `httpx.StreamClosed`.
+    """
+
+    def __iter__(self) -> Iterator[bytes]:
+        raise StreamClosed()
+
+    async def __aiter__(self) -> AsyncIterator[bytes]:
+        raise StreamClosed()
+        yield b""  # pragma: no cover]]>
+    </type-def>
+  </type-definitions>
+  <receipt freshness="clean" complete="incomplete" reason="dependency_frontier_cut" action="fetch_skipped_candidate" index_revision="1a76e45765620474a56fe0c93bfc933e93515aabefec220cd5b49f2cb4ec2151" budget_requested="1432" budget_consumed="1419" returned_shown="14" returned_total="14" skipped_shown="20" skipped_total="20" omitted_edges_shown="20" omitted_edges_total="20">
+    <returned handle="chunk:httpx/_client.py:_redirect_method:494" file="httpx/_client.py" lines="494-515" hash="04f56ee639b94755a020b88474edac7b0514949b0594a44a15838931e7674833" score="1.0810" />
+    <returned handle="chunk:httpx/_content.py:_module:1" file="httpx/_content.py" lines="1-30" hash="7ab0afe01035db6aef889c9d94fcd3a0c4910e444a0531cbbe8bf3b2bf119da8" score="1.6851" />
+    <returned handle="chunk:httpx/_content.py:ByteStream:31" file="httpx/_content.py" lines="31-39" hash="d6649bd4bcf085dad8c5207e871fd3c7427df4192af00fe23fc1ebc2bf5ba85b" score="1.7451" />
+    <returned handle="chunk:httpx/_content.py:UnattachedStream:92" file="httpx/_content.py" lines="92-104" hash="eab2e5995c708aa6adae23e8d83aa41cd1a640a9b0733a7e7dc6d202f59f2e43" score="1.1202" />
+    <returned handle="chunk:httpx/_models.py:_is_known_encoding:56" file="httpx/_models.py" lines="56-64" hash="dfb40b2623f55d172d563785d0aeb60ef2c235b854ab2d08d8d8ea0f65b5fbd0" score="2.0732" />
+    <returned handle="chunk:httpx/_models.py:_normalize_header_key:67" file="httpx/_models.py" lines="67-71" hash="954268270b6cbd2c1af1fb7d687be98828553896bc17aa5d04daa1317bd4a664" score="2.0732" />
+    <returned handle="chunk:httpx/_models.py:_normalize_header_value:74" file="httpx/_models.py" lines="74-82" hash="4a2594718e33eb8e5c1f07d7af2a0a538af7776911132a2119f007ccda87da51" score="2.0732" />
+    <returned handle="chunk:httpx/_models.py:_parse_content_type_charset:85" file="httpx/_models.py" lines="85-90" hash="e9ba763ec04659b154e1aefc6870f64a42f5bf690a6656fd24f94e90f3b965cc" score="1.0069" />
+    <skipped file="httpx/_client.py" reason="over_budget" handle="chunk:httpx/_client.py:_module:1" />
+    <skipped file="httpx/_client.py" reason="over_budget" handle="chunk:httpx/_client.py:_module:112" />
+    <skipped file="httpx/_client.py" reason="over_budget" handle="chunk:httpx/_client.py:AsyncClient:1307" />
+    <skipped file="httpx/_client.py" reason="over_budget" handle="chunk:httpx/_client.py:AsyncClient:1360" />
+    <skipped file="httpx/_client.py" reason="over_budget" handle="chunk:httpx/_client.py:AsyncClient:1498" />
+    <skipped file="httpx/_client.py" reason="over_budget" handle="chunk:httpx/_client.py:AsyncClient:1990" />
+    <skipped file="httpx/_client.py" reason="over_budget" handle="chunk:httpx/_client.py:Client:1288" />
+    <skipped file="httpx/_client.py" reason="over_budget" handle="chunk:httpx/_client.py:Client:594" />
+  </receipt>
+</context>

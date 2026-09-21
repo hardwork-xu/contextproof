@@ -1,0 +1,12 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import attrs
+Record = attrs.make_class("Record", {"flag": attrs.field(type=bool)})
+RESULT = {name: value.__name__ for name, value in Record.__annotations__.items()}
+```
+
+Repository source evidence:
+(No source evidence supplied.)

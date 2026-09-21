@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; img-src data:">
+<title>ContextProof · an actual dependency update</title>
+<style>
+:root{color-scheme:dark;font-family:ui-sans-serif,system-ui,-apple-system,sans-serif;background:#0b1220;color:#e7effc}
+*{box-sizing:border-box}body{margin:0}main{max-width:1080px;margin:0 auto;padding:48px 24px 64px}
+.eyebrow{color:#8ebaff;letter-spacing:.12em;font-size:12px;font-weight:700;text-transform:uppercase}
+h1{font-size:clamp(28px,5vw,43px);line-height:1.12;max-width:850px;margin:18px 0}
+h2{font-size:21px;margin:0 0 14px}p{line-height:1.65;color:#b9c8dc;max-width:900px}
+.badge{display:inline-block;border:1px solid #3b5270;padding:6px 10px;border-radius:20px;font-size:12px;color:#d5e5ff}
+.notice{padding:14px 18px;background:#192638;border-left:3px solid #f9c46b;margin:24px 0}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:28px 0}
+.card,section{border:1px solid #26364e;border-radius:12px;background:#111b2b;padding:22px}
+section{margin:18px 0}.value{font-size:30px;letter-spacing:-.03em;margin:7px 0;color:#f5f8ff}
+.label,small{font-size:12px;color:#a9bad2}.ok{color:#90deb0}.warn{color:#f9c46b}
+.twocol{display:grid;grid-template-columns:1fr 1fr;gap:16px}.codecard{min-width:0}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#091220;border:1px solid #23334b;border-radius:8px;
+padding:16px;line-height:1.55;font-size:13px;max-height:450px;overflow:auto}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.old{border-top:3px solid #dd8390}.new{border-top:3px solid #90deb0}
+svg{width:100%;font-family:ui-monospace,SFMono-Regular,monospace;font-size:14px}
+table{width:100%;border-collapse:collapse;font-size:14px}td,th{text-align:left;border-bottom:1px solid #29364b;padding:12px 8px}
+th{color:#aac0df;font-weight:500}summary{cursor:pointer;color:#afd0ff;padding:7px 0}footer{font-size:12px;color:#8c9cb4;margin-top:26px;line-height:1.7}
+@media(max-width:720px){main{padding:26px 16px}.grid,.twocol{grid-template-columns:1fr}section{padding:17px}}
+</style></head><body><main>
+<div class="eyebrow">ContextProof / executable graph demonstration</div>
+<h1>The caller is unchanged.<br>The policy three calls away changed.</h1>
+<span class="badge">Synthetic fixture · real execution of ContextProof and Git</span>
+<p>This page was generated from immutable Git revisions, actual graph comparisons and the exact model payload.
+The fixture source was inspected, never executed. These are demonstration results, not evidence of production accuracy or model improvement.</p>
+<div class="grid">
+<div class="card"><div class="label">Transitive source comparison</div><div class="value warn">changed</div><small>7 source nodes · 3 references</small></div>
+<div class="card"><div class="label">Current update sent to a model</div><div class="value">2,925 B</div><small>of 16,000 UTF-8 bytes · complete for this update</small></div>
+<div class="card"><div class="label">Delta reconstruction</div><div class="value ok">byte-exact</div><small>1,886 B delta / 5,847 B full graph</small></div>
+</div>
+<section><h2>One recorded cause, followed back to the caller</h2><svg viewBox="0 0 960 94" role="img" aria-label="Recorded dependency path from the unchanged caller to the changed leaf" xmlns="http://www.w3.org/2000/svg"><defs><marker id="arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0L6 3L0 6" fill="#8ebaff"/></marker></defs><rect x="4" y="12" width="206" height="68" rx="9" fill="#172335" stroke="#8ebaff"/><text x="18" y="38" fill="#f2f6ff">invoice_total</text><text x="18" y="61" fill="#a7b6cc" font-size="12">checkout.py</text><path d="M213 46 H237" stroke="#8ebaff" stroke-width="2" marker-end="url(#arrow)"/><rect x="244" y="12" width="206" height="68" rx="9" fill="#172335" stroke="#8ebaff"/><text x="258" y="38" fill="#f2f6ff">price_multiplier</text><text x="258" y="61" fill="#a7b6cc" font-size="12">pricing.py</text><path d="M453 46 H477" stroke="#8ebaff" stroke-width="2" marker-end="url(#arrow)"/><rect x="484" y="12" width="206" height="68" rx="9" fill="#172335" stroke="#8ebaff"/><text x="498" y="38" fill="#f2f6ff">tax_rate</text><text x="498" y="61" fill="#a7b6cc" font-size="12">tax.py</text><path d="M693 46 H717" stroke="#8ebaff" stroke-width="2" marker-end="url(#arrow)"/><rect x="724" y="12" width="206" height="68" rx="9" fill="#172335" stroke="#f9c46b"/><text x="738" y="38" fill="#f2f6ff">base_rate</text><text x="738" y="61" fill="#a7b6cc" font-size="12">policy.py</text></svg>
+<p>The original caller and its direct helper retain identical source. The bounded transitive graph reaches the changed leaf and includes its current definition and connecting import statements in the update.</p>
+<div class="twocol"><div class="codecard"><small>Previous policy.py</small><pre class="old"><code>def base_rate():
+    return 0.05
+</code></pre></div>
+<div class="codecard"><small>Current policy.py</small><pre class="new"><code>def base_rate():
+    return 0.20
+</code></pre></div></div></section>
+<section><h2>What each check actually observed</h2><table><thead><tr><th>Check</th><th>Recorded result</th><th>Meaning</th></tr></thead><tbody>
+<tr><td>Exact caller text</td><td class="ok">valid</td><td>The saved caller text is unchanged.</td></tr>
+<tr><td>v1 direct dependency</td><td class="ok">unchanged</td><td>The direct helper is unchanged; the third-hop edit is outside its scope.</td></tr>
+<tr><td>Transitive graph</td><td class="warn">changed</td><td>The stored path reaches the modified base_rate declaration.</td></tr>
+<tr><td>Verified graph delta</td><td class="ok">exact match</td><td>Applying the delta to its correct base reproduces the full current graph bytes.</td></tr>
+<tr><td>Unrelated-file edit</td><td class="ok">fresh captured closure</td><td>The update contains 0 source nodes; its graph and base handles remain explicit.</td></tr>
+</tbody></table></section>
+<section><h2>Current evidence actually delivered</h2><p>The source below is the real budgeted update. The full graph stays in the local store behind its handle. This update requires the identified base; it is not a standalone full-context claim.</p>
+<details><summary>Inspect all 2,925 UTF-8 bytes</summary><pre><code>{&quot;anchor_count&quot;:1,&quot;anchor_nodes&quot;:[&quot;01d50993d8e4&quot;],&quot;anchor_nodes_truncated&quot;:false,&quot;base_graph_id&quot;:&quot;5ebab8fd060d7fd290ae82efc89d4b251264fd92665fd50faf2f52b75655a832&quot;,&quot;budget&quot;:16000,&quot;cause_count&quot;:1,&quot;cause_details_truncated&quot;:true,&quot;causes&quot;:[{&quot;kind&quot;:&quot;changed&quot;,&quot;node&quot;:&quot;ba3a3e2bac8c&quot;,&quot;path&quot;:[&quot;01d50993d8e4&quot;,&quot;ec518ef0831c&quot;,&quot;54bf37327bd5&quot;,&quot;ba3a3e2bac8c&quot;],&quot;path_truncated&quot;:false,&quot;reason&quot;:&quot;definition or binding source changed&quot;}],&quot;complete&quot;:true,&quot;coverage&quot;:&quot;required-update-nodes&quot;,&quot;deleted&quot;:[],&quot;frontier&quot;:[],&quot;frontier_count&quot;:0,&quot;frontier_details_truncated&quot;:false,&quot;full_graph_handle&quot;:&quot;4594686b4976d1c85c0f87573ccfc9a19a3569fbaa0cea1d8133429406a2f3ee&quot;,&quot;graph_id&quot;:&quot;4594686b4976d1c85c0f87573ccfc9a19a3569fbaa0cea1d8133429406a2f3ee&quot;,&quot;guarantee&quot;:&quot;current recorded source and static references; no behavior or task-sufficiency proof&quot;,&quot;kind&quot;:&quot;contextproof.graph-payload&quot;,&quot;nodes&quot;:[{&quot;end_line&quot;:4,&quot;id&quot;:&quot;01d50993d8e479aae70e5537f3b532affc33143b3254d52dabe8e6c9648a7428&quot;,&quot;kind&quot;:&quot;function&quot;,&quot;path&quot;:&quot;checkout.py&quot;,&quot;start_line&quot;:3,&quot;symbol&quot;:&quot;invoice_total&quot;,&quot;text&quot;:&quot;def invoice_total(amount):\n    return amount * price_multiplier()\n&quot;},{&quot;end_line&quot;:4,&quot;id&quot;:&quot;54bf37327bd5dfcbd75941a29a2f36cbbd46b747c582b15c0713c093955a4ea3&quot;,&quot;kind&quot;:&quot;function&quot;,&quot;path&quot;:&quot;tax.py&quot;,&quot;start_line&quot;:3,&quot;symbol&quot;:&quot;tax_rate&quot;,&quot;text&quot;:&quot;def tax_rate():\n    return base_rate()\n&quot;},{&quot;end_line&quot;:1,&quot;id&quot;:&quot;55cf1781d0d36d90511ccf78392fb87bff239503c56fee97b9ff47eca0fca374&quot;,&quot;kind&quot;:&quot;import&quot;,&quot;path&quot;:&quot;tax.py&quot;,&quot;start_line&quot;:1,&quot;symbol&quot;:&quot;base_rate&quot;,&quot;text&quot;:&quot;from policy import base_rate\n&quot;},{&quot;end_line&quot;:2,&quot;id&quot;:&quot;ba3a3e2bac8c216f101866bf1770141dfa6a0756a34aabba5825918d64a48d86&quot;,&quot;kind&quot;:&quot;function&quot;,&quot;path&quot;:&quot;policy.py&quot;,&quot;start_line&quot;:1,&quot;symbol&quot;:&quot;base_rate&quot;,&quot;text&quot;:&quot;def base_rate():\n    return 0.20\n&quot;},{&quot;end_line&quot;:1,&quot;id&quot;:&quot;df512ed2b3827ce6b80f1f82caeee93acb1ce37615f8a80fb2584a791d17d67b&quot;,&quot;kind&quot;:&quot;import&quot;,&quot;path&quot;:&quot;checkout.py&quot;,&quot;start_line&quot;:1,&quot;symbol&quot;:&quot;price_multiplier&quot;,&quot;text&quot;:&quot;from pricing import price_multiplier\n&quot;},{&quot;end_line&quot;:4,&quot;id&quot;:&quot;ec518ef0831c80436141a109900a67b7a5af434adda684c5736706be404b6889&quot;,&quot;kind&quot;:&quot;function&quot;,&quot;path&quot;:&quot;pricing.py&quot;,&quot;start_line&quot;:3,&quot;symbol&quot;:&quot;price_multiplier&quot;,&quot;text&quot;:&quot;def price_multiplier():\n    return 1 + tax_rate()\n&quot;},{&quot;end_line&quot;:1,&quot;id&quot;:&quot;f20945e7dc681f686c02b42a5a45864a3a53e2f3c7e3535635d0f01179294d7a&quot;,&quot;kind&quot;:&quot;import&quot;,&quot;path&quot;:&quot;pricing.py&quot;,&quot;start_line&quot;:1,&quot;symbol&quot;:&quot;tax_rate&quot;,&quot;text&quot;:&quot;from tax import tax_rate\n&quot;}],&quot;omitted_node_count&quot;:0,&quot;omitted_nodes&quot;:[],&quot;omitted_nodes_truncated&quot;:false,&quot;policy&quot;:{&quot;max_depth&quot;:4,&quot;max_nodes&quot;:32,&quot;resolver_version&quot;:2},&quot;reference_id_prefix_length&quot;:12,&quot;references&quot;:[{&quot;bindings&quot;:[&quot;f20945e7dc68&quot;],&quot;source&quot;:&quot;ec518ef0831c&quot;,&quot;target&quot;:&quot;54bf37327bd5&quot;},{&quot;bindings&quot;:[&quot;55cf1781d0d3&quot;],&quot;source&quot;:&quot;54bf37327bd5&quot;,&quot;target&quot;:&quot;ba3a3e2bac8c&quot;},{&quot;bindings&quot;:[&quot;df512ed2b382&quot;],&quot;source&quot;:&quot;01d50993d8e4&quot;,&quot;target&quot;:&quot;ec518ef0831c&quot;}],&quot;requires_base&quot;:true,&quot;schema_version&quot;:1,&quot;scope&quot;:&quot;update&quot;,&quot;snapshot_id&quot;:&quot;4897cfd799f198be63d8a1e77757efb0c9ffcee4a728a2eb5e0df13b98d3613e&quot;,&quot;unit&quot;:&quot;utf-8-bytes&quot;}</code></pre></details></section>
+<section><h2>Two deliberate limits</h2><div class="twocol"><div>
+<h3 class="warn">A runtime name cannot be resolved</h3><p>The next revision calls <code>configured_rate()</code>, whose binding is unavailable.
+The payload retains source, reports 1 unresolved frontier item(s), and sets <code>complete=false</code>.</p>
+<pre><code>name is not a static repository binding (possibly builtin/external)</code></pre></div><div><h3 class="warn">A 300-byte allowance cannot carry the evidence</h3>
+<p>The small-budget check reports <code>budget_too_small</code>, consumes 0 bytes and sets <code>complete=false</code>. It never truncates a declaration or labels omitted evidence complete.</p></div></div></section>
+<section><h2>Reproduce and inspect</h2><pre><code>python scripts/demo_graph.py
+# Open docs/assets/graph-demo.html
+# Generated graphs, delta and payloads: work/graph-demo/artifacts/</code></pre>
+<details><summary>Actual demonstration receipt</summary><pre><code>{
+  &quot;after_handle&quot;: &quot;4594686b4976d1c85c0f87573ccfc9a19a3569fbaa0cea1d8133429406a2f3ee&quot;,
+  &quot;after_revision&quot;: &quot;b92d629d6043eea75f6f228458f838354e1f5ef7&quot;,
+  &quot;before_handle&quot;: &quot;5ebab8fd060d7fd290ae82efc89d4b251264fd92665fd50faf2f52b75655a832&quot;,
+  &quot;before_revision&quot;: &quot;98370fba147d8d9472eaa8bc27cb50a126e2126e&quot;,
+  &quot;causal_path&quot;: [
+    {
+      &quot;path&quot;: &quot;checkout.py&quot;,
+      &quot;symbol&quot;: &quot;invoice_total&quot;
+    },
+    {
+      &quot;path&quot;: &quot;pricing.py&quot;,
+      &quot;symbol&quot;: &quot;price_multiplier&quot;
+    },
+    {
+      &quot;path&quot;: &quot;tax.py&quot;,
+      &quot;symbol&quot;: &quot;tax_rate&quot;
+    },
+    {
+      &quot;path&quot;: &quot;policy.py&quot;,
+      &quot;symbol&quot;: &quot;base_rate&quot;
+    }
+  ],
+  &quot;delta_reconstruction_exact&quot;: true,
+  &quot;dynamic_frontier_count&quot;: 1,
+  &quot;dynamic_payload_complete&quot;: false,
+  &quot;edges&quot;: 3,
+  &quot;full_graph_bytes&quot;: 5847,
+  &quot;kind&quot;: &quot;synthetic-executable-demonstration&quot;,
+  &quot;lossless_delta_bytes&quot;: 1886,
+  &quot;model_payload_budget&quot;: 16000,
+  &quot;model_payload_bytes&quot;: 2925,
+  &quot;model_payload_complete&quot;: true,
+  &quot;nodes&quot;: 7,
+  &quot;one_hop_fresh&quot;: true,
+  &quot;source_execution&quot;: false,
+  &quot;source_only_valid&quot;: true,
+  &quot;stored_handle_roundtrip&quot;: true,
+  &quot;tiny_budget&quot;: {
+    &quot;budget&quot;: 300,
+    &quot;complete&quot;: false,
+    &quot;consumed&quot;: 0,
+    &quot;status&quot;: &quot;budget_too_small&quot;
+  },
+  &quot;transitive_status&quot;: &quot;changed&quot;,
+  &quot;unrelated_comparison_fresh&quot;: true,
+  &quot;unrelated_payload_source_nodes&quot;: 0
+}</code></pre></details></section>
+<div class="notice">Source identity and payload delivery are separate from runtime behavior. A complete static closure does not prove that an answer is correct, that Python runtime dependencies are complete, or that a model forgot earlier context.</div>
+<footer>Generated by scripts/demo_graph.py from the actual saved graphs and payloads. No network assets, tracking, scripts, personal names or host paths are embedded. All fixture revisions and rate values are synthetic.</footer>
+</main></body></html>

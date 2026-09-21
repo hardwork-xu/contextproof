@@ -1,0 +1,341 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import httpx
+RESULT = str(httpx.URL("http://webservice?u=phrase%20with%20spaces"))
+```
+
+Repository source evidence:
+<context query="Explain the behavior of this Python probe using repository source. httpx/_urls.py URL.__init__ httpx/_urlparse.py urlparse
+import httpx
+RESULT = str(httpx.URL(&quot;http://webservice?u=phrase%20with%20spaces&quot;))
+">
+  <structural-context>
+    <file-tree><![CDATA[
+httpx/__init__.py
+httpx/_transports/__init__.py
+httpx/_urlparse.py
+httpx/_urls.py
+    ]]></file-tree>
+  </structural-context>
+  <chunks>
+    <chunk file="httpx/__init__.py" lines="97-106" score="2.6542" tokens="53">
+      <code><![CDATA[
+    "WriteTimeout",
+    "WSGITransport",
+]
+
+
+__locals = locals()
+for __name in __all__:
+    if not __name.startswith("__"):
+        setattr(__locals[__name], "__module__", "httpx")  # noqa
+
+      ]]></code>
+    </chunk>
+    <chunk file="httpx/_transports/__init__.py" lines="1-16" score="2.6540" tokens="74">
+      <code><![CDATA[
+from .asgi import *
+from .base import *
+from .default import *
+from .mock import *
+from .wsgi import *
+
+__all__ = [
+    "ASGITransport",
+    "AsyncBaseTransport",
+    "BaseTransport",
+    "AsyncHTTPTransport",
+    "HTTPTransport",
+    "MockTransport",
+    "WSGITransport",
+]
+
+      ]]></code>
+    </chunk>
+    <chunk file="httpx/_urls.py" lines="15-57" symbol="URL" score="2.1202" tokens="501">
+      <code><![CDATA[
+class URL:
+    """
+    url = httpx.URL("HTTPS://jo%40email.com:a%20secret@müller.de:1234/pa%20th?search=ab#anchorlink")
+
+    assert url.scheme == "https"
+    assert url.username == "jo@email.com"
+    assert url.password == "a secret"
+    assert url.userinfo == b"jo%40email.com:a%20secret"
+    assert url.host == "müller.de"
+    assert url.raw_host == b"xn--mller-kva.de"
+    assert url.port == 1234
+    assert url.netloc == b"xn--mller-kva.de:1234"
+    assert url.path == "/pa th"
+    assert url.query == b"?search=ab"
+    assert url.raw_path == b"/pa%20th?search=ab"
+    assert url.fragment == "anchorlink"
+
+    The components of a URL are broken down like this:
+
+       https://jo%40email.com:a%20secret@müller.de:1234/pa%20th?search=ab#anchorlink
+    [scheme]   [  username  ] [password] [ host ][port][ path ] [ query ] [fragment]
+               [       userinfo        ] [   netloc   ][    raw_path    ]
+
+    Note that:
+
+    * `url.scheme` is normalized to always be lowercased.
+
+    * `url.host` is normalized to always be lowercased. Internationalized domain
+      names are represented in unicode, without IDNA encoding applied. For instance:
+
+      url = httpx.URL("http://中国.icom.museum")
+      assert url.host == "中国.icom.museum"
+      url = httpx.URL("http://xn--fiqs8s.icom.museum")
+      assert url.host == "中国.icom.museum"
+
+    * `url.raw_host` is normalized to always be lowercased, and is IDNA encoded.
+
+      url = httpx.URL("http://中国.icom.museum")
+      assert url.raw_host == b"xn--fiqs8s.icom.museum"
+      url = httpx.URL("http://xn--fiqs8s.icom.museum")
+      assert url.raw_host == b"xn--fiqs8s.icom.museum"
+
+    * `url.port` is either None or an integer. URLs that include the default port for
+      ]]></code>
+    </chunk>
+    <chunk file="httpx/_urlparse.py" lines="186-198" symbol="copy_with" score="1.8353" tokens="80">
+      <code><![CDATA[
+    def copy_with(self, **kwargs: str | None) -> ParseResult:
+        if not kwargs:
+            return self
+
+        defaults = {
+            "scheme": self.scheme,
+            "authority": self.authority,
+            "path": self.path,
+            "query": self.query,
+            "fragment": self.fragment,
+        }
+        defaults.update(kwargs)
+        return urlparse("", **defaults)
+      ]]></code>
+    </chunk>
+    <chunk file="httpx/_urls.py" lines="58-111" symbol="URL" score="2.1202" tokens="504">
+      <code><![CDATA[
+      "http", "https", "ws", "wss", and "ftp" schemes have their port
+      normalized to `None`.
+
+      assert httpx.URL("http://example.com") == httpx.URL("http://example.com:80")
+      assert httpx.URL("http://example.com").port is None
+      assert httpx.URL("http://example.com:80").port is None
+
+    * `url.userinfo` is raw bytes, without URL escaping. Usually you'll want to work
+      with `url.username` and `url.password` instead, which handle the URL escaping.
+
+    * `url.raw_path` is raw bytes of both the path and query, without URL escaping.
+      This portion is used as the target when constructing HTTP requests. Usually you'll
+      want to work with `url.path` instead.
+
+    * `url.query` is raw bytes, without URL escaping. A URL query string portion can
+      only be properly URL escaped when decoding the parameter names and values
+      themselves.
+    """
+
+    def __init__(self, url: URL | str = "", **kwargs: typing.Any) -> None:
+        if kwargs:
+            allowed = {
+                "scheme": str,
+                "username": str,
+                "password": str,
+                "userinfo": bytes,
+                "host": str,
+                "port": int,
+                "netloc": bytes,
+                "path": str,
+                "query": bytes,
+                "raw_path": bytes,
+                "fragment": str,
+                "params": object,
+            }
+
+            # Perform type checking for all supported keyword arguments.
+            for key, value in kwargs.items():
+                if key not in allowed:
+                    message = f"{key!r} is an invalid keyword argument for URL()"
+                    raise TypeError(message)
+                if value is not None and not isinstance(value, allowed[key]):
+                    expected = allowed[key].__name__
+                    seen = type(value).__name__
+                    message = f"Argument {key!r} must be {expected} but got {seen}"
+                    raise TypeError(message)
+                if isinstance(value, bytes):
+                    kwargs[key] = value.decode("ascii")
+
+            if "params" in kwargs:
+                # Replace any "params" keyword with the raw "query" instead.
+                #
+                # Ensure that empty params use `kwargs["query"] = None` rather
+                # than `kwargs["query"] = ""`, so that generated URLs do not
+      ]]></code>
+    </chunk>
+    <chunk file="httpx/_urls.py" lines="127-132" symbol="scheme" score="2.0602" tokens="39">
+      <code><![CDATA[
+    def scheme(self) -> str:
+        """
+        The URL scheme, such as "http", "https".
+        Always normalised to lowercase.
+        """
+        return self._uri_reference.scheme
+      ]]></code>
+    </chunk>
+    <chunk file="httpx/_urlparse.py" lines="478-479" symbol="PERCENT" score="1.7790" tokens="34">
+      <code><![CDATA[
+def PERCENT(string: str) -> str:
+    return "".join([f"%{byte:02X}" for byte in string.encode("utf-8")])
+      ]]></code>
+    </chunk>
+    <chunk file="httpx/_urlparse.py" lines="178-184" symbol="netloc" score="1.7647" tokens="52">
+      <code><![CDATA[
+    def netloc(self) -> str:
+        return "".join(
+            [
+                f"[{self.host}]" if ":" in self.host else self.host,
+                f":{self.port}" if self.port is not None else "",
+            ]
+        )
+      ]]></code>
+    </chunk>
+    <chunk file="httpx/_urlparse.py" lines="168-175" symbol="authority" score="1.7552" tokens="65">
+      <code><![CDATA[
+    def authority(self) -> str:
+        return "".join(
+            [
+                f"{self.userinfo}@" if self.userinfo else "",
+                f"[{self.host}]" if ":" in self.host else self.host,
+                f":{self.port}" if self.port is not None else "",
+            ]
+        )
+      ]]></code>
+    </chunk>
+  </chunks>
+  <type-definitions>
+    <type-def file="httpx/_urls.py" symbol="URL" lines="15-57">
+      <![CDATA[class URL:
+    """
+    url = httpx.URL("HTTPS://jo%40email.com:a%20secret@müller.de:1234/pa%20th?search=ab#anchorlink")
+
+    assert url.scheme == "https"
+    assert url.username == "jo@email.com"
+    assert url.password == "a secret"
+    assert url.userinfo == b"jo%40email.com:a%20secret"
+    assert url.host == "müller.de"
+    assert url.raw_host == b"xn--mller-kva.de"
+    assert url.port == 1234
+    assert url.netloc == b"xn--mller-kva.de:1234"
+    assert url.path == "/pa th"
+    assert url.query == b"?search=ab"
+    assert url.raw_path == b"/pa%20th?search=ab"
+    assert url.fragment == "anchorlink"
+
+    The components of a URL are broken down like this:
+
+       https://jo%40email.com:a%20secret@müller.de:1234/pa%20th?search=ab#anchorlink
+    [scheme]   [  username  ] [password] [ host ][port][ path ] [ query ] [fragment]
+               [       userinfo        ] [   netloc   ][    raw_path    ]
+
+    Note that:
+
+    * `url.scheme` is normalized to always be lowercased.
+
+    * `url.host` is normalized to always be lowercased. Internationalized domain
+      names are represented in unicode, without IDNA encoding applied. For instance:
+
+      url = httpx.URL("http://中国.icom.museum")
+      assert url.host == "中国.icom.museum"
+      url = httpx.URL("http://xn--fiqs8s.icom.museum")
+      assert url.host == "中国.icom.museum"
+
+    * `url.raw_host` is normalized to always be lowercased, and is IDNA encoded.
+
+      url = httpx.URL("http://中国.icom.museum")
+      assert url.raw_host == b"xn--fiqs8s.icom.museum"
+      url = httpx.URL("http://xn--fiqs8s.icom.museum")
+      assert url.raw_host == b"xn--fiqs8s.icom.museum"
+
+    * `url.port` is either None or an integer. URLs that include the default port for]]>
+    </type-def>
+    <type-def file="httpx/_urls.py" symbol="URL" lines="58-111">
+      <![CDATA[      "http", "https", "ws", "wss", and "ftp" schemes have their port
+      normalized to `None`.
+
+      assert httpx.URL("http://example.com") == httpx.URL("http://example.com:80")
+      assert httpx.URL("http://example.com").port is None
+      assert httpx.URL("http://example.com:80").port is None
+
+    * `url.userinfo` is raw bytes, without URL escaping. Usually you'll want to work
+      with `url.username` and `url.password` instead, which handle the URL escaping.
+
+    * `url.raw_path` is raw bytes of both the path and query, without URL escaping.
+      This portion is used as the target when constructing HTTP requests. Usually you'll
+      want to work with `url.path` instead.
+
+    * `url.query` is raw bytes, without URL escaping. A URL query string portion can
+      only be properly URL escaped when decoding the parameter names and values
+      themselves.
+    """
+
+    def __init__(self, url: URL | str = "", **kwargs: typing.Any) -> None:
+        if kwargs:
+            allowed = {
+                "scheme": str,
+                "username": str,
+                "password": str,
+                "userinfo": bytes,
+                "host": str,
+                "port": int,
+                "netloc": bytes,
+                "path": str,
+                "query": bytes,
+                "raw_path": bytes,
+                "fragment": str,
+                "params": object,
+            }
+
+            # Perform type checking for all supported keyword arguments.
+            for key, value in kwargs.items():
+                if key not in allowed:
+                    message = f"{key!r} is an invalid keyword argument for URL()"
+                    raise TypeError(message)
+                if value is not None and not isinstance(value, allowed[key]):
+                    expected = allowed[key].__name__
+                    seen = type(value).__name__
+                    message = f"Argument {key!r} must be {expected} but got {seen}"
+                    raise TypeError(message)
+                if isinstance(value, bytes):
+                    kwargs[key] = value.decode("ascii")
+
+            if "params" in kwargs:
+                # Replace any "params" keyword with the raw "query" instead.
+                #
+                # Ensure that empty params use `kwargs["query"] = None` rather
+                # than `kwargs["query"] = ""`, so that generated URLs do not]]>
+    </type-def>
+  </type-definitions>
+  <receipt freshness="clean" complete="incomplete" reason="dependency_frontier_cut" action="fetch_skipped_candidate" index_revision="1a76e45765620474a56fe0c93bfc933e93515aabefec220cd5b49f2cb4ec2151" budget_requested="1418" budget_consumed="1402" returned_shown="9" returned_total="9" skipped_shown="20" skipped_total="20" omitted_edges_shown="20" omitted_edges_total="20">
+    <returned handle="chunk:httpx/__init__.py:_module:97" file="httpx/__init__.py" lines="97-106" hash="1e243fa9fd66a1b0dc9e69638d9db796a62f2d609959c84db24f604f06a234ab" score="2.6542" />
+    <returned handle="chunk:httpx/_transports/__init__.py:_module:1" file="httpx/_transports/__init__.py" lines="1-16" hash="592a7de423da838933428c37e0fa124f8c1133180394710c2f2f07bc186249c1" score="2.6540" />
+    <returned handle="chunk:httpx/_urlparse.py:authority:168" file="httpx/_urlparse.py" lines="168-175" hash="41eebc7e206152591ed926577aac6e4d3803b2671cc69632e7c33791602e291a" score="1.7552" />
+    <returned handle="chunk:httpx/_urlparse.py:netloc:178" file="httpx/_urlparse.py" lines="178-184" hash="90fde5f78e335827b8adfbe77604bce22d5515c6b28fdcb8000611ef51455f45" score="1.7647" />
+    <returned handle="chunk:httpx/_urlparse.py:copy_with:186" file="httpx/_urlparse.py" lines="186-198" hash="9f600eed35e5bf2c2bf772a7f4a604a14d7b17b3a64176866a46c7f2d1a36092" score="1.8353" />
+    <returned handle="chunk:httpx/_urlparse.py:PERCENT:478" file="httpx/_urlparse.py" lines="478-479" hash="7597b6c430eb2cc0d12d3c2004e9490dbf3c1a1acc3cdbdad715d7d04ce1fe3a" score="1.7790" />
+    <returned handle="chunk:httpx/_urls.py:URL:15" file="httpx/_urls.py" lines="15-57" hash="4e5bfa6d01710cd37cdcdffb66c20235e475b68b510f82d58ccb54f89a2e9709" score="2.1202" />
+    <returned handle="chunk:httpx/_urls.py:URL:58" file="httpx/_urls.py" lines="58-111" hash="dfd52e59613662eeb468810cc28550cf38b9170dca895babf21fb0331b5784a6" score="2.1202" />
+    <skipped file="httpx/__init__.py" reason="over_budget" handle="chunk:httpx/__init__.py:_module:1" />
+    <skipped file="httpx/_urlparse.py" reason="over_budget" handle="chunk:httpx/_urlparse.py:_module:1" />
+    <skipped file="httpx/_urlparse.py" reason="over_budget" handle="chunk:httpx/_urlparse.py:_module:138" />
+    <skipped file="httpx/_urlparse.py" reason="over_budget" handle="chunk:httpx/_urlparse.py:_module:54" />
+    <skipped file="httpx/_urlparse.py" reason="over_budget" handle="chunk:httpx/_urlparse.py:_module:86" />
+    <skipped file="httpx/_urlparse.py" reason="over_budget" handle="chunk:httpx/_urlparse.py:__str__:200" />
+    <skipped file="httpx/_urlparse.py" reason="over_budget" handle="chunk:httpx/_urlparse.py:encode_host:348" />
+    <skipped file="httpx/_urlparse.py" reason="over_budget" handle="chunk:httpx/_urlparse.py:normalize_path:447" />
+  </receipt>
+</context>

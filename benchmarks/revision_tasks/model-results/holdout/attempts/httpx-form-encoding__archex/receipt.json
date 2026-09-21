@@ -1,0 +1,52 @@
+{
+  "answer": {
+    "value": [
+      "u=with+spaces",
+      "u=with%2520spaces"
+    ]
+  },
+  "artifact_sha256": {
+    "command.json": "b198680e89d01c147c150b920e82a8fac86fe069f86ebe93b3f44cfe43f8b031",
+    "events.jsonl": "d272540b4121b07c47beaf2dcc90810572f972d8202c408de15bb1b6db760909",
+    "instructions.txt": "526c634a7fb2948dad3a3e046acd375975ef58e997ddef36f2039479a7cd05c3",
+    "prompt.txt": "c70daeb8a32ea24a187320f4510d779b13321c5469395dbcea6ab73c533f4860",
+    "response.json": "cd12377f9a1457465249bd4def9d10efba27c1de2ecc9ec8567eceb18fb4ba04",
+    "schema.json": "0875783714dbd7f5cce9a18f60cf5859ebf464e24c8ba232d4254deb1fe231fe",
+    "stderr.txt": "950bcbbc68fd6222288fc7d12bba8484c4ddfd244ff7df6a2c597c536f73f393"
+  },
+  "evidence_bytes": 12816,
+  "execution_error": null,
+  "forbidden_items": [],
+  "input_identity": {
+    "instructions_sha256": "526c634a7fb2948dad3a3e046acd375975ef58e997ddef36f2039479a7cd05c3",
+    "model": "gpt-6-astra",
+    "prompt_sha256": "c70daeb8a32ea24a187320f4510d779b13321c5469395dbcea6ab73c533f4860",
+    "reasoning_effort": "medium",
+    "schema_sha256": "572d646905a4274b2f90cd86de3e2e10660a0dee4b3b963495ade9d263ae41f9",
+    "transport": "https"
+  },
+  "malformed_events": [],
+  "parse_error": null,
+  "prompt_bytes": 13213,
+  "returncode": 0,
+  "started_at": "2026-09-21T11:25:15.600974+00:00",
+  "tool_violation": false,
+  "transport_messages": [
+    {
+      "id": "item_0",
+      "message": "Under-development features enabled: skip_host_skill_discovery. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in <USER_HOME>/.codex/config.toml.",
+      "type": "error"
+    }
+  ],
+  "usage": [
+    {
+      "cache_write_input_tokens": 0,
+      "cached_input_tokens": 3968,
+      "input_tokens": 10073,
+      "output_tokens": 36,
+      "reasoning_output_tokens": 0
+    }
+  ],
+  "valid_completion": true,
+  "wall_seconds": 33.016238707932644
+}

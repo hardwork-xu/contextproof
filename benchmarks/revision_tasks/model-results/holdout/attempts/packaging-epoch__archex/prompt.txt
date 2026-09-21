@@ -1,0 +1,283 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+from packaging.specifiers import Specifier
+RESULT = Specifier("==2!1.0.0.0.*").contains("2!1.0.0")
+```
+
+Repository source evidence:
+<context query="Explain the behavior of this Python probe using repository source. src/packaging/specifiers.py Specifier._compare_equal src/packaging/specifiers.py _version_split src/packaging/specifiers.py _pad_version
+from packaging.specifiers import Specifier
+RESULT = Specifier(&quot;==2!1.0.0.0.*&quot;).contains(&quot;2!1.0.0&quot;)
+">
+  <structural-context>
+    <file-tree><![CDATA[
+src/packaging/_manylinux.py
+src/packaging/specifiers.py
+src/packaging/tags.py
+src/packaging/version.py
+    ]]></file-tree>
+  </structural-context>
+  <chunks>
+    <chunk file="src/packaging/specifiers.py" lines="630-649" symbol="_version_split" score="2.4142" tokens="135">
+      <code><![CDATA[
+def _version_split(version: str) -> list[str]:
+    """Split version into components.
+
+    The split components are intended for version comparison. The logic does
+    not attempt to retain the original version string, so joining the
+    components back with :func:`_version_join` may not produce the original
+    version string.
+    """
+    result: list[str] = []
+
+    epoch, _, rest = version.rpartition("!")
+    result.append(epoch or "0")
+
+    for item in rest.split("."):
+        match = _prefix_regex.search(item)
+        if match:
+            result.extend(match.groups())
+        else:
+            result.append(item)
+    return result
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/version.py" lines="1-37" score="1.8908" tokens="254">
+      <code><![CDATA[
+# This file is dual licensed under the terms of the Apache License, Version
+# 2.0, and the BSD License. See the LICENSE file in the root of this repository
+# for complete details.
+"""
+.. testsetup::
+
+    from packaging.version import parse, Version
+"""
+
+from __future__ import annotations
+
+import itertools
+import re
+from typing import Any, Callable, NamedTuple, SupportsInt, Tuple, Union
+
+from ._structures import Infinity, InfinityType, NegativeInfinity, NegativeInfinityType
+
+__all__ = ["VERSION_PATTERN", "InvalidVersion", "Version", "parse"]
+
+LocalType = Tuple[Union[int, str], ...]
+
+CmpPrePostDevType = Union[InfinityType, NegativeInfinityType, Tuple[str, int]]
+CmpLocalType = Union[
+    NegativeInfinityType,
+    Tuple[Union[Tuple[int, str], Tuple[NegativeInfinityType, Union[int, str]]], ...],
+]
+CmpKey = Tuple[
+    int,
+    Tuple[int, ...],
+    CmpPrePostDevType,
+    CmpPrePostDevType,
+    CmpPrePostDevType,
+    CmpLocalType,
+]
+VersionComparisonMethod = Callable[[CmpKey, CmpKey], bool]
+
+
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/_manylinux.py" lines="182-205" symbol="_is_compatible" score="0.9321" tokens="255">
+      <code><![CDATA[
+def _is_compatible(arch: str, version: _GLibCVersion) -> bool:
+    sys_glibc = _get_glibc_version()
+    if sys_glibc < version:
+        return False
+    # Check for presence of _manylinux module.
+    try:
+        import _manylinux
+    except ImportError:
+        return True
+    if hasattr(_manylinux, "manylinux_compatible"):
+        result = _manylinux.manylinux_compatible(version[0], version[1], arch)
+        if result is not None:
+            return bool(result)
+        return True
+    if version == _GLibCVersion(2, 5):
+        if hasattr(_manylinux, "manylinux1_compatible"):
+            return bool(_manylinux.manylinux1_compatible)
+    if version == _GLibCVersion(2, 12):
+        if hasattr(_manylinux, "manylinux2010_compatible"):
+            return bool(_manylinux.manylinux2010_compatible)
+    if version == _GLibCVersion(2, 17):
+        if hasattr(_manylinux, "manylinux2014_compatible"):
+            return bool(_manylinux.manylinux2014_compatible)
+    return True
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/tags.py" lines="1-41" score="0.8505" tokens="211">
+      <code><![CDATA[
+# This file is dual licensed under the terms of the Apache License, Version
+# 2.0, and the BSD License. See the LICENSE file in the root of this repository
+# for complete details.
+
+from __future__ import annotations
+
+import logging
+import platform
+import re
+import struct
+import subprocess
+import sys
+import sysconfig
+from importlib.machinery import EXTENSION_SUFFIXES
+from typing import (
+    Iterable,
+    Iterator,
+    Sequence,
+    Tuple,
+    cast,
+)
+
+from . import _manylinux, _musllinux
+
+logger = logging.getLogger(__name__)
+
+PythonVersion = Sequence[int]
+AppleVersion = Tuple[int, int]
+
+INTERPRETER_SHORT_NAMES: dict[str, str] = {
+    "python": "py",  # Generic.
+    "cpython": "cp",
+    "pypy": "pp",
+    "ironpython": "ip",
+    "jython": "jy",
+}
+
+
+_32_BIT_INTERPRETER = struct.calcsize("P") == 4
+
+
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/specifiers.py" lines="388-426" symbol="_compare_equal" score="2.2655" tokens="383">
+      <code><![CDATA[
+    def _compare_equal(self, prospective: Version, spec: str) -> bool:
+        # We need special logic to handle prefix matching
+        if spec.endswith(".*"):
+            # In the case of prefix matching we want to ignore local segment.
+            normalized_prospective = canonicalize_version(
+                prospective.public, strip_trailing_zero=False
+            )
+            # Get the normalized version string ignoring the trailing .*
+            normalized_spec = canonicalize_version(spec[:-2], strip_trailing_zero=False)
+            # Split the spec out by bangs and dots, and pretend that there is
+            # an implicit dot in between a release segment and a pre-release segment.
+            split_spec = _version_split(normalized_spec)
+
+            # Split the prospective version out by bangs and dots, and pretend
+            # that there is an implicit dot in between a release segment and
+            # a pre-release segment.
+            split_prospective = _version_split(normalized_prospective)
+
+            # 0-pad the prospective version before shortening it to get the correct
+            # shortened version.
+            padded_prospective, _ = _pad_version(split_prospective, split_spec)
+
+            # Shorten the prospective version to be the same length as the spec
+            # so that we can determine if the specifier is a prefix of the
+            # prospective version or not.
+            shortened_prospective = padded_prospective[: len(split_spec)]
+
+            return shortened_prospective == split_spec
+        else:
+            # Convert our spec string into a Version
+            spec_version = Version(spec)
+
+            # If the specifier does not have a local segment, then we want to
+            # act as if the prospective version also does not have a local
+            # segment.
+            if not spec_version.local:
+                prospective = Version(prospective.public)
+
+            return prospective == spec_version
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/specifiers.py" lines="32-41" symbol="InvalidSpecifier" score="2.1142" tokens="64">
+      <code><![CDATA[
+class InvalidSpecifier(ValueError):
+    """
+    Raised when attempting to create a :class:`Specifier` with a specifier
+    string that is invalid.
+
+    >>> Specifier("lolwat")
+    Traceback (most recent call last):
+        ...
+    packaging.specifiers.InvalidSpecifier: Invalid specifier: 'lolwat'
+    """
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/specifiers.py" lines="26-29" symbol="_coerce_version" score="2.0542" tokens="31">
+      <code><![CDATA[
+def _coerce_version(version: UnparsedVersion) -> Version:
+    if not isinstance(version, Version):
+        version = Version(version)
+    return version
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/specifiers.py" lines="669-687" symbol="_pad_version" score="1.7062" tokens="206">
+      <code><![CDATA[
+def _pad_version(left: list[str], right: list[str]) -> tuple[list[str], list[str]]:
+    left_split, right_split = [], []
+
+    # Get the release segment of our versions
+    left_split.append(list(itertools.takewhile(lambda x: x.isdigit(), left)))
+    right_split.append(list(itertools.takewhile(lambda x: x.isdigit(), right)))
+
+    # Get the rest of our versions
+    left_split.append(left[len(left_split[0]) :])
+    right_split.append(right[len(right_split[0]) :])
+
+    # Insert our padding
+    left_split.insert(1, ["0"] * max(0, len(right_split[0]) - len(left_split[0])))
+    right_split.insert(1, ["0"] * max(0, len(left_split[0]) - len(right_split[0])))
+
+    return (
+        list(itertools.chain.from_iterable(left_split)),
+        list(itertools.chain.from_iterable(right_split)),
+    )
+      ]]></code>
+    </chunk>
+  </chunks>
+  <type-definitions>
+    <type-def file="src/packaging/specifiers.py" symbol="InvalidSpecifier" lines="32-41">
+      <![CDATA[class InvalidSpecifier(ValueError):
+    """
+    Raised when attempting to create a :class:`Specifier` with a specifier
+    string that is invalid.
+
+    >>> Specifier("lolwat")
+    Traceback (most recent call last):
+        ...
+    packaging.specifiers.InvalidSpecifier: Invalid specifier: 'lolwat'
+    """]]>
+    </type-def>
+  </type-definitions>
+  <receipt freshness="clean" complete="incomplete" reason="dependency_frontier_cut" action="fetch_skipped_candidate" index_revision="f846c38dc48af337e9d838d465a652dacd3975209156386732a1bdd68051cf1f" budget_requested="1552" budget_consumed="1539" returned_shown="8" returned_total="8" skipped_shown="20" skipped_total="20" omitted_edges_shown="20" omitted_edges_total="20">
+    <returned handle="chunk:src/packaging/_manylinux.py:_is_compatible:182" file="src/packaging/_manylinux.py" lines="182-205" hash="2239e76784be6d213cf590589311cdd81e97263875d208755e9818a7860710a3" score="0.9321" />
+    <returned handle="chunk:src/packaging/specifiers.py:_coerce_version:26" file="src/packaging/specifiers.py" lines="26-29" hash="bcbfae81e803920c7550418a5311fa4ae6ad461c395c4012fb4cb6e514cf76f8" score="2.0542" />
+    <returned handle="chunk:src/packaging/specifiers.py:InvalidSpecifier:32" file="src/packaging/specifiers.py" lines="32-41" hash="950ab5e407f2e02aa586e4be22e0c523e531350dfb777dcf3f55f213bcffeb19" score="2.1142" />
+    <returned handle="chunk:src/packaging/specifiers.py:_compare_equal:388" file="src/packaging/specifiers.py" lines="388-426" hash="0cc881a8f2c2e6cda471020bfd7c80e4b53e910b1dd52ecca84e6a19237aedf9" score="2.2655" />
+    <returned handle="chunk:src/packaging/specifiers.py:_version_split:630" file="src/packaging/specifiers.py" lines="630-649" hash="25df360f490d3c89ef99f0ccf2a468d7f46300a62e061fc68c29a92ca73569e7" score="2.4142" />
+    <returned handle="chunk:src/packaging/specifiers.py:_pad_version:669" file="src/packaging/specifiers.py" lines="669-687" hash="498fd4383eb184ccf6aba580cd8d372a9bccd913b2c3caa944fbc956dedb7a64" score="1.7062" />
+    <returned handle="chunk:src/packaging/tags.py:_module:1" file="src/packaging/tags.py" lines="1-41" hash="9aafb2a109fadcc48438f7a17f0ce77a8810fa94fd988129b8cd7fb387dfb793" score="0.8505" />
+    <returned handle="chunk:src/packaging/version.py:_module:1" file="src/packaging/version.py" lines="1-37" hash="8268409ee111a8ce9d0f8d6a3570c99874b370500deb3dd2190603d894c72a19" score="1.8908" />
+    <skipped file="src/packaging/_manylinux.py" reason="over_budget" handle="chunk:src/packaging/_manylinux.py:_module:1" />
+    <skipped file="src/packaging/_manylinux.py" reason="over_budget" handle="chunk:src/packaging/_manylinux.py:_glibc_version_string_confstr:85" />
+    <skipped file="src/packaging/_manylinux.py" reason="over_budget" handle="chunk:src/packaging/_manylinux.py:_glibc_version_string_ctypes:104" />
+    <skipped file="src/packaging/_manylinux.py" reason="over_budget" handle="chunk:src/packaging/_manylinux.py:_is_linux_armhf:30" />
+    <skipped file="src/packaging/_manylinux.py" reason="over_budget" handle="chunk:src/packaging/_manylinux.py:_is_linux_i686:45" />
+    <skipped file="src/packaging/_manylinux.py" reason="over_budget" handle="chunk:src/packaging/_manylinux.py:_parse_elf:22" />
+    <skipped file="src/packaging/specifiers.py" reason="over_budget" handle="chunk:src/packaging/specifiers.py:BaseSpecifier:44" />
+    <skipped file="src/packaging/specifiers.py" reason="over_budget" handle="chunk:src/packaging/specifiers.py:Specifier:154" />
+  </receipt>
+</context>

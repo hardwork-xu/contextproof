@@ -1,0 +1,379 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import httpx
+proxy = httpx.Proxy("socks5h://localhost:1080")
+RESULT = [proxy.url.scheme, proxy.url.port]
+```
+
+Repository source evidence:
+<context query="Explain the behavior of this Python probe using repository source. httpx/_config.py Proxy.__init__
+import httpx
+proxy = httpx.Proxy(&quot;socks5h://localhost:1080&quot;)
+RESULT = [proxy.url.scheme, proxy.url.port]
+">
+  <structural-context>
+    <file-tree><![CDATA[
+httpx/__init__.py
+httpx/_client.py
+httpx/_config.py
+httpx/_transports/__init__.py
+    ]]></file-tree>
+  </structural-context>
+  <chunks>
+    <chunk file="httpx/__init__.py" lines="97-106" score="2.6542" tokens="53">
+      <code><![CDATA[
+    "WriteTimeout",
+    "WSGITransport",
+]
+
+
+__locals = locals()
+for __name in __all__:
+    if not __name.startswith("__"):
+        setattr(__locals[__name], "__module__", "httpx")  # noqa
+
+      ]]></code>
+    </chunk>
+    <chunk file="httpx/_transports/__init__.py" lines="1-16" score="2.6540" tokens="74">
+      <code><![CDATA[
+from .asgi import *
+from .base import *
+from .default import *
+from .mock import *
+from .wsgi import *
+
+__all__ = [
+    "ASGITransport",
+    "AsyncBaseTransport",
+    "BaseTransport",
+    "AsyncHTTPTransport",
+    "HTTPTransport",
+    "MockTransport",
+    "WSGITransport",
+]
+
+      ]]></code>
+    </chunk>
+    <chunk file="httpx/_config.py" lines="72-129" symbol="Timeout" score="2.1075" tokens="507">
+      <code><![CDATA[
+class Timeout:
+    """
+    Timeout configuration.
+
+    **Usage**:
+
+    Timeout(None)               # No timeouts.
+    Timeout(5.0)                # 5s timeout on all operations.
+    Timeout(None, connect=5.0)  # 5s timeout on connect, no other timeouts.
+    Timeout(5.0, connect=10.0)  # 10s timeout on connect. 5s timeout elsewhere.
+    Timeout(5.0, pool=None)     # No timeout on acquiring connection from pool.
+                                # 5s timeout elsewhere.
+    """
+
+    def __init__(
+        self,
+        timeout: TimeoutTypes | UnsetType = UNSET,
+        *,
+        connect: None | float | UnsetType = UNSET,
+        read: None | float | UnsetType = UNSET,
+        write: None | float | UnsetType = UNSET,
+        pool: None | float | UnsetType = UNSET,
+    ) -> None:
+        if isinstance(timeout, Timeout):
+            # Passed as a single explicit Timeout.
+            assert connect is UNSET
+            assert read is UNSET
+            assert write is UNSET
+            assert pool is UNSET
+            self.connect = timeout.connect  # type: typing.Optional[float]
+            self.read = timeout.read  # type: typing.Optional[float]
+            self.write = timeout.write  # type: typing.Optional[float]
+            self.pool = timeout.pool  # type: typing.Optional[float]
+        elif isinstance(timeout, tuple):
+            # Passed as a tuple.
+            self.connect = timeout[0]
+            self.read = timeout[1]
+            self.write = None if len(timeout) < 3 else timeout[2]
+            self.pool = None if len(timeout) < 4 else timeout[3]
+        elif not (
+            isinstance(connect, UnsetType)
+            or isinstance(read, UnsetType)
+            or isinstance(write, UnsetType)
+            or isinstance(pool, UnsetType)
+        ):
+            self.connect = connect
+            self.read = read
+            self.write = write
+            self.pool = pool
+        else:
+            if isinstance(timeout, UnsetType):
+                raise ValueError(
+                    "httpx.Timeout must either include a default, or set all "
+                    "four parameters explicitly."
+                )
+            self.connect = timeout if isinstance(connect, UnsetType) else connect
+            self.read = timeout if isinstance(read, UnsetType) else read
+            self.write = timeout if isinstance(write, UnsetType) else write
+      ]]></code>
+    </chunk>
+    <chunk file="httpx/_client.py" lines="494-515" symbol="_redirect_method" score="1.0810" tokens="201">
+      <code><![CDATA[
+    def _redirect_method(self, request: Request, response: Response) -> str:
+        """
+        When being redirected we may want to change the method of the request
+        based on certain specs or browser behavior.
+        """
+        method = request.method
+
+        # https://tools.ietf.org/html/rfc7231#section-6.4.4
+        if response.status_code == codes.SEE_OTHER and method != "HEAD":
+            method = "GET"
+
+        # Do what the browsers do, despite standards...
+        # Turn 302s into GETs.
+        if response.status_code == codes.FOUND and method != "HEAD":
+            method = "GET"
+
+        # If a POST is responded to with a 301, turn it into a GET.
+        # This bizarre behaviour is explained in 'requests' issue 1704.
+        if response.status_code == codes.MOVED_PERMANENTLY and method == "POST":
+            method = "GET"
+
+        return method
+      ]]></code>
+    </chunk>
+    <chunk file="httpx/_config.py" lines="130-156" symbol="Timeout" score="2.1075" tokens="209">
+      <code><![CDATA[
+            self.pool = timeout if isinstance(pool, UnsetType) else pool
+
+    def as_dict(self) -> dict[str, float | None]:
+        return {
+            "connect": self.connect,
+            "read": self.read,
+            "write": self.write,
+            "pool": self.pool,
+        }
+
+    def __eq__(self, other: typing.Any) -> bool:
+        return (
+            isinstance(other, self.__class__)
+            and self.connect == other.connect
+            and self.read == other.read
+            and self.write == other.write
+            and self.pool == other.pool
+        )
+
+    def __repr__(self) -> str:
+        class_name = self.__class__.__name__
+        if len({self.connect, self.read, self.write, self.pool}) == 1:
+            return f"{class_name}(timeout={self.connect})"
+        return (
+            f"{class_name}(connect={self.connect}, "
+            f"read={self.read}, write={self.write}, pool={self.pool})"
+        )
+      ]]></code>
+    </chunk>
+    <chunk file="httpx/_config.py" lines="86-130" symbol="__init__" score="2.0475" tokens="401">
+      <code><![CDATA[
+    def __init__(
+        self,
+        timeout: TimeoutTypes | UnsetType = UNSET,
+        *,
+        connect: None | float | UnsetType = UNSET,
+        read: None | float | UnsetType = UNSET,
+        write: None | float | UnsetType = UNSET,
+        pool: None | float | UnsetType = UNSET,
+    ) -> None:
+        if isinstance(timeout, Timeout):
+            # Passed as a single explicit Timeout.
+            assert connect is UNSET
+            assert read is UNSET
+            assert write is UNSET
+            assert pool is UNSET
+            self.connect = timeout.connect  # type: typing.Optional[float]
+            self.read = timeout.read  # type: typing.Optional[float]
+            self.write = timeout.write  # type: typing.Optional[float]
+            self.pool = timeout.pool  # type: typing.Optional[float]
+        elif isinstance(timeout, tuple):
+            # Passed as a tuple.
+            self.connect = timeout[0]
+            self.read = timeout[1]
+            self.write = None if len(timeout) < 3 else timeout[2]
+            self.pool = None if len(timeout) < 4 else timeout[3]
+        elif not (
+            isinstance(connect, UnsetType)
+            or isinstance(read, UnsetType)
+            or isinstance(write, UnsetType)
+            or isinstance(pool, UnsetType)
+        ):
+            self.connect = connect
+            self.read = read
+            self.write = write
+            self.pool = pool
+        else:
+            if isinstance(timeout, UnsetType):
+                raise ValueError(
+                    "httpx.Timeout must either include a default, or set all "
+                    "four parameters explicitly."
+                )
+            self.connect = timeout if isinstance(connect, UnsetType) else connect
+            self.read = timeout if isinstance(read, UnsetType) else read
+            self.write = timeout if isinstance(write, UnsetType) else write
+            self.pool = timeout if isinstance(pool, UnsetType) else pool
+      ]]></code>
+    </chunk>
+    <chunk file="httpx/_config.py" lines="1-26" score="1.2957" tokens="116">
+      <code><![CDATA[
+from __future__ import annotations
+
+import os
+import typing
+
+from ._models import Headers
+from ._types import CertTypes, HeaderTypes, TimeoutTypes
+from ._urls import URL
+
+if typing.TYPE_CHECKING:
+    import ssl  # pragma: no cover
+
+__all__ = ["Limits", "Proxy", "Timeout", "create_ssl_context"]
+
+
+
+
+UNSET = UnsetType()
+
+
+
+
+DEFAULT_TIMEOUT_CONFIG = Timeout(timeout=5.0)
+DEFAULT_LIMITS = Limits(max_connections=100, max_keepalive_connections=20)
+DEFAULT_MAX_REDIRECTS = 20
+
+      ]]></code>
+    </chunk>
+    <chunk file="httpx/_config.py" lines="227-233" symbol="raw_auth" score="1.2375" tokens="65">
+      <code><![CDATA[
+    def raw_auth(self) -> tuple[bytes, bytes] | None:
+        # The proxy authentication as raw bytes.
+        return (
+            None
+            if self.auth is None
+            else (self.auth[0].encode("utf-8"), self.auth[1].encode("utf-8"))
+        )
+      ]]></code>
+    </chunk>
+  </chunks>
+  <type-definitions>
+    <type-def file="httpx/_config.py" symbol="Timeout" lines="72-129">
+      <![CDATA[class Timeout:
+    """
+    Timeout configuration.
+
+    **Usage**:
+
+    Timeout(None)               # No timeouts.
+    Timeout(5.0)                # 5s timeout on all operations.
+    Timeout(None, connect=5.0)  # 5s timeout on connect, no other timeouts.
+    Timeout(5.0, connect=10.0)  # 10s timeout on connect. 5s timeout elsewhere.
+    Timeout(5.0, pool=None)     # No timeout on acquiring connection from pool.
+                                # 5s timeout elsewhere.
+    """
+
+    def __init__(
+        self,
+        timeout: TimeoutTypes | UnsetType = UNSET,
+        *,
+        connect: None | float | UnsetType = UNSET,
+        read: None | float | UnsetType = UNSET,
+        write: None | float | UnsetType = UNSET,
+        pool: None | float | UnsetType = UNSET,
+    ) -> None:
+        if isinstance(timeout, Timeout):
+            # Passed as a single explicit Timeout.
+            assert connect is UNSET
+            assert read is UNSET
+            assert write is UNSET
+            assert pool is UNSET
+            self.connect = timeout.connect  # type: typing.Optional[float]
+            self.read = timeout.read  # type: typing.Optional[float]
+            self.write = timeout.write  # type: typing.Optional[float]
+            self.pool = timeout.pool  # type: typing.Optional[float]
+        elif isinstance(timeout, tuple):
+            # Passed as a tuple.
+            self.connect = timeout[0]
+            self.read = timeout[1]
+            self.write = None if len(timeout) < 3 else timeout[2]
+            self.pool = None if len(timeout) < 4 else timeout[3]
+        elif not (
+            isinstance(connect, UnsetType)
+            or isinstance(read, UnsetType)
+            or isinstance(write, UnsetType)
+            or isinstance(pool, UnsetType)
+        ):
+            self.connect = connect
+            self.read = read
+            self.write = write
+            self.pool = pool
+        else:
+            if isinstance(timeout, UnsetType):
+                raise ValueError(
+                    "httpx.Timeout must either include a default, or set all "
+                    "four parameters explicitly."
+                )
+            self.connect = timeout if isinstance(connect, UnsetType) else connect
+            self.read = timeout if isinstance(read, UnsetType) else read
+            self.write = timeout if isinstance(write, UnsetType) else write]]>
+    </type-def>
+    <type-def file="httpx/_config.py" symbol="Timeout" lines="130-156">
+      <![CDATA[            self.pool = timeout if isinstance(pool, UnsetType) else pool
+
+    def as_dict(self) -> dict[str, float | None]:
+        return {
+            "connect": self.connect,
+            "read": self.read,
+            "write": self.write,
+            "pool": self.pool,
+        }
+
+    def __eq__(self, other: typing.Any) -> bool:
+        return (
+            isinstance(other, self.__class__)
+            and self.connect == other.connect
+            and self.read == other.read
+            and self.write == other.write
+            and self.pool == other.pool
+        )
+
+    def __repr__(self) -> str:
+        class_name = self.__class__.__name__
+        if len({self.connect, self.read, self.write, self.pool}) == 1:
+            return f"{class_name}(timeout={self.connect})"
+        return (
+            f"{class_name}(connect={self.connect}, "
+            f"read={self.read}, write={self.write}, pool={self.pool})"
+        )]]>
+    </type-def>
+  </type-definitions>
+  <receipt freshness="clean" complete="incomplete" reason="dependency_frontier_cut" action="fetch_skipped_candidate" index_revision="1a76e45765620474a56fe0c93bfc933e93515aabefec220cd5b49f2cb4ec2151" budget_requested="1707" budget_consumed="1626" returned_shown="8" returned_total="8" skipped_shown="20" skipped_total="20" omitted_edges_shown="20" omitted_edges_total="20">
+    <returned handle="chunk:httpx/__init__.py:_module:97" file="httpx/__init__.py" lines="97-106" hash="1e243fa9fd66a1b0dc9e69638d9db796a62f2d609959c84db24f604f06a234ab" score="2.6542" />
+    <returned handle="chunk:httpx/_client.py:_redirect_method:494" file="httpx/_client.py" lines="494-515" hash="04f56ee639b94755a020b88474edac7b0514949b0594a44a15838931e7674833" score="1.0810" />
+    <returned handle="chunk:httpx/_config.py:_module:1" file="httpx/_config.py" lines="1-26" hash="4d3429d61e332db79f27de6a28403157526acebe6c93afc18b65eb6018dae6cd" score="1.2957" />
+    <returned handle="chunk:httpx/_config.py:Timeout:72" file="httpx/_config.py" lines="72-129" hash="7c796c45e3f9a7d52d201919eb3a7704fcc51810ac82e2f17d154e899919f0d4" score="2.1075" />
+    <returned handle="chunk:httpx/_config.py:__init__:86" file="httpx/_config.py" lines="86-130" hash="2915cc1970950bb53f3df49a70d141799b3d3c3bc5014671fad5743bba5149c6" score="2.0475" />
+    <returned handle="chunk:httpx/_config.py:Timeout:130" file="httpx/_config.py" lines="130-156" hash="298f090c4b21f90989023a033c77bcf7cce4fb945d20a64b29145b4a136e4ac5" score="2.1075" />
+    <returned handle="chunk:httpx/_config.py:raw_auth:227" file="httpx/_config.py" lines="227-233" hash="5781f636e6c35fa08ea084db6817815c9722be7190a8622837f868bc92a0d4c3" score="1.2375" />
+    <returned handle="chunk:httpx/_transports/__init__.py:_module:1" file="httpx/_transports/__init__.py" lines="1-16" hash="592a7de423da838933428c37e0fa124f8c1133180394710c2f2f07bc186249c1" score="2.6540" />
+    <skipped file="httpx/__init__.py" reason="over_budget" handle="chunk:httpx/__init__.py:_module:1" />
+    <skipped file="httpx/_client.py" reason="over_budget" handle="chunk:httpx/_client.py:_module:1" />
+    <skipped file="httpx/_client.py" reason="over_budget" handle="chunk:httpx/_client.py:AsyncClient:1307" />
+    <skipped file="httpx/_client.py" reason="over_budget" handle="chunk:httpx/_client.py:AsyncClient:1360" />
+    <skipped file="httpx/_client.py" reason="over_budget" handle="chunk:httpx/_client.py:AsyncClient:1426" />
+    <skipped file="httpx/_client.py" reason="over_budget" handle="chunk:httpx/_client.py:AsyncClient:1498" />
+    <skipped file="httpx/_client.py" reason="over_budget" handle="chunk:httpx/_client.py:AsyncClient:1569" />
+    <skipped file="httpx/_client.py" reason="over_budget" handle="chunk:httpx/_client.py:AsyncClient:1662" />
+  </receipt>
+</context>

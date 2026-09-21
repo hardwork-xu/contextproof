@@ -1,0 +1,32 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import pluggy
+import warnings
+hookspec = pluggy.HookspecMarker("example")
+hookimpl = pluggy.HookimplMarker("example")
+class Specification:
+    @hookspec
+    def run(self):
+        pass
+class Plugin:
+    @hookimpl(hookwrapper=True)
+    def run(self):
+        yield
+        raise ValueError("teardown")
+manager = pluggy.PluginManager("example")
+manager.add_hookspecs(Specification)
+manager.register(Plugin(), "plugin")
+with warnings.catch_warnings(record=True) as caught:
+    warnings.simplefilter("always")
+    try:
+        manager.hook.run()
+    except ValueError:
+        pass
+RESULT = [type(item.message).__name__ for item in caught]
+```
+
+Repository source evidence:
+(No source evidence supplied.)

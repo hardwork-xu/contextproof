@@ -1,0 +1,15 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import attrs
+@attrs.define
+class Record:
+    value: float
+value = float("nan")
+RESULT = Record(value) == Record(value)
+```
+
+Repository source evidence:
+{"ambiguity_policy":"all physical declarations; no runtime binding selection","ambiguous_symbols":[],"complete":true,"kind":"supplied-anchor-source","missing":[],"omitted":[],"scope":"supplied-declarations-only","source":[{"end_line":1627,"path":"src/attr/_make.py","start_line":1592,"symbol":"_make_eq","text":"def _make_eq(cls, attrs):\n    \"\"\"\n    Create __eq__ method for *cls* with *attrs*.\n    \"\"\"\n    attrs = [a for a in attrs if a.eq]\n\n    unique_filename = _generate_unique_filename(cls, \"eq\")\n    lines = [\n        \"def __eq__(self, other):\",\n        \"    if other.__class__ is not self.__class__:\",\n        \"        return NotImplemented\",\n    ]\n\n    globs = {}\n    if attrs:\n        lines.append(\"    return  (\")\n        for a in attrs:\n            if a.eq_key:\n                cmp_name = f\"_{a.name}_key\"\n                # Add the key function to the global namespace\n                # of the evaluated function.\n                globs[cmp_name] = a.eq_key\n                lines.append(\n                    f\"        {cmp_name}(self.{a.name}) == {cmp_name}(other.{a.name})\"\n                )\n            else:\n                lines.append(f\"        self.{a.name} == other.{a.name}\")\n            if a is not attrs[-1]:\n                lines[-1] = f\"{lines[-1]} and\"\n        lines.append(\"    )\")\n    else:\n        lines.append(\"    return True\")\n\n    script = \"\\n\".join(lines)\n\n    return _make_method(\"__eq__\", script, unique_filename, globs)\n","text_sha256":"5be004bf8aa76b11dd4ff32574ebf59c761fbdf4f88b8a799f9673ef82417638"},{"end_line":1082,"path":"src/attr/_make.py","start_line":1074,"symbol":"_ClassBuilder.add_eq","text":"    def add_eq(self):\n        cd = self._cls_dict\n\n        cd[\"__eq__\"] = self._add_method_dunders(\n            _make_eq(self._cls, self._attrs)\n        )\n        cd[\"__ne__\"] = self._add_method_dunders(_make_ne())\n\n        return self\n","text_sha256":"843904c40d66ca971adb4df6ee14516b5bca360ba2170c6585b1431750ebf689"}]}

@@ -1,0 +1,12 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+from packaging.markers import Marker
+RESULT = Marker("python_full_version < '3.12'").evaluate(
+    {"python_full_version": "3.11.1+"})
+```
+
+Repository source evidence:
+{"ambiguity_policy":"all physical declarations; no runtime binding selection","ambiguous_symbols":[],"complete":false,"kind":"supplied-anchor-source","missing":[{"path":"src/packaging/markers.py","reason":"missing","symbol":"_repair_python_full_version"}],"omitted":[],"scope":"supplied-declarations-only","source":[{"end_line":252,"path":"src/packaging/markers.py","start_line":234,"symbol":"Marker.evaluate","text":"    def evaluate(self, environment: Optional[Dict[str, str]] = None) -> bool:\n        \"\"\"Evaluate a marker.\n\n        Return the boolean from evaluating the given marker against the\n        environment. environment is an optional argument to override all or\n        part of the determined environment.\n\n        The environment is determined from the current Python process.\n        \"\"\"\n        current_environment = default_environment()\n        current_environment[\"extra\"] = \"\"\n        if environment is not None:\n            current_environment.update(environment)\n            # The API used to allow setting extra to None. We need to handle this\n            # case for backwards compatibility.\n            if current_environment[\"extra\"] is None:\n                current_environment[\"extra\"] = \"\"\n\n        return _evaluate_markers(self._markers, current_environment)\n","text_sha256":"194dae84f3d10e4d5f4f092c5953a999eb397b748ad0bf3da9ea4311b696dda8"},{"end_line":122,"path":"src/packaging/markers.py","start_line":110,"symbol":"_eval_op","text":"def _eval_op(lhs: str, op: Op, rhs: str) -> bool:\n    try:\n        spec = Specifier(\"\".join([op.serialize(), rhs]))\n    except InvalidSpecifier:\n        pass\n    else:\n        return spec.contains(lhs, prereleases=True)\n\n    oper: Optional[Operator] = _operators.get(op.serialize())\n    if oper is None:\n        raise UndefinedComparison(f\"Undefined {op!r} on {lhs!r} and {rhs!r}.\")\n\n    return oper(lhs, rhs)\n","text_sha256":"e539cb43622379aa5fb8e4f2b35f2e805b3f1430464eb9c671e2564674c5a182"}]}

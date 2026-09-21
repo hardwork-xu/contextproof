@@ -1,0 +1,371 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+from packaging.markers import Marker
+RESULT = Marker("python_full_version < '3.12'").evaluate(
+    {"python_full_version": "3.11.1+"})
+```
+
+Repository source evidence:
+<context query="Explain the behavior of this Python probe using repository source. src/packaging/markers.py Marker.evaluate src/packaging/markers.py _repair_python_full_version src/packaging/markers.py _eval_op
+from packaging.markers import Marker
+RESULT = Marker(&quot;python_full_version &lt; '3.12'&quot;).evaluate(
+    {&quot;python_full_version&quot;: &quot;3.11.1+&quot;})
+">
+  <structural-context>
+    <file-tree><![CDATA[
+src/packaging/_elffile.py
+src/packaging/_manylinux.py
+src/packaging/markers.py
+src/packaging/version.py
+    ]]></file-tree>
+  </structural-context>
+  <chunks>
+    <chunk file="src/packaging/markers.py" lines="316-321" symbol="Marker" score="2.4196" tokens="39">
+      <code><![CDATA[
+            if current_environment["extra"] is None:
+                current_environment["extra"] = ""
+
+        return _evaluate_markers(
+            self._markers, _repair_python_full_version(current_environment)
+        )
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/version.py" lines="1-37" score="1.8223" tokens="254">
+      <code><![CDATA[
+# This file is dual licensed under the terms of the Apache License, Version
+# 2.0, and the BSD License. See the LICENSE file in the root of this repository
+# for complete details.
+"""
+.. testsetup::
+
+    from packaging.version import parse, Version
+"""
+
+from __future__ import annotations
+
+import itertools
+import re
+from typing import Any, Callable, NamedTuple, SupportsInt, Tuple, Union
+
+from ._structures import Infinity, InfinityType, NegativeInfinity, NegativeInfinityType
+
+__all__ = ["VERSION_PATTERN", "InvalidVersion", "Version", "parse"]
+
+LocalType = Tuple[Union[int, str], ...]
+
+CmpPrePostDevType = Union[InfinityType, NegativeInfinityType, Tuple[str, int]]
+CmpLocalType = Union[
+    NegativeInfinityType,
+    Tuple[Union[Tuple[int, str], Tuple[NegativeInfinityType, Union[int, str]]], ...],
+]
+CmpKey = Tuple[
+    int,
+    Tuple[int, ...],
+    CmpPrePostDevType,
+    CmpPrePostDevType,
+    CmpPrePostDevType,
+    CmpLocalType,
+]
+VersionComparisonMethod = Callable[[CmpKey, CmpKey], bool]
+
+
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/_manylinux.py" lines="182-205" symbol="_is_compatible" score="0.8981" tokens="255">
+      <code><![CDATA[
+def _is_compatible(arch: str, version: _GLibCVersion) -> bool:
+    sys_glibc = _get_glibc_version()
+    if sys_glibc < version:
+        return False
+    # Check for presence of _manylinux module.
+    try:
+        import _manylinux
+    except ImportError:
+        return True
+    if hasattr(_manylinux, "manylinux_compatible"):
+        result = _manylinux.manylinux_compatible(version[0], version[1], arch)
+        if result is not None:
+            return bool(result)
+        return True
+    if version == _GLibCVersion(2, 5):
+        if hasattr(_manylinux, "manylinux1_compatible"):
+            return bool(_manylinux.manylinux1_compatible)
+    if version == _GLibCVersion(2, 12):
+        if hasattr(_manylinux, "manylinux2010_compatible"):
+            return bool(_manylinux.manylinux2010_compatible)
+    if version == _GLibCVersion(2, 17):
+        if hasattr(_manylinux, "manylinux2014_compatible"):
+            return bool(_manylinux.manylinux2014_compatible)
+    return True
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/_elffile.py" lines="19-20" symbol="ELFInvalid" score="0.7877" tokens="7">
+      <code><![CDATA[
+class ELFInvalid(ValueError):
+    pass
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/markers.py" lines="324-331" symbol="_repair_python_full_version" score="2.4045" tokens="75">
+      <code><![CDATA[
+def _repair_python_full_version(env: dict[str, str]) -> dict[str, str]:
+    """
+    Work around platform.python_version() returning something that is not PEP 440
+    compliant for non-tagged Python builds.
+    """
+    if env["python_full_version"].endswith("+"):
+        env["python_full_version"] += "local"
+    return env
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/markers.py" lines="177-189" symbol="_eval_op" score="2.0996" tokens="108">
+      <code><![CDATA[
+def _eval_op(lhs: str, op: Op, rhs: str) -> bool:
+    try:
+        spec = Specifier("".join([op.serialize(), rhs]))
+    except InvalidSpecifier:
+        pass
+    else:
+        return spec.contains(lhs, prereleases=True)
+
+    oper: Operator | None = _operators.get(op.serialize())
+    if oper is None:
+        raise UndefinedComparison(f"Undefined {op!r} on {lhs!r} and {rhs!r}.")
+
+    return oper(lhs, rhs)
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/markers.py" lines="204-231" symbol="_evaluate_markers" score="1.9883" tokens="214">
+      <code><![CDATA[
+def _evaluate_markers(markers: MarkerList, environment: dict[str, str]) -> bool:
+    groups: list[list[bool]] = [[]]
+
+    for marker in markers:
+        assert isinstance(marker, (list, tuple, str))
+
+        if isinstance(marker, list):
+            groups[-1].append(_evaluate_markers(marker, environment))
+        elif isinstance(marker, tuple):
+            lhs, op, rhs = marker
+
+            if isinstance(lhs, Variable):
+                environment_key = lhs.value
+                lhs_value = environment[environment_key]
+                rhs_value = rhs.value
+            else:
+                lhs_value = lhs.value
+                environment_key = rhs.value
+                rhs_value = environment[environment_key]
+
+            lhs_value, rhs_value = _normalize(lhs_value, rhs_value, key=environment_key)
+            groups[-1].append(_eval_op(lhs_value, op, rhs_value))
+        else:
+            assert marker in ["and", "or"]
+            if marker == "or":
+                groups.append([])
+
+    return any(all(item) for item in groups)
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/markers.py" lines="121-134" symbol="_normalize_extra_values" score="1.9707" tokens="120">
+      <code><![CDATA[
+def _normalize_extra_values(results: Any) -> Any:
+    """
+    Normalize extra values.
+    """
+    if isinstance(results[0], tuple):
+        lhs, op, rhs = results[0]
+        if isinstance(lhs, Variable) and lhs.value == "extra":
+            normalized_extra = canonicalize_name(rhs.value)
+            rhs = Value(normalized_extra)
+        elif isinstance(rhs, Variable) and rhs.value == "extra":
+            normalized_extra = canonicalize_name(lhs.value)
+            lhs = Value(normalized_extra)
+        results[0] = lhs, op, rhs
+    return results
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/markers.py" lines="1-29" score="1.8218" tokens="169">
+      <code><![CDATA[
+# This file is dual licensed under the terms of the Apache License, Version
+# 2.0, and the BSD License. See the LICENSE file in the root of this repository
+# for complete details.
+
+from __future__ import annotations
+
+import operator
+import os
+import platform
+import sys
+from typing import Any, Callable, TypedDict, cast
+
+from ._parser import MarkerAtom, MarkerList, Op, Value, Variable
+from ._parser import parse_marker as _parse_marker
+from ._tokenizer import ParserSyntaxError
+from .specifiers import InvalidSpecifier, Specifier
+from .utils import canonicalize_name
+
+__all__ = [
+    "InvalidMarker",
+    "Marker",
+    "UndefinedComparison",
+    "UndefinedEnvironmentName",
+    "default_environment",
+]
+
+Operator = Callable[[str, str], bool]
+
+
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/markers.py" lines="242-257" symbol="default_environment" score="1.7893" tokens="135">
+      <code><![CDATA[
+def default_environment() -> Environment:
+    iver = format_full_version(sys.implementation.version)
+    implementation_name = sys.implementation.name
+    return {
+        "implementation_name": implementation_name,
+        "implementation_version": iver,
+        "os_name": os.name,
+        "platform_machine": platform.machine(),
+        "platform_release": platform.release(),
+        "platform_system": platform.system(),
+        "platform_version": platform.version(),
+        "python_full_version": platform.python_version(),
+        "platform_python_implementation": platform.python_implementation(),
+        "python_version": ".".join(platform.python_version_tuple()[:2]),
+        "sys_platform": sys.platform,
+    }
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/markers.py" lines="30-33" symbol="InvalidMarker" score="1.3598" tokens="25">
+      <code><![CDATA[
+class InvalidMarker(ValueError):
+    """
+    An invalid marker was found, users should refer to PEP 508.
+    """
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/markers.py" lines="116-118" symbol="Environment" score="1.3516" tokens="38">
+      <code><![CDATA[
+    ``uname -r`` appended, e.g. ``'sunos5'`` or ``'freebsd8'``, at the time when Python
+    was built.
+    """
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/markers.py" lines="36-39" symbol="UndefinedComparison" score="1.3435" tokens="24">
+      <code><![CDATA[
+class UndefinedComparison(ValueError):
+    """
+    An invalid operation was attempted on a value that doesn't support it.
+    """
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/markers.py" lines="42-46" symbol="UndefinedEnvironmentName" score="1.3400" tokens="29">
+      <code><![CDATA[
+class UndefinedEnvironmentName(ValueError):
+    """
+    A name was attempted to be used that does not exist inside of the
+    environment.
+    """
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/markers.py" lines="286-287" symbol="__str__" score="1.3090" tokens="19">
+      <code><![CDATA[
+    def __str__(self) -> str:
+        return _format_marker(self._markers)
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/markers.py" lines="289-290" symbol="__repr__" score="1.3078" tokens="19">
+      <code><![CDATA[
+    def __repr__(self) -> str:
+        return f"<Marker('{self}')>"
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/markers.py" lines="295-299" symbol="__eq__" score="1.3019" tokens="35">
+      <code><![CDATA[
+    def __eq__(self, other: Any) -> bool:
+        if not isinstance(other, Marker):
+            return NotImplemented
+
+        return str(self) == str(other)
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/markers.py" lines="292-293" symbol="__hash__" score="1.3003" tokens="23">
+      <code><![CDATA[
+    def __hash__(self) -> int:
+        return hash((self.__class__.__name__, str(self)))
+      ]]></code>
+    </chunk>
+    <chunk file="src/packaging/_elffile.py" lines="23-25" symbol="EIClass" score="0.7877" tokens="21">
+      <code><![CDATA[
+class EIClass(enum.IntEnum):
+    C32 = 1
+    C64 = 2
+      ]]></code>
+    </chunk>
+  </chunks>
+  <type-definitions>
+    <type-def file="src/packaging/markers.py" symbol="Marker" lines="316-321">
+      <![CDATA[            if current_environment["extra"] is None:
+                current_environment["extra"] = ""
+
+        return _evaluate_markers(
+            self._markers, _repair_python_full_version(current_environment)
+        )]]>
+    </type-def>
+    <type-def file="src/packaging/_elffile.py" symbol="ELFInvalid" lines="19-20">
+      <![CDATA[class ELFInvalid(ValueError):
+    pass]]>
+    </type-def>
+    <type-def file="src/packaging/markers.py" symbol="InvalidMarker" lines="30-33">
+      <![CDATA[class InvalidMarker(ValueError):
+    """
+    An invalid marker was found, users should refer to PEP 508.
+    """]]>
+    </type-def>
+    <type-def file="src/packaging/markers.py" symbol="Environment" lines="116-118">
+      <![CDATA[    ``uname -r`` appended, e.g. ``'sunos5'`` or ``'freebsd8'``, at the time when Python
+    was built.
+    """]]>
+    </type-def>
+    <type-def file="src/packaging/markers.py" symbol="UndefinedComparison" lines="36-39">
+      <![CDATA[class UndefinedComparison(ValueError):
+    """
+    An invalid operation was attempted on a value that doesn't support it.
+    """]]>
+    </type-def>
+    <type-def file="src/packaging/markers.py" symbol="UndefinedEnvironmentName" lines="42-46">
+      <![CDATA[class UndefinedEnvironmentName(ValueError):
+    """
+    A name was attempted to be used that does not exist inside of the
+    environment.
+    """]]>
+    </type-def>
+    <type-def file="src/packaging/_elffile.py" symbol="EIClass" lines="23-25">
+      <![CDATA[class EIClass(enum.IntEnum):
+    C32 = 1
+    C64 = 2]]>
+    </type-def>
+  </type-definitions>
+  <receipt freshness="clean" complete="incomplete" reason="dependency_frontier_cut" action="fetch_skipped_candidate" index_revision="f846c38dc48af337e9d838d465a652dacd3975209156386732a1bdd68051cf1f" budget_requested="1626" budget_consumed="1609" returned_shown="19" returned_total="19" skipped_shown="17" skipped_total="17" omitted_edges_shown="20" omitted_edges_total="20">
+    <returned handle="chunk:src/packaging/_elffile.py:ELFInvalid:19" file="src/packaging/_elffile.py" lines="19-20" hash="57c2d86fc177037ef6683bae5f2408bdb444b5c9fd5ab4d967863091c6766ed0" score="0.7877" />
+    <returned handle="chunk:src/packaging/_elffile.py:EIClass:23" file="src/packaging/_elffile.py" lines="23-25" hash="d74819b322b0d00a4a9e08c1dd597e6e6c4d93acdf055bec466a719fb1d7e782" score="0.7877" />
+    <returned handle="chunk:src/packaging/_manylinux.py:_is_compatible:182" file="src/packaging/_manylinux.py" lines="182-205" hash="2239e76784be6d213cf590589311cdd81e97263875d208755e9818a7860710a3" score="0.8981" />
+    <returned handle="chunk:src/packaging/markers.py:_module:1" file="src/packaging/markers.py" lines="1-29" hash="1cdaf3606daad54180758c79433cb826f5c7f2b5ef3e6e0ab643d42c86ca0c5f" score="1.8218" />
+    <returned handle="chunk:src/packaging/markers.py:InvalidMarker:30" file="src/packaging/markers.py" lines="30-33" hash="3f8d964db777dbe0cfdf77938d64c0a6f1edd50846fa0f70388ec2a23ad9ab5b" score="1.3598" />
+    <returned handle="chunk:src/packaging/markers.py:UndefinedComparison:36" file="src/packaging/markers.py" lines="36-39" hash="255209b0479d224cec8f604a009bab4cef4af2f67f3f0405ba1e00a38950c097" score="1.3435" />
+    <returned handle="chunk:src/packaging/markers.py:UndefinedEnvironmentName:42" file="src/packaging/markers.py" lines="42-46" hash="7a0493167cfe59d85eb5cacff4b3906fda7af7b775af72505b1f2049d3182f8f" score="1.3400" />
+    <returned handle="chunk:src/packaging/markers.py:Environment:116" file="src/packaging/markers.py" lines="116-118" hash="b315da2815f3db7cded64f3022903519fa8e80fdff0971930ea0a7097ee21446" score="1.3516" />
+    <skipped file="src/packaging/_elffile.py" reason="over_budget" handle="chunk:src/packaging/_elffile.py:_module:1" />
+    <skipped file="src/packaging/_manylinux.py" reason="over_budget" handle="chunk:src/packaging/_manylinux.py:_module:1" />
+    <skipped file="src/packaging/_manylinux.py" reason="over_budget" handle="chunk:src/packaging/_manylinux.py:_glibc_version_string_confstr:85" />
+    <skipped file="src/packaging/_manylinux.py" reason="over_budget" handle="chunk:src/packaging/_manylinux.py:_glibc_version_string_ctypes:104" />
+    <skipped file="src/packaging/_manylinux.py" reason="over_budget" handle="chunk:src/packaging/_manylinux.py:_is_linux_armhf:30" />
+    <skipped file="src/packaging/_manylinux.py" reason="over_budget" handle="chunk:src/packaging/_manylinux.py:_is_linux_i686:45" />
+    <skipped file="src/packaging/_manylinux.py" reason="over_budget" handle="chunk:src/packaging/_manylinux.py:_parse_elf:22" />
+    <skipped file="src/packaging/markers.py" reason="over_budget" handle="chunk:src/packaging/markers.py:_module:163" />
+  </receipt>
+</context>

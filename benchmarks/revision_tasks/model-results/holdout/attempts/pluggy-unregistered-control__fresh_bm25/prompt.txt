@@ -1,0 +1,282 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import pluggy
+manager = pluggy.PluginManager("example")
+plugin = object()
+manager.register(plugin, "plugin")
+RESULT = [manager.has_plugin("plugin"), manager.get_name(plugin),
+          manager.is_blocked("plugin")]
+```
+
+Repository source evidence:
+# ContextProof source evidence
+{"budget":16000,"budget_unit":"utf8_bytes","id":"02bb0497cf76530ad88b27b832f7235bdcd748c3aac33d048dacee692ddcc5c2","method":"bm25","omitted_count":117,"query":"Explain the behavior of this Python probe using repository source. src/pluggy/_manager.py PluginManager.register src/pluggy/_manager.py PluginManager.has_plugin src/pluggy/_manager.py PluginManager.get_name\nimport pluggy\nmanager = pluggy.PluginManager(\"example\")\nplugin = object()\nmanager.register(plugin, \"plugin\")\nRESULT = [manager.has_plugin(\"plugin\"), manager.get_name(plugin),\n          manager.is_blocked(\"plugin\")]\n","schema_version":1,"snapshot_id":"b44f331cae0c553ea8fc773e1f973911c9f6513090972022e40b5e16e8d45b56","tokenizer":"bytes"}
+
+{"end_line":318,"file_sha256":"ca5203170ad43ff98c006a5d44f8fdcf0c6e906ee758901f635cb2957c9700ca","id":"3df580b7e2118699fc5873df9a645df1e87f7edbe0fc62023cc261a811a60157","kind":"function","path":"src/pluggy/_manager.py","reasons":["lexical overlap: get, has, has_plugin, is, manager, name, pluggy, plugin, pluginmanager, py, src, the"],"score":24.48564121,"start_line":316,"symbol":"PluginManager.has_plugin","text_sha256":"0f1e31da8ff8b17db369c9f99b6f73c3cdf91d382815d9387f8de1c684ab3a27"}
+```
+    def has_plugin(self, name: str) -> bool:
+        """Return whether a plugin with the given name is registered."""
+        return self.get_plugin(name) is not None
+```
+
+{"end_line":237,"file_sha256":"ca5203170ad43ff98c006a5d44f8fdcf0c6e906ee758901f635cb2957c9700ca","id":"290c195ed536234e56b8d83f78612bf24a11495df6ce69e9dc15c7320a88f7e8","kind":"function","path":"src/pluggy/_manager.py","reasons":["lexical overlap: blocked, is, is_blocked, manager, name, pluggy, plugin, pluginmanager, py, src, the"],"score":22.03259778,"start_line":235,"symbol":"PluginManager.is_blocked","text_sha256":"5e831020f7637e31f080ba9d9b7dd68f27aa047a8489e75bb2f92bfa1dea6aef"}
+```
+    def is_blocked(self, name: str) -> bool:
+        """Return whether the given plugin name is blocked."""
+        return name in self._name2plugin and self._name2plugin[name] is None
+```
+
+{"end_line":310,"file_sha256":"ca5203170ad43ff98c006a5d44f8fdcf0c6e906ee758901f635cb2957c9700ca","id":"c85863db33710d341f6e7a1b23ef8d602068a0d9bfcdd03bf186be4332d2c84d","kind":"function","path":"src/pluggy/_manager.py","reasons":["lexical overlap: get, get_name, manager, name, object, of, pluggy, plugin, pluginmanager, py, register, src, the"],"score":21.52272199,"start_line":301,"symbol":"PluginManager.get_canonical_name","text_sha256":"99bce0d0278816e692ea6141dca34a372528aeb5487ad46f8099fcafd05f2225"}
+```
+    def get_canonical_name(self, plugin: _Plugin) -> str:
+        """Return a canonical name for a plugin object.
+
+        Note that a plugin may be registered under a different name
+        specified by the caller of :meth:`register(plugin, name) <register>`.
+        To obtain the name of a registered plugin use :meth:`get_name(plugin)
+        <get_name>` instead.
+        """
+        name: str | None = getattr(plugin, "__name__", None)
+        return name or str(id(plugin))
+```
+
+{"end_line":425,"file_sha256":"ca5203170ad43ff98c006a5d44f8fdcf0c6e906ee758901f635cb2957c9700ca","id":"e02159c199b7a2466dc19ff36d1fd8a137ae0345a37f0f888e1dac8b0ee92199","kind":"function","path":"src/pluggy/_manager.py","reasons":["lexical overlap: blocked, get, import, is, is_blocked, manager, name, of, pluggy, plugin, pluginmanager, py, register, src, the, this"],"score":20.68127202,"start_line":397,"symbol":"PluginManager.load_setuptools_entrypoints","text_sha256":"604d80e75ee2c0d92c415d0a57cad0e8d752b8fe82bf98b5e42246f185c9a4e7"}
+```
+    def load_setuptools_entrypoints(self, group: str, name: str | None = None) -> int:
+        """Load modules from querying the specified setuptools ``group``.
+
+        :param group:
+            Entry point group to load plugins.
+        :param name:
+            If given, loads only plugins with the given ``name``.
+
+        :return:
+            The number of plugins loaded by this call.
+        """
+        import importlib.metadata
+
+        count = 0
+        for dist in list(importlib.metadata.distributions()):
+            for ep in dist.entry_points:
+                if (
+                    ep.group != group
+                    or (name is not None and ep.name != name)
+                    # already registered
+                    or self.get_plugin(ep.name)
+                    or self.is_blocked(ep.name)
+                ):
+                    continue
+                plugin = ep.load()
+                self.register(plugin, name=ep.name)
+                self._plugin_distinfo.append((plugin, DistFacade(dist)))
+                count += 1
+        return count
+```
+
+{"end_line":171,"file_sha256":"ca5203170ad43ff98c006a5d44f8fdcf0c6e906ee758901f635cb2957c9700ca","id":"c7496ad7df4950fe71e31a7dff7b46999942f6f3a5df2626bdb7f165f8d3545d","kind":"function","path":"src/pluggy/_manager.py","reasons":["lexical overlap: blocked, get, has, is, manager, name, object, of, pluggy, plugin, pluginmanager, py, register, src, the, using"],"score":20.65804935,"start_line":122,"symbol":"PluginManager.register","text_sha256":"8038a12c572e59d54f0f75dc56585f27cb0bea1724afd65b7c172a7aa7a531a3"}
+```
+    def register(self, plugin: _Plugin, name: str | None = None) -> str | None:
+        """Register a plugin and return its name.
+
+        :param name:
+            The name under which to register the plugin. If not specified, a
+            name is generated using :func:`get_canonical_name`.
+
+        :returns:
+            The plugin name. If the name is blocked from registering, returns
+            ``None``.
+
+        If the plugin is already registered, raises a :exc:`ValueError`.
+        """
+        plugin_name = name or self.get_canonical_name(plugin)
+
+        if plugin_name in self._name2plugin:
+            if self._name2plugin.get(plugin_name, -1) is None:
+                return None  # blocked plugin, return None to indicate no registration
+            raise ValueError(
+                "Plugin name already registered: %s=%s\n%s"
+                % (plugin_name, plugin, self._name2plugin)
+            )
+
+        if plugin in self._name2plugin.values():
+            raise ValueError(
+                "Plugin already registered under a different name: %s=%s\n%s"
+                % (plugin_name, plugin, self._name2plugin)
+            )
+
+        # XXX if an error happens we should make sure no state has been
+        # changed at point of return
+        self._name2plugin[plugin_name] = plugin
+
+        # register matching hook implementations of the plugin
+        for name in dir(plugin):
+            hookimpl_opts = self.parse_hookimpl_opts(plugin, name)
+            if hookimpl_opts is not None:
+                normalize_hookimpl_opts(hookimpl_opts)
+                method: _HookImplFunction[object] = getattr(plugin, name)
+                hookimpl = HookImpl(plugin, plugin_name, method, hookimpl_opts)
+                name = hookimpl_opts.get("specname") or name
+                hook: HookCaller | None = getattr(self.hook, name, None)
+                if hook is None:
+                    hook = HookCaller(name, self._hookexec)
+                    setattr(self.hook, name, hook)
+                elif hook.has_spec():
+                    self._verify_hook(hook, hookimpl)
+                    hook._maybe_apply_history(hookimpl)
+                hook._add_hookimpl(hookimpl)
+        return plugin_name
+```
+
+{"end_line":228,"file_sha256":"ca5203170ad43ff98c006a5d44f8fdcf0c6e906ee758901f635cb2957c9700ca","id":"a9f55f93187b79476baf92bb7293f0f0d45d154f17e2a33b26995647308cae5d","kind":"function","path":"src/pluggy/_manager.py","reasons":["lexical overlap: blocked, get, get_name, is, manager, name, object, of, pluggy, plugin, pluginmanager, py, src, the"],"score":18.08982145,"start_line":198,"symbol":"PluginManager.unregister","text_sha256":"d1238c71b25bf58e54eb52f76dc654c34475d5f5eb517cd8c0b24487bf4fd341"}
+```
+    def unregister(
+        self, plugin: _Plugin | None = None, name: str | None = None
+    ) -> Any | None:
+        """Unregister a plugin and all of its hook implementations.
+
+        The plugin can be specified either by the plugin object or the plugin
+        name. If both are specified, they must agree.
+
+        Returns the unregistered plugin, or ``None`` if not found.
+        """
+        if name is None:
+            assert plugin is not None, "one of name or plugin needs to be specified"
+            name = self.get_name(plugin)
+            assert name is not None, "plugin is not registered"
+
+        if plugin is None:
+            plugin = self.get_plugin(name)
+            if plugin is None:
+                return None
+
+        hookcallers = self.get_hookcallers(plugin)
+        if hookcallers:
+            for hookcaller in hookcallers:
+                hookcaller._remove_plugin(plugin)
+
+        # if self._name2plugin[name] == None registration was blocked: ignore
+        if self._name2plugin.get(name):
+            assert name is not None
+            del self._name2plugin[name]
+
+        return plugin
+```
+
+{"end_line":326,"file_sha256":"ca5203170ad43ff98c006a5d44f8fdcf0c6e906ee758901f635cb2957c9700ca","id":"b918e9f4a0ff757aa5401b5bc8138417280dd84db1d5226599bf1fb98073abab","kind":"function","path":"src/pluggy/_manager.py","reasons":["lexical overlap: get, get_name, is, manager, name, pluggy, plugin, pluginmanager, py, src, the"],"score":17.84667364,"start_line":320,"symbol":"PluginManager.get_name","text_sha256":"a934c8b92bad891cfbca4d25a54180568be3d5457611d696898a1bb900c1484a"}
+```
+    def get_name(self, plugin: _Plugin) -> str | None:
+        """Return the name the plugin is registered under, or ``None`` if
+        is isn't."""
+        for name, val in self._name2plugin.items():
+            if plugin == val:
+                return name
+        return None
+```
+
+{"end_line":450,"file_sha256":"ca5203170ad43ff98c006a5d44f8fdcf0c6e906ee758901f635cb2957c9700ca","id":"53f7087b593cbae39d0dac20441de8363344fc30fa18b4754124e44380c02bd6","kind":"function","path":"src/pluggy/_manager.py","reasons":["lexical overlap: get, get_name, is, manager, name, pluggy, plugin, pluginmanager, py, src, the, this"],"score":16.2827506,"start_line":436,"symbol":"PluginManager.get_hookcallers","text_sha256":"8640ee64b884c91b77d760e2578fc625dc3d93c0388f5bded7279256f48e7005"}
+```
+    def get_hookcallers(self, plugin: _Plugin) -> list[HookCaller] | None:
+        """Get all hook callers for the specified plugin.
+
+        :returns:
+            The hook callers, or ``None`` if ``plugin`` is not registered in
+            this plugin manager.
+        """
+        if self.get_name(plugin) is None:
+            return None
+        hookcallers = []
+        for hookcaller in self.hook.__dict__.values():
+            for hookimpl in hookcaller.get_hookimpls():
+                if hookimpl.plugin is plugin:
+                    hookcallers.append(hookcaller)
+        return hookcallers
+```
+
+{"end_line":233,"file_sha256":"ca5203170ad43ff98c006a5d44f8fdcf0c6e906ee758901f635cb2957c9700ca","id":"36116e66bfb0a25d5c1457828bdb6edebabbb15165a8ee1acaf022572a0a4fab","kind":"function","path":"src/pluggy/_manager.py","reasons":["lexical overlap: blocked, manager, name, of, pluggy, plugin, pluginmanager, py, src, the"],"score":14.75761148,"start_line":230,"symbol":"PluginManager.set_blocked","text_sha256":"d4490b53cae86180e59b28bc325acd3223658244ba5e4d21269c6cb1c8a315c5"}
+```
+    def set_blocked(self, name: str) -> None:
+        """Block registrations of the given name, unregister if already registered."""
+        self.unregister(name=name)
+        self._name2plugin[name] = None
+```
+
+{"end_line":247,"file_sha256":"ca5203170ad43ff98c006a5d44f8fdcf0c6e906ee758901f635cb2957c9700ca","id":"4bf768d4b18132e67e563af44da9e08e10bbcada7ddcea16c5774f6431d0b76b","kind":"function","path":"src/pluggy/_manager.py","reasons":["lexical overlap: blocked, get, is, manager, name, pluggy, plugin, pluginmanager, py, src, the"],"score":14.22979351,"start_line":239,"symbol":"PluginManager.unblock","text_sha256":"3093cbf10e1941331789cc38d14846fbb5bd9160c01821bff6bdeb342c6cd978"}
+```
+    def unblock(self, name: str) -> bool:
+        """Unblocks a name.
+
+        Returns whether the name was actually blocked.
+        """
+        if self._name2plugin.get(name, -1) is None:
+            del self._name2plugin[name]
+            return True
+        return False
+```
+
+{"end_line":264,"file_sha256":"9bedea54b0dd9f84bdcb7a5f7cb3a93107832383c3c3c86b0132b5482f2b4245","id":"8d32ccd7ef7cd996524ef88c98919a49bf2d92efc7a9a63c9d847bc2d32e3408","kind":"function","path":"src/pluggy/_hooks.py","reasons":["lexical overlap: is, manager, name, object, of, pluggy, plugin, pluginmanager, py, register, result, src, the, this, using"],"score":13.46607731,"start_line":204,"symbol":"HookimplMarker.__call__","text_sha256":"346f312d6d1c53ed4ec240f3cad1421ca85480de837eebce96d83f542a081629"}
+```
+    def __call__(  # noqa: F811
+        self,
+        function: _F | None = None,
+        hookwrapper: bool = False,
+        optionalhook: bool = False,
+        tryfirst: bool = False,
+        trylast: bool = False,
+        specname: str | None = None,
+        wrapper: bool = False,
+    ) -> _F | Callable[[_F], _F]:
+        """If passed a function, directly sets attributes on the function
+        which will make it discoverable to :meth:`PluginManager.register`.
+
+        If passed no function, returns a decorator which can be applied to a
+        function later using the attributes supplied.
+
+        :param optionalhook:
+            If ``True``, a missing matching hook specification will not result
+            in an error (by default it is an error if no matching spec is
+            found). See :ref:`optionalhook`.
+
+        :param tryfirst:
+            If ``True``, this hook implementation will run as early as possible
+            in the chain of N hook implementations for a specification. See
+            :ref:`callorder`.
+
+        :param trylast:
+            If ``True``, this hook implementation will run as late as possible
+            in the chain of N hook implementations for a specification. See
+            :ref:`callorder`.
+
+        :param wrapper:
+            If ``True`` ("new-style hook wrapper"), the hook implementation
+            needs to execute exactly one ``yield``. The code before the
+            ``yield`` is run early before any non-hook-wrapper function is run.
+            The code after the ``yield`` is run after all non-hook-wrapper
+            functions have run. The ``yield`` receives the result value of the
+            inner calls, or raises the exception of inner calls (including
+            earlier hook wrapper calls). The return value of the function
+            becomes the return value of the hook, and a raised exception becomes
+            the exception of the hook. See :ref:`hookwrapper`.
+
+        :param hookwrapper:
+            If ``True`` ("old-style hook wrapper"), the hook implementation
+            needs to execute exactly one ``yield``. The code before the
+            ``yield`` is run early before any non-hook-wrapper function is run.
+            The code after the ``yield`` is run after all non-hook-wrapper
+            function have run  The ``yield`` receives a :class:`Result` object
+            representing the exception or result outcome of the inner calls
+            (including earlier hook wrapper calls). This option is mutually
+            exclusive with ``wrapper``. See :ref:`old_style_hookwrapper`.
+
+        :param specname:
+            If provided, the given name will be used instead of the function
+            name when matching this hook implementation to a hook specification
+            during registration. See :ref:`specname`.
+
+        .. versionadded:: 1.2.0
+            The ``wrapper`` parameter.
+        """
+
+```

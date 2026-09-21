@@ -1,0 +1,16 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import attrs
+@attrs.define
+class Record:
+    value: int = attrs.field(converter=int)
+record = Record("3")
+record.value = "4"
+RESULT = [record.value, type(record.value).__name__]
+```
+
+Repository source evidence:
+{"ambiguity_policy":"all physical declarations; no runtime binding selection","ambiguous_symbols":[],"complete":false,"kind":"supplied-anchor-source","missing":[],"omitted":[{"end_line":409,"path":"src/attr/_next_gen.py","start_line":23,"symbol":"define"}],"scope":"supplied-declarations-only","source":[{"end_line":73,"path":"src/attr/setters.py","start_line":56,"symbol":"convert","text":"def convert(instance, attrib, new_value):\n    \"\"\"\n    Run *attrib*'s converter -- if it has one -- on *new_value* and return the\n    result.\n\n    .. versionadded:: 20.1.0\n    \"\"\"\n    c = attrib.converter\n    if c:\n        # This can be removed once we drop 3.8 and use attrs.Converter instead.\n        from ._make import Converter\n\n        if not isinstance(c, Converter):\n            return c(new_value)\n\n        return c(new_value, instance, attrib)\n\n    return new_value\n","text_sha256":"d9bb7cd5aae277fc78e4fde118e4404713e8f3b615b01a9db1c5fc080bc06cd0"}]}

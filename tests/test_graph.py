@@ -203,3 +203,99 @@ def test_resealed_unavailable_anchor_cannot_drop_its_uncertainty():
     built["frontier"] = []
     with pytest.raises(ValueError, match="frontier"):
         validate_graph(reseal(built))
+
+
+def test_nested_method_parameter_cannot_resolve_to_same_named_global():
+    texts = {"app.py": "def callback():\n    return 1\nclass Subject:\n"
+             "    def method(self, callback):\n        return callback()\n"}
+    built = graph(texts, anchor(texts, symbol="Subject"))
+    assert built["policy"]["resolver_version"] == 2
+    assert not compare_graphs(built, built)["fresh"]
+    assert all(edge["status"] == "unresolved" for edge in built["edges"].values())
+    assert not any(node["symbol"] == "callback" for node in built["nodes"].values())
+
+
+def test_nested_function_parameter_and_pattern_capture_are_unresolved():
+    sources = [
+        "def callback():\n    return 1\ndef entry():\n"
+        "    def inner(callback):\n        return callback()\n    return inner\n",
+        "def callback():\n    return 1\ndef entry(value):\n"
+        "    match value:\n        case callback:\n            return callback()\n",
+        "def callback():\n    return 1\ndef entry(value):\n"
+        "    match value:\n        case [*callback]:\n            return callback()\n",
+        "def callback():\n    return 1\ndef entry(value):\n"
+        "    match value:\n        case {**callback}:\n            return callback()\n",
+    ]
+    for source in sources:
+        texts = {"app.py": source}
+        built = graph(texts, anchor(texts))
+        assert not compare_graphs(built, built)["fresh"]
+        assert any("bindings" in item["reason"] for item in built["frontier"])
+
+
+@pytest.mark.parametrize("mutation", [
+    "OTHER = (RATE := 2)\n",
+    "def configure(value=(RATE := 2)):\n    pass\n",
+    "match 2:\n    case RATE:\n        pass\n",
+    "try:\n    pass\nexcept Exception as RATE:\n    pass\n",
+])
+def test_module_rebinding_hidden_from_v1_table_prevents_freshness(mutation):
+    texts = {"app.py": "RATE = 1\n" + mutation + "def entry():\n    return RATE\n"}
+    built = graph(texts, anchor(texts))
+    assert not compare_graphs(built, built)["fresh"]
+    assert any(edge["expression"] == "RATE" and edge["status"] == "unresolved"
+               for edge in built["edges"].values())
+
+
+def test_conditional_module_wildcard_never_uses_unshadowed_assumption():
+    texts = {"app.py": "def rate():\n    return 1\nif True:\n    from policy import *\n"
+             "def entry():\n    return rate()\n", "policy.py": "def rate():\n    return 2\n"}
+    selected = anchor(texts)
+    before = graph(texts, selected)
+    after = graph(texts | {"policy.py": "def rate():\n    return 3\n"}, selected)
+    assert compare_graphs(before, after)["status"] == "unresolved"
+    assert all(node["symbol"] != "rate" for node in before["nodes"].values())
+
+
+@pytest.mark.parametrize("package", [
+    "from alternate import *\n",
+    "import replacement\ndef __getattr__(name):\n    return replacement\n",
+])
+def test_dynamic_package_attribute_prevents_submodule_fallback(package):
+    texts = {"app.py": "from pkg import helper\ndef entry():\n    return helper.compute()\n",
+             "pkg/__init__.py": package, "pkg/helper.py": "def compute():\n    return 1\n",
+             "alternate.py": "import replacement as helper\n",
+             "replacement.py": "def compute():\n    return 2\n"}
+    selected = anchor(texts)
+    before = graph(texts, selected)
+    after = graph(texts | {"replacement.py": "def compute():\n    return 3\n"}, selected)
+    assert compare_graphs(before, after)["status"] == "unresolved"
+    assert all(node["path"] != "pkg/helper.py" for node in before["nodes"].values())
+
+
+def test_noncolliding_global_inside_method_remains_supported():
+    texts = {"app.py": "def callback():\n    return 1\nclass Subject:\n"
+             "    def method(self):\n        return callback()\n"}
+    built = graph(texts, anchor(texts, symbol="Subject"))
+    assert compare_graphs(built, built)["fresh"]
+
+
+def test_class_local_import_does_not_resolve_as_module_global():
+    texts = {"app.py": "def callback():\n    return 1\nclass Subject:\n"
+             "    from other import callback\n    value = callback()\n",
+             "other.py": "def callback():\n    return 2\n"}
+    built = graph(texts, anchor(texts, symbol="Subject"))
+    assert not compare_graphs(built, built)["fresh"]
+    assert all(edge["status"] == "unresolved" for edge in built["edges"].values())
+
+
+def test_old_resolver_artifacts_require_recapture():
+    texts = {"app.py": "def entry():\n    return 1\n"}
+    current = graph(texts, anchor(texts))
+    old = deepcopy(current)
+    old["policy"]["resolver_version"] = 1
+    reseal(old)
+    with pytest.raises(ValueError, match="recapture"):
+        validate_graph(old)
+    with pytest.raises(ValueError, match="different graph resolver versions"):
+        compare_graphs(old, current)

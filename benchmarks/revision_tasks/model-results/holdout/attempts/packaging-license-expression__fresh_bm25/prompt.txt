@@ -1,0 +1,335 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+from packaging.metadata import Metadata
+meta = Metadata.from_raw({"license_expression": "mit"}, validate=False)
+RESULT = meta.license_expression
+```
+
+Repository source evidence:
+# ContextProof source evidence
+{"budget":16000,"budget_unit":"utf8_bytes","id":"0bbefa25204773cd463306783f95d54ff432fba17fea99b228ead2d901e08fc1","method":"bm25","omitted_count":313,"query":"Explain the behavior of this Python probe using repository source. src/packaging/metadata.py _Validator._process_license_expression src/packaging/metadata.py Metadata\nfrom packaging.metadata import Metadata\nmeta = Metadata.from_raw({\"license_expression\": \"mit\"}, validate=False)\nRESULT = meta.license_expression\n","schema_version":1,"snapshot_id":"e997c04787f0a125dc18b4aa3515e97689b1bc275fc6d5efdc040420e8b410e6","tokenizer":"bytes"}
+
+{"end_line":658,"file_sha256":"60989b33b1987b8adef3ed1adce9579864be5c38131283b8b6506ddaadb90678","id":"c03a07aa9ac98f91fc4e29c861b99efff889ebd85cb3f6af6297e7ed60ed5d28","kind":"function","path":"src/packaging/metadata.py","reasons":["lexical overlap: expression, from, license, metadata, packaging, process, process_license_expression, py, src, validator"],"score":34.79282158,"start_line":650,"symbol":"_Validator._process_license_expression","text_sha256":"55d7728ed3bf2a7e2270af561b1959e94c6208002a2e6cc8b1986b709d17a505"}
+```
+    def _process_license_expression(
+        self, value: str
+    ) -> NormalizedLicenseExpression | None:
+        try:
+            return licenses.canonicalize_license_expression(value)
+        except ValueError as exc:
+            raise self._invalid_metadata(
+                f"{value!r} is invalid for {{field}}", cause=exc
+            ) from exc
+```
+
+{"end_line":139,"file_sha256":"d71e4cd671188dc83011b2edd1d5f0cf6ba48ebd7c0e20b30b4b2b690a89f96c","id":"6f020ff0677ee2c0c59679e13b935251a183222acf967dabe9c704bf1c9d732d","kind":"function","path":"src/packaging/licenses/__init__.py","reasons":["lexical overlap: expression, false, from, license, license_expression, packaging, py, python, raw, src, the"],"score":26.1714716,"start_line":60,"symbol":"canonicalize_license_expression","text_sha256":"a6650ac85c2eedce6b8e859f053f26c18f318188d8f0fa4635d816b099b6ffdd"}
+```
+def canonicalize_license_expression(
+    raw_license_expression: str,
+) -> NormalizedLicenseExpression:
+    if not raw_license_expression:
+        message = f"Invalid license expression: {raw_license_expression!r}"
+        raise InvalidLicenseExpression(message)
+
+    # Pad any parentheses so tokenization can be achieved by merely splitting on
+    # whitespace.
+    license_expression = raw_license_expression.replace("(", " ( ").replace(")", " ) ")
+    licenseref_prefix = "LicenseRef-"
+    license_refs = {
+        ref.lower(): "LicenseRef-" + ref[len(licenseref_prefix) :]
+        for ref in license_expression.split()
+        if ref.lower().startswith(licenseref_prefix.lower())
+    }
+
+    # Normalize to lower case so we can look up licenses/exceptions
+    # and so boolean operators are Python-compatible.
+    license_expression = license_expression.lower()
+
+    tokens = license_expression.split()
+
+    # Rather than implementing boolean logic, we create an expression that Python can
+    # parse. Everything that is not involved with the grammar itself is treated as
+    # `False` and the expression should evaluate as such.
+    python_tokens = []
+    for token in tokens:
+        if token not in {"or", "and", "with", "(", ")"}:
+            python_tokens.append("False")
+        elif token == "with":
+            python_tokens.append("or")
+        elif token == "(" and python_tokens and python_tokens[-1] not in {"or", "and"}:
+            message = f"Invalid license expression: {raw_license_expression!r}"
+            raise InvalidLicenseExpression(message)
+        else:
+            python_tokens.append(token)
+
+    python_expression = " ".join(python_tokens)
+    try:
+        invalid = eval(python_expression, globals(), locals())
+    except Exception:
+        invalid = True
+
+    if invalid is not False:
+        message = f"Invalid license expression: {raw_license_expression!r}"
+        raise InvalidLicenseExpression(message) from None
+
+    # Take a final pass to check for unknown licenses/exceptions.
+    normalized_tokens = []
+    for token in tokens:
+        if token in {"or", "and", "with", "(", ")"}:
+            normalized_tokens.append(token.upper())
+            continue
+
+        if normalized_tokens and normalized_tokens[-1] == "WITH":
+            if token not in EXCEPTIONS:
+                message = f"Unknown license exception: {token!r}"
+                raise InvalidLicenseExpression(message)
+
+            normalized_tokens.append(EXCEPTIONS[token]["id"])
+        else:
+            if token.endswith("+"):
+                final_token = token[:-1]
+                suffix = "+"
+            else:
+                final_token = token
+                suffix = ""
+
+            if final_token.startswith("licenseref-"):
+                if not license_ref_allowed.match(final_token):
+                    message = f"Invalid licenseref: {final_token!r}"
+                    raise InvalidLicenseExpression(message)
+                normalized_tokens.append(license_refs[final_token] + suffix)
+            else:
+                if final_token not in LICENSES:
+                    message = f"Unknown license: {final_token!r}"
+                    raise InvalidLicenseExpression(message)
+                normalized_tokens.append(LICENSES[final_token]["id"] + suffix)
+
+```
+
+{"end_line":41,"file_sha256":"085aab2730337365cd19ec5eac7fff4fe639230abb59bb185ec88b1112d6c58d","id":"c23cdc00331af863f9a4aa2d8700e551463bf6318a9c9391d8c975bce1530e99","kind":"module","path":"src/packaging/tags.py","reasons":["lexical overlap: from, import, license, of, packaging, py, python, repository, src, the, this"],"score":23.97396889,"start_line":1,"symbol":"<module>","text_sha256":"e23391a6bb65398b12287a424a9a3bd549a91c23d533fae79f4f4e89ed6226fe"}
+```
+# This file is dual licensed under the terms of the Apache License, Version
+# 2.0, and the BSD License. See the LICENSE file in the root of this repository
+# for complete details.
+
+from __future__ import annotations
+
+import logging
+import platform
+import re
+import struct
+import subprocess
+import sys
+import sysconfig
+from importlib.machinery import EXTENSION_SUFFIXES
+from typing import (
+    Iterable,
+    Iterator,
+    Sequence,
+    Tuple,
+    cast,
+)
+
+from . import _manylinux, _musllinux
+
+logger = logging.getLogger(__name__)
+
+PythonVersion = Sequence[int]
+AppleVersion = Tuple[int, int]
+
+INTERPRETER_SHORT_NAMES: dict[str, str] = {
+    "python": "py",  # Generic.
+    "cpython": "cp",
+    "pypy": "pp",
+    "ironpython": "ip",
+    "jython": "jy",
+}
+
+
+_32_BIT_INTERPRETER = struct.calcsize("P") == 4
+
+
+```
+
+{"end_line":285,"file_sha256":"60989b33b1987b8adef3ed1adce9579864be5c38131283b8b6506ddaadb90678","id":"81cd80c72182c2378587558afb33758e9d7a6ab21a4b86e74aff6d6293cb6368","kind":"module","path":"src/packaging/metadata.py","reasons":["lexical overlap: expression, license, license_expression, metadata, of, packaging, py, python, raw, src, the, this"],"score":23.75151228,"start_line":237,"symbol":"<module>","text_sha256":"8f207c224953c926eeb484c156239fc32c4dd3430a69d43df2cf9c9780fee082"}
+```
+
+
+# The various parse_FORMAT functions here are intended to be as lenient as
+# possible in their parsing, while still returning a correctly typed
+# RawMetadata.
+#
+# To aid in this, we also generally want to do as little touching of the
+# data as possible, except where there are possibly some historic holdovers
+# that make valid data awkward to work with.
+#
+# While this is a lower level, intermediate format than our ``Metadata``
+# class, some light touch ups can make a massive difference in usability.
+
+# Map METADATA fields to RawMetadata.
+_EMAIL_TO_RAW_MAPPING = {
+    "author": "author",
+    "author-email": "author_email",
+    "classifier": "classifiers",
+    "description": "description",
+    "description-content-type": "description_content_type",
+    "download-url": "download_url",
+    "dynamic": "dynamic",
+    "home-page": "home_page",
+    "keywords": "keywords",
+    "license": "license",
+    "license-expression": "license_expression",
+    "license-file": "license_files",
+    "maintainer": "maintainer",
+    "maintainer-email": "maintainer_email",
+    "metadata-version": "metadata_version",
+    "name": "name",
+    "obsoletes": "obsoletes",
+    "obsoletes-dist": "obsoletes_dist",
+    "platform": "platforms",
+    "project-url": "project_urls",
+    "provides": "provides",
+    "provides-dist": "provides_dist",
+    "provides-extra": "provides_extra",
+    "requires": "requires",
+    "requires-dist": "requires_dist",
+    "requires-external": "requires_external",
+    "requires-python": "requires_python",
+    "summary": "summary",
+    "supported-platform": "supported_platforms",
+    "version": "version",
+}
+_RAW_TO_EMAIL_MAPPING = {raw: email for email, raw in _EMAIL_TO_RAW_MAPPING.items()}
+
+
+```
+
+{"end_line":862,"file_sha256":"60989b33b1987b8adef3ed1adce9579864be5c38131283b8b6506ddaadb90678","id":"073e90489d55156dcf6b89c20a81f764fc82dc1d3eaf9d1c801024c656927787","kind":"class","path":"src/packaging/metadata.py","reasons":["lexical overlap: expression, license, license_expression, metadata, of, packaging, py, python, raw, src, the, using, validate, validator"],"score":23.28595631,"start_line":783,"symbol":"Metadata","text_sha256":"ee9cd1d7a87e71590f2700dfc19e2bad5778864e6417045048dd5b5a103255cb"}
+```
+
+    metadata_version: _Validator[_MetadataVersion] = _Validator()
+    """:external:ref:`core-metadata-metadata-version`
+    (required; validated to be a valid metadata version)"""
+    # `name` is not normalized/typed to NormalizedName so as to provide access to
+    # the original/raw name.
+    name: _Validator[str] = _Validator()
+    """:external:ref:`core-metadata-name`
+    (required; validated using :func:`~packaging.utils.canonicalize_name` and its
+    *validate* parameter)"""
+    version: _Validator[version_module.Version] = _Validator()
+    """:external:ref:`core-metadata-version` (required)"""
+    dynamic: _Validator[list[str] | None] = _Validator(
+        added="2.2",
+    )
+    """:external:ref:`core-metadata-dynamic`
+    (validated against core metadata field names and lowercased)"""
+    platforms: _Validator[list[str] | None] = _Validator()
+    """:external:ref:`core-metadata-platform`"""
+    supported_platforms: _Validator[list[str] | None] = _Validator(added="1.1")
+    """:external:ref:`core-metadata-supported-platform`"""
+    summary: _Validator[str | None] = _Validator()
+    """:external:ref:`core-metadata-summary` (validated to contain no newlines)"""
+    description: _Validator[str | None] = _Validator()  # TODO 2.1: can be in body
+    """:external:ref:`core-metadata-description`"""
+    description_content_type: _Validator[str | None] = _Validator(added="2.1")
+    """:external:ref:`core-metadata-description-content-type` (validated)"""
+    keywords: _Validator[list[str] | None] = _Validator()
+    """:external:ref:`core-metadata-keywords`"""
+    home_page: _Validator[str | None] = _Validator()
+    """:external:ref:`core-metadata-home-page`"""
+    download_url: _Validator[str | None] = _Validator(added="1.1")
+    """:external:ref:`core-metadata-download-url`"""
+    author: _Validator[str | None] = _Validator()
+    """:external:ref:`core-metadata-author`"""
+    author_email: _Validator[str | None] = _Validator()
+    """:external:ref:`core-metadata-author-email`"""
+    maintainer: _Validator[str | None] = _Validator(added="1.2")
+    """:external:ref:`core-metadata-maintainer`"""
+    maintainer_email: _Validator[str | None] = _Validator(added="1.2")
+    """:external:ref:`core-metadata-maintainer-email`"""
+    license: _Validator[str | None] = _Validator()
+    """:external:ref:`core-metadata-license`"""
+    license_expression: _Validator[NormalizedLicenseExpression | None] = _Validator(
+        added="2.4"
+    )
+    """:external:ref:`core-metadata-license-expression`"""
+    license_files: _Validator[list[str] | None] = _Validator(added="2.4")
+    """:external:ref:`core-metadata-license-file`"""
+    classifiers: _Validator[list[str] | None] = _Validator(added="1.1")
+    """:external:ref:`core-metadata-classifier`"""
+    requires_dist: _Validator[list[requirements.Requirement] | None] = _Validator(
+        added="1.2"
+    )
+    """:external:ref:`core-metadata-requires-dist`"""
+    requires_python: _Validator[specifiers.SpecifierSet | None] = _Validator(
+        added="1.2"
+    )
+    """:external:ref:`core-metadata-requires-python`"""
+    # Because `Requires-External` allows for non-PEP 440 version specifiers, we
+    # don't do any processing on the values.
+    requires_external: _Validator[list[str] | None] = _Validator(added="1.2")
+    """:external:ref:`core-metadata-requires-external`"""
+    project_urls: _Validator[dict[str, str] | None] = _Validator(added="1.2")
+    """:external:ref:`core-metadata-project-url`"""
+    # PEP 685 lets us raise an error if an extra doesn't pass `Name` validation
+    # regardless of metadata version.
+    provides_extra: _Validator[list[utils.NormalizedName] | None] = _Validator(
+        added="2.1",
+    )
+    """:external:ref:`core-metadata-provides-extra`"""
+    provides_dist: _Validator[list[str] | None] = _Validator(added="1.2")
+    """:external:ref:`core-metadata-provides-dist`"""
+    obsoletes_dist: _Validator[list[str] | None] = _Validator(added="1.2")
+    """:external:ref:`core-metadata-obsoletes-dist`"""
+    requires: _Validator[list[str] | None] = _Validator(added="1.1")
+    """``Requires`` (deprecated)"""
+    provides: _Validator[list[str] | None] = _Validator(added="1.1")
+    """``Provides`` (deprecated)"""
+    obsoletes: _Validator[list[str] | None] = _Validator(added="1.1")
+```
+
+{"end_line":14,"file_sha256":"818c9148075bac8c8a0d8ebaba02035108d132fc641f600b8a84e65f7b672faa","id":"3e039122bcb81603f350e6a7988abb99a80248df433e25cf25cec8565af5e4f5","kind":"module","path":"src/packaging/requirements.py","reasons":["lexical overlap: from, import, license, of, packaging, py, repository, src, the, this"],"score":22.74253828,"start_line":1,"symbol":"<module>","text_sha256":"b28fc0cc770d07a0b548c151568c65388cb69cbb34402330253922cb8f05257c"}
+```
+# This file is dual licensed under the terms of the Apache License, Version
+# 2.0, and the BSD License. See the LICENSE file in the root of this repository
+# for complete details.
+from __future__ import annotations
+
+from typing import Any, Iterator
+
+from ._parser import parse_requirement as _parse_requirement
+from ._tokenizer import ParserSyntaxError
+from .markers import Marker, _normalize_extra_values
+from .specifiers import SpecifierSet
+from .utils import canonicalize_name
+
+
+```
+
+{"end_line":485,"file_sha256":"60989b33b1987b8adef3ed1adce9579864be5c38131283b8b6506ddaadb90678","id":"12fc8d607cc42ad949c408a230173d9a52e868c2b11d8cb44cdf1f93d02c219e","kind":"class","path":"src/packaging/metadata.py","reasons":["lexical overlap: metadata, packaging, process, py, raw, src, the, validate, validator"],"score":22.32017496,"start_line":472,"symbol":"_Validator","text_sha256":"1d35f0efab0c3795c2656c461ed3fddf986f4816bc43b2563128ad89c685d1f2"}
+```
+class _Validator(Generic[T]):
+    """Validate a metadata field.
+
+    All _process_*() methods correspond to a core metadata field. The method is
+    called with the field's raw value. If the raw value is valid it is returned
+    in its "enriched" form (e.g. ``version.Version`` for the ``Version`` field).
+    If the raw value is invalid, :exc:`InvalidMetadata` is raised (with a cause
+    as appropriate).
+    """
+
+    name: str
+    raw_name: str
+    added: _MetadataVersion
+
+```
+
+{"end_line":181,"file_sha256":"be5e4e0a8cf8931f341f9af05ca7975a397d58d2121a6af86604e94cff6553d7","id":"9377a2bac74c5c72b712f27ffbc0547d49aa1e27bb536ad735f220ff058162fb","kind":"module","path":"src/packaging/_manylinux.py","reasons":["lexical overlap: from, packaging, py, src"],"score":2.80640261,"start_line":179,"symbol":"<module>","text_sha256":"dd80bd7e235f988d6139a50f36555161f91cd927ea68b8b02704580fe9752583"}
+```
+
+
+# From PEP 513, PEP 600
+```

@@ -1,4 +1,6 @@
-# ContextProof：跨版本的代码证据
+# 智能体代码证据校验 · Agent Code Evidence
+
+仓库原名 `contextproof`；Python 包名与命令仍为 `contextproof`。
 
 [English](../README.md) · [图接口与契约](GRAPH.md) ·
 [实测报告](GRAPH_REPORT.md) · [模型实验协议](REVISION_STUDY_PROTOCOL.md)
@@ -15,8 +17,8 @@ Python 3.11+、macOS/Linux；日常使用不需要模型、GPU 或 API Key。
 ## 运行三跳依赖演示
 
 ```sh
-git clone https://github.com/hardwork-xu/contextproof.git
-cd contextproof
+git clone https://github.com/hardwork-xu/agent-code-evidence.git
+cd agent-code-evidence
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -e .

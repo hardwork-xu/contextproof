@@ -1,6 +1,8 @@
-# ContextProof
+# Agent Code Evidence · 智能体代码证据校验
 
-[![CI](https://github.com/hardwork-xu/contextproof/actions/workflows/ci.yml/badge.svg)](https://github.com/hardwork-xu/contextproof/actions/workflows/ci.yml)
+Previously `contextproof`. Package and command names remain unchanged (`contextproof`). 仓库原名 `contextproof`，包名及现有命令保持不变。
+
+[![CI](https://github.com/hardwork-xu/agent-code-evidence/actions/workflows/ci.yml/badge.svg)](https://github.com/hardwork-xu/agent-code-evidence/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 **Versioned source evidence for coding agents.**
@@ -24,8 +26,8 @@ requires no model, GPU or API key. Hosted-model experiments are separate.
 ## Run the three-hop example
 
 ```sh
-git clone https://github.com/hardwork-xu/contextproof.git
-cd contextproof
+git clone https://github.com/hardwork-xu/agent-code-evidence.git
+cd agent-code-evidence
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -e .

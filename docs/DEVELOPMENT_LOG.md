@@ -103,8 +103,8 @@ an evidence-linked completion matrix. Added the technical report, bilingual v1
 entry points, explicit budget boundaries, and a demonstration screenshot. Local
 checks cover contracts, malformed inputs, source-policy boundaries, CLI/MCP flows,
 packaging, and artifact integrity. Release verification and remote CI remain
-observable in [GitHub Actions](https://github.com/hardwork-xu/contextproof/actions)
-and [Releases](https://github.com/hardwork-xu/contextproof/releases); this log does
+observable in [GitHub Actions](https://github.com/hardwork-xu/agent-code-evidence/actions)
+and [Releases](https://github.com/hardwork-xu/agent-code-evidence/releases); this log does
 not freeze a changing test count or assert a remote status before it is recorded.
 
 ## 2026-09-21 — Versioned graph evidence and real revision evaluation

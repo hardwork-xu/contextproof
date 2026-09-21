@@ -3,8 +3,8 @@
 The v1 implementation and declared experiments are delivered. This matrix replaces
 the v0.1 list of unexecuted follow-ups with links to the actual code, protocols,
 and results. The [completion contract](COMPLETION.md) defines the project boundary;
-ongoing release verification is visible in [GitHub Actions](https://github.com/hardwork-xu/contextproof/actions)
-and published packages in [Releases](https://github.com/hardwork-xu/contextproof/releases).
+ongoing release verification is visible in [GitHub Actions](https://github.com/hardwork-xu/agent-code-evidence/actions)
+and published packages in [Releases](https://github.com/hardwork-xu/agent-code-evidence/releases).
 
 ## Delivered v1 scope
 

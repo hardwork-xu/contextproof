@@ -22,8 +22,8 @@ integration = ["mcp==2.2.0"]
 contextproof = "contextproof.cli:main"
 
 [project.urls]
-Repository = "https://github.com/hardwork-xu/contextproof"
-Issues = "https://github.com/hardwork-xu/contextproof/issues"
+Repository = "https://github.com/hardwork-xu/agent-code-evidence"
+Issues = "https://github.com/hardwork-xu/agent-code-evidence/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]

@@ -98,21 +98,43 @@ class _Corpus:
 
     def __init__(self, root: Path):
         self.root = _root_path(root)
-        self.texts: dict[str, str] = {}
-        self.trees: dict[str, ast.Module] = {}
         self.unavailable: set[str] = set()
-        self.modules: dict[str, list[str]] = defaultdict(list)
-        self.bindings: dict[str, dict[str, list[dict]]] = {}
-        self.definitions: dict[str, dict[str, list[ast.AST]]] = {}
-        self.wildcards: set[str] = set()
+        texts: dict[str, str] = {}
         for absolute in iter_source_files(self.root):
             path = absolute.relative_to(self.root).as_posix()
             raw = read_source_bytes(self.root, absolute)
             if raw is None:
                 self.unavailable.add(path)
-                continue
-            self.texts[path] = raw.decode("utf-8")
-            if absolute.suffix.lower() not in {".py", ".pyi"}:
+            else:
+                texts[path] = raw.decode("utf-8")
+        self._load_texts(texts)
+
+    @classmethod
+    def from_texts(cls, texts: dict[str, str], parsed_cache: dict | None = None) -> "_Corpus":
+        """Build the same static corpus from already validated immutable source.
+
+        No filesystem reads occur. The provider owns source allowlisting and
+        snapshot consistency; path traversal is still rejected here.
+        """
+        corpus = cls.__new__(cls)
+        corpus.root = None
+        corpus.unavailable = set()
+        for path, source in texts.items():
+            _safe_parts(path)
+            if not isinstance(source, str):
+                raise ValueError("source corpus values must be text")
+        corpus._load_texts(texts, parsed_cache)
+        return corpus
+
+    def _load_texts(self, texts: dict[str, str], parsed_cache: dict | None = None) -> None:
+        self.texts = dict(sorted(texts.items()))
+        self.trees: dict[str, ast.Module] = {}
+        self.modules: dict[str, list[str]] = defaultdict(list)
+        self.bindings: dict[str, dict[str, list[dict]]] = {}
+        self.definitions: dict[str, dict[str, list[ast.AST]]] = {}
+        self.wildcards: set[str] = set()
+        for path, source in self.texts.items():
+            if Path(path).suffix.lower() not in {".py", ".pyi"}:
                 continue
             parts = list(Path(path).with_suffix("").parts)
             if parts[-1] == "__init__":
@@ -122,14 +144,19 @@ class _Corpus:
                 names.add(".".join(parts[1:]))
             for name in sorted(names - {""}):
                 self.modules[name].append(path)
-            try:
-                tree = ast.parse(self.texts[path], filename=path)
-            except (SyntaxError, ValueError, RecursionError):
-                continue
+            cache_key = (path, sha256(source))
+            tree = parsed_cache.get(cache_key) if parsed_cache is not None else None
+            if tree is None:
+                try:
+                    tree = ast.parse(source, filename=path)
+                except (SyntaxError, ValueError, RecursionError):
+                    continue
+                if parsed_cache is not None:
+                    parsed_cache[cache_key] = tree
             self.trees[path] = tree
             self._index(path, tree)
         self.snapshot_id = snapshot_id({path: sha256(text)
-                                        for path, text in sorted(self.texts.items())})
+                                        for path, text in self.texts.items()})
 
     def _index(self, path: str, tree: ast.Module) -> None:
         bindings: dict[str, list[dict]] = defaultdict(list)
@@ -274,12 +301,14 @@ class _Corpus:
     def anchor_state(self, anchor: dict) -> tuple[str, dict | None]:
         path = anchor["path"]
         current = self.root
-        for part in _safe_parts(path):
-            current = current / part
-            if current.is_symlink():
-                return "invalid", None
+        if current is not None:
+            for part in _safe_parts(path):
+                current = current / part
+                if current.is_symlink():
+                    return "invalid", None
         if path not in self.texts:
-            return ("invalid" if path in self.unavailable or current.exists() else "missing"), None
+            return ("invalid" if path in self.unavailable or (
+                current is not None and current.exists()) else "missing"), None
         if path not in self.trees:
             return "unresolved", None
         symbol = anchor["symbol"]

@@ -1,0 +1,8 @@
+{
+  "oracles_sha256": "a66b6288a1cd882eb359f3d3fc7d1991c02b330004d1e6da8d2fb020fa6a5ade",
+  "original_protocol_sha256": "adc6c7337c7c836305e4432cdfe6ef9dfd37f2ecf4c8c733bb448ab80b6fa429",
+  "preserved": "Task and oracle bytes unchanged; only publication metadata paths are sanitized.",
+  "public_protocol_sha256": "5ee84e743ae382855dc96c70fa417b27db3d998884a17fa82cbfae9225a8d47a",
+  "schema_version": 1,
+  "tasks_sha256": "e27051186f0fe5b56a615cd9ee9de5ba6b56232b227e1ea40b72379aeacd4c0b"
+}

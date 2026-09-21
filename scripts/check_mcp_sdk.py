@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exercise all eight tools through the official MCP SDK over real stdio.
+"""Exercise all ten tools through the official MCP SDK over real stdio.
 
 Install the repository first with ``python -m pip install -e '.[integration]'``.
 Run ``python scripts/check_mcp_sdk.py --output benchmarks/results/mcp-interop.json``.
@@ -32,7 +32,8 @@ except ImportError as exc:
 ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_TOOLS = {
     f"contextproof_{name}" for name in (
-        "index", "search", "bundle", "verify", "repair", "capture", "check", "refresh"
+        "index", "search", "bundle", "verify", "repair", "capture", "check", "refresh",
+        "graph_capture", "graph_refresh"
     )
 }
 
@@ -60,9 +61,10 @@ async def check() -> dict:
                 initialized = await session.initialize()
                 listing = await session.list_tools()
                 names = sorted(tool.name for tool in listing.tools)
-                require(set(names) == EXPECTED_TOOLS and len(names) == 8,
-                        "server did not expose the expected eight tools")
+                require(set(names) == EXPECTED_TOOLS and len(names) == 10,
+                        "server did not expose the expected ten tools")
                 called: set[str] = set()
+                text_sizes: dict[str, int] = {}
 
                 async def call(name: str, arguments: dict):
                     result = await session.call_tool(name, arguments)
@@ -70,6 +72,7 @@ async def check() -> dict:
                     require(bool(result.content) and result.content[0].type == "text",
                             f"tool did not return JSON text: {name}")
                     called.add(name)
+                    text_sizes[name] = len(result.content[0].text.encode("utf-8"))
                     return json.loads(result.content[0].text)
 
                 index = await call("contextproof_index", {})
@@ -89,6 +92,9 @@ async def check() -> dict:
                 initial = await call("contextproof_check", {"context": context})
                 require(initial["can_reuse"] and initial["snapshot_consistent"],
                         "initial captured context was not reusable")
+                graph = await call("contextproof_graph_capture", {
+                    "query": "invoice_total", "budget": 16000,
+                })
 
                 (source / "policy.py").write_text(
                     "def tax_rate():\n    return 0.12\n", encoding="utf-8",
@@ -106,7 +112,18 @@ async def check() -> dict:
                 rendered_bytes = len(render_bundle(refreshed["bundle"]).encode("utf-8"))
                 require(rendered_bytes == refreshed["bundle"]["consumed"] <= 6000,
                         "refreshed rendered context violated its budget")
-                require(called == EXPECTED_TOOLS, "not all eight tools were called")
+                graph_update = await call("contextproof_graph_refresh", {
+                    "handle": graph["graph_id"], "budget": 16000,
+                })
+                delivered = "\n".join(node["text"] for node in graph_update["nodes"])
+                require("return 0.12" in delivered and "return 0.10" not in delivered,
+                        "graph refresh did not deliver current changed dependency source")
+                require(graph_update["base_graph_id"] == graph["graph_id"],
+                        "graph update did not identify its retained base")
+                require(all(text_sizes[name] <= 16000 for name in (
+                    "contextproof_graph_capture", "contextproof_graph_refresh")),
+                    "model-visible graph tool text exceeded its byte budget")
+                require(called == EXPECTED_TOOLS, "not all ten tools were called")
 
                 package_root = Path(contextproof.__file__).resolve().parent
                 return {
@@ -118,7 +135,15 @@ async def check() -> dict:
                     "server": initialized.server_info.model_dump(exclude_none=True),
                     "protocol_version": initialized.protocol_version,
                     "listed_tools": names, "called_tools": sorted(called),
-                    "all_eight_tools_called": called == EXPECTED_TOOLS,
+                    "all_ten_tools_called": called == EXPECTED_TOOLS,
+                    "graph_delivery": {
+                        "changed_dependency_delivered": "return 0.12" in delivered,
+                        "old_dependency_absent": "return 0.10" not in delivered,
+                        "base_identified": graph_update["base_graph_id"] == graph["graph_id"],
+                        "capture_text_bytes": text_sizes["contextproof_graph_capture"],
+                        "refresh_text_bytes": text_sizes["contextproof_graph_refresh"],
+                        "budget_bytes": 16000,
+                    },
                     "index_snapshot_available": bool(index["snapshot_id"]),
                     "search_hit_count": len(hits),
                     "initial_recommendation": initial["recommendation"],
@@ -137,7 +162,8 @@ async def check() -> dict:
                     "implementation_sha256": {
                         f"src/contextproof/{name}": hashlib.sha256(
                             (package_root / name).read_bytes()).hexdigest()
-                        for name in ("mcp.py", "session.py", "dependencies.py", "evidence.py", "index.py")
+                        for name in ("mcp.py", "session.py", "dependencies.py", "evidence.py", "index.py",
+                                     "graph.py", "graph_session.py", "graph_payload.py", "revisions.py")
                     },
                     "checker_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                     "scope": "Real stdio SDK interoperability on one controlled dependency-edit fixture; "

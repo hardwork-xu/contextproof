@@ -40,6 +40,26 @@ def parser():
     render = commands.add_parser("render")
     render.add_argument("bundle", type=Path)
     render.add_argument("--output", "-o", type=Path)
+    for name in ("graph-capture", "graph-refresh"):
+        cmd = commands.add_parser(name)
+        cmd.add_argument("root", type=Path)
+        cmd.add_argument("query" if name == "graph-capture" else "artifact")
+        cmd.add_argument("--ref", help="immutable Git commit/ref; default hashes the working tree")
+        cmd.add_argument("--budget", type=int, default=16000)
+        cmd.add_argument("--output", "-o", type=Path, required=True,
+                         help="save full current graph separately from model-facing output")
+        cmd.add_argument("--payload", type=Path, help="save exactly budgeted model-facing text")
+        if name == "graph-capture":
+            cmd.add_argument("--limit", type=int, default=1)
+            cmd.add_argument("--depth", type=int, default=4)
+            cmd.add_argument("--max-nodes", type=int, default=256)
+        else:
+            cmd.add_argument("--view", choices=("full", "update"), default="update")
+            cmd.add_argument("--delta", type=Path, help="save lossless reconstruction delta")
+    delta = commands.add_parser("graph-apply")
+    delta.add_argument("base", type=Path)
+    delta.add_argument("delta", type=Path)
+    delta.add_argument("--output", "-o", type=Path, required=True)
     return p
 
 
@@ -55,6 +75,8 @@ def read_bundle(path):
 def main(argv=None):
     args = parser().parse_args(argv)
     try:
+        if args.command in {"graph-capture", "graph-refresh", "graph-apply"}:
+            return _graph_command(args)
         if args.command == "serve":
             from .mcp import serve
             serve(args.root)
@@ -118,6 +140,43 @@ def main(argv=None):
     except (ValueError, OSError, KeyError, TypeError) as exc:
         print(f"contextproof: {exc}", file=sys.stderr)
         return 2
+
+
+def _write_json(path, value):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False) + "\n",
+                    encoding="utf-8")
+
+
+def _graph_command(args):
+    from .graph_delta import apply_graph_delta
+    from .graph_session import GraphSession
+    if args.command == "graph-apply":
+        result = apply_graph_delta(read_bundle(args.base), read_bundle(args.delta))
+        _write_json(args.output, result)
+        print(json.dumps({"graph_id": result["id"], "reconstructed": True}))
+        return 0
+    with GraphSession(args.root) as session:
+        if args.command == "graph-capture":
+            result = session.capture(args.query, ref=args.ref, budget=args.budget,
+                                     limit=args.limit, max_depth=args.depth, max_nodes=args.max_nodes)
+        else:
+            artifact = Path(args.artifact)
+            before = read_bundle(artifact) if artifact.is_file() else args.artifact
+            result = session.refresh(before, ref=args.ref, budget=args.budget, view=args.view)
+    _write_json(args.output, result["graph"])
+    if args.payload:
+        args.payload.parent.mkdir(parents=True, exist_ok=True)
+        args.payload.write_text(result["payload"]["rendered"], encoding="utf-8")
+    if getattr(args, "delta", None):
+        _write_json(args.delta, result["delta"])
+    receipt = {"graph_id": result["graph"]["id"], "revision": result["revision"],
+               "stats": result["stats"], "delivery": {
+                   key: value for key, value in result["payload"].items() if key != "rendered"}}
+    if "comparison" in result:
+        receipt["comparison"] = result["comparison"]
+    print(json.dumps(receipt, ensure_ascii=False, indent=2))
+    return 0 if result["payload"]["complete"] else 1
 
 
 if __name__ == "__main__":

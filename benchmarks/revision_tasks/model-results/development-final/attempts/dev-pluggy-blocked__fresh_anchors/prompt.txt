@@ -1,0 +1,13 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import pluggy
+manager = pluggy.PluginManager("example")
+manager.set_blocked("blocked")
+RESULT = [len(manager.get_plugins()), None in manager.get_plugins()]
+```
+
+Repository source evidence:
+{"ambiguity_policy":"all physical declarations; no runtime binding selection","ambiguous_symbols":[],"complete":true,"kind":"supplied-anchor-source","missing":[],"omitted":[],"scope":"supplied-declarations-only","source":[{"end_line":295,"path":"src/pluggy/_manager.py","start_line":293,"symbol":"PluginManager.get_plugins","text":"    def get_plugins(self) -> set[Any]:\n        \"\"\"Return a set of all registered plugin objects.\"\"\"\n        return {x for x in self._name2plugin.values() if x is not None}\n","text_sha256":"89d62e59b5d40312b9a9255679ce46f10d417c448c508ec74e4f1d0ef65f1a31"},{"end_line":233,"path":"src/pluggy/_manager.py","start_line":230,"symbol":"PluginManager.set_blocked","text":"    def set_blocked(self, name: str) -> None:\n        \"\"\"Block registrations of the given name, unregister if already registered.\"\"\"\n        self.unregister(name=name)\n        self._name2plugin[name] = None\n","text_sha256":"d4490b53cae86180e59b28bc325acd3223658244ba5e4d21269c6cb1c8a315c5"}]}

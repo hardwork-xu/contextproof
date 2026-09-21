@@ -53,7 +53,7 @@ def test_mcp_lifecycle_and_bundle(tmp_path):
     assert "error" in server.handle(rpc("tools/list"))
     init = server.handle(rpc("initialize", protocolVersion="2025-11-25"))
     assert init["result"]["protocolVersion"] == "2025-11-25"
-    assert len(server.handle(rpc("tools/list"))["result"]["tools"]) == 8
+    assert len(server.handle(rpc("tools/list"))["result"]["tools"]) == 10
     result = server.handle(rpc("tools/call", name="contextproof_bundle",
                                arguments={"query": "discount", "budget": 10000}))
     assert not result["result"]["isError"]

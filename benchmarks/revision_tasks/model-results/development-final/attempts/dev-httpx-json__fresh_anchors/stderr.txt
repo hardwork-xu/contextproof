@@ -1,0 +1,28 @@
+2026-09-21T11:10:55.547867Z ERROR codex_models_manager::manager: failed to refresh available models: timeout waiting for child process to exit
+2026-09-21T11:10:55.550437Z ERROR codex_models_manager::manager: failed to refresh available models: timeout waiting for child process to exit
+2026-09-21T11:10:55.562762Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:10:55.565778Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:10:55.567961Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:10:55.569627Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:10:55.574047Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:10:55.575614Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:10:55.577156Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:10:55.580166Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:10:55.582190Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:10:55.585280Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:10:55.587984Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:10:55.589796Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:10:55.592718Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:10:55.594879Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:10:55.597700Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:10:55.600623Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:10:55.602300Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:10:55.603734Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:10:55.606621Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:10:55.609099Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:10:55.611355Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:10:55.638086Z  WARN codex_core::shell_snapshot: Failed to delete shell snapshot at "<USER_HOME>/.codex/shell_snapshots/01a0c3a8-aa54-7611-a048-6c65af5d415c.1789989005909579000.sh": Os { code: 2, kind: NotFound, message: "No such file or directory" }
+2026-09-21T11:10:55.644832Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:10:55.651825Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:10:55.658257Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:11:11.841366Z ERROR codex_models_manager::manager: failed to refresh available models: timeout waiting for child process to exit

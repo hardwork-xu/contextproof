@@ -1,0 +1,11 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+from packaging.utils import canonicalize_name, canonicalize_version
+RESULT = [canonicalize_name("My_Package.Name"), canonicalize_version("1.0.0")]
+```
+
+Repository source evidence:
+{"ambiguity_policy":"all physical declarations; no runtime binding selection","ambiguous_symbols":[],"complete":true,"kind":"supplied-anchor-source","missing":[],"omitted":[],"scope":"supplied-declarations-only","source":[{"end_line":51,"path":"src/packaging/utils.py","start_line":46,"symbol":"canonicalize_name","text":"def canonicalize_name(name: str, *, validate: bool = False) -> NormalizedName:\n    if validate and not _validate_regex.match(name):\n        raise InvalidName(f\"name is invalid: {name!r}\")\n    # This is taken from PEP 503.\n    value = _canonicalize_regex.sub(\"-\", name).lower()\n    return cast(NormalizedName, value)\n","text_sha256":"e6af6676efd50239aa995dfee4ee0978c742d415406190e80a933c3f68b74bf7"},{"end_line":81,"path":"src/packaging/utils.py","start_line":58,"symbol":"canonicalize_version","text":"@functools.singledispatch\ndef canonicalize_version(\n    version: Version | str, *, strip_trailing_zero: bool = True\n) -> str:\n    \"\"\"\n    Return a canonical form of a version as a string.\n\n    >>> canonicalize_version('1.0.1')\n    '1.0.1'\n\n    Per PEP 625, versions may have multiple canonical forms, differing\n    only by trailing zeros.\n\n    >>> canonicalize_version('1.0.0')\n    '1'\n    >>> canonicalize_version('1.0.0', strip_trailing_zero=False)\n    '1.0.0'\n\n    Invalid versions are returned unaltered.\n\n    >>> canonicalize_version('foo bar baz')\n    'foo bar baz'\n    \"\"\"\n    return str(_TrimmedRelease(str(version)) if strip_trailing_zero else version)\n","text_sha256":"43eee6ea457fe2eed4d1b5572e6c333e96108e574d638dac28141c7d4d2c7603"}]}

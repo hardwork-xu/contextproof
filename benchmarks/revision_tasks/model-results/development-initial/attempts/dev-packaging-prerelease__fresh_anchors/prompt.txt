@@ -1,0 +1,11 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+from packaging.specifiers import Specifier
+RESULT = Specifier(">1.0.dev1").prereleases
+```
+
+Repository source evidence:
+{"complete":false,"kind":"supplied-anchor-source","missing":[{"path":"src/packaging/specifiers.py","reason":"ambiguous","symbol":"Specifier.prereleases"}],"omitted":[],"scope":"supplied-declarations-only","source":[]}

@@ -1,0 +1,32 @@
+2026-09-21T11:01:15.711435Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:01:15.747221Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:01:15.753586Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:01:15.760982Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:01:15.762995Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:01:15.768718Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:01:15.772524Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:01:15.776441Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:01:15.782937Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:01:15.787127Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:01:15.790759Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:01:15.793846Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:01:15.796393Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:01:15.801176Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:01:15.808685Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:01:15.815012Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:01:15.828942Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:01:15.836839Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:01:15.842903Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:01:15.849955Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:01:15.857114Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:01:15.869599Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:01:15.881168Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:01:15.897400Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:01:20.672173Z ERROR codex_models_manager::manager: failed to refresh available models: timeout waiting for child process to exit
+2026-09-21T11:01:47.773864Z  WARN codex_core::responses_retry: stream disconnected - retrying sampling request (1/5 in 213ms)... turn_id=01a0c3a0-9394-7241-afe6-9f0b992de7b2 retries=1 max_retries=5 sampling_error=request timed out
+2026-09-21T11:02:02.992221Z  WARN codex_core::responses_retry: stream disconnected - retrying sampling request (2/5 in 363ms)... turn_id=01a0c3a0-9394-7241-afe6-9f0b992de7b2 retries=2 max_retries=5 sampling_error=request timed out
+2026-09-21T11:02:18.361278Z  WARN codex_core::responses_retry: stream disconnected - retrying sampling request (3/5 in 777ms)... turn_id=01a0c3a0-9394-7241-afe6-9f0b992de7b2 retries=3 max_retries=5 sampling_error=request timed out
+2026-09-21T11:02:34.146034Z  WARN codex_core::responses_retry: stream disconnected - retrying sampling request (4/5 in 1.454s)... turn_id=01a0c3a0-9394-7241-afe6-9f0b992de7b2 retries=4 max_retries=5 sampling_error=request timed out
+2026-09-21T11:02:50.604609Z  WARN codex_core::responses_retry: stream disconnected - retrying sampling request (5/5 in 2.966s)... turn_id=01a0c3a0-9394-7241-afe6-9f0b992de7b2 retries=5 max_retries=5 sampling_error=request timed out
+2026-09-21T11:03:08.576804Z  WARN codex_core::client: falling back to HTTP
+2026-09-21T11:03:16.108276Z  WARN codex_core::shell_snapshot: Failed to delete shell snapshot at AbsolutePathBuf("<USER_HOME>/.codex/shell_snapshots/01a0c3a0-9325-76d3-a54e-bb697d563dc4.1789988475686812000.sh"): Os { code: 2, kind: NotFound, message: "No such file or directory" }

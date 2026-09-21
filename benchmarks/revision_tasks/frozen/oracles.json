@@ -1,0 +1,1880 @@
+[
+  {
+    "after": {
+      "value": true
+    },
+    "before": {
+      "value": false
+    },
+    "behavior_changed": true,
+    "executions": {
+      "after": [
+        {
+          "answer": {
+            "value": true
+          },
+          "returncode": 0,
+          "seconds": 0.07377425010781735,
+          "stderr": "",
+          "stdout": "{\"value\": true}\n"
+        },
+        {
+          "answer": {
+            "value": true
+          },
+          "returncode": 0,
+          "seconds": 0.07026670803315938,
+          "stderr": "",
+          "stdout": "{\"value\": true}\n"
+        }
+      ],
+      "before": [
+        {
+          "answer": {
+            "value": false
+          },
+          "returncode": 0,
+          "seconds": 0.07422650000080466,
+          "stderr": "",
+          "stdout": "{\"value\": false}\n"
+        },
+        {
+          "answer": {
+            "value": false
+          },
+          "returncode": 0,
+          "seconds": 0.07518083299510181,
+          "stderr": "",
+          "stdout": "{\"value\": false}\n"
+        }
+      ]
+    },
+    "id": "dev-packaging-prerelease"
+  },
+  {
+    "after": {
+      "value": [
+        "{\"test\":123}",
+        "12"
+      ]
+    },
+    "before": {
+      "value": [
+        "{\"test\": 123}",
+        "13"
+      ]
+    },
+    "behavior_changed": true,
+    "executions": {
+      "after": [
+        {
+          "answer": {
+            "value": [
+              "{\"test\":123}",
+              "12"
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.12401891697663814,
+          "stderr": "",
+          "stdout": "{\"value\": [\"{\\\"test\\\":123}\", \"12\"]}\n"
+        },
+        {
+          "answer": {
+            "value": [
+              "{\"test\":123}",
+              "12"
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.12346912501379848,
+          "stderr": "",
+          "stdout": "{\"value\": [\"{\\\"test\\\":123}\", \"12\"]}\n"
+        }
+      ],
+      "before": [
+        {
+          "answer": {
+            "value": [
+              "{\"test\": 123}",
+              "13"
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.17576758295763284,
+          "stderr": "",
+          "stdout": "{\"value\": [\"{\\\"test\\\": 123}\", \"13\"]}\n"
+        },
+        {
+          "answer": {
+            "value": [
+              "{\"test\": 123}",
+              "13"
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.17444712505675852,
+          "stderr": "",
+          "stdout": "{\"value\": [\"{\\\"test\\\": 123}\", \"13\"]}\n"
+        }
+      ]
+    },
+    "id": "dev-httpx-json"
+  },
+  {
+    "after": {
+      "value": [
+        0,
+        false
+      ]
+    },
+    "before": {
+      "value": [
+        1,
+        true
+      ]
+    },
+    "behavior_changed": true,
+    "executions": {
+      "after": [
+        {
+          "answer": {
+            "value": [
+              0,
+              false
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.05877479107584804,
+          "stderr": "",
+          "stdout": "{\"value\": [0, false]}\n"
+        },
+        {
+          "answer": {
+            "value": [
+              0,
+              false
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.06734104093629867,
+          "stderr": "",
+          "stdout": "{\"value\": [0, false]}\n"
+        }
+      ],
+      "before": [
+        {
+          "answer": {
+            "value": [
+              1,
+              true
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.08088916691485792,
+          "stderr": "",
+          "stdout": "{\"value\": [1, true]}\n"
+        },
+        {
+          "answer": {
+            "value": [
+              1,
+              true
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.08269754191860557,
+          "stderr": "",
+          "stdout": "{\"value\": [1, true]}\n"
+        }
+      ]
+    },
+    "id": "dev-pluggy-blocked"
+  },
+  {
+    "after": {
+      "error": "TypeError"
+    },
+    "before": {
+      "value": 2
+    },
+    "behavior_changed": true,
+    "executions": {
+      "after": [
+        {
+          "answer": {
+            "error": "TypeError"
+          },
+          "returncode": 0,
+          "seconds": 0.07474087493028492,
+          "stderr": "",
+          "stdout": "{\"error\": \"TypeError\"}\n"
+        },
+        {
+          "answer": {
+            "error": "TypeError"
+          },
+          "returncode": 0,
+          "seconds": 0.07621095795184374,
+          "stderr": "",
+          "stdout": "{\"error\": \"TypeError\"}\n"
+        }
+      ],
+      "before": [
+        {
+          "answer": {
+            "value": 2
+          },
+          "returncode": 0,
+          "seconds": 0.07731229101773351,
+          "stderr": "",
+          "stdout": "{\"value\": 2}\n"
+        },
+        {
+          "answer": {
+            "value": 2
+          },
+          "returncode": 0,
+          "seconds": 0.08005766698624939,
+          "stderr": "",
+          "stdout": "{\"value\": 2}\n"
+        }
+      ]
+    },
+    "id": "dev-attrs-evolve"
+  },
+  {
+    "after": {
+      "value": [
+        "my-package-name",
+        "1"
+      ]
+    },
+    "before": {
+      "value": [
+        "my-package-name",
+        "1"
+      ]
+    },
+    "behavior_changed": false,
+    "executions": {
+      "after": [
+        {
+          "answer": {
+            "value": [
+              "my-package-name",
+              "1"
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.06706749997101724,
+          "stderr": "",
+          "stdout": "{\"value\": [\"my-package-name\", \"1\"]}\n"
+        },
+        {
+          "answer": {
+            "value": [
+              "my-package-name",
+              "1"
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.06936683307867497,
+          "stderr": "",
+          "stdout": "{\"value\": [\"my-package-name\", \"1\"]}\n"
+        }
+      ],
+      "before": [
+        {
+          "answer": {
+            "value": [
+              "my-package-name",
+              "1"
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.06652324995957315,
+          "stderr": "",
+          "stdout": "{\"value\": [\"my-package-name\", \"1\"]}\n"
+        },
+        {
+          "answer": {
+            "value": [
+              "my-package-name",
+              "1"
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.06863245903514326,
+          "stderr": "",
+          "stdout": "{\"value\": [\"my-package-name\", \"1\"]}\n"
+        }
+      ]
+    },
+    "id": "dev-packaging-normalize-control"
+  },
+  {
+    "after": {
+      "value": true
+    },
+    "before": {
+      "value": false
+    },
+    "behavior_changed": true,
+    "executions": {
+      "after": [
+        {
+          "answer": {
+            "value": true
+          },
+          "returncode": 0,
+          "seconds": 0.07195250003132969,
+          "stderr": "",
+          "stdout": "{\"value\": true}\n"
+        },
+        {
+          "answer": {
+            "value": true
+          },
+          "returncode": 0,
+          "seconds": 0.068670165957883,
+          "stderr": "",
+          "stdout": "{\"value\": true}\n"
+        }
+      ],
+      "before": [
+        {
+          "answer": {
+            "value": false
+          },
+          "returncode": 0,
+          "seconds": 0.07024395791813731,
+          "stderr": "",
+          "stdout": "{\"value\": false}\n"
+        },
+        {
+          "answer": {
+            "value": false
+          },
+          "returncode": 0,
+          "seconds": 0.06857495801523328,
+          "stderr": "",
+          "stdout": "{\"value\": false}\n"
+        }
+      ]
+    },
+    "id": "packaging-epoch"
+  },
+  {
+    "after": {
+      "value": [
+        "<2.0",
+        ">=1.0"
+      ]
+    },
+    "before": {
+      "error": "AttributeError"
+    },
+    "behavior_changed": true,
+    "executions": {
+      "after": [
+        {
+          "answer": {
+            "value": [
+              "<2.0",
+              ">=1.0"
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.07082979194819927,
+          "stderr": "",
+          "stdout": "{\"value\": [\"<2.0\", \">=1.0\"]}\n"
+        },
+        {
+          "answer": {
+            "value": [
+              "<2.0",
+              ">=1.0"
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.0714344170410186,
+          "stderr": "",
+          "stdout": "{\"value\": [\"<2.0\", \">=1.0\"]}\n"
+        }
+      ],
+      "before": [
+        {
+          "answer": {
+            "error": "AttributeError"
+          },
+          "returncode": 0,
+          "seconds": 0.0735889170318842,
+          "stderr": "",
+          "stdout": "{\"error\": \"AttributeError\"}\n"
+        },
+        {
+          "answer": {
+            "error": "AttributeError"
+          },
+          "returncode": 0,
+          "seconds": 0.07014375005383044,
+          "stderr": "",
+          "stdout": "{\"error\": \"AttributeError\"}\n"
+        }
+      ]
+    },
+    "id": "packaging-iterable-specifiers"
+  },
+  {
+    "after": {
+      "value": null
+    },
+    "before": {
+      "error": "AssertionError"
+    },
+    "behavior_changed": true,
+    "executions": {
+      "after": [
+        {
+          "answer": {
+            "value": null
+          },
+          "returncode": 0,
+          "seconds": 0.10169491602573544,
+          "stderr": "",
+          "stdout": "{\"value\": null}\n"
+        },
+        {
+          "answer": {
+            "value": null
+          },
+          "returncode": 0,
+          "seconds": 0.10112595895770937,
+          "stderr": "",
+          "stdout": "{\"value\": null}\n"
+        }
+      ],
+      "before": [
+        {
+          "answer": {
+            "error": "AssertionError"
+          },
+          "returncode": 0,
+          "seconds": 0.10106912499759346,
+          "stderr": "",
+          "stdout": "{\"error\": \"AssertionError\"}\n"
+        },
+        {
+          "answer": {
+            "error": "AssertionError"
+          },
+          "returncode": 0,
+          "seconds": 0.09621462493669242,
+          "stderr": "",
+          "stdout": "{\"error\": \"AssertionError\"}\n"
+        }
+      ]
+    },
+    "id": "packaging-missing-metadata"
+  },
+  {
+    "after": {
+      "value": true
+    },
+    "before": {
+      "error": "InvalidVersion"
+    },
+    "behavior_changed": true,
+    "executions": {
+      "after": [
+        {
+          "answer": {
+            "value": true
+          },
+          "returncode": 0,
+          "seconds": 0.08313575002830476,
+          "stderr": "",
+          "stdout": "{\"value\": true}\n"
+        },
+        {
+          "answer": {
+            "value": true
+          },
+          "returncode": 0,
+          "seconds": 0.08413929108064622,
+          "stderr": "",
+          "stdout": "{\"value\": true}\n"
+        }
+      ],
+      "before": [
+        {
+          "answer": {
+            "error": "InvalidVersion"
+          },
+          "returncode": 0,
+          "seconds": 0.08138641598634422,
+          "stderr": "",
+          "stdout": "{\"error\": \"InvalidVersion\"}\n"
+        },
+        {
+          "answer": {
+            "error": "InvalidVersion"
+          },
+          "returncode": 0,
+          "seconds": 0.08029508404433727,
+          "stderr": "",
+          "stdout": "{\"error\": \"InvalidVersion\"}\n"
+        }
+      ]
+    },
+    "id": "packaging-marker-untagged"
+  },
+  {
+    "after": {
+      "value": "MIT"
+    },
+    "before": {
+      "error": "AttributeError"
+    },
+    "behavior_changed": true,
+    "executions": {
+      "after": [
+        {
+          "answer": {
+            "value": "MIT"
+          },
+          "returncode": 0,
+          "seconds": 0.10238708299584687,
+          "stderr": "",
+          "stdout": "{\"value\": \"MIT\"}\n"
+        },
+        {
+          "answer": {
+            "value": "MIT"
+          },
+          "returncode": 0,
+          "seconds": 0.10352658398915082,
+          "stderr": "",
+          "stdout": "{\"value\": \"MIT\"}\n"
+        }
+      ],
+      "before": [
+        {
+          "answer": {
+            "error": "AttributeError"
+          },
+          "returncode": 0,
+          "seconds": 0.09837966703344136,
+          "stderr": "",
+          "stdout": "{\"error\": \"AttributeError\"}\n"
+        },
+        {
+          "answer": {
+            "error": "AttributeError"
+          },
+          "returncode": 0,
+          "seconds": 0.09799608308821917,
+          "stderr": "",
+          "stdout": "{\"error\": \"AttributeError\"}\n"
+        }
+      ]
+    },
+    "id": "packaging-license-expression"
+  },
+  {
+    "after": {
+      "value": [
+        "u=with+spaces",
+        "u=with%2520spaces"
+      ]
+    },
+    "before": {
+      "value": [
+        "u=with%20spaces",
+        "u=with%20spaces"
+      ]
+    },
+    "behavior_changed": true,
+    "executions": {
+      "after": [
+        {
+          "answer": {
+            "value": [
+              "u=with+spaces",
+              "u=with%2520spaces"
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.13169025001116097,
+          "stderr": "",
+          "stdout": "{\"value\": [\"u=with+spaces\", \"u=with%2520spaces\"]}\n"
+        },
+        {
+          "answer": {
+            "value": [
+              "u=with+spaces",
+              "u=with%2520spaces"
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.12634333304595202,
+          "stderr": "",
+          "stdout": "{\"value\": [\"u=with+spaces\", \"u=with%2520spaces\"]}\n"
+        }
+      ],
+      "before": [
+        {
+          "answer": {
+            "value": [
+              "u=with%20spaces",
+              "u=with%20spaces"
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.17524895793758333,
+          "stderr": "",
+          "stdout": "{\"value\": [\"u=with%20spaces\", \"u=with%20spaces\"]}\n"
+        },
+        {
+          "answer": {
+            "value": [
+              "u=with%20spaces",
+              "u=with%20spaces"
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.17706941696815193,
+          "stderr": "",
+          "stdout": "{\"value\": [\"u=with%20spaces\", \"u=with%20spaces\"]}\n"
+        }
+      ]
+    },
+    "id": "httpx-form-encoding"
+  },
+  {
+    "after": {
+      "value": "http://example.com"
+    },
+    "before": {
+      "value": "http://example.com?a=1"
+    },
+    "behavior_changed": true,
+    "executions": {
+      "after": [
+        {
+          "answer": {
+            "value": "http://example.com"
+          },
+          "returncode": 0,
+          "seconds": 0.13941741699818522,
+          "stderr": "",
+          "stdout": "{\"value\": \"http://example.com\"}\n"
+        },
+        {
+          "answer": {
+            "value": "http://example.com"
+          },
+          "returncode": 0,
+          "seconds": 0.13590491598006338,
+          "stderr": "",
+          "stdout": "{\"value\": \"http://example.com\"}\n"
+        }
+      ],
+      "before": [
+        {
+          "answer": {
+            "value": "http://example.com?a=1"
+          },
+          "returncode": 0,
+          "seconds": 0.17774829198606312,
+          "stderr": "",
+          "stdout": "{\"value\": \"http://example.com?a=1\"}\n"
+        },
+        {
+          "answer": {
+            "value": "http://example.com?a=1"
+          },
+          "returncode": 0,
+          "seconds": 0.17850054206792265,
+          "stderr": "",
+          "stdout": "{\"value\": \"http://example.com?a=1\"}\n"
+        }
+      ]
+    },
+    "id": "httpx-empty-params"
+  },
+  {
+    "after": {
+      "value": "https://tom%40example.org:abc123%40%20%@example.org"
+    },
+    "before": {
+      "value": "https://tom%40example.org:abc123%40%20%25@example.org"
+    },
+    "behavior_changed": true,
+    "executions": {
+      "after": [
+        {
+          "answer": {
+            "value": "https://tom%40example.org:abc123%40%20%@example.org"
+          },
+          "returncode": 0,
+          "seconds": 0.13030033302493393,
+          "stderr": "",
+          "stdout": "{\"value\": \"https://tom%40example.org:abc123%40%20%@example.org\"}\n"
+        },
+        {
+          "answer": {
+            "value": "https://tom%40example.org:abc123%40%20%@example.org"
+          },
+          "returncode": 0,
+          "seconds": 0.13130058406386524,
+          "stderr": "",
+          "stdout": "{\"value\": \"https://tom%40example.org:abc123%40%20%@example.org\"}\n"
+        }
+      ],
+      "before": [
+        {
+          "answer": {
+            "value": "https://tom%40example.org:abc123%40%20%25@example.org"
+          },
+          "returncode": 0,
+          "seconds": 0.1898532920749858,
+          "stderr": "",
+          "stdout": "{\"value\": \"https://tom%40example.org:abc123%40%20%25@example.org\"}\n"
+        },
+        {
+          "answer": {
+            "value": "https://tom%40example.org:abc123%40%20%25@example.org"
+          },
+          "returncode": 0,
+          "seconds": 0.18801799998618662,
+          "stderr": "",
+          "stdout": "{\"value\": \"https://tom%40example.org:abc123%40%20%25@example.org\"}\n"
+        }
+      ]
+    },
+    "id": "httpx-userinfo-encoding"
+  },
+  {
+    "after": {
+      "error": "TypeError"
+    },
+    "before": {
+      "value": false
+    },
+    "behavior_changed": true,
+    "executions": {
+      "after": [
+        {
+          "answer": {
+            "error": "TypeError"
+          },
+          "returncode": 0,
+          "seconds": 0.1320950830122456,
+          "stderr": "",
+          "stdout": "{\"error\": \"TypeError\"}\n"
+        },
+        {
+          "answer": {
+            "error": "TypeError"
+          },
+          "returncode": 0,
+          "seconds": 0.13329554197844118,
+          "stderr": "",
+          "stdout": "{\"error\": \"TypeError\"}\n"
+        }
+      ],
+      "before": [
+        {
+          "answer": {
+            "value": false
+          },
+          "returncode": 0,
+          "seconds": 0.19190558302216232,
+          "stderr": "",
+          "stdout": "{\"value\": false}\n"
+        },
+        {
+          "answer": {
+            "value": false
+          },
+          "returncode": 0,
+          "seconds": 0.18228554201778024,
+          "stderr": "",
+          "stdout": "{\"value\": false}\n"
+        }
+      ]
+    },
+    "id": "httpx-client-app"
+  },
+  {
+    "after": {
+      "value": [
+        "socks5h",
+        1080
+      ]
+    },
+    "before": {
+      "error": "ValueError"
+    },
+    "behavior_changed": true,
+    "executions": {
+      "after": [
+        {
+          "answer": {
+            "value": [
+              "socks5h",
+              1080
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.13316174992360175,
+          "stderr": "",
+          "stdout": "{\"value\": [\"socks5h\", 1080]}\n"
+        },
+        {
+          "answer": {
+            "value": [
+              "socks5h",
+              1080
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.13349145790562034,
+          "stderr": "",
+          "stdout": "{\"value\": [\"socks5h\", 1080]}\n"
+        }
+      ],
+      "before": [
+        {
+          "answer": {
+            "error": "ValueError"
+          },
+          "returncode": 0,
+          "seconds": 0.19672499992884696,
+          "stderr": "",
+          "stdout": "{\"error\": \"ValueError\"}\n"
+        },
+        {
+          "answer": {
+            "error": "ValueError"
+          },
+          "returncode": 0,
+          "seconds": 0.18634120794013143,
+          "stderr": "",
+          "stdout": "{\"error\": \"ValueError\"}\n"
+        }
+      ]
+    },
+    "id": "httpx-socks5h"
+  },
+  {
+    "after": {
+      "value": [
+        true,
+        false,
+        false
+      ]
+    },
+    "before": {
+      "error": "AttributeError"
+    },
+    "behavior_changed": true,
+    "executions": {
+      "after": [
+        {
+          "answer": {
+            "value": [
+              true,
+              false,
+              false
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.06394595908932388,
+          "stderr": "",
+          "stdout": "{\"value\": [true, false, false]}\n"
+        },
+        {
+          "answer": {
+            "value": [
+              true,
+              false,
+              false
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.061148792039602995,
+          "stderr": "",
+          "stdout": "{\"value\": [true, false, false]}\n"
+        }
+      ],
+      "before": [
+        {
+          "answer": {
+            "error": "AttributeError"
+          },
+          "returncode": 0,
+          "seconds": 0.08344345900695771,
+          "stderr": "",
+          "stdout": "{\"error\": \"AttributeError\"}\n"
+        },
+        {
+          "answer": {
+            "error": "AttributeError"
+          },
+          "returncode": 0,
+          "seconds": 0.08965062501374632,
+          "stderr": "",
+          "stdout": "{\"error\": \"AttributeError\"}\n"
+        }
+      ]
+    },
+    "id": "pluggy-unblock"
+  },
+  {
+    "after": {
+      "value": [
+        "DeprecationWarning"
+      ]
+    },
+    "before": {
+      "error": "TypeError"
+    },
+    "behavior_changed": true,
+    "executions": {
+      "after": [
+        {
+          "answer": {
+            "value": [
+              "DeprecationWarning"
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.06010870903264731,
+          "stderr": "",
+          "stdout": "{\"value\": [\"DeprecationWarning\"]}\n"
+        },
+        {
+          "answer": {
+            "value": [
+              "DeprecationWarning"
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.06312387494836003,
+          "stderr": "",
+          "stdout": "{\"value\": [\"DeprecationWarning\"]}\n"
+        }
+      ],
+      "before": [
+        {
+          "answer": {
+            "error": "TypeError"
+          },
+          "returncode": 0,
+          "seconds": 0.0871826660586521,
+          "stderr": "",
+          "stdout": "{\"error\": \"TypeError\"}\n"
+        },
+        {
+          "answer": {
+            "error": "TypeError"
+          },
+          "returncode": 0,
+          "seconds": 0.08809383295010775,
+          "stderr": "",
+          "stdout": "{\"error\": \"TypeError\"}\n"
+        }
+      ]
+    },
+    "id": "pluggy-parameter-warning"
+  },
+  {
+    "after": {
+      "value": [
+        "PluggyTeardownRaisedWarning"
+      ]
+    },
+    "before": {
+      "value": []
+    },
+    "behavior_changed": true,
+    "executions": {
+      "after": [
+        {
+          "answer": {
+            "value": [
+              "PluggyTeardownRaisedWarning"
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.060798749909736216,
+          "stderr": "",
+          "stdout": "{\"value\": [\"PluggyTeardownRaisedWarning\"]}\n"
+        },
+        {
+          "answer": {
+            "value": [
+              "PluggyTeardownRaisedWarning"
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.06047495803795755,
+          "stderr": "",
+          "stdout": "{\"value\": [\"PluggyTeardownRaisedWarning\"]}\n"
+        }
+      ],
+      "before": [
+        {
+          "answer": {
+            "value": []
+          },
+          "returncode": 0,
+          "seconds": 0.08805029198992997,
+          "stderr": "",
+          "stdout": "{\"value\": []}\n"
+        },
+        {
+          "answer": {
+            "value": []
+          },
+          "returncode": 0,
+          "seconds": 0.08605012495536357,
+          "stderr": "",
+          "stdout": "{\"value\": []}\n"
+        }
+      ]
+    },
+    "id": "pluggy-teardown-warning"
+  },
+  {
+    "after": {
+      "value": [
+        "first",
+        "extra",
+        "last"
+      ]
+    },
+    "before": {
+      "value": [
+        "first",
+        "extra",
+        "last"
+      ]
+    },
+    "behavior_changed": false,
+    "executions": {
+      "after": [
+        {
+          "answer": {
+            "value": [
+              "first",
+              "extra",
+              "last"
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.059967209002934396,
+          "stderr": "",
+          "stdout": "{\"value\": [\"first\", \"extra\", \"last\"]}\n"
+        },
+        {
+          "answer": {
+            "value": [
+              "first",
+              "extra",
+              "last"
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.06256191607099026,
+          "stderr": "",
+          "stdout": "{\"value\": [\"first\", \"extra\", \"last\"]}\n"
+        }
+      ],
+      "before": [
+        {
+          "answer": {
+            "value": [
+              "first",
+              "extra",
+              "last"
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.0868143339175731,
+          "stderr": "",
+          "stdout": "{\"value\": [\"first\", \"extra\", \"last\"]}\n"
+        },
+        {
+          "answer": {
+            "value": [
+              "first",
+              "extra",
+              "last"
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.08678145904559642,
+          "stderr": "",
+          "stdout": "{\"value\": [\"first\", \"extra\", \"last\"]}\n"
+        }
+      ]
+    },
+    "id": "pluggy-extra-order"
+  },
+  {
+    "after": {
+      "value": false
+    },
+    "before": {
+      "value": true
+    },
+    "behavior_changed": true,
+    "executions": {
+      "after": [
+        {
+          "answer": {
+            "value": false
+          },
+          "returncode": 0,
+          "seconds": 0.08176579198334366,
+          "stderr": "",
+          "stdout": "{\"value\": false}\n"
+        },
+        {
+          "answer": {
+            "value": false
+          },
+          "returncode": 0,
+          "seconds": 0.0817675000289455,
+          "stderr": "",
+          "stdout": "{\"value\": false}\n"
+        }
+      ],
+      "before": [
+        {
+          "answer": {
+            "value": true
+          },
+          "returncode": 0,
+          "seconds": 0.10113741597160697,
+          "stderr": "",
+          "stdout": "{\"value\": true}\n"
+        },
+        {
+          "answer": {
+            "value": true
+          },
+          "returncode": 0,
+          "seconds": 0.08711820794269443,
+          "stderr": "",
+          "stdout": "{\"value\": true}\n"
+        }
+      ]
+    },
+    "id": "attrs-nan-equality"
+  },
+  {
+    "after": {
+      "value": {
+        "flag": "bool"
+      }
+    },
+    "before": {
+      "value": {}
+    },
+    "behavior_changed": true,
+    "executions": {
+      "after": [
+        {
+          "answer": {
+            "value": {
+              "flag": "bool"
+            }
+          },
+          "returncode": 0,
+          "seconds": 0.07949820905923843,
+          "stderr": "",
+          "stdout": "{\"value\": {\"flag\": \"bool\"}}\n"
+        },
+        {
+          "answer": {
+            "value": {
+              "flag": "bool"
+            }
+          },
+          "returncode": 0,
+          "seconds": 0.0896553749917075,
+          "stderr": "",
+          "stdout": "{\"value\": {\"flag\": \"bool\"}}\n"
+        }
+      ],
+      "before": [
+        {
+          "answer": {
+            "value": {}
+          },
+          "returncode": 0,
+          "seconds": 0.08009991701692343,
+          "stderr": "",
+          "stdout": "{\"value\": {}}\n"
+        },
+        {
+          "answer": {
+            "value": {}
+          },
+          "returncode": 0,
+          "seconds": 0.08135662495624274,
+          "stderr": "",
+          "stdout": "{\"value\": {}}\n"
+        }
+      ]
+    },
+    "id": "attrs-makeclass-annotations"
+  },
+  {
+    "after": {
+      "value": [
+        [
+          3
+        ],
+        3
+      ]
+    },
+    "before": {
+      "error": "SyntaxError"
+    },
+    "behavior_changed": true,
+    "executions": {
+      "after": [
+        {
+          "answer": {
+            "value": [
+              [
+                3
+              ],
+              3
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.08004541706759483,
+          "stderr": "",
+          "stdout": "{\"value\": [[3], 3]}\n"
+        },
+        {
+          "answer": {
+            "value": [
+              [
+                3
+              ],
+              3
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.08068291703239083,
+          "stderr": "",
+          "stdout": "{\"value\": [[3], 3]}\n"
+        }
+      ],
+      "before": [
+        {
+          "answer": {
+            "error": "SyntaxError"
+          },
+          "returncode": 0,
+          "seconds": 0.07760062499437481,
+          "stderr": "",
+          "stdout": "{\"error\": \"SyntaxError\"}\n"
+        },
+        {
+          "answer": {
+            "error": "SyntaxError"
+          },
+          "returncode": 0,
+          "seconds": 0.07850641594268382,
+          "stderr": "",
+          "stdout": "{\"error\": \"SyntaxError\"}\n"
+        }
+      ]
+    },
+    "id": "attrs-preinit-default"
+  },
+  {
+    "after": {
+      "value": [
+        true,
+        [
+          "note"
+        ]
+      ]
+    },
+    "before": {
+      "error": "FrozenInstanceError"
+    },
+    "behavior_changed": true,
+    "executions": {
+      "after": [
+        {
+          "answer": {
+            "value": [
+              true,
+              [
+                "note"
+              ]
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.07722391607239842,
+          "stderr": "",
+          "stdout": "{\"value\": [true, [\"note\"]]}\n"
+        },
+        {
+          "answer": {
+            "value": [
+              true,
+              [
+                "note"
+              ]
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.07831874990370125,
+          "stderr": "",
+          "stdout": "{\"value\": [true, [\"note\"]]}\n"
+        }
+      ],
+      "before": [
+        {
+          "answer": {
+            "error": "FrozenInstanceError"
+          },
+          "returncode": 0,
+          "seconds": 0.07762658293358982,
+          "stderr": "",
+          "stdout": "{\"error\": \"FrozenInstanceError\"}\n"
+        },
+        {
+          "answer": {
+            "error": "FrozenInstanceError"
+          },
+          "returncode": 0,
+          "seconds": 0.07613275002222508,
+          "stderr": "",
+          "stdout": "{\"error\": \"FrozenInstanceError\"}\n"
+        }
+      ]
+    },
+    "id": "attrs-frozen-exception"
+  },
+  {
+    "after": {
+      "value": [
+        "Child"
+      ]
+    },
+    "before": {
+      "value": []
+    },
+    "behavior_changed": true,
+    "executions": {
+      "after": [
+        {
+          "answer": {
+            "value": [
+              "Child"
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.07828295906074345,
+          "stderr": "",
+          "stdout": "{\"value\": [\"Child\"]}\n"
+        },
+        {
+          "answer": {
+            "value": [
+              "Child"
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.11246987502090633,
+          "stderr": "",
+          "stdout": "{\"value\": [\"Child\"]}\n"
+        }
+      ],
+      "before": [
+        {
+          "answer": {
+            "value": []
+          },
+          "returncode": 0,
+          "seconds": 0.07728037505876273,
+          "stderr": "",
+          "stdout": "{\"value\": []}\n"
+        },
+        {
+          "answer": {
+            "value": []
+          },
+          "returncode": 0,
+          "seconds": 0.07798720803111792,
+          "stderr": "",
+          "stdout": "{\"value\": []}\n"
+        }
+      ]
+    },
+    "id": "attrs-subclass-hook"
+  },
+  {
+    "after": {
+      "value": true
+    },
+    "before": {
+      "error": "TypeError"
+    },
+    "behavior_changed": true,
+    "executions": {
+      "after": [
+        {
+          "answer": {
+            "value": true
+          },
+          "returncode": 0,
+          "seconds": 0.07645950000733137,
+          "stderr": "",
+          "stdout": "{\"value\": true}\n"
+        },
+        {
+          "answer": {
+            "value": true
+          },
+          "returncode": 0,
+          "seconds": 0.07756979204714298,
+          "stderr": "",
+          "stdout": "{\"value\": true}\n"
+        }
+      ],
+      "before": [
+        {
+          "answer": {
+            "error": "TypeError"
+          },
+          "returncode": 0,
+          "seconds": 0.08089645800646394,
+          "stderr": "",
+          "stdout": "{\"error\": \"TypeError\"}\n"
+        },
+        {
+          "answer": {
+            "error": "TypeError"
+          },
+          "returncode": 0,
+          "seconds": 0.07800075004342943,
+          "stderr": "",
+          "stdout": "{\"error\": \"TypeError\"}\n"
+        }
+      ]
+    },
+    "id": "attrs-validator-hash"
+  },
+  {
+    "after": {
+      "value": "http://webservice?u=phrase%20with%20spaces"
+    },
+    "before": {
+      "value": "http://webservice?u=phrase%20with%20spaces"
+    },
+    "behavior_changed": false,
+    "executions": {
+      "after": [
+        {
+          "answer": {
+            "value": "http://webservice?u=phrase%20with%20spaces"
+          },
+          "returncode": 0,
+          "seconds": 0.13947441696655005,
+          "stderr": "",
+          "stdout": "{\"value\": \"http://webservice?u=phrase%20with%20spaces\"}\n"
+        },
+        {
+          "answer": {
+            "value": "http://webservice?u=phrase%20with%20spaces"
+          },
+          "returncode": 0,
+          "seconds": 0.15250516589730978,
+          "stderr": "",
+          "stdout": "{\"value\": \"http://webservice?u=phrase%20with%20spaces\"}\n"
+        }
+      ],
+      "before": [
+        {
+          "answer": {
+            "value": "http://webservice?u=phrase%20with%20spaces"
+          },
+          "returncode": 0,
+          "seconds": 0.18265824997797608,
+          "stderr": "",
+          "stdout": "{\"value\": \"http://webservice?u=phrase%20with%20spaces\"}\n"
+        },
+        {
+          "answer": {
+            "value": "http://webservice?u=phrase%20with%20spaces"
+          },
+          "returncode": 0,
+          "seconds": 0.18983475002460182,
+          "stderr": "",
+          "stdout": "{\"value\": \"http://webservice?u=phrase%20with%20spaces\"}\n"
+        }
+      ]
+    },
+    "id": "httpx-query-control"
+  },
+  {
+    "after": {
+      "value": [
+        "text/plain",
+        true
+      ]
+    },
+    "before": {
+      "value": [
+        "text/plain",
+        true
+      ]
+    },
+    "behavior_changed": false,
+    "executions": {
+      "after": [
+        {
+          "answer": {
+            "value": [
+              "text/plain",
+              true
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.13354733400046825,
+          "stderr": "",
+          "stdout": "{\"value\": [\"text/plain\", true]}\n"
+        },
+        {
+          "answer": {
+            "value": [
+              "text/plain",
+              true
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.13480762497056276,
+          "stderr": "",
+          "stdout": "{\"value\": [\"text/plain\", true]}\n"
+        }
+      ],
+      "before": [
+        {
+          "answer": {
+            "value": [
+              "text/plain",
+              true
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.20769287506118417,
+          "stderr": "",
+          "stdout": "{\"value\": [\"text/plain\", true]}\n"
+        },
+        {
+          "answer": {
+            "value": [
+              "text/plain",
+              true
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.18895629199687392,
+          "stderr": "",
+          "stdout": "{\"value\": [\"text/plain\", true]}\n"
+        }
+      ]
+    },
+    "id": "httpx-headers-control"
+  },
+  {
+    "after": {
+      "value": [
+        2,
+        [
+          1,
+          4
+        ],
+        [
+          "rc",
+          2
+        ],
+        3,
+        1,
+        "linux.4"
+      ]
+    },
+    "before": {
+      "value": [
+        2,
+        [
+          1,
+          4
+        ],
+        [
+          "rc",
+          2
+        ],
+        3,
+        1,
+        "linux.4"
+      ]
+    },
+    "behavior_changed": false,
+    "executions": {
+      "after": [
+        {
+          "answer": {
+            "value": [
+              2,
+              [
+                1,
+                4
+              ],
+              [
+                "rc",
+                2
+              ],
+              3,
+              1,
+              "linux.4"
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.05336095904931426,
+          "stderr": "",
+          "stdout": "{\"value\": [2, [1, 4], [\"rc\", 2], 3, 1, \"linux.4\"]}\n"
+        },
+        {
+          "answer": {
+            "value": [
+              2,
+              [
+                1,
+                4
+              ],
+              [
+                "rc",
+                2
+              ],
+              3,
+              1,
+              "linux.4"
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.05128762498497963,
+          "stderr": "",
+          "stdout": "{\"value\": [2, [1, 4], [\"rc\", 2], 3, 1, \"linux.4\"]}\n"
+        }
+      ],
+      "before": [
+        {
+          "answer": {
+            "value": [
+              2,
+              [
+                1,
+                4
+              ],
+              [
+                "rc",
+                2
+              ],
+              3,
+              1,
+              "linux.4"
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.05246066697873175,
+          "stderr": "",
+          "stdout": "{\"value\": [2, [1, 4], [\"rc\", 2], 3, 1, \"linux.4\"]}\n"
+        },
+        {
+          "answer": {
+            "value": [
+              2,
+              [
+                1,
+                4
+              ],
+              [
+                "rc",
+                2
+              ],
+              3,
+              1,
+              "linux.4"
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.05356833292171359,
+          "stderr": "",
+          "stdout": "{\"value\": [2, [1, 4], [\"rc\", 2], 3, 1, \"linux.4\"]}\n"
+        }
+      ]
+    },
+    "id": "packaging-version-control"
+  },
+  {
+    "after": {
+      "value": [
+        true,
+        "plugin",
+        false
+      ]
+    },
+    "before": {
+      "value": [
+        true,
+        "plugin",
+        false
+      ]
+    },
+    "behavior_changed": false,
+    "executions": {
+      "after": [
+        {
+          "answer": {
+            "value": [
+              true,
+              "plugin",
+              false
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.06192287500016391,
+          "stderr": "",
+          "stdout": "{\"value\": [true, \"plugin\", false]}\n"
+        },
+        {
+          "answer": {
+            "value": [
+              true,
+              "plugin",
+              false
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.06200329202692956,
+          "stderr": "",
+          "stdout": "{\"value\": [true, \"plugin\", false]}\n"
+        }
+      ],
+      "before": [
+        {
+          "answer": {
+            "value": [
+              true,
+              "plugin",
+              false
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.0901987919351086,
+          "stderr": "",
+          "stdout": "{\"value\": [true, \"plugin\", false]}\n"
+        },
+        {
+          "answer": {
+            "value": [
+              true,
+              "plugin",
+              false
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.08908212499227375,
+          "stderr": "",
+          "stdout": "{\"value\": [true, \"plugin\", false]}\n"
+        }
+      ]
+    },
+    "id": "pluggy-unregistered-control"
+  },
+  {
+    "after": {
+      "value": [
+        4,
+        "int"
+      ]
+    },
+    "before": {
+      "value": [
+        4,
+        "int"
+      ]
+    },
+    "behavior_changed": false,
+    "executions": {
+      "after": [
+        {
+          "answer": {
+            "value": [
+              4,
+              "int"
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.07912087498698384,
+          "stderr": "",
+          "stdout": "{\"value\": [4, \"int\"]}\n"
+        },
+        {
+          "answer": {
+            "value": [
+              4,
+              "int"
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.07718470797408372,
+          "stderr": "",
+          "stdout": "{\"value\": [4, \"int\"]}\n"
+        }
+      ],
+      "before": [
+        {
+          "answer": {
+            "value": [
+              4,
+              "int"
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.07889129198156297,
+          "stderr": "",
+          "stdout": "{\"value\": [4, \"int\"]}\n"
+        },
+        {
+          "answer": {
+            "value": [
+              4,
+              "int"
+            ]
+          },
+          "returncode": 0,
+          "seconds": 0.07843470794614404,
+          "stderr": "",
+          "stdout": "{\"value\": [4, \"int\"]}\n"
+        }
+      ]
+    },
+    "id": "attrs-converter-control"
+  }
+]

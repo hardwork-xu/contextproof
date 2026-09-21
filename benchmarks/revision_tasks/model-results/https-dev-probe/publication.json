@@ -1,0 +1,40 @@
+{
+  "files": {
+    "events.jsonl": {
+      "changed_by_export": true,
+      "private_sha256": "4ce3d136eaa3f26022e4413c709981eee130da37806ea1bd3f68a10ef4bfa8a4",
+      "public_sha256": "1b098ad34798c63ab06e0627317b2de21ad8f39ab234e4aef089cd6741247f18"
+    },
+    "instructions.txt": {
+      "changed_by_export": false,
+      "private_sha256": "526c634a7fb2948dad3a3e046acd375975ef58e997ddef36f2039479a7cd05c3",
+      "public_sha256": "526c634a7fb2948dad3a3e046acd375975ef58e997ddef36f2039479a7cd05c3"
+    },
+    "prompt.txt": {
+      "changed_by_export": false,
+      "private_sha256": "44dd1c6251dc78e9e6adb5d82394a265dc1558b3ec098d232ca432eff68b3b58",
+      "public_sha256": "44dd1c6251dc78e9e6adb5d82394a265dc1558b3ec098d232ca432eff68b3b58"
+    },
+    "receipt.json": {
+      "changed_by_export": true,
+      "private_sha256": "4550acb98ae04481196d21914e1e885cc2148efc08c4693bf21e9117ce9a1e0f",
+      "public_sha256": "3ca2f48a47bdaad1855365eabb0f2ed9c4dc0830dec4584e8e52b58f6c6243df"
+    },
+    "response.json": {
+      "changed_by_export": true,
+      "private_sha256": "a96ca4b7fa638ae0372ea3ac70d2991301e211633f64f7b442f9e33211e94f28",
+      "public_sha256": "8545a83974e208f8112cc45e990c2be488e82d33cc67f30444a39aa375f448e5"
+    },
+    "schema.json": {
+      "changed_by_export": false,
+      "private_sha256": "0875783714dbd7f5cce9a18f60cf5859ebf464e24c8ba232d4254deb1fe231fe",
+      "public_sha256": "0875783714dbd7f5cce9a18f60cf5859ebf464e24c8ba232d4254deb1fe231fe"
+    },
+    "stderr.txt": {
+      "changed_by_export": false,
+      "private_sha256": "3b13468fef779965e1c90688ebcb375c063f843b7d018cb83d4a338be850f7ac",
+      "public_sha256": "3b13468fef779965e1c90688ebcb375c063f843b7d018cb83d4a338be850f7ac"
+    }
+  },
+  "policy": "Private local paths and session identifiers replaced; JSON formatting normalized. Answers, correctness, failures, usage and timings preserved. Original full records remain in the maintainer's private archive outside Git."
+}

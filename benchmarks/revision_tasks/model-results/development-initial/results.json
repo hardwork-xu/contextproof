@@ -1,0 +1,396 @@
+[
+  {
+    "behavior_changed": true,
+    "condition": "fresh_anchors",
+    "correct": true,
+    "family": "attrs-1264",
+    "matches_old": false,
+    "record": {
+      "answer": {
+        "error": "TypeError"
+      },
+      "artifact_sha256": {
+        "events.jsonl": "b17da4c7c70bcfe58ba9a792c478e4c28f073ed8611138928beea556aede93af",
+        "instructions.txt": "526c634a7fb2948dad3a3e046acd375975ef58e997ddef36f2039479a7cd05c3",
+        "prompt.txt": "cdafd2908b16e9b4a2b2ab276029dfcaa5f363681d6eab3b585a3bb0d8e1c834",
+        "response.json": "4e6bde992e83ab5ef336bab470bf449c0fa6d06deb46441a9bf9860d4eba46a1",
+        "schema.json": "0875783714dbd7f5cce9a18f60cf5859ebf464e24c8ba232d4254deb1fe231fe",
+        "stderr.txt": "05e7e0aec55ae98b943d15edc3538f2108d93ca2fb7481438a2fd6a32f9a1ea5"
+      },
+      "evidence_bytes": 1976,
+      "execution_error": null,
+      "forbidden_items": [],
+      "input_identity": {
+        "instructions_sha256": "526c634a7fb2948dad3a3e046acd375975ef58e997ddef36f2039479a7cd05c3",
+        "model": "gpt-6-astra",
+        "prompt_sha256": "cdafd2908b16e9b4a2b2ab276029dfcaa5f363681d6eab3b585a3bb0d8e1c834",
+        "reasoning_effort": "medium",
+        "schema_sha256": "572d646905a4274b2f90cd86de3e2e10660a0dee4b3b963495ade9d263ae41f9"
+      },
+      "malformed_events": [],
+      "parse_error": null,
+      "prompt_bytes": 2355,
+      "returncode": 0,
+      "started_at": "2026-09-21T11:01:15.628754+00:00",
+      "tool_violation": false,
+      "transport_messages": [
+        {
+          "message": "Reconnecting... 2/5 (request timed out)",
+          "type": "error"
+        },
+        {
+          "message": "Reconnecting... 3/5 (request timed out)",
+          "type": "error"
+        },
+        {
+          "message": "Reconnecting... 4/5 (request timed out)",
+          "type": "error"
+        },
+        {
+          "message": "Reconnecting... 5/5 (request timed out)",
+          "type": "error"
+        },
+        {
+          "id": "item_0",
+          "message": "Under-development features enabled: skip_host_skill_discovery. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in <USER_HOME>/.codex/config.toml.",
+          "type": "error"
+        },
+        {
+          "id": "item_1",
+          "message": "Falling back from WebSockets to HTTPS transport. request timed out",
+          "type": "error"
+        }
+      ],
+      "usage": [
+        {
+          "cache_write_input_tokens": 0,
+          "cached_input_tokens": 0,
+          "input_tokens": 6738,
+          "output_tokens": 22,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "valid_completion": true,
+      "wall_seconds": 122.40602574998047
+    },
+    "repository": "attrs",
+    "task_id": "dev-attrs-evolve"
+  },
+  {
+    "behavior_changed": true,
+    "condition": "fresh_anchors",
+    "correct": true,
+    "family": "httpx-3363",
+    "matches_old": false,
+    "record": {
+      "answer": {
+        "value": [
+          "{\"test\":123}",
+          "12"
+        ]
+      },
+      "artifact_sha256": {
+        "events.jsonl": "f9c97bb072ee3139c6d8e4e621f0d19691533446bbda9829d482db21eff2de36",
+        "instructions.txt": "526c634a7fb2948dad3a3e046acd375975ef58e997ddef36f2039479a7cd05c3",
+        "prompt.txt": "e8dc6c8e6b2350da53039eb969bdc388d966e19b9a40bbb4015d6a0c4fdb4bf8",
+        "response.json": "744c81881ca68adb8d6475072dba0492b19741f28bc8a8caaedc2dfe7ffbb154",
+        "schema.json": "0875783714dbd7f5cce9a18f60cf5859ebf464e24c8ba232d4254deb1fe231fe",
+        "stderr.txt": "ab8abb2bb1c532a9c60a6edb6d96122a094c72877ea4494ac4a209d87721c23f"
+      },
+      "evidence_bytes": 3247,
+      "execution_error": null,
+      "forbidden_items": [],
+      "input_identity": {
+        "instructions_sha256": "526c634a7fb2948dad3a3e046acd375975ef58e997ddef36f2039479a7cd05c3",
+        "model": "gpt-6-astra",
+        "prompt_sha256": "e8dc6c8e6b2350da53039eb969bdc388d966e19b9a40bbb4015d6a0c4fdb4bf8",
+        "reasoning_effort": "medium",
+        "schema_sha256": "572d646905a4274b2f90cd86de3e2e10660a0dee4b3b963495ade9d263ae41f9"
+      },
+      "malformed_events": [],
+      "parse_error": null,
+      "prompt_bytes": 3682,
+      "returncode": 0,
+      "started_at": "2026-09-21T10:59:03.475618+00:00",
+      "tool_violation": false,
+      "transport_messages": [
+        {
+          "message": "Reconnecting... 2/5 (request timed out)",
+          "type": "error"
+        },
+        {
+          "message": "Reconnecting... 3/5 (request timed out)",
+          "type": "error"
+        },
+        {
+          "message": "Reconnecting... 4/5 (request timed out)",
+          "type": "error"
+        },
+        {
+          "message": "Reconnecting... 5/5 (request timed out)",
+          "type": "error"
+        },
+        {
+          "id": "item_0",
+          "message": "Under-development features enabled: skip_host_skill_discovery. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in <USER_HOME>/.codex/config.toml.",
+          "type": "error"
+        },
+        {
+          "id": "item_1",
+          "message": "Falling back from WebSockets to HTTPS transport. request timed out",
+          "type": "error"
+        }
+      ],
+      "usage": [
+        {
+          "cache_write_input_tokens": 0,
+          "cached_input_tokens": 0,
+          "input_tokens": 6997,
+          "output_tokens": 62,
+          "reasoning_output_tokens": 27
+        }
+      ],
+      "valid_completion": true,
+      "wall_seconds": 132.14142154192086
+    },
+    "repository": "httpx",
+    "task_id": "dev-httpx-json"
+  },
+  {
+    "behavior_changed": false,
+    "condition": "fresh_anchors",
+    "correct": true,
+    "family": "control-canonicalize",
+    "matches_old": true,
+    "record": {
+      "answer": {
+        "value": [
+          "my-package-name",
+          "1"
+        ]
+      },
+      "artifact_sha256": {
+        "events.jsonl": "ff83fd947384faffd1259dddc5f7d5e225aaa4563a61cf8924a7f0d65c29e7f0",
+        "instructions.txt": "526c634a7fb2948dad3a3e046acd375975ef58e997ddef36f2039479a7cd05c3",
+        "prompt.txt": "7262011c3b73a38db8b9d6544d418b013d61fff1a51692b789b4adcb96b0b026",
+        "response.json": "413ba1f8dea0f2037ce4f7dcf68c7a72739e060560615a027f3449b9f00349c4",
+        "schema.json": "0875783714dbd7f5cce9a18f60cf5859ebf464e24c8ba232d4254deb1fe231fe",
+        "stderr.txt": "3935a37152c643797c390aeb0cb7e46bc6675a26d6cd57a8acffc4630d7157d0"
+      },
+      "evidence_bytes": 1512,
+      "execution_error": null,
+      "forbidden_items": [],
+      "input_identity": {
+        "instructions_sha256": "526c634a7fb2948dad3a3e046acd375975ef58e997ddef36f2039479a7cd05c3",
+        "model": "gpt-6-astra",
+        "prompt_sha256": "7262011c3b73a38db8b9d6544d418b013d61fff1a51692b789b4adcb96b0b026",
+        "reasoning_effort": "medium",
+        "schema_sha256": "572d646905a4274b2f90cd86de3e2e10660a0dee4b3b963495ade9d263ae41f9"
+      },
+      "malformed_events": [],
+      "parse_error": null,
+      "prompt_bytes": 1929,
+      "returncode": 0,
+      "started_at": "2026-09-21T10:59:03.476006+00:00",
+      "tool_violation": false,
+      "transport_messages": [
+        {
+          "message": "Reconnecting... 2/5 (request timed out)",
+          "type": "error"
+        },
+        {
+          "message": "Reconnecting... 3/5 (request timed out)",
+          "type": "error"
+        },
+        {
+          "message": "Reconnecting... 4/5 (request timed out)",
+          "type": "error"
+        },
+        {
+          "message": "Reconnecting... 5/5 (request timed out)",
+          "type": "error"
+        },
+        {
+          "id": "item_0",
+          "message": "Under-development features enabled: skip_host_skill_discovery. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in <USER_HOME>/.codex/config.toml.",
+          "type": "error"
+        },
+        {
+          "id": "item_1",
+          "message": "Falling back from WebSockets to HTTPS transport. request timed out",
+          "type": "error"
+        }
+      ],
+      "usage": [
+        {
+          "cache_write_input_tokens": 0,
+          "cached_input_tokens": 0,
+          "input_tokens": 6660,
+          "output_tokens": 27,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "valid_completion": true,
+      "wall_seconds": 132.14732495800126
+    },
+    "repository": "packaging",
+    "task_id": "dev-packaging-normalize-control"
+  },
+  {
+    "behavior_changed": true,
+    "condition": "fresh_anchors",
+    "correct": true,
+    "family": "packaging-794",
+    "matches_old": false,
+    "record": {
+      "answer": {
+        "value": true
+      },
+      "artifact_sha256": {
+        "events.jsonl": "b22966d13efb72902509c143bcf826dbbe1f96c1d662fb45bf52d89daa277a3d",
+        "instructions.txt": "526c634a7fb2948dad3a3e046acd375975ef58e997ddef36f2039479a7cd05c3",
+        "prompt.txt": "907df382cd5763f679d69a2946169d4fb081c12fb73028e5c8fc9a74c0265359",
+        "response.json": "783460b1b1cedb9e78d267a9e0fa340a6401abac851f91ef23d8d3522e2ab5a3",
+        "schema.json": "0875783714dbd7f5cce9a18f60cf5859ebf464e24c8ba232d4254deb1fe231fe",
+        "stderr.txt": "93ca89c028f95f42cbec64e99d7775020775a267a8bf7bbd8a3dea13b9222838"
+      },
+      "evidence_bytes": 217,
+      "execution_error": null,
+      "forbidden_items": [],
+      "input_identity": {
+        "instructions_sha256": "526c634a7fb2948dad3a3e046acd375975ef58e997ddef36f2039479a7cd05c3",
+        "model": "gpt-6-astra",
+        "prompt_sha256": "907df382cd5763f679d69a2946169d4fb081c12fb73028e5c8fc9a74c0265359",
+        "reasoning_effort": "medium",
+        "schema_sha256": "572d646905a4274b2f90cd86de3e2e10660a0dee4b3b963495ade9d263ae41f9"
+      },
+      "malformed_events": [],
+      "parse_error": null,
+      "prompt_bytes": 574,
+      "returncode": 0,
+      "started_at": "2026-09-21T11:03:17.850867+00:00",
+      "tool_violation": false,
+      "transport_messages": [
+        {
+          "message": "Reconnecting... 2/5 (request timed out)",
+          "type": "error"
+        },
+        {
+          "message": "Reconnecting... 3/5 (request timed out)",
+          "type": "error"
+        },
+        {
+          "message": "Reconnecting... 4/5 (request timed out)",
+          "type": "error"
+        },
+        {
+          "message": "Reconnecting... 5/5 (stream disconnected before completion: Connection reset by peer (os error 54))",
+          "type": "error"
+        },
+        {
+          "id": "item_0",
+          "message": "Under-development features enabled: skip_host_skill_discovery. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in <USER_HOME>/.codex/config.toml.",
+          "type": "error"
+        },
+        {
+          "id": "item_1",
+          "message": "Falling back from WebSockets to HTTPS transport. request timed out",
+          "type": "error"
+        }
+      ],
+      "usage": [
+        {
+          "cache_write_input_tokens": 0,
+          "cached_input_tokens": 0,
+          "input_tokens": 6230,
+          "output_tokens": 229,
+          "reasoning_output_tokens": 207
+        }
+      ],
+      "valid_completion": true,
+      "wall_seconds": 116.20504100003745
+    },
+    "repository": "packaging",
+    "task_id": "dev-packaging-prerelease"
+  },
+  {
+    "behavior_changed": true,
+    "condition": "fresh_anchors",
+    "correct": true,
+    "family": "pluggy-481",
+    "matches_old": false,
+    "record": {
+      "answer": {
+        "value": [
+          0,
+          false
+        ]
+      },
+      "artifact_sha256": {
+        "events.jsonl": "fada4c7dc71fec0e61d569ec7f6170ebb4a31a6d5e6841a894389b72db35cd9b",
+        "instructions.txt": "526c634a7fb2948dad3a3e046acd375975ef58e997ddef36f2039479a7cd05c3",
+        "prompt.txt": "91a9d086e53bf47498c1a6e79762ed78e74b5516e46969d08d5c5508a1c4c611",
+        "response.json": "d4ad558c254dfab4ba8947b3df3e3cb36660b5c73a4e8c2925f41b1cf540802f",
+        "schema.json": "0875783714dbd7f5cce9a18f60cf5859ebf464e24c8ba232d4254deb1fe231fe",
+        "stderr.txt": "8058c7a7a86cc8cd9251ac8c418fba5a47554f3800954b714e458ea2b8778bff"
+      },
+      "evidence_bytes": 909,
+      "execution_error": null,
+      "forbidden_items": [],
+      "input_identity": {
+        "instructions_sha256": "526c634a7fb2948dad3a3e046acd375975ef58e997ddef36f2039479a7cd05c3",
+        "model": "gpt-6-astra",
+        "prompt_sha256": "91a9d086e53bf47498c1a6e79762ed78e74b5516e46969d08d5c5508a1c4c611",
+        "reasoning_effort": "medium",
+        "schema_sha256": "572d646905a4274b2f90cd86de3e2e10660a0dee4b3b963495ade9d263ae41f9"
+      },
+      "malformed_events": [],
+      "parse_error": null,
+      "prompt_bytes": 1335,
+      "returncode": 0,
+      "started_at": "2026-09-21T11:01:15.623891+00:00",
+      "tool_violation": false,
+      "transport_messages": [
+        {
+          "message": "Reconnecting... 2/5 (request timed out)",
+          "type": "error"
+        },
+        {
+          "message": "Reconnecting... 3/5 (request timed out)",
+          "type": "error"
+        },
+        {
+          "message": "Reconnecting... 4/5 (request timed out)",
+          "type": "error"
+        },
+        {
+          "message": "Reconnecting... 5/5 (request timed out)",
+          "type": "error"
+        },
+        {
+          "id": "item_0",
+          "message": "Under-development features enabled: skip_host_skill_discovery. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in <USER_HOME>/.codex/config.toml.",
+          "type": "error"
+        },
+        {
+          "id": "item_1",
+          "message": "Falling back from WebSockets to HTTPS transport. request timed out",
+          "type": "error"
+        }
+      ],
+      "usage": [
+        {
+          "cache_write_input_tokens": 0,
+          "cached_input_tokens": 0,
+          "input_tokens": 6480,
+          "output_tokens": 23,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "valid_completion": true,
+      "wall_seconds": 122.22115241596475
+    },
+    "repository": "pluggy",
+    "task_id": "dev-pluggy-blocked"
+  }
+]

@@ -1,0 +1,13 @@
+{
+  "budget_bytes": 16000,
+  "contexts_sha256": "035b3ac0d716a57f3f11ce2bb54545f50015ac54f20b3ab2e906f951dcb9486e",
+  "model": "gpt-6-astra",
+  "parallel": 2,
+  "qualification": "at least 4/5 development fresh-anchor exact answers before holdout",
+  "reasoning_effort": "medium",
+  "seed_for_job_order": 230921,
+  "semantic_attempts_per_cell": 1,
+  "split": "development",
+  "task_manifest_sha256": "e27051186f0fe5b56a615cd9ee9de5ba6b56232b227e1ea40b72379aeacd4c0b",
+  "transport_retries": "CLI defaults; raw errors retained"
+}

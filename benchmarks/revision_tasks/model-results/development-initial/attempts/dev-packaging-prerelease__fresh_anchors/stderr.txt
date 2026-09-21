@@ -1,0 +1,36 @@
+2026-09-21T11:03:17.895872Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:03:17.897633Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:03:17.899814Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:03:17.901214Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:03:17.902708Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:03:17.904173Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:03:17.905955Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:03:17.908109Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:03:17.910249Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:03:17.913477Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:03:17.916697Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:03:17.918483Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:03:17.921714Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:03:17.923233Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:03:17.924474Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:03:17.925696Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:03:17.927272Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:03:17.928412Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:03:17.929428Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:03:17.930684Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:03:17.932083Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:03:17.933939Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:03:17.935168Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:03:17.936393Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:03:17.937593Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-09-21T11:03:22.887929Z  WARN codex_core_plugins::manager: failed to load recommended plugins error=failed to send remote plugin catalog request to https://chatgpt.com/backend-api/ps/plugins/suggested/codex?scope=GLOBAL: error sending request for url (https://chatgpt.com/backend-api/ps/plugins/suggested/codex?scope=GLOBAL)
+2026-09-21T11:03:22.887959Z ERROR codex_models_manager::manager: failed to refresh available models: timeout waiting for child process to exit
+2026-09-21T11:03:49.608014Z  WARN codex_core::responses_retry: stream disconnected - retrying sampling request (1/5 in 219ms)... turn_id=01a0c3a2-70c1-79e0-8d6c-0ea090258d49 retries=1 max_retries=5 sampling_error=request timed out
+2026-09-21T11:04:04.834213Z  WARN codex_core::responses_retry: stream disconnected - retrying sampling request (2/5 in 415ms)... turn_id=01a0c3a2-70c1-79e0-8d6c-0ea090258d49 retries=2 max_retries=5 sampling_error=request timed out
+2026-09-21T11:04:20.255024Z  WARN codex_core::responses_retry: stream disconnected - retrying sampling request (3/5 in 878ms)... turn_id=01a0c3a2-70c1-79e0-8d6c-0ea090258d49 retries=3 max_retries=5 sampling_error=request timed out
+2026-09-21T11:04:36.139511Z  WARN codex_core::responses_retry: stream disconnected - retrying sampling request (4/5 in 1.472s)... turn_id=01a0c3a2-70c1-79e0-8d6c-0ea090258d49 retries=4 max_retries=5 sampling_error=request timed out
+2026-09-21T11:04:37.859227Z ERROR codex_api::endpoint::responses_websocket: failed to connect to websocket: IO error: Connection reset by peer (os error 54), url: wss://chatgpt.com/backend-api/codex/responses
+2026-09-21T11:04:37.859318Z  WARN codex_core::responses_retry: stream disconnected - retrying sampling request (5/5 in 3.369s)... turn_id=01a0c3a2-70c1-79e0-8d6c-0ea090258d49 retries=5 max_retries=5 sampling_error=stream disconnected before completion: Connection reset by peer (os error 54)
+2026-09-21T11:04:56.233789Z  WARN codex_core::client: falling back to HTTP
+2026-09-21T11:05:07.426322Z ERROR codex_models_manager::manager: failed to refresh available models: timeout waiting for child process to exit
+2026-09-21T11:05:10.238008Z  WARN codex_core::shell_snapshot: Failed to delete shell snapshot at AbsolutePathBuf("<USER_HOME>/.codex/shell_snapshots/01a0c3a2-7080-7692-a1c9-c75b298bda91.1789988597889766000.sh"): Os { code: 2, kind: NotFound, message: "No such file or directory" }

@@ -1,0 +1,11 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+from packaging.specifiers import Specifier
+RESULT = Specifier(">1.0.dev1").prereleases
+```
+
+Repository source evidence:
+{"ambiguity_policy":"all physical declarations; no runtime binding selection","ambiguous_symbols":[{"path":"src/packaging/specifiers.py","physical_declarations":2,"symbol":"Specifier.prereleases"}],"complete":true,"kind":"supplied-anchor-source","missing":[],"omitted":[],"scope":"supplied-declarations-only","source":[{"end_line":270,"path":"src/packaging/specifiers.py","start_line":248,"symbol":"Specifier.prereleases","text":"    @property  # type: ignore[override]\n    def prereleases(self) -> bool:\n        # If there is an explicit prereleases set for this, then we'll just\n        # blindly use that.\n        if self._prereleases is not None:\n            return self._prereleases\n\n        # Look at all of our specifiers and determine if they are inclusive\n        # operators, and if they are if they are including an explicit\n        # prerelease.\n        operator, version = self._spec\n        if operator in [\"==\", \">=\", \"<=\", \"~=\", \"===\", \">\", \"<\"]:\n            # The == specifier can include a trailing .*, if it does we\n            # want to remove before parsing.\n            if operator == \"==\" and version.endswith(\".*\"):\n                version = version[:-2]\n\n            # Parse the version, and if it is a pre-release than this\n            # specifier allows pre-releases.\n            if Version(version).is_prerelease:\n                return True\n\n        return False\n","text_sha256":"5e84d661e86fc32726a04deaf35459d9dcff9a71b920fe3000237ea792131d5e"},{"end_line":274,"path":"src/packaging/specifiers.py","start_line":272,"symbol":"Specifier.prereleases","text":"    @prereleases.setter\n    def prereleases(self, value: bool) -> None:\n        self._prereleases = value\n","text_sha256":"ee5546ad9de8569401dfbe1d08b7f023af72efe3f5606fd9e71ac32f96cf4136"}]}

@@ -12,3 +12,8 @@ dist/
 !.env.example
 work/
 .DS_Store
+private/
+*.private.json
+benchmarks/revision_tasks/model-development/
+benchmarks/revision_tasks/model-development-v2/
+benchmarks/revision_tasks/raw-model-runs/

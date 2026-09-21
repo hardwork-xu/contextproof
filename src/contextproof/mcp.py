@@ -19,6 +19,10 @@ PROTOCOLS = ("2025-11-25", "2025-06-18", "2025-03-26", "2024-11-05")
 MAX_MESSAGE = 16 * 1024 * 1024
 
 
+class BoundedText(str):
+    """Successful tool text already serialized and fully charged to its budget."""
+
+
 def _tool(name, description, properties, required=()):
     return {"name": name, "description": description, "inputSchema": {
         "type": "object", "properties": properties, "required": list(required),
@@ -57,6 +61,22 @@ TOOLS = [
     _tool("contextproof_refresh", "Repair recoverable context when dependencies are unchanged; "
           "otherwise retrieve current source. Preserve invalidation reasons and unresolved references.",
           {"context": {"type": "object"}}, ("context",)),
+    _tool("contextproof_graph_capture", "Capture transitive Python source with dependency code "
+          "included in the model-visible byte budget. Full graph stays local; return its handle. "
+          "Unresolved or budget-limited coverage is explicit. Git ref is optional; default WORKTREE.",
+          {"query": QUERY, "ref": {"type": "string", "maxLength": 300},
+           "budget": {"type": "integer", "minimum": 512, "maximum": 1000000},
+           "limit": {"type": "integer", "minimum": 1, "maximum": 100},
+           "depth": {"type": "integer", "minimum": 0, "maximum": 128},
+           "max_nodes": {"type": "integer", "minimum": 1, "maximum": 10000}}, ("query",)),
+    _tool("contextproof_graph_refresh", "Refresh a locally saved evidence graph by handle. "
+          "Return current changed dependencies and causal paths within the complete text budget. "
+          "Update view requires the stated base; use full view for standalone current source.",
+          {"handle": {"type": "string", "minLength": 64, "maxLength": 64},
+           "ref": {"type": "string", "maxLength": 300},
+           "budget": {"type": "integer", "minimum": 512, "maximum": 1000000},
+           "view": {"type": "string", "enum": ["update", "full"], "default": "update"}},
+          ("handle",)),
 ]
 
 
@@ -87,12 +107,38 @@ class Server:
         if not self.root.is_dir():
             raise ValueError("root must be a directory")
         self.initialized = False
+        self.graph_session = None
+
+    def close(self):
+        if self.graph_session is not None:
+            self.graph_session.close()
+            self.graph_session = None
 
     def call(self, name, args):
         spec = next((t for t in TOOLS if t["name"] == name), None)
         if spec is None:
             raise ValueError(f"unknown tool: {name}")
         _validate_arguments(spec["inputSchema"], args)
+        if name in {"contextproof_graph_capture", "contextproof_graph_refresh"}:
+            from .graph_session import GraphSession
+            if self.graph_session is None:
+                self.graph_session = GraphSession(self.root)
+            session = self.graph_session
+            if name.endswith("capture"):
+                result = session.capture(args["query"], ref=args.get("ref"),
+                                         budget=args.get("budget", 16000),
+                                         limit=args.get("limit", 1),
+                                         max_depth=args.get("depth", 4),
+                                         max_nodes=args.get("max_nodes", 256))
+            else:
+                result = session.refresh(args["handle"], ref=args.get("ref"),
+                                         budget=args.get("budget", 16000),
+                                         view=args.get("view", "update"))
+            payload = result["payload"]
+            if not payload["rendered"]:
+                raise ValueError(f"budget cannot fit evidence metadata; need at least "
+                                 f"{payload['minimum_budget']} UTF-8 bytes")
+            return BoundedText(payload["rendered"])
         if name in {"contextproof_capture", "contextproof_check", "contextproof_refresh"}:
             from .session import capture_context, check_context, refresh_context
             if name == "contextproof_capture":
@@ -144,8 +190,9 @@ class Server:
         elif method == "tools/call":
             try:
                 value = self.call(params.get("name"), params.get("arguments", {}))
-                result = {"content": [{"type": "text", "text": json.dumps(
-                    value, ensure_ascii=False, allow_nan=False)}], "isError": False}
+                result = {"content": [{"type": "text", "text": str(value) if isinstance(
+                    value, BoundedText) else json.dumps(value, ensure_ascii=False, allow_nan=False)}],
+                          "isError": False}
             except sqlite3.Error as exc:
                 result = {"content": [{"type": "text", "text": f"index cache error: {exc}; "
                           "if corrupt, remove .contextproof/index.sqlite3 and reindex"}],
@@ -165,6 +212,13 @@ class Server:
 def serve(root, stdin=None, stdout=None):
     server = Server(root)
     source, sink = stdin or sys.stdin, stdout or sys.stdout
+    try:
+        _serve(server, source, sink)
+    finally:
+        server.close()
+
+
+def _serve(server, source, sink):
     while True:
         line = source.readline(MAX_MESSAGE + 1)
         if not line:

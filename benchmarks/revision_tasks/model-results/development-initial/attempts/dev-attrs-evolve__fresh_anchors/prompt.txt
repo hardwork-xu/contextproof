@@ -1,0 +1,14 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import attrs
+@attrs.define
+class Record:
+    value: int
+RESULT = attrs.evolve(inst=Record(1), value=2).value
+```
+
+Repository source evidence:
+{"complete":true,"kind":"supplied-anchor-source","missing":[],"omitted":[],"scope":"supplied-declarations-only","source":[{"end_line":624,"path":"src/attr/_make.py","start_line":569,"symbol":"evolve","text":"def evolve(*args, **changes):\n    \"\"\"\n    Create a new instance, based on the first positional argument with\n    *changes* applied.\n\n    .. tip::\n\n       On Python 3.13 and later, you can also use `copy.replace` instead.\n\n    Args:\n\n        inst:\n            Instance of a class with *attrs* attributes. *inst* must be passed\n            as a positional argument.\n\n        changes:\n            Keyword changes in the new copy.\n\n    Returns:\n        A copy of inst with *changes* incorporated.\n\n    Raises:\n        TypeError:\n            If *attr_name* couldn't be found in the class ``__init__``.\n\n        attrs.exceptions.NotAnAttrsClassError:\n            If *cls* is not an *attrs* class.\n\n    .. versionadded:: 17.1.0\n    .. deprecated:: 23.1.0\n       It is now deprecated to pass the instance using the keyword argument\n       *inst*. It will raise a warning until at least April 2024, after which\n       it will become an error. Always pass the instance as a positional\n       argument.\n    .. versionchanged:: 24.1.0\n       *inst* can't be passed as a keyword argument anymore.\n    \"\"\"\n    try:\n        (inst,) = args\n    except ValueError:\n        msg = (\n            f\"evolve() takes 1 positional argument, but {len(args)} were given\"\n        )\n        raise TypeError(msg) from None\n\n    cls = inst.__class__\n    attrs = fields(cls)\n    for a in attrs:\n        if not a.init:\n            continue\n        attr_name = a.name  # To deal with private attributes.\n        init_name = a.alias\n        if init_name not in changes:\n            changes[init_name] = getattr(inst, attr_name)\n\n    return cls(**changes)\n","text_sha256":"3b75f8a68d2e20899ade8b58c3e027c25aac4a6689765b88aa87cb3bee9f5428"}]}

@@ -1,0 +1,301 @@
+[
+  {
+    "behavior_changed": true,
+    "condition": "fresh_anchors",
+    "correct": true,
+    "family": "attrs-1264",
+    "matches_old": false,
+    "record": {
+      "answer": {
+        "error": "TypeError"
+      },
+      "artifact_sha256": {
+        "command.json": "f4235fa326f8d13b60b6da79f425889097fef0e922e4448f75ace8d1b94006b1",
+        "events.jsonl": "2414cec8db118a8014d6454539b2ae90e33e59d6c4ea306ab0249e77c9498365",
+        "instructions.txt": "526c634a7fb2948dad3a3e046acd375975ef58e997ddef36f2039479a7cd05c3",
+        "prompt.txt": "7d0ad9d799e7c24da22b21c0c23ab7587e1a00175ce674289887491e5a4a5976",
+        "response.json": "4e6bde992e83ab5ef336bab470bf449c0fa6d06deb46441a9bf9860d4eba46a1",
+        "schema.json": "0875783714dbd7f5cce9a18f60cf5859ebf464e24c8ba232d4254deb1fe231fe",
+        "stderr.txt": "ce3cca96e8c10f928a495864ca2e1c84c6ebcfce577425c3963a15e54eb3eb12"
+      },
+      "evidence_bytes": 2076,
+      "execution_error": null,
+      "forbidden_items": [],
+      "input_identity": {
+        "instructions_sha256": "526c634a7fb2948dad3a3e046acd375975ef58e997ddef36f2039479a7cd05c3",
+        "model": "gpt-6-astra",
+        "prompt_sha256": "7d0ad9d799e7c24da22b21c0c23ab7587e1a00175ce674289887491e5a4a5976",
+        "reasoning_effort": "medium",
+        "schema_sha256": "572d646905a4274b2f90cd86de3e2e10660a0dee4b3b963495ade9d263ae41f9",
+        "transport": "https"
+      },
+      "malformed_events": [],
+      "parse_error": null,
+      "prompt_bytes": 2455,
+      "returncode": 0,
+      "started_at": "2026-09-21T11:11:24.285622+00:00",
+      "tool_violation": false,
+      "transport_messages": [
+        {
+          "id": "item_0",
+          "message": "Under-development features enabled: skip_host_skill_discovery. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in <USER_HOME>/.codex/config.toml.",
+          "type": "error"
+        }
+      ],
+      "usage": [
+        {
+          "cache_write_input_tokens": 0,
+          "cached_input_tokens": 0,
+          "input_tokens": 6752,
+          "output_tokens": 22,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "valid_completion": true,
+      "wall_seconds": 33.82554691599216
+    },
+    "repository": "attrs",
+    "task_id": "dev-attrs-evolve"
+  },
+  {
+    "behavior_changed": true,
+    "condition": "fresh_anchors",
+    "correct": true,
+    "family": "httpx-3363",
+    "matches_old": false,
+    "record": {
+      "answer": {
+        "value": [
+          "{\"test\":123}",
+          "12"
+        ]
+      },
+      "artifact_sha256": {
+        "command.json": "c550711eee6bc43e0bb99ef23e1f5ba729b9d9e59498d095ff19482c448d9a10",
+        "events.jsonl": "0eda35340d15b1351353b4c0192ad0e100e54e67735ffdf47068940d8fe9a0ae",
+        "instructions.txt": "526c634a7fb2948dad3a3e046acd375975ef58e997ddef36f2039479a7cd05c3",
+        "prompt.txt": "694089174d5520a3c77501872a6cb93513233d6c5043fa8d627c485015fd5980",
+        "response.json": "744c81881ca68adb8d6475072dba0492b19741f28bc8a8caaedc2dfe7ffbb154",
+        "schema.json": "0875783714dbd7f5cce9a18f60cf5859ebf464e24c8ba232d4254deb1fe231fe",
+        "stderr.txt": "c71d02a93e259e54d54cbd4e2059b7a7708ed9e92a27dd78b7b6dfb9f6bc1718"
+      },
+      "evidence_bytes": 3347,
+      "execution_error": null,
+      "forbidden_items": [],
+      "input_identity": {
+        "instructions_sha256": "526c634a7fb2948dad3a3e046acd375975ef58e997ddef36f2039479a7cd05c3",
+        "model": "gpt-6-astra",
+        "prompt_sha256": "694089174d5520a3c77501872a6cb93513233d6c5043fa8d627c485015fd5980",
+        "reasoning_effort": "medium",
+        "schema_sha256": "572d646905a4274b2f90cd86de3e2e10660a0dee4b3b963495ade9d263ae41f9",
+        "transport": "https"
+      },
+      "malformed_events": [],
+      "parse_error": null,
+      "prompt_bytes": 3782,
+      "returncode": 0,
+      "started_at": "2026-09-21T11:10:50.508142+00:00",
+      "tool_violation": false,
+      "transport_messages": [
+        {
+          "id": "item_0",
+          "message": "Under-development features enabled: skip_host_skill_discovery. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in <USER_HOME>/.codex/config.toml.",
+          "type": "error"
+        }
+      ],
+      "usage": [
+        {
+          "cache_write_input_tokens": 0,
+          "cached_input_tokens": 0,
+          "input_tokens": 7076,
+          "output_tokens": 62,
+          "reasoning_output_tokens": 27
+        }
+      ],
+      "valid_completion": true,
+      "wall_seconds": 33.718519292073324
+    },
+    "repository": "httpx",
+    "task_id": "dev-httpx-json"
+  },
+  {
+    "behavior_changed": false,
+    "condition": "fresh_anchors",
+    "correct": true,
+    "family": "control-canonicalize",
+    "matches_old": true,
+    "record": {
+      "answer": {
+        "value": [
+          "my-package-name",
+          "1"
+        ]
+      },
+      "artifact_sha256": {
+        "command.json": "560c09d96168ece657af58decdf1f5d4b8d8996c36231e13e5b5ec2f6678a53a",
+        "events.jsonl": "e6168ec1ab8077a5fe35fad6f873022144b034aa43257a03e4c09cca845cbb73",
+        "instructions.txt": "526c634a7fb2948dad3a3e046acd375975ef58e997ddef36f2039479a7cd05c3",
+        "prompt.txt": "65435b5430de29ce233e989707358275722e745bfc3ab30b818ac730f487a5d6",
+        "response.json": "413ba1f8dea0f2037ce4f7dcf68c7a72739e060560615a027f3449b9f00349c4",
+        "schema.json": "0875783714dbd7f5cce9a18f60cf5859ebf464e24c8ba232d4254deb1fe231fe",
+        "stderr.txt": "16ce2ba9dcf1260e53b8e00b0a430a6c15615d555720c8bfa1eaa161603d4fea"
+      },
+      "evidence_bytes": 1612,
+      "execution_error": null,
+      "forbidden_items": [],
+      "input_identity": {
+        "instructions_sha256": "526c634a7fb2948dad3a3e046acd375975ef58e997ddef36f2039479a7cd05c3",
+        "model": "gpt-6-astra",
+        "prompt_sha256": "65435b5430de29ce233e989707358275722e745bfc3ab30b818ac730f487a5d6",
+        "reasoning_effort": "medium",
+        "schema_sha256": "572d646905a4274b2f90cd86de3e2e10660a0dee4b3b963495ade9d263ae41f9",
+        "transport": "https"
+      },
+      "malformed_events": [],
+      "parse_error": null,
+      "prompt_bytes": 2029,
+      "returncode": 0,
+      "started_at": "2026-09-21T11:10:50.508380+00:00",
+      "tool_violation": false,
+      "transport_messages": [
+        {
+          "id": "item_0",
+          "message": "Under-development features enabled: skip_host_skill_discovery. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in <USER_HOME>/.codex/config.toml.",
+          "type": "error"
+        }
+      ],
+      "usage": [
+        {
+          "cache_write_input_tokens": 0,
+          "cached_input_tokens": 0,
+          "input_tokens": 6741,
+          "output_tokens": 27,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "valid_completion": true,
+      "wall_seconds": 33.77297812490724
+    },
+    "repository": "packaging",
+    "task_id": "dev-packaging-normalize-control"
+  },
+  {
+    "behavior_changed": true,
+    "condition": "fresh_anchors",
+    "correct": true,
+    "family": "packaging-794",
+    "matches_old": false,
+    "record": {
+      "answer": {
+        "value": true
+      },
+      "artifact_sha256": {
+        "command.json": "70a7c428c66f580fad249bfbdbb4ccf429b375985d7cca0904865b20ae4eae60",
+        "events.jsonl": "8d4fdb49dde216849aae4e9db16d711b3c2dfa83c7581a2c2865ad2d040ad6f9",
+        "instructions.txt": "526c634a7fb2948dad3a3e046acd375975ef58e997ddef36f2039479a7cd05c3",
+        "prompt.txt": "44dd1c6251dc78e9e6adb5d82394a265dc1558b3ec098d232ca432eff68b3b58",
+        "response.json": "783460b1b1cedb9e78d267a9e0fa340a6401abac851f91ef23d8d3522e2ab5a3",
+        "schema.json": "0875783714dbd7f5cce9a18f60cf5859ebf464e24c8ba232d4254deb1fe231fe",
+        "stderr.txt": "127f742afe6dbea2089ca5e0eb5cc2bef58ded4d83520c4f6c04f7eb9abe4318"
+      },
+      "evidence_bytes": 1822,
+      "execution_error": null,
+      "forbidden_items": [],
+      "input_identity": {
+        "instructions_sha256": "526c634a7fb2948dad3a3e046acd375975ef58e997ddef36f2039479a7cd05c3",
+        "model": "gpt-6-astra",
+        "prompt_sha256": "44dd1c6251dc78e9e6adb5d82394a265dc1558b3ec098d232ca432eff68b3b58",
+        "reasoning_effort": "medium",
+        "schema_sha256": "572d646905a4274b2f90cd86de3e2e10660a0dee4b3b963495ade9d263ae41f9",
+        "transport": "https"
+      },
+      "malformed_events": [],
+      "parse_error": null,
+      "prompt_bytes": 2179,
+      "returncode": 0,
+      "started_at": "2026-09-21T11:11:58.114779+00:00",
+      "tool_violation": false,
+      "transport_messages": [
+        {
+          "id": "item_0",
+          "message": "Under-development features enabled: skip_host_skill_discovery. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in <USER_HOME>/.codex/config.toml.",
+          "type": "error"
+        }
+      ],
+      "usage": [
+        {
+          "cache_write_input_tokens": 0,
+          "cached_input_tokens": 0,
+          "input_tokens": 6663,
+          "output_tokens": 20,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "valid_completion": true,
+      "wall_seconds": 25.684899833984673
+    },
+    "repository": "packaging",
+    "task_id": "dev-packaging-prerelease"
+  },
+  {
+    "behavior_changed": true,
+    "condition": "fresh_anchors",
+    "correct": true,
+    "family": "pluggy-481",
+    "matches_old": false,
+    "record": {
+      "answer": {
+        "value": [
+          0,
+          false
+        ]
+      },
+      "artifact_sha256": {
+        "command.json": "8bb399c38b0d9cc08fd9142184b80b1a982db1c718b74606f069fca667fd384e",
+        "events.jsonl": "734cdd9033c9069599b3e9e9626a187af8b9a49585b54619be88d2b48c814d02",
+        "instructions.txt": "526c634a7fb2948dad3a3e046acd375975ef58e997ddef36f2039479a7cd05c3",
+        "prompt.txt": "87a8949246e5ca64ab8fdbb36c08c5ff5dadc5926151484aa36b982ada334fa7",
+        "response.json": "d4ad558c254dfab4ba8947b3df3e3cb36660b5c73a4e8c2925f41b1cf540802f",
+        "schema.json": "0875783714dbd7f5cce9a18f60cf5859ebf464e24c8ba232d4254deb1fe231fe",
+        "stderr.txt": "92b01447b2bf3623d97e93c83ca32bb1ada6f49c8e9223c25e10bf1b358b6339"
+      },
+      "evidence_bytes": 1009,
+      "execution_error": null,
+      "forbidden_items": [],
+      "input_identity": {
+        "instructions_sha256": "526c634a7fb2948dad3a3e046acd375975ef58e997ddef36f2039479a7cd05c3",
+        "model": "gpt-6-astra",
+        "prompt_sha256": "87a8949246e5ca64ab8fdbb36c08c5ff5dadc5926151484aa36b982ada334fa7",
+        "reasoning_effort": "medium",
+        "schema_sha256": "572d646905a4274b2f90cd86de3e2e10660a0dee4b3b963495ade9d263ae41f9",
+        "transport": "https"
+      },
+      "malformed_events": [],
+      "parse_error": null,
+      "prompt_bytes": 1435,
+      "returncode": 0,
+      "started_at": "2026-09-21T11:11:24.231668+00:00",
+      "tool_violation": false,
+      "transport_messages": [
+        {
+          "id": "item_0",
+          "message": "Under-development features enabled: skip_host_skill_discovery. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in <USER_HOME>/.codex/config.toml.",
+          "type": "error"
+        }
+      ],
+      "usage": [
+        {
+          "cache_write_input_tokens": 0,
+          "cached_input_tokens": 0,
+          "input_tokens": 6488,
+          "output_tokens": 23,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "valid_completion": true,
+      "wall_seconds": 33.88558129197918
+    },
+    "repository": "pluggy",
+    "task_id": "dev-pluggy-blocked"
+  }
+]

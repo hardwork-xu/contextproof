@@ -1,0 +1,2302 @@
+{
+  "schema_version": 1,
+  "experiment": "controlled-direct-python-dependencies",
+  "generated_at": "2026-09-21T09:30:09.740229+00:00",
+  "repeats": 7,
+  "environment": {
+    "python": "3.12.14",
+    "system": "Darwin",
+    "machine": "arm64"
+  },
+  "implementation_sha256": {
+    "src/contextproof/dependencies.py": "5c0af70b2588c87d698eb63fba57f3533c0762d88919f543f2f5242ef8ed98f5",
+    "src/contextproof/evidence.py": "63b41f50ced294c391399121752b5ffb096dc153d75f4eeb30a0a3f74357fc6a",
+    "src/contextproof/index.py": "d8b6838ab5161d69e9b50480674345830a2921cc4be9b1c6a02f5a95d792d108",
+    "benchmarks/dependency_cases.py": "fb325c33f2736fccfa5be91e2879eefbead11c0f4a91749cdd98e981df7a5519",
+    "scripts/run_dependency_benchmarks.py": "04e4f5ddd7cad9cb21a995fd97d409aba34cf2461ee4dc785536ee42d9d9968a"
+  },
+  "quality_sha256": "f81343759c921f13be1d7482a5c44b1c3dc95d1602ec82676136e08f6dd11d68",
+  "controlled": {
+    "summary": {
+      "case_count": 34,
+      "correct_status_count": 34,
+      "expected_counts": {
+        "changed": 10,
+        "missing": 2,
+        "unchanged": 10,
+        "unresolved": 12
+      },
+      "observed_counts": {
+        "changed": 10,
+        "missing": 2,
+        "unchanged": 10,
+        "unresolved": 12
+      },
+      "explicitly_stale_cases": 12,
+      "dependency_unsafe_accepts_on_stale_cases": 0,
+      "exact_text_unsafe_accepts_on_stale_cases": 11,
+      "unresolved_cases": 12,
+      "unresolved_cases_accepted_as_fresh": 0,
+      "median_capture_ms_across_cases": 0.549292,
+      "median_dependency_verify_ms_across_cases": 0.464417,
+      "median_sidecar_json_bytes": 1292.0,
+      "median_additional_bytes_ratio": 1.745946
+    },
+    "cases": [
+      {
+        "case": "same_local_helper",
+        "category": "unchanged",
+        "fixture_sha256": "1b2dbe1293c39867e4f9d476107fa9031f5657030c13ebff81798693c77e6185",
+        "expected": "unchanged",
+        "observed": "unchanged",
+        "correct": true,
+        "fresh": true,
+        "exact_text_usable": true,
+        "exact_text_statuses": [
+          "valid"
+        ],
+        "bundle_id": "ddfd45a0a16302489d4ce71251e763f78deaff205abb1c2173af74cde5dd9954",
+        "witness_id": "d6f3e63d800e6f59b86db53558d07de5ad249c3cda0422cdd94e68675309ee06",
+        "reference_count": 1,
+        "resolved_reference_count": 1,
+        "bundle_rendered_utf8_bytes": 740,
+        "sidecar_json_utf8_bytes": 1292,
+        "additional_bytes_ratio": 1.745946,
+        "capture": {
+          "samples_ms": [
+            0.78,
+            0.472708,
+            0.429,
+            0.435583,
+            0.438292,
+            0.415,
+            0.391416
+          ],
+          "median_ms": 0.435583,
+          "min_ms": 0.391416,
+          "max_ms": 0.78
+        },
+        "verify_dependencies": {
+          "samples_ms": [
+            0.589958,
+            0.514875,
+            0.473542,
+            0.418958,
+            0.399208,
+            0.389166,
+            0.402334
+          ],
+          "median_ms": 0.418958,
+          "min_ms": 0.389166,
+          "max_ms": 0.589958
+        },
+        "verify_exact_text": {
+          "samples_ms": [
+            0.46825,
+            0.383458,
+            0.545583,
+            0.350375,
+            0.334083,
+            0.328166,
+            0.329875
+          ],
+          "median_ms": 0.350375,
+          "min_ms": 0.328166,
+          "max_ms": 0.545583
+        }
+      },
+      {
+        "case": "changed_local_helper",
+        "category": "mutation",
+        "fixture_sha256": "0ec450ccafea8ab76539512f7242bd582eb5c5134bf0e74a960fd9f665fd004b",
+        "expected": "changed",
+        "observed": "changed",
+        "correct": true,
+        "fresh": false,
+        "exact_text_usable": true,
+        "exact_text_statuses": [
+          "valid"
+        ],
+        "bundle_id": "ddfd45a0a16302489d4ce71251e763f78deaff205abb1c2173af74cde5dd9954",
+        "witness_id": "d6f3e63d800e6f59b86db53558d07de5ad249c3cda0422cdd94e68675309ee06",
+        "reference_count": 1,
+        "resolved_reference_count": 1,
+        "bundle_rendered_utf8_bytes": 740,
+        "sidecar_json_utf8_bytes": 1292,
+        "additional_bytes_ratio": 1.745946,
+        "capture": {
+          "samples_ms": [
+            0.549875,
+            0.486792,
+            0.406,
+            0.403208,
+            0.390083,
+            0.386833,
+            0.38625
+          ],
+          "median_ms": 0.403208,
+          "min_ms": 0.38625,
+          "max_ms": 0.549875
+        },
+        "verify_dependencies": {
+          "samples_ms": [
+            0.41125,
+            0.393333,
+            0.386334,
+            0.38625,
+            0.454959,
+            0.400375,
+            0.385208
+          ],
+          "median_ms": 0.393333,
+          "min_ms": 0.385208,
+          "max_ms": 0.454959
+        },
+        "verify_exact_text": {
+          "samples_ms": [
+            0.354041,
+            0.336375,
+            0.326875,
+            0.326125,
+            0.321958,
+            0.32,
+            0.32725
+          ],
+          "median_ms": 0.326875,
+          "min_ms": 0.32,
+          "max_ms": 0.354041
+        }
+      },
+      {
+        "case": "unrelated_file",
+        "category": "negative_control",
+        "fixture_sha256": "a068696814f2c32a196bf86b282e52f8c7d7b4a13dcd9d70dc1049352dfdd301",
+        "expected": "unchanged",
+        "observed": "unchanged",
+        "correct": true,
+        "fresh": true,
+        "exact_text_usable": true,
+        "exact_text_statuses": [
+          "valid"
+        ],
+        "bundle_id": "01fbd2e4c3824fc54afce92e6ae7cc29cb4a61b3bd844807b984cf415b45e992",
+        "witness_id": "9367c3427a67a6d2881df5796f4d89dea3360f001798e8d39da8d22f74b72bd4",
+        "reference_count": 1,
+        "resolved_reference_count": 1,
+        "bundle_rendered_utf8_bytes": 740,
+        "sidecar_json_utf8_bytes": 1292,
+        "additional_bytes_ratio": 1.745946,
+        "capture": {
+          "samples_ms": [
+            0.767166,
+            0.756042,
+            0.627834,
+            0.601917,
+            0.609,
+            0.614708,
+            0.61275
+          ],
+          "median_ms": 0.614708,
+          "min_ms": 0.601917,
+          "max_ms": 0.767166
+        },
+        "verify_dependencies": {
+          "samples_ms": [
+            0.612333,
+            0.581417,
+            0.572625,
+            0.590042,
+            0.563375,
+            0.587542,
+            0.570709
+          ],
+          "median_ms": 0.581417,
+          "min_ms": 0.563375,
+          "max_ms": 0.612333
+        },
+        "verify_exact_text": {
+          "samples_ms": [
+            0.525834,
+            0.548917,
+            0.51925,
+            0.52175,
+            0.849083,
+            0.56825,
+            0.52475
+          ],
+          "median_ms": 0.525834,
+          "min_ms": 0.51925,
+          "max_ms": 0.849083
+        }
+      },
+      {
+        "case": "unrelated_definition",
+        "category": "negative_control",
+        "fixture_sha256": "e514396a6b9a019191443c31549a12be17a45bbb04bb6e55886d05b0dbaaf67c",
+        "expected": "unchanged",
+        "observed": "unchanged",
+        "correct": true,
+        "fresh": true,
+        "exact_text_usable": true,
+        "exact_text_statuses": [
+          "valid"
+        ],
+        "bundle_id": "83e11a5b7108cdbca0a1480f02e607c5336e16c37edf66aecbddb06bc4287e91",
+        "witness_id": "3a0e1b8e051ad1c494d8c1b76c84305f0128c913962d3f60fc55d7e02750a897",
+        "reference_count": 1,
+        "resolved_reference_count": 1,
+        "bundle_rendered_utf8_bytes": 740,
+        "sidecar_json_utf8_bytes": 1292,
+        "additional_bytes_ratio": 1.745946,
+        "capture": {
+          "samples_ms": [
+            0.660625,
+            0.487917,
+            0.44475,
+            0.477917,
+            0.570083,
+            0.487125,
+            0.407833
+          ],
+          "median_ms": 0.487125,
+          "min_ms": 0.407833,
+          "max_ms": 0.660625
+        },
+        "verify_dependencies": {
+          "samples_ms": [
+            0.421292,
+            0.405,
+            0.402166,
+            0.407834,
+            0.402292,
+            0.39575,
+            0.397041
+          ],
+          "median_ms": 0.402292,
+          "min_ms": 0.39575,
+          "max_ms": 0.421292
+        },
+        "verify_exact_text": {
+          "samples_ms": [
+            0.343291,
+            0.328959,
+            0.328625,
+            0.327875,
+            0.3415,
+            0.325333,
+            0.320875
+          ],
+          "median_ms": 0.328625,
+          "min_ms": 0.320875,
+          "max_ms": 0.343291
+        }
+      },
+      {
+        "case": "line_insertion",
+        "category": "relocation",
+        "fixture_sha256": "f7ce7453a3ac4d1c1cd4575ccd2a47dd89a5bb14145e8f85791ced8349ebe64c",
+        "expected": "unchanged",
+        "observed": "unchanged",
+        "correct": true,
+        "fresh": true,
+        "exact_text_usable": true,
+        "exact_text_statuses": [
+          "relocated"
+        ],
+        "bundle_id": "ddfd45a0a16302489d4ce71251e763f78deaff205abb1c2173af74cde5dd9954",
+        "witness_id": "d6f3e63d800e6f59b86db53558d07de5ad249c3cda0422cdd94e68675309ee06",
+        "reference_count": 1,
+        "resolved_reference_count": 1,
+        "bundle_rendered_utf8_bytes": 740,
+        "sidecar_json_utf8_bytes": 1292,
+        "additional_bytes_ratio": 1.745946,
+        "capture": {
+          "samples_ms": [
+            0.5325,
+            0.456584,
+            0.435667,
+            0.42,
+            0.492667,
+            0.465417,
+            0.452542
+          ],
+          "median_ms": 0.456584,
+          "min_ms": 0.42,
+          "max_ms": 0.5325
+        },
+        "verify_dependencies": {
+          "samples_ms": [
+            0.435334,
+            0.41475,
+            0.420375,
+            0.396625,
+            0.399458,
+            0.406834,
+            0.414083
+          ],
+          "median_ms": 0.414083,
+          "min_ms": 0.396625,
+          "max_ms": 0.435334
+        },
+        "verify_exact_text": {
+          "samples_ms": [
+            0.395875,
+            0.571583,
+            0.416458,
+            0.367875,
+            0.352459,
+            0.354,
+            0.332
+          ],
+          "median_ms": 0.367875,
+          "min_ms": 0.332,
+          "max_ms": 0.571583
+        }
+      },
+      {
+        "case": "imported_change",
+        "category": "import",
+        "fixture_sha256": "3e0de359bb7bca11f00c8ff2eab6bb8a3a2a649559c6d6e8fe5bc98bf30e8af3",
+        "expected": "changed",
+        "observed": "changed",
+        "correct": true,
+        "fresh": false,
+        "exact_text_usable": true,
+        "exact_text_statuses": [
+          "valid"
+        ],
+        "bundle_id": "9798cbcb8be54438624ab051c0c3f0e13abeabab4e0c966a26e7e2081a9249ce",
+        "witness_id": "261f7d464857710f580c0ef560efc207959cb1876ba0dc796a00ae3bb2345085",
+        "reference_count": 1,
+        "resolved_reference_count": 1,
+        "bundle_rendered_utf8_bytes": 740,
+        "sidecar_json_utf8_bytes": 1494,
+        "additional_bytes_ratio": 2.018919,
+        "capture": {
+          "samples_ms": [
+            0.6745,
+            0.6315,
+            0.6245,
+            0.640791,
+            0.626625,
+            0.664542,
+            0.645625
+          ],
+          "median_ms": 0.640791,
+          "min_ms": 0.6245,
+          "max_ms": 0.6745
+        },
+        "verify_dependencies": {
+          "samples_ms": [
+            0.653125,
+            0.642666,
+            0.9745,
+            0.684334,
+            0.608833,
+            0.600375,
+            0.608792
+          ],
+          "median_ms": 0.642666,
+          "min_ms": 0.600375,
+          "max_ms": 0.9745
+        },
+        "verify_exact_text": {
+          "samples_ms": [
+            0.530834,
+            0.525334,
+            0.533917,
+            0.530541,
+            0.618625,
+            0.563542,
+            0.589334
+          ],
+          "median_ms": 0.533917,
+          "min_ms": 0.525334,
+          "max_ms": 0.618625
+        }
+      },
+      {
+        "case": "from_alias",
+        "category": "alias",
+        "fixture_sha256": "fdf12164006b43940e973d3910672d2fbdfcbd853f3e24698da7eff5bdab7b97",
+        "expected": "changed",
+        "observed": "changed",
+        "correct": true,
+        "fresh": false,
+        "exact_text_usable": true,
+        "exact_text_statuses": [
+          "valid"
+        ],
+        "bundle_id": "99fc5b1e470b37a639d07859aa1053d7066c6fce8f4eaa0e522f068c3c4207a3",
+        "witness_id": "c1b3b4ffd4fa8a410fc4d8e2f90800ac11b6f10eec67022ef961940f23f3e67e",
+        "reference_count": 1,
+        "resolved_reference_count": 1,
+        "bundle_rendered_utf8_bytes": 735,
+        "sidecar_json_utf8_bytes": 1484,
+        "additional_bytes_ratio": 2.019048,
+        "capture": {
+          "samples_ms": [
+            0.683041,
+            0.6525,
+            0.633209,
+            0.688209,
+            0.721375,
+            0.802667,
+            0.947166
+          ],
+          "median_ms": 0.688209,
+          "min_ms": 0.633209,
+          "max_ms": 0.947166
+        },
+        "verify_dependencies": {
+          "samples_ms": [
+            0.71575,
+            0.628333,
+            0.625625,
+            0.606458,
+            0.648917,
+            0.5875,
+            0.597
+          ],
+          "median_ms": 0.625625,
+          "min_ms": 0.5875,
+          "max_ms": 0.71575
+        },
+        "verify_exact_text": {
+          "samples_ms": [
+            0.531958,
+            0.509917,
+            0.511083,
+            0.514458,
+            0.516667,
+            0.526333,
+            0.497125
+          ],
+          "median_ms": 0.514458,
+          "min_ms": 0.497125,
+          "max_ms": 0.531958
+        }
+      },
+      {
+        "case": "module_alias",
+        "category": "alias",
+        "fixture_sha256": "65a06aba5c7d3157351c37229d96659925c0c2c2b19ae5dec1045d1e0e642dfb",
+        "expected": "unchanged",
+        "observed": "unchanged",
+        "correct": true,
+        "fresh": true,
+        "exact_text_usable": true,
+        "exact_text_statuses": [
+          "valid"
+        ],
+        "bundle_id": "a2c6864a93100023474394d8e60dd2714e74740a39f40f56592d4011f50bb07c",
+        "witness_id": "1fd4db5e5b700c6b1ea3092775354d0741547a6951adca6861f03da0902150f5",
+        "reference_count": 1,
+        "resolved_reference_count": 1,
+        "bundle_rendered_utf8_bytes": 742,
+        "sidecar_json_utf8_bytes": 1486,
+        "additional_bytes_ratio": 2.002695,
+        "capture": {
+          "samples_ms": [
+            0.780917,
+            0.6215,
+            0.594458,
+            0.58875,
+            0.5865,
+            0.578417,
+            0.588916
+          ],
+          "median_ms": 0.588916,
+          "min_ms": 0.578417,
+          "max_ms": 0.780917
+        },
+        "verify_dependencies": {
+          "samples_ms": [
+            0.6105,
+            0.6385,
+            0.646709,
+            0.605917,
+            0.596125,
+            0.598708,
+            0.624125
+          ],
+          "median_ms": 0.6105,
+          "min_ms": 0.596125,
+          "max_ms": 0.646709
+        },
+        "verify_exact_text": {
+          "samples_ms": [
+            0.562458,
+            0.51175,
+            0.507209,
+            0.840083,
+            0.6135,
+            0.561125,
+            0.655
+          ],
+          "median_ms": 0.562458,
+          "min_ms": 0.507209,
+          "max_ms": 0.840083
+        }
+      },
+      {
+        "case": "module_attribute",
+        "category": "import",
+        "fixture_sha256": "8fa2b0743cd33f95028ad86892517f073dd4d0a7da4d1e133a309dbfb6b50bd4",
+        "expected": "changed",
+        "observed": "changed",
+        "correct": true,
+        "fresh": false,
+        "exact_text_usable": true,
+        "exact_text_statuses": [
+          "valid"
+        ],
+        "bundle_id": "1adf3c4e3281757d067a30243bfca45caa855535bf481e1092b013ccb32a963a",
+        "witness_id": "d26edbf753e1641a3789566309a5a89fb37a141c33de4b054838b0dd53125c93",
+        "reference_count": 1,
+        "resolved_reference_count": 1,
+        "bundle_rendered_utf8_bytes": 748,
+        "sidecar_json_utf8_bytes": 1499,
+        "additional_bytes_ratio": 2.004011,
+        "capture": {
+          "samples_ms": [
+            0.668666,
+            0.645875,
+            0.61975,
+            0.611666,
+            0.6265,
+            0.779333,
+            0.689167
+          ],
+          "median_ms": 0.645875,
+          "min_ms": 0.611666,
+          "max_ms": 0.779333
+        },
+        "verify_dependencies": {
+          "samples_ms": [
+            0.805833,
+            0.72425,
+            0.780833,
+            0.672084,
+            0.632959,
+            0.626,
+            0.633125
+          ],
+          "median_ms": 0.672084,
+          "min_ms": 0.626,
+          "max_ms": 0.805833
+        },
+        "verify_exact_text": {
+          "samples_ms": [
+            0.625291,
+            0.565583,
+            0.52925,
+            0.547584,
+            0.546666,
+            0.598375,
+            0.556916
+          ],
+          "median_ms": 0.556916,
+          "min_ms": 0.52925,
+          "max_ms": 0.625291
+        }
+      },
+      {
+        "case": "alias_retarget_identical_definition",
+        "category": "binding",
+        "fixture_sha256": "39949133d3c6f7302572bcd6e1e349f8b65b8c108403e04389a449a367a5e23b",
+        "expected": "changed",
+        "observed": "changed",
+        "correct": true,
+        "fresh": false,
+        "exact_text_usable": true,
+        "exact_text_statuses": [
+          "valid"
+        ],
+        "bundle_id": "0afe31c96036537d37e4968d48a1a596cd575294050a1765e431ebe8cc064f8f",
+        "witness_id": "fc1ec5876ae7e72693edfdedcf6cbe047cfff31eac08e3427fd391a642e3a1b9",
+        "reference_count": 1,
+        "resolved_reference_count": 1,
+        "bundle_rendered_utf8_bytes": 740,
+        "sidecar_json_utf8_bytes": 1494,
+        "additional_bytes_ratio": 2.018919,
+        "capture": {
+          "samples_ms": [
+            0.9655,
+            0.816958,
+            0.779917,
+            0.918791,
+            0.925167,
+            1.226334,
+            0.868166
+          ],
+          "median_ms": 0.918791,
+          "min_ms": 0.779917,
+          "max_ms": 1.226334
+        },
+        "verify_dependencies": {
+          "samples_ms": [
+            0.891375,
+            0.958208,
+            0.817791,
+            0.786375,
+            0.771,
+            0.772792,
+            0.787542
+          ],
+          "median_ms": 0.787542,
+          "min_ms": 0.771,
+          "max_ms": 0.958208
+        },
+        "verify_exact_text": {
+          "samples_ms": [
+            0.697042,
+            0.706417,
+            0.672541,
+            0.664916,
+            0.665875,
+            0.672125,
+            0.667625
+          ],
+          "median_ms": 0.672125,
+          "min_ms": 0.664916,
+          "max_ms": 0.706417
+        }
+      },
+      {
+        "case": "deleted_dependency_file",
+        "category": "deletion",
+        "fixture_sha256": "97cbe04856b8b000965281593491a4d5ab99b99ce796cbbce7b85080ec0031a0",
+        "expected": "missing",
+        "observed": "missing",
+        "correct": true,
+        "fresh": false,
+        "exact_text_usable": true,
+        "exact_text_statuses": [
+          "valid"
+        ],
+        "bundle_id": "9798cbcb8be54438624ab051c0c3f0e13abeabab4e0c966a26e7e2081a9249ce",
+        "witness_id": "261f7d464857710f580c0ef560efc207959cb1876ba0dc796a00ae3bb2345085",
+        "reference_count": 1,
+        "resolved_reference_count": 1,
+        "bundle_rendered_utf8_bytes": 740,
+        "sidecar_json_utf8_bytes": 1494,
+        "additional_bytes_ratio": 2.018919,
+        "capture": {
+          "samples_ms": [
+            0.842208,
+            0.690166,
+            0.655416,
+            0.714833,
+            0.664625,
+            0.738083,
+            0.629166
+          ],
+          "median_ms": 0.690166,
+          "min_ms": 0.629166,
+          "max_ms": 0.842208
+        },
+        "verify_dependencies": {
+          "samples_ms": [
+            0.433209,
+            0.406,
+            0.388209,
+            0.384208,
+            0.392167,
+            0.4155,
+            0.384791
+          ],
+          "median_ms": 0.392167,
+          "min_ms": 0.384208,
+          "max_ms": 0.433209
+        },
+        "verify_exact_text": {
+          "samples_ms": [
+            0.341583,
+            0.329542,
+            0.324459,
+            0.32625,
+            0.317209,
+            0.318458,
+            0.318209
+          ],
+          "median_ms": 0.324459,
+          "min_ms": 0.317209,
+          "max_ms": 0.341583
+        }
+      },
+      {
+        "case": "deleted_definition",
+        "category": "deletion",
+        "fixture_sha256": "418b3033ec0593caaceba2a146cf1aef806f516b75cfb25290b06030e11d8be6",
+        "expected": "missing",
+        "observed": "missing",
+        "correct": true,
+        "fresh": false,
+        "exact_text_usable": true,
+        "exact_text_statuses": [
+          "valid"
+        ],
+        "bundle_id": "9798cbcb8be54438624ab051c0c3f0e13abeabab4e0c966a26e7e2081a9249ce",
+        "witness_id": "261f7d464857710f580c0ef560efc207959cb1876ba0dc796a00ae3bb2345085",
+        "reference_count": 1,
+        "resolved_reference_count": 1,
+        "bundle_rendered_utf8_bytes": 740,
+        "sidecar_json_utf8_bytes": 1494,
+        "additional_bytes_ratio": 2.018919,
+        "capture": {
+          "samples_ms": [
+            0.803292,
+            0.748416,
+            0.618,
+            0.585,
+            0.579459,
+            0.577125,
+            0.590167
+          ],
+          "median_ms": 0.590167,
+          "min_ms": 0.577125,
+          "max_ms": 0.803292
+        },
+        "verify_dependencies": {
+          "samples_ms": [
+            0.88575,
+            0.602959,
+            0.617083,
+            0.583458,
+            0.570125,
+            0.577958,
+            0.578792
+          ],
+          "median_ms": 0.583458,
+          "min_ms": 0.570125,
+          "max_ms": 0.88575
+        },
+        "verify_exact_text": {
+          "samples_ms": [
+            0.948167,
+            0.648958,
+            0.57125,
+            0.553459,
+            0.577667,
+            0.52325,
+            0.493
+          ],
+          "median_ms": 0.57125,
+          "min_ms": 0.493,
+          "max_ms": 0.948167
+        }
+      },
+      {
+        "case": "duplicate_definition",
+        "category": "ambiguity",
+        "fixture_sha256": "cdf358fd137ed3a970762c9b615c9be71608d922ed380a9661dc393265d43935",
+        "expected": "unresolved",
+        "observed": "unresolved",
+        "correct": true,
+        "fresh": false,
+        "exact_text_usable": true,
+        "exact_text_statuses": [
+          "valid"
+        ],
+        "bundle_id": "437b84374058347a5cb3efc870ed05ec1da9ef5882dc57ae43039c975f3b48a7",
+        "witness_id": "db3f3d508193e35b9f97f3eca2acfb944eabc2b676f1494dc547793ca98d758b",
+        "reference_count": 1,
+        "resolved_reference_count": 0,
+        "bundle_rendered_utf8_bytes": 740,
+        "sidecar_json_utf8_bytes": 1062,
+        "additional_bytes_ratio": 1.435135,
+        "capture": {
+          "samples_ms": [
+            0.541416,
+            0.523042,
+            0.421917,
+            0.412625,
+            0.3995,
+            0.384916,
+            0.382583
+          ],
+          "median_ms": 0.412625,
+          "min_ms": 0.382583,
+          "max_ms": 0.541416
+        },
+        "verify_dependencies": {
+          "samples_ms": [
+            0.370792,
+            0.365625,
+            0.364959,
+            0.362,
+            0.373084,
+            0.404792,
+            0.380625
+          ],
+          "median_ms": 0.370792,
+          "min_ms": 0.362,
+          "max_ms": 0.404792
+        },
+        "verify_exact_text": {
+          "samples_ms": [
+            0.361084,
+            0.333042,
+            0.33175,
+            0.360125,
+            0.351375,
+            0.321041,
+            0.327083
+          ],
+          "median_ms": 0.333042,
+          "min_ms": 0.321041,
+          "max_ms": 0.361084
+        }
+      },
+      {
+        "case": "new_duplicate_definition",
+        "category": "ambiguity",
+        "fixture_sha256": "2bbd31e1e698479fe786eb3a2d3f613528583775a8fb4d64bf714924694c18b1",
+        "expected": "unresolved",
+        "observed": "unresolved",
+        "correct": true,
+        "fresh": false,
+        "exact_text_usable": true,
+        "exact_text_statuses": [
+          "valid"
+        ],
+        "bundle_id": "ddfd45a0a16302489d4ce71251e763f78deaff205abb1c2173af74cde5dd9954",
+        "witness_id": "d6f3e63d800e6f59b86db53558d07de5ad249c3cda0422cdd94e68675309ee06",
+        "reference_count": 1,
+        "resolved_reference_count": 1,
+        "bundle_rendered_utf8_bytes": 740,
+        "sidecar_json_utf8_bytes": 1292,
+        "additional_bytes_ratio": 1.745946,
+        "capture": {
+          "samples_ms": [
+            0.542208,
+            0.493542,
+            0.399667,
+            0.398375,
+            0.418542,
+            0.386,
+            0.382084
+          ],
+          "median_ms": 0.399667,
+          "min_ms": 0.382084,
+          "max_ms": 0.542208
+        },
+        "verify_dependencies": {
+          "samples_ms": [
+            0.39575,
+            0.3815,
+            0.390208,
+            0.381958,
+            0.376084,
+            0.378875,
+            0.382042
+          ],
+          "median_ms": 0.381958,
+          "min_ms": 0.376084,
+          "max_ms": 0.39575
+        },
+        "verify_exact_text": {
+          "samples_ms": [
+            0.346875,
+            0.333,
+            0.328958,
+            0.33075,
+            0.326084,
+            0.322667,
+            0.394334
+          ],
+          "median_ms": 0.33075,
+          "min_ms": 0.322667,
+          "max_ms": 0.394334
+        }
+      },
+      {
+        "case": "external_import",
+        "category": "external",
+        "fixture_sha256": "8d7719ef001f0aea8e886ab49dbd4ca6ee33a70bb6d547b8746bbde268633586",
+        "expected": "unresolved",
+        "observed": "unresolved",
+        "correct": true,
+        "fresh": false,
+        "exact_text_usable": true,
+        "exact_text_statuses": [
+          "valid"
+        ],
+        "bundle_id": "b61b6ad5b7b1f1eecdaedf64d5c8a3f7c1c8f94185242ccf77a035a9570d4b49",
+        "witness_id": "65ff0a0e1cc13ff0e4b569168a461fa7414ee60e1d8a70cbcab20e7f98d0e422",
+        "reference_count": 1,
+        "resolved_reference_count": 0,
+        "bundle_rendered_utf8_bytes": 744,
+        "sidecar_json_utf8_bytes": 1074,
+        "additional_bytes_ratio": 1.443548,
+        "capture": {
+          "samples_ms": [
+            0.577833,
+            0.478708,
+            0.460208,
+            0.589459,
+            0.48325,
+            0.485833,
+            0.418875
+          ],
+          "median_ms": 0.48325,
+          "min_ms": 0.418875,
+          "max_ms": 0.589459
+        },
+        "verify_dependencies": {
+          "samples_ms": [
+            0.402834,
+            0.381958,
+            0.406417,
+            0.403209,
+            0.387167,
+            0.388792,
+            0.481208
+          ],
+          "median_ms": 0.402834,
+          "min_ms": 0.381958,
+          "max_ms": 0.481208
+        },
+        "verify_exact_text": {
+          "samples_ms": [
+            0.406792,
+            0.377041,
+            0.354833,
+            0.399416,
+            0.386833,
+            0.406958,
+            0.432875
+          ],
+          "median_ms": 0.399416,
+          "min_ms": 0.354833,
+          "max_ms": 0.432875
+        }
+      },
+      {
+        "case": "callable_parameter",
+        "category": "dynamic",
+        "fixture_sha256": "0e56b1c242a66cf8544e5490fa0abd5e03ac2db58c1dc1a7952659215bd6c32f",
+        "expected": "unresolved",
+        "observed": "unresolved",
+        "correct": true,
+        "fresh": false,
+        "exact_text_usable": true,
+        "exact_text_statuses": [
+          "valid"
+        ],
+        "bundle_id": "b0305201ace43c9ff569f07666990eb0659baf8e276020d08eb5412a01478b90",
+        "witness_id": "184bb0cecf72eb8027193123bf82e2ec41d13eb7cc49e34789db5f31a88fa029",
+        "reference_count": 1,
+        "resolved_reference_count": 0,
+        "bundle_rendered_utf8_bytes": 750,
+        "sidecar_json_utf8_bytes": 1111,
+        "additional_bytes_ratio": 1.481333,
+        "capture": {
+          "samples_ms": [
+            0.525584,
+            0.453375,
+            0.417042,
+            0.429125,
+            0.39075,
+            0.407375,
+            0.400042
+          ],
+          "median_ms": 0.417042,
+          "min_ms": 0.39075,
+          "max_ms": 0.525584
+        },
+        "verify_dependencies": {
+          "samples_ms": [
+            0.400333,
+            0.390083,
+            0.538334,
+            0.56825,
+            0.502792,
+            0.405041,
+            0.376083
+          ],
+          "median_ms": 0.405041,
+          "min_ms": 0.376083,
+          "max_ms": 0.56825
+        },
+        "verify_exact_text": {
+          "samples_ms": [
+            0.372291,
+            0.338375,
+            0.337166,
+            0.333291,
+            0.326625,
+            0.327875,
+            0.321209
+          ],
+          "median_ms": 0.333291,
+          "min_ms": 0.321209,
+          "max_ms": 0.372291
+        }
+      },
+      {
+        "case": "dynamic_method",
+        "category": "dynamic",
+        "fixture_sha256": "b0f2f9132b36fa0eb6f191b5997a6808b0b488620b5fc187410f80a19d0fe395",
+        "expected": "unresolved",
+        "observed": "unresolved",
+        "correct": true,
+        "fresh": false,
+        "exact_text_usable": true,
+        "exact_text_statuses": [
+          "valid"
+        ],
+        "bundle_id": "e6482c2bffec16db4e3d4cf4fbba161c7d73a0faea213b4138e7e6f61e82ef1d",
+        "witness_id": "6ff471e78a38a420b3f70c37869966d4b8d6f8a29088d00106304167938c3345",
+        "reference_count": 1,
+        "resolved_reference_count": 0,
+        "bundle_rendered_utf8_bytes": 744,
+        "sidecar_json_utf8_bytes": 1104,
+        "additional_bytes_ratio": 1.483871,
+        "capture": {
+          "samples_ms": [
+            0.4885,
+            0.418333,
+            0.424625,
+            0.42425,
+            0.422125,
+            0.419291,
+            0.52525
+          ],
+          "median_ms": 0.42425,
+          "min_ms": 0.418333,
+          "max_ms": 0.52525
+        },
+        "verify_dependencies": {
+          "samples_ms": [
+            0.401666,
+            0.398042,
+            0.376125,
+            0.388792,
+            0.39275,
+            0.381333,
+            0.363
+          ],
+          "median_ms": 0.388792,
+          "min_ms": 0.363,
+          "max_ms": 0.401666
+        },
+        "verify_exact_text": {
+          "samples_ms": [
+            0.349042,
+            0.331625,
+            0.323833,
+            0.325125,
+            0.327291,
+            0.320542,
+            0.3235
+          ],
+          "median_ms": 0.325125,
+          "min_ms": 0.320542,
+          "max_ms": 0.349042
+        }
+      },
+      {
+        "case": "call_returned_callable",
+        "category": "dynamic",
+        "fixture_sha256": "6d236088f44e69347d483a2d73af512d7973f87119befeb1b539c413cbf3935f",
+        "expected": "unresolved",
+        "observed": "unresolved",
+        "correct": true,
+        "fresh": false,
+        "exact_text_usable": true,
+        "exact_text_statuses": [
+          "valid"
+        ],
+        "bundle_id": "13d3106a0dc874bb077072a2fde59a71b79588422d2752333526f2f87b07c956",
+        "witness_id": "4f8ad6439002d3d31c9b66706675cd097351d607c528f22fb52f6d88daf3b6fe",
+        "reference_count": 2,
+        "resolved_reference_count": 1,
+        "bundle_rendered_utf8_bytes": 742,
+        "sidecar_json_utf8_bytes": 1419,
+        "additional_bytes_ratio": 1.912399,
+        "capture": {
+          "samples_ms": [
+            0.675542,
+            0.689375,
+            0.564709,
+            0.447417,
+            0.488167,
+            0.451416,
+            0.445167
+          ],
+          "median_ms": 0.488167,
+          "min_ms": 0.445167,
+          "max_ms": 0.689375
+        },
+        "verify_dependencies": {
+          "samples_ms": [
+            0.459708,
+            0.426291,
+            0.412459,
+            0.418917,
+            0.4245,
+            0.448917,
+            0.429917
+          ],
+          "median_ms": 0.426291,
+          "min_ms": 0.412459,
+          "max_ms": 0.459708
+        },
+        "verify_exact_text": {
+          "samples_ms": [
+            0.4435,
+            0.356792,
+            0.358375,
+            0.357375,
+            0.39425,
+            0.351833,
+            0.388083
+          ],
+          "median_ms": 0.358375,
+          "min_ms": 0.351833,
+          "max_ms": 0.4435
+        }
+      },
+      {
+        "case": "changed_called_expression",
+        "category": "caller",
+        "fixture_sha256": "601ad891bf712f375c7023e35bb481da08e96cf66e03f304f92cc695e49bc6ef",
+        "expected": "changed",
+        "observed": "changed",
+        "correct": true,
+        "fresh": false,
+        "exact_text_usable": false,
+        "exact_text_statuses": [
+          "modified"
+        ],
+        "bundle_id": "4b4db9e4c093d8c4ab13e9384bc89838460af8397ffe572e320c035585fd0720",
+        "witness_id": "3726d92578cc561df7097eb27aea644bc3c754f17ba8b1b65ca898dac483a09a",
+        "reference_count": 1,
+        "resolved_reference_count": 1,
+        "bundle_rendered_utf8_bytes": 740,
+        "sidecar_json_utf8_bytes": 1292,
+        "additional_bytes_ratio": 1.745946,
+        "capture": {
+          "samples_ms": [
+            0.493958,
+            0.48,
+            0.438292,
+            0.421417,
+            0.403875,
+            0.404958,
+            0.415542
+          ],
+          "median_ms": 0.421417,
+          "min_ms": 0.403875,
+          "max_ms": 0.493958
+        },
+        "verify_dependencies": {
+          "samples_ms": [
+            0.421208,
+            0.382458,
+            0.379167,
+            0.448708,
+            0.447125,
+            0.453917,
+            0.40325
+          ],
+          "median_ms": 0.421208,
+          "min_ms": 0.379167,
+          "max_ms": 0.453917
+        },
+        "verify_exact_text": {
+          "samples_ms": [
+            0.358292,
+            0.363625,
+            0.337125,
+            0.3575,
+            0.330875,
+            0.341667,
+            0.333792
+          ],
+          "median_ms": 0.341667,
+          "min_ms": 0.330875,
+          "max_ms": 0.363625
+        }
+      },
+      {
+        "case": "constant_change",
+        "category": "constant",
+        "fixture_sha256": "5af8d343b575ed5e943f564678a78e04d15e83b801853868b3edb9e179dfa5e6",
+        "expected": "changed",
+        "observed": "changed",
+        "correct": true,
+        "fresh": false,
+        "exact_text_usable": true,
+        "exact_text_statuses": [
+          "valid"
+        ],
+        "bundle_id": "ab4d491099e21fe5c555945ab49f56e47ec814424956d858587f7f4be8cafc84",
+        "witness_id": "0e2384686d911507c7f550aaf9ab2b9fd0e80ed2b2554928e57430d32763ee4d",
+        "reference_count": 1,
+        "resolved_reference_count": 1,
+        "bundle_rendered_utf8_bytes": 737,
+        "sidecar_json_utf8_bytes": 1269,
+        "additional_bytes_ratio": 1.721845,
+        "capture": {
+          "samples_ms": [
+            0.476958,
+            0.651833,
+            0.45025,
+            0.418458,
+            0.399459,
+            0.411125,
+            0.417625
+          ],
+          "median_ms": 0.418458,
+          "min_ms": 0.399459,
+          "max_ms": 0.651833
+        },
+        "verify_dependencies": {
+          "samples_ms": [
+            0.406458,
+            0.386083,
+            0.390125,
+            0.418625,
+            0.389959,
+            0.381708,
+            0.378167
+          ],
+          "median_ms": 0.389959,
+          "min_ms": 0.378167,
+          "max_ms": 0.418625
+        },
+        "verify_exact_text": {
+          "samples_ms": [
+            0.352625,
+            0.325041,
+            0.324584,
+            0.321959,
+            0.321333,
+            0.327292,
+            0.325
+          ],
+          "median_ms": 0.325,
+          "min_ms": 0.321333,
+          "max_ms": 0.352625
+        }
+      },
+      {
+        "case": "imported_constant",
+        "category": "constant",
+        "fixture_sha256": "5b774081841efe6e6ae98ca51477bbb40e1eab20955ab7c85e187e20794f5290",
+        "expected": "changed",
+        "observed": "changed",
+        "correct": true,
+        "fresh": false,
+        "exact_text_usable": true,
+        "exact_text_statuses": [
+          "valid"
+        ],
+        "bundle_id": "22f05b2d8b5c5a8ab0ff79859e2ba72b8b705cfa1c6f29e6ba023ea95a36d718",
+        "witness_id": "3c733147bffd9a5374a9e00046416e055ba3b68a1ed2c5898252556630dfc383",
+        "reference_count": 1,
+        "resolved_reference_count": 1,
+        "bundle_rendered_utf8_bytes": 737,
+        "sidecar_json_utf8_bytes": 1471,
+        "additional_bytes_ratio": 1.995929,
+        "capture": {
+          "samples_ms": [
+            0.867458,
+            0.76675,
+            0.788875,
+            0.875208,
+            0.64925,
+            0.621708,
+            0.651292
+          ],
+          "median_ms": 0.76675,
+          "min_ms": 0.621708,
+          "max_ms": 0.875208
+        },
+        "verify_dependencies": {
+          "samples_ms": [
+            0.674375,
+            0.633458,
+            0.730875,
+            0.624875,
+            0.613167,
+            0.635875,
+            0.633708
+          ],
+          "median_ms": 0.633708,
+          "min_ms": 0.613167,
+          "max_ms": 0.730875
+        },
+        "verify_exact_text": {
+          "samples_ms": [
+            0.646916,
+            0.681208,
+            0.542,
+            0.520166,
+            0.512125,
+            0.511083,
+            0.52175
+          ],
+          "median_ms": 0.52175,
+          "min_ms": 0.511083,
+          "max_ms": 0.681208
+        }
+      },
+      {
+        "case": "recursive_call",
+        "category": "cycle",
+        "fixture_sha256": "1d1f6fe7647492dad925b6e4b4db7b109bf64c0f408ecb3a7fe99717c645d563",
+        "expected": "unchanged",
+        "observed": "unchanged",
+        "correct": true,
+        "fresh": true,
+        "exact_text_usable": true,
+        "exact_text_statuses": [
+          "valid"
+        ],
+        "bundle_id": "f06b6a9bd928095e83743b76d764af06a6d811d235c9e4662d445c53c2a306e8",
+        "witness_id": "90900be12e06b2d7f12db48fcea14f8f350599b316e77f5114153e84ef99cfcd",
+        "reference_count": 1,
+        "resolved_reference_count": 1,
+        "bundle_rendered_utf8_bytes": 759,
+        "sidecar_json_utf8_bytes": 1340,
+        "additional_bytes_ratio": 1.765481,
+        "capture": {
+          "samples_ms": [
+            0.626417,
+            0.509667,
+            0.4895,
+            0.680833,
+            0.547333,
+            0.482791,
+            0.465625
+          ],
+          "median_ms": 0.509667,
+          "min_ms": 0.465625,
+          "max_ms": 0.680833
+        },
+        "verify_dependencies": {
+          "samples_ms": [
+            0.501958,
+            0.453209,
+            0.421083,
+            0.426209,
+            0.443375,
+            0.770375,
+            0.509333
+          ],
+          "median_ms": 0.453209,
+          "min_ms": 0.421083,
+          "max_ms": 0.770375
+        },
+        "verify_exact_text": {
+          "samples_ms": [
+            0.401708,
+            0.397416,
+            0.383209,
+            0.344917,
+            0.334083,
+            0.34325,
+            0.623958
+          ],
+          "median_ms": 0.383209,
+          "min_ms": 0.334083,
+          "max_ms": 0.623958
+        }
+      },
+      {
+        "case": "import_cycle",
+        "category": "cycle",
+        "fixture_sha256": "20a7a517372cb3adc7a5e5b0f9b2c4e07de9b77b470045b0e3512696478590f8",
+        "expected": "unchanged",
+        "observed": "unchanged",
+        "correct": true,
+        "fresh": true,
+        "exact_text_usable": true,
+        "exact_text_statuses": [
+          "valid"
+        ],
+        "bundle_id": "0ed5915beac22127795f21d5463af2d18fe2d8e66d5bd6bfad306b9ca4f3c019",
+        "witness_id": "848da38cfe4358b521537f0ff96874c2d0c542ece2a72187553c3a585d50d477",
+        "reference_count": 1,
+        "resolved_reference_count": 1,
+        "bundle_rendered_utf8_bytes": 740,
+        "sidecar_json_utf8_bytes": 1502,
+        "additional_bytes_ratio": 2.02973,
+        "capture": {
+          "samples_ms": [
+            0.744917,
+            0.67825,
+            0.617458,
+            0.599292,
+            0.588,
+            0.595125,
+            0.604459
+          ],
+          "median_ms": 0.604459,
+          "min_ms": 0.588,
+          "max_ms": 0.744917
+        },
+        "verify_dependencies": {
+          "samples_ms": [
+            0.626625,
+            0.616584,
+            0.593916,
+            0.643708,
+            0.748333,
+            0.646125,
+            0.653625
+          ],
+          "median_ms": 0.643708,
+          "min_ms": 0.593916,
+          "max_ms": 0.748333
+        },
+        "verify_exact_text": {
+          "samples_ms": [
+            0.553625,
+            0.840625,
+            0.616417,
+            0.552708,
+            0.525125,
+            0.5215,
+            0.516
+          ],
+          "median_ms": 0.552708,
+          "min_ms": 0.516,
+          "max_ms": 0.840625
+        }
+      },
+      {
+        "case": "reexport_cycle",
+        "category": "cycle",
+        "fixture_sha256": "94fa2a5d1b266bf38f68578d74dc8761c791cc0845585c6b5f6cced663599e0c",
+        "expected": "unresolved",
+        "observed": "unresolved",
+        "correct": true,
+        "fresh": false,
+        "exact_text_usable": true,
+        "exact_text_statuses": [
+          "valid"
+        ],
+        "bundle_id": "015006b79d49d9e06e3e2e25a815e1e7d66551d7c37d65645ebd3091c539bf58",
+        "witness_id": "e389efb4e1e86776d9a3c83ae07169238600735672c3b9990b919a5dbb35210c",
+        "reference_count": 1,
+        "resolved_reference_count": 0,
+        "bundle_rendered_utf8_bytes": 740,
+        "sidecar_json_utf8_bytes": 1061,
+        "additional_bytes_ratio": 1.433784,
+        "capture": {
+          "samples_ms": [
+            1.037416,
+            0.873791,
+            0.772583,
+            0.754375,
+            0.76775,
+            0.750166,
+            0.75575
+          ],
+          "median_ms": 0.76775,
+          "min_ms": 0.750166,
+          "max_ms": 1.037416
+        },
+        "verify_dependencies": {
+          "samples_ms": [
+            0.733125,
+            0.731042,
+            0.728791,
+            0.736458,
+            0.719709,
+            0.720625,
+            0.736334
+          ],
+          "median_ms": 0.731042,
+          "min_ms": 0.719709,
+          "max_ms": 0.736458
+        },
+        "verify_exact_text": {
+          "samples_ms": [
+            0.782542,
+            0.68175,
+            0.661334,
+            0.66975,
+            0.681875,
+            0.662875,
+            0.659375
+          ],
+          "median_ms": 0.66975,
+          "min_ms": 0.659375,
+          "max_ms": 0.782542
+        }
+      },
+      {
+        "case": "relative_import",
+        "category": "import",
+        "fixture_sha256": "5c30274b151beea25d2bb4b203cf486a2f475e0c613f1731d5209775cf6d1ae6",
+        "expected": "changed",
+        "observed": "changed",
+        "correct": true,
+        "fresh": false,
+        "exact_text_usable": true,
+        "exact_text_statuses": [
+          "valid"
+        ],
+        "bundle_id": "0925b29d405cd793744ab6e219391c1096b55360b852ff0b19297eca7dac0c35",
+        "witness_id": "cb6bda536f9fd4e270354ea606c8106dbf3e7ce411d81c66d2cc26d5602fbe25",
+        "reference_count": 1,
+        "resolved_reference_count": 1,
+        "bundle_rendered_utf8_bytes": 744,
+        "sidecar_json_utf8_bytes": 1507,
+        "additional_bytes_ratio": 2.025538,
+        "capture": {
+          "samples_ms": [
+            1.068834,
+            0.906583,
+            0.873542,
+            0.868625,
+            0.869875,
+            0.912708,
+            0.879916
+          ],
+          "median_ms": 0.879916,
+          "min_ms": 0.868625,
+          "max_ms": 1.068834
+        },
+        "verify_dependencies": {
+          "samples_ms": [
+            0.984334,
+            0.896833,
+            0.947166,
+            1.391166,
+            1.086875,
+            1.039208,
+            0.899875
+          ],
+          "median_ms": 0.984334,
+          "min_ms": 0.896833,
+          "max_ms": 1.391166
+        },
+        "verify_exact_text": {
+          "samples_ms": [
+            0.785291,
+            0.767042,
+            0.779417,
+            0.770333,
+            0.787292,
+            0.786333,
+            0.760083
+          ],
+          "median_ms": 0.779417,
+          "min_ms": 0.760083,
+          "max_ms": 0.787292
+        }
+      },
+      {
+        "case": "src_layout",
+        "category": "import",
+        "fixture_sha256": "850ebb9488ca97fb52c979df5cd4bb1484422579ac87737d3fc12b6550092508",
+        "expected": "unchanged",
+        "observed": "unchanged",
+        "correct": true,
+        "fresh": true,
+        "exact_text_usable": true,
+        "exact_text_statuses": [
+          "valid"
+        ],
+        "bundle_id": "ba1f4c0365e10abd3284de046ca9d50dcd05d9e815606755f34fdc6703080ac3",
+        "witness_id": "1cfab6279a6632fd0cce72b60ce3d582a9e884d987d4f74f603baa3dbe06a9a3",
+        "reference_count": 1,
+        "resolved_reference_count": 1,
+        "bundle_rendered_utf8_bytes": 740,
+        "sidecar_json_utf8_bytes": 1506,
+        "additional_bytes_ratio": 2.035135,
+        "capture": {
+          "samples_ms": [
+            1.21925,
+            1.355833,
+            1.090083,
+            1.103458,
+            1.009334,
+            0.927458,
+            0.946791
+          ],
+          "median_ms": 1.090083,
+          "min_ms": 0.927458,
+          "max_ms": 1.355833
+        },
+        "verify_dependencies": {
+          "samples_ms": [
+            1.009375,
+            1.16075,
+            1.305625,
+            1.039875,
+            0.951875,
+            0.946542,
+            1.105542
+          ],
+          "median_ms": 1.039875,
+          "min_ms": 0.946542,
+          "max_ms": 1.305625
+        },
+        "verify_exact_text": {
+          "samples_ms": [
+            1.177666,
+            1.380833,
+            1.049708,
+            0.939792,
+            0.93925,
+            0.903667,
+            0.853792
+          ],
+          "median_ms": 0.939792,
+          "min_ms": 0.853792,
+          "max_ms": 1.380833
+        }
+      },
+      {
+        "case": "ambiguous_module",
+        "category": "ambiguity",
+        "fixture_sha256": "4824006dc7fc021c723c26e87e9dfb986cd736b7bb283964b744b2f08fce0db4",
+        "expected": "unresolved",
+        "observed": "unresolved",
+        "correct": true,
+        "fresh": false,
+        "exact_text_usable": true,
+        "exact_text_statuses": [
+          "valid"
+        ],
+        "bundle_id": "1d2042254e439161d8d2b3f46c1104c389d52b839ce0115caec56c9533854ea1",
+        "witness_id": "0da934344ca0a201ad7a0ede34002b637520efc065e852823ba37d6150159a77",
+        "reference_count": 1,
+        "resolved_reference_count": 0,
+        "bundle_rendered_utf8_bytes": 740,
+        "sidecar_json_utf8_bytes": 1064,
+        "additional_bytes_ratio": 1.437838,
+        "capture": {
+          "samples_ms": [
+            1.52275,
+            1.502916,
+            1.210583,
+            1.446041,
+            1.365583,
+            1.334209,
+            1.130334
+          ],
+          "median_ms": 1.365583,
+          "min_ms": 1.130334,
+          "max_ms": 1.52275
+        },
+        "verify_dependencies": {
+          "samples_ms": [
+            1.281625,
+            1.419792,
+            1.197375,
+            1.124584,
+            0.969542,
+            0.986167,
+            0.843958
+          ],
+          "median_ms": 1.124584,
+          "min_ms": 0.843958,
+          "max_ms": 1.419792
+        },
+        "verify_exact_text": {
+          "samples_ms": [
+            0.849833,
+            0.860208,
+            0.734125,
+            0.718625,
+            0.710875,
+            0.921291,
+            0.845125
+          ],
+          "median_ms": 0.845125,
+          "min_ms": 0.710875,
+          "max_ms": 0.921291
+        }
+      },
+      {
+        "case": "wildcard_import",
+        "category": "ambiguity",
+        "fixture_sha256": "06e545f9cbdaff4544364df33ff1d4e05de6528e9cb17adcfde0262c4ea5403b",
+        "expected": "unresolved",
+        "observed": "unresolved",
+        "correct": true,
+        "fresh": false,
+        "exact_text_usable": true,
+        "exact_text_statuses": [
+          "valid"
+        ],
+        "bundle_id": "11a652ba9986f3a46301b9996cd3dbe6f037b3b6dc47b7677be78f35cd1a5c00",
+        "witness_id": "8f035453995abd81f27c04465cb445b7c8ef4e74b4e9c4af17822d760ee645ed",
+        "reference_count": 1,
+        "resolved_reference_count": 0,
+        "bundle_rendered_utf8_bytes": 740,
+        "sidecar_json_utf8_bytes": 1076,
+        "additional_bytes_ratio": 1.454054,
+        "capture": {
+          "samples_ms": [
+            0.960875,
+            0.84325,
+            0.82075,
+            0.827958,
+            1.054375,
+            0.716333,
+            0.77325
+          ],
+          "median_ms": 0.827958,
+          "min_ms": 0.716333,
+          "max_ms": 1.054375
+        },
+        "verify_dependencies": {
+          "samples_ms": [
+            0.582417,
+            0.579292,
+            0.582667,
+            0.558625,
+            0.5415,
+            0.566042,
+            0.562542
+          ],
+          "median_ms": 0.566042,
+          "min_ms": 0.5415,
+          "max_ms": 0.582667
+        },
+        "verify_exact_text": {
+          "samples_ms": [
+            0.51825,
+            0.5125,
+            0.509292,
+            0.494417,
+            0.496417,
+            0.498708,
+            0.497209
+          ],
+          "median_ms": 0.498708,
+          "min_ms": 0.494417,
+          "max_ms": 0.51825
+        }
+      },
+      {
+        "case": "local_shadow",
+        "category": "dynamic",
+        "fixture_sha256": "bf6d3b191ac2e092bba692bee6fc0d9575f3ded0882bbfb15da311002a3aceb5",
+        "expected": "unresolved",
+        "observed": "unresolved",
+        "correct": true,
+        "fresh": false,
+        "exact_text_usable": true,
+        "exact_text_statuses": [
+          "valid"
+        ],
+        "bundle_id": "0abca5a28f8f624db9c814071775864eae79393efa74bb8cfe35f220ba28ffd4",
+        "witness_id": "520e33eb7bc7916cb4d276498b3222acc694cdf6e12f1e18464f0ff11c2dc26a",
+        "reference_count": 1,
+        "resolved_reference_count": 0,
+        "bundle_rendered_utf8_bytes": 746,
+        "sidecar_json_utf8_bytes": 1105,
+        "additional_bytes_ratio": 1.481233,
+        "capture": {
+          "samples_ms": [
+            0.5295,
+            0.46825,
+            0.530292,
+            0.4985,
+            0.448459,
+            0.422917,
+            0.414917
+          ],
+          "median_ms": 0.46825,
+          "min_ms": 0.414917,
+          "max_ms": 0.530292
+        },
+        "verify_dependencies": {
+          "samples_ms": [
+            0.504542,
+            0.491792,
+            0.411375,
+            0.474917,
+            0.448584,
+            0.416667,
+            0.392916
+          ],
+          "median_ms": 0.448584,
+          "min_ms": 0.392916,
+          "max_ms": 0.504542
+        },
+        "verify_exact_text": {
+          "samples_ms": [
+            0.386,
+            0.364958,
+            0.364709,
+            0.33775,
+            0.354708,
+            0.359875,
+            0.332791
+          ],
+          "median_ms": 0.359875,
+          "min_ms": 0.332791,
+          "max_ms": 0.386
+        }
+      },
+      {
+        "case": "one_hop_boundary",
+        "category": "scope_limit",
+        "fixture_sha256": "581a56dc4908cb6714ef42428f8e3dd9bfdfb9fcc2a56f01f6b36aa78ac91183",
+        "expected": "unchanged",
+        "observed": "unchanged",
+        "correct": true,
+        "fresh": true,
+        "exact_text_usable": true,
+        "exact_text_statuses": [
+          "valid"
+        ],
+        "bundle_id": "e695b6896ffbc6e5eb86bd4917ba4d86914fbabbd9a85a9faafe3236156b9694",
+        "witness_id": "dc485c28694174df0c5832d910fd9cf611c1b0c561e43b5831c2ee3686b392ef",
+        "reference_count": 1,
+        "resolved_reference_count": 1,
+        "bundle_rendered_utf8_bytes": 740,
+        "sidecar_json_utf8_bytes": 1297,
+        "additional_bytes_ratio": 1.752703,
+        "capture": {
+          "samples_ms": [
+            0.466709,
+            0.428416,
+            0.416417,
+            0.5765,
+            0.534709,
+            0.501291,
+            0.491542
+          ],
+          "median_ms": 0.491542,
+          "min_ms": 0.416417,
+          "max_ms": 0.5765
+        },
+        "verify_dependencies": {
+          "samples_ms": [
+            0.476792,
+            0.471125,
+            0.512166,
+            0.475625,
+            0.506958,
+            0.406708,
+            0.407958
+          ],
+          "median_ms": 0.475625,
+          "min_ms": 0.406708,
+          "max_ms": 0.512166
+        },
+        "verify_exact_text": {
+          "samples_ms": [
+            0.379875,
+            0.349125,
+            0.3365,
+            0.327208,
+            0.3235,
+            0.333917,
+            0.3305
+          ],
+          "median_ms": 0.333917,
+          "min_ms": 0.3235,
+          "max_ms": 0.379875
+        }
+      },
+      {
+        "case": "syntax_error_dependency",
+        "category": "syntax",
+        "fixture_sha256": "312e3b8b5bb3b88e7efdc2b10d34fc87a7a9fd4199d75bc05a5bef5986bb5349",
+        "expected": "unresolved",
+        "observed": "unresolved",
+        "correct": true,
+        "fresh": false,
+        "exact_text_usable": true,
+        "exact_text_statuses": [
+          "valid"
+        ],
+        "bundle_id": "9798cbcb8be54438624ab051c0c3f0e13abeabab4e0c966a26e7e2081a9249ce",
+        "witness_id": "261f7d464857710f580c0ef560efc207959cb1876ba0dc796a00ae3bb2345085",
+        "reference_count": 1,
+        "resolved_reference_count": 1,
+        "bundle_rendered_utf8_bytes": 740,
+        "sidecar_json_utf8_bytes": 1494,
+        "additional_bytes_ratio": 2.018919,
+        "capture": {
+          "samples_ms": [
+            0.736458,
+            0.667875,
+            0.639666,
+            0.600917,
+            0.582584,
+            0.6165,
+            0.599959
+          ],
+          "median_ms": 0.6165,
+          "min_ms": 0.582584,
+          "max_ms": 0.736458
+        },
+        "verify_dependencies": {
+          "samples_ms": [
+            0.6685,
+            0.6605,
+            0.642791,
+            0.640375,
+            0.738875,
+            0.666625,
+            0.698541
+          ],
+          "median_ms": 0.666625,
+          "min_ms": 0.640375,
+          "max_ms": 0.738875
+        },
+        "verify_exact_text": {
+          "samples_ms": [
+            0.621125,
+            0.551,
+            0.523209,
+            0.523583,
+            0.530584,
+            0.52925,
+            0.591792
+          ],
+          "median_ms": 0.530584,
+          "min_ms": 0.523209,
+          "max_ms": 0.621125
+        }
+      },
+      {
+        "case": "no_dependencies",
+        "category": "negative_control",
+        "fixture_sha256": "5c3d640b74481bde2f6b6ce63ec2075c51c02f184f655edcad3cf55f65ca6e31",
+        "expected": "unchanged",
+        "observed": "unchanged",
+        "correct": true,
+        "fresh": true,
+        "exact_text_usable": true,
+        "exact_text_statuses": [
+          "valid"
+        ],
+        "bundle_id": "547a1625d1a202ca240e84916b8960080c8f4b8bea6a2232113f87f5a6d46a45",
+        "witness_id": "0f043e9165868441ff3f0005ccef8ab51eb528f5d8808e3f4ec1bb1b65b97318",
+        "reference_count": 0,
+        "resolved_reference_count": 0,
+        "bundle_rendered_utf8_bytes": 746,
+        "sidecar_json_utf8_bytes": 967,
+        "additional_bytes_ratio": 1.296247,
+        "capture": {
+          "samples_ms": [
+            0.763,
+            0.548375,
+            0.43325,
+            0.41625,
+            0.411167,
+            0.401083,
+            0.443584
+          ],
+          "median_ms": 0.43325,
+          "min_ms": 0.401083,
+          "max_ms": 0.763
+        },
+        "verify_dependencies": {
+          "samples_ms": [
+            0.639833,
+            0.470958,
+            0.457709,
+            0.372292,
+            0.3765,
+            0.3815,
+            0.377375
+          ],
+          "median_ms": 0.3815,
+          "min_ms": 0.372292,
+          "max_ms": 0.639833
+        },
+        "verify_exact_text": {
+          "samples_ms": [
+            0.385875,
+            0.355375,
+            0.348875,
+            0.340292,
+            0.371667,
+            0.374208,
+            0.447292
+          ],
+          "median_ms": 0.371667,
+          "min_ms": 0.340292,
+          "max_ms": 0.447292
+        }
+      },
+      {
+        "case": "selected_external_import",
+        "category": "external",
+        "fixture_sha256": "344e2b14ae46f8f326c6aea767d7e6760b0a29ddab8544466f2d3b4ef43438e3",
+        "expected": "unresolved",
+        "observed": "unresolved",
+        "correct": true,
+        "fresh": false,
+        "exact_text_usable": true,
+        "exact_text_statuses": [
+          "valid"
+        ],
+        "bundle_id": "6ec7f5a251810b42329816fc74be1bd1a83e034f772b5ccab2dd29ead224c5de",
+        "witness_id": "44dd23a90423fead44773641efb8b8f60aa1969ca44f76cd365720ccc79f5b5d",
+        "reference_count": 1,
+        "resolved_reference_count": 0,
+        "bundle_rendered_utf8_bytes": 716,
+        "sidecar_json_utf8_bytes": 1058,
+        "additional_bytes_ratio": 1.477654,
+        "capture": {
+          "samples_ms": [
+            0.395584,
+            0.381958,
+            0.406709,
+            0.396125,
+            0.463666,
+            0.39675,
+            0.393541
+          ],
+          "median_ms": 0.396125,
+          "min_ms": 0.381958,
+          "max_ms": 0.463666
+        },
+        "verify_dependencies": {
+          "samples_ms": [
+            0.414208,
+            0.36375,
+            0.356375,
+            0.345083,
+            0.348791,
+            0.372834,
+            0.395875
+          ],
+          "median_ms": 0.36375,
+          "min_ms": 0.345083,
+          "max_ms": 0.414208
+        },
+        "verify_exact_text": {
+          "samples_ms": [
+            0.3825,
+            0.349125,
+            0.347959,
+            0.341458,
+            0.327583,
+            0.329375,
+            0.341167
+          ],
+          "median_ms": 0.341458,
+          "min_ms": 0.327583,
+          "max_ms": 0.3825
+        }
+      },
+      {
+        "case": "selected_from_import",
+        "category": "import",
+        "fixture_sha256": "2a47ebb03c51d802d911fc07c733b1bbc412fb98405d86db4a3af2655852746a",
+        "expected": "changed",
+        "observed": "changed",
+        "correct": true,
+        "fresh": false,
+        "exact_text_usable": true,
+        "exact_text_statuses": [
+          "valid"
+        ],
+        "bundle_id": "d2e89b610b2687f3effee9cc471bd388f662144095fc80c686412152e82e193d",
+        "witness_id": "4633197ba1aa295e9a34f8bea6f189158ed6844785f938bc9e2edf2239bcf559",
+        "reference_count": 1,
+        "resolved_reference_count": 1,
+        "bundle_rendered_utf8_bytes": 731,
+        "sidecar_json_utf8_bytes": 1484,
+        "additional_bytes_ratio": 2.030096,
+        "capture": {
+          "samples_ms": [
+            0.63475,
+            0.606417,
+            0.633084,
+            0.623958,
+            0.597792,
+            0.704833,
+            0.642292
+          ],
+          "median_ms": 0.633084,
+          "min_ms": 0.597792,
+          "max_ms": 0.704833
+        },
+        "verify_dependencies": {
+          "samples_ms": [
+            0.751166,
+            0.683458,
+            0.600292,
+            0.578458,
+            0.604583,
+            0.585917,
+            0.597292
+          ],
+          "median_ms": 0.600292,
+          "min_ms": 0.578458,
+          "max_ms": 0.751166
+        },
+        "verify_exact_text": {
+          "samples_ms": [
+            0.527875,
+            0.493167,
+            0.508459,
+            0.520541,
+            0.5175,
+            0.573459,
+            0.689542
+          ],
+          "median_ms": 0.520541,
+          "min_ms": 0.493167,
+          "max_ms": 0.689542
+        }
+      }
+    ]
+  },
+  "scaling": [
+    {
+      "python_files": 10,
+      "source_utf8_bytes": 313,
+      "selected_entries": 1,
+      "captured_direct_references": 1,
+      "capture": {
+        "samples_ms": [
+          2.258417,
+          2.053792,
+          2.0335,
+          2.008834,
+          2.414625,
+          2.631834,
+          2.430959
+        ],
+        "median_ms": 2.258417,
+        "min_ms": 2.008834,
+        "max_ms": 2.631834
+      },
+      "verify_dependencies": {
+        "samples_ms": [
+          2.265208,
+          2.290708,
+          2.139167,
+          2.272875,
+          2.128958,
+          2.4225,
+          2.095959
+        ],
+        "median_ms": 2.265208,
+        "min_ms": 2.095959,
+        "max_ms": 2.4225
+      },
+      "verify_exact_text": {
+        "samples_ms": [
+          1.916167,
+          2.390625,
+          1.987959,
+          1.851125,
+          1.860458,
+          1.866833,
+          2.4405
+        ],
+        "median_ms": 1.916167,
+        "min_ms": 1.851125,
+        "max_ms": 2.4405
+      }
+    },
+    {
+      "python_files": 100,
+      "source_utf8_bytes": 3009,
+      "selected_entries": 1,
+      "captured_direct_references": 1,
+      "capture": {
+        "samples_ms": [
+          19.499583,
+          20.146792,
+          20.102167,
+          20.682834,
+          20.3795,
+          20.962875,
+          19.8885
+        ],
+        "median_ms": 20.146792,
+        "min_ms": 19.499583,
+        "max_ms": 20.962875
+      },
+      "verify_dependencies": {
+        "samples_ms": [
+          19.237,
+          23.03525,
+          22.184583,
+          22.173917,
+          21.126625,
+          24.116667,
+          20.275959
+        ],
+        "median_ms": 22.173917,
+        "min_ms": 19.237,
+        "max_ms": 24.116667
+      },
+      "verify_exact_text": {
+        "samples_ms": [
+          21.065666,
+          18.942375,
+          19.089875,
+          18.332542,
+          19.221042,
+          18.217083,
+          19.540917
+        ],
+        "median_ms": 19.089875,
+        "min_ms": 18.217083,
+        "max_ms": 21.065666
+      }
+    },
+    {
+      "python_files": 500,
+      "source_utf8_bytes": 15805,
+      "selected_entries": 1,
+      "captured_direct_references": 1,
+      "capture": {
+        "samples_ms": [
+          104.0395,
+          107.997709,
+          101.558917,
+          105.216041,
+          98.634542,
+          102.100541,
+          107.693708
+        ],
+        "median_ms": 104.0395,
+        "min_ms": 98.634542,
+        "max_ms": 107.997709
+      },
+      "verify_dependencies": {
+        "samples_ms": [
+          107.122792,
+          108.269375,
+          103.093834,
+          103.33825,
+          102.481875,
+          103.990833,
+          101.559042
+        ],
+        "median_ms": 103.33825,
+        "min_ms": 101.559042,
+        "max_ms": 108.269375
+      },
+      "verify_exact_text": {
+        "samples_ms": [
+          97.275792,
+          97.693583,
+          94.970584,
+          94.229208,
+          93.276875,
+          91.932042,
+          92.265291
+        ],
+        "median_ms": 94.229208,
+        "min_ms": 91.932042,
+        "max_ms": 97.693583
+      }
+    }
+  ]
+}

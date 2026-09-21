@@ -45,6 +45,18 @@ TOOLS = [
     _tool("contextproof_repair", "Keep exact evidence and update uniquely relocated citations. "
           "Return invalidated entries explicitly; modified code is never silently substituted.",
           {"bundle": {"type": "object"}}, ("bundle",)),
+    _tool("contextproof_capture", "Capture source evidence and direct static dependency witnesses "
+          "together. The budget covers rendered source; witness diagnostics are separate.",
+          {"query": QUERY, "method": {**METHOD, "default": "bm25"},
+           "budget": {"type": "integer", "minimum": 1, "maximum": 1000000},
+           "tokenizer": {"type": "string", "enum": ["bytes", "cl100k_base", "o200k_base"]}},
+          ("query",)),
+    _tool("contextproof_check", "Check saved context text and its captured direct dependencies. "
+          "Unresolved references remain explicit; returns a reuse/repair/retrieve/review recommendation.",
+          {"context": {"type": "object"}}, ("context",)),
+    _tool("contextproof_refresh", "Repair recoverable context when dependencies are unchanged; "
+          "otherwise retrieve current source. Preserve invalidation reasons and unresolved references.",
+          {"context": {"type": "object"}}, ("context",)),
 ]
 
 
@@ -81,6 +93,13 @@ class Server:
         if spec is None:
             raise ValueError(f"unknown tool: {name}")
         _validate_arguments(spec["inputSchema"], args)
+        if name in {"contextproof_capture", "contextproof_check", "contextproof_refresh"}:
+            from .session import capture_context, check_context, refresh_context
+            if name == "contextproof_capture":
+                return capture_context(self.root, args["query"], args.get("budget", 4000),
+                                       args.get("method", "bm25"), args.get("tokenizer", "bytes"))
+            operation = check_context if name == "contextproof_check" else refresh_context
+            return operation(args["context"], self.root)
         if name == "contextproof_verify":
             return verify_bundle(args["bundle"], self.root)
         if name == "contextproof_repair":

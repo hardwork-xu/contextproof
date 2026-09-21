@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "client": "official Python MCP SDK",
+  "client_version": "2.2.0",
+  "environment": {
+    "python": "3.12.2",
+    "system": "Darwin",
+    "machine": "arm64"
+  },
+  "server": {
+    "name": "contextproof",
+    "version": "1.0.0"
+  },
+  "protocol_version": "2025-11-25",
+  "listed_tools": [
+    "contextproof_bundle",
+    "contextproof_capture",
+    "contextproof_check",
+    "contextproof_index",
+    "contextproof_refresh",
+    "contextproof_repair",
+    "contextproof_search",
+    "contextproof_verify"
+  ],
+  "called_tools": [
+    "contextproof_bundle",
+    "contextproof_capture",
+    "contextproof_check",
+    "contextproof_index",
+    "contextproof_refresh",
+    "contextproof_repair",
+    "contextproof_search",
+    "contextproof_verify"
+  ],
+  "all_eight_tools_called": true,
+  "index_snapshot_available": true,
+  "search_hit_count": 1,
+  "initial_recommendation": "reuse",
+  "after_helper_edit": {
+    "source_valid": true,
+    "dependency_status": "changed",
+    "can_reuse": false,
+    "recommendation": "retrieve"
+  },
+  "after_refresh": {
+    "can_reuse": true,
+    "snapshot_consistent": true,
+    "recommendation": "reuse",
+    "rendered_context_bytes": 804,
+    "budget_bytes": 6000
+  },
+  "implementation_sha256": {
+    "src/contextproof/mcp.py": "1a055c2c1758bb9b51c2a9401791cbc6e9b77c4c9456b89b80dd5bc441b34c2b",
+    "src/contextproof/session.py": "46a40b8fb24d2acd7f2bb595f7f51c993c0204949c0c6d331de8d2b52717c144",
+    "src/contextproof/dependencies.py": "5c0af70b2588c87d698eb63fba57f3533c0762d88919f543f2f5242ef8ed98f5",
+    "src/contextproof/evidence.py": "63b41f50ced294c391399121752b5ffb096dc153d75f4eeb30a0a3f74357fc6a",
+    "src/contextproof/index.py": "d8b6838ab5161d69e9b50480674345830a2921cc4be9b1c6a02f5a95d792d108"
+  },
+  "checker_sha256": "982628c779761bc1ee8bc55b7aee28860ea61bb23b128e8b662accbd1083352e",
+  "scope": "Real stdio SDK interoperability on one controlled dependency-edit fixture; not a general client compatibility or task-success benchmark."
+}

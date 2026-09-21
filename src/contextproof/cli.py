@@ -17,19 +17,21 @@ def parser():
     p = argparse.ArgumentParser(description="Verifiable code context across repository changes")
     p.add_argument("--version", action="version", version=__version__)
     commands = p.add_subparsers(dest="command", required=True)
-    for name in ("index", "search", "bundle", "verify", "repair", "serve"):
+    for name in ("index", "search", "bundle", "verify", "repair", "serve",
+                 "capture", "check", "refresh", "report"):
         cmd = commands.add_parser(name)
         cmd.add_argument("root", type=Path, help="repository directory; source is never executed")
-        if name in ("search", "bundle"):
+        if name in ("search", "bundle", "capture"):
             cmd.add_argument("query")
-            cmd.add_argument("--method", choices=("bm25", "graph"), default="graph")
+            cmd.add_argument("--method", choices=("bm25", "graph"),
+                             default="bm25" if name == "capture" else "graph")
         if name == "search":
             cmd.add_argument("--limit", type=int, default=10)
-        if name == "bundle":
+        if name in ("bundle", "capture"):
             cmd.add_argument("--budget", type=int, default=4000)
             cmd.add_argument("--tokenizer", choices=("bytes", "cl100k_base", "o200k_base"),
                              default="bytes")
-        if name in ("verify", "repair"):
+        if name in ("verify", "repair", "check", "refresh", "report"):
             cmd.add_argument("bundle", type=Path)
         if name in ("bundle", "repair"):
             cmd.add_argument("--format", choices=("json", "markdown"), default="json")
@@ -57,8 +59,27 @@ def main(argv=None):
             from .mcp import serve
             serve(args.root)
             return 0
-        if args.command == "render":
-            result = render_bundle(read_bundle(args.bundle))
+        if args.command in ("capture", "check", "refresh", "report"):
+            from .session import capture_context, check_context, refresh_context
+            if args.command == "capture":
+                result = capture_context(args.root, args.query, args.budget,
+                                         args.method, args.tokenizer)
+            else:
+                context = read_bundle(args.bundle)
+                if args.command == "refresh":
+                    result = refresh_context(context, args.root)
+                else:
+                    result = check_context(context, args.root)
+                    if args.command == "report":
+                        from .report import render_report
+                        result = render_report(context, result)
+        elif args.command == "render":
+            artifact = read_bundle(args.bundle)
+            if artifact.get("kind") == "contextproof.context":
+                from .session import validate_context
+                validate_context(artifact)
+                artifact = artifact["bundle"]
+            result = render_bundle(artifact)
         elif args.command in ("verify", "repair"):
             operation = verify_bundle if args.command == "verify" else repair_bundle
             result = operation(read_bundle(args.bundle), args.root)
@@ -86,6 +107,8 @@ def main(argv=None):
             if not isinstance(result, str):
                 sys.stdout.write("\n")
         if args.command == "verify" and not result.get("valid", False):
+            return 1
+        if args.command == "check" and not result.get("can_reuse", False):
             return 1
         return 0
     except sqlite3.Error as exc:

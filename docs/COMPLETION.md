@@ -1,4 +1,7 @@
-# Project completion contract
+# Historical v1 completion contract
+
+This preserves the earlier v1 acceptance scope. The current graph implementation,
+real revision comparison and measured limitations are in the [current report](GRAPH_REPORT.md).
 
 The v0.1 release was a working prototype. The project goal is to finish and
 publish v1.0 with the following deliverables, not merely defer them to a roadmap.

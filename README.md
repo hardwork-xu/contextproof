@@ -19,7 +19,7 @@ Python 3.11+, macOS/Linux. The core has no third-party runtime dependencies and
 requires no model, GPU or API key. Hosted-model experiments are separate.
 
 [简体中文](docs/README.zh-CN.md) · [Graph API and contracts](docs/GRAPH.md) ·
-[Model protocol](docs/REVISION_STUDY_PROTOCOL.md) · [Earlier v1 report](docs/TECHNICAL_REPORT.md)
+[Measured report](docs/GRAPH_REPORT.md) · [Model protocol](docs/REVISION_STUDY_PROTOCOL.md)
 
 ## Run the three-hop example
 
@@ -113,6 +113,15 @@ source baseline and actual Archex 0.31.2. A capable-model gate passed 5/5 before
 held-out inference. The public protocol and inputs precede those completions.
 This is source-conditioned output prediction with supplied localization hints.
 
+The frozen 150-completion comparison scores **8/25 with stale source and 24/25
+with graph context, fresh supplied declarations or BM25**; Archex scores 21/25.
+The graph ties the simpler same-anchor baseline and uses more input tokens.
+These results motivate version tracking and auditable refresh. A separate
+25-completion resolver-v2 sensitivity produces the same 24/25 answers; the original
+150 records remain available. [Full paired results and correction history](docs/GRAPH_REPORT.md).
+
+![Original comparison and corrected graph sensitivity](docs/assets/revision-results.svg)
+
 Earlier results remain public: [300 exact-text drift cases](docs/DRIFT_STUDY.md),
 [34 direct-dependency controls](docs/DEPENDENCIES.md), and a
 [60-generation Qwen study with 0/20 in every condition](docs/DOWNSTREAM.md).
@@ -123,7 +132,7 @@ Neither contract agreement nor a smaller artifact establishes model effectivenes
 ```sh
 python -m pip install -e '.[dev]'
 ruff check .
-pytest -q
+pytest -q tests benchmarks/graph/test_scope_audit.py benchmarks/revision_baselines/test_baselines.py
 python scripts/check_publication.py
 python -m build
 ```

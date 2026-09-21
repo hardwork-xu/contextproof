@@ -106,3 +106,44 @@ packaging, and artifact integrity. Release verification and remote CI remain
 observable in [GitHub Actions](https://github.com/hardwork-xu/contextproof/actions)
 and [Releases](https://github.com/hardwork-xu/contextproof/releases); this log does
 not freeze a changing test count or assert a remote status before it is recorded.
+
+## 2026-09-21 — Versioned graph evidence and real revision evaluation
+
+**Value audit and corrected scope.** The prior small-model study could not answer
+whether useful source improved a capable model. Reviewing current primary sources
+also showed that graph retrieval and incremental dependency reuse are established.
+The project now focuses on source identity, explicit uncertainty, auditable version
+transitions and exact transport contracts. No novelty or general-agent success is
+inferred from test counts.
+
+**Delivered source.** Added immutable Git-object reads, bounded transitive Python
+evidence, durable full-graph handles, exact field deltas, and complete model-payload
+budgeting through CLI and the official MCP SDK. A changed supported helper now
+appears in delivered source when the allowance permits it. Reads verify blob IDs,
+reject unsafe paths and deny lazy fetching or repository-configured remote commands.
+The generated three-hop demonstration checks source delivery and reconstruction.
+
+**Counterexamples and failed approaches.** An independent AI-assisted review found
+eight concrete scope/binding cases incorrectly treated as fresh. Resolver v2 fixes
+them conservatively in both graph and direct-witness APIs; old graph versions must
+be recaptured. All fixtures and original outcomes remain public. The initial
+renderer overflowed its budget with diagnostics, and persisted JSON ASTs lost to a
+fair shared-cache baseline. Compact bounded diagnostics and default in-memory reuse
+replace those designs; original measurements remain separately versioned.
+
+**Capable-model comparison.** Froze 30 real upstream-derived API probes, 5 for
+development and 25 held out, with executed version-specific oracles. After a 5/5
+development gate, published inputs preceded all 150 held-out completions across
+six context conditions. Stale source scored 8/25; graph, current supplied source
+and BM25 each scored 24/25; Archex scored 21/25. The graph tied the same-anchor
+source comparator while using more input tokens. Its advantage over stale source
+does not establish a unique retrieval benefit.
+
+**Versioned sensitivity and publication.** Corrected graph contexts were separately
+frozen and all 25 rerun; all answers matched the original graph run, still 24/25.
+This post-freeze sensitivity is exploratory, with 125 original comparator results
+reused. Public exports retain every answer, failure, timing and usage record. Raw
+local logs and personal records stay outside Git. Release building now checks
+archive ownership, public maintainer metadata, content hashes and personal paths.
+See the [measured report](GRAPH_REPORT.md) for final engineering replay and paired
+model results, methodological limits and reproduction records.

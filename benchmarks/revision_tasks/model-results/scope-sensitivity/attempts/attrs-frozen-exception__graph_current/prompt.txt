@@ -1,0 +1,17 @@
+Predict the exact JSON response for this code in the repository checkout.
+The code is run in Python 3.12 with deprecation warnings ignored, except when it explicitly captures warnings. No network operation is performed.
+
+Code:
+```python
+import attrs
+@attrs.frozen
+class Failure(Exception):
+    pass
+error = Failure()
+error.__suppress_context__ = True
+error.__notes__ = ["note"]
+RESULT = [error.__suppress_context__, error.__notes__]
+```
+
+Repository source evidence:
+{"anchor_count":1,"anchor_nodes":["84b98d0561f4"],"anchor_nodes_truncated":false,"base_graph_id":null,"budget":16000,"cause_count":0,"cause_details_truncated":false,"causes":[],"complete":false,"coverage":"saved-anchor-static-closure","deleted":[],"frontier":[{"count":1,"kind":"unresolved","reason":"ambiguous repository module"},{"count":1,"kind":"unresolved","reason":"name is not a static repository binding (possibly builtin/external)"}],"frontier_count":2,"frontier_details_truncated":true,"full_graph_handle":"161347a91d572e494d1112df77046885fd75195d7e7d98daac6f6ffd3d8ed958","graph_id":"161347a91d572e494d1112df77046885fd75195d7e7d98daac6f6ffd3d8ed958","guarantee":"current recorded source and static references; no behavior or task-sufficiency proof","kind":"contextproof.graph-payload","nodes":[{"end_line":555,"id":"84b98d0561f493bbbb69f3db4dd6376ceca2e58ac25b8fbdde179124ab14fe94","kind":"function","path":"src/attr/_make.py","start_line":541,"symbol":"_frozen_setattrs","text":"def _frozen_setattrs(self, name, value):\n    \"\"\"\n    Attached to frozen classes as __setattr__.\n    \"\"\"\n    if isinstance(self, BaseException) and name in (\n        \"__cause__\",\n        \"__context__\",\n        \"__traceback__\",\n        \"__suppress_context__\",\n        \"__notes__\",\n    ):\n        BaseException.__setattr__(self, name, value)\n        return\n\n    raise FrozenInstanceError\n"}],"omitted_node_count":0,"omitted_nodes":[],"omitted_nodes_truncated":false,"policy":{"max_depth":4,"max_nodes":256,"resolver_version":2},"reference_id_prefix_length":12,"references":[],"requires_base":false,"schema_version":1,"scope":"full","snapshot_id":"58c49369a49066b693430d997a4de08e4a9c123a92d7766476a6071e1417221b","unit":"utf-8-bytes"}

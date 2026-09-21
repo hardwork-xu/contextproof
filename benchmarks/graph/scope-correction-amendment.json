@@ -1,0 +1,12 @@
+{
+  "additional_transport_baseline": "Deterministic gzip level 9 with mtime=0, applied separately and identically to canonical full graph and canonical sealed field delta. Report totals, per-case lengths, and compressed-delta-smaller count. Delta requires an already-held matching base; exclude base delivery and shared compression dictionaries. These are transport bytes, not model tokens or semantic outcome evidence.",
+  "change": "Shared conservative guards used by current direct witnesses and transitive graphs. Unsupported lexical collisions and module rebinding remain unresolved. Partial snippets only intersect nested local bindings when selected nested load occurrences exist. Prior direct sidecars are checked by the corrected resolver without silent rewriting. Resolver-1 graphs require recapture and cannot compare against resolver 2.",
+  "frozen_history": "All original sample selections, source snapshots, splits, protocol phases and failures retained. Pre-scope-fix final reports copied byte-for-byte and indexed by pre-scope-fix-manifest.json. This is exploratory engineering development, not a preregistered superiority experiment.",
+  "preservation_manifest_sha256": "78dc3511bd597d2ea5f78e6ed365a621642099da19b742d980bad79e29fbecce",
+  "reason": "An independent synthetic audit reproduced lexical and module binding false-fresh cases in resolver 1. Full declaration graph expansion aggregated references across nested scopes; unindexed pattern/walrus/exception bindings and package wildcard or __getattr__ fallback could identify the wrong target.",
+  "recorded_at_utc": "2026-09-21T11:51:26.766998+00:00",
+  "replay": "All 300 frozen anchors across ten release pairs and all 450 anchor-transition observations across 15 adjacent transitions. Fresh and cached canonical equivalence, lossless delta reconstruction, full/update delivery, and three-repetition fair full-shared, persistent and default-memory timing conditions rerun on resolver 2. No sample selection changes.",
+  "resolver_version": 2,
+  "schema_version": 1,
+  "stage": "Post-freeze correctness correction, before corrected full engineering replay. Original 150 model-condition inputs and runs at commit 0c6d0be remain unchanged; a separate 25-cell graph sensitivity run is owned by the revision-task study."
+}

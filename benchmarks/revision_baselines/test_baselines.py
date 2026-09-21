@@ -1,14 +1,26 @@
 import hashlib
 import json
+import os
 from pathlib import Path
+import shutil
+
+import pytest
 
 from contextproof.evidence import make_bundle
 from contextproof.index import build_index
 
 from .adapter import supplied_anchor_context
 from .corpus import prepare_retrieval_corpus
-from .diagnostics import diagnose_saved_bundle
+from .diagnostics import diagnose_saved_bundle, git_changed_files
 from .privacy import public_value
+
+
+@pytest.fixture
+def git_executable():
+    executable = os.environ.get("CONTEXTPROOF_GIT") or shutil.which("git")
+    if not executable:
+        pytest.skip("Git is required for the external Git baseline")
+    return executable
 
 
 def test_supplied_symbols_keep_both_property_declarations():
@@ -28,22 +40,23 @@ def test_supplied_symbols_keep_both_property_declarations():
     assert not supplied_anchor_context(task, budget_bytes=1)["complete"]
 
 
-def test_shared_retrieval_corpus_excludes_tests_docs_and_prefix_neighbors(tmp_path):
+def test_shared_retrieval_corpus_excludes_tests_docs_and_prefix_neighbors(tmp_path, git_executable):
     root, destination = tmp_path / "original", tmp_path / "materialized"
     for name in ["src/pkg/api.py", "src/pkg/tests/test_answer.py", "src/pkg/docs/example.py",
                  "src/pkg_neighbor/secret.py", "tests/test_answer.py", "src/pkg/CHANGELOG.md"]:
         path = root / name
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text("result = 42\n")
-    result = prepare_retrieval_corpus(root, destination, ["src/pkg"])
+    result = prepare_retrieval_corpus(root, destination, ["src/pkg"], git_executable=git_executable)
     assert set(result["files"]) == {"src/pkg/api.py"}
     assert (destination / ".git").is_dir()
     assert not (destination / "tests").exists()
-    assert prepare_retrieval_corpus(root, destination, ["src/pkg"])["git_commit"] == result["git_commit"]
+    assert prepare_retrieval_corpus(root, destination, ["src/pkg"],
+                                    git_executable=git_executable)["git_commit"] == result["git_commit"]
     assert "root" not in json.loads((tmp_path / "materialized.corpus.json").read_text())
 
 
-def test_actual_v1_and_git_predicates_diverge_on_unchanged_caller(tmp_path):
+def test_actual_v1_and_git_predicates_diverge_on_unchanged_caller(tmp_path, git_executable):
     before, after = tmp_path / "before", tmp_path / "after"
     for root, rate in [(before, "0.05"), (after, "0.20")]:
         root.mkdir()
@@ -51,7 +64,8 @@ def test_actual_v1_and_git_predicates_diverge_on_unchanged_caller(tmp_path):
                                           "    return x * rate()\n")
         (root / "pricing.py").write_text(f"def rate():\n    return {rate}\n")
     bundle = make_bundle(build_index(before), "invoice_total", budget=4000, method="bm25")
-    result = diagnose_saved_bundle(bundle, before, after)
+    git_report = git_changed_files(before, after, git_executable=git_executable)
+    result = diagnose_saved_bundle(bundle, before, after, git_report=git_report)
     assert result["git_changed_file"]["status"] == "ok"
     assert result["git_changed_file"]["changed_files"] == ["pricing.py"]
     assert all(row["accept"] for row in result["git_changed_file"]["results"])

@@ -1,0 +1,5 @@
+{"thread_id": "<REDACTED_LOCAL_SESSION>", "type": "thread.started"}
+{"item": {"id": "item_0", "message": "Under-development features enabled: skip_host_skill_discovery. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in <USER_HOME>/.codex/config.toml.", "type": "error"}, "type": "item.completed"}
+{"type": "turn.started"}
+{"item": {"id": "item_1", "text": "{\"answer_json\":\"{\\\"value\\\":\\\"MIT\\\"}\"}", "type": "agent_message"}, "type": "item.completed"}
+{"type": "turn.completed", "usage": {"cache_write_input_tokens": 0, "cached_input_tokens": 3968, "input_tokens": 10592, "output_tokens": 21, "reasoning_output_tokens": 0}}

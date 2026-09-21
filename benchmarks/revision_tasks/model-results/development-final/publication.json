@@ -77,8 +77,11 @@
     },
     "attempts/dev-httpx-json__fresh_anchors/stderr.txt": {
       "changed_by_export": true,
+      "previous_public_sha256": [
+        "4f21775621bbc4ce5a07395d89fdfab2d13b870535c07c9a360aebb58f4b433f"
+      ],
       "private_sha256": "c71d02a93e259e54d54cbd4e2059b7a7708ed9e92a27dd78b7b6dfb9f6bc1718",
-      "public_sha256": "4f21775621bbc4ce5a07395d89fdfab2d13b870535c07c9a360aebb58f4b433f"
+      "public_sha256": "bbe80dfa29800b0aaa35333fe436a84e874e43d71fc65c536e906fe620cd14c6"
     },
     "attempts/dev-packaging-normalize-control__fresh_anchors/command.json": {
       "changed_by_export": true,
@@ -211,5 +214,7 @@
       "public_sha256": "97d50164e8024b872d6b124b8784a629caa87e09166d3042b244309ed4ac09fc"
     }
   },
-  "policy": "Private local paths and session identifiers replaced; JSON formatting normalized. Answers, correctness, failures, usage and timings preserved. Original full records remain in the maintainer's private archive outside Git."
+  "policy": "Private local paths and session identifiers replaced; JSON formatting normalized. Runtime diagnostic IDs and shell-snapshot filenames redacted in stderr only. Answers, correctness, failures, usage and timings preserved. Original full records remain in the maintainer's private archive outside Git.",
+  "previous_publication_sha256": "278c9ad9fe4154968600af56e70982d9d154beb7817185c449f93a075462e77b",
+  "redaction_version": 2
 }

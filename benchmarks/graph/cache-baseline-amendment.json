@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "recorded_at_utc": "2026-09-21T11:10:44.142498+00:00",
+  "stage": "After initial graph/cache observations and before fair shared-cache timing measurements. All original samples/transitions retained.",
+  "reason": "Fresh per-anchor parsing inflates the full-rebuild baseline by denying same-version reuse available to the persistent path. Keep it as a diagnostic, not the main performance comparison.",
+  "main_timing_phases": [
+    "full_after_shared: one fresh in-memory AST cache for all 30 current-version anchor queries",
+    "incremental_after: before-version ASTs already loaded; same 30 current-version queries, persistent writes for newly parsed modules included",
+    "warm_stable_after: same persistent cache and the same 30 current-version queries again"
+  ],
+  "repeats": 3,
+  "excluded_costs": "Source mappings are verified and loaded before timing. Untimed before-AST cache priming represents prior evidence capture. File reads/hash cost and Git object transport are not measured.",
+  "assertions": "Every graph from every phase must be byte-identical to its original full rebuild, including frontier and metadata. Preserve original diagnostics; report small, zero, or negative effects without selective exclusions.",
+  "delivery_revision": "The initial renderer was developed into a compact source-first renderer after observing budget failures. Preserve initial results and reconstructed initial source, replay its original metrics, then replay compact delivery on identical graph IDs. No held-out efficacy claim."
+}

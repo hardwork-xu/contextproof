@@ -1,0 +1,21 @@
+{
+  "files": {
+    "cache-baseline-amendment.json": "c882c2f906ee5a373c25551c0490cefa0fd237d673207e3b1a35747155504baf",
+    "initial-renderer-results.json": "71922009e8abbd6fd653a2515ac25dd103997ab6d27cf3d8c1558ea5619ac0a6",
+    "initial-renderer-results.md": "fca43d8ec676b9ad4fe8fcc0141233ec28806647115c0d4bb1d4226156b9f83f",
+    "initial_graph_payload.py": "b35bb51f3c6fa72e9039e077b3847aae73b4a0de55e56dd6031f64702ace4fb8",
+    "memory-cache-decision.json": "ff379e354c7668d2b9d077488d3e127f2eedd80d3cba76dda657f7feef0b42d8",
+    "persistent-cache-history-results.json": "51895b06d8a3d6aa64cd40c325b3eaa9b2936e6b45c8b81a112faf3410a72236",
+    "persistent-cache-history-results.md": "14ef6907bc832291deb2243b9c2bc9643d47dda8988d62a2ec0018139cfa7fb5",
+    "persistent-cache-results.json": "1303a69a0bc6b4dbb904d1697b51dfab26288f1ce2b4b0ec4f83426b1c625598",
+    "persistent-cache-results.md": "d909ae1ffb225575e50c66711b5f59dc64cfadb2a1e2da8e71ea012f3e508959",
+    "pre-scope-fix-history-results.json": "6914636227e52afec8a9552db034d8d2118d100dbf6cde9aea54e8469b295b6c",
+    "pre-scope-fix-history-results.md": "24e70af63641b1669007a5f9a6cce4503c40db2cf710b0a762dc1b2a7e7c82af",
+    "pre-scope-fix-results.json": "e3af5cdc945434e9f5c32957ec0bb084ee31fe582f8b4038202d3b05eaa4d3f9",
+    "pre-scope-fix-results.md": "4aeb898f77ef4a895632e1413e214854cdc8e9d7fa6677e45ce8d00fe90bd726",
+    "protocol.json": "0aaad213287fba6aecc9efd7f4690a5ae4d7ac28406622b4ac38123b7f179633"
+  },
+  "recorded_at_utc": "2026-09-21T11:50:12.181661+00:00",
+  "schema_version": 1,
+  "scope": "Immutable prior resolver-1 graph study phases; known lexical/module binding false-fresh bugs were subsequently corrected. Historical output is not current-engine accuracy evidence."
+}

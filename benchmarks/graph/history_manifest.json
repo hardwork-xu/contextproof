@@ -1,0 +1,199 @@
+{
+  "frozen_at_utc": "2026-09-21T10:53:00.564451+00:00",
+  "protocol_sha256": "0aaad213287fba6aecc9efd7f4690a5ae4d7ac28406622b4ac38123b7f179633",
+  "repositories": [
+    {
+      "github": "psf/requests",
+      "name": "requests",
+      "prefixes": [
+        "requests/",
+        "src/requests/"
+      ],
+      "versions": [
+        {
+          "archive_url": "https://codeload.github.com/psf/requests/tar.gz/2ad18e0e10e7d7ecd5384c378f25ec8821a10a29",
+          "commit": "2ad18e0e10e7d7ecd5384c378f25ec8821a10a29",
+          "commit_date": "2023-05-03T15:39:44Z",
+          "parents": [
+            "f2629e9e3c7ce3c3c8c025bcd8db551101cbc773"
+          ],
+          "url": "https://github.com/psf/requests/commit/2ad18e0e10e7d7ecd5384c378f25ec8821a10a29"
+        },
+        {
+          "archive_url": "https://codeload.github.com/psf/requests/tar.gz/d3d504436ef0c2ac7ec8af13738b04dcc8c694be",
+          "commit": "d3d504436ef0c2ac7ec8af13738b04dcc8c694be",
+          "commit_date": "2023-05-09T16:55:33Z",
+          "parents": [
+            "2ad18e0e10e7d7ecd5384c378f25ec8821a10a29"
+          ],
+          "url": "https://github.com/psf/requests/commit/d3d504436ef0c2ac7ec8af13738b04dcc8c694be"
+        },
+        {
+          "archive_url": "https://codeload.github.com/psf/requests/tar.gz/b639e66c816514e40604d46f0088fbceec1a5149",
+          "commit": "b639e66c816514e40604d46f0088fbceec1a5149",
+          "commit_date": "2023-05-13T14:10:56Z",
+          "parents": [
+            "d3d504436ef0c2ac7ec8af13738b04dcc8c694be"
+          ],
+          "url": "https://github.com/psf/requests/commit/b639e66c816514e40604d46f0088fbceec1a5149"
+        },
+        {
+          "archive_url": "https://codeload.github.com/psf/requests/tar.gz/302225334678490ec66b3614a9dddb8a02c5f4fe",
+          "commit": "302225334678490ec66b3614a9dddb8a02c5f4fe",
+          "commit_date": "2023-05-15T15:04:21Z",
+          "parents": [
+            "b639e66c816514e40604d46f0088fbceec1a5149"
+          ],
+          "url": "https://github.com/psf/requests/commit/302225334678490ec66b3614a9dddb8a02c5f4fe"
+        },
+        {
+          "archive_url": "https://codeload.github.com/psf/requests/tar.gz/74ea7cf7a6a27a4eeb2ae24e162bcc942a6706d5",
+          "commit": "74ea7cf7a6a27a4eeb2ae24e162bcc942a6706d5",
+          "commit_date": "2023-05-22T15:08:57Z",
+          "parents": [
+            "302225334678490ec66b3614a9dddb8a02c5f4fe"
+          ],
+          "url": "https://github.com/psf/requests/commit/74ea7cf7a6a27a4eeb2ae24e162bcc942a6706d5"
+        },
+        {
+          "archive_url": "https://codeload.github.com/psf/requests/tar.gz/147c8511ddbfa5e8f71bbf5c18ede0c4ceb3bba4",
+          "commit": "147c8511ddbfa5e8f71bbf5c18ede0c4ceb3bba4",
+          "commit_date": "2023-05-22T15:10:32Z",
+          "parents": [
+            "74ea7cf7a6a27a4eeb2ae24e162bcc942a6706d5"
+          ],
+          "url": "https://github.com/psf/requests/commit/147c8511ddbfa5e8f71bbf5c18ede0c4ceb3bba4"
+        }
+      ]
+    },
+    {
+      "github": "encode/httpx",
+      "name": "httpx",
+      "prefixes": [
+        "httpx/"
+      ],
+      "versions": [
+        {
+          "archive_url": "https://codeload.github.com/encode/httpx/tar.gz/2c51edd0c0d4124423661eb5678ae1a94a107260",
+          "commit": "2c51edd0c0d4124423661eb5678ae1a94a107260",
+          "commit_date": "2023-12-12T13:44:26Z",
+          "parents": [
+            "1e110964736a95d822144390b99d7ecf17fca527"
+          ],
+          "url": "https://github.com/encode/httpx/commit/2c51edd0c0d4124423661eb5678ae1a94a107260"
+        },
+        {
+          "archive_url": "https://codeload.github.com/encode/httpx/tar.gz/2318fd822cdb16435ccb5cabcba16c0b7969c1e4",
+          "commit": "2318fd822cdb16435ccb5cabcba16c0b7969c1e4",
+          "commit_date": "2023-12-13T11:30:39Z",
+          "parents": [
+            "2c51edd0c0d4124423661eb5678ae1a94a107260"
+          ],
+          "url": "https://github.com/encode/httpx/commit/2318fd822cdb16435ccb5cabcba16c0b7969c1e4"
+        },
+        {
+          "archive_url": "https://codeload.github.com/encode/httpx/tar.gz/3b9060ee1121b48669e0b30045c9344065f4f2ae",
+          "commit": "3b9060ee1121b48669e0b30045c9344065f4f2ae",
+          "commit_date": "2023-12-14T14:04:04Z",
+          "parents": [
+            "2318fd822cdb16435ccb5cabcba16c0b7969c1e4"
+          ],
+          "url": "https://github.com/encode/httpx/commit/3b9060ee1121b48669e0b30045c9344065f4f2ae"
+        },
+        {
+          "archive_url": "https://codeload.github.com/encode/httpx/tar.gz/a11fc3849b94157274c98d99501acad05cbfb221",
+          "commit": "a11fc3849b94157274c98d99501acad05cbfb221",
+          "commit_date": "2023-12-15T11:35:16Z",
+          "parents": [
+            "3b9060ee1121b48669e0b30045c9344065f4f2ae"
+          ],
+          "url": "https://github.com/encode/httpx/commit/a11fc3849b94157274c98d99501acad05cbfb221"
+        },
+        {
+          "archive_url": "https://codeload.github.com/encode/httpx/tar.gz/b4b27ff6777c8906c2b31dd879bd4cc1d9e4f6ce",
+          "commit": "b4b27ff6777c8906c2b31dd879bd4cc1d9e4f6ce",
+          "commit_date": "2023-12-19T04:53:30Z",
+          "parents": [
+            "a11fc3849b94157274c98d99501acad05cbfb221"
+          ],
+          "url": "https://github.com/encode/httpx/commit/b4b27ff6777c8906c2b31dd879bd4cc1d9e4f6ce"
+        },
+        {
+          "archive_url": "https://codeload.github.com/encode/httpx/tar.gz/08eff926a6011ac84961fd2cee22d9fd4d4b1a88",
+          "commit": "08eff926a6011ac84961fd2cee22d9fd4d4b1a88",
+          "commit_date": "2023-12-20T10:52:22Z",
+          "parents": [
+            "b4b27ff6777c8906c2b31dd879bd4cc1d9e4f6ce"
+          ],
+          "url": "https://github.com/encode/httpx/commit/08eff926a6011ac84961fd2cee22d9fd4d4b1a88"
+        }
+      ]
+    },
+    {
+      "github": "pypa/packaging",
+      "name": "packaging",
+      "prefixes": [
+        "packaging/",
+        "src/packaging/"
+      ],
+      "versions": [
+        {
+          "archive_url": "https://codeload.github.com/pypa/packaging/tar.gz/702353715de375a65e49d1ae4af21c35dce838b8",
+          "commit": "702353715de375a65e49d1ae4af21c35dce838b8",
+          "commit_date": "2023-09-06T00:22:12Z",
+          "parents": [
+            "39786bb4bf661bdb5137b8db8bd38d8e838dd67f"
+          ],
+          "url": "https://github.com/pypa/packaging/commit/702353715de375a65e49d1ae4af21c35dce838b8"
+        },
+        {
+          "archive_url": "https://codeload.github.com/pypa/packaging/tar.gz/0206c394cebce1b261299032edcb33f842b65d10",
+          "commit": "0206c394cebce1b261299032edcb33f842b65d10",
+          "commit_date": "2023-09-07T22:19:46Z",
+          "parents": [
+            "702353715de375a65e49d1ae4af21c35dce838b8"
+          ],
+          "url": "https://github.com/pypa/packaging/commit/0206c394cebce1b261299032edcb33f842b65d10"
+        },
+        {
+          "archive_url": "https://codeload.github.com/pypa/packaging/tar.gz/b509bef6a4573595b23a97ecbfe569000918157f",
+          "commit": "b509bef6a4573595b23a97ecbfe569000918157f",
+          "commit_date": "2023-09-12T00:25:22Z",
+          "parents": [
+            "0206c394cebce1b261299032edcb33f842b65d10"
+          ],
+          "url": "https://github.com/pypa/packaging/commit/b509bef6a4573595b23a97ecbfe569000918157f"
+        },
+        {
+          "archive_url": "https://codeload.github.com/pypa/packaging/tar.gz/524b701c6e30fc4da9355117367273f591c6de72",
+          "commit": "524b701c6e30fc4da9355117367273f591c6de72",
+          "commit_date": "2023-10-01T12:53:22Z",
+          "parents": [
+            "b509bef6a4573595b23a97ecbfe569000918157f"
+          ],
+          "url": "https://github.com/pypa/packaging/commit/524b701c6e30fc4da9355117367273f591c6de72"
+        },
+        {
+          "archive_url": "https://codeload.github.com/pypa/packaging/tar.gz/d7ce40d8cc005a6b83f4abb33ae7d48d0428a4f6",
+          "commit": "d7ce40d8cc005a6b83f4abb33ae7d48d0428a4f6",
+          "commit_date": "2023-10-01T13:37:44Z",
+          "parents": [
+            "524b701c6e30fc4da9355117367273f591c6de72"
+          ],
+          "url": "https://github.com/pypa/packaging/commit/d7ce40d8cc005a6b83f4abb33ae7d48d0428a4f6"
+        },
+        {
+          "archive_url": "https://codeload.github.com/pypa/packaging/tar.gz/b3a5d7d68991c040615d5345bb55f61de53ba176",
+          "commit": "b3a5d7d68991c040615d5345bb55f61de53ba176",
+          "commit_date": "2023-10-01T13:49:25Z",
+          "parents": [
+            "d7ce40d8cc005a6b83f4abb33ae7d48d0428a4f6"
+          ],
+          "url": "https://github.com/pypa/packaging/commit/b3a5d7d68991c040615d5345bb55f61de53ba176"
+        }
+      ]
+    }
+  ],
+  "schema_version": 1,
+  "stage": "SHAs pinned before history source extraction or graph results"
+}

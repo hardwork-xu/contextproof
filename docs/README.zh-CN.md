@@ -1,7 +1,7 @@
 # ContextProof：跨版本的代码证据
 
 [English](../README.md) · [图接口与契约](GRAPH.md) ·
-[模型实验协议](REVISION_STUDY_PROTOCOL.md) · [历史 v1 报告](TECHNICAL_REPORT.md)
+[实测报告](GRAPH_REPORT.md) · [模型实验协议](REVISION_STUDY_PROTOCOL.md)
 
 代码库修改后，编程助手保存的调用者可能一字未变，但它依赖的函数已经变了。
 ContextProof 保存源码及其支持解析的 Python 依赖，指出哪条依赖路径发生变化，
@@ -95,9 +95,17 @@ BM25、传递图和真实运行的 Archex 0.31.2。最终运行配置先通过�
 任务能力检查，再开始留出实验；协议与输入已提前提交到公开仓库。
 这是带源码提示的 API 输出预测，不是完整软件问题修复或通用 agent 排名。
 
+首次冻结的 150 次对照中，旧源码组 **8/25**；图上下文、直接提供当前源码、
+BM25 都是 **24/25**；Archex 为 **21/25**。图方案与相同定位提示下的简化
+基线打平，而且使用了更多输入 token。因此项目聚焦于版本证据与可核验刷新，
+没有把这个结果宣传成检索方法更强。修正版另跑的 25 次结果仍为 24/25，
+逐题答案与首轮一致，两轮记录均保留。完整配对结果和修正版记录见[实测报告](GRAPH_REPORT.md)。
+
+![首轮六组对照与修正版图上下文结果](assets/revision-results.svg)
+
 历史材料继续保留：[300 条精确文本漂移样本](DRIFT_STUDY.md)、
 [34 项直接依赖控制案例](DEPENDENCIES.md)，以及
-[三组均为 0/20 的 60 次 Qwen 生成](DOWNSTREAM.md)。同一改动族中的多个
+[三组均为 0/20 的 60 次 Qwen 生成](DOWNSTREAM.md)。同一仓库、版本对和实现区域内的
 任务存在相关性；测试数量、源码校验一致性和差量体积不能替代模型效果证据。
 
 ## 复现与发布
@@ -105,7 +113,7 @@ BM25、传递图和真实运行的 Archex 0.31.2。最终运行配置先通过�
 ```sh
 python -m pip install -e '.[dev]'
 ruff check .
-pytest -q
+pytest -q tests benchmarks/graph/test_scope_audit.py benchmarks/revision_baselines/test_baselines.py
 python scripts/check_publication.py
 python -m build
 ```

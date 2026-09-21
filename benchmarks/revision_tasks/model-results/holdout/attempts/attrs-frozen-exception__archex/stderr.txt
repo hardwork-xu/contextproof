@@ -1,7 +1,7 @@
 2026-09-21T11:39:17.432066Z ERROR codex_models_manager::manager: failed to refresh available models: timeout waiting for child process to exit
 2026-09-21T11:39:17.433634Z ERROR codex_models_manager::manager: failed to refresh available models: timeout waiting for child process to exit
 2026-09-21T11:39:17.440818Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
-2026-09-21T11:39:17.468252Z  WARN codex_core::shell_snapshot: Failed to delete shell snapshot at "<USER_HOME>/.codex/shell_snapshots/01a0c3c3-2341-7302-b48c-1dd6af87dcf2.1789990740802817000.sh": Os { code: 2, kind: NotFound, message: "No such file or directory" }
+2026-09-21T11:39:17.468252Z  WARN codex_core::shell_snapshot: Failed to delete shell snapshot at "<USER_HOME>/.codex/shell_snapshots/<REDACTED_LOCAL_SNAPSHOT>.sh": Os { code: 2, kind: NotFound, message: "No such file or directory" }
 2026-09-21T11:39:17.469853Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
 2026-09-21T11:39:17.471530Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
 2026-09-21T11:39:17.473112Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
@@ -25,4 +25,4 @@
 2026-09-21T11:39:17.510426Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
 2026-09-21T11:39:17.515468Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
 2026-09-21T11:39:34.025741Z ERROR codex_models_manager::manager: failed to refresh available models: timeout waiting for child process to exit
-2026-09-21T11:39:34.030308Z  WARN codex_core::shell_snapshot: Failed to delete shell snapshot at AbsolutePathBuf("<USER_HOME>/.codex/shell_snapshots/01a0c3c3-6439-7d41-9cd8-b797c1b40181.1789990757435492000.sh"): Os { code: 2, kind: NotFound, message: "No such file or directory" }
+2026-09-21T11:39:34.030308Z  WARN codex_core::shell_snapshot: Failed to delete shell snapshot at AbsolutePathBuf("<USER_HOME>/.codex/shell_snapshots/<REDACTED_LOCAL_SNAPSHOT>.sh"): Os { code: 2, kind: NotFound, message: "No such file or directory" }

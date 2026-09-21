@@ -32,8 +32,11 @@
     },
     "attempts/dev-attrs-evolve__fresh_anchors/stderr.txt": {
       "changed_by_export": true,
+      "previous_public_sha256": [
+        "e3d2847c59890521a741fd900e7647d020b8fe44921640a3c3255f046f852195"
+      ],
       "private_sha256": "05e7e0aec55ae98b943d15edc3538f2108d93ca2fb7481438a2fd6a32f9a1ea5",
-      "public_sha256": "e3d2847c59890521a741fd900e7647d020b8fe44921640a3c3255f046f852195"
+      "public_sha256": "ad7f27fb95469d3f7fe2c2d4eb655bbd75c6e1244c0e3d5661e099e80448733d"
     },
     "attempts/dev-httpx-json__fresh_anchors/events.jsonl": {
       "changed_by_export": true,
@@ -67,8 +70,11 @@
     },
     "attempts/dev-httpx-json__fresh_anchors/stderr.txt": {
       "changed_by_export": true,
+      "previous_public_sha256": [
+        "68cbb4bb6789345d097b39bf119f6800eb3ffc98ea042ed5494cac9afb20662d"
+      ],
       "private_sha256": "ab8abb2bb1c532a9c60a6edb6d96122a094c72877ea4494ac4a209d87721c23f",
-      "public_sha256": "68cbb4bb6789345d097b39bf119f6800eb3ffc98ea042ed5494cac9afb20662d"
+      "public_sha256": "a1e50f71778a325c428817ba87df7018d850185a0d3845df8524062d34ca4bc5"
     },
     "attempts/dev-packaging-normalize-control__fresh_anchors/events.jsonl": {
       "changed_by_export": true,
@@ -102,8 +108,11 @@
     },
     "attempts/dev-packaging-normalize-control__fresh_anchors/stderr.txt": {
       "changed_by_export": true,
+      "previous_public_sha256": [
+        "e27801610927a2461f539e70122e8f637130993d0ad15a4bd425c984643b8b85"
+      ],
       "private_sha256": "3935a37152c643797c390aeb0cb7e46bc6675a26d6cd57a8acffc4630d7157d0",
-      "public_sha256": "e27801610927a2461f539e70122e8f637130993d0ad15a4bd425c984643b8b85"
+      "public_sha256": "0d5324e389efce6c2f8a79d6e90163d78311b47416fc456e4e02e07284a5ce54"
     },
     "attempts/dev-packaging-prerelease__fresh_anchors/events.jsonl": {
       "changed_by_export": true,
@@ -137,8 +146,11 @@
     },
     "attempts/dev-packaging-prerelease__fresh_anchors/stderr.txt": {
       "changed_by_export": true,
+      "previous_public_sha256": [
+        "533450ad0d21d3d8de7e0d01050be47b59f2f402b9e7be3ecbde8b2fde7e7e9d"
+      ],
       "private_sha256": "93ca89c028f95f42cbec64e99d7775020775a267a8bf7bbd8a3dea13b9222838",
-      "public_sha256": "533450ad0d21d3d8de7e0d01050be47b59f2f402b9e7be3ecbde8b2fde7e7e9d"
+      "public_sha256": "8d82990ab4538bf73df74b34c259c61a3a6f78ee39a41aabe37df7f91ccf032e"
     },
     "attempts/dev-pluggy-blocked__fresh_anchors/events.jsonl": {
       "changed_by_export": true,
@@ -172,8 +184,11 @@
     },
     "attempts/dev-pluggy-blocked__fresh_anchors/stderr.txt": {
       "changed_by_export": true,
+      "previous_public_sha256": [
+        "411b520d453e7ab789068b5461626505b62fbf600eeff445caa4240f85d52065"
+      ],
       "private_sha256": "8058c7a7a86cc8cd9251ac8c418fba5a47554f3800954b714e458ea2b8778bff",
-      "public_sha256": "411b520d453e7ab789068b5461626505b62fbf600eeff445caa4240f85d52065"
+      "public_sha256": "90d7518343aa96d12231d5fa0096286bf7227e333e5aca29df6ea280a08b6dc5"
     },
     "results.json": {
       "changed_by_export": true,
@@ -186,5 +201,7 @@
       "public_sha256": "c8db215e139db14deeeb9c99e6da87afafec30ec551f42204e96e791a1b32315"
     }
   },
-  "policy": "Private local paths and session identifiers replaced; JSON formatting normalized. Answers, correctness, failures, usage and timings preserved. Original full records remain in the maintainer's private archive outside Git."
+  "policy": "Private local paths and session identifiers replaced; JSON formatting normalized. Runtime diagnostic IDs and shell-snapshot filenames redacted in stderr only. Answers, correctness, failures, usage and timings preserved. Original full records remain in the maintainer's private archive outside Git.",
+  "previous_publication_sha256": "29dece1fa47d53de114e951ef83c792df328b297497ba7c649e848008f824e11",
+  "redaction_version": 2
 }

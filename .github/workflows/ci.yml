@@ -30,8 +30,10 @@ jobs:
       - run: python -m pip install -e '.[dev]'
       - run: ruff check .
       - run: python scripts/check_publication.py
-      - run: pytest -q
-      - run: python -m build
+      - run: >-
+          python -m pytest -q tests benchmarks/graph/test_scope_audit.py
+          benchmarks/revision_baselines/test_baselines.py
+      - run: python scripts/build_release.py --source-date-epoch "$(git show -s --format=%ct HEAD)"
 
   tokenizer:
     runs-on: ubuntu-latest

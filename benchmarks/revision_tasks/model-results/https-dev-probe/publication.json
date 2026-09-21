@@ -36,5 +36,7 @@
       "public_sha256": "3b13468fef779965e1c90688ebcb375c063f843b7d018cb83d4a338be850f7ac"
     }
   },
-  "policy": "Private local paths and session identifiers replaced; JSON formatting normalized. Answers, correctness, failures, usage and timings preserved. Original full records remain in the maintainer's private archive outside Git."
+  "policy": "Private local paths and session identifiers replaced; JSON formatting normalized. Runtime diagnostic IDs and shell-snapshot filenames redacted in stderr only. Answers, correctness, failures, usage and timings preserved. Original full records remain in the maintainer's private archive outside Git.",
+  "previous_publication_sha256": "4a901eb7e426d1d9165b83928fb1464437ee12df498e92df142a1aa01b82f0a0",
+  "redaction_version": 2
 }

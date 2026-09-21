@@ -16,3 +16,19 @@ Before publishing, run `python scripts/check_publication.py`. An optional
 the checker reports locations without printing the private values. Review binary
 release assets and commit metadata separately. Existing third-party attribution
 and source licenses must remain intact.
+
+## Release archives
+
+Use the checked archive builder from a clean checkout, with a declared timestamp:
+
+```sh
+SOURCE_DATE_EPOCH="$(git show -s --format=%ct HEAD)" \
+  python scripts/build_release.py --out dist
+```
+
+The output directory must be empty. The builder normalizes archive ownership and
+timestamps, validates package identity and wheel content hashes, and produces
+`BUILDINFO.json` and `SHA256SUMS`. It preserves third-party license bytes. Identical
+artifacts require identical source, timestamp and Python/build toolchain; the
+recorded toolchain is not a promise that an unpinned future build is identical.
+Use `--no-isolation` with a separately pinned environment when reproducing one.

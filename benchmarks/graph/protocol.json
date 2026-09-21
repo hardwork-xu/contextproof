@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "frozen_at_utc": "2026-09-21T10:52:54.253950+00:00",
+  "stage": "Frozen before the per-anchor/cache/payload runs; after exploratory resolver and grouped-graph inspection. This is an engineering replay protocol, not pristine preregistration or independent semantic ground truth.",
+  "scope": "Observed exact source and binding identity only. No semantic accuracy, algorithm novelty, downstream task success, or billed-token savings claim.",
+  "frozen_samples": {
+    "path": "benchmarks/v1/samples.json",
+    "sha256": "b48c70176181b679f0333cb36b23b9fb89d2d52795300b8dc4a163403451bfca",
+    "count": 300,
+    "repositories": 10,
+    "selection": "Every frozen v1 sample, no replacement or selection using graph outcomes. Original split labels are retained as inherited metadata, not a new independent holdout."
+  },
+  "graph": {
+    "max_depths": [
+      1,
+      4
+    ],
+    "max_nodes_per_anchor": 256,
+    "mode": "One saved anchor per graph; current whole enclosing declaration is observed independently from original selected chunk."
+  },
+  "cache": {
+    "repeats": 3,
+    "sequence": [
+      "cold_before fresh memory cache for each anchor",
+      "seed_before shared persistent cache across 30 anchors",
+      "warm_before reopened persistent cache across 30 anchors",
+      "incremental_after reuse warm_before cache across 30 anchors",
+      "cold_after fresh memory cache for each anchor"
+    ],
+    "equivalence": "Canonical graph bytes must match cold vs seed/warm and cold vs incremental for every anchor and repetition; lossless field delta must reproduce current graph bytes exactly.",
+    "timing_boundary": "Source mappings are loaded and verified before timed graph construction; AST cache setup/commit times excluded. Source-I/O and immutable Git-blob savings must be reported separately, not inferred from this parse study."
+  },
+  "payload": {
+    "budget_utf8_bytes": 16000,
+    "metrics": [
+      "canonical full graph bytes",
+      "sealed field delta bytes",
+      "full and update rendered UTF-8 bytes",
+      "required delivery complete/incomplete/budget_too_small",
+      "omitted-node and unresolved/truncated counts"
+    ],
+    "fairness": "Aggregate independent per-anchor sessions. Report repeated node/source material and cross-anchor unique source separately. Updates require their identified base; small/incomplete output is not counted as equivalent full delivery."
+  },
+  "comparisons": [
+    "revision changed invalidates all",
+    "anchor file hash",
+    "exact selected text via existing v1 source reference",
+    "existing v1 direct-static witness labels",
+    "new graph depth 1",
+    "new graph depth 4"
+  ],
+  "change_attribution": "Separate changed enclosing roots from changed descendants behind unchanged roots. A new descendant flag must have an unchanged root fingerprint and changed cause path of at least two nodes. Report absent/unresolved captures and explicit frontier, never relabel them fresh.",
+  "historical_extension": {
+    "repositories": [
+      "requests",
+      "httpx",
+      "packaging"
+    ],
+    "selection": "For each existing v1 BEFORE commit, take it and its five first-parent ancestors. Freeze actual SHAs and parent links before source extraction and graph outcomes. Read only upstream source; no generated synthetic commit history.",
+    "anchors": "All original 30 before-version anchors for that repository, reused across all adjacent transitions; unavailable older declarations remain in denominator.",
+    "transitions": 15,
+    "source_scope": "Original preregistered library Python prefixes and source exclusion rules.",
+    "metrics": "Same cold/warm canonical and delta equivalence, parse counts/timings, source-delta file counts. Archive-backed mappings do not measure Git-object-reader transport savings."
+  }
+}

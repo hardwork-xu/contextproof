@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "recorded_at_utc": "2026-09-21T11:20:04.167834+00:00",
+  "stage": "After the fair shared-cache persistent-AST measurements and before measuring the new default memory condition. No sample or transition selection changes.",
+  "observed_problem": "Across all ten release-pair batches, persistent AST replay was slower than shared-memory full rebuild. Preserve this negative phase and remove AST JSON persistence from the default session path. Durable graph handles and source blobs remain separate.",
+  "decision": "Default live sessions reuse process-local ASTs. Persistent AST JSON is optional. The fixed-root server retains a session between requests.",
+  "new_measurement": "For every original release pair and adjacent transition, three paired repetitions of full current-revision shared-memory cache, old-to-current in-memory cache, and stable-current memory cache over the same 30 queries. Before-cache priming is untimed; source hashing/reading and graph persistence remain excluded.",
+  "publication": "Keep initial renderer failures and compact-renderer persistent-cache negative results immutable under their diagnostic names. Append the memory condition; never reinterpret old persistent timings as memory timings. Exact graph IDs and all prior observations must remain unchanged."
+}

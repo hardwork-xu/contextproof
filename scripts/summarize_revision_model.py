@@ -87,7 +87,7 @@ def summarize(rows, tasks, conditions):
 def markdown(summary):
     lines = ["# Source-conditioned real revision behavior", "",
              "All attempts are included. These are exact API-output predictions with shared upstream-derived "
-             "source hints, not issue-resolution scores. See [the pre-model protocol](../../../docs/REVISION_STUDY_PROTOCOL.md).", "",
+             "source hints, not issue-resolution scores. See [the pre-model protocol](../../../../docs/REVISION_STUDY_PROTOCOL.md).", "",
              f"{summary['task_count']} held-out probes, {summary['family_count']} change/control families, "
              f"4 repositories, {summary['attempts']} completions.", "",
              "| Context | Exact | Changed | Controls | Wrong old answer | Invalid | Mean source bytes | Input tokens |",

@@ -1,5 +1,9 @@
 # Research framing and related work
 
+For the current versioned graph implementation and executed capable-model study,
+see the [new measured report](GRAPH_REPORT.md). The v1 framing and negative
+small-model results below remain historical records, not current novelty claims.
+
 ## Question
 
 After a coding agent has read repository evidence and the repository changes,

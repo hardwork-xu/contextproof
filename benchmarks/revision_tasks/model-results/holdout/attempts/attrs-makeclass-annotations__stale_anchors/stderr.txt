@@ -22,4 +22,4 @@
 2026-09-21T11:33:21.171760Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
 2026-09-21T11:33:21.173127Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
 2026-09-21T11:33:36.782015Z ERROR codex_models_manager::manager: failed to refresh available models: timeout waiting for child process to exit
-2026-09-21T11:33:36.785703Z  WARN codex_core::shell_snapshot: Failed to delete shell snapshot at AbsolutePathBuf("<USER_HOME>/.codex/shell_snapshots/01a0c3bd-f474-7552-8f82-679406e40a7c.1789990401140989000.sh"): Os { code: 2, kind: NotFound, message: "No such file or directory" }
+2026-09-21T11:33:36.785703Z  WARN codex_core::shell_snapshot: Failed to delete shell snapshot at AbsolutePathBuf("<USER_HOME>/.codex/shell_snapshots/<REDACTED_LOCAL_SNAPSHOT>.sh"): Os { code: 2, kind: NotFound, message: "No such file or directory" }

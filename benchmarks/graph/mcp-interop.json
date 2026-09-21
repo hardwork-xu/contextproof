@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "client": "official Python MCP SDK",
+  "client_version": "2.2.0",
+  "environment": {
+    "python": "3.12.2",
+    "system": "Darwin",
+    "machine": "arm64"
+  },
+  "server": {
+    "name": "contextproof",
+    "version": "1.1.0"
+  },
+  "protocol_version": "2025-11-25",
+  "listed_tools": [
+    "contextproof_bundle",
+    "contextproof_capture",
+    "contextproof_check",
+    "contextproof_graph_capture",
+    "contextproof_graph_refresh",
+    "contextproof_index",
+    "contextproof_refresh",
+    "contextproof_repair",
+    "contextproof_search",
+    "contextproof_verify"
+  ],
+  "called_tools": [
+    "contextproof_bundle",
+    "contextproof_capture",
+    "contextproof_check",
+    "contextproof_graph_capture",
+    "contextproof_graph_refresh",
+    "contextproof_index",
+    "contextproof_refresh",
+    "contextproof_repair",
+    "contextproof_search",
+    "contextproof_verify"
+  ],
+  "all_ten_tools_called": true,
+  "graph_delivery": {
+    "changed_dependency_delivered": true,
+    "old_dependency_absent": true,
+    "base_identified": true,
+    "capture_text_bytes": 1687,
+    "refresh_text_bytes": 1893,
+    "budget_bytes": 16000
+  },
+  "index_snapshot_available": true,
+  "search_hit_count": 1,
+  "initial_recommendation": "reuse",
+  "after_helper_edit": {
+    "source_valid": true,
+    "dependency_status": "changed",
+    "can_reuse": false,
+    "recommendation": "retrieve"
+  },
+  "after_refresh": {
+    "can_reuse": true,
+    "snapshot_consistent": true,
+    "recommendation": "reuse",
+    "rendered_context_bytes": 804,
+    "budget_bytes": 6000
+  },
+  "implementation_sha256": {
+    "src/contextproof/mcp.py": "3b954718f775ccb2f99c971369a99fdb202d3a1f20eb0a27330d7d14ece12712",
+    "src/contextproof/session.py": "46a40b8fb24d2acd7f2bb595f7f51c993c0204949c0c6d331de8d2b52717c144",
+    "src/contextproof/dependencies.py": "ee2641c17fe6513fcec683627394e161447a1b0e3f94168d56e51d5ea8b9ed58",
+    "src/contextproof/evidence.py": "63b41f50ced294c391399121752b5ffb096dc153d75f4eeb30a0a3f74357fc6a",
+    "src/contextproof/index.py": "d8b6838ab5161d69e9b50480674345830a2921cc4be9b1c6a02f5a95d792d108",
+    "src/contextproof/graph.py": "a11ee0d52a655a8b41cd7f79ff8dcabd82790c4f5905cb8d941db5088f06daf0",
+    "src/contextproof/graph_session.py": "d86b59beff2566f514464d1b4791fb5bc58dfd2f8a51028d986d457e0829b4ff",
+    "src/contextproof/graph_payload.py": "663eca2ac57b5f1ef127b946057629999bfde47c93bf38c8bbc72007ce5ec509",
+    "src/contextproof/revisions.py": "7a4d5d6a707c4ddd4b87308be30b62062178971cdac604088942c3bb40d462f5"
+  },
+  "checker_sha256": "f0aeecb0b1c53c88be214ddd4a0cac4444deed561bacacaa14ee2dba4b68f932",
+  "scope": "Real stdio SDK interoperability on one controlled dependency-edit fixture; not a general client compatibility or task-success benchmark."
+}

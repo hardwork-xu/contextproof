@@ -1,6 +1,6 @@
 # Source-conditioned real revision behavior
 
-All attempts are included. These are exact API-output predictions with shared upstream-derived source hints, not issue-resolution scores. See [the pre-model protocol](../../../docs/REVISION_STUDY_PROTOCOL.md).
+All attempts are included. These are exact API-output predictions with shared upstream-derived source hints, not issue-resolution scores. See [the pre-model protocol](../../../../docs/REVISION_STUDY_PROTOCOL.md).
 
 25 held-out probes, 25 change/control families, 4 repositories, 150 completions.
 

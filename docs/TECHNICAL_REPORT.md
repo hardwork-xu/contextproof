@@ -1,5 +1,9 @@
 # ContextProof v1.0: verifiable code evidence across repository changes
 
+This is the historical v1 report. The current transitive graph, scope corrections,
+fair cache replays and capable-model study are documented in the
+[versioned evidence report](GRAPH_REPORT.md). Earlier outcomes below are retained.
+
 **Author and maintainer:** hardwork-xu. AI-assisted design, implementation, experiments,
 and writing. **Date:** 2026-09-21. This is a project technical report, not a
 peer-reviewed publication.
@@ -353,7 +357,7 @@ subsequent project edits are not silently represented as the original code.
 
 ## 7. Reproduction and interpretation
 
-Start with the [README demo](../README.md#see-the-complete-workflow) to inspect the
+Start with the [README demo](../README.md#run-the-three-hop-example) to inspect the
 full capture/change/check/refresh loop. Each experiment has its own protocol and
 artifact identity; the main study should not be conflated with earlier exploration.
 

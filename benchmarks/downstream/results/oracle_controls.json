@@ -1,0 +1,666 @@
+{
+  "all_controls_match_expectation": true,
+  "canonical_solutions_in_model_inputs": false,
+  "correct_current_api_passed": 20,
+  "executed_at": "2026-09-21T09:16:58.684463+00:00",
+  "obsolete_api_passed": 5,
+  "results": [
+    {
+      "code_sha256": "145fd148b983735d75051faf6ecec86c64c2f2a150cec40bbd671fa0c7e649c5",
+      "control": "correct_current_api",
+      "drift": "symbol_rename",
+      "evaluation": {
+        "decoder_calls": 7,
+        "execution_seconds": 0.05308645800687373,
+        "passed": true,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"decoder_calls\": 7, \"passed\": true, \"test_invocations\": 7}\n",
+        "test_invocations": 7
+      },
+      "expected_pass": true,
+      "task_id": "HumanEval/0"
+    },
+    {
+      "code_sha256": "7bbbc55aa2d6a2fdfdbcdc207782228fe0e87dae43d81b111dd9245aee818c4f",
+      "control": "obsolete_api",
+      "drift": "symbol_rename",
+      "evaluation": {
+        "error": "cannot import name 'unpack_request' from 'request_api' (unknown location)",
+        "error_type": "ImportError",
+        "execution_seconds": 0.04812070797197521,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"cannot import name 'unpack_request' from 'request_api' (unknown location)\", \"error_type\": \"ImportError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp2azkxg09/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp2azkxg09/worker.py\\\", line 70, in execute\\n    exec(compile(tree, \\\"candidate.py\\\", \\\"exec\\\"), namespace)\\n  File \\\"candidate.py\\\", line 22, in <module>\\nImportError: cannot import name 'unpack_request' from 'request_api' (unknown location)\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmp2azkxg09/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmp2azkxg09/worker.py\", line 70, in execute\n    exec(compile(tree, \"candidate.py\", \"exec\"), namespace)\n  File \"candidate.py\", line 22, in <module>\nImportError: cannot import name 'unpack_request' from 'request_api' (unknown location)\n"
+      },
+      "expected_pass": false,
+      "task_id": "HumanEval/0"
+    },
+    {
+      "code_sha256": "017236b6b1cc2e326f5d6baeee09eea6e1fc9ff80c772a3dee63942f72ea2856",
+      "control": "correct_current_api",
+      "drift": "signature_change",
+      "evaluation": {
+        "decoder_calls": 4,
+        "execution_seconds": 0.042831082944758236,
+        "passed": true,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"decoder_calls\": 4, \"passed\": true, \"test_invocations\": 4}\n",
+        "test_invocations": 4
+      },
+      "expected_pass": true,
+      "task_id": "HumanEval/1"
+    },
+    {
+      "code_sha256": "d65be18064b31083dafbf8076c2dfe46ce1bd2b8dd348d26507bbc89bb9a5fb3",
+      "control": "obsolete_api",
+      "drift": "signature_change",
+      "evaluation": {
+        "error": "unpack_request() missing 1 required keyword-only argument: 'version'",
+        "error_type": "TypeError",
+        "execution_seconds": 0.04232074995525181,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"unpack_request() missing 1 required keyword-only argument: 'version'\", \"error_type\": \"TypeError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpraa0xwgf/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpraa0xwgf/worker.py\\\", line 95, in execute\\n    test_namespace[\\\"check\\\"](adapted_candidate)\\n  File \\\"upstream_tests.py\\\", line 10, in check\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpraa0xwgf/worker.py\\\", line 87, in adapted_candidate\\n    result = candidate(request)\\n             ^^^^^^^^^^^^^^^^^^\\n  File \\\"candidate.py\\\", line 33, in separate_paren_groups\\nTypeError: unpack_request() missing 1 required keyword-only argument: 'version'\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmpraa0xwgf/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpraa0xwgf/worker.py\", line 95, in execute\n    test_namespace[\"check\"](adapted_candidate)\n  File \"upstream_tests.py\", line 10, in check\n  File \"<WORKSPACE>/work/downstream/scratch/tmpraa0xwgf/worker.py\", line 87, in adapted_candidate\n    result = candidate(request)\n             ^^^^^^^^^^^^^^^^^^\n  File \"candidate.py\", line 33, in separate_paren_groups\nTypeError: unpack_request() missing 1 required keyword-only argument: 'version'\n"
+      },
+      "expected_pass": false,
+      "task_id": "HumanEval/1"
+    },
+    {
+      "code_sha256": "af82f23362a8979029e4b250903695dca548df226272b2890664ea081592eb71",
+      "control": "correct_current_api",
+      "drift": "file_move",
+      "evaluation": {
+        "decoder_calls": 3,
+        "execution_seconds": 0.04163362504914403,
+        "passed": true,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"decoder_calls\": 3, \"passed\": true, \"test_invocations\": 3}\n",
+        "test_invocations": 3
+      },
+      "expected_pass": true,
+      "task_id": "HumanEval/2"
+    },
+    {
+      "code_sha256": "658aae2adeb404a8628950db8e1e4dc76bba6eb59fe1fce76d0bfeb727ab07c4",
+      "control": "obsolete_api",
+      "drift": "file_move",
+      "evaluation": {
+        "error": "module 'request_api' is absent from current repository",
+        "error_type": "ImportError",
+        "execution_seconds": 0.04341941699385643,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"module 'request_api' is absent from current repository\", \"error_type\": \"ImportError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpxyxl_z9h/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpxyxl_z9h/worker.py\\\", line 70, in execute\\n    exec(compile(tree, \\\"candidate.py\\\", \\\"exec\\\"), namespace)\\n  File \\\"candidate.py\\\", line 15, in <module>\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpxyxl_z9h/worker.py\\\", line 65, in restricted_import\\n    raise ImportError(f\\\"module {name!r} is absent from current repository\\\")\\nImportError: module 'request_api' is absent from current repository\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmpxyxl_z9h/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpxyxl_z9h/worker.py\", line 70, in execute\n    exec(compile(tree, \"candidate.py\", \"exec\"), namespace)\n  File \"candidate.py\", line 15, in <module>\n  File \"<WORKSPACE>/work/downstream/scratch/tmpxyxl_z9h/worker.py\", line 65, in restricted_import\n    raise ImportError(f\"module {name!r} is absent from current repository\")\nImportError: module 'request_api' is absent from current repository\n"
+      },
+      "expected_pass": false,
+      "task_id": "HumanEval/2"
+    },
+    {
+      "code_sha256": "2fca9b36b86d659509d3512ae2d2ac256495f61c79939b2fdfcbf1e317320374",
+      "control": "correct_current_api",
+      "drift": "unchanged",
+      "evaluation": {
+        "decoder_calls": 6,
+        "execution_seconds": 0.059798667090944946,
+        "passed": true,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"decoder_calls\": 6, \"passed\": true, \"test_invocations\": 6}\n",
+        "test_invocations": 6
+      },
+      "expected_pass": true,
+      "task_id": "HumanEval/3"
+    },
+    {
+      "code_sha256": "2fca9b36b86d659509d3512ae2d2ac256495f61c79939b2fdfcbf1e317320374",
+      "control": "obsolete_api",
+      "drift": "unchanged",
+      "evaluation": {
+        "decoder_calls": 6,
+        "execution_seconds": 0.05094358301721513,
+        "passed": true,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"decoder_calls\": 6, \"passed\": true, \"test_invocations\": 6}\n",
+        "test_invocations": 6
+      },
+      "expected_pass": true,
+      "task_id": "HumanEval/3"
+    },
+    {
+      "code_sha256": "c20d6a8c25365230eb1a576ae7a675c408f0176c3c9f30ddf39b3cc635f70dd9",
+      "control": "correct_current_api",
+      "drift": "symbol_rename",
+      "evaluation": {
+        "decoder_calls": 3,
+        "execution_seconds": 0.04297383304219693,
+        "passed": true,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"decoder_calls\": 3, \"passed\": true, \"test_invocations\": 3}\n",
+        "test_invocations": 3
+      },
+      "expected_pass": true,
+      "task_id": "HumanEval/4"
+    },
+    {
+      "code_sha256": "a03b9c9511bda4a6640ac7e2238b6af12662d6ff2bb1b53150057beaef0b0d6b",
+      "control": "obsolete_api",
+      "drift": "symbol_rename",
+      "evaluation": {
+        "error": "cannot import name 'unpack_request' from 'request_api' (unknown location)",
+        "error_type": "ImportError",
+        "execution_seconds": 0.045830458984710276,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"cannot import name 'unpack_request' from 'request_api' (unknown location)\", \"error_type\": \"ImportError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpbm2_lcia/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpbm2_lcia/worker.py\\\", line 70, in execute\\n    exec(compile(tree, \\\"candidate.py\\\", \\\"exec\\\"), namespace)\\n  File \\\"candidate.py\\\", line 17, in <module>\\nImportError: cannot import name 'unpack_request' from 'request_api' (unknown location)\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmpbm2_lcia/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpbm2_lcia/worker.py\", line 70, in execute\n    exec(compile(tree, \"candidate.py\", \"exec\"), namespace)\n  File \"candidate.py\", line 17, in <module>\nImportError: cannot import name 'unpack_request' from 'request_api' (unknown location)\n"
+      },
+      "expected_pass": false,
+      "task_id": "HumanEval/4"
+    },
+    {
+      "code_sha256": "0b3521c6326cfd8e2cc05d0283482fe72e81bd58ae1047cd4e636b29184a7fe8",
+      "control": "correct_current_api",
+      "drift": "signature_change",
+      "evaluation": {
+        "decoder_calls": 3,
+        "execution_seconds": 0.046103375032544136,
+        "passed": true,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"decoder_calls\": 3, \"passed\": true, \"test_invocations\": 3}\n",
+        "test_invocations": 3
+      },
+      "expected_pass": true,
+      "task_id": "HumanEval/5"
+    },
+    {
+      "code_sha256": "79474f8976263b0b0340f19b600fb8648834c090a2dd75d71dc773b89d05d218",
+      "control": "obsolete_api",
+      "drift": "signature_change",
+      "evaluation": {
+        "error": "unpack_request() missing 1 required keyword-only argument: 'version'",
+        "error_type": "TypeError",
+        "execution_seconds": 0.043310583918355405,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"unpack_request() missing 1 required keyword-only argument: 'version'\", \"error_type\": \"TypeError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmph13qmb0g/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmph13qmb0g/worker.py\\\", line 95, in execute\\n    test_namespace[\\\"check\\\"](adapted_candidate)\\n  File \\\"upstream_tests.py\\\", line 10, in check\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmph13qmb0g/worker.py\\\", line 87, in adapted_candidate\\n    result = candidate(request)\\n             ^^^^^^^^^^^^^^^^^^\\n  File \\\"candidate.py\\\", line 27, in intersperse\\nTypeError: unpack_request() missing 1 required keyword-only argument: 'version'\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmph13qmb0g/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmph13qmb0g/worker.py\", line 95, in execute\n    test_namespace[\"check\"](adapted_candidate)\n  File \"upstream_tests.py\", line 10, in check\n  File \"<WORKSPACE>/work/downstream/scratch/tmph13qmb0g/worker.py\", line 87, in adapted_candidate\n    result = candidate(request)\n             ^^^^^^^^^^^^^^^^^^\n  File \"candidate.py\", line 27, in intersperse\nTypeError: unpack_request() missing 1 required keyword-only argument: 'version'\n"
+      },
+      "expected_pass": false,
+      "task_id": "HumanEval/5"
+    },
+    {
+      "code_sha256": "6420cf123a92737f8f51a42d1b100c7c12d5e84b1993a134c5919c9a9044ceb4",
+      "control": "correct_current_api",
+      "drift": "file_move",
+      "evaluation": {
+        "decoder_calls": 3,
+        "execution_seconds": 0.045838374993763864,
+        "passed": true,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"decoder_calls\": 3, \"passed\": true, \"test_invocations\": 3}\n",
+        "test_invocations": 3
+      },
+      "expected_pass": true,
+      "task_id": "HumanEval/6"
+    },
+    {
+      "code_sha256": "2a1c692f476db1fc034d168fcef7600214e22c8f43232ff97a783605d32f4a2e",
+      "control": "obsolete_api",
+      "drift": "file_move",
+      "evaluation": {
+        "error": "module 'request_api' is absent from current repository",
+        "error_type": "ImportError",
+        "execution_seconds": 0.04171374998986721,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"module 'request_api' is absent from current repository\", \"error_type\": \"ImportError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp5l8nv6c1/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp5l8nv6c1/worker.py\\\", line 70, in execute\\n    exec(compile(tree, \\\"candidate.py\\\", \\\"exec\\\"), namespace)\\n  File \\\"candidate.py\\\", line 27, in <module>\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp5l8nv6c1/worker.py\\\", line 65, in restricted_import\\n    raise ImportError(f\\\"module {name!r} is absent from current repository\\\")\\nImportError: module 'request_api' is absent from current repository\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmp5l8nv6c1/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmp5l8nv6c1/worker.py\", line 70, in execute\n    exec(compile(tree, \"candidate.py\", \"exec\"), namespace)\n  File \"candidate.py\", line 27, in <module>\n  File \"<WORKSPACE>/work/downstream/scratch/tmp5l8nv6c1/worker.py\", line 65, in restricted_import\n    raise ImportError(f\"module {name!r} is absent from current repository\")\nImportError: module 'request_api' is absent from current repository\n"
+      },
+      "expected_pass": false,
+      "task_id": "HumanEval/6"
+    },
+    {
+      "code_sha256": "a1cac5995ca5e9b8cadff46a7749e1a1852be7d6c9a8dee2699d51b7a90689b9",
+      "control": "correct_current_api",
+      "drift": "unchanged",
+      "evaluation": {
+        "decoder_calls": 4,
+        "execution_seconds": 0.04167441697791219,
+        "passed": true,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"decoder_calls\": 4, \"passed\": true, \"test_invocations\": 4}\n",
+        "test_invocations": 4
+      },
+      "expected_pass": true,
+      "task_id": "HumanEval/7"
+    },
+    {
+      "code_sha256": "a1cac5995ca5e9b8cadff46a7749e1a1852be7d6c9a8dee2699d51b7a90689b9",
+      "control": "obsolete_api",
+      "drift": "unchanged",
+      "evaluation": {
+        "decoder_calls": 4,
+        "execution_seconds": 0.04155770794022828,
+        "passed": true,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"decoder_calls\": 4, \"passed\": true, \"test_invocations\": 4}\n",
+        "test_invocations": 4
+      },
+      "expected_pass": true,
+      "task_id": "HumanEval/7"
+    },
+    {
+      "code_sha256": "1050875015cc2f9d3ded12499faea1634eeae875999665f81448dd13b1c1957c",
+      "control": "correct_current_api",
+      "drift": "symbol_rename",
+      "evaluation": {
+        "decoder_calls": 5,
+        "execution_seconds": 0.04351912497077137,
+        "passed": true,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"decoder_calls\": 5, \"passed\": true, \"test_invocations\": 5}\n",
+        "test_invocations": 5
+      },
+      "expected_pass": true,
+      "task_id": "HumanEval/8"
+    },
+    {
+      "code_sha256": "3bcdc9862ecb2b5fa36f645c997ec49b523847815642aa5a801ce48183e380fa",
+      "control": "obsolete_api",
+      "drift": "symbol_rename",
+      "evaluation": {
+        "error": "cannot import name 'unpack_request' from 'request_api' (unknown location)",
+        "error_type": "ImportError",
+        "execution_seconds": 0.04597841703798622,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"cannot import name 'unpack_request' from 'request_api' (unknown location)\", \"error_type\": \"ImportError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp8608c36p/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp8608c36p/worker.py\\\", line 70, in execute\\n    exec(compile(tree, \\\"candidate.py\\\", \\\"exec\\\"), namespace)\\n  File \\\"candidate.py\\\", line 21, in <module>\\nImportError: cannot import name 'unpack_request' from 'request_api' (unknown location)\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmp8608c36p/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmp8608c36p/worker.py\", line 70, in execute\n    exec(compile(tree, \"candidate.py\", \"exec\"), namespace)\n  File \"candidate.py\", line 21, in <module>\nImportError: cannot import name 'unpack_request' from 'request_api' (unknown location)\n"
+      },
+      "expected_pass": false,
+      "task_id": "HumanEval/8"
+    },
+    {
+      "code_sha256": "32aa9834f0a3af31ee266e8d2508debb9e1a0c9dc1988cb4065f27c84c185c24",
+      "control": "correct_current_api",
+      "drift": "signature_change",
+      "evaluation": {
+        "decoder_calls": 4,
+        "execution_seconds": 0.04391433403361589,
+        "passed": true,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"decoder_calls\": 4, \"passed\": true, \"test_invocations\": 4}\n",
+        "test_invocations": 4
+      },
+      "expected_pass": true,
+      "task_id": "HumanEval/9"
+    },
+    {
+      "code_sha256": "a791e978b851f8330763ecc2024a5f0687c4c040b19a137a16d2a0449a091d29",
+      "control": "obsolete_api",
+      "drift": "signature_change",
+      "evaluation": {
+        "error": "unpack_request() missing 1 required keyword-only argument: 'version'",
+        "error_type": "TypeError",
+        "execution_seconds": 0.04242695798166096,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"unpack_request() missing 1 required keyword-only argument: 'version'\", \"error_type\": \"TypeError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp2bo25n1e/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp2bo25n1e/worker.py\\\", line 95, in execute\\n    test_namespace[\\\"check\\\"](adapted_candidate)\\n  File \\\"upstream_tests.py\\\", line 10, in check\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp2bo25n1e/worker.py\\\", line 87, in adapted_candidate\\n    result = candidate(request)\\n             ^^^^^^^^^^^^^^^^^^\\n  File \\\"candidate.py\\\", line 26, in rolling_max\\nTypeError: unpack_request() missing 1 required keyword-only argument: 'version'\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmp2bo25n1e/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmp2bo25n1e/worker.py\", line 95, in execute\n    test_namespace[\"check\"](adapted_candidate)\n  File \"upstream_tests.py\", line 10, in check\n  File \"<WORKSPACE>/work/downstream/scratch/tmp2bo25n1e/worker.py\", line 87, in adapted_candidate\n    result = candidate(request)\n             ^^^^^^^^^^^^^^^^^^\n  File \"candidate.py\", line 26, in rolling_max\nTypeError: unpack_request() missing 1 required keyword-only argument: 'version'\n"
+      },
+      "expected_pass": false,
+      "task_id": "HumanEval/9"
+    },
+    {
+      "code_sha256": "bd7dec4ee39271bbeb56dc85197e724984b0ffab6ba4bca343b146640985dcd6",
+      "control": "correct_current_api",
+      "drift": "file_move",
+      "evaluation": {
+        "decoder_calls": 5,
+        "execution_seconds": 0.042279208078980446,
+        "passed": true,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"decoder_calls\": 5, \"passed\": true, \"test_invocations\": 5}\n",
+        "test_invocations": 5
+      },
+      "expected_pass": true,
+      "task_id": "HumanEval/10"
+    },
+    {
+      "code_sha256": "caee3391387db965ce95255fe32804a55690c332bf40adc8fd4fd06405ba7635",
+      "control": "obsolete_api",
+      "drift": "file_move",
+      "evaluation": {
+        "error": "module 'request_api' is absent from current repository",
+        "error_type": "ImportError",
+        "execution_seconds": 0.042831792030483484,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"module 'request_api' is absent from current repository\", \"error_type\": \"ImportError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpmpvrw86u/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpmpvrw86u/worker.py\\\", line 70, in execute\\n    exec(compile(tree, \\\"candidate.py\\\", \\\"exec\\\"), namespace)\\n  File \\\"candidate.py\\\", line 31, in <module>\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpmpvrw86u/worker.py\\\", line 65, in restricted_import\\n    raise ImportError(f\\\"module {name!r} is absent from current repository\\\")\\nImportError: module 'request_api' is absent from current repository\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmpmpvrw86u/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpmpvrw86u/worker.py\", line 70, in execute\n    exec(compile(tree, \"candidate.py\", \"exec\"), namespace)\n  File \"candidate.py\", line 31, in <module>\n  File \"<WORKSPACE>/work/downstream/scratch/tmpmpvrw86u/worker.py\", line 65, in restricted_import\n    raise ImportError(f\"module {name!r} is absent from current repository\")\nImportError: module 'request_api' is absent from current repository\n"
+      },
+      "expected_pass": false,
+      "task_id": "HumanEval/10"
+    },
+    {
+      "code_sha256": "c596d2599fb154b64f329d28fc0d3196f9ef483259a4de177618d7fadb179e53",
+      "control": "correct_current_api",
+      "drift": "unchanged",
+      "evaluation": {
+        "decoder_calls": 3,
+        "execution_seconds": 0.04223616688977927,
+        "passed": true,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"decoder_calls\": 3, \"passed\": true, \"test_invocations\": 3}\n",
+        "test_invocations": 3
+      },
+      "expected_pass": true,
+      "task_id": "HumanEval/11"
+    },
+    {
+      "code_sha256": "c596d2599fb154b64f329d28fc0d3196f9ef483259a4de177618d7fadb179e53",
+      "control": "obsolete_api",
+      "drift": "unchanged",
+      "evaluation": {
+        "decoder_calls": 3,
+        "execution_seconds": 0.042561125010252,
+        "passed": true,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"decoder_calls\": 3, \"passed\": true, \"test_invocations\": 3}\n",
+        "test_invocations": 3
+      },
+      "expected_pass": true,
+      "task_id": "HumanEval/11"
+    },
+    {
+      "code_sha256": "684912fb57eafd92ff81b3c7cec44fd771e155db2f1ab2fc45ca3d461cb75f97",
+      "control": "correct_current_api",
+      "drift": "symbol_rename",
+      "evaluation": {
+        "decoder_calls": 3,
+        "execution_seconds": 0.0412087079603225,
+        "passed": true,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"decoder_calls\": 3, \"passed\": true, \"test_invocations\": 3}\n",
+        "test_invocations": 3
+      },
+      "expected_pass": true,
+      "task_id": "HumanEval/12"
+    },
+    {
+      "code_sha256": "a3c47d615910fc7b3552750af47e8c23371baa707bc8f7c9cb87a73987f360d0",
+      "control": "obsolete_api",
+      "drift": "symbol_rename",
+      "evaluation": {
+        "error": "cannot import name 'unpack_request' from 'request_api' (unknown location)",
+        "error_type": "ImportError",
+        "execution_seconds": 0.04260129097383469,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"cannot import name 'unpack_request' from 'request_api' (unknown location)\", \"error_type\": \"ImportError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmphz3vgf44/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmphz3vgf44/worker.py\\\", line 70, in execute\\n    exec(compile(tree, \\\"candidate.py\\\", \\\"exec\\\"), namespace)\\n  File \\\"candidate.py\\\", line 23, in <module>\\nImportError: cannot import name 'unpack_request' from 'request_api' (unknown location)\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmphz3vgf44/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmphz3vgf44/worker.py\", line 70, in execute\n    exec(compile(tree, \"candidate.py\", \"exec\"), namespace)\n  File \"candidate.py\", line 23, in <module>\nImportError: cannot import name 'unpack_request' from 'request_api' (unknown location)\n"
+      },
+      "expected_pass": false,
+      "task_id": "HumanEval/12"
+    },
+    {
+      "code_sha256": "002b0c8a4fb86817f0c295bad5373a1689d94b9519bd6e4584ed358c7273b33c",
+      "control": "correct_current_api",
+      "drift": "signature_change",
+      "evaluation": {
+        "decoder_calls": 4,
+        "execution_seconds": 0.06023958302102983,
+        "passed": true,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"decoder_calls\": 4, \"passed\": true, \"test_invocations\": 4}\n",
+        "test_invocations": 4
+      },
+      "expected_pass": true,
+      "task_id": "HumanEval/13"
+    },
+    {
+      "code_sha256": "f13fa63420241f6921421b7cadab134cda057afb207b81a8cbebc378cc39a524",
+      "control": "obsolete_api",
+      "drift": "signature_change",
+      "evaluation": {
+        "error": "unpack_request() missing 1 required keyword-only argument: 'version'",
+        "error_type": "TypeError",
+        "execution_seconds": 0.046707000001333654,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"unpack_request() missing 1 required keyword-only argument: 'version'\", \"error_type\": \"TypeError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmprbm9_a0f/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmprbm9_a0f/worker.py\\\", line 95, in execute\\n    test_namespace[\\\"check\\\"](adapted_candidate)\\n  File \\\"upstream_tests.py\\\", line 10, in check\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmprbm9_a0f/worker.py\\\", line 87, in adapted_candidate\\n    result = candidate(request)\\n             ^^^^^^^^^^^^^^^^^^\\n  File \\\"candidate.py\\\", line 17, in greatest_common_divisor\\nTypeError: unpack_request() missing 1 required keyword-only argument: 'version'\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmprbm9_a0f/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmprbm9_a0f/worker.py\", line 95, in execute\n    test_namespace[\"check\"](adapted_candidate)\n  File \"upstream_tests.py\", line 10, in check\n  File \"<WORKSPACE>/work/downstream/scratch/tmprbm9_a0f/worker.py\", line 87, in adapted_candidate\n    result = candidate(request)\n             ^^^^^^^^^^^^^^^^^^\n  File \"candidate.py\", line 17, in greatest_common_divisor\nTypeError: unpack_request() missing 1 required keyword-only argument: 'version'\n"
+      },
+      "expected_pass": false,
+      "task_id": "HumanEval/13"
+    },
+    {
+      "code_sha256": "e2653053bee902b248459e7f025c5df522bc50bdaf126156f66b3b2b18b32b74",
+      "control": "correct_current_api",
+      "drift": "file_move",
+      "evaluation": {
+        "decoder_calls": 3,
+        "execution_seconds": 0.04152491700369865,
+        "passed": true,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"decoder_calls\": 3, \"passed\": true, \"test_invocations\": 3}\n",
+        "test_invocations": 3
+      },
+      "expected_pass": true,
+      "task_id": "HumanEval/14"
+    },
+    {
+      "code_sha256": "9990e338fe4c12ddb2837190032cc626598666655a36518b401de059c6c2ca57",
+      "control": "obsolete_api",
+      "drift": "file_move",
+      "evaluation": {
+        "error": "module 'request_api' is absent from current repository",
+        "error_type": "ImportError",
+        "execution_seconds": 0.04659483290743083,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"module 'request_api' is absent from current repository\", \"error_type\": \"ImportError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmptyzyua_p/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmptyzyua_p/worker.py\\\", line 70, in execute\\n    exec(compile(tree, \\\"candidate.py\\\", \\\"exec\\\"), namespace)\\n  File \\\"candidate.py\\\", line 16, in <module>\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmptyzyua_p/worker.py\\\", line 65, in restricted_import\\n    raise ImportError(f\\\"module {name!r} is absent from current repository\\\")\\nImportError: module 'request_api' is absent from current repository\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmptyzyua_p/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmptyzyua_p/worker.py\", line 70, in execute\n    exec(compile(tree, \"candidate.py\", \"exec\"), namespace)\n  File \"candidate.py\", line 16, in <module>\n  File \"<WORKSPACE>/work/downstream/scratch/tmptyzyua_p/worker.py\", line 65, in restricted_import\n    raise ImportError(f\"module {name!r} is absent from current repository\")\nImportError: module 'request_api' is absent from current repository\n"
+      },
+      "expected_pass": false,
+      "task_id": "HumanEval/14"
+    },
+    {
+      "code_sha256": "3dbbbcc6bc0fc11409b8659b8144dbca673c68bc7ed95da85b00d65cc54b2be7",
+      "control": "correct_current_api",
+      "drift": "unchanged",
+      "evaluation": {
+        "decoder_calls": 3,
+        "execution_seconds": 0.038641707971692085,
+        "passed": true,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"decoder_calls\": 3, \"passed\": true, \"test_invocations\": 3}\n",
+        "test_invocations": 3
+      },
+      "expected_pass": true,
+      "task_id": "HumanEval/15"
+    },
+    {
+      "code_sha256": "3dbbbcc6bc0fc11409b8659b8144dbca673c68bc7ed95da85b00d65cc54b2be7",
+      "control": "obsolete_api",
+      "drift": "unchanged",
+      "evaluation": {
+        "decoder_calls": 3,
+        "execution_seconds": 0.0408799999859184,
+        "passed": true,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"decoder_calls\": 3, \"passed\": true, \"test_invocations\": 3}\n",
+        "test_invocations": 3
+      },
+      "expected_pass": true,
+      "task_id": "HumanEval/15"
+    },
+    {
+      "code_sha256": "8c49e0d37a0ca245fc3527dfdf0a14956890312a92b49d10771d3782f94335b0",
+      "control": "correct_current_api",
+      "drift": "symbol_rename",
+      "evaluation": {
+        "decoder_calls": 5,
+        "execution_seconds": 0.03945958300027996,
+        "passed": true,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"decoder_calls\": 5, \"passed\": true, \"test_invocations\": 5}\n",
+        "test_invocations": 5
+      },
+      "expected_pass": true,
+      "task_id": "HumanEval/16"
+    },
+    {
+      "code_sha256": "1f1371efa939b6f302393df1c170d9f6796e9217f926097bf577ec05fdd5250e",
+      "control": "obsolete_api",
+      "drift": "symbol_rename",
+      "evaluation": {
+        "error": "cannot import name 'unpack_request' from 'request_api' (unknown location)",
+        "error_type": "ImportError",
+        "execution_seconds": 0.040762250078842044,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"cannot import name 'unpack_request' from 'request_api' (unknown location)\", \"error_type\": \"ImportError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpjlqbacaz/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpjlqbacaz/worker.py\\\", line 70, in execute\\n    exec(compile(tree, \\\"candidate.py\\\", \\\"exec\\\"), namespace)\\n  File \\\"candidate.py\\\", line 13, in <module>\\nImportError: cannot import name 'unpack_request' from 'request_api' (unknown location)\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmpjlqbacaz/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpjlqbacaz/worker.py\", line 70, in execute\n    exec(compile(tree, \"candidate.py\", \"exec\"), namespace)\n  File \"candidate.py\", line 13, in <module>\nImportError: cannot import name 'unpack_request' from 'request_api' (unknown location)\n"
+      },
+      "expected_pass": false,
+      "task_id": "HumanEval/16"
+    },
+    {
+      "code_sha256": "aeff12d5609adf8e357f802d6265c97d9d47959cbece40681b738b4b00eac24c",
+      "control": "correct_current_api",
+      "drift": "signature_change",
+      "evaluation": {
+        "decoder_calls": 5,
+        "execution_seconds": 0.04189466591924429,
+        "passed": true,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"decoder_calls\": 5, \"passed\": true, \"test_invocations\": 5}\n",
+        "test_invocations": 5
+      },
+      "expected_pass": true,
+      "task_id": "HumanEval/17"
+    },
+    {
+      "code_sha256": "568f4468249343e4605614a7986b83ade1ad91d410a489901a386b39954dcecb",
+      "control": "obsolete_api",
+      "drift": "signature_change",
+      "evaluation": {
+        "error": "unpack_request() missing 1 required keyword-only argument: 'version'",
+        "error_type": "TypeError",
+        "execution_seconds": 0.04120908409822732,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"unpack_request() missing 1 required keyword-only argument: 'version'\", \"error_type\": \"TypeError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmprmd9e_i8/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmprmd9e_i8/worker.py\\\", line 95, in execute\\n    test_namespace[\\\"check\\\"](adapted_candidate)\\n  File \\\"upstream_tests.py\\\", line 10, in check\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmprmd9e_i8/worker.py\\\", line 87, in adapted_candidate\\n    result = candidate(request)\\n             ^^^^^^^^^^^^^^^^^^\\n  File \\\"candidate.py\\\", line 23, in parse_music\\nTypeError: unpack_request() missing 1 required keyword-only argument: 'version'\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmprmd9e_i8/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmprmd9e_i8/worker.py\", line 95, in execute\n    test_namespace[\"check\"](adapted_candidate)\n  File \"upstream_tests.py\", line 10, in check\n  File \"<WORKSPACE>/work/downstream/scratch/tmprmd9e_i8/worker.py\", line 87, in adapted_candidate\n    result = candidate(request)\n             ^^^^^^^^^^^^^^^^^^\n  File \"candidate.py\", line 23, in parse_music\nTypeError: unpack_request() missing 1 required keyword-only argument: 'version'\n"
+      },
+      "expected_pass": false,
+      "task_id": "HumanEval/17"
+    },
+    {
+      "code_sha256": "15092dd98b295e0ab706def1d45b08a323c070537d63f2ef8b8a822777836a9e",
+      "control": "correct_current_api",
+      "drift": "file_move",
+      "evaluation": {
+        "decoder_calls": 4,
+        "execution_seconds": 0.04103837499860674,
+        "passed": true,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"decoder_calls\": 4, \"passed\": true, \"test_invocations\": 4}\n",
+        "test_invocations": 4
+      },
+      "expected_pass": true,
+      "task_id": "HumanEval/18"
+    },
+    {
+      "code_sha256": "5b1b63d016342ad6b9440d81925eec40dd591175d2d4c02fc8ebfdbfc4496f1b",
+      "control": "obsolete_api",
+      "drift": "file_move",
+      "evaluation": {
+        "error": "module 'request_api' is absent from current repository",
+        "error_type": "ImportError",
+        "execution_seconds": 0.03991524991579354,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"module 'request_api' is absent from current repository\", \"error_type\": \"ImportError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpgwt69m3_/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpgwt69m3_/worker.py\\\", line 70, in execute\\n    exec(compile(tree, \\\"candidate.py\\\", \\\"exec\\\"), namespace)\\n  File \\\"candidate.py\\\", line 21, in <module>\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpgwt69m3_/worker.py\\\", line 65, in restricted_import\\n    raise ImportError(f\\\"module {name!r} is absent from current repository\\\")\\nImportError: module 'request_api' is absent from current repository\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmpgwt69m3_/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpgwt69m3_/worker.py\", line 70, in execute\n    exec(compile(tree, \"candidate.py\", \"exec\"), namespace)\n  File \"candidate.py\", line 21, in <module>\n  File \"<WORKSPACE>/work/downstream/scratch/tmpgwt69m3_/worker.py\", line 65, in restricted_import\n    raise ImportError(f\"module {name!r} is absent from current repository\")\nImportError: module 'request_api' is absent from current repository\n"
+      },
+      "expected_pass": false,
+      "task_id": "HumanEval/18"
+    },
+    {
+      "code_sha256": "c32a7fe0b01a75a8e6b899e671003aa126b84192a1c80fe22d1fcf268c1e633b",
+      "control": "correct_current_api",
+      "drift": "unchanged",
+      "evaluation": {
+        "decoder_calls": 5,
+        "execution_seconds": 0.04246395896188915,
+        "passed": true,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"decoder_calls\": 5, \"passed\": true, \"test_invocations\": 5}\n",
+        "test_invocations": 5
+      },
+      "expected_pass": true,
+      "task_id": "HumanEval/19"
+    },
+    {
+      "code_sha256": "c32a7fe0b01a75a8e6b899e671003aa126b84192a1c80fe22d1fcf268c1e633b",
+      "control": "obsolete_api",
+      "drift": "unchanged",
+      "evaluation": {
+        "decoder_calls": 5,
+        "execution_seconds": 0.04261925001628697,
+        "passed": true,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"decoder_calls\": 5, \"passed\": true, \"test_invocations\": 5}\n",
+        "test_invocations": 5
+      },
+      "expected_pass": true,
+      "task_id": "HumanEval/19"
+    }
+  ],
+  "source_sha256": "b796127e635a67f93fb35c04f4cb03cf06f38c8072ee7cee8833d7bee06979ef",
+  "timing": "post-model-run harness validation"
+}

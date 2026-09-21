@@ -1,0 +1,477 @@
+{
+  "schema_version": 1,
+  "preregistration_sha256": "c2fe26221e02307c1013e736d5ecfd7be6523776f41bbca8d1b66236e0979e40",
+  "frozen_at_utc": "2026-09-21T09:00:55.838685+00:00",
+  "repositories": [
+    {
+      "name": "requests",
+      "github": "psf/requests",
+      "domain": "HTTP client",
+      "license": "Apache-2.0",
+      "split": "development",
+      "prefixes": [
+        "requests/",
+        "src/requests/"
+      ],
+      "repository": "https://github.com/psf/requests",
+      "versions": {
+        "before": {
+          "tag": "v2.31.0",
+          "commit": "147c8511ddbfa5e8f71bbf5c18ede0c4ceb3bba4",
+          "commit_date": "2023-05-22T15:10:32Z",
+          "archive_url": "https://codeload.github.com/psf/requests/tar.gz/147c8511ddbfa5e8f71bbf5c18ede0c4ceb3bba4",
+          "archive_sha256": "00b2fd9b226ceb366050ef3680f228d10044d9b0bdcf9b9eb0f2252584c805d0",
+          "archive_bytes": 4035723,
+          "license_files": [
+            {
+              "path": "LICENSE",
+              "sha256": "09e8a9bcec8067104652c168685ab0931e7868f9c8284b66f5ae6edae5f1130b"
+            },
+            {
+              "path": "ext/LICENSE",
+              "sha256": "3172d399cbd8f10609e73fec73d0e0b33eecd3c572a68b0722229d8c7059f725"
+            }
+          ]
+        },
+        "after": {
+          "tag": "v2.32.3",
+          "commit": "0e322af87745eff34caffe4df68456ebc20d9068",
+          "commit_date": "2024-05-29T15:36:10Z",
+          "archive_url": "https://codeload.github.com/psf/requests/tar.gz/0e322af87745eff34caffe4df68456ebc20d9068",
+          "archive_sha256": "0e26fc10271a9a328923ebc478e99397d034d1d8ad12cabe9100c9de3d6a6865",
+          "archive_bytes": 4055676,
+          "license_files": [
+            {
+              "path": "LICENSE",
+              "sha256": "09e8a9bcec8067104652c168685ab0931e7868f9c8284b66f5ae6edae5f1130b"
+            },
+            {
+              "path": "ext/LICENSE",
+              "sha256": "3172d399cbd8f10609e73fec73d0e0b33eecd3c572a68b0722229d8c7059f725"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "httpx",
+      "github": "encode/httpx",
+      "domain": "asynchronous HTTP client",
+      "license": "BSD-3-Clause",
+      "split": "development",
+      "prefixes": [
+        "httpx/"
+      ],
+      "repository": "https://github.com/encode/httpx",
+      "versions": {
+        "before": {
+          "tag": "0.26.0",
+          "commit": "08eff926a6011ac84961fd2cee22d9fd4d4b1a88",
+          "commit_date": "2023-12-20T10:52:22Z",
+          "archive_url": "https://codeload.github.com/encode/httpx/tar.gz/08eff926a6011ac84961fd2cee22d9fd4d4b1a88",
+          "archive_sha256": "596a1c3f73a0483944e6cc6b87f785e9fefe3fcbf171c7330ccefc5c0f6319bc",
+          "archive_bytes": 2164676,
+          "license_files": [
+            {
+              "path": "LICENSE.md",
+              "sha256": "4ec59d544f12b5f539a3a716fd321ac58ccd8030b465221f2c880200cdf28d8d"
+            }
+          ]
+        },
+        "after": {
+          "tag": "0.28.1",
+          "commit": "26d48e0634e6ee9cdc0533996db289ce4b430177",
+          "commit_date": "2024-12-06T15:35:41Z",
+          "archive_url": "https://codeload.github.com/encode/httpx/tar.gz/26d48e0634e6ee9cdc0533996db289ce4b430177",
+          "archive_sha256": "41ce356ff41e37539b2abbb6b6b13b3f5c41d2c09422112e72074d2e96816e10",
+          "archive_bytes": 4118375,
+          "license_files": [
+            {
+              "path": "LICENSE.md",
+              "sha256": "4ec59d544f12b5f539a3a716fd321ac58ccd8030b465221f2c880200cdf28d8d"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "urllib3",
+      "github": "urllib3/urllib3",
+      "domain": "HTTP transport",
+      "license": "MIT",
+      "split": "development",
+      "prefixes": [
+        "src/urllib3/"
+      ],
+      "repository": "https://github.com/urllib3/urllib3",
+      "versions": {
+        "before": {
+          "tag": "2.0.7",
+          "commit": "56f01e088dc006c03d4ee6ea9da4ab810f1ed700",
+          "commit_date": "2023-10-17T17:26:50Z",
+          "archive_url": "https://codeload.github.com/urllib3/urllib3/tar.gz/56f01e088dc006c03d4ee6ea9da4ab810f1ed700",
+          "archive_sha256": "c741869c1b43334876cd3819c2b9f8805fc5601114a90dad4a88c2766eb7919c",
+          "archive_bytes": 297355,
+          "license_files": [
+            {
+              "path": "LICENSE.txt",
+              "sha256": "130e3a64d5fdd5d096a752694634a7d9df284469de86e5732100268041e3d686"
+            }
+          ]
+        },
+        "after": {
+          "tag": "2.2.3",
+          "commit": "2458bfcd3dacdf6c196e98d077fc6bb02a5fc1df",
+          "commit_date": "2024-09-12T10:37:01Z",
+          "archive_url": "https://codeload.github.com/urllib3/urllib3/tar.gz/2458bfcd3dacdf6c196e98d077fc6bb02a5fc1df",
+          "archive_sha256": "50db5c8c5cc90ccd727b24c36bdad37e933b68c94f902fc1c9815072670d5f80",
+          "archive_bytes": 318993,
+          "license_files": [
+            {
+              "path": "LICENSE.txt",
+              "sha256": "130e3a64d5fdd5d096a752694634a7d9df284469de86e5732100268041e3d686"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "pydantic",
+      "github": "pydantic/pydantic",
+      "domain": "data validation",
+      "license": "MIT",
+      "split": "development",
+      "prefixes": [
+        "pydantic/"
+      ],
+      "repository": "https://github.com/pydantic/pydantic",
+      "versions": {
+        "before": {
+          "tag": "v2.7.4",
+          "commit": "1ab655a54c0defdc5a2a9b13bc90feb6fba78719",
+          "commit_date": "2024-06-12T13:44:13Z",
+          "archive_url": "https://codeload.github.com/pydantic/pydantic/tar.gz/1ab655a54c0defdc5a2a9b13bc90feb6fba78719",
+          "archive_sha256": "067b2412cd52e01ddaaf433a5f12ab98c68ee402b1840dad47f5157029871904",
+          "archive_bytes": 2750720,
+          "license_files": [
+            {
+              "path": "LICENSE",
+              "sha256": "a9e186f3ca16b5eef84318e7a701721351a00cb7b8ae3a4394b67b49e3529ef3"
+            }
+          ]
+        },
+        "after": {
+          "tag": "v2.10.6",
+          "commit": "df05e69a8a3fb37628a0e3a33518ca0425334bc9",
+          "commit_date": "2025-01-24T01:29:00Z",
+          "archive_url": "https://codeload.github.com/pydantic/pydantic/tar.gz/df05e69a8a3fb37628a0e3a33518ca0425334bc9",
+          "archive_sha256": "32da4c6ebeb447376c1d0d950c881661aee87482d2e9984dc784563bef34512f",
+          "archive_bytes": 3010783,
+          "license_files": [
+            {
+              "path": "LICENSE",
+              "sha256": "a9e186f3ca16b5eef84318e7a701721351a00cb7b8ae3a4394b67b49e3529ef3"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "attrs",
+      "github": "python-attrs/attrs",
+      "domain": "object modeling",
+      "license": "MIT",
+      "split": "development",
+      "prefixes": [
+        "src/attr/",
+        "src/attrs/"
+      ],
+      "repository": "https://github.com/python-attrs/attrs",
+      "versions": {
+        "before": {
+          "tag": "23.2.0",
+          "commit": "9e443b18527dc96b194e92805fa751cbf8434ba9",
+          "commit_date": "2023-12-31T06:20:03Z",
+          "archive_url": "https://codeload.github.com/python-attrs/attrs/tar.gz/9e443b18527dc96b194e92805fa751cbf8434ba9",
+          "archive_sha256": "a4412d8266699276ec15a8aac51fd826f0c61429f3c69e62e4752efdcbfafbe1",
+          "archive_bytes": 779110,
+          "license_files": [
+            {
+              "path": "LICENSE",
+              "sha256": "882115c95dfc2af1eeb6714f8ec6d5cbcabf667caff8729f42420da63f714e9f"
+            },
+            {
+              "path": "docs/license.md",
+              "sha256": "0eaf4b4ffe76f2873a044bcd32848319830259699b09ccf77b197b8d8a7b0cf7"
+            }
+          ]
+        },
+        "after": {
+          "tag": "24.3.0",
+          "commit": "598494a618410490cfbe0c896b7a544f6d23e0d9",
+          "commit_date": "2024-12-16T06:26:35Z",
+          "archive_url": "https://codeload.github.com/python-attrs/attrs/tar.gz/598494a618410490cfbe0c896b7a544f6d23e0d9",
+          "archive_sha256": "89a4ff32eccf7df6906615dee94f520d326573abc08601cc17c443a462c0f486",
+          "archive_bytes": 806025,
+          "license_files": [
+            {
+              "path": "LICENSE",
+              "sha256": "882115c95dfc2af1eeb6714f8ec6d5cbcabf667caff8729f42420da63f714e9f"
+            },
+            {
+              "path": "docs/license.md",
+              "sha256": "2da25a89fa0fe1957e42b32fb438290e2796009788c161da4fb9792d53f0146e"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "packaging",
+      "github": "pypa/packaging",
+      "domain": "package metadata",
+      "license": "Apache-2.0 OR BSD-2-Clause",
+      "split": "development",
+      "prefixes": [
+        "packaging/",
+        "src/packaging/"
+      ],
+      "repository": "https://github.com/pypa/packaging",
+      "versions": {
+        "before": {
+          "tag": "23.2",
+          "commit": "b3a5d7d68991c040615d5345bb55f61de53ba176",
+          "commit_date": "2023-10-01T13:49:25Z",
+          "archive_url": "https://codeload.github.com/pypa/packaging/tar.gz/b3a5d7d68991c040615d5345bb55f61de53ba176",
+          "archive_sha256": "9b1568b65362e1e5a95883fc3b0c907e4c269126fffed207b1db0e3a4e22102b",
+          "archive_bytes": 101614,
+          "license_files": [
+            {
+              "path": "LICENSE",
+              "sha256": "cad1ef5bd340d73e074ba614d26f7deaca5c7940c3d8c34852e65c4909686c48"
+            },
+            {
+              "path": "LICENSE.APACHE",
+              "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594"
+            },
+            {
+              "path": "LICENSE.BSD",
+              "sha256": "b70e7e9b742f1cc6f948b34c16aa39ffece94196364bc88ff0d2180f0028fac5"
+            }
+          ]
+        },
+        "after": {
+          "tag": "24.2",
+          "commit": "d8e3b31b734926ebbcaff654279f6855a73e052f",
+          "commit_date": "2024-11-08T09:47:12Z",
+          "archive_url": "https://codeload.github.com/pypa/packaging/tar.gz/d8e3b31b734926ebbcaff654279f6855a73e052f",
+          "archive_sha256": "f5828ce6d6ce35a12c7eff765d8c3a04b9c21a1697b5c5ec94bf3597709d4fed",
+          "archive_bytes": 120093,
+          "license_files": [
+            {
+              "path": "LICENSE",
+              "sha256": "cad1ef5bd340d73e074ba614d26f7deaca5c7940c3d8c34852e65c4909686c48"
+            },
+            {
+              "path": "LICENSE.APACHE",
+              "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594"
+            },
+            {
+              "path": "LICENSE.BSD",
+              "sha256": "b70e7e9b742f1cc6f948b34c16aa39ffece94196364bc88ff0d2180f0028fac5"
+            },
+            {
+              "path": "docs/licenses.rst",
+              "sha256": "efe1f34e7f19037ce654f9f8e76cc6f7149d6fadd0cc8ee87691c4122b83b94a"
+            },
+            {
+              "path": "tasks/licenses.py",
+              "sha256": "65b3e244ab46d175e066e3fa250466bb12bf4296097d12bdfb6625bc0dfb038e"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "pluggy",
+      "github": "pytest-dev/pluggy",
+      "domain": "plugin dispatch",
+      "license": "MIT",
+      "split": "development",
+      "prefixes": [
+        "src/pluggy/"
+      ],
+      "repository": "https://github.com/pytest-dev/pluggy",
+      "versions": {
+        "before": {
+          "tag": "1.3.0",
+          "commit": "e13a58c5039bf7a8aa6a46a77244aea48b210510",
+          "commit_date": "2023-08-26T16:04:02Z",
+          "archive_url": "https://codeload.github.com/pytest-dev/pluggy/tar.gz/e13a58c5039bf7a8aa6a46a77244aea48b210510",
+          "archive_sha256": "0e0c8d365664142d53335640504cbecbfbef0154997ed51711b796a59da6e5b9",
+          "archive_bytes": 59223,
+          "license_files": [
+            {
+              "path": "LICENSE",
+              "sha256": "d6b65e6c213a5d0b577911d34d6e5949b9f59d76c238c5071a2f3fc16cfb2606"
+            }
+          ]
+        },
+        "after": {
+          "tag": "1.5.0",
+          "commit": "f8aa4a009716a7994f2f6c1947d9fa69feccbdd5",
+          "commit_date": "2024-04-19T12:43:52Z",
+          "archive_url": "https://codeload.github.com/pytest-dev/pluggy/tar.gz/f8aa4a009716a7994f2f6c1947d9fa69feccbdd5",
+          "archive_sha256": "33ab5c7ab6c4f86ad6f0040aabb46c354878d1583d8c7794ef7bc8d15d34af06",
+          "archive_bytes": 63190,
+          "license_files": [
+            {
+              "path": "LICENSE",
+              "sha256": "d6b65e6c213a5d0b577911d34d6e5949b9f59d76c238c5071a2f3fc16cfb2606"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "babel",
+      "github": "python-babel/babel",
+      "domain": "localization",
+      "license": "BSD-3-Clause",
+      "split": "holdout",
+      "prefixes": [
+        "babel/"
+      ],
+      "repository": "https://github.com/python-babel/babel",
+      "versions": {
+        "before": {
+          "tag": "v2.13.1",
+          "commit": "65de3dcf2dc217d6135eff999dc87a3861065e8d",
+          "commit_date": "2023-10-24T14:29:31Z",
+          "archive_url": "https://codeload.github.com/python-babel/babel/tar.gz/65de3dcf2dc217d6135eff999dc87a3861065e8d",
+          "archive_sha256": "213ffecd97911846832738e51bfb355015e46cb2e8b9debe9536989ebadf6b44",
+          "archive_bytes": 286143,
+          "license_files": [
+            {
+              "path": "LICENSE",
+              "sha256": "908e0ad72053ae27c1d17e3340bd14cff9bf935992ed56526d17c983ab6e7af7"
+            },
+            {
+              "path": "docs/license.rst",
+              "sha256": "dfb80face8fee3d5072d285296fee145f8e4d366da1d71409de23af4ee19eb78"
+            }
+          ]
+        },
+        "after": {
+          "tag": "v2.16.0",
+          "commit": "cf7d22369cf40a8218cff1d3dc823eefa174aee0",
+          "commit_date": "2024-08-08T12:45:14Z",
+          "archive_url": "https://codeload.github.com/python-babel/babel/tar.gz/cf7d22369cf40a8218cff1d3dc823eefa174aee0",
+          "archive_sha256": "d29da1d776ea9958c12c5a3929cd2e6f6e3a5894465b74783e0749843427de7c",
+          "archive_bytes": 301704,
+          "license_files": [
+            {
+              "path": "LICENSE",
+              "sha256": "3f9142a40859dfcb33f45c16ad872b500d683cc4a20b17091478b404e900520f"
+            },
+            {
+              "path": "docs/license.rst",
+              "sha256": "8fb672dc293c5f16d3bd7f0fa8cb4ff41c72ee5e9b3e6c4fb3bc6ec05e6ba7fe"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "filelock",
+      "github": "tox-dev/filelock",
+      "domain": "file locking",
+      "license": "Unlicense",
+      "split": "holdout",
+      "prefixes": [
+        "src/filelock/"
+      ],
+      "repository": "https://github.com/tox-dev/filelock",
+      "versions": {
+        "before": {
+          "tag": "3.13.1",
+          "commit": "141f5d8c21be2830a9d93ad4ad822acf4b0f8a12",
+          "commit_date": "2023-10-30T18:28:21Z",
+          "archive_url": "https://codeload.github.com/tox-dev/filelock/tar.gz/141f5d8c21be2830a9d93ad4ad822acf4b0f8a12",
+          "archive_sha256": "df61e1483ed0acd31617be96bde82a76992414556592d9ec91f55312884b26e9",
+          "archive_bytes": 209792,
+          "license_files": [
+            {
+              "path": "LICENSE",
+              "sha256": "88d9b4eb60579c191ec391ca04c16130572d7eedc4a86daa58bf28c6e14c9bcd"
+            },
+            {
+              "path": "docs/license.rst",
+              "sha256": "73c3e61cdabdbf8f909064ed245f51a403ecd5e67327d26b2d3dbbf0d07b0078"
+            }
+          ]
+        },
+        "after": {
+          "tag": "3.16.1",
+          "commit": "c2c43e456b4369ecac8c932115e41b3addc5c3d6",
+          "commit_date": "2024-09-17T18:57:52Z",
+          "archive_url": "https://codeload.github.com/tox-dev/filelock/tar.gz/c2c43e456b4369ecac8c932115e41b3addc5c3d6",
+          "archive_sha256": "21cb973a31131a754aa13d060522e9366933727247b6d6c344e06ad7f0ba64c2",
+          "archive_bytes": 213902,
+          "license_files": [
+            {
+              "path": "LICENSE",
+              "sha256": "88d9b4eb60579c191ec391ca04c16130572d7eedc4a86daa58bf28c6e14c9bcd"
+            },
+            {
+              "path": "docs/license.rst",
+              "sha256": "73c3e61cdabdbf8f909064ed245f51a403ecd5e67327d26b2d3dbbf0d07b0078"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "dateutil",
+      "github": "dateutil/dateutil",
+      "domain": "date parsing",
+      "license": "Apache-2.0 OR BSD-3-Clause",
+      "split": "holdout",
+      "prefixes": [
+        "dateutil/",
+        "src/dateutil/"
+      ],
+      "repository": "https://github.com/dateutil/dateutil",
+      "versions": {
+        "before": {
+          "tag": "2.8.2",
+          "commit": "6b035517571e63b6a63a493740c5506ec1e5da44",
+          "commit_date": "2021-07-13T15:58:48Z",
+          "archive_url": "https://codeload.github.com/dateutil/dateutil/tar.gz/6b035517571e63b6a63a493740c5506ec1e5da44",
+          "archive_sha256": "9446bea539e49228d6a1e8aa38f447e48d04e75b95a31616d197158231622848",
+          "archive_bytes": 352470,
+          "license_files": [
+            {
+              "path": "LICENSE",
+              "sha256": "ba00f51a0d92823b5a1cde27d8b5b9d2321e67ed8da9bc163eff96d5e17e577e"
+            }
+          ]
+        },
+        "after": {
+          "tag": "2.9.0.post0",
+          "commit": "1ae807774053c071acc9e7d3d27778fba0a7773e",
+          "commit_date": "2024-03-01T18:28:13Z",
+          "archive_url": "https://codeload.github.com/dateutil/dateutil/tar.gz/1ae807774053c071acc9e7d3d27778fba0a7773e",
+          "archive_sha256": "3abcb788e8281b2b3d3fc6aaf4b08e089ae852ceadf5a2b1056022d4a8436785",
+          "archive_bytes": 182717,
+          "license_files": [
+            {
+              "path": "LICENSE",
+              "sha256": "ba00f51a0d92823b5a1cde27d8b5b9d2321e67ed8da9bc163eff96d5e17e577e"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "files": {
+    "attempts.jsonl": {
+      "public_sha256": "0b6611c256273946f1a3faba80032565ef15986872d634b680ef7b69a0036a94",
+      "raw_sha256": "1fd8a5b78d02d247ae5bd46367cb2b822b261d26502f4332c1450f074396d2d9"
+    },
+    "environment.json": {
+      "public_sha256": "b0dfb16cf1293cd0bd3fdc57e80a3e44ee49cd49c1eeeb0e4a9c8a27561d1b34",
+      "raw_sha256": "6c3dc2a9e0b2d7f26b6783d74a5122abc00dccdbfbf358a9f4c06fdb9947cc73"
+    },
+    "inputs.json": {
+      "public_sha256": "75d5169298b130842bc9614e88f253cc3512db379a797dd446f877df4b8389f3",
+      "raw_sha256": "75d5169298b130842bc9614e88f253cc3512db379a797dd446f877df4b8389f3"
+    },
+    "oracle_controls.json": {
+      "public_sha256": "ac3c994722e1b821bcea46b5e871131d3bf4fbc68cca9dc1d4e8f38272789968",
+      "raw_sha256": "c2756b1e8d16cadfa54721411557e615c29cc5ec8bb323f1ac600144eb24e9a7"
+    },
+    "protocol.json": {
+      "public_sha256": "3c4928d3fd546803d6c3ed789a2293be2e55b27090645c84dab688feb50f8166",
+      "raw_sha256": "5c8125e4c465c43190921618532fad529670ce2fdb96e35c689bd6b188b99205"
+    },
+    "replay.json": {
+      "public_sha256": "e8015e83f775cfc2ae6dddbe3276c953eccfe282788e9fafb392f0215a12863a",
+      "raw_sha256": "c2d5334a45eb8481bb428691be37c064a82ae17bfa75e9fffd51fe09e2191989"
+    },
+    "results.jsonl": {
+      "public_sha256": "b19f25763ed30147e9e2a8611bfbe3acb953dbbbd319960b6d9d6edd1eea7029",
+      "raw_sha256": "37c8e9ca0619dd0e8c432573e1bef1f90f3e58cea1f2f0bac01bcbaad8e276c3"
+    },
+    "summary.json": {
+      "public_sha256": "9e6a2de4a68769c5e6120ca985f303afee62109ba991a3d668a3c55633851323",
+      "raw_sha256": "78f25f2ebbde44cb2c3f8c9472f6748df324a2eec2c620f32549267372785ea6"
+    }
+  },
+  "inputs_unchanged": true,
+  "model_responses_token_ids_counts_latency_and_pass_outcomes_unchanged": true,
+  "placeholders": [
+    "<WORKSPACE>",
+    "<USER_HOME>"
+  ],
+  "published_at": "2026-09-21T09:18:26.412855+00:00",
+  "purpose": "local path privacy only; no model output or outcome changes",
+  "unredacted_originals": "byte-identical local archive outside public repository"
+}

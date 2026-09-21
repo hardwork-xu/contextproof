@@ -1,0 +1,109 @@
+{
+  "download_endpoint": "https://hf-mirror.com (pinned Hugging Face mirror)",
+  "machine": "arm64",
+  "model_files": {
+    ".gitattributes": {
+      "bytes": 1519,
+      "sha256": "11ad7efa24975ee4b0c3c3a38ed18737f0658a5f75a0a96787b576a78a023361"
+    },
+    "README.md": {
+      "bytes": 863,
+      "sha256": "f164287c8bb0d595f172a4be0329660c35208249f360e0c84780e1fcc251e29b"
+    },
+    "added_tokens.json": {
+      "bytes": 605,
+      "sha256": "58b54bbe36fc752f79a24a271ef66a0a0830054b4dfad94bde757d851968060b"
+    },
+    "config.json": {
+      "bytes": 785,
+      "sha256": "0708e236aa7b7db3c01bf8a46200e1a92d57f20fa668a7c430154bd6a21cdba5"
+    },
+    "merges.txt": {
+      "bytes": 1671853,
+      "sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5"
+    },
+    "model.safetensors": {
+      "bytes": 868628559,
+      "sha256": "daeab4764fb420d161721791cf2e509e2de81a7af4223646e7bed2bf82c57b58"
+    },
+    "model.safetensors.index.json": {
+      "bytes": 51569,
+      "sha256": "6b98634d5044f0e2ad45228a374f8445904e571f1082392d08a6ce54f5d517ca"
+    },
+    "special_tokens_map.json": {
+      "bytes": 613,
+      "sha256": "76862e765266b85aa9459767e33cbaf13970f327a0e88d1c65846c2ddd3a1ecd"
+    },
+    "tokenizer.json": {
+      "bytes": 7031673,
+      "sha256": "a8506e7111b80c6d8635951a02eab0f4e1a8e4e5772da83846579e97b16f61bf"
+    },
+    "tokenizer_config.json": {
+      "bytes": 7228,
+      "sha256": "dced901d401aa828f313a2baec70d0ce164653285812237b5285c7efd5b9e760"
+    },
+    "vocab.json": {
+      "bytes": 2776833,
+      "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+    }
+  },
+  "model_id": "mlx-community/Qwen2.5-Coder-1.5B-Instruct-4bit",
+  "model_revision": "b3252a2f97102b1fb1571fec2c9b27219a8536be",
+  "packages": {
+    "Jinja2": "3.1.6",
+    "MarkupSafe": "3.0.3",
+    "PyYAML": "6.0.3",
+    "Pygments": "2.21.0",
+    "annotated-doc": "0.0.5",
+    "anyio": "4.15.1",
+    "certifi": "2026.7.22",
+    "click": "8.5.0",
+    "contextproof": "0.1.0",
+    "filelock": "4.0.1",
+    "fsspec": "2026.9.0",
+    "h11": "0.16.0",
+    "hf-xet": "1.6.0",
+    "httpcore": "1.0.9",
+    "httpx": "0.28.1",
+    "huggingface_hub": "1.32.0",
+    "idna": "3.20",
+    "markdown-it-py": "4.2.0",
+    "mdurl": "0.1.2",
+    "mlx": "0.32.2",
+    "mlx-lm": "0.31.3",
+    "mlx-metal": "0.32.2",
+    "numpy": "2.5.3",
+    "packaging": "26.3",
+    "pip": "24.0",
+    "protobuf": "7.36.2",
+    "regex": "2026.9.10",
+    "rich": "15.0.0",
+    "safetensors": "0.8.0",
+    "sentencepiece": "0.2.2",
+    "shellingham": "1.5.4",
+    "tokenizers": "0.23.2",
+    "tqdm": "4.70.1",
+    "transformers": "5.17.0",
+    "typer": "0.27.2",
+    "typing_extensions": "4.16.0"
+  },
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "python": "3.12.2 (v3.12.2:6abddd9f6a, Feb  6 2024, 17:02:06) [Clang 13.0.0 (clang-1300.0.29.30)]",
+  "recorded_at": "2026-09-21T09:11:49.972578+00:00",
+  "sandbox": {
+    "checked_at": "2026-09-21T09:11:48.075232+00:00",
+    "checks": {
+      "fork": "denied: [Errno 1] Operation not permitted",
+      "network": "denied: [Errno 1] Operation not permitted",
+      "outside_read": "denied: [Errno 1] Operation not permitted: '<WORKSPACE>/work/downstream/scratch/sandbox-outside-sentinel'",
+      "outside_write": "denied: [Errno 1] Operation not permitted: '<WORKSPACE>/work/downstream/scratch/sandbox-outside-sentinel'",
+      "scratch_write": "allowed"
+    },
+    "cpu_limit_seconds": 3,
+    "file_size_limit_bytes": 1048576,
+    "mechanism": "macOS Seatbelt sandbox-exec",
+    "open_file_limit": 64,
+    "profile": "(version 1) (allow default) (deny network*) (deny process-fork) (deny file-write*) (allow file-write* (subpath \"<WORKSPACE>/outputs/contextproof/SCRATCH\")) (deny file-read* (subpath \"/Users\") (subpath \"/private/var/folders\")) (allow file-read* (subpath \"<WORKSPACE>/outputs/contextproof/SCRATCH\") (subpath \"<WORKSPACE>/work/model-venv\") (subpath \"/Library/Frameworks/Python.framework/Versions/3.12\") (subpath \"/System\") (subpath \"/usr\") (subpath \"/dev\"))",
+    "wall_timeout_seconds": 10
+  }
+}

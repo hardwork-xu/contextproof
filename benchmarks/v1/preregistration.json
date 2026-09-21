@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "frozen_at_utc": "2026-09-21T09:00:12.839366+00:00",
+  "stage": "protocol recorded before archives, sampling, annotation, or engine predictions",
+  "research_question": "On exact source evidence sampled only from older public Python library versions, how do three naive reuse baselines and ContextProof agree with a separately implemented byte-location reference annotation after version drift?",
+  "annotation_disclosure": "Automated reference annotation, with blinded AI review; not independent human ground truth or semantic equivalence.",
+  "selection": "Convenience sample of ten public Python libraries from ten different GitHub owners, covering HTTP, validation, object models, packaging, plugins, localization, locking and dates. Tags selected for historical version drift, not measured outcomes. No replacement based on observed results.",
+  "split": "First seven repositories below are development; final three are repository-level holdout. No tuning to holdout results. All ten remain a convenience sample.",
+  "sample": {
+    "per_repository": 30,
+    "min_lines": 3,
+    "max_bytes": 6000,
+    "seed": "contextproof-v1-drift-2026-09-21",
+    "selection": "Build older-version chunks; retain library Python chunks having at least three editor lines and at most 6000 UTF-8 bytes and exactly one whole-line byte occurrence in the before corpus. Rank SHA256(seed NUL repository NUL path NUL start_line NUL text_sha256); take first 30. Eligibility and ranking never read after sources."
+  },
+  "source_policy": "Only regular UTF-8 Python files under the listed library prefixes, <=2 MiB, with no NUL, private-key header, generated header, excluded directory or secret-like filename. Freeze and hash the accepted path->raw SHA256 manifests before annotation. Stage only these accepted files as input for all methods. Never execute upstream code. Publish metadata and hashes, not upstream snippets.",
+  "reference": "A separate module with no contextproof imports scans raw byte offsets and CR/LF/CRLF editor-line boundaries. Exact recorded location -> valid; otherwise one whole-line byte occurrence -> relocated; multiple -> ambiguous; none with old path present -> modified; none with old path absent -> deleted. Valid takes precedence over duplicate copies elsewhere. Labels concern byte provenance only.",
+  "baselines": [
+    "path_exists_and_line_range",
+    "path_line_exact",
+    "file_hash"
+  ],
+  "metrics": "Per-repository and overall acceptance confusion matrices, precision, recall, accuracy and false acceptance rate; five-way engine/reference agreement; paired differences in acceptance accuracy from 5000 seeded bootstrap resamples clustered by repository. Report development and holdout separately. N=10 repository clusters (holdout N=3) is small and intervals are descriptive.",
+  "cache": {
+    "repeats": 3,
+    "sequence": "fresh cache older version, immediate older-version warm scan, newer-version scan sharing that cache",
+    "claims": "Report individual and median wall times plus parsed/reused counts. Warm caching still reads and hashes sources; no promised speedup."
+  },
+  "mismatches": "Preserve first-run engine/reference disagreements in an append-only audit artifact, disclose causes, and never silently overwrite annotations to agree with engine.",
+  "review": "Select one item per repository and up to two additional per observed reference status by seeded hash; provide before/after paths and hashes but no labels or engine predictions to a separate AI reviewer. Record the disclosure and any disagreements.",
+  "repositories": [
+    {
+      "name": "requests",
+      "github": "psf/requests",
+      "domain": "HTTP client",
+      "license": "Apache-2.0",
+      "split": "development",
+      "before_tag": "v2.31.0",
+      "after_tag": "v2.32.3",
+      "prefixes": [
+        "requests/",
+        "src/requests/"
+      ]
+    },
+    {
+      "name": "httpx",
+      "github": "encode/httpx",
+      "domain": "asynchronous HTTP client",
+      "license": "BSD-3-Clause",
+      "split": "development",
+      "before_tag": "0.26.0",
+      "after_tag": "0.28.1",
+      "prefixes": [
+        "httpx/"
+      ]
+    },
+    {
+      "name": "urllib3",
+      "github": "urllib3/urllib3",
+      "domain": "HTTP transport",
+      "license": "MIT",
+      "split": "development",
+      "before_tag": "2.0.7",
+      "after_tag": "2.2.3",
+      "prefixes": [
+        "src/urllib3/"
+      ]
+    },
+    {
+      "name": "pydantic",
+      "github": "pydantic/pydantic",
+      "domain": "data validation",
+      "license": "MIT",
+      "split": "development",
+      "before_tag": "v2.7.4",
+      "after_tag": "v2.10.6",
+      "prefixes": [
+        "pydantic/"
+      ]
+    },
+    {
+      "name": "attrs",
+      "github": "python-attrs/attrs",
+      "domain": "object modeling",
+      "license": "MIT",
+      "split": "development",
+      "before_tag": "23.2.0",
+      "after_tag": "24.3.0",
+      "prefixes": [
+        "src/attr/",
+        "src/attrs/"
+      ]
+    },
+    {
+      "name": "packaging",
+      "github": "pypa/packaging",
+      "domain": "package metadata",
+      "license": "Apache-2.0 OR BSD-2-Clause",
+      "split": "development",
+      "before_tag": "23.2",
+      "after_tag": "24.2",
+      "prefixes": [
+        "packaging/",
+        "src/packaging/"
+      ]
+    },
+    {
+      "name": "pluggy",
+      "github": "pytest-dev/pluggy",
+      "domain": "plugin dispatch",
+      "license": "MIT",
+      "split": "development",
+      "before_tag": "1.3.0",
+      "after_tag": "1.5.0",
+      "prefixes": [
+        "src/pluggy/"
+      ]
+    },
+    {
+      "name": "babel",
+      "github": "python-babel/babel",
+      "domain": "localization",
+      "license": "BSD-3-Clause",
+      "split": "holdout",
+      "before_tag": "v2.13.1",
+      "after_tag": "v2.16.0",
+      "prefixes": [
+        "babel/"
+      ]
+    },
+    {
+      "name": "filelock",
+      "github": "tox-dev/filelock",
+      "domain": "file locking",
+      "license": "Unlicense",
+      "split": "holdout",
+      "before_tag": "3.13.1",
+      "after_tag": "3.16.1",
+      "prefixes": [
+        "src/filelock/"
+      ]
+    },
+    {
+      "name": "dateutil",
+      "github": "dateutil/dateutil",
+      "domain": "date parsing",
+      "license": "Apache-2.0 OR BSD-3-Clause",
+      "split": "holdout",
+      "before_tag": "2.8.2",
+      "after_tag": "2.9.0.post0",
+      "prefixes": [
+        "dateutil/",
+        "src/dateutil/"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+{
+  "disclosure": "Comparison performed after separate AI reviewer sealed predictions; purposive21-item check, not independent human labels or a representative error-rate estimate.",
+  "review_integrity_sha256": "ae6192d9945014ce32451d1599fa238979b25873a26a7ff162b346e2869e60b6",
+  "count": 21,
+  "agreements": 21,
+  "rows": [
+    {
+      "sample_id": "0021b6e6351447368dd93824259c48218d3d86228d0934a4fc129e7cfd566ad8",
+      "reviewed_status": "relocated",
+      "reference_status": "relocated",
+      "agreement": true
+    },
+    {
+      "sample_id": "008a0e7c44ea1b5ba77fb3af65f9247526e384ee8ea0636203c41acea27c7af2",
+      "reviewed_status": "modified",
+      "reference_status": "modified",
+      "agreement": true
+    },
+    {
+      "sample_id": "00cd7c35462787d45ba42903db60c0df79068058131a7141a8060e0e18cbbc20",
+      "reviewed_status": "relocated",
+      "reference_status": "relocated",
+      "agreement": true
+    },
+    {
+      "sample_id": "0102d307ed29a946f5ed6743149c9233866aa2a849033b860354363ecb957705",
+      "reviewed_status": "valid",
+      "reference_status": "valid",
+      "agreement": true
+    },
+    {
+      "sample_id": "035f61f20097e6dfcedc128dda2362ead0780f3cd002532115295c106b0d0606",
+      "reviewed_status": "valid",
+      "reference_status": "valid",
+      "agreement": true
+    },
+    {
+      "sample_id": "03b422b5eb81591f24cdddf57f49733253d04ac8fdeb61d0a563a8d199277946",
+      "reviewed_status": "deleted",
+      "reference_status": "deleted",
+      "agreement": true
+    },
+    {
+      "sample_id": "03d940fbaec8c0bb96621c623fed947e351e90464bcbb99babe862c4f82fe96d",
+      "reviewed_status": "modified",
+      "reference_status": "modified",
+      "agreement": true
+    },
+    {
+      "sample_id": "05480319a73df9d4e90a4b12adbe5da685923d5db5fb1baedf4e81ff24df9709",
+      "reviewed_status": "deleted",
+      "reference_status": "deleted",
+      "agreement": true
+    },
+    {
+      "sample_id": "056cf74b1866efd2843cad8ed35de13f94f79e30043b64757f80fb6ea5cf60d7",
+      "reviewed_status": "valid",
+      "reference_status": "valid",
+      "agreement": true
+    },
+    {
+      "sample_id": "06bc1b5f4b6328a0d1e33dbbbe34a76ffe5bff1fd6b58bb681a163665e381011",
+      "reviewed_status": "relocated",
+      "reference_status": "relocated",
+      "agreement": true
+    },
+    {
+      "sample_id": "08fa587ea2abd552ad6694b3f4592970889a6536364414a69b408f300e37dbb3",
+      "reviewed_status": "valid",
+      "reference_status": "valid",
+      "agreement": true
+    },
+    {
+      "sample_id": "0a902becadf74af3a076713ca419ab17c4fb8dfa447067ecddf69d1a8e2eec7a",
+      "reviewed_status": "relocated",
+      "reference_status": "relocated",
+      "agreement": true
+    },
+    {
+      "sample_id": "0c86685a32536cfbbb104053c98428ffc6217b6e0a63330bd14b48625e35bf3c",
+      "reviewed_status": "valid",
+      "reference_status": "valid",
+      "agreement": true
+    },
+    {
+      "sample_id": "0d459595c47a834b5743b3ea665f8815923a635d9efb0d84e2fc9633b279d493",
+      "reviewed_status": "relocated",
+      "reference_status": "relocated",
+      "agreement": true
+    },
+    {
+      "sample_id": "106603d93d6785895c94a101478d36c696ab56e406fd9f9d5fb7457bee4a1b7a",
+      "reviewed_status": "modified",
+      "reference_status": "modified",
+      "agreement": true
+    },
+    {
+      "sample_id": "12ec2ce8db95bca547e5804ccd4bb51870a6400cc99be304abfdc7535be7e675",
+      "reviewed_status": "relocated",
+      "reference_status": "relocated",
+      "agreement": true
+    },
+    {
+      "sample_id": "1a22e9233afbf8221accf9cb145097096a4f98f35490ee440c879de9ecc450c6",
+      "reviewed_status": "modified",
+      "reference_status": "modified",
+      "agreement": true
+    },
+    {
+      "sample_id": "217a2218babb8e79e87ffd23366bb32060c00963546e656ba999d4e48ab24925",
+      "reviewed_status": "relocated",
+      "reference_status": "relocated",
+      "agreement": true
+    },
+    {
+      "sample_id": "37902a59853c77842b7b2330e62bd2fbe40c2a580331db4d6673f049e65f348a",
+      "reviewed_status": "relocated",
+      "reference_status": "relocated",
+      "agreement": true
+    },
+    {
+      "sample_id": "4283627fbfd3889f4769619e7e0308a877cad48e0801ea2ed562cb5ff38163d3",
+      "reviewed_status": "relocated",
+      "reference_status": "relocated",
+      "agreement": true
+    },
+    {
+      "sample_id": "7e1bc522f17503220c07d68c12edd9796d3c529a14de6b2fc65346b7ee0c5102",
+      "reviewed_status": "modified",
+      "reference_status": "modified",
+      "agreement": true
+    }
+  ],
+  "review_integrity_recipe": "SHA-256 of UTF-8 json.dumps(review without its top-level integrity_sha256 field, ensure_ascii=False, sort_keys=True, separators=(',', ':')); no trailing newline. This is a canonical payload checksum, not the raw file digest. The separate reviewer confirmed this recipe.",
+  "review_file_sha256": "7698510e90313efd1d0eb5985c5cfbcc3c9f09f79bf9848340bbe0282ed6cd97",
+  "review_file_digest_recipe": "SHA-256 of the exact published ai_review.json bytes, including formatting and final newline."
+}

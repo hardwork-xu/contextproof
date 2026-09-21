@@ -1,0 +1,464 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-09-21T09:17:34.223895+00:00",
+  "disclosure": "AI-assisted blinded check; not human labels or an independent human ground-truth dataset. The reviewer did not inspect annotations, reference labeler, first-run audit, engine predictions or result files before sealing this review.",
+  "input_scope": "Only review_packet.json and the referenced frozen before/after source bytes were used as task evidence. Scratch scripts were authored independently; no ContextProof implementation or verifier was imported for this review.",
+  "method": "Before file and slice SHA-256 values were recomputed. A separately written byte scanner preserves LF, CRLF and CR as complete source lines without normalizing text. Every regular non-symlink UTF-8 file without NUL bytes in each frozen after root was searched for every exact complete-line occurrence. A match at the recorded path and lines is valid; otherwise one occurrence is relocated, multiple occurrences ambiguous, no occurrence with the old path present modified, and no occurrence with the old path absent deleted. Diff neighborhoods were inspected for modified cases and source neighborhoods for relocated cases. No source was executed.",
+  "scope_limitation": "The review covers 21 supplied samples and only the supplied frozen source corpus. It does not assess semantic correctness, the independence of the initial sample selection, or files not present in those roots.",
+  "review_packet_sha256": "6feb65a121fc49dbb9f79c7543a203ce2faf9dbd045f61b6b29d7aad0b46c5fd",
+  "checker_script_sha256": "1fec8a95541b389909afcc4f62280ef356b89cfc0472a8c1f96db2fe24bab940",
+  "summary": {
+    "sample_count": 21,
+    "before_hash_checks_passed": 21,
+    "statuses": {
+      "deleted": 2,
+      "modified": 5,
+      "relocated": 9,
+      "valid": 5
+    }
+  },
+  "reviews": [
+    {
+      "sample_id": "0021b6e6351447368dd93824259c48218d3d86228d0934a4fc129e7cfd566ad8",
+      "repository": "dateutil",
+      "path": "dateutil/parser/__init__.py",
+      "reviewed_status": "relocated",
+      "before_file_hash_verified": true,
+      "before_text_hash_verified": true,
+      "before_lines": {
+        "start_line": 36,
+        "end_line": 42
+      },
+      "matches": [
+        {
+          "path": "src/dateutil/parser/__init__.py",
+          "start_line": 36,
+          "end_line": 42
+        }
+      ],
+      "after_original_path_exists": false,
+      "searched_utf8_files": 17,
+      "rationale": "The original module path is absent. The complete seven-line slice occurs exactly once under the src directory at the same line numbers. Inspection of the private-class deprecation helper and adjacent wrapper ending confirms a directory-prefix relocation, with no slice byte changes.",
+      "review_method": "independent byte-line search plus AI inspection of relevant source neighborhoods"
+    },
+    {
+      "sample_id": "008a0e7c44ea1b5ba77fb3af65f9247526e384ee8ea0636203c41acea27c7af2",
+      "repository": "attrs",
+      "path": "src/attr/_make.py",
+      "reviewed_status": "modified",
+      "before_file_hash_verified": true,
+      "before_text_hash_verified": true,
+      "before_lines": {
+        "start_line": 2968,
+        "end_line": 3042
+      },
+      "matches": [],
+      "after_original_path_exists": true,
+      "searched_utf8_files": 19,
+      "rationale": "The original file remains but no full-slice match exists in the frozen after corpus. The corresponding make_class definition moved earlier, its documentation was reorganized, and its ending now assigns class annotations before returning the class. These are byte changes within the captured span, so relocation is insufficient.",
+      "review_method": "independent byte-line search plus AI inspection of relevant source neighborhoods"
+    },
+    {
+      "sample_id": "00cd7c35462787d45ba42903db60c0df79068058131a7141a8060e0e18cbbc20",
+      "repository": "pydantic",
+      "path": "pydantic/_internal/_utils.py",
+      "reviewed_status": "relocated",
+      "before_file_hash_verified": true,
+      "before_text_hash_verified": true,
+      "before_lines": {
+        "start_line": 302,
+        "end_line": 318
+      },
+      "matches": [
+        {
+          "path": "pydantic/_internal/_utils.py",
+          "start_line": 329,
+          "end_line": 345
+        }
+      ],
+      "after_original_path_exists": true,
+      "searched_utf8_files": 103,
+      "rationale": "The complete smart_deepcopy declaration and body occur once in the same module, shifted down by 27 lines. The inspected declaration/docstring neighborhood matches, and every captured line matches byte for byte at 329-345 rather than the recorded 302-318.",
+      "review_method": "independent byte-line search plus AI inspection of relevant source neighborhoods"
+    },
+    {
+      "sample_id": "0102d307ed29a946f5ed6743149c9233866aa2a849033b860354363ecb957705",
+      "repository": "httpx",
+      "path": "httpx/_content.py",
+      "reviewed_status": "valid",
+      "before_file_hash_verified": true,
+      "before_text_hash_verified": true,
+      "before_lines": {
+        "start_line": 67,
+        "end_line": 69
+      },
+      "matches": [
+        {
+          "path": "httpx/_content.py",
+          "start_line": 67,
+          "end_line": 69
+        }
+      ],
+      "after_original_path_exists": true,
+      "searched_utf8_files": 23,
+      "rationale": "The complete three-line byte sequence remains at the original file and recorded lines. The independent all-file search found that exact occurrence, so the original location is valid.",
+      "review_method": "independent byte-line search plus AI inspection of relevant source neighborhoods"
+    },
+    {
+      "sample_id": "035f61f20097e6dfcedc128dda2362ead0780f3cd002532115295c106b0d0606",
+      "repository": "pydantic",
+      "path": "pydantic/v1/types.py",
+      "reviewed_status": "valid",
+      "before_file_hash_verified": true,
+      "before_text_hash_verified": true,
+      "before_lines": {
+        "start_line": 1186,
+        "end_line": 1188
+      },
+      "matches": [
+        {
+          "path": "pydantic/v1/types.py",
+          "start_line": 1186,
+          "end_line": 1188
+        }
+      ],
+      "after_original_path_exists": true,
+      "searched_utf8_files": 103,
+      "rationale": "The complete three-line byte sequence remains at the original path and original line range. The captured file and slice hashes both verify, and current byte equality establishes validity without any relocation.",
+      "review_method": "independent byte-line search plus AI inspection of relevant source neighborhoods"
+    },
+    {
+      "sample_id": "03b422b5eb81591f24cdddf57f49733253d04ac8fdeb61d0a563a8d199277946",
+      "repository": "dateutil",
+      "path": "dateutil/test/test_tz.py",
+      "reviewed_status": "deleted",
+      "before_file_hash_verified": true,
+      "before_text_hash_verified": true,
+      "before_lines": {
+        "start_line": 2237,
+        "end_line": 2245
+      },
+      "matches": [],
+      "after_original_path_exists": false,
+      "searched_utf8_files": 17,
+      "rationale": "The original test module is absent from the frozen after corpus, and the complete nine-line test slice occurs nowhere in its 17 available UTF-8 source files. The inspected before neighborhood is the timezone offset test; classification is deletion within the declared frozen corpus, not a claim about files outside it.",
+      "review_method": "independent byte-line search plus AI inspection of relevant source neighborhoods"
+    },
+    {
+      "sample_id": "03d940fbaec8c0bb96621c623fed947e351e90464bcbb99babe862c4f82fe96d",
+      "repository": "httpx",
+      "path": "httpx/_models.py",
+      "reviewed_status": "modified",
+      "before_file_hash_verified": true,
+      "before_text_hash_verified": true,
+      "before_lines": {
+        "start_line": 198,
+        "end_line": 203
+      },
+      "matches": [],
+      "after_original_path_exists": true,
+      "searched_utf8_files": 23,
+      "rationale": "The file remains, but the captured six-line sequence has no exact occurrence. Inspection locates the corresponding header-update method at line 274: its parameter annotation uses union syntax instead of the previous Optional form. The captured signature changed, irrespective of whether runtime behavior is equivalent.",
+      "review_method": "independent byte-line search plus AI inspection of relevant source neighborhoods"
+    },
+    {
+      "sample_id": "05480319a73df9d4e90a4b12adbe5da685923d5db5fb1baedf4e81ff24df9709",
+      "repository": "dateutil",
+      "path": "dateutil/test/test_relativedelta.py",
+      "reviewed_status": "deleted",
+      "before_file_hash_verified": true,
+      "before_text_hash_verified": true,
+      "before_lines": {
+        "start_line": 114,
+        "end_line": 116
+      },
+      "matches": [],
+      "after_original_path_exists": false,
+      "searched_utf8_files": 17,
+      "rationale": "The original relative-date test file is absent and the complete three-line slice has no occurrence in the frozen after corpus. The inspected before slice is the next-Friday test. This is deletion under the frozen-corpus exact-text contract.",
+      "review_method": "independent byte-line search plus AI inspection of relevant source neighborhoods"
+    },
+    {
+      "sample_id": "056cf74b1866efd2843cad8ed35de13f94f79e30043b64757f80fb6ea5cf60d7",
+      "repository": "babel",
+      "path": "babel/messages/pofile.py",
+      "reviewed_status": "valid",
+      "before_file_hash_verified": true,
+      "before_text_hash_verified": true,
+      "before_lines": {
+        "start_line": 208,
+        "end_line": 212
+      },
+      "matches": [
+        {
+          "path": "babel/messages/pofile.py",
+          "start_line": 208,
+          "end_line": 212
+        }
+      ],
+      "after_original_path_exists": true,
+      "searched_utf8_files": 27,
+      "rationale": "All five captured lines remain byte-identical at the recorded path and lines 208-212. The location itself is an exact whole-line match, so the result is valid.",
+      "review_method": "independent byte-line search plus AI inspection of relevant source neighborhoods"
+    },
+    {
+      "sample_id": "06bc1b5f4b6328a0d1e33dbbbe34a76ffe5bff1fd6b58bb681a163665e381011",
+      "repository": "babel",
+      "path": "babel/numbers.py",
+      "reviewed_status": "relocated",
+      "before_file_hash_verified": true,
+      "before_text_hash_verified": true,
+      "before_lines": {
+        "start_line": 984,
+        "end_line": 1003
+      },
+      "matches": [
+        {
+          "path": "babel/numbers.py",
+          "start_line": 1198,
+          "end_line": 1217
+        }
+      ],
+      "after_original_path_exists": true,
+      "searched_utf8_files": 27,
+      "rationale": "The complete parse_grouping function slice is found exactly once in the same file at lines 1198-1217, 214 lines later. Inspection of its signature and docstring neighborhood agrees with the complete byte comparison; the recorded old lines no longer identify the slice.",
+      "review_method": "independent byte-line search plus AI inspection of relevant source neighborhoods"
+    },
+    {
+      "sample_id": "08fa587ea2abd552ad6694b3f4592970889a6536364414a69b408f300e37dbb3",
+      "repository": "urllib3",
+      "path": "src/urllib3/contrib/pyopenssl.py",
+      "reviewed_status": "valid",
+      "before_file_hash_verified": true,
+      "before_text_hash_verified": true,
+      "before_lines": {
+        "start_line": 159,
+        "end_line": 182
+      },
+      "matches": [
+        {
+          "path": "src/urllib3/contrib/pyopenssl.py",
+          "start_line": 159,
+          "end_line": 182
+        }
+      ],
+      "after_original_path_exists": true,
+      "searched_utf8_files": 35,
+      "rationale": "The complete 24-line source sequence remains at the original file and line range 159-182. Full-line byte comparison verifies the recorded location; no repair or semantic interpretation is needed.",
+      "review_method": "independent byte-line search plus AI inspection of relevant source neighborhoods"
+    },
+    {
+      "sample_id": "0a902becadf74af3a076713ca419ab17c4fb8dfa447067ecddf69d1a8e2eec7a",
+      "repository": "packaging",
+      "path": "src/packaging/version.py",
+      "reviewed_status": "relocated",
+      "before_file_hash_verified": true,
+      "before_text_hash_verified": true,
+      "before_lines": {
+        "start_line": 111,
+        "end_line": 158
+      },
+      "matches": [
+        {
+          "path": "src/packaging/version.py",
+          "start_line": 113,
+          "end_line": 160
+        }
+      ],
+      "after_original_path_exists": true,
+      "searched_utf8_files": 16,
+      "rationale": "The entire 48-line source slice occurs exactly once, shifted down two lines in the same file. The adjacent comparison-method ending and following version-pattern commentary retain their arrangement. Exact comparison covers the complete slice including its leading blank lines.",
+      "review_method": "independent byte-line search plus AI inspection of relevant source neighborhoods"
+    },
+    {
+      "sample_id": "0c86685a32536cfbbb104053c98428ffc6217b6e0a63330bd14b48625e35bf3c",
+      "repository": "urllib3",
+      "path": "src/urllib3/util/request.py",
+      "reviewed_status": "valid",
+      "before_file_hash_verified": true,
+      "before_text_hash_verified": true,
+      "before_lines": {
+        "start_line": 41,
+        "end_line": 54
+      },
+      "matches": [
+        {
+          "path": "src/urllib3/util/request.py",
+          "start_line": 41,
+          "end_line": 54
+        }
+      ],
+      "after_original_path_exists": true,
+      "searched_utf8_files": 35,
+      "rationale": "The complete 14-line source sequence is present at the original path and lines 41-54. Both before hashes are verified and the current original-location byte match is exact.",
+      "review_method": "independent byte-line search plus AI inspection of relevant source neighborhoods"
+    },
+    {
+      "sample_id": "0d459595c47a834b5743b3ea665f8815923a635d9efb0d84e2fc9633b279d493",
+      "repository": "attrs",
+      "path": "src/attr/_make.py",
+      "reviewed_status": "relocated",
+      "before_file_hash_verified": true,
+      "before_text_hash_verified": true,
+      "before_lines": {
+        "start_line": 2931,
+        "end_line": 2933
+      },
+      "matches": [
+        {
+          "path": "src/attr/_make.py",
+          "start_line": 2707,
+          "end_line": 2709
+        }
+      ],
+      "after_original_path_exists": true,
+      "searched_utf8_files": 19,
+      "rationale": "The three-line factory initializer remains byte-identical but occurs once at 2707-2709 rather than 2931-2933. Inspection includes the adjacent slots declaration and the two initializer assignments, supporting a line relocation inside the same file.",
+      "review_method": "independent byte-line search plus AI inspection of relevant source neighborhoods"
+    },
+    {
+      "sample_id": "106603d93d6785895c94a101478d36c696ab56e406fd9f9d5fb7457bee4a1b7a",
+      "repository": "packaging",
+      "path": "src/packaging/tags.py",
+      "reviewed_status": "modified",
+      "before_file_hash_verified": true,
+      "before_text_hash_verified": true,
+      "before_lines": {
+        "start_line": 270,
+        "end_line": 298
+      },
+      "matches": [],
+      "after_original_path_exists": true,
+      "searched_utf8_files": 16,
+      "rationale": "The file exists and no exact 29-line occurrence remains. Inspection finds the corresponding generic_tags function at line 284, with three parameter annotations changed from Optional wrappers to union syntax. Those differences occur inside the captured text, so the result is modified.",
+      "review_method": "independent byte-line search plus AI inspection of relevant source neighborhoods"
+    },
+    {
+      "sample_id": "12ec2ce8db95bca547e5804ccd4bb51870a6400cc99be304abfdc7535be7e675",
+      "repository": "requests",
+      "path": "requests/sessions.py",
+      "reviewed_status": "relocated",
+      "before_file_hash_verified": true,
+      "before_text_hash_verified": true,
+      "before_lines": {
+        "start_line": 626,
+        "end_line": 637
+      },
+      "matches": [
+        {
+          "path": "src/requests/sessions.py",
+          "start_line": 626,
+          "end_line": 637
+        }
+      ],
+      "after_original_path_exists": false,
+      "searched_utf8_files": 18,
+      "rationale": "The original requests module path is absent, while the entire twelve-line POST method slice occurs once under src/requests at the same line range. Inspection of the preceding HEAD method and POST documentation supports a path relocation; complete bytes are unchanged.",
+      "review_method": "independent byte-line search plus AI inspection of relevant source neighborhoods"
+    },
+    {
+      "sample_id": "1a22e9233afbf8221accf9cb145097096a4f98f35490ee440c879de9ecc450c6",
+      "repository": "filelock",
+      "path": "src/filelock/_api.py",
+      "reviewed_status": "modified",
+      "before_file_hash_verified": true,
+      "before_text_hash_verified": true,
+      "before_lines": {
+        "start_line": 1,
+        "end_line": 31
+      },
+      "matches": [],
+      "after_original_path_exists": true,
+      "searched_utf8_files": 8,
+      "rationale": "The original file remains but its captured opening 31 lines no longer occur exactly. The inspected import neighborhood adds an inspection module and changes the abstract-base and typing imports. Since the edited header is inside the captured span, the status is modified.",
+      "review_method": "independent byte-line search plus AI inspection of relevant source neighborhoods"
+    },
+    {
+      "sample_id": "217a2218babb8e79e87ffd23366bb32060c00963546e656ba999d4e48ab24925",
+      "repository": "requests",
+      "path": "requests/cookies.py",
+      "reviewed_status": "relocated",
+      "before_file_hash_verified": true,
+      "before_text_hash_verified": true,
+      "before_lines": {
+        "start_line": 366,
+        "end_line": 384
+      },
+      "matches": [
+        {
+          "path": "src/requests/cookies.py",
+          "start_line": 366,
+          "end_line": 384
+        }
+      ],
+      "after_original_path_exists": false,
+      "searched_utf8_files": 18,
+      "rationale": "The original cookies module path is absent. One complete identical 19-line slice exists under src/requests at lines 366-384. The surrounding update-method ending and cookie-search method start were inspected; this is a directory-prefix relocation.",
+      "review_method": "independent byte-line search plus AI inspection of relevant source neighborhoods"
+    },
+    {
+      "sample_id": "37902a59853c77842b7b2330e62bd2fbe40c2a580331db4d6673f049e65f348a",
+      "repository": "pluggy",
+      "path": "src/pluggy/_hooks.py",
+      "reviewed_status": "relocated",
+      "before_file_hash_verified": true,
+      "before_text_hash_verified": true,
+      "before_lines": {
+        "start_line": 270,
+        "end_line": 276
+      },
+      "matches": [
+        {
+          "path": "src/pluggy/_hooks.py",
+          "start_line": 283,
+          "end_line": 289
+        }
+      ],
+      "after_original_path_exists": true,
+      "searched_utf8_files": 7,
+      "rationale": "The full seven-line hook-option normalization helper appears exactly once in the original file, shifted down thirteen lines. Inspection of the function start and adjacent option defaults corroborates the exact whole-slice match at 283-289.",
+      "review_method": "independent byte-line search plus AI inspection of relevant source neighborhoods"
+    },
+    {
+      "sample_id": "4283627fbfd3889f4769619e7e0308a877cad48e0801ea2ed562cb5ff38163d3",
+      "repository": "pluggy",
+      "path": "src/pluggy/_hooks.py",
+      "reviewed_status": "relocated",
+      "before_file_hash_verified": true,
+      "before_text_hash_verified": true,
+      "before_lines": {
+        "start_line": 282,
+        "end_line": 344
+      },
+      "matches": [
+        {
+          "path": "src/pluggy/_hooks.py",
+          "start_line": 295,
+          "end_line": 357
+        }
+      ],
+      "after_original_path_exists": true,
+      "searched_utf8_files": 7,
+      "rationale": "The complete 63-line argument-name inspection helper occurs exactly once in the same file at 295-357, thirteen lines later. Its declaration and documentation neighborhood match and the full byte comparison also matches; the original location is stale but uniquely relocatable.",
+      "review_method": "independent byte-line search plus AI inspection of relevant source neighborhoods"
+    },
+    {
+      "sample_id": "7e1bc522f17503220c07d68c12edd9796d3c529a14de6b2fc65346b7ee0c5102",
+      "repository": "filelock",
+      "path": "src/filelock/_unix.py",
+      "reviewed_status": "modified",
+      "before_file_hash_verified": true,
+      "before_text_hash_verified": true,
+      "before_lines": {
+        "start_line": 1,
+        "end_line": 15
+      },
+      "matches": [],
+      "after_original_path_exists": true,
+      "searched_utf8_files": 8,
+      "rationale": "The original file remains but the opening fifteen-line slice has no exact occurrence. Inspection of the opening import neighborhood shows an added pathlib import within that slice, making the original byte sequence modified.",
+      "review_method": "independent byte-line search plus AI inspection of relevant source neighborhoods"
+    }
+  ],
+  "integrity_sha256": "ae6192d9945014ce32451d1599fa238979b25873a26a7ff162b346e2869e60b6"
+}

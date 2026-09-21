@@ -1,0 +1,846 @@
+{
+  "all_match": true,
+  "cells": [
+    {
+      "cell": "HumanEval/0:reuse",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.04239616694394499,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpn3qy5thw/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpn3qy5thw/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpn3qy5thw/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmpn3qy5thw/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpn3qy5thw/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpn3qy5thw/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/0:fresh",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.04024108394514769,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpvebtzaqm/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpvebtzaqm/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpvebtzaqm/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmpvebtzaqm/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpvebtzaqm/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpvebtzaqm/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/0:verify_repair_refresh",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.04169616592116654,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpatp4iuhp/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpatp4iuhp/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpatp4iuhp/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmpatp4iuhp/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpatp4iuhp/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpatp4iuhp/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/1:reuse",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.041715041967108846,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp7767im1v/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp7767im1v/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp7767im1v/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmp7767im1v/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmp7767im1v/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmp7767im1v/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/1:fresh",
+      "evaluation": {
+        "error": "name 'unpack_request' is not defined",
+        "error_type": "NameError",
+        "execution_seconds": 0.04176854097750038,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"name 'unpack_request' is not defined\", \"error_type\": \"NameError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpmhwv_b_h/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpmhwv_b_h/worker.py\\\", line 95, in execute\\n    test_namespace[\\\"check\\\"](adapted_candidate)\\n  File \\\"upstream_tests.py\\\", line 10, in check\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpmhwv_b_h/worker.py\\\", line 87, in adapted_candidate\\n    result = candidate(request)\\n             ^^^^^^^^^^^^^^^^^^\\n  File \\\"candidate.py\\\", line 12, in separate_paren_groups\\nNameError: name 'unpack_request' is not defined\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmpmhwv_b_h/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpmhwv_b_h/worker.py\", line 95, in execute\n    test_namespace[\"check\"](adapted_candidate)\n  File \"upstream_tests.py\", line 10, in check\n  File \"<WORKSPACE>/work/downstream/scratch/tmpmhwv_b_h/worker.py\", line 87, in adapted_candidate\n    result = candidate(request)\n             ^^^^^^^^^^^^^^^^^^\n  File \"candidate.py\", line 12, in separate_paren_groups\nNameError: name 'unpack_request' is not defined\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/1:verify_repair_refresh",
+      "evaluation": {
+        "error": "name 'unpack_request' is not defined",
+        "error_type": "NameError",
+        "execution_seconds": 0.0439470000565052,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"name 'unpack_request' is not defined\", \"error_type\": \"NameError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmppshc9e1j/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmppshc9e1j/worker.py\\\", line 95, in execute\\n    test_namespace[\\\"check\\\"](adapted_candidate)\\n  File \\\"upstream_tests.py\\\", line 10, in check\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmppshc9e1j/worker.py\\\", line 87, in adapted_candidate\\n    result = candidate(request)\\n             ^^^^^^^^^^^^^^^^^^\\n  File \\\"candidate.py\\\", line 12, in separate_paren_groups\\nNameError: name 'unpack_request' is not defined\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmppshc9e1j/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmppshc9e1j/worker.py\", line 95, in execute\n    test_namespace[\"check\"](adapted_candidate)\n  File \"upstream_tests.py\", line 10, in check\n  File \"<WORKSPACE>/work/downstream/scratch/tmppshc9e1j/worker.py\", line 87, in adapted_candidate\n    result = candidate(request)\n             ^^^^^^^^^^^^^^^^^^\n  File \"candidate.py\", line 12, in separate_paren_groups\nNameError: name 'unpack_request' is not defined\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/2:reuse",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.039951249957084656,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpewr9ne0f/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpewr9ne0f/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpewr9ne0f/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmpewr9ne0f/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpewr9ne0f/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpewr9ne0f/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/2:fresh",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.03870658308733255,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpojo61u1o/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpojo61u1o/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpojo61u1o/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmpojo61u1o/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpojo61u1o/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpojo61u1o/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/2:verify_repair_refresh",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.0390487079275772,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpmydmuzj0/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpmydmuzj0/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpmydmuzj0/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmpmydmuzj0/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpmydmuzj0/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpmydmuzj0/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/3:reuse",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.039900791947729886,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpl6wxtgwi/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpl6wxtgwi/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpl6wxtgwi/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmpl6wxtgwi/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpl6wxtgwi/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpl6wxtgwi/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/3:fresh",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.0392874589888379,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmph9658kks/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmph9658kks/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmph9658kks/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmph9658kks/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmph9658kks/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmph9658kks/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/3:verify_repair_refresh",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.04050487501081079,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpd70r5asb/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpd70r5asb/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpd70r5asb/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmpd70r5asb/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpd70r5asb/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpd70r5asb/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/4:reuse",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.04028008400928229,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpx9n916zz/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpx9n916zz/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpx9n916zz/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmpx9n916zz/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpx9n916zz/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpx9n916zz/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/4:fresh",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.038105124956928194,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp_y3aqqlb/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp_y3aqqlb/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp_y3aqqlb/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmp_y3aqqlb/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmp_y3aqqlb/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmp_y3aqqlb/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/4:verify_repair_refresh",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.04016149998642504,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpv0h7_k8u/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpv0h7_k8u/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpv0h7_k8u/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmpv0h7_k8u/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpv0h7_k8u/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpv0h7_k8u/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/5:reuse",
+      "evaluation": {
+        "error": "intersperse() missing 1 required positional argument: 'delimeter'",
+        "error_type": "TypeError",
+        "execution_seconds": 0.046114958939142525,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"intersperse() missing 1 required positional argument: 'delimeter'\", \"error_type\": \"TypeError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp59gpdq76/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp59gpdq76/worker.py\\\", line 95, in execute\\n    test_namespace[\\\"check\\\"](adapted_candidate)\\n  File \\\"upstream_tests.py\\\", line 10, in check\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp59gpdq76/worker.py\\\", line 87, in adapted_candidate\\n    result = candidate(request)\\n             ^^^^^^^^^^^^^^^^^^\\nTypeError: intersperse() missing 1 required positional argument: 'delimeter'\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmp59gpdq76/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmp59gpdq76/worker.py\", line 95, in execute\n    test_namespace[\"check\"](adapted_candidate)\n  File \"upstream_tests.py\", line 10, in check\n  File \"<WORKSPACE>/work/downstream/scratch/tmp59gpdq76/worker.py\", line 87, in adapted_candidate\n    result = candidate(request)\n             ^^^^^^^^^^^^^^^^^^\nTypeError: intersperse() missing 1 required positional argument: 'delimeter'\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/5:fresh",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.039752707933075726,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmprm24sb_k/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmprm24sb_k/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmprm24sb_k/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmprm24sb_k/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmprm24sb_k/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmprm24sb_k/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/5:verify_repair_refresh",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.03922870906535536,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp31enxds3/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp31enxds3/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp31enxds3/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmp31enxds3/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmp31enxds3/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmp31enxds3/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/6:reuse",
+      "evaluation": {
+        "error": "'tuple' object has no attribute 'split'",
+        "error_type": "AttributeError",
+        "execution_seconds": 0.042959541897289455,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"'tuple' object has no attribute 'split'\", \"error_type\": \"AttributeError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpb2iydd_b/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpb2iydd_b/worker.py\\\", line 95, in execute\\n    test_namespace[\\\"check\\\"](adapted_candidate)\\n  File \\\"upstream_tests.py\\\", line 10, in check\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpb2iydd_b/worker.py\\\", line 87, in adapted_candidate\\n    result = candidate(request)\\n             ^^^^^^^^^^^^^^^^^^\\n  File \\\"candidate.py\\\", line 20, in parse_nested_parens\\nAttributeError: 'tuple' object has no attribute 'split'\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmpb2iydd_b/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpb2iydd_b/worker.py\", line 95, in execute\n    test_namespace[\"check\"](adapted_candidate)\n  File \"upstream_tests.py\", line 10, in check\n  File \"<WORKSPACE>/work/downstream/scratch/tmpb2iydd_b/worker.py\", line 87, in adapted_candidate\n    result = candidate(request)\n             ^^^^^^^^^^^^^^^^^^\n  File \"candidate.py\", line 20, in parse_nested_parens\nAttributeError: 'tuple' object has no attribute 'split'\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/6:fresh",
+      "evaluation": {
+        "error": "'tuple' object has no attribute 'split'",
+        "error_type": "AttributeError",
+        "execution_seconds": 0.04147237504366785,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"'tuple' object has no attribute 'split'\", \"error_type\": \"AttributeError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpc2g781hm/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpc2g781hm/worker.py\\\", line 95, in execute\\n    test_namespace[\\\"check\\\"](adapted_candidate)\\n  File \\\"upstream_tests.py\\\", line 10, in check\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpc2g781hm/worker.py\\\", line 87, in adapted_candidate\\n    result = candidate(request)\\n             ^^^^^^^^^^^^^^^^^^\\n  File \\\"candidate.py\\\", line 20, in parse_nested_parens\\nAttributeError: 'tuple' object has no attribute 'split'\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmpc2g781hm/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpc2g781hm/worker.py\", line 95, in execute\n    test_namespace[\"check\"](adapted_candidate)\n  File \"upstream_tests.py\", line 10, in check\n  File \"<WORKSPACE>/work/downstream/scratch/tmpc2g781hm/worker.py\", line 87, in adapted_candidate\n    result = candidate(request)\n             ^^^^^^^^^^^^^^^^^^\n  File \"candidate.py\", line 20, in parse_nested_parens\nAttributeError: 'tuple' object has no attribute 'split'\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/6:verify_repair_refresh",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.03940745792351663,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpfwc6y2zv/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpfwc6y2zv/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpfwc6y2zv/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmpfwc6y2zv/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpfwc6y2zv/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpfwc6y2zv/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/7:reuse",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.04184170800726861,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp1e_y0x_b/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp1e_y0x_b/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp1e_y0x_b/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmp1e_y0x_b/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmp1e_y0x_b/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmp1e_y0x_b/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/7:fresh",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.04109049995895475,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpafkw5wjq/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpafkw5wjq/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpafkw5wjq/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmpafkw5wjq/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpafkw5wjq/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpafkw5wjq/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/7:verify_repair_refresh",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.04127066594082862,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmprd836i6b/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmprd836i6b/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmprd836i6b/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmprd836i6b/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmprd836i6b/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmprd836i6b/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/8:reuse",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.040494541986845434,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp6ljr661y/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp6ljr661y/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp6ljr661y/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmp6ljr661y/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmp6ljr661y/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmp6ljr661y/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/8:fresh",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.04124275001231581,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpxtkmhl2p/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpxtkmhl2p/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpxtkmhl2p/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmpxtkmhl2p/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpxtkmhl2p/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpxtkmhl2p/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/8:verify_repair_refresh",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.03955362504348159,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpmberxgaf/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpmberxgaf/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpmberxgaf/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmpmberxgaf/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpmberxgaf/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpmberxgaf/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/9:reuse",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.03986745793372393,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmphbcsaewa/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmphbcsaewa/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmphbcsaewa/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmphbcsaewa/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmphbcsaewa/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmphbcsaewa/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/9:fresh",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.03909512504469603,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpuc4mjhy1/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpuc4mjhy1/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpuc4mjhy1/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmpuc4mjhy1/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpuc4mjhy1/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpuc4mjhy1/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/9:verify_repair_refresh",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.0383047501090914,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpq4led98y/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpq4led98y/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpq4led98y/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmpq4led98y/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpq4led98y/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpq4led98y/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/10:reuse",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.04137950006406754,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpxql_8tt9/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpxql_8tt9/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpxql_8tt9/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmpxql_8tt9/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpxql_8tt9/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpxql_8tt9/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/10:fresh",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.040641916915774345,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp0_o7pgn3/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp0_o7pgn3/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp0_o7pgn3/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmp0_o7pgn3/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmp0_o7pgn3/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmp0_o7pgn3/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/10:verify_repair_refresh",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.038632667041383684,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpa88nho51/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpa88nho51/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpa88nho51/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmpa88nho51/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpa88nho51/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpa88nho51/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/11:reuse",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.040232624975033104,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpee7a2fk5/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpee7a2fk5/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpee7a2fk5/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmpee7a2fk5/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpee7a2fk5/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpee7a2fk5/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/11:fresh",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.04080733400769532,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpv89upu7g/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpv89upu7g/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpv89upu7g/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmpv89upu7g/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpv89upu7g/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpv89upu7g/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/11:verify_repair_refresh",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.03984350000973791,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpld0t4v0a/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpld0t4v0a/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpld0t4v0a/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmpld0t4v0a/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpld0t4v0a/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpld0t4v0a/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/12:reuse",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.04156725003849715,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpix0ez0i9/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpix0ez0i9/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpix0ez0i9/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmpix0ez0i9/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpix0ez0i9/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpix0ez0i9/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/12:fresh",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.039513375028036535,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpz_hg2zyk/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpz_hg2zyk/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpz_hg2zyk/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmpz_hg2zyk/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpz_hg2zyk/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpz_hg2zyk/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/12:verify_repair_refresh",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.03992566594388336,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp4ons21he/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp4ons21he/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp4ons21he/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmp4ons21he/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmp4ons21he/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmp4ons21he/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/13:reuse",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.04000704106874764,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmphhs_l9ok/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmphhs_l9ok/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmphhs_l9ok/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmphhs_l9ok/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmphhs_l9ok/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmphhs_l9ok/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/13:fresh",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.04119662498123944,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpzbh4z1df/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpzbh4z1df/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpzbh4z1df/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmpzbh4z1df/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpzbh4z1df/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpzbh4z1df/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/13:verify_repair_refresh",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.04100945801474154,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpjk1iwd7t/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpjk1iwd7t/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpjk1iwd7t/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmpjk1iwd7t/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpjk1iwd7t/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpjk1iwd7t/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/14:reuse",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.04034804098773748,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpjm8l1fnr/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpjm8l1fnr/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpjm8l1fnr/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmpjm8l1fnr/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpjm8l1fnr/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpjm8l1fnr/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/14:fresh",
+      "evaluation": {
+        "error": "name 'unpack_request' is not defined",
+        "error_type": "NameError",
+        "execution_seconds": 0.04364737495779991,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"name 'unpack_request' is not defined\", \"error_type\": \"NameError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpc2af52x1/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpc2af52x1/worker.py\\\", line 95, in execute\\n    test_namespace[\\\"check\\\"](adapted_candidate)\\n  File \\\"upstream_tests.py\\\", line 10, in check\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpc2af52x1/worker.py\\\", line 87, in adapted_candidate\\n    result = candidate(request)\\n             ^^^^^^^^^^^^^^^^^^\\n  File \\\"candidate.py\\\", line 8, in all_prefixes\\nNameError: name 'unpack_request' is not defined\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmpc2af52x1/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpc2af52x1/worker.py\", line 95, in execute\n    test_namespace[\"check\"](adapted_candidate)\n  File \"upstream_tests.py\", line 10, in check\n  File \"<WORKSPACE>/work/downstream/scratch/tmpc2af52x1/worker.py\", line 87, in adapted_candidate\n    result = candidate(request)\n             ^^^^^^^^^^^^^^^^^^\n  File \"candidate.py\", line 8, in all_prefixes\nNameError: name 'unpack_request' is not defined\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/14:verify_repair_refresh",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.04027070803567767,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp0yg7qjkd/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp0yg7qjkd/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp0yg7qjkd/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmp0yg7qjkd/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmp0yg7qjkd/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmp0yg7qjkd/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/15:reuse",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.039895791094750166,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp8y8slg3e/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp8y8slg3e/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp8y8slg3e/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmp8y8slg3e/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmp8y8slg3e/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmp8y8slg3e/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/15:fresh",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.041154207894578576,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpa3znrxlu/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpa3znrxlu/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpa3znrxlu/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmpa3znrxlu/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpa3znrxlu/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpa3znrxlu/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/15:verify_repair_refresh",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.04123016609810293,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmphug4sjfu/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmphug4sjfu/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmphug4sjfu/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmphug4sjfu/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmphug4sjfu/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmphug4sjfu/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/16:reuse",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.04031304200179875,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp5uomg3l1/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp5uomg3l1/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp5uomg3l1/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmp5uomg3l1/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmp5uomg3l1/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmp5uomg3l1/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/16:fresh",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.041558833909220994,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpeirxq6vc/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpeirxq6vc/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpeirxq6vc/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmpeirxq6vc/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpeirxq6vc/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpeirxq6vc/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/16:verify_repair_refresh",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.039678124943748116,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpk2_qp9pi/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpk2_qp9pi/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpk2_qp9pi/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmpk2_qp9pi/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpk2_qp9pi/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpk2_qp9pi/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/17:reuse",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.03786162496544421,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp59a8c1q4/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp59a8c1q4/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp59a8c1q4/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmp59a8c1q4/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmp59a8c1q4/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmp59a8c1q4/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/17:fresh",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.03983920800965279,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpqemhw_ou/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpqemhw_ou/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpqemhw_ou/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmpqemhw_ou/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpqemhw_ou/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpqemhw_ou/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/17:verify_repair_refresh",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.03791624994482845,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpukxhn1fg/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpukxhn1fg/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpukxhn1fg/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmpukxhn1fg/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpukxhn1fg/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpukxhn1fg/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/18:reuse",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.04015512496698648,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpksh0mixy/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpksh0mixy/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpksh0mixy/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmpksh0mixy/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpksh0mixy/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpksh0mixy/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/18:fresh",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.04014729196205735,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpdpz3stfw/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpdpz3stfw/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpdpz3stfw/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmpdpz3stfw/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpdpz3stfw/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpdpz3stfw/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/18:verify_repair_refresh",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.0398549169767648,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmplsv1jfsw/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmplsv1jfsw/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmplsv1jfsw/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmplsv1jfsw/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmplsv1jfsw/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmplsv1jfsw/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/19:reuse",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.04051195795182139,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpzjetyd4k/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpzjetyd4k/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpzjetyd4k/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmpzjetyd4k/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpzjetyd4k/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpzjetyd4k/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/19:fresh",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.04376441694330424,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpskxnqjd7/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpskxnqjd7/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmpskxnqjd7/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmpskxnqjd7/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpskxnqjd7/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmpskxnqjd7/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    },
+    {
+      "cell": "HumanEval/19:verify_repair_refresh",
+      "evaluation": {
+        "error": "import outside frozen allowlist",
+        "error_type": "ValueError",
+        "execution_seconds": 0.052485791966319084,
+        "passed": false,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "{\"error\": \"import outside frozen allowlist\", \"error_type\": \"ValueError\", \"passed\": false, \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp56ocoyo_/worker.py\\\", line 105, in main\\n    result = execute(payload)\\n             ^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp56ocoyo_/worker.py\\\", line 56, in execute\\n    tree = validate_code(code, {\\\"request_api\\\", \\\"current_api\\\"})\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"<WORKSPACE>/work/downstream/scratch/tmp56ocoyo_/worker.py\\\", line 41, in validate_code\\n    raise ValueError(\\\"import outside frozen allowlist\\\")\\nValueError: import outside frozen allowlist\\n\"}\n",
+        "traceback": "Traceback (most recent call last):\n  File \"<WORKSPACE>/work/downstream/scratch/tmp56ocoyo_/worker.py\", line 105, in main\n    result = execute(payload)\n             ^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmp56ocoyo_/worker.py\", line 56, in execute\n    tree = validate_code(code, {\"request_api\", \"current_api\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>/work/downstream/scratch/tmp56ocoyo_/worker.py\", line 41, in validate_code\n    raise ValueError(\"import outside frozen allowlist\")\nValueError: import outside frozen allowlist\n"
+      },
+      "matches_recorded_pass": true
+    }
+  ],
+  "replayed_at": "2026-09-21T09:15:32.681289+00:00"
+}

@@ -1,0 +1,10 @@
+{
+  "amendments": [
+    {
+      "recorded_at_utc": "2026-09-21T09:09:24.668960+00:00",
+      "stage": "After archives, source manifests, samples and automated reference annotations were frozen; before any engine predictions or blinded review. Root requested >=20 review items without seeing labels. Original smaller review packet is preserved as review_packet_initial.json.",
+      "change": "Blinded AI review selects two snippets per repository rather than one, plus up to two per observed reference status; ensures at least20 reviewed snippets.",
+      "reason": "Increase repository coverage of separate AI review; no sampling, labels, metrics or split change."
+    }
+  ]
+}

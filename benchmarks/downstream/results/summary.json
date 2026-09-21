@@ -1,0 +1,101 @@
+{
+  "claim": "executed functional success on an artificial API-adaptation study only",
+  "completed_cells": 60,
+  "conditions": {
+    "fresh": {
+      "by_drift": {
+        "file_move": {
+          "passed": 0,
+          "total": 5
+        },
+        "signature_change": {
+          "passed": 0,
+          "total": 5
+        },
+        "symbol_rename": {
+          "passed": 0,
+          "total": 5
+        },
+        "unchanged": {
+          "passed": 0,
+          "total": 5
+        }
+      },
+      "completed": 20,
+      "failed": 20,
+      "failure_types": {
+        "AttributeError": 1,
+        "NameError": 2,
+        "ValueError": 17
+      },
+      "generation_seconds": 43.09544758335687,
+      "generation_tokens": 2642,
+      "passed": 0,
+      "prompt_tokens": 15341
+    },
+    "reuse": {
+      "by_drift": {
+        "file_move": {
+          "passed": 0,
+          "total": 5
+        },
+        "signature_change": {
+          "passed": 0,
+          "total": 5
+        },
+        "symbol_rename": {
+          "passed": 0,
+          "total": 5
+        },
+        "unchanged": {
+          "passed": 0,
+          "total": 5
+        }
+      },
+      "completed": 20,
+      "failed": 20,
+      "failure_types": {
+        "AttributeError": 1,
+        "TypeError": 1,
+        "ValueError": 18
+      },
+      "generation_seconds": 43.04010016517714,
+      "generation_tokens": 2605,
+      "passed": 0,
+      "prompt_tokens": 15263
+    },
+    "verify_repair_refresh": {
+      "by_drift": {
+        "file_move": {
+          "passed": 0,
+          "total": 5
+        },
+        "signature_change": {
+          "passed": 0,
+          "total": 5
+        },
+        "symbol_rename": {
+          "passed": 0,
+          "total": 5
+        },
+        "unchanged": {
+          "passed": 0,
+          "total": 5
+        }
+      },
+      "completed": 20,
+      "failed": 20,
+      "failure_types": {
+        "NameError": 1,
+        "ValueError": 19
+      },
+      "generation_seconds": 42.309268956887536,
+      "generation_tokens": 2605,
+      "passed": 0,
+      "prompt_tokens": 15977
+    }
+  },
+  "expected_cells": 60,
+  "raw_results_sha256": "37c8e9ca0619dd0e8c432573e1bef1f90f3e58cea1f2f0bac01bcbaad8e276c3",
+  "results_sha256": "b19f25763ed30147e9e2a8611bfbe3acb953dbbbd319960b6d9d6edd1eea7029"
+}

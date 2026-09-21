@@ -1,0 +1,5421 @@
+{
+  "protocol": "All frozen v1 drift samples, no selection by dependency outcome. Batch diagnostic bundle budget=250000 UTF-8 bytes; this is not a retrieval budget experiment. Source-text acceptance vs direct-static witness invalidation; additional flags are observations, not independently labeled correctness or semantic staleness.",
+  "provenance": {
+    "samples_sha256": "b48c70176181b679f0333cb36b23b9fb89d2d52795300b8dc4a163403451bfca",
+    "implementation_sha256": "8b299a5672a07df5aba867b5c43e48d6b7d82131cdc6e025ad061541bdd4b83f",
+    "runner_sha256": "813433832f3e86ab161059d6ad525a8223736d8ee3292cc119099f0638d45211"
+  },
+  "quality": {
+    "samples": 300,
+    "text_recoverable": 191,
+    "additionally_flagged": 65,
+    "direct_reference_flags": 30,
+    "anchor_flags": 35,
+    "needs_review": 104,
+    "dependency_statuses": {
+      "changed": 105,
+      "missing": 68,
+      "unchanged": 22,
+      "unresolved": 105
+    },
+    "rows": [
+      {
+        "sample_id": "008a0e7c44ea1b5ba77fb3af65f9247526e384ee8ea0636203c41acea27c7af2",
+        "repository": "attrs",
+        "split": "development",
+        "path": "src/attr/_make.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 20,
+          "changed": 2
+        }
+      },
+      {
+        "sample_id": "020213f3b764b23fcba5af68790b7060064e3c8ca5dddb9405ae38bfee6bdd5f",
+        "repository": "attrs",
+        "split": "development",
+        "path": "src/attrs/validators.py",
+        "source_status": "valid",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 1
+        }
+      },
+      {
+        "sample_id": "03507f12f7c2f9f6267624c8294b16ec3098f1f401cc682236a07b78c4b1e194",
+        "repository": "attrs",
+        "split": "development",
+        "path": "src/attr/_cmp.py",
+        "source_status": "valid",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unchanged": 1,
+          "unresolved": 2
+        }
+      },
+      {
+        "sample_id": "03899e9fac34be955bfc73701545290473c9f9c77e7b7d0fd3fc4928729e44a3",
+        "repository": "attrs",
+        "split": "development",
+        "path": "src/attr/_make.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 1
+        }
+      },
+      {
+        "sample_id": "03a083f97178cc85615be544031df7dc932e70c173ab5df4dcb2a1974fc0aec9",
+        "repository": "attrs",
+        "split": "development",
+        "path": "src/attr/_make.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unchanged": 1,
+          "unresolved": 5
+        }
+      },
+      {
+        "sample_id": "047199c17c2d80e7ed796076c8eaaa0946af8a25b7ff09c6aaf239619242c0a1",
+        "repository": "attrs",
+        "split": "development",
+        "path": "src/attr/_make.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 2
+        }
+      },
+      {
+        "sample_id": "0611292fc05f2362f87fae4bb6b0ca86d6dd3bbf0d535ca2fed474b1ebd97e49",
+        "repository": "attrs",
+        "split": "development",
+        "path": "src/attr/setters.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 2
+        }
+      },
+      {
+        "sample_id": "0625a34ecc0e5a9cc1959ce2ac220e4997026e56c1c302c0410ae924c12f9c81",
+        "repository": "attrs",
+        "split": "development",
+        "path": "src/attr/_make.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 2
+        }
+      },
+      {
+        "sample_id": "0699a2c91ceff4e793f5c78a592da5301182fa38ffa31004828a05d10278fc41",
+        "repository": "attrs",
+        "split": "development",
+        "path": "src/attr/_make.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 4
+        }
+      },
+      {
+        "sample_id": "0b2cd7c5208438c86f73572b3e2229fb2b2eb0edb3c82f7b9a8d4dae63529528",
+        "repository": "attrs",
+        "split": "development",
+        "path": "src/attr/_make.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 3
+        }
+      },
+      {
+        "sample_id": "0b59071c818d19bd153c5785af132f96ea8ec1471de4fe2ffbbce26de4c660e2",
+        "repository": "attrs",
+        "split": "development",
+        "path": "src/attr/_cmp.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 5
+        }
+      },
+      {
+        "sample_id": "0b88178e88fb6ba31e3aa2b1cb28267d06e314449cfe35a6f47b713654656d33",
+        "repository": "attrs",
+        "split": "development",
+        "path": "src/attr/validators.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 4
+        }
+      },
+      {
+        "sample_id": "0c0ce3eb871ab936885a9ed5a94e74fa7976c375a680da2708054b71ab209ad3",
+        "repository": "attrs",
+        "split": "development",
+        "path": "src/attr/_make.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "changed": 6,
+          "unresolved": 22
+        }
+      },
+      {
+        "sample_id": "0c33f0941dfbee41edaac722f9ce903ce2f41f1a9bca1e8536a68d984a1ad656",
+        "repository": "attrs",
+        "split": "development",
+        "path": "src/attr/_cmp.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "changed": 5,
+          "unresolved": 4
+        }
+      },
+      {
+        "sample_id": "0d3ce2b48c4e9aaa014f232751194d2ee594a9bb3286cbcfb865fd0b0e2d5d71",
+        "repository": "attrs",
+        "split": "development",
+        "path": "src/attr/_make.py",
+        "source_status": "relocated",
+        "dependency_status": "changed",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": true,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "changed": 1,
+          "unchanged": 1,
+          "unresolved": 4
+        }
+      },
+      {
+        "sample_id": "0d459595c47a834b5743b3ea665f8815923a635d9efb0d84e2fc9633b279d493",
+        "repository": "attrs",
+        "split": "development",
+        "path": "src/attr/_make.py",
+        "source_status": "relocated",
+        "dependency_status": "unchanged",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {}
+      },
+      {
+        "sample_id": "0e03398730a6d7db2bd12812476790a7f60ddb1455feb7b30097c77073f57621",
+        "repository": "attrs",
+        "split": "development",
+        "path": "src/attr/validators.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "changed": 1
+        }
+      },
+      {
+        "sample_id": "0ef1d31c7bb4e5f36156c29937733867b178bd4694cb1cc0c470f05f3b6fa281",
+        "repository": "attrs",
+        "split": "development",
+        "path": "src/attr/validators.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "changed": 1,
+          "unresolved": 1
+        }
+      },
+      {
+        "sample_id": "1094324d26bac3c7faf7597f36d63f68f9c4dbf1dda515b723e797ffdb2c10e6",
+        "repository": "attrs",
+        "split": "development",
+        "path": "src/attr/validators.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "changed": 1
+        }
+      },
+      {
+        "sample_id": "1245089af457e2c7e23b53ddcf7eeb4a06012f717b669a148f6f47f7e0264c1d",
+        "repository": "attrs",
+        "split": "development",
+        "path": "src/attr/validators.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 1
+        }
+      },
+      {
+        "sample_id": "12ce64018019d8eb0d54db50c0aab93b25798a14a5ace2fa9afac1b24fe8aa70",
+        "repository": "attrs",
+        "split": "development",
+        "path": "src/attr/exceptions.py",
+        "source_status": "valid",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 1
+        }
+      },
+      {
+        "sample_id": "15b2feb36d25bdff2e57941395690e8e056951af9d91dbe25e9829a710eeb425",
+        "repository": "attrs",
+        "split": "development",
+        "path": "src/attr/validators.py",
+        "source_status": "modified",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "changed": 2
+        }
+      },
+      {
+        "sample_id": "1625f2c01c076b679b8bc77a94dd68e54a8e9cfcffefd231cbb82afd22c4527c",
+        "repository": "attrs",
+        "split": "development",
+        "path": "src/attr/_make.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "changed": 1,
+          "unresolved": 6
+        }
+      },
+      {
+        "sample_id": "1a42f4717a4da0e2cbafde93a5f4b3197a309c96c277ba9936e5386d130c0c8e",
+        "repository": "attrs",
+        "split": "development",
+        "path": "src/attr/_make.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 2
+        }
+      },
+      {
+        "sample_id": "1aa1dcee272254dd347de8c33a4013c11b77d703bcb2458242d75206c34b2a71",
+        "repository": "attrs",
+        "split": "development",
+        "path": "src/attr/_compat.py",
+        "source_status": "relocated",
+        "dependency_status": "unchanged",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {}
+      },
+      {
+        "sample_id": "1c8be1c6e9516ffcbfb7cbf2586d83950860c7409320520ccdec9a0410d70060",
+        "repository": "attrs",
+        "split": "development",
+        "path": "src/attr/_next_gen.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {}
+      },
+      {
+        "sample_id": "1cc0c5857b1258cf050127cc80386d0dbe8d1a9a7c786aa203448f0c74d0499a",
+        "repository": "attrs",
+        "split": "development",
+        "path": "src/attr/converters.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 5
+        }
+      },
+      {
+        "sample_id": "1cfd5dfa518550cde749ed9a9f9ecf5c9f073ce4971a5b91e06d830cad8bcfa9",
+        "repository": "attrs",
+        "split": "development",
+        "path": "src/attr/__init__.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 13
+        }
+      },
+      {
+        "sample_id": "1dac72bca4a26ad78e5763925ee052bb817f71c4205077148436b51b2c22bdf2",
+        "repository": "attrs",
+        "split": "development",
+        "path": "src/attr/validators.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 2
+        }
+      },
+      {
+        "sample_id": "1fd29cf641a23b56b6af2da04edaa8d458df377b52e0e1a149e5d479e919647c",
+        "repository": "attrs",
+        "split": "development",
+        "path": "src/attr/_next_gen.py",
+        "source_status": "relocated",
+        "dependency_status": "changed",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": true,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "changed": 1,
+          "unresolved": 20
+        }
+      },
+      {
+        "sample_id": "0113da860cab60a9e8762dbf886388ec686ff482c1e757809f575aac33338650",
+        "repository": "babel",
+        "split": "holdout",
+        "path": "babel/messages/pofile.py",
+        "source_status": "valid",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 2
+        }
+      },
+      {
+        "sample_id": "0241a21b31a6d72aeabb742758593cf19016d24a363d167dbdcf3aa4ab336d3a",
+        "repository": "babel",
+        "split": "holdout",
+        "path": "babel/dates.py",
+        "source_status": "relocated",
+        "dependency_status": "changed",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": true,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 9,
+          "changed": 1
+        }
+      },
+      {
+        "sample_id": "0272e7f736b30094cc46cd573d19c0f71954e20678ca29a3765933958f17088f",
+        "repository": "babel",
+        "split": "holdout",
+        "path": "babel/dates.py",
+        "source_status": "relocated",
+        "dependency_status": "changed",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": true,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "changed": 1,
+          "unresolved": 6
+        }
+      },
+      {
+        "sample_id": "02edfbf6038bbe6597b752bff5d56b5f218c1a187ebbcc1a3131cb53cf73f630",
+        "repository": "babel",
+        "split": "holdout",
+        "path": "babel/plural.py",
+        "source_status": "valid",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 16,
+          "unchanged": 7
+        }
+      },
+      {
+        "sample_id": "0346600387f26d034311062b07365daa601c2ce645cc4a0bc24f5747d4c52d2d",
+        "repository": "babel",
+        "split": "holdout",
+        "path": "babel/core.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unchanged": 1,
+          "unresolved": 2
+        }
+      },
+      {
+        "sample_id": "0348b8aaf1cc181440cdcb72245ad5399ce513fa6b70ca186cf485870f60ecb4",
+        "repository": "babel",
+        "split": "holdout",
+        "path": "babel/numbers.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 4
+        }
+      },
+      {
+        "sample_id": "041a19fdc76e70f56cca0f8e4de12e6663b1e661e25f4665c7c7b3fc3ec83383",
+        "repository": "babel",
+        "split": "holdout",
+        "path": "babel/localedata.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 18,
+          "changed": 4
+        }
+      },
+      {
+        "sample_id": "041a859b924bc8b87e72be53ccb8515fca57b657788fb7918c97775be5848e55",
+        "repository": "babel",
+        "split": "holdout",
+        "path": "babel/languages.py",
+        "source_status": "valid",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 14,
+          "unchanged": 1
+        }
+      },
+      {
+        "sample_id": "04f0ad5e0f04bbccfb1ec74bf586475ab2ed5aa826a55289228c8359c0fbc840",
+        "repository": "babel",
+        "split": "holdout",
+        "path": "babel/support.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 11
+        }
+      },
+      {
+        "sample_id": "056cf74b1866efd2843cad8ed35de13f94f79e30043b64757f80fb6ea5cf60d7",
+        "repository": "babel",
+        "split": "holdout",
+        "path": "babel/messages/pofile.py",
+        "source_status": "valid",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 3
+        }
+      },
+      {
+        "sample_id": "06b0ca7926995c81c9525c731027b816da6627dbd5f43babcf916b99f19ff23c",
+        "repository": "babel",
+        "split": "holdout",
+        "path": "babel/messages/catalog.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 9,
+          "unchanged": 1
+        }
+      },
+      {
+        "sample_id": "06bc1b5f4b6328a0d1e33dbbbe34a76ffe5bff1fd6b58bb681a163665e381011",
+        "repository": "babel",
+        "split": "holdout",
+        "path": "babel/numbers.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 6
+        }
+      },
+      {
+        "sample_id": "074461d3816b48de45908751f13f9c3045a5d3e6457a8fac8d304e907e7383df",
+        "repository": "babel",
+        "split": "holdout",
+        "path": "babel/localtime/_win32.py",
+        "source_status": "valid",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 15,
+          "unchanged": 1
+        }
+      },
+      {
+        "sample_id": "077544312e5504db129a2eb338de8ee933c0ee03188614bbf1fa7932af5f42d9",
+        "repository": "babel",
+        "split": "holdout",
+        "path": "babel/core.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 3
+        }
+      },
+      {
+        "sample_id": "0793b7e7c2151a8c42544982217ebdea4d34b1eac83f63c8c9dd01a7930c15c5",
+        "repository": "babel",
+        "split": "holdout",
+        "path": "babel/dates.py",
+        "source_status": "valid",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 15
+        }
+      },
+      {
+        "sample_id": "0793ed12e9079e5f07e9d4019fcd23bbe76270a0af9f274aa97846b0f8456797",
+        "repository": "babel",
+        "split": "holdout",
+        "path": "babel/numbers.py",
+        "source_status": "relocated",
+        "dependency_status": "changed",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": true,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "changed": 1,
+          "unresolved": 2
+        }
+      },
+      {
+        "sample_id": "07df666c100c301805530f28720390386bf5ff8e2a218ad6dc7d6249f858ffc1",
+        "repository": "babel",
+        "split": "holdout",
+        "path": "babel/dates.py",
+        "source_status": "relocated",
+        "dependency_status": "changed",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": true,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 7,
+          "unchanged": 3,
+          "changed": 1
+        }
+      },
+      {
+        "sample_id": "0867881197b968d3b4e54a991ce3e1ca8309d4363e253bd5c04300fc924a2b6b",
+        "repository": "babel",
+        "split": "holdout",
+        "path": "babel/messages/catalog.py",
+        "source_status": "valid",
+        "dependency_status": "unchanged",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {}
+      },
+      {
+        "sample_id": "0879a24d7ddd8b043d350f8fbc6458d98193a7a4132f9149be31ab43453c696a",
+        "repository": "babel",
+        "split": "holdout",
+        "path": "babel/plural.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 2
+        }
+      },
+      {
+        "sample_id": "092df7adbb18c740cfa5c2440f3f7255cd8ba9bab360e8e8551afa03bcf51162",
+        "repository": "babel",
+        "split": "holdout",
+        "path": "babel/messages/catalog.py",
+        "source_status": "valid",
+        "dependency_status": "changed",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": true,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "changed": 1,
+          "unresolved": 22,
+          "unchanged": 1
+        }
+      },
+      {
+        "sample_id": "0935978919343fcefb422fa5a031a6542046f5921c0f0d546dd043a786a9d99b",
+        "repository": "babel",
+        "split": "holdout",
+        "path": "babel/plural.py",
+        "source_status": "valid",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 7
+        }
+      },
+      {
+        "sample_id": "09ab74451bd6283a8ee62d36f3edfc58cd4ddd04495f79fed40f4450f9456560",
+        "repository": "babel",
+        "split": "holdout",
+        "path": "babel/messages/catalog.py",
+        "source_status": "relocated",
+        "dependency_status": "changed",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": true,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "changed": 1,
+          "unresolved": 9
+        }
+      },
+      {
+        "sample_id": "0a0ad12407fc0eba2a95be339d28744fe01b86b830be53485e29ac4b484b33f3",
+        "repository": "babel",
+        "split": "holdout",
+        "path": "babel/dates.py",
+        "source_status": "valid",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 11
+        }
+      },
+      {
+        "sample_id": "0a16875ca47728f16654a00cb83a2ff1109e18e1149ae27b6215e6eb57b9cd8a",
+        "repository": "babel",
+        "split": "holdout",
+        "path": "babel/support.py",
+        "source_status": "relocated",
+        "dependency_status": "changed",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": true,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 8,
+          "changed": 3,
+          "unchanged": 1
+        }
+      },
+      {
+        "sample_id": "0a1caeb43250e715991e2a38fcdcdfb649cf1ebdfa0d302253312990cf6f55b2",
+        "repository": "babel",
+        "split": "holdout",
+        "path": "babel/dates.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 10
+        }
+      },
+      {
+        "sample_id": "0ab85501a701b1f36532564422fafedf874160151b5a92f540f735c681c87866",
+        "repository": "babel",
+        "split": "holdout",
+        "path": "babel/core.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unchanged": 1,
+          "unresolved": 2
+        }
+      },
+      {
+        "sample_id": "0c062dad470fe65a1b7cb8874219b42f95e0aa01cdca78999745e9139b28cef2",
+        "repository": "babel",
+        "split": "holdout",
+        "path": "babel/numbers.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 5
+        }
+      },
+      {
+        "sample_id": "0c36869a0ee04aaa4b7d5e888a2a9a56ae74d5dbed9e692c57e0a7d8a5c4afa2",
+        "repository": "babel",
+        "split": "holdout",
+        "path": "babel/support.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 6,
+          "changed": 1
+        }
+      },
+      {
+        "sample_id": "0c6521a02b937e2e993b4340d0eca766efdf29ce4829465e23b55d278102079d",
+        "repository": "babel",
+        "split": "holdout",
+        "path": "babel/plural.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 2,
+          "unchanged": 1
+        }
+      },
+      {
+        "sample_id": "0d934461a9c718354a92738be8b23e00dc351675a8368c160ec6c23fb0d6c51d",
+        "repository": "babel",
+        "split": "holdout",
+        "path": "babel/dates.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unchanged": 1,
+          "unresolved": 4
+        }
+      },
+      {
+        "sample_id": "0021b6e6351447368dd93824259c48218d3d86228d0934a4fc129e7cfd566ad8",
+        "repository": "dateutil",
+        "split": "holdout",
+        "path": "dateutil/parser/__init__.py",
+        "source_status": "relocated",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": false,
+        "anchor_flag": true,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 3
+        }
+      },
+      {
+        "sample_id": "0075df95f5789590dd11319838c7469cf63c8bc74b2a804dbb31303c885b0d6a",
+        "repository": "dateutil",
+        "split": "holdout",
+        "path": "dateutil/test/_common.py",
+        "source_status": "deleted",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 1
+        }
+      },
+      {
+        "sample_id": "007ea07b2ec62dfd1bb373c55a09c25a66d4942b287f611155607e94c7d86dc7",
+        "repository": "dateutil",
+        "split": "holdout",
+        "path": "dateutil/parser/_parser.py",
+        "source_status": "relocated",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": false,
+        "anchor_flag": true,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 1
+        }
+      },
+      {
+        "sample_id": "0084cb49e9f677ecca826e81228702df54cccb22c1f603fd79f3a9cc3638ff00",
+        "repository": "dateutil",
+        "split": "holdout",
+        "path": "dateutil/test/test_rrule.py",
+        "source_status": "deleted",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 4
+        }
+      },
+      {
+        "sample_id": "008b8c29766754322e6148c5b5ccb242bdb6114eb34284ed5bdf6da5921b0803",
+        "repository": "dateutil",
+        "split": "holdout",
+        "path": "dateutil/test/test_rrule.py",
+        "source_status": "deleted",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 6,
+          "missing": 1
+        }
+      },
+      {
+        "sample_id": "008d160781564683f6cfbab57a5863e8c206d2362a66a6f7ecea3b2db73a6f1d",
+        "repository": "dateutil",
+        "split": "holdout",
+        "path": "dateutil/test/test_rrule.py",
+        "source_status": "deleted",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 5,
+          "missing": 1
+        }
+      },
+      {
+        "sample_id": "00950ff52f31b953d3de9ff0c1cdb89c7d668566a8edefb5023379bf6ec60d2b",
+        "repository": "dateutil",
+        "split": "holdout",
+        "path": "dateutil/test/test_tz.py",
+        "source_status": "deleted",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 3
+        }
+      },
+      {
+        "sample_id": "00958ed82bd572e3877b2273e3b3f6b4d1f7003cad4b6c8460c62daa653923e7",
+        "repository": "dateutil",
+        "split": "holdout",
+        "path": "dateutil/test/test_rrule.py",
+        "source_status": "deleted",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 3,
+          "missing": 1
+        }
+      },
+      {
+        "sample_id": "00b8d8ede5dc9c8a62bbd83d2c7c57163892c42b1b60991d1cd9ba08516294f5",
+        "repository": "dateutil",
+        "split": "holdout",
+        "path": "dateutil/test/test_rrule.py",
+        "source_status": "deleted",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 4,
+          "missing": 1
+        }
+      },
+      {
+        "sample_id": "00c127bf0002c8ccf9f86a8a7e54e99f9634a1a04a3c33c056c5d474905033d4",
+        "repository": "dateutil",
+        "split": "holdout",
+        "path": "dateutil/test/test_tz.py",
+        "source_status": "deleted",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 3
+        }
+      },
+      {
+        "sample_id": "00cbf8da080624851d1d9ed6f71f8fcf9a1c81696e8675fb86e5961d72dd60f2",
+        "repository": "dateutil",
+        "split": "holdout",
+        "path": "dateutil/test/test_easter.py",
+        "source_status": "deleted",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 2,
+          "missing": 1
+        }
+      },
+      {
+        "sample_id": "01bbcab9def7a6c158d13e011a3aa83929f4d594b6cf8e6a8803efc583c2b3f5",
+        "repository": "dateutil",
+        "split": "holdout",
+        "path": "dateutil/test/test_rrule.py",
+        "source_status": "deleted",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 4,
+          "missing": 1
+        }
+      },
+      {
+        "sample_id": "0255fe6d0a95f56e7699efde6d99b475b26b4b99ddd623a1157a03598c92347c",
+        "repository": "dateutil",
+        "split": "holdout",
+        "path": "dateutil/test/test_parser.py",
+        "source_status": "deleted",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 2,
+          "missing": 1
+        }
+      },
+      {
+        "sample_id": "026b3b469d8253cd2b51c4c1ef41f001dd0f09b5cfdfcd2a0c144db8557513a6",
+        "repository": "dateutil",
+        "split": "holdout",
+        "path": "dateutil/test/test_rrule.py",
+        "source_status": "deleted",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 4,
+          "missing": 1
+        }
+      },
+      {
+        "sample_id": "026d4bfe102e2e7f6ae43022a9f1ebebdfc4a55050f6d4ed7c7bd8e9008cb048",
+        "repository": "dateutil",
+        "split": "holdout",
+        "path": "dateutil/test/test_rrule.py",
+        "source_status": "deleted",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 4,
+          "missing": 1
+        }
+      },
+      {
+        "sample_id": "027e0f9b5b9910fc27a537840c4204f5ff20e9514348ffb6de452b737c4b7377",
+        "repository": "dateutil",
+        "split": "holdout",
+        "path": "dateutil/test/test_isoparser.py",
+        "source_status": "deleted",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 3,
+          "missing": 1
+        }
+      },
+      {
+        "sample_id": "02d2b0a63714161159a73482f51e151f5a40c84e0291a48f3ade68d2ff90f137",
+        "repository": "dateutil",
+        "split": "holdout",
+        "path": "dateutil/tz/tz.py",
+        "source_status": "relocated",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": false,
+        "anchor_flag": true,
+        "needs_review": false,
+        "reference_statuses": {
+          "missing": 1
+        }
+      },
+      {
+        "sample_id": "02edca7ff3401d55e14e401896b909905365532dcb6f92d1676f8978299aecec",
+        "repository": "dateutil",
+        "split": "holdout",
+        "path": "dateutil/test/test_rrule.py",
+        "source_status": "deleted",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 4,
+          "missing": 1
+        }
+      },
+      {
+        "sample_id": "0320fe1ee931724da01a7f42805a50bd9ddd21b938e1a80a48b555b63d1803e4",
+        "repository": "dateutil",
+        "split": "holdout",
+        "path": "dateutil/test/test_tz.py",
+        "source_status": "deleted",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 3
+        }
+      },
+      {
+        "sample_id": "034e2e20bba4cc32186847ff6314e4e93156dfe41980d4f69372583316acb34a",
+        "repository": "dateutil",
+        "split": "holdout",
+        "path": "dateutil/test/test_rrule.py",
+        "source_status": "deleted",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 3,
+          "missing": 1
+        }
+      },
+      {
+        "sample_id": "0397dfa484e74a5fe760c2d845d1c538d0ed1f29f5657526308f39686e8bddfe",
+        "repository": "dateutil",
+        "split": "holdout",
+        "path": "dateutil/test/test_rrule.py",
+        "source_status": "deleted",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 3,
+          "missing": 1
+        }
+      },
+      {
+        "sample_id": "03a6995be5f266425fc906a87c657b4204ff7602c27470975cc426bfbcffa646",
+        "repository": "dateutil",
+        "split": "holdout",
+        "path": "dateutil/test/test_parser.py",
+        "source_status": "deleted",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 2,
+          "missing": 1
+        }
+      },
+      {
+        "sample_id": "03b422b5eb81591f24cdddf57f49733253d04ac8fdeb61d0a563a8d199277946",
+        "repository": "dateutil",
+        "split": "holdout",
+        "path": "dateutil/test/test_tz.py",
+        "source_status": "deleted",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 7
+        }
+      },
+      {
+        "sample_id": "03c8168cb6ba9d37abc4c5f454b0aec87739de1d0cc6f8fa145b7952c93c42fa",
+        "repository": "dateutil",
+        "split": "holdout",
+        "path": "dateutil/test/test_imports.py",
+        "source_status": "deleted",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 1
+        }
+      },
+      {
+        "sample_id": "041cdb519ee0197117f3e462b657cecea7f52d5e51204c007abd17e0b056fbbb",
+        "repository": "dateutil",
+        "split": "holdout",
+        "path": "dateutil/parser/_parser.py",
+        "source_status": "relocated",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": false,
+        "anchor_flag": true,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 2
+        }
+      },
+      {
+        "sample_id": "04308523102717b0fe1990804110fe1aecb4cf1169fae278d1686fb34ecbd03a",
+        "repository": "dateutil",
+        "split": "holdout",
+        "path": "dateutil/tz/_factories.py",
+        "source_status": "relocated",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": false,
+        "anchor_flag": true,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 4
+        }
+      },
+      {
+        "sample_id": "04c0d18ae897dd14759c65c2595a628e2511d75e22ce9fe3ada62ae698814064",
+        "repository": "dateutil",
+        "split": "holdout",
+        "path": "dateutil/tz/win.py",
+        "source_status": "relocated",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": false,
+        "anchor_flag": true,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 3
+        }
+      },
+      {
+        "sample_id": "04e712b266751c15aa607533664d96d64e2012f53cd4ebc79ddc27707469416c",
+        "repository": "dateutil",
+        "split": "holdout",
+        "path": "dateutil/test/test_tz.py",
+        "source_status": "deleted",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 2
+        }
+      },
+      {
+        "sample_id": "051da651054ab5479515687ebe5b5244518141f4d72b5978c16e3ecacb4c8bd7",
+        "repository": "dateutil",
+        "split": "holdout",
+        "path": "dateutil/tz/_common.py",
+        "source_status": "relocated",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": false,
+        "anchor_flag": true,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 1
+        }
+      },
+      {
+        "sample_id": "05480319a73df9d4e90a4b12adbe5da685923d5db5fb1baedf4e81ff24df9709",
+        "repository": "dateutil",
+        "split": "holdout",
+        "path": "dateutil/test/test_relativedelta.py",
+        "source_status": "deleted",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 4,
+          "missing": 1
+        }
+      },
+      {
+        "sample_id": "0bc2550b668bec2eb3d520882f351322d962f83b526ddcdff938068ee7e7b4c1",
+        "repository": "filelock",
+        "split": "holdout",
+        "path": "src/filelock/_api.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 4
+        }
+      },
+      {
+        "sample_id": "0f6e4bbc4f899863ff837f0c34bf8680121ce5e443efe783ea0cd243e8af345b",
+        "repository": "filelock",
+        "split": "holdout",
+        "path": "src/filelock/_api.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 2
+        }
+      },
+      {
+        "sample_id": "13afd12a07c6f040c83215e0e7e5df5713f2c9ae1ea2123caf08c8fd1d31db0f",
+        "repository": "filelock",
+        "split": "holdout",
+        "path": "src/filelock/_unix.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 2
+        }
+      },
+      {
+        "sample_id": "145eaf77b86dc3983c8fa180e30067cc867114696f9474232c31bbffbb8517f0",
+        "repository": "filelock",
+        "split": "holdout",
+        "path": "src/filelock/_api.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 8
+        }
+      },
+      {
+        "sample_id": "1a22e9233afbf8221accf9cb145097096a4f98f35490ee440c879de9ecc450c6",
+        "repository": "filelock",
+        "split": "holdout",
+        "path": "src/filelock/_api.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 19,
+          "changed": 1
+        }
+      },
+      {
+        "sample_id": "1db8fdb2fcceee28859f0d9f5d5a3e8c0281012d9f2afda837a39beac05be02f",
+        "repository": "filelock",
+        "split": "holdout",
+        "path": "src/filelock/_util.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {}
+      },
+      {
+        "sample_id": "1ec37154934769679b814144e5c92d5be7d128b83dcfe6c734f9085514a7fcce",
+        "repository": "filelock",
+        "split": "holdout",
+        "path": "src/filelock/_windows.py",
+        "source_status": "valid",
+        "dependency_status": "unresolved",
+        "anchor_status": "unresolved",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 1
+        }
+      },
+      {
+        "sample_id": "2ea33806c9b0118e04f45d8285b2d1656545f5cc6a215a522a2e3657234044f7",
+        "repository": "filelock",
+        "split": "holdout",
+        "path": "src/filelock/_api.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 3
+        }
+      },
+      {
+        "sample_id": "38f914c1a586c93a234850c04082cd2a0365468c91890a9d74dbcf904f4ac434",
+        "repository": "filelock",
+        "split": "holdout",
+        "path": "src/filelock/_error.py",
+        "source_status": "valid",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 1
+        }
+      },
+      {
+        "sample_id": "3bb1c135660341b0240c3db50eb4254d22b2fd1bdb008c14f11932d0b40111d8",
+        "repository": "filelock",
+        "split": "holdout",
+        "path": "src/filelock/_api.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 3
+        }
+      },
+      {
+        "sample_id": "416573a164f51474f5ac8fb6fb312546ab3a038be0fdcdf968ea6b8f4bf0825d",
+        "repository": "filelock",
+        "split": "holdout",
+        "path": "src/filelock/_error.py",
+        "source_status": "valid",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 3
+        }
+      },
+      {
+        "sample_id": "41942c1cfacbb2efc4791cff98aea92148405379197159c8bf57cd0494829a30",
+        "repository": "filelock",
+        "split": "holdout",
+        "path": "src/filelock/_windows.py",
+        "source_status": "valid",
+        "dependency_status": "changed",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": true,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "changed": 3,
+          "unresolved": 9
+        }
+      },
+      {
+        "sample_id": "4212b61a42b1a36c102761ece0821e0d31dd91370507480aa51c8bec3820718c",
+        "repository": "filelock",
+        "split": "holdout",
+        "path": "src/filelock/_unix.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {}
+      },
+      {
+        "sample_id": "42bb45022f22f4fa98ba260693baa59744ce697a5020f19f9361d7cd24cbeca7",
+        "repository": "filelock",
+        "split": "holdout",
+        "path": "src/filelock/_api.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 4
+        }
+      },
+      {
+        "sample_id": "4387bcb062d4da174d609e39b238b8bf5df5d40eebd6343934015936427c194b",
+        "repository": "filelock",
+        "split": "holdout",
+        "path": "src/filelock/_util.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 4
+        }
+      },
+      {
+        "sample_id": "47241942ae5f89de46dfe86d841c07eaac453e09b27d33fc35339558947870fd",
+        "repository": "filelock",
+        "split": "holdout",
+        "path": "src/filelock/_error.py",
+        "source_status": "valid",
+        "dependency_status": "unchanged",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {}
+      },
+      {
+        "sample_id": "5e702494cb94ffd357171838e88db152dc971819ebd12a182dc7137e6c97778a",
+        "repository": "filelock",
+        "split": "holdout",
+        "path": "src/filelock/_windows.py",
+        "source_status": "valid",
+        "dependency_status": "unresolved",
+        "anchor_status": "unresolved",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 1
+        }
+      },
+      {
+        "sample_id": "5f1b019ed4595c50a8d421d230d4077d172c5ed569683709c286d76f2725e3d6",
+        "repository": "filelock",
+        "split": "holdout",
+        "path": "src/filelock/_windows.py",
+        "source_status": "valid",
+        "dependency_status": "unchanged",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {}
+      },
+      {
+        "sample_id": "660a72887cd3792096b6e52511ff07e7cfc64ed1f9213b31e8830c1bfe8cae63",
+        "repository": "filelock",
+        "split": "holdout",
+        "path": "src/filelock/_soft.py",
+        "source_status": "valid",
+        "dependency_status": "changed",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": true,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 13,
+          "changed": 2
+        }
+      },
+      {
+        "sample_id": "6c280238aa74598f3988a536637e53e68e67b6d6d4c4db6dfdd40776b1c845d7",
+        "repository": "filelock",
+        "split": "holdout",
+        "path": "src/filelock/_api.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 2
+        }
+      },
+      {
+        "sample_id": "751469dc8c496fd8296fafcd05d838747f666e26249816a50db6f2ca88d1f24c",
+        "repository": "filelock",
+        "split": "holdout",
+        "path": "src/filelock/_api.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 9,
+          "changed": 1
+        }
+      },
+      {
+        "sample_id": "7e1bc522f17503220c07d68c12edd9796d3c529a14de6b2fc65346b7ee0c5102",
+        "repository": "filelock",
+        "split": "holdout",
+        "path": "src/filelock/_unix.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "changed": 2,
+          "unresolved": 7
+        }
+      },
+      {
+        "sample_id": "82774d8e72e0bd30d2325f63c921853da2956827cda566b5fd06731cacc59ba6",
+        "repository": "filelock",
+        "split": "holdout",
+        "path": "src/filelock/_unix.py",
+        "source_status": "modified",
+        "dependency_status": "unresolved",
+        "anchor_status": "unresolved",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 1
+        }
+      },
+      {
+        "sample_id": "841d50484097164e9f8ba8d28306aaf74ebbfb9fa406c7900ac274915ff4eb82",
+        "repository": "filelock",
+        "split": "holdout",
+        "path": "src/filelock/_api.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 4
+        }
+      },
+      {
+        "sample_id": "84639ef6521c406c5ff4cb5376f7355a1dfe50ba83fde42eaab12a100af4f616",
+        "repository": "filelock",
+        "split": "holdout",
+        "path": "src/filelock/_soft.py",
+        "source_status": "valid",
+        "dependency_status": "changed",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": true,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "changed": 3,
+          "unresolved": 7
+        }
+      },
+      {
+        "sample_id": "8463f5348fed82d4ae53f1613d9170675c8b1e422f06952ab0e7d0d4f2387aed",
+        "repository": "filelock",
+        "split": "holdout",
+        "path": "src/filelock/_api.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unresolved",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 1
+        }
+      },
+      {
+        "sample_id": "87a190bd47bb697a3b84eb01d609e4088baa9d8d71146376a9a92c800e751b77",
+        "repository": "filelock",
+        "split": "holdout",
+        "path": "src/filelock/_unix.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unresolved",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 1
+        }
+      },
+      {
+        "sample_id": "945e51890618a49fe0e0c41c4c5e78f3912ead34c19f65390158e0a74e050c1b",
+        "repository": "filelock",
+        "split": "holdout",
+        "path": "src/filelock/_api.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 2
+        }
+      },
+      {
+        "sample_id": "99b1fd07df45cd9a850ab39b6001748aa18b2968403265715cf91401ae56f9ff",
+        "repository": "filelock",
+        "split": "holdout",
+        "path": "src/filelock/_util.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 12
+        }
+      },
+      {
+        "sample_id": "9a50e420de14986b08f22c4d503e02b8a0952f49673a2fe2d4a83b39362508dd",
+        "repository": "filelock",
+        "split": "holdout",
+        "path": "src/filelock/_error.py",
+        "source_status": "valid",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 3
+        }
+      },
+      {
+        "sample_id": "00322cbd89d930959dd6277d9cd70f2bf016c8ffe7f1b93ae7deb0140d81cb5f",
+        "repository": "httpx",
+        "split": "development",
+        "path": "httpx/_urls.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 6
+        }
+      },
+      {
+        "sample_id": "0102d307ed29a946f5ed6743149c9233866aa2a849033b860354363ecb957705",
+        "repository": "httpx",
+        "split": "development",
+        "path": "httpx/_content.py",
+        "source_status": "valid",
+        "dependency_status": "unchanged",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unchanged": 1
+        }
+      },
+      {
+        "sample_id": "015852d8bca59c71f613d1657160bc2d442bb4a37b106a600097abfbecdc998a",
+        "repository": "httpx",
+        "split": "development",
+        "path": "httpx/_urls.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 4
+        }
+      },
+      {
+        "sample_id": "0178ea3af9d19c3ff9cce2bafa34cc43962f671fd40707f41c7026c65bb75556",
+        "repository": "httpx",
+        "split": "development",
+        "path": "httpx/_client.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "changed": 2,
+          "missing": 1
+        }
+      },
+      {
+        "sample_id": "01d76a36f13b9093fa08385aa933aa7c4de316245439e1f581343cf0c432046c",
+        "repository": "httpx",
+        "split": "development",
+        "path": "httpx/_client.py",
+        "source_status": "relocated",
+        "dependency_status": "changed",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": true,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "changed": 2,
+          "unresolved": 3
+        }
+      },
+      {
+        "sample_id": "020498b2d3a050f3a52f7190a0928024d3e0407c1a575b80c703e17a29d5dfd4",
+        "repository": "httpx",
+        "split": "development",
+        "path": "httpx/_decoders.py",
+        "source_status": "relocated",
+        "dependency_status": "unchanged",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unchanged": 1
+        }
+      },
+      {
+        "sample_id": "024ebb227b8c651de8e970c4743e92ae8702d50957ba9ff8785884eb8bd42a85",
+        "repository": "httpx",
+        "split": "development",
+        "path": "httpx/_utils.py",
+        "source_status": "modified",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 2
+        }
+      },
+      {
+        "sample_id": "0269c3ae3b2d8e52d0f0f887e1ab972b0a3d0ebd0c8125b0eb90bd3207270c70",
+        "repository": "httpx",
+        "split": "development",
+        "path": "httpx/_urls.py",
+        "source_status": "valid",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 4
+        }
+      },
+      {
+        "sample_id": "03a2b056ce2a76b15b843ca0b5d8116f597d0a81ab1360531eae17780170d9de",
+        "repository": "httpx",
+        "split": "development",
+        "path": "httpx/_transports/base.py",
+        "source_status": "relocated",
+        "dependency_status": "changed",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": true,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 1,
+          "changed": 2
+        }
+      },
+      {
+        "sample_id": "03d685815e494653c255c78b0e73a4ced127fd340fefd379614cdb75bbee859c",
+        "repository": "httpx",
+        "split": "development",
+        "path": "httpx/_transports/wsgi.py",
+        "source_status": "relocated",
+        "dependency_status": "changed",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": true,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "changed": 1
+        }
+      },
+      {
+        "sample_id": "03d940fbaec8c0bb96621c623fed947e351e90464bcbb99babe862c4f82fe96d",
+        "repository": "httpx",
+        "split": "development",
+        "path": "httpx/_models.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 6,
+          "changed": 1
+        }
+      },
+      {
+        "sample_id": "056103362a66aeaaee0127e9e5984c12f44e16bd92feb09e328b65b59316a729",
+        "repository": "httpx",
+        "split": "development",
+        "path": "httpx/_exceptions.py",
+        "source_status": "relocated",
+        "dependency_status": "unchanged",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unchanged": 1
+        }
+      },
+      {
+        "sample_id": "065f1dde58eb5105727639b867360673176bacaecf9aae38b3251f583ea894d9",
+        "repository": "httpx",
+        "split": "development",
+        "path": "httpx/_multipart.py",
+        "source_status": "relocated",
+        "dependency_status": "unchanged",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unchanged": 2
+        }
+      },
+      {
+        "sample_id": "06660e048307d0a3c2648ea3178e1e7d0a8235c56c1a02875062eeb484f005a9",
+        "repository": "httpx",
+        "split": "development",
+        "path": "httpx/_client.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 9
+        }
+      },
+      {
+        "sample_id": "07d9b4e7488c3d6357214ba597033b80660dba8ddd769e2d92fe4328d547da8c",
+        "repository": "httpx",
+        "split": "development",
+        "path": "httpx/_transports/wsgi.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 7
+        }
+      },
+      {
+        "sample_id": "08521130da5c581feb0a709b306bf25288ef64d6e5c453bd72a97417f8021cd3",
+        "repository": "httpx",
+        "split": "development",
+        "path": "httpx/_models.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 4
+        }
+      },
+      {
+        "sample_id": "08a1bbca3ae69ad6d3b192517385ce49a859d6e8e91d631ff1f7d03eaeabf9ec",
+        "repository": "httpx",
+        "split": "development",
+        "path": "httpx/_api.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 1
+        }
+      },
+      {
+        "sample_id": "08b97c2917abcba8aadc9a0696d7635efdeffae9e2ff801730e7a344a7319b0a",
+        "repository": "httpx",
+        "split": "development",
+        "path": "httpx/_models.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unresolved",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 1
+        }
+      },
+      {
+        "sample_id": "08bc9212a70d4a1cf564bb6f9a00234b63d59aca93218c55b1e1151a29cdf053",
+        "repository": "httpx",
+        "split": "development",
+        "path": "httpx/_models.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 6
+        }
+      },
+      {
+        "sample_id": "08e77ea05486e2f2a16bcad362863271f2ca13a14f43b8d5aaab1c24e1d88c69",
+        "repository": "httpx",
+        "split": "development",
+        "path": "httpx/_utils.py",
+        "source_status": "modified",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "missing": 1,
+          "unresolved": 5,
+          "changed": 2
+        }
+      },
+      {
+        "sample_id": "0988510bc41c76bc8e20ec74c78fb74de5254d25a4091f40c35f439290a23858",
+        "repository": "httpx",
+        "split": "development",
+        "path": "httpx/_urls.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "changed": 1,
+          "unresolved": 1
+        }
+      },
+      {
+        "sample_id": "0c212e0a81623e36e7f488893e1288d6c2d36ec4fe2b9408030ff91fccc30260",
+        "repository": "httpx",
+        "split": "development",
+        "path": "httpx/_utils.py",
+        "source_status": "modified",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 8
+        }
+      },
+      {
+        "sample_id": "0c2332cd6593797f0bc4125764376d1c70850fce3bc42e4f8cc94835626a4825",
+        "repository": "httpx",
+        "split": "development",
+        "path": "httpx/_models.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 9
+        }
+      },
+      {
+        "sample_id": "0cbd2485fd9c9c0085443e0af366e2543bf5f55a6d2b04b0b1a885c077edbb77",
+        "repository": "httpx",
+        "split": "development",
+        "path": "httpx/_multipart.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "changed": 4,
+          "unresolved": 10
+        }
+      },
+      {
+        "sample_id": "0d1a54f67e3351ad914def20b15b74209b320040da84ce0572846bc949f3473e",
+        "repository": "httpx",
+        "split": "development",
+        "path": "httpx/_exceptions.py",
+        "source_status": "relocated",
+        "dependency_status": "changed",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": true,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "changed": 1
+        }
+      },
+      {
+        "sample_id": "0db48252ccf3ec94c0be8d36aadd41b63d679c06a0f7952a7d89dd71ff3cdd26",
+        "repository": "httpx",
+        "split": "development",
+        "path": "httpx/_auth.py",
+        "source_status": "relocated",
+        "dependency_status": "unchanged",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unchanged": 1
+        }
+      },
+      {
+        "sample_id": "0dee206f041ff6e5ba45a53f4f1a7691a94820080427e18ca1f7b101135ba1b3",
+        "repository": "httpx",
+        "split": "development",
+        "path": "httpx/_exceptions.py",
+        "source_status": "relocated",
+        "dependency_status": "unchanged",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unchanged": 1
+        }
+      },
+      {
+        "sample_id": "0dfd6196d5d2143cb1836eb6295d492c74d64a3b9cfdc3b5883b0f3177c1659f",
+        "repository": "httpx",
+        "split": "development",
+        "path": "httpx/_exceptions.py",
+        "source_status": "relocated",
+        "dependency_status": "unchanged",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {}
+      },
+      {
+        "sample_id": "0dfea6191bd453bb2c59cd53a453bbf2107aa180423953d4a4f179e33029b8f9",
+        "repository": "httpx",
+        "split": "development",
+        "path": "httpx/_client.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 12,
+          "changed": 2
+        }
+      },
+      {
+        "sample_id": "0e1b4190fcbea890a29118fb9109d76ad62f3e62d2232dbb0f8b60d2f5e844fb",
+        "repository": "httpx",
+        "split": "development",
+        "path": "httpx/_exceptions.py",
+        "source_status": "relocated",
+        "dependency_status": "unchanged",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {}
+      },
+      {
+        "sample_id": "002662787e9deeb82a4602855a80df6737f68bda23565828062ab4e35f4ae129",
+        "repository": "packaging",
+        "split": "development",
+        "path": "src/packaging/_tokenizer.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 5
+        }
+      },
+      {
+        "sample_id": "0180ab08f3eb6dd2bf68f1ed5b0cf4071190326d404d12f68d1b34e410acda9d",
+        "repository": "packaging",
+        "split": "development",
+        "path": "src/packaging/specifiers.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 14,
+          "changed": 1
+        }
+      },
+      {
+        "sample_id": "02967022299340675e0d9587d7d3b464ea44555f156a5c380367dc5114863476",
+        "repository": "packaging",
+        "split": "development",
+        "path": "src/packaging/version.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 4
+        }
+      },
+      {
+        "sample_id": "0382acb6ec4ee353023236ddb8d2a4badf33dea5e378b878818d62da4f5c1522",
+        "repository": "packaging",
+        "split": "development",
+        "path": "src/packaging/_structures.py",
+        "source_status": "valid",
+        "dependency_status": "unchanged",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unchanged": 1
+        }
+      },
+      {
+        "sample_id": "0495efb04d1978d70e9f2e680584a5d2d1f11cbdb50b74aaab90043c21ea507f",
+        "repository": "packaging",
+        "split": "development",
+        "path": "src/packaging/metadata.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 2,
+          "changed": 2
+        }
+      },
+      {
+        "sample_id": "0498c89c75f5387f9834c699d9b8ffba8d37e642dec06b5de4bd8e6489b58ce5",
+        "repository": "packaging",
+        "split": "development",
+        "path": "src/packaging/version.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 9
+        }
+      },
+      {
+        "sample_id": "05943e0492f28224b8ce51b88f60780dec7d33cad4c60e83da1d3a3d26d50745",
+        "repository": "packaging",
+        "split": "development",
+        "path": "src/packaging/_elffile.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 15
+        }
+      },
+      {
+        "sample_id": "05ba1653bef17603cd90782b0e671bc0032c1e5bf24b7c1cd9219b41869e11f4",
+        "repository": "packaging",
+        "split": "development",
+        "path": "src/packaging/_parser.py",
+        "source_status": "relocated",
+        "dependency_status": "changed",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": true,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "changed": 1,
+          "unchanged": 1,
+          "unresolved": 3
+        }
+      },
+      {
+        "sample_id": "07147b4332d3d6291213fcc9878ce60506ff5ee2ab96fa2e2271598f20a72b74",
+        "repository": "packaging",
+        "split": "development",
+        "path": "src/packaging/tags.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 12,
+          "changed": 2
+        }
+      },
+      {
+        "sample_id": "0721679fcd085374e51e162894af9db82aafc783cd3bae70f182c37c7ed4b916",
+        "repository": "packaging",
+        "split": "development",
+        "path": "src/packaging/metadata.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 4
+        }
+      },
+      {
+        "sample_id": "08ac9103abab0392bced9ddf1f90a683b22a1d6f99bc7ec4d8c44cdc91c739d8",
+        "repository": "packaging",
+        "split": "development",
+        "path": "src/packaging/_elffile.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 6
+        }
+      },
+      {
+        "sample_id": "09062963463c295f6fb265a9f221a8121f3110825b5c7f6bae41357ed7d2b979",
+        "repository": "packaging",
+        "split": "development",
+        "path": "src/packaging/version.py",
+        "source_status": "relocated",
+        "dependency_status": "changed",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": true,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 5,
+          "changed": 1
+        }
+      },
+      {
+        "sample_id": "0a902becadf74af3a076713ca419ab17c4fb8dfa447067ecddf69d1a8e2eec7a",
+        "repository": "packaging",
+        "split": "development",
+        "path": "src/packaging/version.py",
+        "source_status": "relocated",
+        "dependency_status": "unchanged",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unchanged": 1
+        }
+      },
+      {
+        "sample_id": "0ad5a85d1e5139a4bf5bbe6acd918b3e2c72cf7f81968ee4aecdf8208abaf936",
+        "repository": "packaging",
+        "split": "development",
+        "path": "src/packaging/markers.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 9,
+          "changed": 4
+        }
+      },
+      {
+        "sample_id": "0ade706f62d73223aaa902b7b74f5ce2e6a13432162227f90ffff79f19669f28",
+        "repository": "packaging",
+        "split": "development",
+        "path": "src/packaging/metadata.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 6,
+          "changed": 1
+        }
+      },
+      {
+        "sample_id": "0c6b2b1fcc95c03c2682a36d018ad20b9ed2461411003d381258ee5d94c9f2ba",
+        "repository": "packaging",
+        "split": "development",
+        "path": "src/packaging/_manylinux.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 12
+        }
+      },
+      {
+        "sample_id": "0cdd0b6c7cc0d7ed296710e053157fea16ac6823f300700e467ed1225853e499",
+        "repository": "packaging",
+        "split": "development",
+        "path": "src/packaging/metadata.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 3
+        }
+      },
+      {
+        "sample_id": "0d287b3a807f1d458c2da2660ab9412914428479a2ad4204ca8666f0eb8a5d8d",
+        "repository": "packaging",
+        "split": "development",
+        "path": "src/packaging/version.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 4
+        }
+      },
+      {
+        "sample_id": "0d45c96fe1b3fb2b785eb2257fa2fb86f7aef118afbfd10859546683b252a28d",
+        "repository": "packaging",
+        "split": "development",
+        "path": "src/packaging/version.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 5,
+          "changed": 1
+        }
+      },
+      {
+        "sample_id": "0d4cd1b55d74facafd3b15979cf635898c9a5ea82dbb420eabffaa37e734428e",
+        "repository": "packaging",
+        "split": "development",
+        "path": "src/packaging/_parser.py",
+        "source_status": "relocated",
+        "dependency_status": "changed",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": true,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 4,
+          "changed": 1,
+          "unchanged": 2
+        }
+      },
+      {
+        "sample_id": "0da8ce43615d0f2f409817c099e0d697255e901821c177fc1a0425d6206b8e51",
+        "repository": "packaging",
+        "split": "development",
+        "path": "src/packaging/utils.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 9,
+          "changed": 4
+        }
+      },
+      {
+        "sample_id": "0dce6f185a5689437abf9be6734e958ecf9e580726a06d02888b5ec945f27f0b",
+        "repository": "packaging",
+        "split": "development",
+        "path": "src/packaging/specifiers.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 1
+        }
+      },
+      {
+        "sample_id": "0def24a2686a231ac394c6d8f2421eab8f463d954fb1f3ba4e03781c196fbd14",
+        "repository": "packaging",
+        "split": "development",
+        "path": "src/packaging/metadata.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 6,
+          "changed": 2
+        }
+      },
+      {
+        "sample_id": "106603d93d6785895c94a101478d36c696ab56e406fd9f9d5fb7457bee4a1b7a",
+        "repository": "packaging",
+        "split": "development",
+        "path": "src/packaging/tags.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 8,
+          "changed": 6
+        }
+      },
+      {
+        "sample_id": "11f1fe9bda47ca5b69ddd2d692f5b8c8104212a8d4cd04d290740b826ce75aee",
+        "repository": "packaging",
+        "split": "development",
+        "path": "src/packaging/specifiers.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 16,
+          "changed": 2
+        }
+      },
+      {
+        "sample_id": "12514b784b4810722312e40a63bbd2beb412ac2a4ba324e1116fdfdbb5a33060",
+        "repository": "packaging",
+        "split": "development",
+        "path": "src/packaging/tags.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 10,
+          "changed": 3
+        }
+      },
+      {
+        "sample_id": "1293983e8b010cf432278079c81fed664fc0e60d11f808bb5a735fd6112bc5c8",
+        "repository": "packaging",
+        "split": "development",
+        "path": "src/packaging/_musllinux.py",
+        "source_status": "relocated",
+        "dependency_status": "changed",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": true,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 10,
+          "changed": 1,
+          "unchanged": 1
+        }
+      },
+      {
+        "sample_id": "13425a3e5ba102a63ab42e8e067251825cb1a6d1cff2111d836660a270d3b3af",
+        "repository": "packaging",
+        "split": "development",
+        "path": "src/packaging/metadata.py",
+        "source_status": "relocated",
+        "dependency_status": "unchanged",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {}
+      },
+      {
+        "sample_id": "1347d2c965f11676c1a1368310d3a4cd186c51af2dcd2af2df95ef22a2f7b7af",
+        "repository": "packaging",
+        "split": "development",
+        "path": "src/packaging/metadata.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 2
+        }
+      },
+      {
+        "sample_id": "134e88d25230a769d845f7d983d4dbdeccbf994a7216fa0a65ed2747e128e1f6",
+        "repository": "packaging",
+        "split": "development",
+        "path": "src/packaging/version.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 9
+        }
+      },
+      {
+        "sample_id": "01b38bfab2d7edf8a289460e71b57e7933560cf0a1045161ab0d47b004a7f39f",
+        "repository": "pluggy",
+        "split": "development",
+        "path": "src/pluggy/_manager.py",
+        "source_status": "relocated",
+        "dependency_status": "changed",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": true,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "changed": 2,
+          "unresolved": 13
+        }
+      },
+      {
+        "sample_id": "04696320883ebd48f74597c7c69c8816c3280c7443dcc060c5e07a3d391fc8c6",
+        "repository": "pluggy",
+        "split": "development",
+        "path": "src/pluggy/_manager.py",
+        "source_status": "relocated",
+        "dependency_status": "changed",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": true,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "changed": 1,
+          "unresolved": 4
+        }
+      },
+      {
+        "sample_id": "0ee0d031a4186082a735c05d84c62d939da55bb5cd190ef43af51913d2d9450c",
+        "repository": "pluggy",
+        "split": "development",
+        "path": "src/pluggy/_manager.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unchanged": 1,
+          "unresolved": 11
+        }
+      },
+      {
+        "sample_id": "0fde99936f27122e568d16b187c8765b1c1722f9c47fcf520ea01ee8d1526d6c",
+        "repository": "pluggy",
+        "split": "development",
+        "path": "src/pluggy/_manager.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 3
+        }
+      },
+      {
+        "sample_id": "139d2a1fe758a75b8109ae5ceba1bf34549ea83a1a8011b4610173b0bcc30b68",
+        "repository": "pluggy",
+        "split": "development",
+        "path": "src/pluggy/_manager.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 9
+        }
+      },
+      {
+        "sample_id": "1a41e29708910750d8fdd9921c650cc4b323bd626ffe225445328530b00da4b7",
+        "repository": "pluggy",
+        "split": "development",
+        "path": "src/pluggy/_manager.py",
+        "source_status": "relocated",
+        "dependency_status": "changed",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": true,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "changed": 2,
+          "unchanged": 2,
+          "unresolved": 20
+        }
+      },
+      {
+        "sample_id": "1df8336a099a965de50c379eb4f852b544c86f3c5eab3d7ec2ab62fe722c773b",
+        "repository": "pluggy",
+        "split": "development",
+        "path": "src/pluggy/_hooks.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 6,
+          "unchanged": 2
+        }
+      },
+      {
+        "sample_id": "218e94362dc9692e9a09afcf801d3d7661ad4854fe623a95d75f4090a3f40e95",
+        "repository": "pluggy",
+        "split": "development",
+        "path": "src/pluggy/_manager.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 17,
+          "changed": 9
+        }
+      },
+      {
+        "sample_id": "21a55bd26d4060a5b3402f89bf67f4ddf8c28c5d93f16c3f62dd5c2a6ed42b09",
+        "repository": "pluggy",
+        "split": "development",
+        "path": "src/pluggy/_manager.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unchanged": 1,
+          "unresolved": 7
+        }
+      },
+      {
+        "sample_id": "228837c57407d7ac80724b37adad86c864f8aebf8e63becb96b1907d960bc3e1",
+        "repository": "pluggy",
+        "split": "development",
+        "path": "src/pluggy/_hooks.py",
+        "source_status": "relocated",
+        "dependency_status": "changed",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": true,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "changed": 2,
+          "unresolved": 7
+        }
+      },
+      {
+        "sample_id": "23f0e61286e8cc253f0bdc0171daf8f60b1ba08b2dcac012b246997d46b26bd6",
+        "repository": "pluggy",
+        "split": "development",
+        "path": "src/pluggy/_manager.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unchanged": 1,
+          "unresolved": 5
+        }
+      },
+      {
+        "sample_id": "29fa330ea21f5c95d6d4f8e9dfc306c7d9581125b7506921b09a8d5b5970c034",
+        "repository": "pluggy",
+        "split": "development",
+        "path": "src/pluggy/_manager.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 9
+        }
+      },
+      {
+        "sample_id": "2bdb357d4557b48e834615dc00489ac58a4ea1230462af0e272fea9280ec9e14",
+        "repository": "pluggy",
+        "split": "development",
+        "path": "src/pluggy/_result.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 3
+        }
+      },
+      {
+        "sample_id": "2e4028574e9078fe31d3f459e6b5b5f9af5397212dae83de893dcd30484e11e7",
+        "repository": "pluggy",
+        "split": "development",
+        "path": "src/pluggy/_manager.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 6
+        }
+      },
+      {
+        "sample_id": "306a74ce81435f78a66ead4a00328fe7260ef32289b566ba14dc7883c30fc999",
+        "repository": "pluggy",
+        "split": "development",
+        "path": "src/pluggy/_result.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 3
+        }
+      },
+      {
+        "sample_id": "32c9b93d3f751fda23dbaea1607cbfbc88e23ecf4548486d32f5b892a351cfcc",
+        "repository": "pluggy",
+        "split": "development",
+        "path": "src/pluggy/_hooks.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 1
+        }
+      },
+      {
+        "sample_id": "356468cb502ecdf49da7f1c34140ed346d8bb6995fe1aad91211b04a16d4dda2",
+        "repository": "pluggy",
+        "split": "development",
+        "path": "src/pluggy/_manager.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 4
+        }
+      },
+      {
+        "sample_id": "37902a59853c77842b7b2330e62bd2fbe40c2a580331db4d6673f049e65f348a",
+        "repository": "pluggy",
+        "split": "development",
+        "path": "src/pluggy/_hooks.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unchanged": 1,
+          "unresolved": 1
+        }
+      },
+      {
+        "sample_id": "389d90a80073c763c601e2ce5beecd7994d2bd0328cdd46509cd783e8f7690a0",
+        "repository": "pluggy",
+        "split": "development",
+        "path": "src/pluggy/_result.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 6
+        }
+      },
+      {
+        "sample_id": "3ecc09b752c9b8f8aa991b5bb143993d785ad2261a86ade72e82641ea39132c7",
+        "repository": "pluggy",
+        "split": "development",
+        "path": "src/pluggy/_callers.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 8,
+          "changed": 3,
+          "missing": 1
+        }
+      },
+      {
+        "sample_id": "3f1d53e8ac1ca4a7ff99c4cbf709779650a62763f24697caa7dc55de3aecc99b",
+        "repository": "pluggy",
+        "split": "development",
+        "path": "src/pluggy/_manager.py",
+        "source_status": "relocated",
+        "dependency_status": "unchanged",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {}
+      },
+      {
+        "sample_id": "41dd0b498ee7941c42dad1fa3c2205ae4e11c5e4f1013fccf16dc3ffe17c40cc",
+        "repository": "pluggy",
+        "split": "development",
+        "path": "src/pluggy/_result.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 2
+        }
+      },
+      {
+        "sample_id": "422754382934ff14d0b1dc2d1eb4fa2ff0a51fa7fa015c6697993625e7ee43e7",
+        "repository": "pluggy",
+        "split": "development",
+        "path": "src/pluggy/_hooks.py",
+        "source_status": "relocated",
+        "dependency_status": "changed",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": true,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 4,
+          "changed": 1
+        }
+      },
+      {
+        "sample_id": "4283627fbfd3889f4769619e7e0308a877cad48e0801ea2ed562cb5ff38163d3",
+        "repository": "pluggy",
+        "split": "development",
+        "path": "src/pluggy/_hooks.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 25
+        }
+      },
+      {
+        "sample_id": "43b2b7b612d4f3871e5d92841294e9b4d2b58a3a2745c81a0babc0bbe182dddf",
+        "repository": "pluggy",
+        "split": "development",
+        "path": "src/pluggy/_hooks.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 1
+        }
+      },
+      {
+        "sample_id": "44449270f4beee5c1cab8e026bfc8d80a7ceaec99a0d745a985faeabd7e81d2e",
+        "repository": "pluggy",
+        "split": "development",
+        "path": "src/pluggy/_hooks.py",
+        "source_status": "relocated",
+        "dependency_status": "changed",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": true,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "changed": 1,
+          "unresolved": 2
+        }
+      },
+      {
+        "sample_id": "448af826e79ab5692f56afabf65a2ea9336a933fe7037026d1b5072a858a201a",
+        "repository": "pluggy",
+        "split": "development",
+        "path": "src/pluggy/_hooks.py",
+        "source_status": "relocated",
+        "dependency_status": "changed",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": true,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "changed": 1
+        }
+      },
+      {
+        "sample_id": "452414b4c6abaad8f2c765a4c9ad3208e5f9d2520eda884b5f2c5f94bd160d48",
+        "repository": "pluggy",
+        "split": "development",
+        "path": "src/pluggy/_manager.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 3
+        }
+      },
+      {
+        "sample_id": "46db7dffc91f6ba04596008abadf77cbe46e9cc1022a2a0e0322f61b6f4b437f",
+        "repository": "pluggy",
+        "split": "development",
+        "path": "src/pluggy/_result.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 6,
+          "unchanged": 1
+        }
+      },
+      {
+        "sample_id": "4c31c7e7fa24c11b569cf91e40575a7ad8c554258f4487ff09dbe94826a1b3f1",
+        "repository": "pluggy",
+        "split": "development",
+        "path": "src/pluggy/_hooks.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "changed": 1,
+          "unresolved": 7
+        }
+      },
+      {
+        "sample_id": "0002429e5e41274a935d9ca9d8f11c746f6de0bd2e8c444b33b5533ec2e8ce48",
+        "repository": "pydantic",
+        "split": "development",
+        "path": "pydantic/mypy.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "changed": 5,
+          "unresolved": 36
+        }
+      },
+      {
+        "sample_id": "0090935165c16139ac42f81382ea44dd77661ee7be8fa81cd2213a28c76f6340",
+        "repository": "pydantic",
+        "split": "development",
+        "path": "pydantic/_internal/_generate_schema.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 12,
+          "changed": 2
+        }
+      },
+      {
+        "sample_id": "00a14db854b941ef0ad5558f123c9fbfea3414d2f16f4efb2cd795e46f40275e",
+        "repository": "pydantic",
+        "split": "development",
+        "path": "pydantic/deprecated/decorator.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 14
+        }
+      },
+      {
+        "sample_id": "00cd7c35462787d45ba42903db60c0df79068058131a7141a8060e0e18cbbc20",
+        "repository": "pydantic",
+        "split": "development",
+        "path": "pydantic/_internal/_utils.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 10
+        }
+      },
+      {
+        "sample_id": "00ec3897102a852f7c60126cf476fd58ffe0a1b86a90f724c6d7b8e3ddd8f46f",
+        "repository": "pydantic",
+        "split": "development",
+        "path": "pydantic/v1/mypy.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 6
+        }
+      },
+      {
+        "sample_id": "00f7d0c346f5760b23e8c4ff720b299f8ff9793fb32b7b8e81f14306463deccd",
+        "repository": "pydantic",
+        "split": "development",
+        "path": "pydantic/_internal/_schema_generation_shared.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 4
+        }
+      },
+      {
+        "sample_id": "011e8977952b03b4c591dbec0df4fc71e18ecdde0ccf2c7fe4c8e660b5ae436e",
+        "repository": "pydantic",
+        "split": "development",
+        "path": "pydantic/_internal/_generate_schema.py",
+        "source_status": "relocated",
+        "dependency_status": "unchanged",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {}
+      },
+      {
+        "sample_id": "01383f27d152b4d563176cc18da8c399dfb43240843754dcba67baf1ad04a773",
+        "repository": "pydantic",
+        "split": "development",
+        "path": "pydantic/json_schema.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 9
+        }
+      },
+      {
+        "sample_id": "0141398d2d2fe3a454ee2b5b99d37c74348a2a4e38b17cb959e0eb2572ec94ef",
+        "repository": "pydantic",
+        "split": "development",
+        "path": "pydantic/_internal/_model_construction.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 10,
+          "changed": 2
+        }
+      },
+      {
+        "sample_id": "014e044cd08488ee0d8c1257b5a036e205b810a4fa392ebca9d6147b8d966a06",
+        "repository": "pydantic",
+        "split": "development",
+        "path": "pydantic/json_schema.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 3
+        }
+      },
+      {
+        "sample_id": "016d79a1da1c7478bff186a9ad3757dfd183fa990e204b444e7a44ed1d0f0607",
+        "repository": "pydantic",
+        "split": "development",
+        "path": "pydantic/main.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "changed": 1,
+          "unresolved": 6
+        }
+      },
+      {
+        "sample_id": "0183aa39ac5387ec3fb3699fbcdac513fc705ee0af9ff030d009ca6df2d87008",
+        "repository": "pydantic",
+        "split": "development",
+        "path": "pydantic/errors.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 3
+        }
+      },
+      {
+        "sample_id": "01ccae5b0b0c5fa4c92dc9c0efb45404968e4e5a8cd72c910c86451d542840d6",
+        "repository": "pydantic",
+        "split": "development",
+        "path": "pydantic/v1/typing.py",
+        "source_status": "valid",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 1
+        }
+      },
+      {
+        "sample_id": "01d16875347ab0193a8b46f53c2326d6f78a3cd076cc7d7e1e06aad221b61373",
+        "repository": "pydantic",
+        "split": "development",
+        "path": "pydantic/config.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 5
+        }
+      },
+      {
+        "sample_id": "01d7c8facdaeb816bfc8ba026d6065b6011c6d7b328191c0f63581dffe481602",
+        "repository": "pydantic",
+        "split": "development",
+        "path": "pydantic/v1/networks.py",
+        "source_status": "valid",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 7
+        }
+      },
+      {
+        "sample_id": "020b2c2c0729846c74ffab7dda6e2661940db75c81d8083d272335f08a35d807",
+        "repository": "pydantic",
+        "split": "development",
+        "path": "pydantic/mypy.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 4,
+          "unchanged": 1
+        }
+      },
+      {
+        "sample_id": "021acccb48ae9aea817ee2d850c736d3886d4f57f9d83be7a88078ece312a4c7",
+        "repository": "pydantic",
+        "split": "development",
+        "path": "pydantic/v1/types.py",
+        "source_status": "valid",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unchanged": 1,
+          "unresolved": 9
+        }
+      },
+      {
+        "sample_id": "0249dbb0d7acaf7c1150a66bb13e90363425ada9371182913e936442b3806efa",
+        "repository": "pydantic",
+        "split": "development",
+        "path": "pydantic/type_adapter.py",
+        "source_status": "relocated",
+        "dependency_status": "unchanged",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {}
+      },
+      {
+        "sample_id": "026879874dee27bb923d412f842af91faae3440760259e63bcae0331c37543e3",
+        "repository": "pydantic",
+        "split": "development",
+        "path": "pydantic/v1/errors.py",
+        "source_status": "valid",
+        "dependency_status": "unchanged",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unchanged": 1
+        }
+      },
+      {
+        "sample_id": "02bb5cbee93dd82b7c68805f3bac661efe3316368a52d6a6c29cc726c6a13a78",
+        "repository": "pydantic",
+        "split": "development",
+        "path": "pydantic/types.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 4,
+          "unchanged": 1
+        }
+      },
+      {
+        "sample_id": "02dbc4b1c4e8a82aaa6b4ab1914782a56ee5e91cae32a3025f58fbc9ddd51541",
+        "repository": "pydantic",
+        "split": "development",
+        "path": "pydantic/_internal/_generics.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 20,
+          "changed": 5
+        }
+      },
+      {
+        "sample_id": "03104bb3f1f3197801a287237f145d5c0ba5c787bc69c0e651e02b39689f8075",
+        "repository": "pydantic",
+        "split": "development",
+        "path": "pydantic/v1/color.py",
+        "source_status": "valid",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 7,
+          "unchanged": 1
+        }
+      },
+      {
+        "sample_id": "031d08f9e9b53bc2d583dd4665c1d1d197c732265d4ff5be3934483ffed35dfe",
+        "repository": "pydantic",
+        "split": "development",
+        "path": "pydantic/_internal/_config.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 17,
+          "changed": 3
+        }
+      },
+      {
+        "sample_id": "031e0b115484a48626395921923d2ef99135f5542cb81413b6d4b00b5e6f7a94",
+        "repository": "pydantic",
+        "split": "development",
+        "path": "pydantic/_internal/_generate_schema.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "changed": 4,
+          "unresolved": 19
+        }
+      },
+      {
+        "sample_id": "033689f286a9a4021fb033d5052f150e4809e519f4ea9e715f1c1ca6d0ec8817",
+        "repository": "pydantic",
+        "split": "development",
+        "path": "pydantic/types.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 1
+        }
+      },
+      {
+        "sample_id": "03379f1197f71a29937e1e776fe85155c19bac49dd30e767aa27b0df7a0b0485",
+        "repository": "pydantic",
+        "split": "development",
+        "path": "pydantic/main.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 6,
+          "changed": 1
+        }
+      },
+      {
+        "sample_id": "0352961bacf175c91309b52d9b4d8721b1778f1670f9a760bc9c24f753f68025",
+        "repository": "pydantic",
+        "split": "development",
+        "path": "pydantic/v1/schema.py",
+        "source_status": "valid",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 10,
+          "unchanged": 5
+        }
+      },
+      {
+        "sample_id": "03586199a12a6d83a84dfbb3bcd56550c5dd8f0cb0d75f76f47177cf1bc85f5a",
+        "repository": "pydantic",
+        "split": "development",
+        "path": "pydantic/_internal/_decorators.py",
+        "source_status": "relocated",
+        "dependency_status": "changed",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": true,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 45,
+          "changed": 5,
+          "unchanged": 6
+        }
+      },
+      {
+        "sample_id": "035f61f20097e6dfcedc128dda2362ead0780f3cd002532115295c106b0d0606",
+        "repository": "pydantic",
+        "split": "development",
+        "path": "pydantic/v1/types.py",
+        "source_status": "valid",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 8,
+          "unchanged": 1
+        }
+      },
+      {
+        "sample_id": "0388835f7d03f9a5057d5056157759626cddfa646892085c88030aedc407760b",
+        "repository": "pydantic",
+        "split": "development",
+        "path": "pydantic/v1/networks.py",
+        "source_status": "valid",
+        "dependency_status": "unchanged",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unchanged": 1
+        }
+      },
+      {
+        "sample_id": "0178db8be983fe4e1f32f73bc421160eeef0c277cae487254925e34f2fdcb177",
+        "repository": "requests",
+        "split": "development",
+        "path": "requests/models.py",
+        "source_status": "relocated",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": false,
+        "anchor_flag": true,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 9
+        }
+      },
+      {
+        "sample_id": "03b2f86093a77a4dfe3109675a8ed38dd697d5c52641962c454528b51a0a5b8a",
+        "repository": "requests",
+        "split": "development",
+        "path": "requests/cookies.py",
+        "source_status": "relocated",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": false,
+        "anchor_flag": true,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 7
+        }
+      },
+      {
+        "sample_id": "03c6ed5a740b0add78ca14304307d799182aa82527c8283b1f516c514e65f736",
+        "repository": "requests",
+        "split": "development",
+        "path": "requests/sessions.py",
+        "source_status": "relocated",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": false,
+        "anchor_flag": true,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 2
+        }
+      },
+      {
+        "sample_id": "0487d1f55f388caea7f158cc113da89c78df7c882fbe7d7eaab928243e45b233",
+        "repository": "requests",
+        "split": "development",
+        "path": "requests/models.py",
+        "source_status": "relocated",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": false,
+        "anchor_flag": true,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 2,
+          "missing": 1
+        }
+      },
+      {
+        "sample_id": "0542d03d0305a0ba60e372e248e2f7ba7f1d1a94cd7a70e6e981a935c4182b37",
+        "repository": "requests",
+        "split": "development",
+        "path": "requests/utils.py",
+        "source_status": "relocated",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": false,
+        "anchor_flag": true,
+        "needs_review": false,
+        "reference_statuses": {
+          "missing": 2,
+          "unresolved": 1
+        }
+      },
+      {
+        "sample_id": "05aacc61ef17a662d852684bf58f7790e2f7ceca651d188121fb5bbe166a14fd",
+        "repository": "requests",
+        "split": "development",
+        "path": "requests/utils.py",
+        "source_status": "relocated",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": false,
+        "anchor_flag": true,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 3
+        }
+      },
+      {
+        "sample_id": "07070ac8a1e86f9da67b664717ecda4ec41b231f30ffd43753a00438661dac0d",
+        "repository": "requests",
+        "split": "development",
+        "path": "requests/models.py",
+        "source_status": "relocated",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": false,
+        "anchor_flag": true,
+        "needs_review": false,
+        "reference_statuses": {
+          "missing": 1,
+          "unresolved": 11
+        }
+      },
+      {
+        "sample_id": "07cc70d4baf27b7f55bdd2b09e473d9d313fd6cc95e1382531b50f17659a2f7c",
+        "repository": "requests",
+        "split": "development",
+        "path": "requests/structures.py",
+        "source_status": "relocated",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": false,
+        "anchor_flag": true,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 2
+        }
+      },
+      {
+        "sample_id": "09161b9d367404d9907783b4d2f7eaee3c0118b3307795910e9f0348b3bc882c",
+        "repository": "requests",
+        "split": "development",
+        "path": "requests/cookies.py",
+        "source_status": "relocated",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": false,
+        "anchor_flag": true,
+        "needs_review": false,
+        "reference_statuses": {
+          "missing": 1,
+          "unresolved": 2
+        }
+      },
+      {
+        "sample_id": "0966702b8dcf05324cd22b4a435ff0c10d5e86961428a079ce9899542aef9f45",
+        "repository": "requests",
+        "split": "development",
+        "path": "requests/_internal_utils.py",
+        "source_status": "relocated",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": false,
+        "anchor_flag": true,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 11
+        }
+      },
+      {
+        "sample_id": "09de7f96d938112e4aa0f565145c6dd959b33b9eb5243ba09b9c840e3c7594ce",
+        "repository": "requests",
+        "split": "development",
+        "path": "requests/cookies.py",
+        "source_status": "relocated",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": false,
+        "anchor_flag": true,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 5
+        }
+      },
+      {
+        "sample_id": "0d239f2677f5fe02023ffc9aa8ff99af2f6c55e3208771b605e0b1709d9477a1",
+        "repository": "requests",
+        "split": "development",
+        "path": "requests/models.py",
+        "source_status": "relocated",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": false,
+        "anchor_flag": true,
+        "needs_review": false,
+        "reference_statuses": {}
+      },
+      {
+        "sample_id": "0d618c2bb670224b23460a87410c7bb674380ebdef463d5add602ba1055bdadf",
+        "repository": "requests",
+        "split": "development",
+        "path": "requests/status_codes.py",
+        "source_status": "deleted",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "missing": 1
+        }
+      },
+      {
+        "sample_id": "0f7efab8bfdf0e29381ba259d397e6e7fcdac221c647e335defb98c3b4ffdfb4",
+        "repository": "requests",
+        "split": "development",
+        "path": "requests/structures.py",
+        "source_status": "relocated",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": false,
+        "anchor_flag": true,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 1
+        }
+      },
+      {
+        "sample_id": "102c1fd049725e8e3759c10b559834c923521ba480c1b278e4551419a5201b86",
+        "repository": "requests",
+        "split": "development",
+        "path": "requests/utils.py",
+        "source_status": "relocated",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": false,
+        "anchor_flag": true,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 6
+        }
+      },
+      {
+        "sample_id": "102f4004ac0c3e6398fc55e5a53641d556dccb279a5cd6b36bcf15fb2b82cb5d",
+        "repository": "requests",
+        "split": "development",
+        "path": "requests/utils.py",
+        "source_status": "relocated",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": false,
+        "anchor_flag": true,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 1,
+          "missing": 1
+        }
+      },
+      {
+        "sample_id": "112f437a2329099eeae6d995436f91be6a3c4127c2f93d4829bee9bf0229e313",
+        "repository": "requests",
+        "split": "development",
+        "path": "requests/adapters.py",
+        "source_status": "relocated",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": false,
+        "anchor_flag": true,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 3
+        }
+      },
+      {
+        "sample_id": "12d703efd84b040ad393dec7bafdae2242b0c1f3b562cce9c0e89712bfc165bc",
+        "repository": "requests",
+        "split": "development",
+        "path": "requests/auth.py",
+        "source_status": "relocated",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": false,
+        "anchor_flag": true,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 2
+        }
+      },
+      {
+        "sample_id": "12ec2ce8db95bca547e5804ccd4bb51870a6400cc99be304abfdc7535be7e675",
+        "repository": "requests",
+        "split": "development",
+        "path": "requests/sessions.py",
+        "source_status": "relocated",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": false,
+        "anchor_flag": true,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 1
+        }
+      },
+      {
+        "sample_id": "1438dc9e5850de315173bef945e710e25eda3356e9868050d4354fe0e25c86ce",
+        "repository": "requests",
+        "split": "development",
+        "path": "requests/cookies.py",
+        "source_status": "deleted",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {}
+      },
+      {
+        "sample_id": "168a0ad427b65eb2f82ead8bec8c43d96ae0ccc2331d49ca24e83daa060359ed",
+        "repository": "requests",
+        "split": "development",
+        "path": "requests/utils.py",
+        "source_status": "relocated",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": false,
+        "anchor_flag": true,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 7
+        }
+      },
+      {
+        "sample_id": "16e0515f01a7921424337516807600a57d4777b22607e4438e044fb2081ab66f",
+        "repository": "requests",
+        "split": "development",
+        "path": "requests/models.py",
+        "source_status": "relocated",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": false,
+        "anchor_flag": true,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 3,
+          "missing": 1
+        }
+      },
+      {
+        "sample_id": "17687a61a6fcc208ae8ebafaff22106a287440fa0ffdc42ff20ef3769a24e6d5",
+        "repository": "requests",
+        "split": "development",
+        "path": "requests/utils.py",
+        "source_status": "relocated",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": false,
+        "anchor_flag": true,
+        "needs_review": false,
+        "reference_statuses": {
+          "missing": 2,
+          "unresolved": 1
+        }
+      },
+      {
+        "sample_id": "1bb2ef1f1a0e399111acc6e22479cda956d48b3344e43381ead2af0c504aec05",
+        "repository": "requests",
+        "split": "development",
+        "path": "requests/models.py",
+        "source_status": "relocated",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": false,
+        "anchor_flag": true,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 7
+        }
+      },
+      {
+        "sample_id": "1c63249a237b7f9a6d35fe943227dfd266e064abab1481563d9f3a12e07ff312",
+        "repository": "requests",
+        "split": "development",
+        "path": "requests/api.py",
+        "source_status": "relocated",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": false,
+        "anchor_flag": true,
+        "needs_review": false,
+        "reference_statuses": {
+          "missing": 1
+        }
+      },
+      {
+        "sample_id": "1c7a739385cf2ee47f70de956a7d60b301e4ec9c61aa9a3d9b924fe5853cd9eb",
+        "repository": "requests",
+        "split": "development",
+        "path": "requests/utils.py",
+        "source_status": "relocated",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": false,
+        "anchor_flag": true,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 11,
+          "missing": 1
+        }
+      },
+      {
+        "sample_id": "20d5d5a26dab3088882de7b1c2a63d8e4e1101ba0964e797379de75c687986bb",
+        "repository": "requests",
+        "split": "development",
+        "path": "requests/utils.py",
+        "source_status": "relocated",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": false,
+        "anchor_flag": true,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 2
+        }
+      },
+      {
+        "sample_id": "217a2218babb8e79e87ffd23366bb32060c00963546e656ba999d4e48ab24925",
+        "repository": "requests",
+        "split": "development",
+        "path": "requests/cookies.py",
+        "source_status": "relocated",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": false,
+        "anchor_flag": true,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 6
+        }
+      },
+      {
+        "sample_id": "2284a6a8d9a9aace6884c8e4b1f86e14307f3652f98f77b360538d0f69f26525",
+        "repository": "requests",
+        "split": "development",
+        "path": "requests/cookies.py",
+        "source_status": "relocated",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": false,
+        "anchor_flag": true,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 2
+        }
+      },
+      {
+        "sample_id": "22c6519c8a6d30945bde9b4fe018af991f15b11cb8cb742577ada5352e6d3720",
+        "repository": "requests",
+        "split": "development",
+        "path": "requests/auth.py",
+        "source_status": "relocated",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": false,
+        "anchor_flag": true,
+        "needs_review": false,
+        "reference_statuses": {
+          "missing": 1
+        }
+      },
+      {
+        "sample_id": "0043670a5ed8b1f1ef5f1d46b110c5e721c1b39fe2f4e294651ad5ce387ae7ac",
+        "repository": "urllib3",
+        "split": "development",
+        "path": "src/urllib3/connectionpool.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 2
+        }
+      },
+      {
+        "sample_id": "01834f61d3e0726fb482e6540b81731c20535411040d07ba84c178382d8ed776",
+        "repository": "urllib3",
+        "split": "development",
+        "path": "src/urllib3/util/url.py",
+        "source_status": "valid",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 3
+        }
+      },
+      {
+        "sample_id": "01a2880c0d62fc2386932189419177df2f28b4fad886cc71193aa71be11257f6",
+        "repository": "urllib3",
+        "split": "development",
+        "path": "src/urllib3/connectionpool.py",
+        "source_status": "relocated",
+        "dependency_status": "changed",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": true,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "changed": 3,
+          "unchanged": 1,
+          "unresolved": 3
+        }
+      },
+      {
+        "sample_id": "01dde59e3e8e318a8ab29285d39bad5fe32d8b07796814758f759fae102754d6",
+        "repository": "urllib3",
+        "split": "development",
+        "path": "src/urllib3/util/retry.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 9
+        }
+      },
+      {
+        "sample_id": "022e9a5d6182c85f50502da30e982602444d8f64d8d8936a28bd0ec875c79476",
+        "repository": "urllib3",
+        "split": "development",
+        "path": "src/urllib3/contrib/securetransport.py",
+        "source_status": "deleted",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "missing": 1,
+          "unresolved": 3
+        }
+      },
+      {
+        "sample_id": "024d04612fc77d5869affdd43826297da57c01fe5ff6e20898620e1b449e23d2",
+        "repository": "urllib3",
+        "split": "development",
+        "path": "src/urllib3/util/retry.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 14,
+          "changed": 8
+        }
+      },
+      {
+        "sample_id": "02d32d30ee2d4aeeab7b79263c0ad156d356df8e6c38070e0c811fca4ea0aad5",
+        "repository": "urllib3",
+        "split": "development",
+        "path": "src/urllib3/util/ssl_.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 11,
+          "changed": 1
+        }
+      },
+      {
+        "sample_id": "042aa2bd80800a86eecc34f4c5398e4e990b0391093dbbb7ceb5003ded86cb0a",
+        "repository": "urllib3",
+        "split": "development",
+        "path": "src/urllib3/util/retry.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 21,
+          "changed": 3
+        }
+      },
+      {
+        "sample_id": "046eaf3d2c37b5a4111e73d1a60bb649d9bb4ce9e99b4aba26b0f5f93887eb01",
+        "repository": "urllib3",
+        "split": "development",
+        "path": "src/urllib3/contrib/pyopenssl.py",
+        "source_status": "relocated",
+        "dependency_status": "changed",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": true,
+        "direct_reference_flag": true,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "changed": 1,
+          "unresolved": 1
+        }
+      },
+      {
+        "sample_id": "04895aa9dfc82dd45be5289ff663b878e8a76686b2ddb0d8af1d8c00e65540f2",
+        "repository": "urllib3",
+        "split": "development",
+        "path": "src/urllib3/response.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 1
+        }
+      },
+      {
+        "sample_id": "049b557c4254ac1023547cd1d18a17923f05fca8bb1b9716645cd260a44d3fd2",
+        "repository": "urllib3",
+        "split": "development",
+        "path": "src/urllib3/util/ssltransport.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 14
+        }
+      },
+      {
+        "sample_id": "04b5f81191d40d490db8d4368e34e18db200746108666ff84fa02eccee67ba31",
+        "repository": "urllib3",
+        "split": "development",
+        "path": "src/urllib3/connectionpool.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 7
+        }
+      },
+      {
+        "sample_id": "0524bdcb85ab7a35b722456ff3507e516dbbc4d27462b7d563f3a0f4012dadd6",
+        "repository": "urllib3",
+        "split": "development",
+        "path": "src/urllib3/util/timeout.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 2
+        }
+      },
+      {
+        "sample_id": "074ed87f837d0947f9b2ee18388e6e693a72f93b6335c332e73a6fa0cd9740bd",
+        "repository": "urllib3",
+        "split": "development",
+        "path": "src/urllib3/contrib/securetransport.py",
+        "source_status": "deleted",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 7,
+          "missing": 1
+        }
+      },
+      {
+        "sample_id": "07dfd05ec6c26a3bd427827089aa2dff891c3c968cc2dab1fbf8eac4f524d27a",
+        "repository": "urllib3",
+        "split": "development",
+        "path": "src/urllib3/contrib/pyopenssl.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 9
+        }
+      },
+      {
+        "sample_id": "08fa587ea2abd552ad6694b3f4592970889a6536364414a69b408f300e37dbb3",
+        "repository": "urllib3",
+        "split": "development",
+        "path": "src/urllib3/contrib/pyopenssl.py",
+        "source_status": "valid",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 5
+        }
+      },
+      {
+        "sample_id": "093b9c4490d95b9ae2731e931881c0707e28f0f9f50d58918712141eca215ad6",
+        "repository": "urllib3",
+        "split": "development",
+        "path": "src/urllib3/util/ssltransport.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unresolved",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 1
+        }
+      },
+      {
+        "sample_id": "0952d66b812b0f19f76aea0964740654e0ba2291a05c2ac17741f0a06fc5fed3",
+        "repository": "urllib3",
+        "split": "development",
+        "path": "src/urllib3/response.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 11,
+          "unchanged": 1
+        }
+      },
+      {
+        "sample_id": "0956b6ea8fa2469a6edbe7963a837e173d8bc97948413169ef6554a2f6e9a420",
+        "repository": "urllib3",
+        "split": "development",
+        "path": "src/urllib3/response.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 5
+        }
+      },
+      {
+        "sample_id": "09ead0ac884ad0b7ce2eac60a7bdaf9e73c2ab393b696121be4ca787c231433f",
+        "repository": "urllib3",
+        "split": "development",
+        "path": "src/urllib3/util/util.py",
+        "source_status": "valid",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 7
+        }
+      },
+      {
+        "sample_id": "0a3af05310057a92ddd92cb564456e4379d2457c2e6f2aac790cad7c44051612",
+        "repository": "urllib3",
+        "split": "development",
+        "path": "src/urllib3/_base_connection.py",
+        "source_status": "valid",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unchanged": 1,
+          "unresolved": 11
+        }
+      },
+      {
+        "sample_id": "0bb560421f55843afc77db8ca307bb30b981686469c0e06073e67344ec8de922",
+        "repository": "urllib3",
+        "split": "development",
+        "path": "src/urllib3/util/url.py",
+        "source_status": "valid",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 6
+        }
+      },
+      {
+        "sample_id": "0c48de5950c64680cc4236dcb09edc980e0aec6f1ce38ce48573561d82589806",
+        "repository": "urllib3",
+        "split": "development",
+        "path": "src/urllib3/contrib/securetransport.py",
+        "source_status": "deleted",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 9
+        }
+      },
+      {
+        "sample_id": "0c86685a32536cfbbb104053c98428ffc6217b6e0a63330bd14b48625e35bf3c",
+        "repository": "urllib3",
+        "split": "development",
+        "path": "src/urllib3/util/request.py",
+        "source_status": "valid",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 4,
+          "unchanged": 1
+        }
+      },
+      {
+        "sample_id": "0cc1e92ba98c87b3c170850289957fce8e0209616600bdc90efdc7a0839b673f",
+        "repository": "urllib3",
+        "split": "development",
+        "path": "src/urllib3/exceptions.py",
+        "source_status": "relocated",
+        "dependency_status": "unchanged",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unchanged": 1
+        }
+      },
+      {
+        "sample_id": "0d002b622baf88773f6537b44eff09c1b2e2ea4040d6bf5d1866f78f53195ae3",
+        "repository": "urllib3",
+        "split": "development",
+        "path": "src/urllib3/contrib/securetransport.py",
+        "source_status": "deleted",
+        "dependency_status": "missing",
+        "anchor_status": "missing",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 5
+        }
+      },
+      {
+        "sample_id": "0d0ef1b1ea4146500d94db865090af2b4b6d34c98fff1e401ab8504355164e86",
+        "repository": "urllib3",
+        "split": "development",
+        "path": "src/urllib3/fields.py",
+        "source_status": "valid",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 9,
+          "unchanged": 1
+        }
+      },
+      {
+        "sample_id": "0d1a56d94d289ad974baa2bd4edc86329a9299b171037440cde5205f49cf0533",
+        "repository": "urllib3",
+        "split": "development",
+        "path": "src/urllib3/response.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "changed": 3,
+          "unresolved": 18
+        }
+      },
+      {
+        "sample_id": "0d338c9c27fb6a6c5448f838757467158fcd709247f213f86a1aa4f9ce5d18b0",
+        "repository": "urllib3",
+        "split": "development",
+        "path": "src/urllib3/util/request.py",
+        "source_status": "modified",
+        "dependency_status": "changed",
+        "anchor_status": "changed",
+        "text_recoverable": false,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": false,
+        "reference_statuses": {
+          "unresolved": 11,
+          "changed": 2
+        }
+      },
+      {
+        "sample_id": "0db275d23810e265e88f1650ce7389aedd5e0679e0534df8a6cbfb07be2a9490",
+        "repository": "urllib3",
+        "split": "development",
+        "path": "src/urllib3/response.py",
+        "source_status": "relocated",
+        "dependency_status": "unresolved",
+        "anchor_status": "unchanged",
+        "text_recoverable": true,
+        "additionally_flagged": false,
+        "direct_reference_flag": false,
+        "anchor_flag": false,
+        "needs_review": true,
+        "reference_statuses": {
+          "unresolved": 1
+        }
+      }
+    ]
+  },
+  "observations": {
+    "python": "3.12.14",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "repositories": [
+      {
+        "repository": "attrs",
+        "repetitions": 3,
+        "capture_seconds": [
+          0.08447095903102309,
+          0.08193741703871638,
+          0.07724779099225998
+        ],
+        "verify_seconds": [
+          0.0641366250347346,
+          0.05875104200094938,
+          0.057971916045062244
+        ],
+        "capture_median_seconds": 0.08193741703871638,
+        "verify_median_seconds": 0.05875104200094938,
+        "witness_json_bytes": 131871,
+        "source_bundle_json_bytes": 37004,
+        "source_rendered_bytes": 35266
+      },
+      {
+        "repository": "babel",
+        "repetitions": 3,
+        "capture_seconds": [
+          0.12985979102086276,
+          0.12938499997835606,
+          0.13127008394803852
+        ],
+        "verify_seconds": [
+          0.14737816690467298,
+          0.14132137491833419,
+          0.13234962499700487
+        ],
+        "capture_median_seconds": 0.12985979102086276,
+        "verify_median_seconds": 0.14132137491833419,
+        "witness_json_bytes": 211850,
+        "source_bundle_json_bytes": 41332,
+        "source_rendered_bytes": 39766
+      },
+      {
+        "repository": "dateutil",
+        "repetitions": 3,
+        "capture_seconds": [
+          0.2672246251022443,
+          0.2419499169336632,
+          0.24100000003818423
+        ],
+        "verify_seconds": [
+          0.08007545897271484,
+          0.06571683404035866,
+          0.06730983301531523
+        ],
+        "capture_median_seconds": 0.2419499169336632,
+        "verify_median_seconds": 0.06730983301531523,
+        "witness_json_bytes": 431605,
+        "source_bundle_json_bytes": 26188,
+        "source_rendered_bytes": 25205
+      },
+      {
+        "repository": "filelock",
+        "repetitions": 3,
+        "capture_seconds": [
+          0.014777083066292107,
+          0.014431624906137586,
+          0.014520458062179387
+        ],
+        "verify_seconds": [
+          0.018549500033259392,
+          0.017259917105548084,
+          0.016188250039704144
+        ],
+        "capture_median_seconds": 0.014520458062179387,
+        "verify_median_seconds": 0.017259917105548084,
+        "witness_json_bytes": 88785,
+        "source_bundle_json_bytes": 29275,
+        "source_rendered_bytes": 28099
+      },
+      {
+        "repository": "httpx",
+        "repetitions": 3,
+        "capture_seconds": [
+          0.10777408292051405,
+          0.09922941704280674,
+          0.10520708304829895
+        ],
+        "verify_seconds": [
+          0.09450749994721264,
+          0.08788499992806464,
+          0.09384562505874783
+        ],
+        "capture_median_seconds": 0.10520708304829895,
+        "verify_median_seconds": 0.09384562505874783,
+        "witness_json_bytes": 185204,
+        "source_bundle_json_bytes": 26797,
+        "source_rendered_bytes": 25564
+      },
+      {
+        "repository": "packaging",
+        "repetitions": 3,
+        "capture_seconds": [
+          0.11457841598894447,
+          0.0688282500486821,
+          0.08253949997015297
+        ],
+        "verify_seconds": [
+          0.08683829102665186,
+          0.11095074994955212,
+          0.07024437503423542
+        ],
+        "capture_median_seconds": 0.08253949997015297,
+        "verify_median_seconds": 0.08683829102665186,
+        "witness_json_bytes": 150781,
+        "source_bundle_json_bytes": 37479,
+        "source_rendered_bytes": 35781
+      },
+      {
+        "repository": "pluggy",
+        "repetitions": 3,
+        "capture_seconds": [
+          0.042228708043694496,
+          0.04043779103085399,
+          0.039798583020456135
+        ],
+        "verify_seconds": [
+          0.04111829190514982,
+          0.03719141602050513,
+          0.037543624988757074
+        ],
+        "capture_median_seconds": 0.04043779103085399,
+        "verify_median_seconds": 0.037543624988757074,
+        "witness_json_bytes": 166767,
+        "source_bundle_json_bytes": 34498,
+        "source_rendered_bytes": 33108
+      },
+      {
+        "repository": "pydantic",
+        "repetitions": 3,
+        "capture_seconds": [
+          0.40549604198895395,
+          0.43436362501233816,
+          0.44076429202686995
+        ],
+        "verify_seconds": [
+          0.450969124911353,
+          0.4033871670253575,
+          0.4947326669935137
+        ],
+        "capture_median_seconds": 0.43436362501233816,
+        "verify_median_seconds": 0.450969124911353,
+        "witness_json_bytes": 203827,
+        "source_bundle_json_bytes": 52739,
+        "source_rendered_bytes": 51116
+      },
+      {
+        "repository": "requests",
+        "repetitions": 3,
+        "capture_seconds": [
+          0.055126584018580616,
+          0.054698415915481746,
+          0.05663054098840803
+        ],
+        "verify_seconds": [
+          0.04986629099585116,
+          0.03861695807427168,
+          0.04210354189854115
+        ],
+        "capture_median_seconds": 0.055126584018580616,
+        "verify_median_seconds": 0.04210354189854115,
+        "witness_json_bytes": 78156,
+        "source_bundle_json_bytes": 32980,
+        "source_rendered_bytes": 31429
+      },
+      {
+        "repository": "urllib3",
+        "repetitions": 3,
+        "capture_seconds": [
+          0.11948591598775238,
+          0.1303380000172183,
+          0.1170174169819802
+        ],
+        "verify_seconds": [
+          0.12155379203613847,
+          0.10754320793785155,
+          0.10805208410602063
+        ],
+        "capture_median_seconds": 0.11948591598775238,
+        "verify_median_seconds": 0.10805208410602063,
+        "witness_json_bytes": 194763,
+        "source_bundle_json_bytes": 39776,
+        "source_rendered_bytes": 38259
+      }
+    ]
+  }
+}

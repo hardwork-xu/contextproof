@@ -1,0 +1,70 @@
+{
+  "attempts_per_cell": 1,
+  "cell_count": 60,
+  "conditions": [
+    "reuse",
+    "fresh",
+    "verify_repair_refresh"
+  ],
+  "context_token_cap": 1024,
+  "drift_assignment": "ID modulo 4: symbol rename, signature change, file move, unchanged",
+  "evidence_byte_cap": 4000,
+  "failure_policy": "no retries or edited completions; failures remain in denominator",
+  "frozen_at": "2026-09-21T09:11:28.253463+00:00",
+  "inputs_sha256": "75d5169298b130842bc9614e88f253cc3512db379a797dd446f877df4b8389f3",
+  "model_id": "mlx-community/Qwen2.5-Coder-1.5B-Instruct-4bit",
+  "model_revision": "b3252a2f97102b1fb1571fec2c9b27219a8536be",
+  "ordering": "task ID ascending, conditions in listed order; no prompt cache reuse",
+  "output_token_cap": 384,
+  "path_redactions": {
+    "note": "Post-run publication copy: local path prefixes in diagnostic strings replaced; frozen inputs unchanged.",
+    "original_protocol_sha256": "5c8125e4c465c43190921618532fad529670ce2fdb96e35c689bd6b188b99205",
+    "source_hash_note": "Source hashes describe the pre-run preparation snapshot, not necessarily final repository files."
+  },
+  "primary_outcome": "all original functional assertions AND decoder-call contract pass",
+  "refresh_policy": "verify; retain valid; repair exact moves; refresh any invalidated or budget-omitted evidence",
+  "retrieval": "ContextProof BM25",
+  "sandbox_preflight": {
+    "checked_at": "2026-09-21T09:11:28.318131+00:00",
+    "checks": {
+      "fork": "denied: [Errno 1] Operation not permitted",
+      "network": "denied: [Errno 1] Operation not permitted",
+      "outside_read": "denied: [Errno 1] Operation not permitted: '<WORKSPACE>/work/downstream/scratch/sandbox-outside-sentinel'",
+      "outside_write": "denied: [Errno 1] Operation not permitted: '<WORKSPACE>/work/downstream/scratch/sandbox-outside-sentinel'",
+      "scratch_write": "allowed"
+    },
+    "cpu_limit_seconds": 3,
+    "file_size_limit_bytes": 1048576,
+    "mechanism": "macOS Seatbelt sandbox-exec",
+    "open_file_limit": 64,
+    "profile": "(version 1) (allow default) (deny network*) (deny process-fork) (deny file-write*) (allow file-write* (subpath \"<WORKSPACE>/outputs/contextproof/SCRATCH\")) (deny file-read* (subpath \"/Users\") (subpath \"/private/var/folders\")) (allow file-read* (subpath \"<WORKSPACE>/outputs/contextproof/SCRATCH\") (subpath \"<WORKSPACE>/work/model-venv\") (subpath \"/Library/Frameworks/Python.framework/Versions/3.12\") (subpath \"/System\") (subpath \"/usr\") (subpath \"/dev\"))",
+    "wall_timeout_seconds": 10
+  },
+  "schema_version": 1,
+  "scope_limit": "Artificial API adaptation, not unmodified HumanEval or real issue resolution",
+  "seed": 0,
+  "selection": "first 20 IDs numerically, HumanEval/0 through HumanEval/19",
+  "source_sha256": {
+    "benchmarks/downstream/sandbox_worker.py": "ed72eb0f589b2e6e48481063611a808fc936d6135b858ce6c604f701c9a2b5a0",
+    "benchmarks/downstream/suite.py": "5df791ea83f96a17d6ff55e407ba2b7ee2571f5bbcde921f3641e93fb9599d6e",
+    "scripts/run_downstream.py": "c8ad12242c27d0130e4e61045dfcda487c5231852b7a18677f8823cbf238b274",
+    "src/contextproof/__init__.py": "a515946ce99bfe22e9db28e13d38661112b134027be8331f53014aaa7454798d",
+    "src/contextproof/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "src/contextproof/cli.py": "832dd6b94b90979bbb28338f17a777fb6d77e47ebd50a3bd18f114d035913596",
+    "src/contextproof/dependencies.py": "70db6274fcdfb6daa9135961beee23a8d7a8a6ff75376e6c77474268742b9561",
+    "src/contextproof/evidence.py": "63b41f50ced294c391399121752b5ffb096dc153d75f4eeb30a0a3f74357fc6a",
+    "src/contextproof/index.py": "d8b6838ab5161d69e9b50480674345830a2921cc4be9b1c6a02f5a95d792d108",
+    "src/contextproof/mcp.py": "1a055c2c1758bb9b51c2a9401791cbc6e9b77c4c9456b89b80dd5bc441b34c2b",
+    "src/contextproof/models.py": "4bc812d50fe6773f5c89181b7259de9950f4c25ea4272081cdc38b130f15c8bf",
+    "src/contextproof/report.py": "9b3ca9497147c24e64bae0a504b0c6d82a4f4029354514a1d9855fccb58e3653",
+    "src/contextproof/retrieval.py": "c237c65f99197b4565374decd2afc9bf6e1fc079d527f74beb1ab994fc1e1a68",
+    "src/contextproof/session.py": "681d3c117173c2ab954aded5d150686aebbb9469dcb7b89f6d2653c830d97911"
+  },
+  "study": "adapted HumanEval API drift",
+  "tasks_sha256": "8bb52a2f65fe9922e22acfed0c005f15cdddf890e3ebe6b8c646de827de925fc",
+  "temperature": 0.0,
+  "tokenizer": "model-native Qwen tokenizer",
+  "upstream_gzip_sha256": "b796127e635a67f93fb35c04f4cb03cf06f38c8072ee7cee8833d7bee06979ef",
+  "upstream_repository": "https://github.com/openai/human-eval",
+  "upstream_revision": "6d43fb980f9fee3c892a914eda09951f772ad10d"
+}

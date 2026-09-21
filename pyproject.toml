@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "contextproof"
+version = "0.1.0"
+description = "Verifiable code context across repository changes"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+authors = [{name = "hardwork-xu"}]
+dependencies = []
+keywords = ["code-retrieval", "coding-agents", "context-engineering", "reproducibility"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "ruff>=0.11,<1", "build>=1,<2"]
+tokens = ["tiktoken>=0.8,<1"]
+
+[project.scripts]
+contextproof = "contextproof.cli:main"
+
+[project.urls]
+Repository = "https://github.com/hardwork-xu/contextproof"
+Issues = "https://github.com/hardwork-xu/contextproof/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F"]

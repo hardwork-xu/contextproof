@@ -1,33 +1,21 @@
-# ContextProof：代码改了，AI 之前读到的证据还能用吗？
+# ContextProof：检查 AI 保存的代码证据是否仍然可用
 
-[English](../README.md) · [公开仓库](https://github.com/hardwork-xu/contextproof) ·
-[真实实验结果](../benchmarks/results/latest.md) · [评估协议](EVALUATION.md)
+[English](../README.md) · [技术报告](TECHNICAL_REPORT.md) ·
+[公开仓库](https://github.com/hardwork-xu/contextproof) · [评估协议](EVALUATION.md)
 
-ContextProof 是一个给 AI 编程助手使用的本地代码证据工具。它先检索代码，
-保存片段、路径、行号、哈希和来源；代码库变化后，再检查旧证据是否仍然精确
-匹配。插入几行或移动文件时，可以修正唯一匹配的引用；片段被修改、删除或
-出现多个候选位置时，会明确报告失效或歧义。
+ContextProof 为编程助手保存代码片段、引用位置、源码哈希和直接依赖证据。
+代码库变化后，它检查旧片段，修复唯一的精确文本迁移，报告依赖变化或无法
+解析的引用，并给出可以检查的重新检索建议。
 
-当前是 **v0.1 可运行研究原型**：包含 CLI、MCP stdio 接口、自动化测试和
-可复现实验。使用 Python 3.11+，面向 macOS/Linux；默认安装没有运行时依赖，
-不需要 GPU、模型 API 或付费服务。
+**v1.0 已实现完整工作流**：Python 包、CLI、8 个 MCP 工具、离线 HTML 报告，
+以及完成运行并公开记录的实验。默认安装只用 Python 标准库，支持 Python 3.11+
+和 macOS/Linux，日常使用不需要模型、GPU 或付费 API。
 
-## 一个具体例子
+![离线报告：invoice_total 的源码没变，但依赖已变化，因此建议重新检索](assets/context-report.png)
 
-AI 保存了 `pricing.py` 的第 4–8 行。你随后在文件顶部加了一行注释。
-原来的代码还在，但引用行号已经错了。
+## 先运行一个完整示例
 
-- 只检查原来的行号，会认为证据已经变化。
-- 只比较整个文件的哈希，也只能知道文件变了。
-- ContextProof 查找原片段的精确文本；只有一个匹配位置时，更新引用行号，
-  再验证修复后的证据。
-
-这里验证的是**文本是否仍然一致**。如果片段调用的另一个函数变了，即使
-片段本身没变，程序行为仍可能变化。当前版本不会把“文本相同”说成“行为相同”。
-
-## 三分钟跑起来
-
-从 GitHub 安装；当前没有发布到 PyPI。在项目根目录执行：
+从 GitHub 安装；当前没有发布到 PyPI。
 
 ```sh
 git clone https://github.com/hardwork-xu/contextproof.git
@@ -35,91 +23,108 @@ cd contextproof
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -e .
-
-contextproof index examples/tinyshop
-contextproof bundle examples/tinyshop "discount price rate" \
-  --method bm25 --budget 4000 --output work/demo.json
-contextproof verify examples/tinyshop work/demo.json
-contextproof render work/demo.json --output work/demo.md
+python scripts/demo.py
 ```
 
-`work/demo.json` 保存可验证的证据，`work/demo.md` 是交给 AI 的正文。
-这里的预算是 **4,000 个 UTF-8 字节**，不是 4,000 个模型 token。
+用浏览器打开 `work/demo/02-changed.html`。示例只改变计算税率的辅助函数，
+`invoice_total()` 的文本仍然相同。普通片段验证继续有效，依赖证据发现变化，
+刷新后重新捕获当前源码。三个报告展示 **可复用 → 重新检索 → 可复用**。
 
-接着在临时副本中插入一行，观察引用修复：
+在自己的代码库上使用相同流程：
 
 ```sh
-python - <<'PY'
-from pathlib import Path
-from shutil import copytree
+contextproof capture work/demo/repository "invoice_total" \
+  --budget 6000 --output work/context.json
+contextproof check work/demo/repository work/context.json
+contextproof report work/demo/repository work/context.json --output work/context.html
 
-source = Path("examples/tinyshop")
-changed = Path("work/tinyshop")
-copytree(source, changed, dirs_exist_ok=True)
-(changed / "pricing.py").write_bytes(
-    b"# Header added after retrieval.\n" + (source / "pricing.py").read_bytes()
-)
-PY
-
-# 此处出现 relocated、退出码为 1 是预期结果。
-contextproof verify work/tinyshop work/demo.json
-contextproof repair work/tinyshop work/demo.json --output work/repaired.json
-contextproof verify work/tinyshop work/repaired.json
-contextproof render work/repaired.json --output work/repaired.md
+# 代码变化后，刷新证据并生成交给模型的正文。
+contextproof refresh work/demo/repository work/context.json --output work/refreshed.json
+contextproof render work/refreshed.json --output work/model-context.md
 ```
 
-修复后的引用应当恢复为 `valid`。如果直接改变片段中的表达式，系统会将它
-标为失效，而不会偷偷用新代码替换旧证据；这时需要重新检索。
-生成文件均位于被索引示例之外，避免把自己的输出当成新的源码。
+`capture` 保存绑定在一起的源码包和依赖旁路记录；`check` 返回 `reuse`、
+`repair`、`review` 或 `retrieve` 建议。`refresh` 在源码与依赖两层条件允许时
+修复引用，否则按原查询和预算重新检索。动态依赖无法解析时，刷新后仍可能
+需要人工检查。`work/` 中的输出应放在被索引源码目录之外。
 
-## 项目中值得理解的技术
+源码层面的 `index/search/bundle/verify/repair/render` 命令继续可用。
+退出码 `0` 表示操作成功，`1` 表示 `verify` 未全部有效或 `check` 不可直接
+复用，`2` 表示输入或操作错误。完整参数见 `contextproof --help`。
 
-| 部分 | 做了什么 | 需要能解释的问题 |
+## 三层契约分别证明什么
+
+| 层次 | 实际检查 | 明确边界 |
 | --- | --- | --- |
-| AST 切块 | 按 Python 类、函数和源代码范围组织片段 | 装饰器、嵌套函数与长函数如何定位？ |
-| 检索 | BM25 与简单依赖图扩展 | 图扩展为什么也可能降低效果？ |
-| SQLite 缓存 | 复用内容未变的解析结果 | 为什么缓存命中仍需要读取文件？ |
-| 预算打包 | 计入完整正文和引用元数据，放不下就跳过整个片段 | 如何保证统计范围与实际发送内容一致？ |
-| 跨版本验证 | 区分有效、迁移、修改、删除、歧义、无效输入 | 精确匹配能证明什么、不能证明什么？ |
-| 可复现实验 | 固定源码版本、采样规则、对照方法与结果文件 | 真实版本变化为什么不能直接当准确率？ |
+| 源码证据 | 原位置的精确文本；唯一完整行匹配的迁移 | 文本一致不等于行为一致；哈希不是数字签名 |
+| 直接依赖 | 支持静态解析的 Python 定义、常量和导入绑定 | 只检查一跳；动态、外部或歧义引用保留为 unresolved |
+| 上下文工作流 | 源码包与依赖记录的身份绑定及复用建议 | 重新检索不会自动解决所有运行时依赖问题 |
 
-完整实现说明见[系统设计](DESIGN.md)。预算约束覆盖渲染后的正文，包含查询、
-引用、代码和来源信息；JSON 存储记录、MCP 外层封装、其他对话消息及模型接口
-开销不在预算内。可选安装 `.[tokens]` 后使用 `cl100k_base` 或 `o200k_base`；
-首次使用可能下载编码表，编码计数也不等于完整请求的计费 token。
+源码状态包括有效、迁移、修改、删除、歧义和无效。修复只保留可以精确确认的
+证据，不会用修改后的代码冒充原片段。依赖状态包括未变、变化、缺失、无法
+解析和无效；**无法解析不会被当作新鲜证据**。完整细节见[系统设计](DESIGN.md)
+与[依赖契约](DEPENDENCIES.md)。
 
-## 已经测到什么
+检索实现包含 Python AST 切块、BM25、简单图扩展和 SQLite 增量解析缓存。
+缓存命中仍需读取并计算文件哈希。源码扫描不会导入或执行被检查的仓库；
+多个文件的验证过程也不提供原子快照保证。
 
-- 7 种受控变化均得到预期验证状态，修复结果也符合契约。
-- 在 Click、ItsDangerous、MarkupSafe 的两个冻结版本之间检查了 118 个片段。
-  这些是状态分布，尚无独立标注，不能说是 118 个样本的准确率。
-- 14 个手写检索问题，分别使用 2 种方法和 3 档预算，共 84 次运行，
-  完整渲染预算均未超限。
-- 2,000 字节时，图扩展命中相关文件的问题数为 8/14，低于 BM25 的 9/14；
-  4,000 字节时两者相同，8,000 字节时分别为 14/14 和 13/14。
+## 预算与 MCP 接入
 
-这些问题经常包含精确函数名，三个仓库也来自同一 Pallets 生态，因此结果
-不能证明图方法普遍更强。当前没有运行下游 LLM 编程任务，没有论文录用或
-模型成功率提升的结论。负面结果也保留在[实验报告](../benchmarks/results/latest.md)。
+`--budget 6000` 默认表示 **6,000 个 UTF-8 字节**。统计范围是完整渲染的源码
+正文，包含查询、引用、代码、元数据和分隔符；放不下的整块代码会被省略。
+**依赖旁路记录、HTML 报告、JSON 存储回执、MCP 外层封装和其他消息不在该预算内。**
+如果一并交给模型，需要另外计算它们的开销。
 
-复现实验：
+可选安装 `.[tokens]` 后，可指定 `cl100k_base` 或 `o200k_base` 编码；首次
+使用可能下载编码表。编码 token 数不等于所有模型的 token 数或计费数量。
+
+按照 [examples/mcp.json](../examples/mcp.json) 配置客户端，将根目录替换为
+源码仓库的绝对路径。`contextproof serve ROOT` 通过 stdio 提供 8 个工具：
+`contextproof_index`、`contextproof_search`、`contextproof_bundle`、
+`contextproof_verify`、`contextproof_repair`、`contextproof_capture`、
+`contextproof_check` 和 `contextproof_refresh`。每个服务固定一个源码根目录。
+
+## 已完成的实验与结果
+
+| 实验 | 结果 | 应如何理解 |
+| --- | --- | --- |
+| [真实版本漂移](../benchmarks/v1/results/latest.md) | 10 个仓库、300 个样本，与单独实现的参考程序 300/300 一致 | 限定源码范围内的契约一致性，不是人工标注准确率 |
+| [源码范围敏感性](../benchmarks/v1/results/scope-sensitivity.md) | 扩大范围后，23 个 dateutil 样本从 deleted 变为 relocated | 这些代码移出了原语料边界，并未从上游仓库删除 |
+| [盲态 AI 复核](../benchmarks/v1/review_comparison.json) | 选定的 21 个样本全部一致 | AI 复核，不是独立人工标注 |
+| [依赖受控实验](../benchmarks/results/dependencies.md) | 34/34 符合预定状态；12 个过时案例和 12 个 unresolved 案例均未被接受为新鲜 | 检查已声明的规则，并记录额外耗时与体积 |
+| [真实模型编程实验](DOWNSTREAM.md) | 20 个改编任务 × 3 种策略；**三组均为 0/20** | 没有证明下游任务成功率提升 |
+
+下游实验固定 Qwen2.5-Coder-1.5B 本地模型、提示、预算和每格一次尝试，公开
+全部 60 次输出及执行结果。54 次输出虚构了不存在的 `repository_helper` 模块。
+随后用正确算法验证执行框架：当前 API 对照 20/20 通过，旧 API 对照只有
+5 个未变化任务通过。任务可以完成，但这次模型没有完成；没有重新提示、
+替换模型或挑选更好的结果。
+
+[技术报告](TECHNICAL_REPORT.md) 汇总问题、方法、对照、留出划分、统计限制、
+开销与失败分析。此前三个 Pallets 仓库上的 118 条漂移观察和 84 次检索实验
+仍保留为[早期探索结果](EVALUATION.md)，没有被混入新的主实验。
+
+## 复现
 
 ```sh
-python scripts/run_benchmarks.py --download
-python scripts/run_benchmarks.py \
-  --check benchmarks/results/latest.json --output work/repeated-results
+python -m pip install -e '.[dev]'
+ruff check .
+pytest -q
+python -m build
+python scripts/run_drift_benchmarks.py --download
+python scripts/run_drift_benchmarks.py \
+  --check benchmarks/v1/results/latest.json --output work/drift-replay
+python scripts/run_dependency_benchmarks.py --repeats 7 --output work/dependencies.json
 ```
 
-脚本校验冻结归档的 SHA-256，只读取上游源码，不安装或执行上游项目。
-第二条命令比较确定性结果；时间、机器环境和耗时单独记录。
-详见[实验协议](EVALUATION.md)。
+更多操作见[漂移协议](DRIFT_STUDY.md)、[依赖实验](DEPENDENCIES.md)、
+[下游模型与隔离重放](DOWNSTREAM.md)。GitHub 首页 CI 标记链接当前验证结果；
+模型生成实验与普通 CI 分开复现。
 
-## 如何把它继续做扎实
+[完成矩阵](ROADMAP.md)列出交付物及证据；[开发记录](DEVELOPMENT_LOG.md)记录
+实际完成的工作。
 
-[研究定位](RESEARCH.md)说明已有工作与可证伪问题；
-[路线图](ROADMAP.md)列出下一阶段实验的验收标准。
-
-项目由 **hardwork-xu 维护，使用 AI 辅助设计、实现与文档**。
-开发记录如实记录本次实际产出，不虚构团队、数月开发经历或尚未完成的研究。
-默认采用 [MIT 许可证](../LICENSE)；实验使用的公开源码来源及其许可证记录在
-[manifest](../benchmarks/manifest.json)中。
+项目由 **hardwork-xu 维护，使用 AI 辅助设计、实现、实验与写作**。
+项目采用 [MIT 许可证](../LICENSE)，
+实验来源与上游许可证保存在各实验 manifest 中。

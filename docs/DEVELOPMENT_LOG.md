@@ -1,61 +1,108 @@
 # Development log
 
-This log records decisions and evidence from actual development. ContextProof is
-maintained by hardwork-xu with AI assistance for design, implementation, and writing.
-It does not reconstruct a longer history or imply an external engineering team.
+This record describes actual work completed on 2026-09-21. ContextProof is maintained
+by hardwork-xu with AI assistance for design, implementation, experiments, and writing.
+It does not imply a longer development history, a separate engineering team, or an
+independent human annotation study.
 
-## 2026-09-21 — Initial v0.1 implementation and evaluation
+## 2026-09-21 — Initial prototype
 
-**Problem selected.** Focus on saved code evidence becoming stale after repository
-changes. The implemented contract checks exact source text and conservatively
-repairs citations. It does not claim a novel retrieval algorithm or infer semantic
-equivalence. Related systems and untested research questions are recorded in
-[RESEARCH.md](RESEARCH.md).
+**Problem and implementation.** Selected the problem of saved code evidence becoming
+stale after repository changes. Implemented source scanning, Python AST chunks,
+SQLite parsing cache, BM25, a small graph-expansion heuristic, complete-payload
+budgeting, exact-text verification, conservative citation repair, CLI, and a
+fixed-root MCP interface. The initial public milestone was v0.1.
 
-**Implementation completed.** Added source scanning, Python AST chunks, source
-hashes, a SQLite parse cache, BM25, a small dependency-graph ranking heuristic,
-budgeted evidence packing, six verification outcomes, conservative repair, a CLI,
-and a fixed-root MCP stdio interface. The default implementation uses the Python
-standard library. Optional tiktoken encodings have separate dependency and test
-coverage. Source trees are inspected as text without executing repository code.
+**Contract decisions.** Used UTF-8 bytes as the default budget unit and counted
+the complete rendered source payload. Whole chunks that did not fit were omitted.
+Original exact locations took precedence over identical copies; displaced text
+required a unique whole-line match for repair. Changed, missing, ambiguous, and
+unsafe evidence was explicitly invalidated. Hashes were described as integrity
+checks, never as signatures or semantic-equivalence proofs.
 
-**Budget decision.** The default allowance is explicitly UTF-8 bytes. The counted
-object is the full rendered agent payload, including source and provenance. JSON
-storage receipts and transport wrappers are outside the allowance. The consumed
-count lives outside the rendered payload to avoid a self-referential count.
-Whole chunks that do not fit are skipped rather than truncated. These choices are
-specified in [DESIGN.md](DESIGN.md).
+**Initial measurements.** Froze version pairs for Click, ItsDangerous, and MarkupSafe;
+recorded 118 natural-drift observations, seven controlled transformations, and
+84 retrieval runs from fourteen queries, two methods, and three budgets. Graph
+expansion performed worse than BM25 at 2,000 bytes, tied at 4,000, and better at
+8,000 on this small query set. The mixed result and limited Pallets-only sample
+remain in the [earlier report](../benchmarks/results/latest.md).
 
-**Verification decision.** Original exact locations take precedence; displaced
-text is recoverable only when an exact whole-line match is unique. Modified,
-deleted, and ambiguous evidence is invalidated. Malformed or tampered bundles can
-be refused before repair. This detects internal inconsistency, not a malicious
-party able to replace both content and checksums. Dependency freshness and
-transactional consistency remain unresolved.
+## 2026-09-21 — Complete v1 project scope
 
-**Evaluation completed.** Froze two versions each of Click, ItsDangerous, and
-MarkupSafe using commit SHAs and archive SHA-256 digests. Added independent
-controlled-transformation labels, path-and-line and whole-file-hash baselines,
-and a deterministic sample of 118 production snippets. Added 14 exploratory
-file-relevance queries and evaluated both retrieval methods at three byte budgets.
-The committed [report](../benchmarks/results/latest.md) includes all outcomes,
-source provenance, and local cold/warm indexing observations.
+**Scope correction.** A runnable prototype was an intermediate milestone. The
+[completion contract](COMPLETION.md) expanded the deliverable to an end-to-end
+capture/check/refresh workflow, direct dependency diagnostics, broader frozen
+evaluation, executed downstream tasks, reporting, and reproducible documentation.
+Positive experimental findings were not made a completion requirement.
 
-**Results retained.** All seven controlled statuses and repair contracts matched
-expectations. All 84 retrieval runs respected their rendered budgets. Graph
-expansion reduced labeled-file hit rate at 2,000 bytes (8/14 versus BM25's 9/14),
-tied at 4,000 bytes, and increased it at 8,000 bytes (14/14 versus 13/14). This mixed
-result is retained without treating the small query set as general evidence of
-superiority. Natural drift remains status observations without independent gold
-labels. No downstream agent experiment was performed.
+**Product workflow.** Added bound context artifacts containing a source bundle and
+separate dependency sidecar. Added `capture`, `check`, `refresh`, and offline `report`
+commands, preserving the source-only API and expanding MCP to eight tools. A small
+original demo changes a tax-rate helper while its caller remains text-identical;
+its three reports show reuse, retrieval after the dependency edit, and reuse after
+refresh. The report is self-contained and uses no external assets.
 
-**Validation completed.** Ran the local test suite, lint checks, CLI integration,
-optional-tokenizer checks, and benchmark-oracle tests. A second full benchmark run
-matched all deterministic quality fields. The CI workflow defines a Linux/macOS
-Python matrix, package-build checks, and a separate tokenizer job; its current
-remote outcome is available in [GitHub Actions](https://github.com/hardwork-xu/contextproof/actions).
-Test counts can change during review, so this log does not freeze a numeric count.
+**Dependency contract.** Implemented supported direct Python definitions, literal
+constants, and import-binding witnesses. Aliases and supported re-exports retain
+binding identity; ambiguous, external, dynamic, or unsupported references abstain.
+The resolver remains one hop. Sidecar bytes are measured as additional overhead,
+not hidden inside the source bundle's stated budget. All 34 predeclared controlled
+cases matched; none of the twelve stale or twelve unresolved cases was accepted
+as fresh. Seven-repetition timing and source-scan scaling measurements were retained
+in the [dependency report](../benchmarks/results/dependencies.md).
 
-**Next decision gates.** The [roadmap](ROADMAP.md) defines independent drift
-annotation, dependency witnesses, and downstream evaluation. Those are proposed
-follow-up work, not completed features or demonstrated research findings.
+**Broader frozen study.** Recorded a protocol before source acquisition, sampling,
+annotation, or predictions. Pinned two versions each of ten Python libraries from
+ten GitHub owners. Selected thirty snippets per repository using before-version
+information only, with seven development and three holdout repositories. Both
+engine and a separately implemented byte-offset reference received the same frozen
+source policy. The resulting 300/300 agreement is reported as scoped contract
+agreement, not human-labeled accuracy. First-run predictions and all artifact
+hashes are preserved.
+
+**Blinded cross-check.** A separate AI reviewer inspected selected source evidence
+without reference labels or engine predictions. A disclosed protocol amendment
+increased coverage before predictions and review; the sealed 21-item check agreed
+on every item. Its limited, purposive AI-review status is explicit in the
+[comparison](../benchmarks/v1/review_comparison.json).
+
+**Corpus-boundary correction.** Inspection of the first drift results found that
+23 dateutil tests labeled deleted had moved outside the registered library prefixes,
+while exact unique matches survived elsewhere in the newer archive. The primary
+labels were retained as scoped outcomes and prominently identified as corpus exits.
+A separate posthoc all-Python-scope sensitivity kept the same 300 samples and changed
+exactly those 23 labels to relocated. Both primary and sensitivity results remain
+available; the wider search was not presented as a new prospective holdout test.
+
+**Natural dependency diagnostics.** Applied witness checks to the same frozen drift
+samples and recorded repeated measurements and sidecar sizes. Interpretation keeps
+source-anchor changes and moves separate from changes to a direct target or import
+binding. The source reference does not label dependency behavior, so additional
+flags are diagnostics rather than measured semantic detection accuracy.
+
+**Executed model study.** Froze HumanEval IDs 0–19 with controlled request-decoder
+API adaptations, three context policies, complete prompts, a native Qwen context
+cap, one attempt per condition, and one pinned local 1.5B model. Downloaded the
+model through a disclosed mirror after direct access failed, recorded every file
+hash, and ran without a paid API or uploading source to a model service. The model
+ran all sixty cells; every condition scored 0/20. Fifty-four outputs invented a
+nonexistent module, while the remaining six had decoder/name/argument errors.
+There were no hidden retries, replacement models, or selected favorable examples.
+
+**Harness controls and publication hygiene.** macOS Seatbelt preflight checks
+confirmed the execution boundary; AST/import restrictions and resource limits
+provided additional controls. All sixty outcomes reproduced on replay. Post-run
+known-good algorithms passed 20/20 using current APIs, while obsolete APIs passed
+only the five unchanged tasks. Canonical algorithms never entered model inputs.
+Local diagnostic paths were redacted in a separate publication step; unredacted
+originals, raw/public checksum pairs, and byte-identical frozen prompts were preserved.
+The [downstream report](DOWNSTREAM.md) states the null conclusion and its limits.
+
+**Final documentation and verification.** Replaced the proposed-work roadmap with
+an evidence-linked completion matrix. Added the technical report, bilingual v1
+entry points, explicit budget boundaries, and a demonstration screenshot. Local
+checks cover contracts, malformed inputs, source-policy boundaries, CLI/MCP flows,
+packaging, and artifact integrity. Release verification and remote CI remain
+observable in [GitHub Actions](https://github.com/hardwork-xu/contextproof/actions)
+and [Releases](https://github.com/hardwork-xu/contextproof/releases); this log does
+not freeze a changing test count or assert a remote status before it is recorded.

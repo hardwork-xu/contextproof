@@ -1,87 +1,47 @@
-# Research roadmap after v0.1
+# v1 completion matrix and future research
 
-These are three proposed follow-up issues with measurable acceptance criteria.
-They are not completed experiments or a promise of positive results. v0.1's
-current evidence and limits remain in the [evaluation protocol](EVALUATION.md).
+The v1 implementation and declared experiments are delivered. This matrix replaces
+the v0.1 list of unexecuted follow-ups with links to the actual code, protocols,
+and results. The [completion contract](COMPLETION.md) defines the project boundary;
+ongoing release verification is visible in [GitHub Actions](https://github.com/hardwork-xu/contextproof/actions)
+and published packages in [Releases](https://github.com/hardwork-xu/contextproof/releases).
 
-## 1. Freeze a broader, independently reviewed drift corpus
+## Delivered v1 scope
 
-**Question:** How often do exact verification and unique relocation accept,
-recover, or invalidate evidence correctly outside the initial Pallets sample?
+| Deliverable | Completed work | Reviewable evidence |
+| --- | --- | --- |
+| Usable local workflow | Capture source and witnesses, check, conservatively repair or retrieve, render bounded context | [CLI and quickstart](../README.md), [session implementation](../src/contextproof/session.py) |
+| Agent integration | Eight fixed-root MCP stdio tools; source-only operations preserved | [MCP implementation](../src/contextproof/mcp.py), [client example](../examples/mcp.json) |
+| Demonstration and reporting | Reproducible dependency-change demo; offline searchable HTML report | [Demo](../scripts/demo.py), [report screenshot](assets/context-report.png) |
+| Dependency diagnostics | Sealed direct-static sidecar; unresolved references explicit; 34 controlled cases and repeated overhead measurements | [Contract](DEPENDENCIES.md), [controlled results](../benchmarks/results/dependencies.md) |
+| Broader natural drift study | 300 before-only samples from ten owners; immutable version pairs; seven development and three holdout repositories | [Protocol](DRIFT_STUDY.md), [primary results](../benchmarks/v1/results/latest.md) |
+| Annotation cross-check | Separate reference implementation, preserved first-run predictions, sealed 21-item blinded AI check | [Reference](../benchmarks/v1/reference.py), [first-run audit](../benchmarks/v1/first_run_audit.json), [review comparison](../benchmarks/v1/review_comparison.json) |
+| Corpus-scope sensitivity | Same 300 samples rechecked against broader Python scope; all 23 changed labels retained | [Sensitivity report](../benchmarks/v1/results/scope-sensitivity.md) |
+| Natural dependency analysis | Witness diagnostics on the frozen drift samples, with cause and uncertainty limits | [Dependency-drift report](../benchmarks/v1/results/dependency-drift.md) |
+| Executed downstream study | 20 public-benchmark-derived tasks × 3 policies, one fixed local model, all 60 attempts, real isolated execution | [Protocol and null result](DOWNSTREAM.md), [raw responses](../benchmarks/downstream/results/results.jsonl) |
+| Harness validation | All 60 outcomes reproduced; current-API controls 20/20, obsolete-API controls 5/20 | [Replay](../benchmarks/downstream/results/replay.json), [oracle controls](../benchmarks/downstream/results/oracle_controls.json) |
+| Reproducibility and packaging | Frozen manifests/hashes, runnable scripts, package build configuration, tests and CI workflow | [Build configuration](../pyproject.toml), [tests](../tests), [CI](../.github/workflows/ci.yml) |
+| Candidate/reviewer documentation | Bilingual entry points, design, technical report, learning guide and dated development record | [Technical report](TECHNICAL_REPORT.md), [Chinese guide](README.zh-CN.md), [development log](DEVELOPMENT_LOG.md) |
 
-Build a version-pair corpus from at least ten unrelated public repositories with
-compatible source licenses. Freeze a minimum of 200 sampled snippets before
-inspecting verifier output. Define labels from source comparisons and publish
-annotation guidelines, selection rules, immutable source identities, and review
-disagreements. Distinguish observed tool statuses from externally reviewed labels.
+Completion means the declared work was implemented, run, and made inspectable.
+The downstream study's 0/20 result in every condition is a completed negative
+experiment. It is not a postponed positive-result requirement. The blinded review
+is AI review, not a claim that independent humans have supplied ground truth.
 
-**Acceptance criteria:**
+## Extensions beyond the completed project
 
-- At least ten repositories, 200 snippet pairs, frozen source identities, and a
-  public annotation sheet covering original location, text identity, relocation
-  ambiguity, and whether evidence is recoverable under the exact-text contract.
-- Independent review of the labels with disagreement resolution recorded. If
-  independent review is unavailable, label the study as single-annotator and keep
-  the independent-validation gate open.
-- Reserve at least 30% of repositories as a holdout before any method tuning;
-  never split different versions of one repository between development and holdout.
-- Compare path-and-line, whole-file hash, and ContextProof under the same labels.
-  Report false acceptance, false invalidation, recoveries, per-repository results,
-  and uncertainty intervals, including failures and unresolved cases.
+These are possible research directions, not remaining work hidden behind a future
+version number. They require new protocols and should retain the v1 evidence.
 
-**Result that would change the plan:** high ambiguous or incorrect acceptance
-rates may favor stricter invalidation over broader relocation search.
+| Direction | Question worth testing | Evidence needed before making a stronger claim |
+| --- | --- | --- |
+| Independent human annotation | Do people agree with the source contract and its practical relevance? | Independent annotators, explicit guidance, disagreements, and a broader sample |
+| Runtime and deeper dependencies | Which staleness lies beyond one-hop static witnesses? | Labeled multi-hop/runtime examples, supported-language boundaries, and measured false invalidation |
+| Real issue-resolution tasks | Does evidence verification help a working coding agent? | Frozen repository-disjoint real tasks, reliable execution environments, fixed agent/model policies and all attempts |
+| Stronger and interactive agents | Does a model that follows the API contract respond differently to stale and verified context? | A new prospective protocol, multiple seeds/models where feasible, task success and full workflow cost |
+| Mature-system comparisons | Does the evidence workflow add value to existing retrieval or repository-map tools? | Comparable task context, budgets and integration effort; reproduction of each baseline's intended use |
+| Concurrent editing and scale | Can a consistent source snapshot and lower scan cost improve practical use? | Snapshot identity under mutation, large-repository workloads, and repeated end-to-end measurements |
+| External research validation | Are the claims independently reproducible and publication-ready? | Outside replication and review; any submission or acceptance reported only when it occurs |
 
-## 2. Add dependency witnesses to otherwise unchanged evidence
-
-**Question:** Can a small, explicit record of referenced definitions detect stale
-context caused by dependency changes without invalidating too much unrelated code?
-
-Prototype optional dependency witnesses alongside each snippet. Start with
-statically identifiable Python references; record unresolved references explicitly.
-Define evidence freshness separately from exact-text validity. Do not present a
-static import graph as complete runtime dependency analysis.
-
-**Acceptance criteria:**
-
-- A documented, versioned witness schema and explicit statuses for changed,
-  unchanged, unresolved, and missing referenced definitions.
-- At least 20 controlled fixtures covering called-function edits, unrelated edits,
-  aliases, cycles, ambiguous names, external imports, and deleted definitions.
-  Expected labels must be written before checking implementation output.
-- An ablation comparing exact text alone with one-hop witness invalidation on the
-  frozen corpus from issue 1, reporting additional detections and over-invalidation.
-- Reproducible runtime and context-size overhead measurements with repeated runs;
-  failure examples retained. Unsupported dynamic behavior must remain explicit.
-
-**Result that would change the plan:** high over-invalidation or overhead may make
-witnesses useful as advisory diagnostics rather than automatic rejection rules.
-
-## 3. Test the verification loop on downstream coding tasks
-
-**Question:** Does checking saved evidence improve task outcomes compared with
-reusing it or retrieving fresh context under the same resource constraints?
-
-Build a small execution-based harness using a public task benchmark and isolated
-checkouts. Start with at least 20 frozen tasks from repositories excluded from
-method development. Compare reuse of saved evidence, fresh retrieval, and
-verify/repair with explicit invalidation handling. Fix the model version, prompts,
-context allowance, tool policy, retry count, and maximum spend before running.
-
-**Acceptance criteria:**
-
-- A public task manifest, exact environments, harness, baseline definitions, and
-  preregistered primary outcome based on executable task checks. Retrieval hit
-  rate must not substitute for task success.
-- Identical task/model settings across conditions, a documented repetition policy,
-  and all attempts retained, including failures and aborted tasks.
-- Report task success, stale-evidence use, total input/output tokens, tool calls,
-  wall time, and actual cost; distinguish retrieval overhead from total workflow
-  cost and include uncertainty on paired differences.
-- Publish prompts, logs that can be legally redistributed, aggregate results, and
-  representative failure analyses. Keep the study marked incomplete if resources
-  do not permit the prespecified run; do not silently shrink it to favorable cases.
-
-**Result that would change the plan:** if fresh retrieval performs as well with
-lower total cost, keep provenance verification as an audit feature rather than
-claiming it improves agent performance.
+No extension implies a current publication, semantic-equivalence guarantee,
+state-of-the-art retrieval result, or demonstrated improvement in model task success.
